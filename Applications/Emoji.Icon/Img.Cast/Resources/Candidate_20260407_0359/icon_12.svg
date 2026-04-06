@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Layer 1: 배경 — 밝은 민트+하늘 -->
+  <defs>
+    <linearGradient id="bg12" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#E0F7FA"/>
+      <stop offset="100%" stop-color="#F3E5F5"/>
+    </linearGradient>
+    <linearGradient id="wing12a" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#E040FB"/>
+      <stop offset="50%" stop-color="#7C4DFF"/>
+      <stop offset="100%" stop-color="#00B0FF"/>
+    </linearGradient>
+    <linearGradient id="wing12b" x1="1" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#69F0AE"/>
+      <stop offset="50%" stop-color="#00BCD4"/>
+      <stop offset="100%" stop-color="#7C4DFF"/>
+    </linearGradient>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg12)"/>
+
+  <!-- Layer 2: 나비 실루엣 (변환의 상징) -->
+  <!-- 왼쪽 위 날개 -->
+  <path d="M512,500 Q400,350 230,280 Q180,380 260,460 Q360,510 512,500 Z" fill="url(#wing12a)" opacity="0.9"/>
+  <!-- 오른쪽 위 날개 -->
+  <path d="M512,500 Q624,350 794,280 Q844,380 764,460 Q664,510 512,500 Z" fill="url(#wing12b)" opacity="0.9"/>
+  <!-- 왼쪽 아래 날개 -->
+  <path d="M512,520 Q380,560 240,680 Q250,760 330,740 Q440,690 512,520 Z" fill="url(#wing12a)" opacity="0.8"/>
+  <!-- 오른쪽 아래 날개 -->
+  <path d="M512,520 Q644,560 784,680 Q774,760 694,740 Q584,690 512,520 Z" fill="url(#wing12b)" opacity="0.8"/>
+  <!-- 날개 테두리 -->
+  <path d="M512,500 Q400,350 230,280 Q180,380 260,460 Q360,510 512,500 Z" fill="none" stroke="white" stroke-width="8" opacity="0.7"/>
+  <path d="M512,500 Q624,350 794,280 Q844,380 764,460 Q664,510 512,500 Z" fill="none" stroke="white" stroke-width="8" opacity="0.7"/>
+  <path d="M512,520 Q380,560 240,680 Q250,760 330,740 Q440,690 512,520 Z" fill="none" stroke="white" stroke-width="8" opacity="0.7"/>
+  <path d="M512,520 Q644,560 784,680 Q774,760 694,740 Q584,690 512,520 Z" fill="none" stroke="white" stroke-width="8" opacity="0.7"/>
+
+  <!-- 날개 패턴 원형 포인트 -->
+  <circle cx="330" cy="380" r="44" fill="white" opacity="0.4"/>
+  <circle cx="330" cy="380" r="28" fill="#E040FB" opacity="0.6"/>
+  <circle cx="694" cy="380" r="44" fill="white" opacity="0.4"/>
+  <circle cx="694" cy="380" r="28" fill="#69F0AE" opacity="0.6"/>
+
+  <!-- 나비 몸통 -->
+  <ellipse cx="512" cy="510" rx="22" ry="90" fill="#4A148C"/>
+  <!-- 더듬이 -->
+  <path d="M512,420 Q460,340 440,300" stroke="#4A148C" stroke-width="10" fill="none" stroke-linecap="round"/>
+  <circle cx="440" cy="300" r="16" fill="#E040FB"/>
+  <path d="M512,420 Q564,340 584,300" stroke="#4A148C" stroke-width="10" fill="none" stroke-linecap="round"/>
+  <circle cx="584" cy="300" r="16" fill="#69F0AE"/>
+
+  <!-- Layer 3: 날개에 파일 포맷 텍스트 -->
+  <text x="310" y="430" font-family="Arial Black" font-size="52" fill="white" text-anchor="middle" opacity="0.8">SVG</text>
+  <text x="714" y="430" font-family="Arial Black" font-size="52" fill="white" text-anchor="middle" opacity="0.8">ICO</text>
+  <!-- 하단 변환 암시 -->
+  <text x="512" y="860" font-family="Arial, sans-serif" font-weight="700" font-size="60" fill="#7C4DFF" text-anchor="middle" opacity="0.6">transform</text>
+</svg>

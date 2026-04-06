@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Layer 1: 배경 — 하늘+오렌지 그라데이션 -->
+  <defs>
+    <linearGradient id="bg04" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#E3F2FD"/>
+      <stop offset="100%" stop-color="#FFF3E0"/>
+    </linearGradient>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg04)"/>
+
+  <!-- Layer 2: 픽셀 격자(흐림) → 선명한 이미지 공간/장면 -->
+  <!-- 왼쪽 — 흐릿한 픽셀 블록 -->
+  <rect x="80" y="200" width="380" height="380" rx="20" fill="#90CAF9" stroke="#42A5F5" stroke-width="8"/>
+  <!-- 큰 픽셀 블록들 (저해상도 느낌) -->
+  <rect x="100" y="220" width="80" height="80" rx="6" fill="#1565C0" opacity="0.7"/>
+  <rect x="192" y="220" width="80" height="80" rx="6" fill="#1976D2" opacity="0.8"/>
+  <rect x="284" y="220" width="80" height="80" rx="6" fill="#1565C0" opacity="0.6"/>
+  <rect x="376" y="220" width="72" height="80" rx="6" fill="#42A5F5" opacity="0.7"/>
+  <rect x="100" y="312" width="80" height="80" rx="6" fill="#1976D2" opacity="0.8"/>
+  <rect x="192" y="312" width="80" height="80" rx="6" fill="#0D47A1" opacity="0.7"/>
+  <rect x="284" y="312" width="80" height="80" rx="6" fill="#1565C0" opacity="0.9"/>
+  <rect x="376" y="312" width="72" height="80" rx="6" fill="#1976D2" opacity="0.6"/>
+  <rect x="100" y="404" width="80" height="80" rx="6" fill="#1565C0" opacity="0.9"/>
+  <rect x="192" y="404" width="80" height="80" rx="6" fill="#42A5F5" opacity="0.7"/>
+  <rect x="284" y="404" width="80" height="80" rx="6" fill="#1976D2" opacity="0.8"/>
+  <rect x="376" y="404" width="72" height="80" rx="6" fill="#0D47A1" opacity="0.7"/>
+  <!-- 저해상도 라벨 -->
+  <text x="270" y="628" font-family="Arial, sans-serif" font-weight="700" font-size="42" fill="#1565C0" text-anchor="middle">240px</text>
+
+  <!-- 중앙 AI 변환 화살표 -->
+  <g transform="translate(512,450)">
+    <path d="M-60,0 L60,0" stroke="#FF6D00" stroke-width="24" stroke-linecap="round"/>
+    <path d="M36,-30 L72,0 L36,30" stroke="#FF6D00" stroke-width="24" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+    <text x="0" y="-46" font-family="Arial Black" font-size="44" fill="#FF6D00" text-anchor="middle">AI</text>
+  </g>
+
+  <!-- 오른쪽 — 선명한 이미지 (작은 픽셀 = 고해상도) -->
+  <rect x="564" y="200" width="380" height="380" rx="20" fill="#FFCC80" stroke="#FF9800" stroke-width="8"/>
+  <!-- 작은 픽셀들 (고해상도 느낌) — 산 풍경 -->
+  <path d="M584,540 L680,350 L740,420 L800,310 L864,430 L930,540 Z" fill="#E65100" opacity="0.85"/>
+  <!-- 하늘 느낌 -->
+  <rect x="584" y="220" width="360" height="130" rx="10" fill="#29B6F6" opacity="0.5"/>
+  <!-- 태양 -->
+  <circle cx="875" cy="270" r="40" fill="#FFD600" opacity="0.9"/>
+  <!-- 고해상도 라벨 -->
+  <text x="754" y="628" font-family="Arial, sans-serif" font-weight="700" font-size="42" fill="#E65100" text-anchor="middle">960px</text>
+
+  <!-- Layer 3: 4x 텍스트 + 비교 라인 -->
+  <circle cx="512" cy="700" r="70" fill="#FF9800"/>
+  <text x="512" y="720" font-family="Arial Black" font-size="56" fill="white" text-anchor="middle">4x</text>
+</svg>

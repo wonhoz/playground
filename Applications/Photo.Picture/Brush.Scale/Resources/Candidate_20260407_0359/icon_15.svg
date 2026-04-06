@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Layer 1: 배경 — 딥 인디고+황금 -->
+  <defs>
+    <linearGradient id="bg15" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1A237E"/>
+      <stop offset="100%" stop-color="#0D47A1"/>
+    </linearGradient>
+    <linearGradient id="arrow15" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#FFD740"/>
+      <stop offset="100%" stop-color="#FF6D00"/>
+    </linearGradient>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg15)"/>
+
+  <!-- Layer 2: 사진 + 업스케일 화살표 + 해상도 표시 (대각선/동적 — hybrid) -->
+  <!-- 입력 사진 (왼쪽 상단, 작게) -->
+  <rect x="80" y="180" width="280" height="220" rx="20" fill="#283593" stroke="#5C6BC0" stroke-width="10"/>
+  <!-- 사진 내용 (저해상도 느낌) -->
+  <rect x="100" y="200" width="80" height="80" rx="8" fill="#3949AB" opacity="0.8"/>
+  <rect x="194" y="200" width="80" height="80" rx="8" fill="#303F9F" opacity="0.8"/>
+  <rect x="100" y="294" width="80" height="80" rx="8" fill="#303F9F" opacity="0.8"/>
+  <rect x="194" y="294" width="80" height="80" rx="8" fill="#3949AB" opacity="0.8"/>
+  <!-- 입력 해상도 -->
+  <text x="220" y="440" font-family="Arial, sans-serif" font-weight="700" font-size="40" fill="#90CAF9" text-anchor="middle" opacity="0.8">480px</text>
+
+  <!-- 대각선 업스케일 화살표 (큼직하게) -->
+  <path d="M380,350 L670,610" stroke="url(#arrow15)" stroke-width="36" stroke-linecap="round"/>
+  <!-- 화살표 머리 -->
+  <path d="M630,560 L690,630 L612,648" fill="url(#arrow15)" stroke="url(#arrow15)" stroke-width="4" stroke-linejoin="round"/>
+  <!-- AI 텍스트 (화살표 위) -->
+  <text x="525" y="460" font-family="Arial Black" font-size="56" fill="#FFD740" text-anchor="middle" transform="rotate(38, 525, 460)">AI</text>
+
+  <!-- 출력 사진 (오른쪽 하단, 크게) -->
+  <rect x="600" y="520" width="360" height="290" rx="24" fill="#1565C0" stroke="#FFD740" stroke-width="12"/>
+  <!-- 사진 내용 (선명한 고해상도) -->
+  <path d="M624,780 L720,600 L780,650 L840,560 L940,760 L940,780 Z" fill="#1A237E" opacity="0.85"/>
+  <!-- 하늘 -->
+  <rect x="624" y="544" width="316" height="100" rx="10" fill="#42A5F5" opacity="0.4"/>
+  <!-- 태양 -->
+  <circle cx="910" cy="580" r="36" fill="#FFD740" opacity="0.9"/>
+  <!-- 출력 해상도 -->
+  <text x="780" y="856" font-family="Arial, sans-serif" font-weight="700" font-size="40" fill="#FFD740" text-anchor="middle">1920px</text>
+
+  <!-- Layer 3: 4x 표시 원 (중앙) -->
+  <circle cx="512" cy="400" r="72" fill="#FF6D00"/>
+  <text x="512" y="418" font-family="Arial Black" font-size="56" fill="white" text-anchor="middle">4x</text>
+</svg>

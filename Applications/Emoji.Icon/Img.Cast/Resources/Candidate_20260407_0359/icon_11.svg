@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Layer 1: 배경 — 어두운 군청 (야간 작업장) -->
+  <defs>
+    <radialGradient id="bg11" cx="0.5" cy="0.8" r="0.7">
+      <stop offset="0%" stop-color="#263238"/>
+      <stop offset="100%" stop-color="#0D1B2A"/>
+    </radialGradient>
+    <radialGradient id="molten11" cx="0.5" cy="0.4" r="0.6">
+      <stop offset="0%" stop-color="#FFEA00"/>
+      <stop offset="40%" stop-color="#FF6D00"/>
+      <stop offset="100%" stop-color="#BF360C"/>
+    </radialGradient>
+    <radialGradient id="glow11" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0%" stop-color="#FF6D0060"/>
+      <stop offset="100%" stop-color="#FF6D0000"/>
+    </radialGradient>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg11)"/>
+
+  <!-- 하단 빛 반사 -->
+  <ellipse cx="512" cy="950" rx="350" ry="80" fill="url(#glow11)"/>
+
+  <!-- Layer 2: 주조 도가니/국자 (Cast를 직접 표현) -->
+  <!-- 국자 손잡이 -->
+  <rect x="680" y="280" width="60" height="360" rx="30" fill="#546E7A" transform="rotate(30, 710, 460)"/>
+
+  <!-- 도가니 본체 -->
+  <path d="M280,400 L260,680 Q260,730 320,730 L700,730 Q760,730 760,680 L740,400 Z" fill="#37474F"/>
+  <!-- 도가니 테두리 -->
+  <path d="M280,400 L260,680 Q260,730 320,730 L700,730 Q760,730 760,680 L740,400 Z"
+    stroke="#546E7A" stroke-width="16" fill="none"/>
+  <!-- 도가니 상단 -->
+  <ellipse cx="510" cy="400" rx="234" ry="44" fill="#455A64"/>
+
+  <!-- 녹아내리는 금속 (밝은 빛) -->
+  <ellipse cx="510" cy="400" rx="200" ry="36" fill="url(#molten11)"/>
+  <!-- 용탕 표면 반짝임 -->
+  <ellipse cx="480" cy="395" rx="60" ry="14" fill="#FFEA00" opacity="0.7"/>
+  <ellipse cx="560" cy="402" rx="40" ry="10" fill="#FFFF00" opacity="0.5"/>
+
+  <!-- 쏟아지는 용탕 줄기 (왼쪽 아래) -->
+  <path d="M280,500 Q220,560 200,650 Q190,700 220,720 Q240,730 260,690 Q250,650 280,590 Z"
+    fill="url(#molten11)" opacity="0.85"/>
+
+  <!-- Layer 3: 결과물 — 새 파일 (ICO) 아이콘 -->
+  <!-- 금형/틀 -->
+  <rect x="120" y="680" width="180" height="220" rx="20" fill="#1A237E" stroke="#3949AB" stroke-width="10"/>
+  <!-- 금형 위 용탕이 채워지는 표현 -->
+  <rect x="130" y="690" width="160" height="60" rx="10" fill="url(#molten11)" opacity="0.8"/>
+  <text x="210" y="830" font-family="Arial Black" font-size="60" fill="#FFD740" text-anchor="middle">ICO</text>
+
+  <!-- 불꽃 파티클 -->
+  <circle cx="350" cy="320" r="14" fill="#FFEA00" opacity="0.9"/>
+  <circle cx="390" cy="280" r="10" fill="#FF6D00" opacity="0.8"/>
+  <circle cx="420" cy="300" r="8" fill="#FFCA28" opacity="0.7"/>
+  <circle cx="460" cy="260" r="12" fill="#FFEA00" opacity="0.6"/>
+  <circle cx="570" cy="270" r="9" fill="#FF6D00" opacity="0.8"/>
+  <circle cx="610" cy="295" r="14" fill="#FFCA28" opacity="0.7"/>
+  <circle cx="650" cy="265" r="11" fill="#FFEA00" opacity="0.9"/>
+</svg>

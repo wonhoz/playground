@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Layer 1: 배경 — 밝은 하늘+초록 -->
+  <defs>
+    <linearGradient id="bg09" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#E3F2FD"/>
+      <stop offset="60%" stop-color="#E8F5E9"/>
+      <stop offset="100%" stop-color="#C8E6C9"/>
+    </linearGradient>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg09)"/>
+
+  <!-- Layer 2: 씨앗 → 나무 성장 (scale up = 성장) — 공간/장면 -->
+  <!-- 지평선 -->
+  <path d="M130,720 Q512,680 894,720" stroke="#66BB6A" stroke-width="16" fill="none" stroke-linecap="round"/>
+  <!-- 초원 -->
+  <ellipse cx="512" cy="800" rx="380" ry="100" fill="#A5D6A7" opacity="0.7"/>
+
+  <!-- 왼쪽 — 작은 씨앗/새싹 -->
+  <circle cx="220" cy="700" r="40" fill="#4CAF50"/>
+  <path d="M220,660 L220,580" stroke="#388E3C" stroke-width="16" stroke-linecap="round"/>
+  <path d="M220,610 Q190,570 160,575" stroke="#66BB6A" stroke-width="12" fill="none" stroke-linecap="round"/>
+  <text x="220" y="790" font-family="Arial, sans-serif" font-weight="700" font-size="38" fill="#388E3C" text-anchor="middle">before</text>
+
+  <!-- 가운데 → 중간 나무 -->
+  <rect x="500" y="540" width="24" height="200" rx="12" fill="#795548"/>
+  <circle cx="512" cy="500" r="70" fill="#4CAF50"/>
+  <!-- 4x 원 -->
+  <circle cx="640" cy="380" r="56" fill="#FF9800"/>
+  <text x="640" y="396" font-family="Arial Black" font-size="44" fill="white" text-anchor="middle">4x</text>
+  <!-- 화살표 (왼→오른쪽 성장 방향) -->
+  <path d="M290,650 L440,610" stroke="#FF9800" stroke-width="16" stroke-linecap="round" opacity="0.7"/>
+  <path d="M420,588 L450,614 L422,638" stroke="#FF9800" stroke-width="16" stroke-linecap="round" stroke-linejoin="round" fill="none" opacity="0.7"/>
+
+  <!-- 오른쪽 — 큰 나무 -->
+  <rect x="770" y="440" width="30" height="300" rx="15" fill="#5D4037"/>
+  <!-- 나뭇가지 -->
+  <path d="M785,560 Q730,520 710,490" stroke="#5D4037" stroke-width="14" fill="none" stroke-linecap="round"/>
+  <path d="M785,610 Q840,570 860,540" stroke="#5D4037" stroke-width="14" fill="none" stroke-linecap="round"/>
+  <!-- 나뭇잎 -->
+  <circle cx="785" cy="380" r="120" fill="#66BB6A"/>
+  <circle cx="710" cy="460" r="60" fill="#81C784" opacity="0.8"/>
+  <circle cx="860" cy="470" r="60" fill="#81C784" opacity="0.8"/>
+  <text x="785" y="820" font-family="Arial, sans-serif" font-weight="700" font-size="38" fill="#1B5E20" text-anchor="middle">after</text>
+
+  <!-- Layer 3: 하늘 구름 + 태양 -->
+  <circle cx="700" cy="220" r="60" fill="white" opacity="0.9"/>
+  <circle cx="750" cy="200" r="80" fill="white" opacity="0.9"/>
+  <circle cx="800" cy="220" r="60" fill="white" opacity="0.9"/>
+  <circle cx="280" cy="200" r="50" fill="#FFF9C4" opacity="0.8"/>
+  <circle cx="260" cy="220" r="70" fill="#FFF9C4" opacity="0.8"/>
+  <!-- 태양 -->
+  <circle cx="830" cy="150" r="54" fill="#FFD740"/>
+</svg>

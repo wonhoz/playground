@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Layer 1: 배경 — 딥 네이비 -->
+  <defs>
+    <linearGradient id="bg05" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0D47A1"/>
+      <stop offset="100%" stop-color="#1A237E"/>
+    </linearGradient>
+    <radialGradient id="glow05" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0%" stop-color="#FFD74040"/>
+      <stop offset="100%" stop-color="#FFD74000"/>
+    </radialGradient>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg05)"/>
+  <rect width="1024" height="1024" rx="190" fill="url(#glow05)"/>
+
+  <!-- Layer 2: 해상도 숫자 — 1080 → 4320 -->
+  <!-- 입력 해상도 -->
+  <text x="512" y="340" font-family="Arial Black" font-size="76" fill="#90CAF9" text-anchor="middle" opacity="0.8">1080p</text>
+
+  <!-- 변환 화살표 (아래 방향) -->
+  <path d="M512,360 L512,520" stroke="#FFD740" stroke-width="20" stroke-linecap="round"/>
+  <path d="M460,490 L512,540 L564,490" stroke="#FFD740" stroke-width="20" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <!-- AI 텍스트 (화살표 옆) -->
+  <rect x="556" y="400" width="110" height="52" rx="26" fill="#FFD740"/>
+  <text x="611" y="434" font-family="Arial Black" font-size="36" fill="#0D47A1" text-anchor="middle">AI</text>
+
+  <!-- 출력 해상도 (크고 밝게) -->
+  <text x="512" y="670" font-family="Arial Black" font-size="120" fill="#FFD740" text-anchor="middle">4K</text>
+  <text x="512" y="760" font-family="Arial Black" font-size="64" fill="#FFF9C4" text-anchor="middle" opacity="0.7">4320p</text>
+
+  <!-- Layer 3: 별/빛살 장식 + 4x 뱃지 -->
+  <!-- 빛살들 -->
+  <line x1="200" y1="620" x2="140" y2="560" stroke="#FFD740" stroke-width="8" stroke-linecap="round" opacity="0.5"/>
+  <line x1="180" y1="680" x2="110" y2="680" stroke="#FFD740" stroke-width="8" stroke-linecap="round" opacity="0.4"/>
+  <line x1="200" y1="740" x2="140" y2="800" stroke="#FFD740" stroke-width="8" stroke-linecap="round" opacity="0.3"/>
+  <line x1="824" y1="620" x2="884" y2="560" stroke="#FFD740" stroke-width="8" stroke-linecap="round" opacity="0.5"/>
+  <line x1="844" y1="680" x2="914" y2="680" stroke="#FFD740" stroke-width="8" stroke-linecap="round" opacity="0.4"/>
+  <line x1="824" y1="740" x2="884" y2="800" stroke="#FFD740" stroke-width="8" stroke-linecap="round" opacity="0.3"/>
+  <!-- 배율 뱃지 -->
+  <rect x="380" y="840" width="264" height="72" rx="36" fill="#FFD740"/>
+  <text x="512" y="888" font-family="Arial Black" font-size="50" fill="#0D47A1" text-anchor="middle">×4 Scale</text>
+</svg>

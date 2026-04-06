@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Layer 1: 배경 — 따뜻한 크림 -->
+  <defs>
+    <linearGradient id="bg07" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FFF8F1"/>
+      <stop offset="100%" stop-color="#FFF3E0"/>
+    </linearGradient>
+    <linearGradient id="brush07" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FF6F00"/>
+      <stop offset="100%" stop-color="#E65100"/>
+    </linearGradient>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg07)"/>
+
+  <!-- Layer 2: 화가 붓 (Brush 직역) — 큼직하게 대각선 -->
+  <!-- 붓 손잡이 -->
+  <rect x="200" y="180" width="80" height="540" rx="40" fill="#8D6E63" transform="rotate(35, 520, 450)"/>
+  <!-- 붓 페룰 (금속 부분) -->
+  <rect x="200" y="680" width="80" height="60" rx="8" fill="#B0BEC5" transform="rotate(35, 520, 450)"/>
+  <!-- 붓털 (끝 부분 — 페인트 묻은) -->
+  <ellipse cx="700" cy="720" rx="45" ry="90" fill="url(#brush07)" transform="rotate(35, 700, 720)"/>
+  <!-- 붓털 끝 뾰족함 -->
+  <path d="M680,760 Q700,830 720,760" fill="#FF6F00" transform="rotate(35, 700, 760)"/>
+
+  <!-- Layer 3: 붓으로 그린 확대 이미지 — 붓 터치 흔적 + 고해상도 -->
+  <!-- 그려지는 이미지 캔버스 -->
+  <rect x="80" y="560" width="480" height="340" rx="20" fill="white" stroke="#E65100" stroke-width="12" opacity="0.9"/>
+  <!-- 캔버스에 붓 터치 (고화질 이미지 느낌) -->
+  <!-- 산 실루엣 -->
+  <path d="M110,840 L220,680 L290,730 L360,640 L450,840 Z" fill="#FF7043" opacity="0.8"/>
+  <!-- 하늘 -->
+  <rect x="100" y="580" width="460" height="120" rx="8" fill="#29B6F6" opacity="0.4"/>
+  <!-- 태양 -->
+  <circle cx="490" cy="620" r="34" fill="#FFD740" opacity="0.9"/>
+  <!-- 초원 -->
+  <ellipse cx="280" cy="845" rx="200" ry="30" fill="#66BB6A" opacity="0.6"/>
+
+  <!-- 붓 페인트 방울 (오른쪽) -->
+  <circle cx="780" cy="380" r="22" fill="#FF6F00" opacity="0.7"/>
+  <circle cx="830" cy="440" r="16" fill="#FF8F00" opacity="0.6"/>
+  <circle cx="760" cy="460" r="12" fill="#FFA726" opacity="0.5"/>
+  <circle cx="850" cy="360" r="10" fill="#FF6F00" opacity="0.4"/>
+
+  <!-- AI 뱃지 (붓 옆) -->
+  <circle cx="840" cy="600" r="72" fill="#E65100"/>
+  <text x="840" y="624" font-family="Arial Black" font-size="56" fill="white" text-anchor="middle">AI</text>
+</svg>

@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Layer 1: 배경 — 비비드 파랑 -->
+  <defs>
+    <linearGradient id="bg02" x1="0" y1="0" x2="0.5" y2="1">
+      <stop offset="0%" stop-color="#1565C0"/>
+      <stop offset="100%" stop-color="#0D47A1"/>
+    </linearGradient>
+    <linearGradient id="zone02" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#29B6F640"/>
+      <stop offset="100%" stop-color="#0288D130"/>
+    </linearGradient>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg02)"/>
+
+  <!-- Layer 2: 드롭존 UI 사각형 (점선 테두리) -->
+  <rect x="180" y="200" width="664" height="480" rx="40" fill="url(#zone02)"
+    stroke="#29B6F6" stroke-width="14" stroke-dasharray="32,18"/>
+
+  <!-- 떨어지는 파일 아이콘 (중앙) -->
+  <rect x="410" y="250" width="204" height="250" rx="20" fill="#E3F2FD"/>
+  <!-- 파일 폴드 -->
+  <path d="M560,250 L614,304 L560,304 Z" fill="#90CAF9"/>
+  <!-- 파일 내부 선 -->
+  <rect x="440" y="340" width="130" height="14" rx="7" fill="#42A5F5"/>
+  <rect x="440" y="368" width="100" height="14" rx="7" fill="#42A5F5"/>
+  <rect x="440" y="396" width="115" height="14" rx="7" fill="#42A5F5"/>
+
+  <!-- 아래 방향 큰 화살표 -->
+  <path d="M512,510 L512,640" stroke="#29B6F6" stroke-width="30" stroke-linecap="round"/>
+  <path d="M440,590 L512,670 L584,590" stroke="#29B6F6" stroke-width="30" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+
+  <!-- Layer 3: "DROP" 텍스트 + 하단 포맷 뱃지 -->
+  <text x="512" y="770" font-family="Arial, sans-serif" font-weight="700" font-size="72" fill="#29B6F6" text-anchor="middle" opacity="0.85">DROP</text>
+  <!-- 포맷 뱃지들 -->
+  <rect x="212" y="820" width="140" height="52" rx="26" fill="#FF6B35"/>
+  <text x="282" y="856" font-family="Arial Black" font-size="28" fill="white" text-anchor="middle">SVG</text>
+  <rect x="372" y="820" width="140" height="52" rx="26" fill="#4CAF50"/>
+  <text x="442" y="856" font-family="Arial Black" font-size="28" fill="white" text-anchor="middle">PNG</text>
+  <rect x="532" y="820" width="140" height="52" rx="26" fill="#FF9800"/>
+  <text x="602" y="856" font-family="Arial Black" font-size="28" fill="white" text-anchor="middle">JPG</text>
+  <rect x="692" y="820" width="140" height="52" rx="26" fill="#9C27B0"/>
+  <text x="762" y="856" font-family="Arial Black" font-size="28" fill="white" text-anchor="middle">ICO</text>
+</svg>

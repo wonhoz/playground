@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Layer 1: 배경 — 딥 마젠타+인디고 -->
+  <defs>
+    <linearGradient id="bg15" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#880E4F"/>
+      <stop offset="100%" stop-color="#1A237E"/>
+    </linearGradient>
+    <radialGradient id="center15" cx="0.5" cy="0.5" r="0.4">
+      <stop offset="0%" stop-color="#FFFF0040"/>
+      <stop offset="100%" stop-color="#FFFF0000"/>
+    </radialGradient>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg15)"/>
+  <rect width="1024" height="1024" rx="190" fill="url(#center15)"/>
+
+  <!-- Layer 2: 픽셀 분해/재조립 (추상) -->
+  <!-- 왼쪽 — 분해되는 픽셀들 (흩어진 정사각형) -->
+  <rect x="100" y="200" width="70" height="70" rx="10" fill="#F50057" opacity="0.9"/>
+  <rect x="200" y="240" width="70" height="70" rx="10" fill="#D500F9" opacity="0.8"/>
+  <rect x="140" y="330" width="70" height="70" rx="10" fill="#FF4081" opacity="0.7"/>
+  <rect x="240" y="300" width="70" height="70" rx="10" fill="#FF80AB" opacity="0.9"/>
+  <rect x="170" y="420" width="70" height="70" rx="10" fill="#F50057" opacity="0.6"/>
+  <rect x="110" y="460" width="70" height="70" rx="10" fill="#D500F9" opacity="0.8"/>
+  <rect x="250" y="430" width="70" height="70" rx="10" fill="#FF4081" opacity="0.7"/>
+  <rect x="130" y="540" width="70" height="70" rx="10" fill="#FF80AB" opacity="0.5"/>
+  <rect x="220" y="560" width="70" height="70" rx="10" fill="#F50057" opacity="0.6"/>
+  <!-- 흩어지는 방향선 -->
+  <line x1="300" y1="400" x2="220" y2="360" stroke="#FF4081" stroke-width="6" opacity="0.4" stroke-linecap="round"/>
+  <line x1="300" y1="450" x2="200" y2="430" stroke="#D500F9" stroke-width="6" opacity="0.3" stroke-linecap="round"/>
+  <line x1="300" y1="500" x2="215" y2="510" stroke="#FF80AB" stroke-width="6" opacity="0.3" stroke-linecap="round"/>
+
+  <!-- 중앙 변환 에너지 -->
+  <circle cx="512" cy="512" r="80" fill="#FFEA00" opacity="0.9"/>
+  <circle cx="512" cy="512" r="60" fill="white"/>
+  <!-- 체크 표시 (변환 완료) -->
+  <path d="M470,512 L500,545 L560,480" stroke="#1A237E" stroke-width="20" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+
+  <!-- 오른쪽 — 재조립되는 픽셀들 (정렬된 격자) -->
+  <!-- 잘 정렬된 격자 파일 -->
+  <rect x="654" y="280" width="260" height="320" rx="24" fill="#1565C0" opacity="0.9"/>
+  <!-- 격자 내부 픽셀들 (정렬) -->
+  <rect x="680" y="310" width="54" height="54" rx="8" fill="#00E5FF"/>
+  <rect x="750" y="310" width="54" height="54" rx="8" fill="#69F0AE"/>
+  <rect x="820" y="310" width="54" height="54" rx="8" fill="#FFEA00"/>
+  <rect x="680" y="380" width="54" height="54" rx="8" fill="#FF6D00"/>
+  <rect x="750" y="380" width="54" height="54" rx="8" fill="#E040FB"/>
+  <rect x="820" y="380" width="54" height="54" rx="8" fill="#00E5FF"/>
+  <rect x="680" y="450" width="54" height="54" rx="8" fill="#FFEA00"/>
+  <rect x="750" y="450" width="54" height="54" rx="8" fill="#FF6D00"/>
+  <rect x="820" y="450" width="54" height="54" rx="8" fill="#69F0AE"/>
+  <!-- ICO 라벨 -->
+  <text x="784" y="575" font-family="Arial Black" font-size="60" fill="white" text-anchor="middle">ICO</text>
+  <!-- 파일 상단 폴드 -->
+  <path d="M860,280 L914,334 L860,334 Z" fill="#0D47A1"/>
+
+  <!-- Layer 3: 방향 화살표들 -->
+  <path d="M320,490 L420,510" stroke="#FFEA00" stroke-width="14" stroke-linecap="round" opacity="0.8"/>
+  <path d="M400,482 L432,510 L400,538" stroke="#FFEA00" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" fill="none" opacity="0.8"/>
+  <path d="M602,510 L650,500" stroke="#FFEA00" stroke-width="14" stroke-linecap="round" opacity="0.8"/>
+  <path d="M634,483 L658,500 L634,517" stroke="#FFEA00" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" fill="none" opacity="0.8"/>
+</svg>

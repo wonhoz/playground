@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Layer 1: 배경 — 흐린 그레이에서 비비드 블루로 전환 -->
+  <defs>
+    <linearGradient id="bg10" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#ECEFF1"/>
+      <stop offset="50%" stop-color="#E3F2FD"/>
+      <stop offset="100%" stop-color="#BBDEFB"/>
+    </linearGradient>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg10)"/>
+
+  <!-- Layer 2: 흐릿한 이미지 → 선명한 이미지 (포커스 전환 — 레이어드) -->
+  <!-- 흐릿한 이미지 (왼쪽) — 블러 느낌 (큰 색 블록) -->
+  <rect x="80" y="200" width="360" height="480" rx="20" fill="#B0BEC5" opacity="0.8"/>
+  <!-- 흐릿 타원들 (블러 효과 표현) -->
+  <ellipse cx="200" cy="380" rx="80" ry="60" fill="#90A4AE" opacity="0.6"/>
+  <ellipse cx="320" cy="480" rx="100" ry="80" fill="#78909C" opacity="0.5"/>
+  <ellipse cx="200" cy="580" rx="80" ry="60" fill="#90A4AE" opacity="0.6"/>
+  <ellipse cx="300" cy="320" rx="70" ry="50" fill="#78909C" opacity="0.5"/>
+  <!-- BLUR 텍스트 -->
+  <text x="260" y="730" font-family="Arial, sans-serif" font-weight="700" font-size="42" fill="#607D8B" text-anchor="middle" opacity="0.7">blur</text>
+
+  <!-- 중앙 전환 — AI 렌즈 -->
+  <rect x="460" y="350" width="104" height="300" rx="52" fill="#1565C0" opacity="0.2"/>
+  <path d="M460,480 L540,430 M460,510 L540,510 M460,540 L540,590" stroke="#1565C0" stroke-width="14" stroke-linecap="round" opacity="0.5"/>
+
+  <!-- 선명한 이미지 (오른쪽) -->
+  <rect x="584" y="200" width="360" height="480" rx="20" fill="#29B6F6"/>
+  <!-- 선명한 산 풍경 -->
+  <path d="M604,640 L714,400 L784,470 L854,340 L924,540 L924,640 Z" fill="#0D47A1" opacity="0.85"/>
+  <!-- 하늘 영역 -->
+  <rect x="604" y="220" width="360" height="160" rx="10" fill="#80D8FF" opacity="0.5"/>
+  <!-- 태양 -->
+  <circle cx="880" cy="280" r="42" fill="#FFD740" opacity="0.95"/>
+  <!-- 명확한 테두리 (선명함 강조) -->
+  <rect x="584" y="200" width="360" height="480" rx="20" fill="none" stroke="#0288D1" stroke-width="10"/>
+  <!-- 4K 텍스트 -->
+  <text x="764" y="730" font-family="Arial Black" font-size="52" fill="#0288D1" text-anchor="middle">Sharp</text>
+
+  <!-- Layer 3: 중앙 AI 뱃지 + 화살표 -->
+  <circle cx="512" cy="512" r="64" fill="#1565C0"/>
+  <text x="512" y="530" font-family="Arial Black" font-size="50" fill="white" text-anchor="middle">AI</text>
+</svg>

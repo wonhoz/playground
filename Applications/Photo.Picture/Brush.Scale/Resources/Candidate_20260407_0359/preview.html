@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>Brush.Scale — Icon Candidates (Candidate_20260407_0359)</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: linear-gradient(135deg, #E8F5E9 0%, #E3F2FD 50%, #EDE7F6 100%);
+    min-height: 100vh;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    padding: 40px 20px;
+  }
+  h1 {
+    text-align: center;
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: #1565C0;
+    margin-bottom: 8px;
+    letter-spacing: -1px;
+  }
+  .subtitle {
+    text-align: center;
+    font-size: 1rem;
+    color: #7B1FA2;
+    margin-bottom: 40px;
+    opacity: 0.8;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 28px;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+  .card {
+    background: white;
+    border-radius: 20px;
+    padding: 24px 20px 20px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.10);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    cursor: pointer;
+  }
+  .card:hover {
+    transform: translateY(-6px) scale(1.03);
+    box-shadow: 0 12px 36px rgba(0,0,0,0.18);
+  }
+  .icon-wrap {
+    width: 160px;
+    height: 160px;
+    margin: 0 auto 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .icon-wrap img {
+    width: 160px;
+    height: 160px;
+    object-fit: contain;
+    border-radius: 12px;
+  }
+  .card-title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #1A237E;
+    text-align: center;
+    margin-bottom: 4px;
+  }
+  .card-type {
+    font-size: 0.78rem;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 6px;
+    padding: 2px 10px;
+    border-radius: 20px;
+    display: inline-block;
+    margin-left: auto;
+    margin-right: auto;
+    width: fit-content;
+  }
+  .type-literal  { background: #E3F2FD; color: #1565C0; }
+  .type-metaphor { background: #F3E5F5; color: #7B1FA2; }
+  .type-hybrid   { background: #E8F5E9; color: #2E7D32; }
+  .card-meta {
+    font-size: 0.76rem;
+    color: #555;
+    text-align: center;
+    line-height: 1.5;
+    margin-top: 4px;
+  }
+  .palette {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    margin-top: 10px;
+  }
+  .dot {
+    width: 18px; height: 18px;
+    border-radius: 50%;
+    border: 2px solid rgba(0,0,0,0.1);
+  }
+  .card-type-row {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 6px;
+  }
+</style>
+</head>
+<body>
+<h1>Brush.Scale</h1>
+<p class="subtitle">아이콘 후보 15개 · Candidate_20260407_0359 · AI 이미지 업스케일러</p>
+<div class="grid">
+
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_01.svg" alt="icon_01"></div>
+    <div class="card-title">icon_01 — Before/After 비교</div>
+    <div class="card-type-row"><span class="card-type type-literal">literal</span></div>
+    <div class="card-meta">패턴: 레이어드<br>흐릿한 픽셀 → 선명한 이미지 + 4x 뱃지</div>
+    <div class="palette">
+      <div class="dot" style="background:#F3E5F5"></div>
+      <div class="dot" style="background:#9FA8DA"></div>
+      <div class="dot" style="background:#AB47BC"></div>
+      <div class="dot" style="background:#CE93D8"></div>
+      <div class="dot" style="background:#E91E63"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_02.svg" alt="icon_02"></div>
+    <div class="card-title">icon_02 — 돋보기 + 4x</div>
+    <div class="card-type-row"><span class="card-type type-literal">literal</span></div>
+    <div class="card-meta">패턴: 중앙 심볼<br>돋보기로 이미지 확대 + AI 뱃지</div>
+    <div class="palette">
+      <div class="dot" style="background:#FFFDE7"></div>
+      <div class="dot" style="background:#FF6F00"></div>
+      <div class="dot" style="background:#FFE082"></div>
+      <div class="dot" style="background:#EF6C00"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_03.svg" alt="icon_03"></div>
+    <div class="card-title">icon_03 — 배율 선택 UI</div>
+    <div class="card-type-row"><span class="card-type type-literal">literal</span></div>
+    <div class="card-meta">패턴: 기하학 추상<br>2x / 4x / 8x 배율 버튼 목록</div>
+    <div class="palette">
+      <div class="dot" style="background:#E0F7FA"></div>
+      <div class="dot" style="background:#00838F"></div>
+      <div class="dot" style="background:#00ACC1"></div>
+      <div class="dot" style="background:#FF6D00"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_04.svg" alt="icon_04"></div>
+    <div class="card-title">icon_04 — 픽셀 격자 비교</div>
+    <div class="card-type-row"><span class="card-type type-literal">literal</span></div>
+    <div class="card-meta">패턴: 공간/장면<br>저해상도 픽셀 → AI → 선명한 사진</div>
+    <div class="palette">
+      <div class="dot" style="background:#E3F2FD"></div>
+      <div class="dot" style="background:#90CAF9"></div>
+      <div class="dot" style="background:#FF9800"></div>
+      <div class="dot" style="background:#FFCC80"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_05.svg" alt="icon_05"></div>
+    <div class="card-title">icon_05 — 1080p → 4K</div>
+    <div class="card-type-row"><span class="card-type type-literal">literal</span></div>
+    <div class="card-meta">패턴: 중앙 심볼<br>해상도 수치가 직관적으로 표시</div>
+    <div class="palette">
+      <div class="dot" style="background:#0D47A1"></div>
+      <div class="dot" style="background:#90CAF9"></div>
+      <div class="dot" style="background:#FFD740"></div>
+      <div class="dot" style="background:#FF6D00"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_06.svg" alt="icon_06"></div>
+    <div class="card-title">icon_06 — AI 뇌 처리</div>
+    <div class="card-type-row"><span class="card-type type-metaphor">metaphor</span></div>
+    <div class="card-meta">패턴: 기하학 추상<br>AI 뇌가 저해상도 → 고해상도 처리</div>
+    <div class="palette">
+      <div class="dot" style="background:#4A148C"></div>
+      <div class="dot" style="background:#E040FB"></div>
+      <div class="dot" style="background:#00E5FF"></div>
+      <div class="dot" style="background:#69F0AE"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_07.svg" alt="icon_07"></div>
+    <div class="card-title">icon_07 — 화가 붓</div>
+    <div class="card-type-row"><span class="card-type type-metaphor">metaphor</span></div>
+    <div class="card-meta">패턴: 실루엣/캐릭터<br>붓으로 정밀하게 그리는 AI (Brush 직역)</div>
+    <div class="palette">
+      <div class="dot" style="background:#FFF8F1"></div>
+      <div class="dot" style="background:#FF6F00"></div>
+      <div class="dot" style="background:#8D6E63"></div>
+      <div class="dot" style="background:#E65100"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_08.svg" alt="icon_08"></div>
+    <div class="card-title">icon_08 — 확대경 + 반짝임</div>
+    <div class="card-type-row"><span class="card-type type-metaphor">metaphor</span></div>
+    <div class="card-meta">패턴: 대각선/동적<br>AI 마법으로 빛나게 확대되는 이미지</div>
+    <div class="palette">
+      <div class="dot" style="background:#FCE4EC"></div>
+      <div class="dot" style="background:#E91E63"></div>
+      <div class="dot" style="background:#FFD740"></div>
+      <div class="dot" style="background:#FF4081"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_09.svg" alt="icon_09"></div>
+    <div class="card-title">icon_09 — 씨앗→나무 성장</div>
+    <div class="card-type-row"><span class="card-type type-metaphor">metaphor</span></div>
+    <div class="card-meta">패턴: 공간/장면<br>작은 씨앗이 큰 나무로 (scale up = 성장)</div>
+    <div class="palette">
+      <div class="dot" style="background:#E3F2FD"></div>
+      <div class="dot" style="background:#4CAF50"></div>
+      <div class="dot" style="background:#66BB6A"></div>
+      <div class="dot" style="background:#FF9800"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_10.svg" alt="icon_10"></div>
+    <div class="card-title">icon_10 — 초점 포커스 전환</div>
+    <div class="card-type-row"><span class="card-type type-metaphor">metaphor</span></div>
+    <div class="card-meta">패턴: 레이어드<br>흐릿(blur) → 선명(sharp) AI 포커스</div>
+    <div class="palette">
+      <div class="dot" style="background:#ECEFF1"></div>
+      <div class="dot" style="background:#607D8B"></div>
+      <div class="dot" style="background:#29B6F6"></div>
+      <div class="dot" style="background:#1565C0"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_11.svg" alt="icon_11"></div>
+    <div class="card-title">icon_11 — 픽셀 재조립</div>
+    <div class="card-type-row"><span class="card-type type-metaphor">metaphor</span></div>
+    <div class="card-meta">패턴: 기하학 추상<br>큰 픽셀 블록 → 작은 세밀한 픽셀 격자</div>
+    <div class="palette">
+      <div class="dot" style="background:#FCE4EC"></div>
+      <div class="dot" style="background:#E91E63"></div>
+      <div class="dot" style="background:#69F0AE"></div>
+      <div class="dot" style="background:#00C853"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_12.svg" alt="icon_12"></div>
+    <div class="card-title">icon_12 — 빛나는 별</div>
+    <div class="card-type-row"><span class="card-type type-metaphor">metaphor</span></div>
+    <div class="card-meta">패턴: 추상<br>스케일업 = 별처럼 빛나는 성장</div>
+    <div class="palette">
+      <div class="dot" style="background:#1A0533"></div>
+      <div class="dot" style="background:#FFD740"></div>
+      <div class="dot" style="background:#FF6D00"></div>
+      <div class="dot" style="background:#B39DDB"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_13.svg" alt="icon_13"></div>
+    <div class="card-title">icon_13 — 크리스탈 굴절</div>
+    <div class="card-type-row"><span class="card-type type-metaphor">metaphor</span></div>
+    <div class="card-meta">패턴: 기하학 추상<br>수정이 이미지를 정제하여 선명하게</div>
+    <div class="palette">
+      <div class="dot" style="background:#E0F2F1"></div>
+      <div class="dot" style="background:#80DEEA"></div>
+      <div class="dot" style="background:#00BCD4"></div>
+      <div class="dot" style="background:#00897B"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_14.svg" alt="icon_14"></div>
+    <div class="card-title">icon_14 — 이미지+확대경+4x</div>
+    <div class="card-type-row"><span class="card-type type-hybrid">hybrid</span></div>
+    <div class="card-meta">패턴: 레이어드<br>사진 위에 확대경 오버레이 + 4x 뱃지</div>
+    <div class="palette">
+      <div class="dot" style="background:#FCE4EC"></div>
+      <div class="dot" style="background:#CE93D8"></div>
+      <div class="dot" style="background:#E91E63"></div>
+      <div class="dot" style="background:#9C27B0"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_15.svg" alt="icon_15"></div>
+    <div class="card-title">icon_15 — 사진+화살표+해상도</div>
+    <div class="card-type-row"><span class="card-type type-hybrid">hybrid</span></div>
+    <div class="card-meta">패턴: 대각선/동적<br>480px → AI 화살표 → 1920px 직관 표현</div>
+    <div class="palette">
+      <div class="dot" style="background:#1A237E"></div>
+      <div class="dot" style="background:#5C6BC0"></div>
+      <div class="dot" style="background:#FFD740"></div>
+      <div class="dot" style="background:#FF6D00"></div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

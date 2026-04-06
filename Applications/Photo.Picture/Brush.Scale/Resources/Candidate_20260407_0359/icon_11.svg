@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Layer 1: 배경 — 핫핑크+라임 -->
+  <defs>
+    <linearGradient id="bg11" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FCE4EC"/>
+      <stop offset="100%" stop-color="#F1F8E9"/>
+    </linearGradient>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg11)"/>
+
+  <!-- Layer 2: 픽셀 블록 → 세밀한 디테일 (AI 복원 — 기하학 추상) -->
+  <!-- 왼쪽 — 4×4 큰 픽셀 블록 격자 (저해상도) -->
+  <g transform="translate(80, 220)">
+    <!-- 4×4 픽셀 그리드 (각 블록 96px) -->
+    <rect x="0" y="0" width="96" height="96" rx="6" fill="#E91E63" opacity="0.8"/>
+    <rect x="100" y="0" width="96" height="96" rx="6" fill="#F06292" opacity="0.7"/>
+    <rect x="200" y="0" width="96" height="96" rx="6" fill="#E91E63" opacity="0.9"/>
+    <rect x="300" y="0" width="96" height="96" rx="6" fill="#EC407A" opacity="0.8"/>
+
+    <rect x="0" y="100" width="96" height="96" rx="6" fill="#F06292" opacity="0.7"/>
+    <rect x="100" y="100" width="96" height="96" rx="6" fill="#E91E63" opacity="0.9"/>
+    <rect x="200" y="100" width="96" height="96" rx="6" fill="#EC407A" opacity="0.8"/>
+    <rect x="300" y="100" width="96" height="96" rx="6" fill="#E91E63" opacity="0.7"/>
+
+    <rect x="0" y="200" width="96" height="96" rx="6" fill="#E91E63" opacity="0.9"/>
+    <rect x="100" y="200" width="96" height="96" rx="6" fill="#EC407A" opacity="0.8"/>
+    <rect x="200" y="200" width="96" height="96" rx="6" fill="#F06292" opacity="0.7"/>
+    <rect x="300" y="200" width="96" height="96" rx="6" fill="#E91E63" opacity="0.8"/>
+
+    <rect x="0" y="300" width="96" height="96" rx="6" fill="#EC407A" opacity="0.7"/>
+    <rect x="100" y="300" width="96" height="96" rx="6" fill="#E91E63" opacity="0.8"/>
+    <rect x="200" y="300" width="96" height="96" rx="6" fill="#F06292" opacity="0.9"/>
+    <rect x="300" y="300" width="96" height="96" rx="6" fill="#E91E63" opacity="0.7"/>
+  </g>
+
+  <!-- 중앙 AI 변환 원 -->
+  <circle cx="512" cy="512" r="80" fill="#FF4081"/>
+  <text x="512" y="532" font-family="Arial Black" font-size="60" fill="white" text-anchor="middle">AI</text>
+  <!-- 화살표 -->
+  <path d="M420,512 L432,512" stroke="white" stroke-width="12" stroke-linecap="round"/>
+
+  <!-- 오른쪽 — 세밀한 8×8 픽셀 격자 (고해상도) -->
+  <g transform="translate(564, 220)">
+    <!-- 세밀한 8x8 격자 (각 블록 48px) — 다채로운 색상 -->
+    <!-- 1행 -->
+    <rect x="0" y="0" width="48" height="48" rx="4" fill="#69F0AE"/>
+    <rect x="52" y="0" width="48" height="48" rx="4" fill="#00E676"/>
+    <rect x="104" y="0" width="48" height="48" rx="4" fill="#76FF03"/>
+    <rect x="156" y="0" width="48" height="48" rx="4" fill="#69F0AE"/>
+    <rect x="208" y="0" width="48" height="48" rx="4" fill="#00E676"/>
+    <rect x="260" y="0" width="48" height="48" rx="4" fill="#76FF03"/>
+    <rect x="312" y="0" width="48" height="48" rx="4" fill="#69F0AE"/>
+    <rect x="364" y="0" width="48" height="48" rx="4" fill="#00E676"/>
+    <!-- 2행 -->
+    <rect x="0" y="52" width="48" height="48" rx="4" fill="#00E676"/>
+    <rect x="52" y="52" width="48" height="48" rx="4" fill="#69F0AE"/>
+    <rect x="104" y="52" width="48" height="48" rx="4" fill="#00C853"/>
+    <rect x="156" y="52" width="48" height="48" rx="4" fill="#76FF03"/>
+    <rect x="208" y="52" width="48" height="48" rx="4" fill="#69F0AE"/>
+    <rect x="260" y="52" width="48" height="48" rx="4" fill="#00E676"/>
+    <rect x="312" y="52" width="48" height="48" rx="4" fill="#76FF03"/>
+    <rect x="364" y="52" width="48" height="48" rx="4" fill="#00C853"/>
+    <!-- 3행 -->
+    <rect x="0" y="104" width="48" height="48" rx="4" fill="#76FF03"/>
+    <rect x="52" y="104" width="48" height="48" rx="4" fill="#00C853"/>
+    <rect x="104" y="104" width="48" height="48" rx="4" fill="#69F0AE"/>
+    <rect x="156" y="104" width="48" height="48" rx="4" fill="#00E676"/>
+    <rect x="208" y="104" width="48" height="48" rx="4" fill="#00C853"/>
+    <rect x="260" y="104" width="48" height="48" rx="4" fill="#76FF03"/>
+    <rect x="312" y="104" width="48" height="48" rx="4" fill="#69F0AE"/>
+    <rect x="364" y="104" width="48" height="48" rx="4" fill="#00E676"/>
+    <!-- 4-8행 패턴 반복 -->
+    <rect x="0" y="156" width="412" height="240" rx="4" fill="#A5D6A7" opacity="0.4"/>
+    <!-- 산 모양 표현 -->
+    <path d="M0,380 L100,240 L170,290 L240,200 L300,270 L360,220 L412,380 Z" fill="#2E7D32" opacity="0.7"/>
+  </g>
+
+  <!-- Layer 3: 배율 표시 -->
+  <text x="512" y="870" font-family="Arial Black" font-size="72" fill="#E91E63" text-anchor="middle" opacity="0.8">4x UP</text>
+</svg>

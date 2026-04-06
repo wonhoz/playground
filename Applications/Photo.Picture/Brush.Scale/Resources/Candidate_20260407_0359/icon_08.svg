@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Layer 1: 배경 — 핫핑크+골드 -->
+  <defs>
+    <radialGradient id="bg08" cx="0.4" cy="0.4" r="0.7">
+      <stop offset="0%" stop-color="#FCE4EC"/>
+      <stop offset="100%" stop-color="#FFF9C4"/>
+    </radialGradient>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg08)"/>
+
+  <!-- Layer 2: 돋보기 + AI 반짝임 (대각선/동적) -->
+  <!-- 돋보기 원 -->
+  <circle cx="420" cy="420" r="260" fill="none" stroke="#E91E63" stroke-width="44"/>
+  <!-- 돋보기 내부 (확대된 이미지) -->
+  <clipPath id="lens08">
+    <circle cx="420" cy="420" r="238"/>
+  </clipPath>
+  <g clip-path="url(#lens08)">
+    <rect x="182" y="182" width="476" height="476" fill="#FCE4EC"/>
+    <!-- 고해상도 산 이미지 -->
+    <path d="M182,600 L320,350 L410,440 L490,300 L600,500 L658,600 Z" fill="#E91E63" opacity="0.8"/>
+    <rect x="182" y="182" width="476" height="160" fill="#F8BBD9" opacity="0.5"/>
+    <circle cx="600" cy="250" r="50" fill="#FFD740" opacity="0.9"/>
+    <ellipse cx="420" cy="608" rx="238" ry="60" fill="#66BB6A" opacity="0.5"/>
+  </g>
+  <!-- 돋보기 손잡이 -->
+  <line x1="624" y1="624" x2="820" y2="820" stroke="#E91E63" stroke-width="54" stroke-linecap="round"/>
+
+  <!-- Layer 3: AI 반짝임 별들 + 4x 뱃지 -->
+  <!-- 반짝임들 -->
+  <path d="M750,250 L764,290 L810,280 L775,310 L790,360 L750,330 L710,360 L725,310 L690,280 L736,290 Z" fill="#FFD740"/>
+  <path d="M820,420 L830,446 L860,440 L838,458 L846,486 L820,468 L794,486 L802,458 L780,440 L810,446 Z" fill="#FFD740" opacity="0.8"/>
+  <path d="M680,180 L688,200 L710,196 L695,208 L700,230 L680,218 L660,230 L665,208 L650,196 L672,200 Z" fill="#FF4081" opacity="0.9"/>
+
+  <!-- 4x 뱃지 -->
+  <circle cx="800" cy="600" r="86" fill="#E91E63"/>
+  <text x="800" y="622" font-family="Arial Black" font-size="68" fill="white" text-anchor="middle">4x</text>
+</svg>

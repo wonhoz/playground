@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Layer 1: 배경 — 밝은 하늘+코랄 그라데이션 -->
+  <defs>
+    <linearGradient id="bg14" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#E1F5FE"/>
+      <stop offset="100%" stop-color="#FCE4EC"/>
+    </linearGradient>
+    <linearGradient id="swirl14a" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0091EA" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#00B0FF" stop-opacity="0.4"/>
+    </linearGradient>
+    <linearGradient id="swirl14b" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FF4081" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#FF80AB" stop-opacity="0.4"/>
+    </linearGradient>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg14)"/>
+
+  <!-- Layer 2: 소용돌이 변환 에너지 (기하학 추상) -->
+  <!-- 소용돌이 원호들 — 파란색 -->
+  <path d="M512,512 m-260,0 A260,260 0 0,1 640,280" stroke="url(#swirl14a)" stroke-width="50" fill="none" stroke-linecap="round"/>
+  <path d="M512,512 m0,-200 A200,200 0 0,1 680,580" stroke="#00B0FF" stroke-width="36" fill="none" stroke-linecap="round" opacity="0.7"/>
+  <path d="M512,512 m140,80 A160,160 0 0,1 420,680" stroke="#40C4FF" stroke-width="24" fill="none" stroke-linecap="round" opacity="0.5"/>
+  <!-- 소용돌이 원호들 — 코랄/핑크색 -->
+  <path d="M512,512 m260,0 A260,260 0 0,1 384,744" stroke="url(#swirl14b)" stroke-width="50" fill="none" stroke-linecap="round"/>
+  <path d="M512,512 m0,200 A200,200 0 0,1 344,444" stroke="#FF4081" stroke-width="36" fill="none" stroke-linecap="round" opacity="0.7"/>
+  <path d="M512,512 m-140,-80 A160,160 0 0,1 604,344" stroke="#FF80AB" stroke-width="24" fill="none" stroke-linecap="round" opacity="0.5"/>
+
+  <!-- Layer 3: 중앙 파일 아이콘 (hybrid — 파일+소용돌이) -->
+  <!-- 중앙 원 배경 -->
+  <circle cx="512" cy="512" r="130" fill="white" opacity="0.95"/>
+  <!-- 파일 아이콘 심볼 (작은 버전) -->
+  <rect x="450" y="430" width="130" height="165" rx="16" fill="#0091EA"/>
+  <path d="M534,430 L580,476 L534,476 Z" fill="#005B9F"/>
+  <text x="516" y="568" font-family="Arial Black" font-size="52" fill="white" text-anchor="middle">ICO</text>
+
+  <!-- 소용돌이 화살표 머리들 -->
+  <path d="M620,256 L660,300 L610,310" fill="#0091EA" stroke="#0091EA" stroke-width="4" stroke-linejoin="round" opacity="0.9"/>
+  <path d="M400,766 L360,722 L410,712" fill="#FF4081" stroke="#FF4081" stroke-width="4" stroke-linejoin="round" opacity="0.9"/>
+</svg>

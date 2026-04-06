@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Layer 1: 배경 — 밝은 노랑/크림 -->
+  <defs>
+    <radialGradient id="bg02" cx="0.5" cy="0.45" r="0.6">
+      <stop offset="0%" stop-color="#FFFDE7"/>
+      <stop offset="100%" stop-color="#FFF9C4"/>
+    </radialGradient>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg02)"/>
+
+  <!-- Layer 2: 돋보기 (크고 중앙에) -->
+  <!-- 돋보기 원 -->
+  <circle cx="450" cy="450" r="240" fill="#FFF9C4" stroke="#FF6F00" stroke-width="40"/>
+  <!-- 돋보기 내부 — 확대된 사진 느낌 -->
+  <circle cx="450" cy="450" r="200" fill="#FFE082"/>
+  <!-- 내부 산 풍경 (선명한 고화질 이미지) -->
+  <path d="M270,580 L380,390 L470,470 L540,360 L630,580 Z" fill="#E65100" opacity="0.8"/>
+  <circle cx="600" cy="380" r="44" fill="#FFD740" opacity="0.9"/>
+  <!-- 내부 하단 초원 -->
+  <ellipse cx="450" cy="590" rx="180" ry="50" fill="#558B2F" opacity="0.7"/>
+  <!-- 돋보기 손잡이 -->
+  <line x1="645" y1="650" x2="800" y2="820" stroke="#FF6F00" stroke-width="50" stroke-linecap="round"/>
+
+  <!-- Layer 3: 배율 표시 + AI 라벨 -->
+  <!-- 4x 배지 (오른쪽 위) -->
+  <circle cx="780" cy="240" r="90" fill="#FF6F00"/>
+  <text x="780" y="260" font-family="Arial Black" font-size="72" fill="white" text-anchor="middle">4x</text>
+  <!-- AI 뱃지 -->
+  <rect x="650" y="840" width="200" height="68" rx="34" fill="#EF6C00"/>
+  <text x="750" y="884" font-family="Arial Black" font-size="44" fill="white" text-anchor="middle">AI</text>
+</svg>

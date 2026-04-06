@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Layer 1: 배경 — 밝은 민트 그라데이션 -->
+  <defs>
+    <linearGradient id="bg01" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#E0FFF5"/>
+      <stop offset="100%" stop-color="#B2EFE0"/>
+    </linearGradient>
+    <filter id="shadow01">
+      <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#00B08840" flood-opacity="1"/>
+    </filter>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg01)"/>
+
+  <!-- Layer 2: 3장 겹친 파일 스택 (레이어드) -->
+  <!-- 뒷 파일 (BMP — 노란색) -->
+  <rect x="300" y="230" width="300" height="380" rx="28" fill="#FFE066" filter="url(#shadow01)"/>
+  <!-- 파일 헤더 폴드 -->
+  <polygon points="540,230 600,290 540,290" fill="#FFB300"/>
+  <rect x="540" y="290" width="60" height="60" rx="0" fill="#FFB300" opacity="0"/>
+  <!-- 폴드 삼각형 재설정 -->
+  <path d="M540,230 L600,290 L540,290 Z" fill="#D4A000"/>
+  <rect x="300" y="290" width="300" height="320" rx="0" fill="#FFE066" opacity="0"/>
+  <!-- 텍스트 BMP -->
+  <text x="390" y="520" font-family="Arial Black, sans-serif" font-weight="900" font-size="80" fill="#B37A00" text-anchor="middle">BMP</text>
+
+  <!-- 가운데 파일 (JPG — 산호색) -->
+  <rect x="340" y="270" width="300" height="380" rx="28" fill="#FF8A7A" filter="url(#shadow01)"/>
+  <path d="M580,270 L640,330 L580,330 Z" fill="#C0392B"/>
+  <text x="430" y="560" font-family="Arial Black, sans-serif" font-weight="900" font-size="80" fill="#7A1C10" text-anchor="middle">JPG</text>
+
+  <!-- 앞 파일 (PNG — 하늘색) -->
+  <rect x="380" y="310" width="300" height="380" rx="28" fill="#5BC8F5" filter="url(#shadow01)"/>
+  <path d="M620,310 L680,370 L620,370 Z" fill="#0288D1"/>
+  <text x="470" y="600" font-family="Arial Black, sans-serif" font-weight="900" font-size="80" fill="#01579B" text-anchor="middle">PNG</text>
+
+  <!-- Layer 3: 변환 화살표 포인트 (오른쪽 하단) -->
+  <circle cx="770" cy="720" r="80" fill="#FF6B35"/>
+  <path d="M730,720 L790,720 M770,680 L810,720 L770,760" stroke="white" stroke-width="20" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+</svg>

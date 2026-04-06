@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Layer 1: 배경 — 딥 퍼플+스카이블루 -->
+  <defs>
+    <radialGradient id="bg12" cx="0.5" cy="0.5" r="0.7">
+      <stop offset="0%" stop-color="#1A0533"/>
+      <stop offset="100%" stop-color="#0D1B69"/>
+    </radialGradient>
+    <radialGradient id="star12" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0%" stop-color="#FFD740" stop-opacity="1"/>
+      <stop offset="100%" stop-color="#FFD740" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg12)"/>
+
+  <!-- Layer 2: 작은 별 → 빛나는 큰 별 (스케일업의 상징) -->
+  <!-- 배경 작은 별들 (흩어진) -->
+  <circle cx="200" cy="200" r="8" fill="#90CAF9" opacity="0.6"/>
+  <circle cx="800" cy="300" r="6" fill="#B39DDB" opacity="0.5"/>
+  <circle cx="180" cy="750" r="10" fill="#80DEEA" opacity="0.6"/>
+  <circle cx="850" cy="700" r="7" fill="#90CAF9" opacity="0.5"/>
+  <circle cx="120" cy="500" r="9" fill="#B39DDB" opacity="0.4"/>
+  <circle cx="900" cy="500" r="11" fill="#80DEEA" opacity="0.5"/>
+  <circle cx="350" cy="820" r="7" fill="#90CAF9" opacity="0.4"/>
+  <circle cx="680" cy="180" r="9" fill="#B39DDB" opacity="0.5"/>
+
+  <!-- 중앙 큰 빛나는 별 -->
+  <!-- 별 글로우 -->
+  <circle cx="512" cy="480" r="200" fill="url(#star12)"/>
+  <!-- 별 모양 -->
+  <path d="M512,220 L548,368 L700,368 L578,458 L622,606 L512,518 L402,606 L446,458 L324,368 L476,368 Z" fill="#FFD740"/>
+  <!-- 별 내부 이미지 느낌 (업스케일된 이미지 상징) -->
+  <path d="M512,220 L548,368 L700,368 L578,458 L622,606 L512,518 L402,606 L446,458 L324,368 L476,368 Z"
+    fill="none" stroke="#FFF9C4" stroke-width="6" opacity="0.6"/>
+  <!-- 별빛살 -->
+  <line x1="512" y1="140" x2="512" y2="180" stroke="#FFD740" stroke-width="14" stroke-linecap="round" opacity="0.7"/>
+  <line x1="512" y1="780" x2="512" y2="820" stroke="#FFD740" stroke-width="14" stroke-linecap="round" opacity="0.7"/>
+  <line x1="200" y1="480" x2="240" y2="480" stroke="#FFD740" stroke-width="14" stroke-linecap="round" opacity="0.7"/>
+  <line x1="784" y1="480" x2="824" y2="480" stroke="#FFD740" stroke-width="14" stroke-linecap="round" opacity="0.7"/>
+
+  <!-- Layer 3: 배율 뱃지 + AI 텍스트 -->
+  <!-- 중앙 별 위에 배율 -->
+  <rect x="380" y="428" width="264" height="72" rx="36" fill="#FF6D00"/>
+  <text x="512" y="474" font-family="Arial Black" font-size="50" fill="white" text-anchor="middle">×4 Scale</text>
+
+  <!-- 하단 AI 라벨 -->
+  <rect x="380" y="820" width="264" height="72" rx="36" fill="#B39DDB"/>
+  <text x="512" y="866" font-family="Arial Black" font-size="50" fill="#1A0533" text-anchor="middle">AI Magic</text>
+</svg>

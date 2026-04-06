@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Layer 1: 배경 — 에메랄드 그린 -->
+  <defs>
+    <linearGradient id="bg09" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#E8F5E9"/>
+      <stop offset="100%" stop-color="#C8E6C9"/>
+    </linearGradient>
+    <linearGradient id="recycle09" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#00C853"/>
+      <stop offset="100%" stop-color="#00897B"/>
+    </linearGradient>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg09)"/>
+
+  <!-- Layer 2: 순환 화살표 (재생성 상징) — 큰 원형 화살표 -->
+  <!-- 화살표 원호 1 (위 오른쪽) -->
+  <path d="M512,180 A300,300 0 0,1 780,430" stroke="url(#recycle09)" stroke-width="56" fill="none" stroke-linecap="round"/>
+  <!-- 화살표 머리 1 -->
+  <path d="M750,360 L800,450 L690,460" fill="#00C853" stroke="#00C853" stroke-width="4" stroke-linejoin="round"/>
+
+  <!-- 화살표 원호 2 (아래 왼쪽) -->
+  <path d="M512,840 A300,300 0 0,1 244,590" stroke="url(#recycle09)" stroke-width="56" fill="none" stroke-linecap="round"/>
+  <!-- 화살표 머리 2 -->
+  <path d="M274,660 L224,570 L334,560" fill="#00897B" stroke="#00897B" stroke-width="4" stroke-linejoin="round"/>
+
+  <!-- 연결 원호 -->
+  <path d="M244,590 A300,300 0 0,1 512,180" stroke="#69F0AE" stroke-width="30" fill="none" stroke-linecap="round" opacity="0.7"/>
+  <path d="M780,430 A300,300 0 0,1 512,840" stroke="#1DE9B6" stroke-width="30" fill="none" stroke-linecap="round" opacity="0.7"/>
+
+  <!-- Layer 3: 중앙 — 파일 변환 표현 -->
+  <!-- 중앙 원 배경 -->
+  <circle cx="512" cy="512" r="140" fill="white" opacity="0.9"/>
+  <!-- 입력 파일 라벨 + 출력 파일 라벨 -->
+  <text x="512" y="488" font-family="Arial Black" font-size="64" fill="#F4511E" text-anchor="middle">IMG</text>
+  <path d="M430,508 L594,508" stroke="#00897B" stroke-width="6" opacity="0.4"/>
+  <text x="512" y="556" font-family="Arial Black" font-size="52" fill="#00897B" text-anchor="middle">ICO</text>
+
+  <!-- 새로 태어난 파일 — 오른쪽 하단 빛나는 파일 -->
+  <rect x="760" y="720" width="170" height="210" rx="20" fill="#B9F6CA" stroke="#00C853" stroke-width="10"/>
+  <path d="M878,720 L930,772 L878,772 Z" fill="#00C853"/>
+  <!-- 새로운 파일 위 별빛 -->
+  <circle cx="845" cy="825" r="38" fill="#69F0AE"/>
+  <path d="M845,795 L852,815 L875,815 L858,828 L864,848 L845,835 L826,848 L832,828 L815,815 L838,815 Z" fill="#00C853"/>
+</svg>

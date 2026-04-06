@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>Img.Cast — Icon Candidates (Candidate_20260407_0359)</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: linear-gradient(135deg, #E3F2FD 0%, #FCE4EC 50%, #F3E5F5 100%);
+    min-height: 100vh;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    padding: 40px 20px;
+  }
+  h1 {
+    text-align: center;
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: #1565C0;
+    margin-bottom: 8px;
+    letter-spacing: -1px;
+  }
+  .subtitle {
+    text-align: center;
+    font-size: 1rem;
+    color: #7B1FA2;
+    margin-bottom: 40px;
+    opacity: 0.8;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 28px;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+  .card {
+    background: white;
+    border-radius: 20px;
+    padding: 24px 20px 20px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.10);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    cursor: pointer;
+  }
+  .card:hover {
+    transform: translateY(-6px) scale(1.03);
+    box-shadow: 0 12px 36px rgba(0,0,0,0.18);
+  }
+  .icon-wrap {
+    width: 160px;
+    height: 160px;
+    margin: 0 auto 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .icon-wrap img {
+    width: 160px;
+    height: 160px;
+    object-fit: contain;
+    border-radius: 12px;
+  }
+  .card-title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #1A237E;
+    text-align: center;
+    margin-bottom: 4px;
+  }
+  .card-type {
+    font-size: 0.78rem;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 6px;
+    padding: 2px 10px;
+    border-radius: 20px;
+    display: inline-block;
+    margin-left: auto;
+    margin-right: auto;
+    width: fit-content;
+  }
+  .type-literal  { background: #E3F2FD; color: #1565C0; }
+  .type-metaphor { background: #F3E5F5; color: #7B1FA2; }
+  .type-hybrid   { background: #E8F5E9; color: #2E7D32; }
+  .card-meta {
+    font-size: 0.76rem;
+    color: #555;
+    text-align: center;
+    line-height: 1.5;
+    margin-top: 4px;
+  }
+  .palette {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    margin-top: 10px;
+  }
+  .dot {
+    width: 18px; height: 18px;
+    border-radius: 50%;
+    border: 2px solid rgba(0,0,0,0.1);
+  }
+  .card-type-row {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 6px;
+  }
+</style>
+</head>
+<body>
+<h1>Img.Cast</h1>
+<p class="subtitle">아이콘 후보 15개 · Candidate_20260407_0359 · 이미지 포맷 변환기</p>
+<div class="grid">
+
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_01.svg" alt="icon_01"></div>
+    <div class="card-title">icon_01 — 포맷 파일 스택</div>
+    <div class="card-type-row"><span class="card-type type-literal">literal</span></div>
+    <div class="card-meta">패턴: 레이어드<br>BMP/JPG/PNG 파일이 겹쳐진 스택</div>
+    <div class="palette">
+      <div class="dot" style="background:#E0FFF5"></div>
+      <div class="dot" style="background:#FFE066"></div>
+      <div class="dot" style="background:#FF8A7A"></div>
+      <div class="dot" style="background:#5BC8F5"></div>
+      <div class="dot" style="background:#FF6B35"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_02.svg" alt="icon_02"></div>
+    <div class="card-title">icon_02 — 드롭존 UI</div>
+    <div class="card-type-row"><span class="card-type type-literal">literal</span></div>
+    <div class="card-meta">패턴: 중앙 심볼<br>파일 드롭 UI + 포맷 뱃지</div>
+    <div class="palette">
+      <div class="dot" style="background:#1565C0"></div>
+      <div class="dot" style="background:#29B6F6"></div>
+      <div class="dot" style="background:#E3F2FD"></div>
+      <div class="dot" style="background:#FF6B35"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_03.svg" alt="icon_03"></div>
+    <div class="card-title">icon_03 — 주조 용광로</div>
+    <div class="card-type-row"><span class="card-type type-metaphor">metaphor</span></div>
+    <div class="card-meta">패턴: 공간/장면<br>SVG를 녹여 ICO로 주조 (Cast 직역)</div>
+    <div class="palette">
+      <div class="dot" style="background:#FFF8E1"></div>
+      <div class="dot" style="background:#FF6D00"></div>
+      <div class="dot" style="background:#FFCA28"></div>
+      <div class="dot" style="background:#4CAF50"></div>
+      <div class="dot" style="background:#9C27B0"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_04.svg" alt="icon_04"></div>
+    <div class="card-title">icon_04 — 마법 지팡이 변환</div>
+    <div class="card-type-row"><span class="card-type type-metaphor">metaphor</span></div>
+    <div class="card-meta">패턴: 대각선/동적<br>마법 지팡이로 PNG → ICO 변환</div>
+    <div class="palette">
+      <div class="dot" style="background:#4A148C"></div>
+      <div class="dot" style="background:#FFD740"></div>
+      <div class="dot" style="background:#E040FB"></div>
+      <div class="dot" style="background:#40C4FF"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_05.svg" alt="icon_05"></div>
+    <div class="card-title">icon_05 — 파일 변환 화살표</div>
+    <div class="card-type-row"><span class="card-type type-hybrid">hybrid</span></div>
+    <div class="card-meta">패턴: 레이어드<br>SVG → 변환 화살표 → ICO 직관 표현</div>
+    <div class="palette">
+      <div class="dot" style="background:#E0F7FA"></div>
+      <div class="dot" style="background:#FF7043"></div>
+      <div class="dot" style="background:#00BCD4"></div>
+      <div class="dot" style="background:#7E57C2"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_06.svg" alt="icon_06"></div>
+    <div class="card-title">icon_06 — SVG→ICO 텍스트 변환</div>
+    <div class="card-type-row"><span class="card-type type-literal">literal</span></div>
+    <div class="card-meta">패턴: 공간/장면<br>SVG/ICO 대형 뱃지 + 포맷 목록</div>
+    <div class="palette">
+      <div class="dot" style="background:#1A0533"></div>
+      <div class="dot" style="background:#FF4081"></div>
+      <div class="dot" style="background:#7C4DFF"></div>
+      <div class="dot" style="background:#FF6D00"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_07.svg" alt="icon_07"></div>
+    <div class="card-title">icon_07 — 프리즘 스펙트럼</div>
+    <div class="card-type-row"><span class="card-type type-metaphor">metaphor</span></div>
+    <div class="card-meta">패턴: 기하학 추상<br>프리즘이 하나의 이미지를 여러 포맷으로</div>
+    <div class="palette">
+      <div class="dot" style="background:#FAFAFA"></div>
+      <div class="dot" style="background:#FF1744"></div>
+      <div class="dot" style="background:#00E676"></div>
+      <div class="dot" style="background:#00B0FF"></div>
+      <div class="dot" style="background:#E040FB"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_08.svg" alt="icon_08"></div>
+    <div class="card-title">icon_08 — 드래그&드롭 손</div>
+    <div class="card-type-row"><span class="card-type type-metaphor">metaphor</span></div>
+    <div class="card-meta">패턴: 실루엣/캐릭터<br>파일을 쥐고 드래그하는 손</div>
+    <div class="palette">
+      <div class="dot" style="background:#FFCCBC"></div>
+      <div class="dot" style="background:#FF7043"></div>
+      <div class="dot" style="background:#FFF9C4"></div>
+      <div class="dot" style="background:#F9A825"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_09.svg" alt="icon_09"></div>
+    <div class="card-title">icon_09 — 순환 재탄생</div>
+    <div class="card-type-row"><span class="card-type type-metaphor">metaphor</span></div>
+    <div class="card-meta">패턴: 대각선/동적<br>재활용 순환 화살표 → 새 파일 탄생</div>
+    <div class="palette">
+      <div class="dot" style="background:#E8F5E9"></div>
+      <div class="dot" style="background:#00C853"></div>
+      <div class="dot" style="background:#00897B"></div>
+      <div class="dot" style="background:#69F0AE"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_10.svg" alt="icon_10"></div>
+    <div class="card-title">icon_10 — 포맷 2×2 격자</div>
+    <div class="card-type-row"><span class="card-type type-literal">literal</span></div>
+    <div class="card-meta">패턴: 기하학 추상<br>SVG/PNG/JPG/ICO 색상별 격자</div>
+    <div class="palette">
+      <div class="dot" style="background:#D1C4E9"></div>
+      <div class="dot" style="background:#FF7043"></div>
+      <div class="dot" style="background:#29B6F6"></div>
+      <div class="dot" style="background:#FFC107"></div>
+      <div class="dot" style="background:#AB47BC"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_11.svg" alt="icon_11"></div>
+    <div class="card-title">icon_11 — 용광로 주조 장면</div>
+    <div class="card-type-row"><span class="card-type type-metaphor">metaphor</span></div>
+    <div class="card-meta">패턴: 공간/장면<br>금속 용융 주조 — Cast의 직접 표현</div>
+    <div class="palette">
+      <div class="dot" style="background:#0D1B2A"></div>
+      <div class="dot" style="background:#FFEA00"></div>
+      <div class="dot" style="background:#FF6D00"></div>
+      <div class="dot" style="background:#37474F"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_12.svg" alt="icon_12"></div>
+    <div class="card-title">icon_12 — 나비 변태</div>
+    <div class="card-type-row"><span class="card-type type-metaphor">metaphor</span></div>
+    <div class="card-meta">패턴: 실루엣/캐릭터<br>SVG→ICO 변태하는 나비</div>
+    <div class="palette">
+      <div class="dot" style="background:#E0F7FA"></div>
+      <div class="dot" style="background:#E040FB"></div>
+      <div class="dot" style="background:#7C4DFF"></div>
+      <div class="dot" style="background:#69F0AE"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_13.svg" alt="icon_13"></div>
+    <div class="card-title">icon_13 — 필름→디지털</div>
+    <div class="card-type-row"><span class="card-type type-metaphor">metaphor</span></div>
+    <div class="card-meta">패턴: 레이어드<br>사진 필름 스트립 → 디지털 파일 전환</div>
+    <div class="palette">
+      <div class="dot" style="background:#FFF8F1"></div>
+      <div class="dot" style="background:#1A1A2E"></div>
+      <div class="dot" style="background:#EF5350"></div>
+      <div class="dot" style="background:#7E57C2"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_14.svg" alt="icon_14"></div>
+    <div class="card-title">icon_14 — 소용돌이 변환</div>
+    <div class="card-type-row"><span class="card-type type-hybrid">hybrid</span></div>
+    <div class="card-meta">패턴: 기하학 추상<br>파일 + 소용돌이 변환 에너지</div>
+    <div class="palette">
+      <div class="dot" style="background:#E1F5FE"></div>
+      <div class="dot" style="background:#0091EA"></div>
+      <div class="dot" style="background:#FF4081"></div>
+      <div class="dot" style="background:#1565C0"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_15.svg" alt="icon_15"></div>
+    <div class="card-title">icon_15 — 픽셀 재조립</div>
+    <div class="card-type-row"><span class="card-type type-literal">literal</span></div>
+    <div class="card-meta">패턴: 기하학 추상<br>흩어진 픽셀 → 정렬된 ICO 파일</div>
+    <div class="palette">
+      <div class="dot" style="background:#880E4F"></div>
+      <div class="dot" style="background:#F50057"></div>
+      <div class="dot" style="background:#FFEA00"></div>
+      <div class="dot" style="background:#00E5FF"></div>
+      <div class="dot" style="background:#1565C0"></div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

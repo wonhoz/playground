@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Layer 1: 배경 — 비비드 보라+시안 -->
+  <defs>
+    <linearGradient id="bg06" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#4A148C"/>
+      <stop offset="100%" stop-color="#006064"/>
+    </linearGradient>
+    <radialGradient id="brain06" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0%" stop-color="#E040FB"/>
+      <stop offset="100%" stop-color="#7C4DFF"/>
+    </radialGradient>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg06)"/>
+
+  <!-- Layer 2: AI 뇌 모양 (추상적 기하학) -->
+  <!-- 뇌 반구들 -->
+  <!-- 왼쪽 반구 -->
+  <path d="M512,280 Q360,260 300,380 Q240,500 300,600 Q340,660 420,680 L512,680 Z" fill="url(#brain06)" opacity="0.9"/>
+  <!-- 오른쪽 반구 -->
+  <path d="M512,280 Q664,260 724,380 Q784,500 724,600 Q684,660 604,680 L512,680 Z" fill="url(#brain06)" opacity="0.85"/>
+  <!-- 뇌 주름 (왼쪽) -->
+  <path d="M340,380 Q380,420 360,470" stroke="#CE93D8" stroke-width="12" fill="none" stroke-linecap="round" opacity="0.6"/>
+  <path d="M320,460 Q360,490 340,540" stroke="#CE93D8" stroke-width="12" fill="none" stroke-linecap="round" opacity="0.6"/>
+  <path d="M350,550 Q400,570 380,610" stroke="#CE93D8" stroke-width="12" fill="none" stroke-linecap="round" opacity="0.6"/>
+  <!-- 뇌 주름 (오른쪽) -->
+  <path d="M684,380 Q644,420 664,470" stroke="#CE93D8" stroke-width="12" fill="none" stroke-linecap="round" opacity="0.6"/>
+  <path d="M704,460 Q664,490 684,540" stroke="#CE93D8" stroke-width="12" fill="none" stroke-linecap="round" opacity="0.6"/>
+  <path d="M674,550 Q624,570 644,610" stroke="#CE93D8" stroke-width="12" fill="none" stroke-linecap="round" opacity="0.6"/>
+  <!-- 뇌 중앙 분리선 -->
+  <path d="M512,280 Q530,350 512,450 Q494,550 512,680" stroke="#CE93D8" stroke-width="8" fill="none" opacity="0.5"/>
+  <!-- 뇌 기저부 -->
+  <rect x="440" y="680" width="144" height="50" rx="25" fill="#7C4DFF" opacity="0.8"/>
+
+  <!-- Layer 3: AI 신경망 연결선 + 이미지 처리 표현 -->
+  <!-- 입력 이미지 (좌) -->
+  <rect x="80" y="440" width="140" height="140" rx="16" fill="#26C6DA" opacity="0.8"/>
+  <!-- 저해상도 픽셀 -->
+  <rect x="96" y="456" width="48" height="48" rx="6" fill="#00ACC1"/>
+  <rect x="152" y="456" width="48" height="48" rx="6" fill="#0097A7"/>
+  <rect x="96" y="512" width="48" height="48" rx="6" fill="#0097A7"/>
+  <rect x="152" y="512" width="48" height="48" rx="6" fill="#00ACC1"/>
+  <!-- 입력 화살표 -->
+  <path d="M224,510 L300,480" stroke="#00E5FF" stroke-width="14" stroke-linecap="round" opacity="0.8"/>
+
+  <!-- 출력 이미지 (우) -->
+  <rect x="804" y="390" width="140" height="190" rx="16" fill="#69F0AE" opacity="0.8"/>
+  <!-- 고해상도 산 이미지 -->
+  <path d="M820,550 L870,440 L900,480 L930,410 L944,550 Z" fill="#00897B" opacity="0.9"/>
+  <circle cx="934" cy="420" r="20" fill="#FFD740" opacity="0.8"/>
+  <!-- 출력 화살표 -->
+  <path d="M724,480 L800,450" stroke="#00E5FF" stroke-width="14" stroke-linecap="round" opacity="0.8"/>
+
+  <!-- 신경망 점들 (뇌 주변) -->
+  <circle cx="300" cy="480" r="12" fill="#E040FB" opacity="0.7"/>
+  <circle cx="280" cy="400" r="10" fill="#00E5FF" opacity="0.6"/>
+  <circle cx="724" cy="480" r="12" fill="#E040FB" opacity="0.7"/>
+  <circle cx="744" cy="400" r="10" fill="#00E5FF" opacity="0.6"/>
+</svg>

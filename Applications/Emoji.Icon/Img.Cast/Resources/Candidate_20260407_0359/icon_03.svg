@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Layer 1: 배경 — 따뜻한 황금빛 그라데이션 (주조 용광로 느낌) -->
+  <defs>
+    <radialGradient id="bg03" cx="0.5" cy="0.5" r="0.7">
+      <stop offset="0%" stop-color="#FFF8E1"/>
+      <stop offset="100%" stop-color="#FFE082"/>
+    </radialGradient>
+    <linearGradient id="fire03" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FF6B00"/>
+      <stop offset="100%" stop-color="#FF1744"/>
+    </linearGradient>
+    <linearGradient id="melt03" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#42A5F5"/>
+      <stop offset="100%" stop-color="#1976D2"/>
+    </linearGradient>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg03)"/>
+
+  <!-- Layer 2: 주조 용광로/도가니 -->
+  <!-- 도가니 몸체 -->
+  <path d="M320,680 Q240,650 260,500 L380,440 L644,440 L764,500 Q784,650 704,680 Z" fill="#FF8F00"/>
+  <!-- 도가니 테두리 -->
+  <path d="M320,680 Q240,650 260,500 L380,440 L644,440 L764,500 Q784,650 704,680 Z"
+    stroke="#E65100" stroke-width="16" fill="none"/>
+  <!-- 용융 금속 (빛나는 오렌지) -->
+  <ellipse cx="512" cy="500" rx="220" ry="60" fill="#FF6D00" opacity="0.9"/>
+  <ellipse cx="512" cy="490" rx="180" ry="45" fill="#FFCA28"/>
+  <!-- 불꽃들 -->
+  <path d="M430,440 Q420,380 450,320 Q460,380 480,350 Q470,400 500,380 Q485,440 460,440 Z" fill="url(#fire03)" opacity="0.9"/>
+  <path d="M510,440 Q500,360 530,290 Q545,370 560,330 Q555,400 580,370 Q565,445 540,440 Z" fill="url(#fire03)" opacity="0.85"/>
+  <path d="M580,440 Q575,390 600,350 Q605,390 625,370 Q618,420 605,440 Z" fill="#FF9800" opacity="0.8"/>
+
+  <!-- Layer 3: 왼쪽 입력 파일 → 도가니 → 오른쪽 출력 파일 -->
+  <!-- 입력 파일 (SVG) -->
+  <rect x="100" y="430" width="160" height="200" rx="16" fill="#E8F5E9" stroke="#4CAF50" stroke-width="8"/>
+  <text x="180" y="545" font-family="Arial Black" font-size="56" fill="#2E7D32" text-anchor="middle">SVG</text>
+  <!-- 입력 화살표 -->
+  <path d="M270,520 L360,520" stroke="#FF6D00" stroke-width="16" stroke-linecap="round"/>
+  <path d="M340,495 L375,520 L340,545" stroke="#FF6D00" stroke-width="16" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+
+  <!-- 출력 파일 (ICO — 빛나는) -->
+  <rect x="764" y="430" width="160" height="200" rx="16" fill="#EDE7F6" stroke="#9C27B0" stroke-width="8"/>
+  <text x="844" y="545" font-family="Arial Black" font-size="56" fill="#6A1B9A" text-anchor="middle">ICO</text>
+  <!-- 출력 화살표 -->
+  <path d="M664,520 L754,520" stroke="#FF6D00" stroke-width="16" stroke-linecap="round"/>
+  <path d="M734,495 L769,520 L734,545" stroke="#FF6D00" stroke-width="16" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+
+  <!-- 하단 "CAST" 텍스트 -->
+  <text x="512" y="820" font-family="Arial Black" font-size="90" fill="#E65100" text-anchor="middle" opacity="0.7">CAST</text>
+</svg>

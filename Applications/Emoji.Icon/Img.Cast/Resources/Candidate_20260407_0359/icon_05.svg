@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Layer 1: 배경 — 밝은 청록 그라데이션 -->
+  <defs>
+    <linearGradient id="bg05" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#E0F7FA"/>
+      <stop offset="100%" stop-color="#B2EBF2"/>
+    </linearGradient>
+    <linearGradient id="arrow05" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#00BCD4"/>
+      <stop offset="100%" stop-color="#4CAF50"/>
+    </linearGradient>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg05)"/>
+
+  <!-- Layer 2: 입력 파일 (좌) + 큰 변환 화살표 (가운데) + 출력 파일 (우) — 레이어드 -->
+  <!-- 입력 파일 (SVG) -->
+  <rect x="80" y="340" width="240" height="300" rx="24" fill="#FF7043"/>
+  <path d="M268,340 L320,392 L268,392 Z" fill="#BF360C"/>
+  <text x="200" y="510" font-family="Arial Black" font-size="72" fill="white" text-anchor="middle">SVG</text>
+  <!-- 서브 라인 -->
+  <rect x="115" y="540" width="160" height="12" rx="6" fill="white" opacity="0.5"/>
+  <rect x="115" y="562" width="120" height="12" rx="6" fill="white" opacity="0.5"/>
+
+  <!-- 변환 화살표 (가운데 — 큼직하게) -->
+  <g transform="translate(512,490)">
+    <!-- 화살표 몸통 -->
+    <rect x="-110" y="-22" width="180" height="44" rx="22" fill="url(#arrow05)"/>
+    <!-- 화살표 머리 -->
+    <path d="M60,-55 L130,0 L60,55" fill="url(#arrow05)"/>
+  </g>
+
+  <!-- 출력 파일 (ICO) — 겹쳐진 레이어 -->
+  <!-- 그림자 레이어 -->
+  <rect x="704" y="360" width="240" height="300" rx="24" fill="#7B1FA2" opacity="0.3" transform="translate(12,12)"/>
+  <!-- 메인 파일 -->
+  <rect x="704" y="340" width="240" height="300" rx="24" fill="#7E57C2"/>
+  <path d="M892,340 L944,392 L892,392 Z" fill="#4527A0"/>
+  <text x="824" y="510" font-family="Arial Black" font-size="72" fill="white" text-anchor="middle">ICO</text>
+  <rect x="739" y="540" width="160" height="12" rx="6" fill="white" opacity="0.5"/>
+  <rect x="739" y="562" width="120" height="12" rx="6" fill="white" opacity="0.5"/>
+
+  <!-- Layer 3: 하단 포맷 목록 + 완료 체크 -->
+  <rect x="180" y="720" width="664" height="80" rx="40" fill="white" opacity="0.7"/>
+  <text x="512" y="773" font-family="Arial, sans-serif" font-weight="700" font-size="46" fill="#00897B" text-anchor="middle">PNG · JPG · BMP · ICO · SVG</text>
+</svg>

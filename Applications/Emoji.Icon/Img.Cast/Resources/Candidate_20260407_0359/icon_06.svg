@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Layer 1: 배경 — 딥 인디고 + 핑크 그라데이션 -->
+  <defs>
+    <linearGradient id="bg06" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1A0533"/>
+      <stop offset="100%" stop-color="#2D1B69"/>
+    </linearGradient>
+    <linearGradient id="pill06a" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#FF4081"/>
+      <stop offset="100%" stop-color="#F50057"/>
+    </linearGradient>
+    <linearGradient id="pill06b" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#7C4DFF"/>
+      <stop offset="100%" stop-color="#651FFF"/>
+    </linearGradient>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg06)"/>
+
+  <!-- Layer 2: 대형 SVG → ICO 텍스트 변환 표현 -->
+  <!-- "SVG" 필 뱃지 -->
+  <rect x="100" y="340" width="330" height="160" rx="80" fill="url(#pill06a)"/>
+  <text x="265" y="442" font-family="Arial Black, sans-serif" font-size="110" fill="white" text-anchor="middle">SVG</text>
+
+  <!-- 변환 화살표 (크고 밝게) -->
+  <g transform="translate(512,420)">
+    <circle r="56" fill="#FF6D00"/>
+    <path d="M-22,0 L22,0 M6,-22 L28,0 L6,22" stroke="white" stroke-width="12" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  </g>
+
+  <!-- "ICO" 필 뱃지 -->
+  <rect x="594" y="340" width="330" height="160" rx="80" fill="url(#pill06b)"/>
+  <text x="759" y="442" font-family="Arial Black, sans-serif" font-size="110" fill="white" text-anchor="middle">ICO</text>
+
+  <!-- Layer 3: 아래 지원 포맷 목록 -->
+  <!-- PNG 뱃지 -->
+  <rect x="130" y="580" width="180" height="72" rx="36" fill="#00BCD4" opacity="0.9"/>
+  <text x="220" y="626" font-family="Arial Black" font-size="44" fill="white" text-anchor="middle">PNG</text>
+  <!-- JPG 뱃지 -->
+  <rect x="330" y="580" width="180" height="72" rx="36" fill="#FF9800" opacity="0.9"/>
+  <text x="420" y="626" font-family="Arial Black" font-size="44" fill="white" text-anchor="middle">JPG</text>
+  <!-- BMP 뱃지 -->
+  <rect x="530" y="580" width="180" height="72" rx="36" fill="#4CAF50" opacity="0.9"/>
+  <text x="620" y="626" font-family="Arial Black" font-size="44" fill="white" text-anchor="middle">BMP</text>
+  <!-- ICO 뱃지 작은 버전 -->
+  <rect x="730" y="580" width="180" height="72" rx="36" fill="#E040FB" opacity="0.9"/>
+  <text x="820" y="626" font-family="Arial Black" font-size="44" fill="white" text-anchor="middle">ICO</text>
+
+  <!-- 상단 작은 포인트 텍스트 -->
+  <text x="512" y="240" font-family="Arial, sans-serif" font-weight="600" font-size="60" fill="#FF4081" text-anchor="middle" opacity="0.7">Image Converter</text>
+
+  <!-- 하단 파형 장식 -->
+  <path d="M130,760 Q230,730 330,760 Q430,790 530,760 Q630,730 730,760 Q830,790 894,760"
+    stroke="#7C4DFF" stroke-width="12" fill="none" opacity="0.6" stroke-linecap="round"/>
+</svg>

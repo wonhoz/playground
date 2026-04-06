@@ -250,6 +250,47 @@
           </ControlTemplate>
         </Setter.Value>
       </Setter>
+      <!-- 가로 ScrollBar (탭바 등) -->
+      <Style.Triggers>
+        <Trigger Property="Orientation" Value="Horizontal">
+          <Setter Property="Width"     Value="Auto"/>
+          <Setter Property="Height"    Value="8"/>
+          <Setter Property="MinHeight" Value="8"/>
+          <Setter Property="Template">
+            <Setter.Value>
+              <ControlTemplate TargetType="ScrollBar">
+                <Grid>
+                  <Border Background="#080F1E" CornerRadius="4"/>
+                  <Track x:Name="PART_Track" IsDirectionReversed="False">
+                    <Track.Thumb>
+                      <Thumb>
+                        <Thumb.Template>
+                          <ControlTemplate TargetType="Thumb">
+                            <Border x:Name="ThumbBd" Background="#1E4080" CornerRadius="4" Margin="2">
+                              <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                  <VisualState x:Name="Normal"/>
+                                  <VisualState x:Name="MouseOver">
+                                    <Storyboard>
+                                      <ColorAnimation Storyboard.TargetName="ThumbBd"
+                                                      Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"
+                                                      To="#3060B0" Duration="0:0:0.1"/>
+                                    </Storyboard>
+                                  </VisualState>
+                                </VisualStateGroup>
+                              </VisualStateManager.VisualStateGroups>
+                            </Border>
+                          </ControlTemplate>
+                        </Thumb.Template>
+                      </Thumb>
+                    </Track.Thumb>
+                  </Track>
+                </Grid>
+              </ControlTemplate>
+            </Setter.Value>
+          </Setter>
+        </Trigger>
+      </Style.Triggers>
     </Style>
     <Style TargetType="ScrollViewer">
       <Setter Property="Background"                Value="Transparent"/>

@@ -39,6 +39,9 @@ public partial class MainWindow : Window
     private readonly Dictionary<string, FileSystemWatcher> _fileWatchers = new(StringComparer.OrdinalIgnoreCase);
     private double _editorFontSize = 13;
     private double _previewFontSize = 15;
+    private int _findMatchCount = 0;
+    private int _findCurrentIndex = 0;
+    private List<RecentFileItem> _allRecentItems = [];
 
     public MainWindow()
     {
@@ -907,6 +910,7 @@ public partial class MainWindow : Window
             TxtEditIcon.Foreground = (SolidColorBrush)FindResource("TextDimBrush");
             StatusMode.Text = "뷰";
             StatusCursor.Visibility = Visibility.Collapsed;
+            StatusUndo.Visibility = Visibility.Collapsed;
             FormatBar.Visibility = Visibility.Collapsed;
         }
         _settings.IsEditMode = editMode;
@@ -932,6 +936,7 @@ public partial class MainWindow : Window
             case "ul":       InsertLinePrefix("- "); break;
             case "ol":       InsertLinePrefix("1. "); break;
             case "hr":       InsertAtNewLine("---"); break;
+            case "table":    InsertAtNewLine("| 제목1 | 제목2 | 제목3 |\n|-------|-------|-------|\n|       |       |       |"); break;
         }
     }
 
@@ -1104,6 +1109,7 @@ public partial class MainWindow : Window
         var readMin = Math.Max(1, (int)Math.Ceiling(words / 200.0));
         StatusWords.Text = words > 0 ? $"{words}단어 · 약 {readMin}분" : "0단어";
         StatusMode.Text = _isEditMode ? "편집" : "뷰";
+        StatusUndo.Visibility = _isEditMode && Editor.CanUndo ? Visibility.Visible : Visibility.Collapsed;
     }
 
     // ── 찾기 ────────────────────────────────────────────────────────────
@@ -1113,10 +1119,13 @@ public partial class MainWindow : Window
         if (!_webViewReady) return;
         if (string.IsNullOrEmpty(keyword))
         {
+            _findCurrentIndex = 0;
+            _findMatchCount = 0;
             StatusFind.Visibility = Visibility.Collapsed;
             _ = Viewer.ExecuteScriptAsync("window.getSelection()?.removeAllRanges()");
             return;
         }
+        _findCurrentIndex = 0; // 검색어 변경 시 초기화
         _ = FindInPreviewAsync(keyword, reverse: false);
         if (_isEditMode) FindInEditor(keyword);
     }
@@ -1155,12 +1164,28 @@ public partial class MainWindow : Window
 }})()");
             if (int.TryParse(countJson.Trim('"'), out var count))
             {
-                StatusFind.Text = count > 0 ? $"{count}개 일치" : "없음";
+                _findMatchCount = count;
+                if (count > 0)
+                {
+                    // 방향에 따라 이동 (reverse=true: 역방향)
+                    var rev = reverse ? "true" : "false";
+                    await Viewer.ExecuteScriptAsync($"window.find({kw}, false, {rev}, true)");
+                    // 현재 위치 인덱스 업데이트
+                    if (_findCurrentIndex == 0)
+                        _findCurrentIndex = 1;
+                    else if (reverse)
+                        _findCurrentIndex = _findCurrentIndex <= 1 ? count : _findCurrentIndex - 1;
+                    else
+                        _findCurrentIndex = _findCurrentIndex >= count ? 1 : _findCurrentIndex + 1;
+                    StatusFind.Text = $"{_findCurrentIndex} / {count}";
+                }
+                else
+                {
+                    _findCurrentIndex = 0;
+                    StatusFind.Text = "없음";
+                }
                 StatusFind.Visibility = Visibility.Visible;
             }
-            // 방향에 따라 이동 (reverse=true: 역방향)
-            var rev = reverse ? "true" : "false";
-            await Viewer.ExecuteScriptAsync($"window.find({kw}, false, {rev}, true)");
         }
         catch { }
     }
@@ -1448,12 +1473,27 @@ public partial class MainWindow : Window
     {
         var start = Editor.SelectionStart;
         var sel = Editor.SelectedText;
+
+        // 인라인 서식 토글: 이미 같은 마커로 감싸진 텍스트 선택 시 제거
+        if (!before.Contains('\n') && sel.Length > before.Length + after.Length &&
+            sel.StartsWith(before, StringComparison.Ordinal) &&
+            sel.EndsWith(after, StringComparison.Ordinal))
+        {
+            var inner = sel[before.Length..(sel.Length - after.Length)];
+            // "**" vs "*" 혼동 방지: inner가 동일 구분자로 시작/끝나는지 확인
+            bool isSameChar = inner.Length > 0 && before.Length > 0 &&
+                              inner[0] == before[^1] && inner[^1] == after[0];
+            if (!isSameChar)
+            {
+                Editor.SelectedText = inner;
+                Editor.Select(start, inner.Length);
+                return;
+            }
+        }
+
         var wrapped = before + sel + after;
         Editor.SelectedText = wrapped;
-        if (sel.Length == 0)
-            Editor.CaretIndex = start + before.Length;
-        else
-            Editor.CaretIndex = start + wrapped.Length;
+        Editor.CaretIndex = sel.Length == 0 ? start + before.Length : start + wrapped.Length;
     }
 
     private void WrapAsLink()
@@ -1468,7 +1508,7 @@ public partial class MainWindow : Window
 
     private void Editor_SelectionChanged(object sender, RoutedEventArgs e)
     {
-        if (!IsLoaded || _activeIndex < 0) return;
+        if (!IsLoaded || _activeIndex < 0 || _activeIndex >= _docs.Count) return;
         var text = Editor.Text;
         var caret = Editor.CaretIndex;
         if (caret < 0 || caret > text.Length) return;
@@ -1873,14 +1913,31 @@ public partial class MainWindow : Window
                 System.IO.Path.GetDirectoryName(p) ?? "",
                 p, false));
 
-        var all = pinned.Concat(rest).ToList();
-        if (all.Count == 0)
+        _allRecentItems = pinned.Concat(rest).ToList();
+        if (_allRecentItems.Count == 0)
         {
             RecentFilesPanel.Visibility = Visibility.Collapsed;
             return;
         }
-        RecentFilesList.ItemsSource = all;
+        FilterRecentList(TxtRecentSearch?.Text ?? "");
         RecentFilesPanel.Visibility = Visibility.Visible;
+    }
+
+    private void FilterRecentList(string query)
+    {
+        if (_allRecentItems.Count == 0) return;
+        var filtered = string.IsNullOrWhiteSpace(query)
+            ? _allRecentItems
+            : _allRecentItems
+                .Where(i => i.FileName.Contains(query, StringComparison.OrdinalIgnoreCase) ||
+                            i.Directory.Contains(query, StringComparison.OrdinalIgnoreCase))
+                .ToList();
+        RecentFilesList.ItemsSource = filtered;
+    }
+
+    private void TxtRecentSearch_TextChanged(object sender, TextChangedEventArgs e)
+    {
+        FilterRecentList(TxtRecentSearch.Text);
     }
 
     private void PinFile_Click(object sender, RoutedEventArgs e)

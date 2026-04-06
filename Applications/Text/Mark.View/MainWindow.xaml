@@ -94,6 +94,11 @@
                     Click="FmtBtn_Click" ToolTip="가로 구분선" Padding="6,3" Margin="0,0,1,0">
               <TextBlock Text="&#x2500;&#x2500;" FontSize="11"/>
             </Button>
+            <Separator Width="1" Height="16" Margin="2,0" Background="{StaticResource BorderBrush}"/>
+            <Button Style="{StaticResource IconButton}" Tag="table"
+                    Click="FmtBtn_Click" ToolTip="표 삽입" Padding="6,3" Margin="4,0,1,0">
+              <TextBlock Text="표" FontSize="11" FontWeight="SemiBold"/>
+            </Button>
           </StackPanel>
         </Border>
 
@@ -405,6 +410,25 @@
                 <TextBlock Text="최근 파일" FontSize="12" FontWeight="SemiBold"
                            Foreground="{StaticResource TextDimBrush}"
                            HorizontalAlignment="Center" Margin="0,0,0,8"/>
+                <!-- 최근 파일 검색 -->
+                <Grid Width="240" Margin="0,0,0,8" HorizontalAlignment="Center">
+                  <TextBox x:Name="TxtRecentSearch"
+                           TextChanged="TxtRecentSearch_TextChanged"/>
+                  <TextBlock Text="&#x1F50D; 파일 검색..." Foreground="#6888AA"
+                             FontSize="11" VerticalAlignment="Center" Margin="8,0,0,0"
+                             IsHitTestVisible="False" IsEnabled="False">
+                    <TextBlock.Style>
+                      <Style TargetType="TextBlock">
+                        <Setter Property="Visibility" Value="Collapsed"/>
+                        <Style.Triggers>
+                          <DataTrigger Binding="{Binding Text, ElementName=TxtRecentSearch}" Value="">
+                            <Setter Property="Visibility" Value="Visible"/>
+                          </DataTrigger>
+                        </Style.Triggers>
+                      </Style>
+                    </TextBlock.Style>
+                  </TextBlock>
+                </Grid>
                 <ItemsControl x:Name="RecentFilesList">
                   <ItemsControl.ItemTemplate>
                     <DataTemplate>
@@ -536,6 +560,13 @@
                      VerticalAlignment="Center"
                      Margin="0,0,12,0"
                      Visibility="Collapsed"/>
+          <TextBlock x:Name="StatusUndo"
+                     Text="↩" FontSize="11"
+                     Foreground="{StaticResource TextDimBrush}"
+                     VerticalAlignment="Center"
+                     Margin="0,0,8,0"
+                     Visibility="Collapsed"
+                     ToolTip="실행 취소 가능 (Ctrl+Z)"/>
           <TextBlock x:Name="StatusMode"
                      FontSize="11"
                      Foreground="{StaticResource AccentBrush}"

@@ -18,6 +18,7 @@ public partial class PopupWindow : System.Windows.Window
     private bool      _suppressSizeChanged = false;
     private string    _lastStatusText = "";
     private bool      _customSortByName = false;
+    private bool      _preserveClipboard = false;
 
     // ItemSize = 문자 버튼 1칸 크기 (폰트 크기 기반으로 자동 계산)
     private double ItemSize => _charFontSize + 28;
@@ -63,8 +64,11 @@ public partial class PopupWindow : System.Windows.Window
             Height = Math.Clamp(ph, 300, 700);
         _suppressSizeChanged = false;
 
+        _customSortByName  = _storage.GetSetting("custom_sort_by_name")  == "1";
+        _preserveClipboard = _storage.GetSetting("preserve_clipboard")  == "1";
         BuildTabs();
         UpdatePinBtn();
+        UpdateClipboardPreserveBtn();
         _initialized = true;
         var lastTab = _storage.GetSetting("last_tab") ?? "recent";
         SwitchTab(lastTab);
@@ -229,22 +233,48 @@ public partial class PopupWindow : System.Windows.Window
         CharGrid.ItemWidth  = ItemSize;
         CharGrid.ItemHeight = ItemSize;
 
-        // recents/favorites를 한 번씩만 조회 — 탭 entries 계산 + 즐겨찾기 별표 표시에 모두 재사용
-        var recentsList   = _storage.GetRecents();
+        var query = SearchBox.Text.Trim();
+        bool isSearchResult = !string.IsNullOrEmpty(query);
+
+        // favorites: favSet은 모든 탭에서 별표 표시에 필요 — 항상 조회
         var favoritesList = _storage.GetFavorites();  // sort_order 순서 보장
         var favSet        = favoritesList.ToHashSet();
+        // recents: 커스텀 탭 비검색 시 불필요 — 건너뜀
+        bool needRecents = isSearchResult || _activeTab != "custom";
+        var recentsList   = needRecents ? _storage.GetRecents() : new List<string>();
+        // 커스텀 문자 조회 — 최근 탭·검색·즐겨찾기 탭 등 공통 재사용
+        var customChars   = _storage.GetCustomChars();
+        var customLookup  = customChars.ToDictionary(t => t.Char, t => t.Name);
+        // 최근 탭 use_count 딕셔너리 (툴팁 "N회 사용" 표시용 — 최근 탭에서만 조회)
+        Dictionary<string, int>? recentUseCounts = null;
+        if (!isSearchResult && _activeTab == "recent")
+            recentUseCounts = _storage.GetRecentUseCounts();
 
-        var query = SearchBox.Text.Trim();
         IEnumerable<CharEntry> entries;
-        bool isSearchResult = !string.IsNullOrEmpty(query);
 
         if (isSearchResult)
         {
+            // U+XXXX 코드포인트 직접 검색
+            if (query.Length >= 3 && query.StartsWith("U+", StringComparison.OrdinalIgnoreCase) &&
+                int.TryParse(query[2..], System.Globalization.NumberStyles.HexNumber, null, out int codepoint) &&
+                codepoint is >= 0x20 and <= 0x10FFFF)
+            {
+                try
+                {
+                    var ch = char.ConvertFromUtf32(codepoint);
+                    var found = CharDatabase.AllByChar.GetValueOrDefault(ch)
+                             ?? (customLookup.TryGetValue(ch, out var cn2) ? new CharEntry(ch, cn2, "custom") : null)
+                             ?? new CharEntry(ch, $"U+{codepoint:X4}", "symbol");
+                    entries = [found];
+                    StatusText.Text = $"U+{codepoint:X4} 검색";
+                }
+                catch { entries = []; StatusText.Text = "잘못된 코드포인트"; }
+            }
             // 커스텀 탭: CharDatabase가 아닌 StorageService에서 검색
-            if (_activeTab == "custom")
+            else if (_activeTab == "custom")
             {
                 var lowerQuery = query.ToLowerInvariant();
-                entries = _storage.GetCustomChars()
+                entries = customChars
                     .Where(t => t.Name.ToLowerInvariant().Contains(lowerQuery)
                              || t.Char.Contains(query, StringComparison.OrdinalIgnoreCase))
                     .Select(t => new CharEntry(t.Char, t.Name, "custom"));
@@ -255,13 +285,25 @@ public partial class PopupWindow : System.Windows.Window
                 var results = CharDatabase.Search(query);
                 // 카테고리 탭 선택 시 해당 카테고리만 필터링 (recent/favorite 제외)
                 if (_activeTab != "recent" && _activeTab != "favorite")
-                    results = results.Where(e => e.Category == _activeTab);
-                entries = results;
-
-                // 전체 탭 검색 시 카테고리별 통계 표시
-                if (_activeTab is "recent" or "favorite")
                 {
-                    var grouped = results.GroupBy(e => e.Category)
+                    results = results.Where(e => e.Category == _activeTab);
+                    entries = results;
+                    var statusName = Tabs.FirstOrDefault(t => t.Id == _activeTab).StatusName ?? "";
+                    StatusText.Text = $"{statusName} 검색";
+                }
+                else
+                {
+                    // recent/favorite 탭 전체 검색: CharDatabase + 커스텀 문자 병합
+                    var lq = query.ToLowerInvariant();
+                    var customResults = customChars
+                        .Where(t => t.Name.ToLowerInvariant().Contains(lq)
+                                 || t.Char.Contains(query, StringComparison.OrdinalIgnoreCase))
+                        .Select(t => new CharEntry(t.Char, t.Name, "custom"));
+                    var merged = results.Concat(customResults);
+                    entries = merged;
+
+                    // 카테고리별 통계 표시
+                    var grouped = merged.GroupBy(e => e.Category)
                         .OrderByDescending(g => g.Count())
                         .Select(g =>
                         {
@@ -271,11 +313,6 @@ public partial class PopupWindow : System.Windows.Window
                     StatusText.Text = string.Join(" · ", grouped.Take(4));
                     if (!StatusText.Text.Any()) StatusText.Text = "검색 결과";
                 }
-                else
-                {
-                    var statusName = Tabs.FirstOrDefault(t => t.Id == _activeTab).StatusName ?? "";
-                    StatusText.Text = $"{statusName} 검색";
-                }
             }
         }
         else
@@ -283,14 +320,18 @@ public partial class PopupWindow : System.Windows.Window
             entries = _activeTab switch
             {
                 "recent"   => recentsList
-                                .Select(c => CharDatabase.AllByChar.GetValueOrDefault(c))
+                                .Select(c => CharDatabase.AllByChar.GetValueOrDefault(c)
+                                         ?? (customLookup.TryGetValue(c, out var cn)
+                                             ? new CharEntry(c, cn, "custom") : null))
                                 .Where(e => e is not null).Select(e => e!),
-                "favorite" => favoritesList  // sort_order 순서 유지
-                                .Select(c => CharDatabase.AllByChar.GetValueOrDefault(c))
+                "favorite" => favoritesList  // sort_order 순서 유지 (커스텀 문자 포함)
+                                .Select(c => CharDatabase.AllByChar.GetValueOrDefault(c)
+                                         ?? (customLookup.TryGetValue(c, out var fn)
+                                             ? new CharEntry(c, fn, "custom") : null))
                                 .Where(e => e is not null).Select(e => e!),
                 "custom"   => (_customSortByName
-                                ? (IEnumerable<(string Char, string Name)>)_storage.GetCustomChars().OrderBy(t => t.Name)
-                                : _storage.GetCustomChars())
+                                ? (IEnumerable<(string Char, string Name)>)customChars.OrderBy(t => t.Name)
+                                : customChars)
                                 .Select(t => new CharEntry(t.Char, t.Name, "custom")),
                 // 카테고리 탭: 최근 사용한 문자를 앞에 표시
                 _ => SortByRecent(CharDatabase.GetByCategory(_activeTab), recentsList),
@@ -303,12 +344,31 @@ public partial class PopupWindow : System.Windows.Window
         StatusText.Text += $" ({list.Count}개)";
         _lastStatusText = StatusText.Text;
 
+        // 탭 배지 업데이트 (즐겨찾기·커스텀 수)
+        UpdateTabBadge("favorite", favoritesList.Count);
+        UpdateTabBadge("custom",   customChars.Count);
+
         // 결과 없음 안내
         EmptyText.Visibility = list.Count == 0 ? Visibility.Visible : Visibility.Collapsed;
 
         CharGrid.Children.Clear();
         foreach (var entry in list)
-            CharGrid.Children.Add(MakeCharButton(entry, favSet, isSearchResult));
+        {
+            int? uc = (recentUseCounts != null && recentUseCounts.TryGetValue(entry.Char, out int cnt)) ? cnt : null;
+            CharGrid.Children.Add(MakeCharButton(entry, favSet, isSearchResult, uc));
+        }
+    }
+
+    // ── 탭 배지 카운트 업데이트 ─────────────────────────────────────────
+    private void UpdateTabBadge(string tabId, int count)
+    {
+        var tabDef = Tabs.FirstOrDefault(t => t.Id == tabId);
+        if (string.IsNullOrEmpty(tabDef.Id)) return;
+        string label = count > 0 ? $"{tabDef.Label} ({count})" : tabDef.Label;
+        foreach (WpfButton b in TabPanel.Children)
+        {
+            if ((string)b.Tag == tabId) { b.Content = label; break; }
+        }
     }
 
     // ── 카테고리 탭: 최근 사용 문자를 앞으로 정렬 ──────────────────────
@@ -322,7 +382,7 @@ public partial class PopupWindow : System.Windows.Window
     }
 
     // ── Unicode 코드포인트 툴팁 생성 ────────────────────────────────────
-    private static string GetUnicodeTooltip(CharEntry entry)
+    private static string GetUnicodeTooltip(CharEntry entry, int? useCount = null)
     {
         var codepoints = new System.Text.StringBuilder();
         for (int i = 0; i < entry.Char.Length; )
@@ -332,11 +392,14 @@ public partial class PopupWindow : System.Windows.Window
             codepoints.Append($"U+{cp:X4}");
             i += char.IsSurrogatePair(entry.Char, i) ? 2 : 1;
         }
-        return $"{entry.Char}  {entry.Name}  {codepoints}";
+        var tip = $"{entry.Char}  {entry.Name}  {codepoints}";
+        if (useCount.HasValue && useCount.Value > 1)
+            tip += $"  ({useCount.Value}회 사용)";
+        return tip;
     }
 
     // ── 문자 버튼 생성 ──────────────────────────────────────────────────
-    private UIElement MakeCharButton(CharEntry entry, HashSet<string> favSet, bool isSearchResult = false)
+    private UIElement MakeCharButton(CharEntry entry, HashSet<string> favSet, bool isSearchResult = false, int? useCount = null)
     {
         bool isFav = favSet.Contains(entry.Char);
         double size = ItemSize - 4;
@@ -350,7 +413,7 @@ public partial class PopupWindow : System.Windows.Window
             BorderThickness = new Thickness(isSearchResult ? 1 : 0),
             CornerRadius    = new CornerRadius(8),
             Cursor          = System.Windows.Input.Cursors.Hand,
-            ToolTip         = GetUnicodeTooltip(entry),
+            ToolTip         = GetUnicodeTooltip(entry, useCount),
             Focusable       = true,
             Tag             = entry,
         };
@@ -400,7 +463,7 @@ public partial class PopupWindow : System.Windows.Window
         border.MouseEnter += (_, _) =>
         {
             border.Background = (SolidColorBrush)FindResource("CharHover");
-            StatusText.Text = GetUnicodeTooltip(entry);
+            StatusText.Text = GetUnicodeTooltip(entry, useCount);
         };
         border.MouseLeave += (_, _) =>
         {
@@ -532,6 +595,9 @@ public partial class PopupWindow : System.Windows.Window
     {
         try
         {
+            // 클립보드 유지 모드: 삽입 전 원본 클립보드 내용 백업
+            string? prevClip = _preserveClipboard ? TryGetClipboardText() : null;
+
             System.Windows.Clipboard.SetText(entry.Char);
             _storage.AddRecent(entry.Char);
 
@@ -544,6 +610,7 @@ public partial class PopupWindow : System.Windows.Window
                     await Task.Delay(50);
                     await InputHelper.PasteToWindowAsync(_targetHwnd);
                     await Task.Delay(100);
+                    if (!string.IsNullOrEmpty(prevClip)) TrySetClipboardText(prevClip);
                     // 팝업을 다시 최상위로 가져옴
                     SetForegroundWindow(new WindowInteropHelper(this).Handle);
                 }
@@ -557,12 +624,45 @@ public partial class PopupWindow : System.Windows.Window
             {
                 await Task.Delay(80);
                 await InputHelper.PasteToWindowAsync(_targetHwnd);
+                if (!string.IsNullOrEmpty(prevClip))
+                {
+                    await Task.Delay(100); // 붙여넣기 완료 후 복원
+                    TrySetClipboardText(prevClip);
+                }
             }
         }
         catch (Exception ex)
         {
             StatusText.Text = $"삽입 실패: {ex.Message}";
         }
+    }
+
+    private static string? TryGetClipboardText()
+    {
+        try { return System.Windows.Clipboard.GetText(); } catch { return null; }
+    }
+
+    private static void TrySetClipboardText(string text)
+    {
+        try { System.Windows.Clipboard.SetText(text); } catch { }
+    }
+
+    // ── 클립보드 유지 토글 ────────────────────────────────────────────────
+    private void ClipboardPreserveBtn_Click(object sender, RoutedEventArgs e)
+    {
+        _preserveClipboard = !_preserveClipboard;
+        _storage.SetSetting("preserve_clipboard", _preserveClipboard ? "1" : "0");
+        UpdateClipboardPreserveBtn();
+    }
+
+    private void UpdateClipboardPreserveBtn()
+    {
+        ClipboardPreserveBtn.Foreground = _preserveClipboard
+            ? (SolidColorBrush)FindResource("AccentBrush")
+            : (SolidColorBrush)FindResource("TextSecondary");
+        ClipboardPreserveBtn.ToolTip = _preserveClipboard
+            ? "클립보드 유지 ON — 삽입 후 원본 클립보드 복원 중"
+            : "클립보드 유지 — 삽입 후 원본 클립보드 복원";
     }
 
     // ── 복사 전용 (Shift+클릭) ──────────────────────────────────────────
@@ -706,13 +806,38 @@ public partial class PopupWindow : System.Windows.Window
         RefreshGrid();
     }
 
-    // ── 커스텀 문자 우클릭 컨텍스트 메뉴 (편집 / 삭제) ──────────────────
+    // ── 커스텀 문자 우클릭 컨텍스트 메뉴 (즐겨찾기 · 편집 · 삭제) ──────
     private void ShowCustomCharContextMenu(CharEntry entry, UIElement anchor)
     {
         var menu = new System.Windows.Controls.ContextMenu();
         menu.Background    = (SolidColorBrush)FindResource("SurfaceBrush");
         menu.BorderBrush   = (SolidColorBrush)FindResource("BorderBrush");
         menu.BorderThickness = new Thickness(1);
+
+        bool isFav = _storage.IsFavorite(entry.Char);
+        var favItem = new System.Windows.Controls.MenuItem
+        {
+            Header     = isFav ? $"★  즐겨찾기 제거  ({entry.Char})" : $"☆  즐겨찾기 추가  ({entry.Char})",
+            Foreground = isFav
+                ? (SolidColorBrush)FindResource("FavColor")
+                : (SolidColorBrush)FindResource("TextPrimary"),
+            Background = System.Windows.Media.Brushes.Transparent,
+        };
+        favItem.Click += (_, _) =>
+        {
+            // 즐겨찾기 토글 — 별표 TextBlock은 anchor(border)의 부모 Grid 두 번째 Child
+            TextBlock? starTb = null;
+            if (anchor is Border b && b.Parent is Grid g && g.Children.Count > 1 && g.Children[1] is TextBlock st)
+                starTb = st;
+            if (starTb != null)
+                ToggleFavorite(entry, starTb);
+            else
+            {
+                if (_storage.IsFavorite(entry.Char)) _storage.RemoveFavorite(entry.Char);
+                else _storage.AddFavorite(entry.Char);
+                RefreshGrid();
+            }
+        };
 
         var editItem = new System.Windows.Controls.MenuItem
         {
@@ -739,6 +864,8 @@ public partial class PopupWindow : System.Windows.Window
         };
         deleteItem.Click += (_, _) => DeleteCustomChar(entry);
 
+        menu.Items.Add(favItem);
+        menu.Items.Add(new System.Windows.Controls.Separator());
         menu.Items.Add(editItem);
         menu.Items.Add(deleteItem);
         menu.PlacementTarget = anchor;
@@ -797,6 +924,7 @@ public partial class PopupWindow : System.Windows.Window
     private void SortCustomBtn_Click(object sender, RoutedEventArgs e)
     {
         _customSortByName = !_customSortByName;
+        _storage.SetSetting("custom_sort_by_name", _customSortByName ? "1" : "0");
         SortCustomBtn.Content  = _customSortByName ? "↑A" : "↕";
         SortCustomBtn.ToolTip  = _customSortByName ? "정렬: 이름순 (클릭하면 추가순으로 전환)" : "정렬 전환 (추가순 / 이름순)";
         RefreshGrid();

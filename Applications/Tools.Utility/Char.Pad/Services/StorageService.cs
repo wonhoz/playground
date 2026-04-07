@@ -100,6 +100,18 @@ public class StorageService : IDisposable
         return result;
     }
 
+    /// <summary>최근 사용 문자 목록 + 사용 횟수 반환 (툴팁 표시용)</summary>
+    public Dictionary<string, int> GetRecentUseCounts()
+    {
+        using var cmd = _db.CreateCommand();
+        cmd.CommandText = "SELECT char, use_count FROM recents ORDER BY use_count DESC, used_at DESC LIMIT $max";
+        cmd.Parameters.AddWithValue("$max", MaxRecents);
+        var result = new Dictionary<string, int>();
+        using var reader = cmd.ExecuteReader();
+        while (reader.Read()) result[reader.GetString(0)] = reader.GetInt32(1);
+        return result;
+    }
+
     // ── Favorites ────────────────────────────────────────────────────
 
     public void AddFavorite(string ch)

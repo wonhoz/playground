@@ -62,7 +62,7 @@ public class MarkdownRenderer
             + "<script defer src='https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js'"
             + " onerror=\"window.__katexFailed=true;\"></script>"
             + "<script defer src='https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js'"
-            + " onload=\"if(!window.__katexFailed&&typeof renderMathInElement!=='undefined')renderMathInElement(document.body,{delimiters:["
+            + " onload=\"if(!window.__katexFailed&&typeof renderMathInElement!=='undefined')renderMathInElement(document.body,{throwOnError:false,delimiters:["
             + "{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false},"
             + "{left:'\\\\(',right:'\\\\)',display:false},{left:'\\\\[',right:'\\\\]',display:true}]})\"></script>"
             + GetNavButtonsHtml()

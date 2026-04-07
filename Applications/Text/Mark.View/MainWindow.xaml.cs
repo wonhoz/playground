@@ -28,6 +28,7 @@ public partial class MainWindow : Window
     private bool _isFocusMode;
     private bool _suppressEditorChange;
     private bool _suppressTocSelection;
+    private bool _caseSensitive;
     private HelpWindow? _helpWindow;
     private DispatcherTimer? _previewTimer;
 
@@ -426,7 +427,7 @@ public partial class MainWindow : Window
         {
             await Viewer.ExecuteScriptAsync(@"
 (function() {
-    window.__searchHighlight = function(keyword) {
+    window.__searchHighlight = function(keyword, caseSensitive) {
         // 기존 하이라이트 제거
         document.querySelectorAll('.__shl').forEach(function(el) {
             var parent = el.parentNode;
@@ -434,7 +435,7 @@ public partial class MainWindow : Window
             parent.normalize();
         });
         if (!keyword) return;
-        var lower = keyword.toLowerCase();
+        var target = caseSensitive ? keyword : keyword.toLowerCase();
         var walk = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, {
             acceptNode: function(node) {
                 var p = node.parentNode;
@@ -449,8 +450,8 @@ public partial class MainWindow : Window
         nodes.forEach(function(node) {
             var text = node.nodeValue;
             if (!text) return;
-            var lowerText = text.toLowerCase();
-            var idx = lowerText.indexOf(lower);
+            var searchText = caseSensitive ? text : text.toLowerCase();
+            var idx = searchText.indexOf(target);
             if (idx < 0) return;
             var frag = document.createDocumentFragment();
             var pos = 0;
@@ -462,7 +463,7 @@ public partial class MainWindow : Window
                 span.textContent = text.slice(idx, idx + keyword.length);
                 frag.appendChild(span);
                 pos = idx + keyword.length;
-                idx = lowerText.indexOf(lower, pos);
+                idx = searchText.indexOf(target, pos);
             }
             if (pos < text.length) frag.appendChild(document.createTextNode(text.slice(pos)));
             node.parentNode.replaceChild(frag, node);
@@ -479,7 +480,8 @@ public partial class MainWindow : Window
         try
         {
             var kw = System.Text.Json.JsonSerializer.Serialize(keyword);
-            await Viewer.ExecuteScriptAsync($"window.__searchHighlight && window.__searchHighlight({kw})");
+            var cs = _caseSensitive ? "true" : "false";
+            await Viewer.ExecuteScriptAsync($"window.__searchHighlight && window.__searchHighlight({kw}, {cs})");
         }
         catch { }
     }
@@ -1015,6 +1017,7 @@ public partial class MainWindow : Window
             case "ol":       InsertLinePrefix("1. "); break;
             case "hr":       InsertAtNewLine("---"); break;
             case "table":    InsertAtNewLine("| 제목1 | 제목2 | 제목3 |\n|-------|-------|-------|\n|       |       |       |"); break;
+            case "image":    InsertImage(); break;
         }
     }
 
@@ -1037,6 +1040,26 @@ public partial class MainWindow : Window
         Editor.Select(caret, 0);
         Editor.SelectedText = insert;
         Editor.CaretIndex = caret + insert.Length;
+    }
+
+    private void InsertImage()
+    {
+        var dlg = new OpenFileDialog
+        {
+            Filter = "이미지 파일 (*.png;*.jpg;*.jpeg;*.gif;*.webp;*.svg;*.bmp)|*.png;*.jpg;*.jpeg;*.gif;*.webp;*.svg;*.bmp|모든 파일 (*.*)|*.*",
+            Title = "이미지 선택",
+        };
+        if (_activeIndex >= 0 && !_docs[_activeIndex].IsNew)
+            dlg.InitialDirectory = _docs[_activeIndex].Directory;
+        if (dlg.ShowDialog() != true) return;
+
+        var doc = _docs[_activeIndex];
+        var docDir = doc.IsNew ? null : Path.GetDirectoryName(doc.FilePath);
+        var imgPath = docDir != null
+            ? Path.GetRelativePath(docDir, dlg.FileName).Replace('\\', '/')
+            : dlg.FileName.Replace('\\', '/');
+        var altText = Path.GetFileNameWithoutExtension(dlg.FileName);
+        InsertAtNewLine($"![{altText}]({imgPath})");
     }
 
     // ── TOC ─────────────────────────────────────────────────────────────
@@ -1178,16 +1201,32 @@ public partial class MainWindow : Window
         catch { }
     }
 
+    private static readonly Regex _headingRegex = new(@"^#{1,6}\s", RegexOptions.Compiled | RegexOptions.Multiline);
+    private static readonly Regex _imageRegex   = new(@"!\[.*?\]\(.*?\)", RegexOptions.Compiled);
+    private static readonly Regex _linkRegex    = new(@"(?<!!)\[.*?\]\(.*?\)", RegexOptions.Compiled);
+
     private void UpdateStatusBar(MarkDocument doc)
     {
         StatusPath.Text = doc.IsNew ? "새 문서 (저장되지 않음)" : doc.FilePath;
         var lines = doc.Content.Split('\n').Length;
         var words = string.IsNullOrWhiteSpace(doc.Content)
             ? 0
-            : Regex.Matches(doc.Content, @"\S+").Count;
+            : _wordRegex.Matches(doc.Content).Count;
         StatusLines.Text = $"{lines}줄";
         var readMin = Math.Max(1, (int)Math.Ceiling(words / 200.0));
         StatusWords.Text = words > 0 ? $"{words}단어 · 약 {readMin}분" : "0단어";
+        // 문서 구조 통계 툴팁
+        if (!string.IsNullOrWhiteSpace(doc.Content))
+        {
+            var headings = _headingRegex.Matches(doc.Content).Count;
+            var images   = _imageRegex.Matches(doc.Content).Count;
+            var links    = _linkRegex.Matches(doc.Content).Count;
+            StatusWords.ToolTip = $"헤딩: {headings}개  이미지: {images}개  링크: {links}개";
+        }
+        else
+        {
+            StatusWords.ToolTip = null;
+        }
         StatusMode.Text = _isEditMode ? "편집" : "뷰";
         StatusUndo.Visibility = _isEditMode && Editor.CanUndo ? Visibility.Visible : Visibility.Collapsed;
     }
@@ -1216,12 +1255,12 @@ public partial class MainWindow : Window
     {
         if (string.IsNullOrEmpty(keyword) || _activeIndex < 0) return;
         var text = Editor.Text;
-        var idx = text.IndexOf(keyword, StringComparison.OrdinalIgnoreCase);
+        var cmp = _caseSensitive ? StringComparison.Ordinal : StringComparison.OrdinalIgnoreCase;
+        var idx = text.IndexOf(keyword, cmp);
         if (idx < 0) return;
-        // 선택 위치가 이미 해당 텍스트를 포함하면 다음 검색
         if (Editor.SelectionStart >= idx && Editor.SelectionStart < idx + keyword.Length)
         {
-            var nextIdx = text.IndexOf(keyword, idx + keyword.Length, StringComparison.OrdinalIgnoreCase);
+            var nextIdx = text.IndexOf(keyword, idx + keyword.Length, cmp);
             if (nextIdx >= 0) idx = nextIdx;
         }
         Editor.Select(idx, keyword.Length);
@@ -1233,15 +1272,17 @@ public partial class MainWindow : Window
         try
         {
             var kw = System.Text.Json.JsonSerializer.Serialize(keyword);
+            var caseSensitiveJs = _caseSensitive ? "true" : "false";
             // 전체 매칭 개수 계산
             var countJson = await Viewer.ExecuteScriptAsync($@"
 (function() {{
     var text = document.body.innerText || '';
-    var lower = text.toLowerCase();
-    var target = {kw}.toLowerCase();
+    var caseSensitive = {caseSensitiveJs};
+    var searchText = caseSensitive ? text : text.toLowerCase();
+    var target = caseSensitive ? {kw} : {kw}.toLowerCase();
     if (!target) return '0';
     var count = 0, idx = 0;
-    while ((idx = lower.indexOf(target, idx)) !== -1) {{ count++; idx += target.length; }}
+    while ((idx = searchText.indexOf(target, idx)) !== -1) {{ count++; idx += target.length; }}
     return count.toString();
 }})()");
             if (int.TryParse(countJson.Trim('"'), out var count))
@@ -1249,9 +1290,9 @@ public partial class MainWindow : Window
                 _findMatchCount = count;
                 if (count > 0)
                 {
-                    // 방향에 따라 이동 (reverse=true: 역방향)
+                    // 방향에 따라 이동 (reverse=true: 역방향, caseSensitive 전달)
                     var rev = reverse ? "true" : "false";
-                    await Viewer.ExecuteScriptAsync($"window.find({kw}, false, {rev}, true)");
+                    await Viewer.ExecuteScriptAsync($"window.find({kw}, {caseSensitiveJs}, {rev}, true)");
                     // 현재 위치 인덱스 업데이트
                     if (_findCurrentIndex == 0)
                         _findCurrentIndex = 1;
@@ -1343,7 +1384,7 @@ public partial class MainWindow : Window
         StatusReplace.Text = msg;
         StatusReplace.Visibility = Visibility.Visible;
         _replaceStatusTimer?.Stop();
-        _replaceStatusTimer ??= new DispatcherTimer { Interval = TimeSpan.FromSeconds(2) };
+        _replaceStatusTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(2) };
         _replaceStatusTimer.Tick += (_, _) => { _replaceStatusTimer.Stop(); StatusReplace.Visibility = Visibility.Collapsed; };
         _replaceStatusTimer.Start();
     }
@@ -1358,6 +1399,17 @@ public partial class MainWindow : Window
     {
         if (!string.IsNullOrEmpty(TxtFind.Text))
             _ = FindInPreviewAsync(TxtFind.Text, reverse: false);
+    }
+
+    private void BtnCase_Click(object sender, RoutedEventArgs e)
+    {
+        _caseSensitive = !_caseSensitive;
+        TxtCaseIcon.Foreground = _caseSensitive
+            ? (SolidColorBrush)FindResource("AccentBrush")
+            : (SolidColorBrush)FindResource("TextDimBrush");
+        BtnCase.ToolTip = _caseSensitive ? "대소문자 구분 켜짐 (Alt+C)" : "대소문자 구분 (Alt+C)";
+        if (!string.IsNullOrEmpty(TxtFind.Text))
+            FindInPreview(TxtFind.Text);
     }
 
     // ── 이벤트 핸들러 ────────────────────────────────────────────────────
@@ -1601,6 +1653,7 @@ public partial class MainWindow : Window
 
     // 각 논리 줄을 GetRectFromCharacterIndex 로 정확한 Y에 개별 TextBlock 배치
     // → 워드랩 여부와 무관하게 줄 번호가 해당 줄 첫 행에 정확히 맞춤
+    private static readonly Regex _wordRegex = new(@"\S+", RegexOptions.Compiled);
     private static readonly System.Windows.Media.SolidColorBrush _lineNumFg =
         new(System.Windows.Media.Color.FromRgb(0x5A, 0x7A, 0x9A));
     private static readonly System.Windows.Media.FontFamily _lineNumFont =
@@ -1888,6 +1941,8 @@ public partial class MainWindow : Window
         { PasteClipboardAsNewTab(); e.Handled = true; }
         else if (e.Key == Key.Z && Keyboard.Modifiers == ModifierKeys.Alt)
         { SetWordWrap(!_isWordWrap); e.Handled = true; }
+        else if (e.Key == Key.C && Keyboard.Modifiers == ModifierKeys.Alt)
+        { BtnCase_Click(this, new RoutedEventArgs()); e.Handled = true; }
         else if (e.Key == Key.Escape && !string.IsNullOrEmpty(TxtFind.Text))
         { TxtFind.Text = ""; e.Handled = true; }
     }

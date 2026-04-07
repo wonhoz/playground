@@ -14,6 +14,8 @@ extern LONG        g_cDllRef;
 
 // 공유 유틸 (ContextMenu.cpp 에서 구현)
 std::wstring FindClaudeIconSource();
+bool         FindClaudeExe();        // claude.exe 설치 여부 확인 (PATH + 하드코딩 경로)
+bool         FindWindowsTerminal();  // wt.exe 탐색 (PATH + WindowsApps 경로)
 
 class ClaudeContextMenu : public IShellExtInit, public IContextMenu, public IExplorerCommand
 {

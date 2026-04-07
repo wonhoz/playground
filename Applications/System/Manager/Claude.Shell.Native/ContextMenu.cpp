@@ -22,17 +22,83 @@ ClaudeContextMenu::~ClaudeContextMenu()
     InterlockedDecrement(&g_cDllRef);
 }
 
+// ── 공유 유틸: claude.exe 존재 확인 (PATH → 하드코딩 경로 순) ────────────────
+bool FindClaudeExe()
+{
+    WCHAR buf[MAX_PATH] = L"claude.exe";
+    if (PathFindOnPathW(buf, nullptr)) return true;
+
+    WCHAR userProfile[MAX_PATH] = {}, localAppData[MAX_PATH] = {};
+    ExpandEnvironmentStringsW(L"%USERPROFILE%",  userProfile,  MAX_PATH);
+    ExpandEnvironmentStringsW(L"%LOCALAPPDATA%", localAppData, MAX_PATH);
+
+    struct { const wchar_t* base; const wchar_t* rel; } exes[] = {
+        { userProfile,  L".local\\bin\\claude.exe"         },
+        { localAppData, L"AnthropicClaude\\claude.exe"     },
+        { localAppData, L"Programs\\claude\\claude.exe"    },
+        { localAppData, L"Programs\\Claude\\Claude.exe"    },
+    };
+    for (auto& e : exes)
+    {
+        WCHAR path[MAX_PATH] = {};
+        PathCombineW(path, e.base, e.rel);
+        if (PathFileExistsW(path)) return true;
+    }
+    return false;
+}
+
+// ── 공유 유틸: Windows Terminal(wt.exe) 탐색 ─────────────────────────────────
+bool FindWindowsTerminal()
+{
+    WCHAR buf[MAX_PATH] = L"wt.exe";
+    if (PathFindOnPathW(buf, nullptr)) return true;
+
+    WCHAR localAppData[MAX_PATH] = {};
+    ExpandEnvironmentStringsW(L"%LOCALAPPDATA%", localAppData, MAX_PATH);
+    WCHAR path[MAX_PATH] = {};
+    PathCombineW(path, localAppData, L"Microsoft\\WindowsApps\\wt.exe");
+    return PathFileExistsW(path) == TRUE;
+}
+
 // ── 공유 유틸: Claude 실행 ────────────────────────────────────────────────────
 static void LaunchClaude(const std::wstring& folder, bool dangerous)
 {
+    if (!FindClaudeExe())
+    {
+        MessageBoxW(nullptr,
+            L"Claude Code가 설치되지 않았습니다.\n"
+            L"https://claude.ai/download 에서 설치 후 다시 시도하세요.",
+            L"Claude Code", MB_OK | MB_ICONINFORMATION);
+        return;
+    }
+
     const wchar_t* claudeArg = dangerous
         ? L"claude --dangerously-skip-permissions" : L"claude";
-    std::wstring args = folder.empty()
-        ? std::wstring(L"/k ") + claudeArg
-        : std::wstring(L"/k cd /d \"") + folder + L"\" && " + claudeArg;
+
     SHELLEXECUTEINFOW sei = {};
-    sei.cbSize = sizeof(sei); sei.lpVerb = L"open";
-    sei.lpFile = L"cmd.exe"; sei.lpParameters = args.c_str(); sei.nShow = SW_SHOWNORMAL;
+    sei.cbSize = sizeof(sei);
+    sei.lpVerb = L"open";
+    sei.nShow  = SW_SHOWNORMAL;
+
+    std::wstring args;
+    if (FindWindowsTerminal())
+    {
+        // Windows Terminal: wt.exe -d "folder" cmd /k claude
+        args = folder.empty()
+            ? std::wstring(L"cmd /k ") + claudeArg
+            : std::wstring(L"-d \"") + folder + L"\" cmd /k " + claudeArg;
+        sei.lpFile = L"wt.exe";
+    }
+    else
+    {
+        // 기본 cmd.exe
+        args = folder.empty()
+            ? std::wstring(L"/k ") + claudeArg
+            : std::wstring(L"/k cd /d \"") + folder + L"\" && " + claudeArg;
+        sei.lpFile = L"cmd.exe";
+    }
+    sei.lpParameters = args.c_str();
+
     if (!ShellExecuteExW(&sei))
     {
         WCHAR msg[256];
@@ -105,6 +171,7 @@ STDMETHODIMP ClaudeContextMenu::QueryContextMenu(HMENU hmenu, UINT indexMenu, UI
     InsertMenuW(hmenu, indexMenu, MF_BYPOSITION | MF_POPUP,
                 reinterpret_cast<UINT_PTR>(m_hSubMenu),
                 L"Claude Code 열기");
+    m_hSubMenu = nullptr; // 부모 hmenu에 소유권 이전 — 소멸자에서 재파괴 금지
 
     HBITMAP hbmp = GetOrCreateIconBitmap();
     if (hbmp)

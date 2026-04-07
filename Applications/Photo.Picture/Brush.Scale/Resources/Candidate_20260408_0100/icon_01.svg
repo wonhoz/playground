@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg01bs" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#6366F1"/>
+      <stop offset="100%" stop-color="#4F46E5"/>
+    </linearGradient>
+    <!-- Blurry pixel pattern for left side -->
+    <filter id="blur01">
+      <feGaussianBlur stdDeviation="4"/>
+    </filter>
+  </defs>
+
+  <!-- Background: indigo -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg01bs)"/>
+
+  <!-- Left panel: blurry/pixelated image -->
+  <rect x="106" y="280" width="340" height="340" rx="16" fill="#1E1B4B"/>
+  <!-- Pixel blocks (low res) -->
+  <rect x="118" y="292" width="85" height="85" rx="0" fill="#7B6B8A"/>
+  <rect x="203" y="292" width="85" height="85" rx="0" fill="#9B8BAA"/>
+  <rect x="288" y="292" width="85" height="85" rx="0" fill="#6B5B7A"/>
+  <rect x="373" y="292" width="61" height="85" rx="0" fill="#8B7B9A"/>
+  <rect x="118" y="377" width="85" height="85" rx="0" fill="#9B8BAA"/>
+  <rect x="203" y="377" width="85" height="85" rx="0" fill="#C8A8C0"/>
+  <rect x="288" y="377" width="85" height="85" rx="0" fill="#D8B8D0"/>
+  <rect x="373" y="377" width="61" height="85" rx="0" fill="#B89AB8"/>
+  <rect x="118" y="462" width="85" height="85" rx="0" fill="#5B4B6A"/>
+  <rect x="203" y="462" width="85" height="85" rx="0" fill="#7B6B8A"/>
+  <rect x="288" y="462" width="85" height="85" rx="0" fill="#9B8BAA"/>
+  <rect x="373" y="462" width="61" height="85" rx="0" fill="#6B5B7A"/>
+  <rect x="118" y="547" width="316" height="61" rx="0" fill="#4B3B5A"/>
+  <!-- Label: "100px" -->
+  <rect x="106" y="630" width="340" height="46" rx="10" fill="#1E1B4B"/>
+  <text x="276" y="660" font-family="Arial,sans-serif" font-size="28" fill="#A5B4FC" text-anchor="middle" font-weight="bold">100 × 100 px</text>
+
+  <!-- Arrow in middle -->
+  <line x1="466" y1="450" x2="558" y2="450" stroke="#FDE047" stroke-width="20" stroke-linecap="round"/>
+  <polygon points="550,416 610,450 550,484" fill="#FDE047"/>
+  <!-- AI label -->
+  <rect x="466" y="494" width="100" height="34" rx="8" fill="#FDE047" opacity="0.2"/>
+  <text x="516" y="516" font-family="Arial,sans-serif" font-size="20" fill="#FDE047" font-weight="bold" text-anchor="middle">AI ×4</text>
+
+  <!-- Right panel: sharp high-res image -->
+  <rect x="580" y="280" width="340" height="340" rx="16" fill="#0A0A1A"/>
+  <!-- Smooth gradient image representation -->
+  <defs>
+    <radialGradient id="imgGrad" cx="50%" cy="45%" r="55%">
+      <stop offset="0%" stop-color="#F8B4CC"/>
+      <stop offset="40%" stop-color="#E879A0"/>
+      <stop offset="100%" stop-color="#7C3AED"/>
+    </radialGradient>
+  </defs>
+  <rect x="592" y="292" width="316" height="316" fill="url(#imgGrad)"/>
+  <!-- Crisp detail lines -->
+  <line x1="650" y1="390" x2="800" y2="390" stroke="white" stroke-width="2.5" stroke-linecap="round" opacity="0.5"/>
+  <line x1="650" y1="420" x2="770" y2="420" stroke="white" stroke-width="2" stroke-linecap="round" opacity="0.35"/>
+  <line x1="650" y1="450" x2="780" y2="450" stroke="white" stroke-width="2" stroke-linecap="round" opacity="0.35"/>
+  <!-- Sharp edges indicator -->
+  <rect x="592" y="292" width="316" height="316" fill="none" stroke="#22C55E" stroke-width="5" rx="0"/>
+  <!-- Label: "400px" -->
+  <rect x="580" y="630" width="340" height="46" rx="10" fill="#0A2210"/>
+  <text x="750" y="660" font-family="Arial,sans-serif" font-size="28" fill="#4ADE80" text-anchor="middle" font-weight="bold">400 × 400 px</text>
+
+  <!-- Stars sparkle around right panel -->
+  <text x="570" y="310" font-family="Arial,sans-serif" font-size="24" fill="#FDE047">✦</text>
+  <text x="900" y="288" font-family="Arial,sans-serif" font-size="18" fill="#A5F3FC">✦</text>
+  <text x="920" y="600" font-family="Arial,sans-serif" font-size="20" fill="#FDE047">✦</text>
+
+  <!-- Title at bottom -->
+  <text x="512" y="770" font-family="Arial Black,Arial" font-size="36" fill="white" font-weight="900" text-anchor="middle" opacity="0.9">UPSCALE</text>
+</svg>

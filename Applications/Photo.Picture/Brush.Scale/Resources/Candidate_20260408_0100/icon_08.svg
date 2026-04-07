@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Background: emerald green -->
+  <rect width="1024" height="1024" rx="190" fill="#059669"/>
+
+  <!-- Large ×4 in center -->
+  <text x="512" y="500" font-family="Arial Black,Arial" font-size="320" fill="white" font-weight="900" text-anchor="middle" opacity="0.95">×4</text>
+
+  <!-- Image frame top-left (small, blurry) -->
+  <rect x="130" y="180" width="200" height="180" rx="14" fill="#047857"/>
+  <rect x="144" y="194" width="172" height="152" fill="#065F46" rx="4"/>
+  <!-- Pixel blocks in small frame -->
+  <rect x="148" y="198" width="40" height="40" fill="#6EE7B7" opacity="0.6"/>
+  <rect x="188" y="198" width="40" height="40" fill="#34D399" opacity="0.6"/>
+  <rect x="228" y="198" width="40" height="40" fill="#6EE7B7" opacity="0.6"/>
+  <rect x="268" y="198" width="44" height="40" fill="#10B981" opacity="0.6"/>
+  <rect x="148" y="238" width="40" height="40" fill="#34D399" opacity="0.6"/>
+  <rect x="188" y="238" width="40" height="40" fill="#A7F3D0" opacity="0.6"/>
+  <rect x="228" y="238" width="40" height="40" fill="#6EE7B7" opacity="0.6"/>
+  <rect x="268" y="238" width="44" height="40" fill="#34D399" opacity="0.6"/>
+  <rect x="148" y="278" width="164" height="64" fill="#065F46" opacity="0.8"/>
+
+  <!-- Arrow from small frame to large frame -->
+  <line x1="330" y1="270" x2="420" y2="360" stroke="#FDE047" stroke-width="14" stroke-linecap="round"/>
+  <polygon points="410,340 436,372 400,376" fill="#FDE047"/>
+
+  <!-- Image frame bottom-right (large, sharp) -->
+  <rect x="696" y="640" width="200" height="180" rx="14" fill="#047857"/>
+  <defs>
+    <radialGradient id="bigSharp" cx="50%" cy="40%" r="60%">
+      <stop offset="0%" stop-color="#A7F3D0"/>
+      <stop offset="50%" stop-color="#34D399"/>
+      <stop offset="100%" stop-color="#065F46"/>
+    </radialGradient>
+  </defs>
+  <rect x="710" y="654" width="172" height="152" fill="url(#bigSharp)" rx="4"/>
+  <!-- Sharp detail lines in big frame -->
+  <line x1="728" y1="695" x2="870" y2="695" stroke="white" stroke-width="2.5" opacity="0.5" stroke-linecap="round"/>
+  <line x1="728" y1="718" x2="858" y2="718" stroke="white" stroke-width="2" opacity="0.4" stroke-linecap="round"/>
+  <line x1="728" y1="741" x2="863" y2="741" stroke="white" stroke-width="2" opacity="0.4" stroke-linecap="round"/>
+
+  <!-- Arrow from × text to big frame -->
+  <line x1="700" y1="570" x2="776" y2="648" stroke="#FDE047" stroke-width="14" stroke-linecap="round"/>
+  <polygon points="762,636 786,660 756,668" fill="#FDE047"/>
+
+  <!-- "Brush.Scale" label at bottom -->
+  <text x="512" y="870" font-family="Arial,sans-serif" font-size="40" fill="white" font-weight="bold" text-anchor="middle" opacity="0.9">Brush.Scale</text>
+
+  <!-- Sparkle stars -->
+  <text x="680" y="200" font-family="Arial,sans-serif" font-size="30" fill="#FDE047">★</text>
+  <text x="740" y="260" font-family="Arial,sans-serif" font-size="20" fill="#FCD34D">✦</text>
+  <text x="140" y="670" font-family="Arial,sans-serif" font-size="24" fill="#FDE047">✦</text>
+  <text x="200" y="720" font-family="Arial,sans-serif" font-size="16" fill="#A7F3D0">✦</text>
+</svg>

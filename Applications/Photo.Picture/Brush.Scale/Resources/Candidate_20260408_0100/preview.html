@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Brush.Scale — Icon Candidates (20260408_0100)</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: linear-gradient(135deg, #1E1B4B 0%, #0F172A 100%);
+    min-height: 100vh;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    color: #E2E8F0;
+    padding: 40px 24px;
+  }
+  .header { text-align: center; margin-bottom: 48px; }
+  .header h1 { font-size: 32px; font-weight: 800; color: #F1F5F9; }
+  .header .app-name { color: #FCD34D; }
+  .header p { margin-top: 8px; font-size: 15px; color: #64748B; }
+  .header .summary {
+    margin-top: 16px; display: inline-block;
+    background: #1E3A5F; border: 1px solid #F59E0B;
+    border-radius: 10px; padding: 10px 20px;
+    font-size: 14px; color: #FDE68A;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 24px; max-width: 1400px; margin: 0 auto;
+  }
+  .card {
+    background: #1E293B; border: 1px solid #334155;
+    border-radius: 16px; padding: 20px;
+    transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s; cursor: pointer;
+  }
+  .card:hover { transform: translateY(-6px) scale(1.02); box-shadow: 0 20px 48px rgba(0,0,0,0.5); border-color: #FCD34D; }
+  .icon-wrap { width: 160px; height: 160px; margin: 0 auto 16px; display: block; transition: transform 0.2s; }
+  .card:hover .icon-wrap { transform: scale(1.08); }
+  .icon-wrap img { width: 100%; height: 100%; object-fit: contain; }
+  .icon-num { text-align: center; font-size: 11px; font-weight: 700; color: #475569; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 8px; }
+  .concept { font-size: 14px; font-weight: 700; color: #F1F5F9; text-align: center; margin-bottom: 6px; }
+  .tags { display: flex; gap: 6px; justify-content: center; flex-wrap: wrap; margin-bottom: 10px; }
+  .tag { font-size: 11px; padding: 2px 8px; border-radius: 20px; font-weight: 600; }
+  .tag.literal   { background: #1D4ED8; color: #BFDBFE; }
+  .tag.metaphor  { background: #7C3AED; color: #DDD6FE; }
+  .tag.hybrid    { background: #0F766E; color: #99F6E4; }
+  .tag.pattern   { background: #374151; color: #D1D5DB; }
+  .palette { display: flex; gap: 5px; justify-content: center; margin-top: 8px; }
+  .swatch { width: 22px; height: 22px; border-radius: 50%; border: 2px solid #1E293B; box-shadow: 0 0 0 1px #475569; }
+</style>
+</head>
+<body>
+<div class="header">
+  <h1><span class="app-name">Brush.Scale</span> — Icon Candidates</h1>
+  <p>Candidate_20260408_0100 &nbsp;·&nbsp; 10 icons</p>
+  <div class="summary">AI 모델(RealESRGAN/ONNX)로 이미지를 고품질 고해상도로 업스케일</div>
+</div>
+<div class="grid">
+  <div class="card">
+    <div class="icon-num">icon_01</div>
+    <div class="icon-wrap"><img src="icon_01.svg" alt="icon_01"></div>
+    <div class="concept">100px↔400px Before/After 비교</div>
+    <div class="tags"><span class="tag literal">literal</span><span class="tag pattern">레이어드</span></div>
+    <div class="palette">
+      <div class="swatch" style="background:#6366F1"></div><div class="swatch" style="background:#1E1B4B"></div>
+      <div class="swatch" style="background:#22C55E"></div><div class="swatch" style="background:#FDE047"></div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="icon-num">icon_02</div>
+    <div class="icon-wrap"><img src="icon_02.svg" alt="icon_02"></div>
+    <div class="concept">마법 붓이 흐릿함을 선명함으로</div>
+    <div class="tags"><span class="tag metaphor">metaphor</span><span class="tag pattern">실루엣/캐릭터</span></div>
+    <div class="palette">
+      <div class="swatch" style="background:#2D1B69"></div><div class="swatch" style="background:#FCD34D"></div>
+      <div class="swatch" style="background:#F9A8D4"></div><div class="swatch" style="background:#C084FC"></div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="icon-num">icon_03</div>
+    <div class="icon-wrap"><img src="icon_03.svg" alt="icon_03"></div>
+    <div class="concept">이미지 비교 슬라이더 + ×4 배율</div>
+    <div class="tags"><span class="tag literal">literal</span><span class="tag pattern">레이어드</span></div>
+    <div class="palette">
+      <div class="swatch" style="background:#F97316"></div><div class="swatch" style="background:#FFFFFF"></div>
+      <div class="swatch" style="background:#0EA5E9"></div><div class="swatch" style="background:#22C55E"></div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="icon-num">icon_04</div>
+    <div class="icon-wrap"><img src="icon_04.svg" alt="icon_04"></div>
+    <div class="concept">확대경 렌즈 아래 선명해지는 이미지</div>
+    <div class="tags"><span class="tag metaphor">metaphor</span><span class="tag pattern">중앙 심볼</span></div>
+    <div class="palette">
+      <div class="swatch" style="background:#ECFDF5"></div><div class="swatch" style="background:#0891B2"></div>
+      <div class="swatch" style="background:#FDE68A"></div><div class="swatch" style="background:#059669"></div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="icon-num">icon_05</div>
+    <div class="icon-wrap"><img src="icon_05.svg" alt="icon_05"></div>
+    <div class="concept">픽셀 블록이 부드러운 그라데이션으로</div>
+    <div class="tags"><span class="tag metaphor">metaphor</span><span class="tag pattern">기하학 추상</span></div>
+    <div class="palette">
+      <div class="swatch" style="background:#EC4899"></div><div class="swatch" style="background:#4A044E"></div>
+      <div class="swatch" style="background:#FAD1F8"></div><div class="swatch" style="background:#FFFFFF"></div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="icon-num">icon_06</div>
+    <div class="icon-wrap"><img src="icon_06.svg" alt="icon_06"></div>
+    <div class="concept">앱 UI — 모델 선택 + 진행바</div>
+    <div class="tags"><span class="tag literal">literal</span><span class="tag pattern">공간/장면</span></div>
+    <div class="palette">
+      <div class="swatch" style="background:#0EA5E9"></div><div class="swatch" style="background:#FFFFFF"></div>
+      <div class="swatch" style="background:#1D4ED8"></div><div class="swatch" style="background:#0369A1"></div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="icon-num">icon_07</div>
+    <div class="icon-wrap"><img src="icon_07.svg" alt="icon_07"></div>
+    <div class="concept">모자이크 얼굴이 선명하게 복원</div>
+    <div class="tags"><span class="tag metaphor">metaphor</span><span class="tag pattern">레이어드</span></div>
+    <div class="palette">
+      <div class="swatch" style="background:#F59E0B"></div><div class="swatch" style="background:#FEF3C7"></div>
+      <div class="swatch" style="background:#92400E"></div><div class="swatch" style="background:#059669"></div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="icon-num">icon_08</div>
+    <div class="icon-wrap"><img src="icon_08.svg" alt="icon_08"></div>
+    <div class="concept">×4 배율 + 소형→대형 이미지 변환</div>
+    <div class="tags"><span class="tag hybrid">hybrid</span><span class="tag pattern">중앙 심볼</span></div>
+    <div class="palette">
+      <div class="swatch" style="background:#059669"></div><div class="swatch" style="background:#FFFFFF"></div>
+      <div class="swatch" style="background:#FDE047"></div><div class="swatch" style="background:#A7F3D0"></div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="icon-num">icon_09</div>
+    <div class="icon-wrap"><img src="icon_09.svg" alt="icon_09"></div>
+    <div class="concept">원본/업스케일 비교 슬라이더 UI</div>
+    <div class="tags"><span class="tag literal">literal</span><span class="tag pattern">공간/장면</span></div>
+    <div class="palette">
+      <div class="swatch" style="background:#F5F3FF"></div><div class="swatch" style="background:#4F46E5"></div>
+      <div class="swatch" style="background:#A78BFA"></div><div class="swatch" style="background:#4ADE80"></div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="icon-num">icon_10</div>
+    <div class="icon-wrap"><img src="icon_10.svg" alt="icon_10"></div>
+    <div class="concept">별빛 마법 — 픽셀 → 선명한 이미지</div>
+    <div class="tags"><span class="tag metaphor">metaphor</span><span class="tag pattern">기하학 추상</span></div>
+    <div class="palette">
+      <div class="swatch" style="background:#0F172A"></div><div class="swatch" style="background:#FCD34D"></div>
+      <div class="swatch" style="background:#93C5FD"></div><div class="swatch" style="background:#6EE7B7"></div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

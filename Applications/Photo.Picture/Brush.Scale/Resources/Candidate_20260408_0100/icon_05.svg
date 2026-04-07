@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg05bs" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#EC4899"/>
+      <stop offset="100%" stop-color="#BE185D"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background: hot pink -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg05bs)"/>
+
+  <!-- Left: pixel grid (blocky, low-res) -->
+  <rect x="100" y="300" width="340" height="340" rx="14" fill="#4A044E"/>
+  <!-- Pixel block grid 4x4 -->
+  <rect x="112" y="312" width="78" height="78" rx="2" fill="#C026D3" opacity="0.9"/>
+  <rect x="192" y="312" width="78" height="78" rx="2" fill="#9333EA" opacity="0.9"/>
+  <rect x="272" y="312" width="78" height="78" rx="2" fill="#D946EF" opacity="0.9"/>
+  <rect x="352" y="312" width="76" height="78" rx="2" fill="#A855F7" opacity="0.9"/>
+
+  <rect x="112" y="392" width="78" height="78" rx="2" fill="#E879F9" opacity="0.9"/>
+  <rect x="192" y="392" width="78" height="78" rx="2" fill="#F0ABFC" opacity="0.9"/>
+  <rect x="272" y="392" width="78" height="78" rx="2" fill="#E879F9" opacity="0.9"/>
+  <rect x="352" y="392" width="76" height="78" rx="2" fill="#C026D3" opacity="0.9"/>
+
+  <rect x="112" y="472" width="78" height="78" rx="2" fill="#A855F7" opacity="0.9"/>
+  <rect x="192" y="472" width="78" height="78" rx="2" fill="#D946EF" opacity="0.9"/>
+  <rect x="272" y="472" width="78" height="78" rx="2" fill="#9333EA" opacity="0.9"/>
+  <rect x="352" y="472" width="76" height="78" rx="2" fill="#A855F7" opacity="0.9"/>
+
+  <rect x="112" y="552" width="78" height="76" rx="2" fill="#7E22CE" opacity="0.9"/>
+  <rect x="192" y="552" width="78" height="76" rx="2" fill="#C026D3" opacity="0.9"/>
+  <rect x="272" y="552" width="78" height="76" rx="2" fill="#E879F9" opacity="0.9"/>
+  <rect x="352" y="552" width="76" height="76" rx="2" fill="#9333EA" opacity="0.9"/>
+
+  <!-- Label below left -->
+  <text x="270" y="680" font-family="Arial,sans-serif" font-size="26" fill="white" text-anchor="middle" opacity="0.8">4×4 pixels</text>
+
+  <!-- Big arrow in middle -->
+  <line x1="460" y1="470" x2="556" y2="470" stroke="white" stroke-width="22" stroke-linecap="round"/>
+  <polygon points="548,432 620,470 548,508" fill="white"/>
+
+  <!-- Right: smooth gradient (high-res representation) -->
+  <rect x="590" y="300" width="340" height="340" rx="14" fill="#4A044E"/>
+  <defs>
+    <radialGradient id="smoothPurple" cx="50%" cy="40%" r="70%">
+      <stop offset="0%" stop-color="#FAD1F8"/>
+      <stop offset="30%" stop-color="#E879F9"/>
+      <stop offset="65%" stop-color="#A855F7"/>
+      <stop offset="100%" stop-color="#4A044E"/>
+    </radialGradient>
+  </defs>
+  <rect x="602" y="312" width="316" height="316" fill="url(#smoothPurple)"/>
+  <!-- Smooth detail lines -->
+  <line x1="630" y1="385" x2="890" y2="385" stroke="white" stroke-width="2" opacity="0.4" stroke-linecap="round"/>
+  <line x1="630" y1="415" x2="870" y2="415" stroke="white" stroke-width="1.5" opacity="0.3" stroke-linecap="round"/>
+  <line x1="630" y1="445" x2="875" y2="445" stroke="white" stroke-width="1.5" opacity="0.3" stroke-linecap="round"/>
+
+  <!-- Label below right -->
+  <text x="760" y="680" font-family="Arial,sans-serif" font-size="26" fill="#FDE047" text-anchor="middle" font-weight="bold">16×16 smooth</text>
+
+  <!-- Scale badge -->
+  <rect x="412" y="770" width="200" height="72" rx="18" fill="white"/>
+  <text x="512" y="822" font-family="Arial Black,Arial" font-size="46" fill="#BE185D" font-weight="900" text-anchor="middle">×4</text>
+</svg>

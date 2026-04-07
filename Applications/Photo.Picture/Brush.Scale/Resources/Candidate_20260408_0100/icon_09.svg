@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Background: light lavender -->
+  <rect width="1024" height="1024" rx="190" fill="#F5F3FF"/>
+
+  <!-- Main image comparison panel -->
+  <rect x="116" y="220" width="792" height="500" rx="20" fill="#1E1B4B" opacity="0.95"/>
+
+  <!-- Left: blurry image -->
+  <clipPath id="leftPanel">
+    <rect x="128" y="232" width="390" height="476"/>
+  </clipPath>
+  <g clip-path="url(#leftPanel)">
+    <rect x="128" y="232" width="390" height="476" fill="#312E81"/>
+    <!-- Pixel blocks -->
+    <rect x="132" y="236" width="60" height="60" fill="#6D28D9" opacity="0.8"/>
+    <rect x="192" y="236" width="60" height="60" fill="#7C3AED" opacity="0.8"/>
+    <rect x="252" y="236" width="60" height="60" fill="#8B5CF6" opacity="0.8"/>
+    <rect x="312" y="236" width="60" height="60" fill="#7C3AED" opacity="0.8"/>
+    <rect x="372" y="236" width="60" height="60" fill="#6D28D9" opacity="0.8"/>
+    <rect x="432" y="236" width="60" height="60" fill="#7C3AED" opacity="0.8"/>
+
+    <rect x="132" y="296" width="60" height="60" fill="#7C3AED" opacity="0.8"/>
+    <rect x="192" y="296" width="60" height="60" fill="#A78BFA" opacity="0.8"/>
+    <rect x="252" y="296" width="60" height="60" fill="#C4B5FD" opacity="0.8"/>
+    <rect x="312" y="296" width="60" height="60" fill="#A78BFA" opacity="0.8"/>
+    <rect x="372" y="296" width="60" height="60" fill="#7C3AED" opacity="0.8"/>
+    <rect x="432" y="296" width="60" height="60" fill="#8B5CF6" opacity="0.8"/>
+
+    <rect x="132" y="356" width="360" height="352" fill="#4C1D95" opacity="0.5"/>
+  </g>
+
+  <!-- Divider / slider handle -->
+  <line x1="518" y1="232" x2="518" y2="708" stroke="white" stroke-width="5"/>
+  <rect x="494" y="448" width="48" height="80" rx="12" fill="white"/>
+  <line x1="506" y1="468" x2="506" y2="508" stroke="#6D28D9" stroke-width="5" stroke-linecap="round"/>
+  <line x1="530" y1="468" x2="530" y2="508" stroke="#6D28D9" stroke-width="5" stroke-linecap="round"/>
+
+  <!-- Right: sharp image -->
+  <clipPath id="rightPanel">
+    <rect x="518" y="232" width="378" height="476"/>
+  </clipPath>
+  <g clip-path="url(#rightPanel)">
+    <defs>
+      <linearGradient id="sharpPurple" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#EDE9FE"/>
+        <stop offset="40%" stop-color="#A78BFA"/>
+        <stop offset="100%" stop-color="#4F46E5"/>
+      </linearGradient>
+    </defs>
+    <rect x="518" y="232" width="378" height="476" fill="url(#sharpPurple)"/>
+    <!-- Sharp crisp lines -->
+    <line x1="540" y1="320" x2="884" y2="320" stroke="white" stroke-width="2.5" opacity="0.5" stroke-linecap="round"/>
+    <line x1="540" y1="355" x2="860" y2="355" stroke="white" stroke-width="2" opacity="0.35" stroke-linecap="round"/>
+    <line x1="540" y1="390" x2="872" y2="390" stroke="white" stroke-width="2" opacity="0.35" stroke-linecap="round"/>
+    <line x1="540" y1="460" x2="884" y2="460" stroke="white" stroke-width="2.5" opacity="0.4" stroke-linecap="round"/>
+    <line x1="540" y1="495" x2="860" y2="495" stroke="white" stroke-width="2" opacity="0.3" stroke-linecap="round"/>
+  </g>
+
+  <!-- Bottom labels -->
+  <text x="322" y="756" font-family="Arial,sans-serif" font-size="28" fill="#6D28D9" text-anchor="middle" font-weight="bold">Original</text>
+  <text x="710" y="756" font-family="Arial,sans-serif" font-size="28" fill="#4ADE80" text-anchor="middle" font-weight="bold">AI Upscaled</text>
+
+  <!-- Resolution comparison -->
+  <rect x="160" y="790" width="280" height="54" rx="12" fill="#DDD6FE"/>
+  <text x="300" y="823" font-family="Consolas,monospace" font-size="26" fill="#4C1D95" text-anchor="middle" font-weight="bold">400 × 300</text>
+
+  <rect x="584" y="790" width="280" height="54" rx="12" fill="#D1FAE5"/>
+  <text x="724" y="823" font-family="Consolas,monospace" font-size="26" fill="#065F46" text-anchor="middle" font-weight="bold">1600 × 1200</text>
+
+  <!-- Arrow between resolution labels -->
+  <line x1="450" y1="817" x2="574" y2="817" stroke="#7C3AED" stroke-width="8" stroke-linecap="round"/>
+  <polygon points="566,797 596,817 566,837" fill="#7C3AED"/>
+</svg>

@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg03bs" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F97316"/>
+      <stop offset="100%" stop-color="#EA580C"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background: orange -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg03bs)"/>
+
+  <!-- Image frame -->
+  <rect x="192" y="190" width="640" height="480" rx="20" fill="white" opacity="0.95"/>
+
+  <!-- Image content: left half pixelated, right half sharp -->
+  <!-- Left half: pixel art look -->
+  <rect x="204" y="202" width="308" height="456" fill="#E2E8F0"/>
+  <rect x="204" y="202" width="70" height="70" fill="#9CA3AF"/>
+  <rect x="274" y="202" width="70" height="70" fill="#6B7280"/>
+  <rect x="344" y="202" width="70" height="70" fill="#9CA3AF"/>
+  <rect x="414" y="202" width="90" height="70" fill="#D1D5DB"/>
+  <rect x="204" y="272" width="70" height="70" fill="#6B7280"/>
+  <rect x="274" y="272" width="70" height="70" fill="#CBD5E1"/>
+  <rect x="344" y="272" width="70" height="70" fill="#E2E8F0"/>
+  <rect x="414" y="272" width="90" height="70" fill="#9CA3AF"/>
+  <rect x="204" y="342" width="70" height="70" fill="#9CA3AF"/>
+  <rect x="274" y="342" width="70" height="70" fill="#D1D5DB"/>
+  <rect x="344" y="342" width="70" height="70" fill="#9CA3AF"/>
+  <rect x="414" y="342" width="90" height="70" fill="#6B7280"/>
+  <rect x="204" y="412" width="308" height="244" fill="#94A3B8"/>
+
+  <!-- Divider line in middle -->
+  <line x1="512" y1="202" x2="512" y2="658" stroke="#FB923C" stroke-width="6"/>
+  <rect x="497" y="385" width="30" height="70" rx="4" fill="#FB923C"/>
+  <polygon points="485,420 497,405 497,435" fill="white"/>
+  <polygon points="542,420 527,405 527,435" fill="white"/>
+
+  <!-- Right half: smooth/sharp -->
+  <rect x="512" y="202" width="308" height="456" fill="#E0F2FE"/>
+  <defs>
+    <linearGradient id="sharpImg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#BAE6FD"/>
+      <stop offset="40%" stop-color="#7DD3FC"/>
+      <stop offset="100%" stop-color="#0EA5E9"/>
+    </linearGradient>
+  </defs>
+  <rect x="522" y="212" width="288" height="280" rx="4" fill="url(#sharpImg)"/>
+  <!-- Crisp detail lines on right -->
+  <line x1="545" y1="280" x2="790" y2="280" stroke="white" stroke-width="3" stroke-linecap="round" opacity="0.6"/>
+  <line x1="545" y1="308" x2="760" y2="308" stroke="white" stroke-width="2" stroke-linecap="round" opacity="0.4"/>
+  <line x1="545" y1="336" x2="775" y2="336" stroke="white" stroke-width="2" stroke-linecap="round" opacity="0.4"/>
+  <rect x="522" y="498" width="288" height="152" fill="#0284C7" opacity="0.5"/>
+
+  <!-- Scale indicator at bottom: ×4 -->
+  <rect x="412" y="686" width="200" height="80" rx="16" fill="#1C1917"/>
+  <text x="512" y="742" font-family="Arial Black,Arial" font-size="52" fill="white" font-weight="900" text-anchor="middle">×4</text>
+
+  <!-- Small labels -->
+  <text x="358" y="178" font-family="Arial,sans-serif" font-size="24" fill="white" text-anchor="middle" opacity="0.9">Blurry</text>
+  <text x="666" y="178" font-family="Arial,sans-serif" font-size="24" fill="white" text-anchor="middle" font-weight="bold">Sharp</text>
+
+  <!-- Checkmark for sharp side -->
+  <circle cx="800" cy="780" r="50" fill="#22C55E"/>
+  <polyline points="778,780 796,800 826,760" fill="none" stroke="white" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

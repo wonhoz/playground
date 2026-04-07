@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <radialGradient id="bg10ic" cx="50%" cy="50%" r="70%">
+      <stop offset="0%" stop-color="#1E293B"/>
+      <stop offset="100%" stop-color="#0F172A"/>
+    </radialGradient>
+    <radialGradient id="wandGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FCD34D" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#FCD34D" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Background: dark navy -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg10ic)"/>
+
+  <!-- Glow orb at wand tip -->
+  <circle cx="640" cy="370" r="180" fill="url(#wandGlow)"/>
+
+  <!-- Magic wand (diagonal) -->
+  <!-- Handle -->
+  <line x1="200" y1="820" x2="600" y2="340" stroke="#B45309" stroke-width="30" stroke-linecap="round"/>
+  <line x1="200" y1="820" x2="600" y2="340" stroke="#FCD34D" stroke-width="10" stroke-linecap="round" opacity="0.5"/>
+  <!-- Wand tip star -->
+  <polygon points="640,290 656,335 706,335 668,363 682,410 640,383 598,410 612,363 574,335 624,335"
+           fill="#FCD34D"/>
+  <polygon points="640,308 651,338 682,338 659,356 668,388 640,370 612,388 621,356 598,338 629,338"
+           fill="#FEF3C7"/>
+
+  <!-- Input file (left/bottom) being transformed -->
+  <rect x="108" y="600" width="160" height="200" rx="14" fill="#1E3A5F" opacity="0.9"/>
+  <path d="M108,600 L108,800 Q108,800 268,800 L268,664 L204,600 Z" fill="#DBEAFE" opacity="0.8"/>
+  <polygon points="204,600 204,664 268,664" fill="#93C5FD" opacity="0.8"/>
+  <rect x="126" y="706" width="124" height="40" rx="8" fill="#1D4ED8"/>
+  <text x="188" y="732" font-family="Arial Black,Arial" font-size="26" fill="white" text-anchor="middle">SVG</text>
+
+  <!-- Transformed output files (right/top, emanating from wand) -->
+  <!-- ICO output -->
+  <rect x="700" y="160" width="130" height="160" rx="12" fill="#78350F" opacity="0.9"/>
+  <path d="M700,160 L700,320 Q700,320 830,320 L830,232 L758,160 Z" fill="#FEF3C7" opacity="0.9"/>
+  <polygon points="758,160 758,232 830,232" fill="#FCD34D"/>
+  <rect x="714" y="252" width="102" height="36" rx="7" fill="#D97706"/>
+  <text x="765" y="276" font-family="Arial Black,Arial" font-size="22" fill="white" text-anchor="middle">ICO</text>
+
+  <!-- PNG output -->
+  <rect x="700" y="360" width="130" height="160" rx="12" fill="#064E3B" opacity="0.9"/>
+  <path d="M700,360 L700,520 Q700,520 830,520 L830,432 L758,360 Z" fill="#DCFCE7" opacity="0.9"/>
+  <polygon points="758,360 758,432 830,432" fill="#6EE7B7"/>
+  <rect x="714" y="452" width="102" height="36" rx="7" fill="#059669"/>
+  <text x="765" y="476" font-family="Arial Black,Arial" font-size="22" fill="white" text-anchor="middle">PNG</text>
+
+  <!-- JPG output -->
+  <rect x="700" y="560" width="130" height="160" rx="12" fill="#7C2D12" opacity="0.9"/>
+  <path d="M700,560 L700,720 Q700,720 830,720 L830,632 L758,560 Z" fill="#FEF3C7" opacity="0.9"/>
+  <polygon points="758,560 758,632 830,632" fill="#FB923C"/>
+  <rect x="714" y="652" width="102" height="36" rx="7" fill="#EA580C"/>
+  <text x="765" y="676" font-family="Arial Black,Arial" font-size="22" fill="white" text-anchor="middle">JPG</text>
+
+  <!-- Sparkle stars around wand tip -->
+  <text x="580" y="280" font-family="Arial,sans-serif" font-size="22" fill="#FCD34D">✦</text>
+  <text x="700" y="270" font-family="Arial,sans-serif" font-size="16" fill="#FCD34D">★</text>
+  <text x="720" y="330" font-family="Arial,sans-serif" font-size="18" fill="#A5F3FC">✦</text>
+  <text x="540" y="360" font-family="Arial,sans-serif" font-size="14" fill="#FCD34D">✦</text>
+  <text x="740" y="430" font-family="Arial,sans-serif" font-size="12" fill="#C4B5FD">★</text>
+
+  <!-- Wand trail sparkles -->
+  <circle cx="400" cy="590" r="6" fill="#FCD34D" opacity="0.7"/>
+  <circle cx="460" cy="530" r="5" fill="#A5F3FC" opacity="0.6"/>
+  <circle cx="520" cy="462" r="4" fill="#FCD34D" opacity="0.5"/>
+</svg>

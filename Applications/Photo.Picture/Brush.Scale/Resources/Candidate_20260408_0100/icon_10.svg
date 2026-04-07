@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <radialGradient id="bg10bs" cx="50%" cy="50%" r="70%">
+      <stop offset="0%" stop-color="#1E293B"/>
+      <stop offset="100%" stop-color="#0F172A"/>
+    </radialGradient>
+    <radialGradient id="starGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FCD34D" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#FCD34D" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Background: dark navy -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg10bs)"/>
+
+  <!-- Center glow burst -->
+  <circle cx="512" cy="480" r="300" fill="url(#starGlow)"/>
+
+  <!-- Pixel grid (before) - corners -->
+  <!-- Top-left pixels -->
+  <rect x="130" y="160" width="200" height="200" rx="10" fill="#1E3A5F" opacity="0.8"/>
+  <rect x="142" y="172" width="44" height="44" fill="#374151"/>
+  <rect x="186" y="172" width="44" height="44" fill="#4B5563"/>
+  <rect x="230" y="172" width="44" height="44" fill="#374151"/>
+  <rect x="274" y="172" width="44" height="44" fill="#4B5563"/>
+  <rect x="142" y="216" width="44" height="44" fill="#4B5563"/>
+  <rect x="186" y="216" width="44" height="44" fill="#6B7280"/>
+  <rect x="230" y="216" width="44" height="44" fill="#4B5563"/>
+  <rect x="274" y="216" width="44" height="44" fill="#374151"/>
+  <rect x="142" y="260" width="44" height="44" fill="#374151"/>
+  <rect x="186" y="260" width="44" height="44" fill="#4B5563"/>
+  <rect x="230" y="260" width="44" height="44" fill="#6B7280"/>
+  <rect x="274" y="260" width="44" height="44" fill="#4B5563"/>
+  <rect x="142" y="304" width="176" height="44" fill="#2D3748"/>
+
+  <!-- Top-right pixels -->
+  <rect x="694" y="160" width="200" height="200" rx="10" fill="#1E3A5F" opacity="0.8"/>
+  <rect x="706" y="172" width="44" height="44" fill="#4B5563"/>
+  <rect x="750" y="172" width="44" height="44" fill="#374151"/>
+  <rect x="794" y="172" width="44" height="44" fill="#4B5563"/>
+  <rect x="838" y="172" width="44" height="44" fill="#374151"/>
+  <rect x="706" y="216" width="44" height="44" fill="#374151"/>
+  <rect x="750" y="216" width="44" height="44" fill="#4B5563"/>
+  <rect x="794" y="216" width="44" height="44" fill="#374151"/>
+  <rect x="838" y="216" width="44" height="44" fill="#6B7280"/>
+  <rect x="706" y="260" width="44" height="44" fill="#4B5563"/>
+  <rect x="750" y="260" width="44" height="44" fill="#6B7280"/>
+  <rect x="794" y="260" width="44" height="44" fill="#4B5563"/>
+  <rect x="838" y="260" width="44" height="44" fill="#374151"/>
+  <rect x="706" y="304" width="176" height="44" fill="#2D3748"/>
+
+  <!-- Central bright star (transformation) -->
+  <!-- Rays -->
+  <line x1="512" y1="200" x2="512" y2="340" stroke="#FCD34D" stroke-width="10" stroke-linecap="round" opacity="0.8"/>
+  <line x1="512" y1="620" x2="512" y2="760" stroke="#FCD34D" stroke-width="10" stroke-linecap="round" opacity="0.8"/>
+  <line x1="200" y1="480" x2="340" y2="480" stroke="#FCD34D" stroke-width="10" stroke-linecap="round" opacity="0.8"/>
+  <line x1="684" y1="480" x2="824" y2="480" stroke="#FCD34D" stroke-width="10" stroke-linecap="round" opacity="0.8"/>
+  <line x1="290" y1="270" x2="390" y2="380" stroke="#FCD34D" stroke-width="8" stroke-linecap="round" opacity="0.6"/>
+  <line x1="634" y1="580" x2="734" y2="680" stroke="#FCD34D" stroke-width="8" stroke-linecap="round" opacity="0.6"/>
+  <line x1="634" y1="270" x2="734" y2="380" stroke="#A5F3FC" stroke-width="8" stroke-linecap="round" opacity="0.6"/>
+  <line x1="290" y1="580" x2="390" y2="680" stroke="#A5F3FC" stroke-width="8" stroke-linecap="round" opacity="0.6"/>
+
+  <!-- Central star -->
+  <polygon points="512,360 538,450 630,450 558,505 582,598 512,545 442,598 466,505 394,450 486,450" fill="#FCD34D"/>
+  <polygon points="512,395 530,445 582,445 540,475 556,528 512,498 468,528 484,475 442,445 494,445" fill="#FEF3C7"/>
+  <circle cx="512" cy="480" r="42" fill="white"/>
+
+  <!-- ×4 in center star -->
+  <text x="512" y="495" font-family="Arial Black,Arial" font-size="40" fill="#F59E0B" font-weight="900" text-anchor="middle">×4</text>
+
+  <!-- Bottom smooth image panels -->
+  <rect x="130" y="664" width="200" height="200" rx="10" fill="#0F2744" opacity="0.9"/>
+  <defs>
+    <linearGradient id="smoothBL" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#93C5FD"/>
+      <stop offset="100%" stop-color="#1D4ED8"/>
+    </linearGradient>
+  </defs>
+  <rect x="142" y="676" width="176" height="176" fill="url(#smoothBL)" rx="6"/>
+
+  <rect x="694" y="664" width="200" height="200" rx="10" fill="#0F2744" opacity="0.9"/>
+  <defs>
+    <linearGradient id="smoothBR" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#6EE7B7"/>
+      <stop offset="100%" stop-color="#059669"/>
+    </linearGradient>
+  </defs>
+  <rect x="706" y="676" width="176" height="176" fill="url(#smoothBR)" rx="6"/>
+
+  <!-- Small connecting arrows from pixel corners to smooth -->
+  <line x1="230" y1="360" x2="400" y2="430" stroke="#FCD34D" stroke-width="5" stroke-linecap="round" opacity="0.5" stroke-dasharray="12,8"/>
+  <line x1="794" y1="360" x2="624" y2="430" stroke="#A5F3FC" stroke-width="5" stroke-linecap="round" opacity="0.5" stroke-dasharray="12,8"/>
+</svg>

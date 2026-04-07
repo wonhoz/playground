@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <radialGradient id="bg02tc" cx="50%" cy="50%" r="70%">
+      <stop offset="0%" stop-color="#EA580C"/>
+      <stop offset="100%" stop-color="#9A3412"/>
+    </radialGradient>
+    <radialGradient id="qGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FDE047" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#FDE047" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Background: deep orange/red -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg02tc)"/>
+
+  <!-- Glow behind question mark -->
+  <circle cx="512" cy="460" r="300" fill="url(#qGlow)"/>
+
+  <!-- Large central question mark -->
+  <text x="512" y="580" font-family="Arial Black,Arial" font-size="440" fill="white" font-weight="900" text-anchor="middle" opacity="0.95">?</text>
+
+  <!-- Burst rays from question mark -->
+  <line x1="512" y1="160" x2="512" y2="80" stroke="#FDE047" stroke-width="16" stroke-linecap="round" opacity="0.8"/>
+  <line x1="688" y1="220" x2="742" y2="152" stroke="#FDE047" stroke-width="14" stroke-linecap="round" opacity="0.8"/>
+  <line x1="336" y1="220" x2="282" y2="152" stroke="#FDE047" stroke-width="14" stroke-linecap="round" opacity="0.8"/>
+  <line x1="800" y1="360" x2="872" y2="302" stroke="#FDE047" stroke-width="12" stroke-linecap="round" opacity="0.7"/>
+  <line x1="224" y1="360" x2="152" y2="302" stroke="#FDE047" stroke-width="12" stroke-linecap="round" opacity="0.7"/>
+  <line x1="868" y1="526" x2="958" y2="496" stroke="#FDE047" stroke-width="10" stroke-linecap="round" opacity="0.6"/>
+  <line x1="156" y1="526" x2="66" y2="496" stroke="#FDE047" stroke-width="10" stroke-linecap="round" opacity="0.6"/>
+
+  <!-- Answer option badges around question mark -->
+  <rect x="80" y="720" width="130" height="56" rx="14" fill="white" opacity="0.95"/>
+  <circle cx="112" cy="748" r="20" fill="#3B82F6"/>
+  <text x="112" y="754" font-family="Arial Black,Arial" font-size="18" fill="white" text-anchor="middle">A</text>
+  <text x="185" y="754" font-family="Arial,sans-serif" font-size="18" fill="#374151" text-anchor="middle">목성</text>
+
+  <rect x="300" y="720" width="130" height="56" rx="14" fill="white" opacity="0.95"/>
+  <circle cx="332" cy="748" r="20" fill="#22C55E"/>
+  <text x="332" y="754" font-family="Arial Black,Arial" font-size="18" fill="white" text-anchor="middle">B</text>
+  <text x="405" y="754" font-family="Arial,sans-serif" font-size="18" fill="#374151" text-anchor="middle">토성</text>
+
+  <rect x="594" y="720" width="130" height="56" rx="14" fill="white" opacity="0.95"/>
+  <circle cx="626" cy="748" r="20" fill="#F59E0B"/>
+  <text x="626" y="754" font-family="Arial Black,Arial" font-size="18" fill="white" text-anchor="middle">C</text>
+  <text x="699" y="754" font-family="Arial,sans-serif" font-size="18" fill="#374151" text-anchor="middle">천왕성</text>
+
+  <rect x="814" y="720" width="130" height="56" rx="14" fill="white" opacity="0.95"/>
+  <circle cx="846" cy="748" r="20" fill="#EF4444"/>
+  <text x="846" y="754" font-family="Arial Black,Arial" font-size="18" fill="white" text-anchor="middle">D</text>
+  <text x="919" y="754" font-family="Arial,sans-serif" font-size="18" fill="#374151" text-anchor="middle">해왕성</text>
+
+  <!-- Timer display -->
+  <rect x="430" y="820" width="164" height="64" rx="16" fill="#FDE047"/>
+  <text x="512" y="864" font-family="Arial Black,Arial" font-size="44" fill="#92400E" font-weight="900" text-anchor="middle">15s</text>
+</svg>

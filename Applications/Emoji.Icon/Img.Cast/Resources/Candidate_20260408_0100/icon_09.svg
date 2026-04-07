@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Background: bright teal/emerald -->
+  <rect width="1024" height="1024" rx="190" fill="#059669"/>
+
+  <!-- App window -->
+  <rect x="120" y="180" width="784" height="680" rx="18" fill="#ECFDF5" opacity="0.97"/>
+
+  <!-- Drop zone area -->
+  <rect x="144" y="208" width="736" height="300" rx="14" fill="#F0FDF4" stroke="#86EFAC" stroke-width="3" stroke-dasharray="14,8"/>
+
+  <!-- Drag & drop visual - 3 files being dragged in -->
+  <!-- Shadow/ghost files moving in -->
+  <rect x="230" y="256" width="100" height="120" rx="10" fill="#DBEAFE" opacity="0.7" transform="rotate(-8 280 316)"/>
+  <rect x="300" y="240" width="100" height="120" rx="10" fill="#FEF3C7" opacity="0.7" transform="rotate(-3 350 300)"/>
+  <rect x="380" y="248" width="100" height="120" rx="10" fill="#DCFCE7" opacity="0.7" transform="rotate(5 430 308)"/>
+
+  <!-- Drop zone center arrow -->
+  <path d="M512,280 L512,370" stroke="#16A34A" stroke-width="10" stroke-linecap="round"/>
+  <path d="M476,348 L512,386 L548,348" fill="none" stroke="#16A34A" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="512" y="450" font-family="Arial,sans-serif" font-size="22" fill="#16A34A" text-anchor="middle">Drop 3 files here...</text>
+  <text x="512" y="476" font-family="Arial,sans-serif" font-size="18" fill="#6B7280" text-anchor="middle">SVG · PNG · JPG · BMP · ICO</text>
+
+  <!-- Format selector row -->
+  <rect x="144" y="524" width="736" height="56" rx="10" fill="#F0FDF4"/>
+  <text x="164" y="558" font-family="Arial,sans-serif" font-size="22" fill="#374151">Output:</text>
+  <rect x="260" y="532" width="200" height="40" rx="8" fill="#1D4ED8"/>
+  <text x="360" y="558" font-family="Arial,sans-serif" font-size="22" fill="white" text-anchor="middle">ICO (all sizes)</text>
+  <rect x="476" y="532" width="160" height="40" rx="8" fill="#E5E7EB"/>
+  <text x="556" y="558" font-family="Arial,sans-serif" font-size="22" fill="#6B7280" text-anchor="middle">PNG</text>
+  <rect x="652" y="532" width="160" height="40" rx="8" fill="#E5E7EB"/>
+  <text x="732" y="558" font-family="Arial,sans-serif" font-size="22" fill="#6B7280" text-anchor="middle">JPG</text>
+
+  <!-- Results list -->
+  <!-- File 1: success -->
+  <rect x="144" y="596" width="736" height="52" rx="8" fill="#F0FDF4"/>
+  <circle cx="176" cy="622" r="16" fill="#22C55E"/>
+  <text x="176" y="628" font-family="Arial,sans-serif" font-size="18" fill="white" text-anchor="middle">✓</text>
+  <text x="206" y="628" font-family="Arial,sans-serif" font-size="20" fill="#374151">app_icon.svg → app_icon.ico (6 sizes)</text>
+  <text x="840" y="628" font-family="Arial,sans-serif" font-size="18" fill="#6B7280" text-anchor="end">256px ✓</text>
+
+  <!-- File 2: success -->
+  <rect x="144" y="656" width="736" height="52" rx="8" fill="#F0FDF4"/>
+  <circle cx="176" cy="682" r="16" fill="#22C55E"/>
+  <text x="176" y="688" font-family="Arial,sans-serif" font-size="18" fill="white" text-anchor="middle">✓</text>
+  <text x="206" y="688" font-family="Arial,sans-serif" font-size="20" fill="#374151">logo.png → logo.ico (6 sizes)</text>
+
+  <!-- File 3: in progress -->
+  <rect x="144" y="716" width="736" height="52" rx="8" fill="#FFF7ED"/>
+  <circle cx="176" cy="742" r="16" fill="#F59E0B"/>
+  <text x="176" y="748" font-family="Arial,sans-serif" font-size="20" fill="white" text-anchor="middle">⟳</text>
+  <text x="206" y="748" font-family="Arial,sans-serif" font-size="20" fill="#374151">banner.jpg → banner.ico...</text>
+  <rect x="600" y="730" width="260" height="24" rx="6" fill="#E5E7EB"/>
+  <rect x="600" y="730" width="130" height="24" rx="6" fill="#F59E0B"/>
+
+  <!-- Status bar -->
+  <rect x="144" y="788" width="736" height="48" rx="8" fill="#DCFCE7"/>
+  <text x="164" y="818" font-family="Arial,sans-serif" font-size="22" fill="#166534">Processing... 2/3 done</text>
+</svg>

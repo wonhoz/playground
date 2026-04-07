@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg06ic" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F97316"/>
+      <stop offset="100%" stop-color="#EA580C"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background: orange -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg06ic)"/>
+
+  <!-- Central transform hub: rotating arrows circle -->
+  <circle cx="512" cy="490" r="260" fill="none" stroke="white" stroke-width="8" stroke-dasharray="30,20" opacity="0.3"/>
+  <circle cx="512" cy="490" r="200" fill="none" stroke="white" stroke-width="6" stroke-dasharray="20,15" opacity="0.2"/>
+
+  <!-- Circular arrows (rotate/transform symbol) -->
+  <!-- Top arc -->
+  <path d="M 340,370 A 200,200 0 0,1 684,370" fill="none" stroke="white" stroke-width="16" stroke-linecap="round" opacity="0.9"/>
+  <polygon points="700,340 704,390 660,370" fill="white" opacity="0.9"/>
+  <!-- Bottom arc -->
+  <path d="M 684,610 A 200,200 0 0,1 340,610" fill="none" stroke="white" stroke-width="16" stroke-linecap="round" opacity="0.9"/>
+  <polygon points="324,640 320,590 364,610" fill="white" opacity="0.9"/>
+
+  <!-- Center: format cycling display -->
+  <circle cx="512" cy="490" r="130" fill="#EA580C"/>
+  <circle cx="512" cy="490" r="120" fill="#C2410C"/>
+
+  <!-- Format display in center - cycling SVG/PNG/ICO/JPG -->
+  <text x="512" y="510" font-family="Arial Black,Arial" font-size="70" fill="white" font-weight="900" text-anchor="middle">SVG</text>
+
+  <!-- Format labels around the circle -->
+  <!-- Top: PNG -->
+  <rect x="448" y="196" width="128" height="52" rx="12" fill="#16A34A"/>
+  <text x="512" y="230" font-family="Arial Black,Arial" font-size="32" fill="white" text-anchor="middle">PNG</text>
+
+  <!-- Right: JPG -->
+  <rect x="756" y="466" width="128" height="52" rx="12" fill="#B45309"/>
+  <text x="820" y="500" font-family="Arial Black,Arial" font-size="32" fill="white" text-anchor="middle">JPG</text>
+
+  <!-- Bottom: BMP -->
+  <rect x="448" y="744" width="128" height="52" rx="12" fill="#7C3AED"/>
+  <text x="512" y="778" font-family="Arial Black,Arial" font-size="32" fill="white" text-anchor="middle">BMP</text>
+
+  <!-- Left: ICO -->
+  <rect x="140" y="466" width="128" height="52" rx="12" fill="#1D4ED8"/>
+  <text x="204" y="500" font-family="Arial Black,Arial" font-size="32" fill="white" text-anchor="middle">ICO</text>
+
+  <!-- Arrows connecting formats to center -->
+  <line x1="512" y1="248" x2="512" y2="366" stroke="white" stroke-width="6" stroke-linecap="round" opacity="0.5" stroke-dasharray="10,8"/>
+  <line x1="756" y1="492" x2="634" y2="492" stroke="white" stroke-width="6" stroke-linecap="round" opacity="0.5" stroke-dasharray="10,8"/>
+  <line x1="512" y1="744" x2="512" y2="616" stroke="white" stroke-width="6" stroke-linecap="round" opacity="0.5" stroke-dasharray="10,8"/>
+  <line x1="268" y1="492" x2="390" y2="492" stroke="white" stroke-width="6" stroke-linecap="round" opacity="0.5" stroke-dasharray="10,8"/>
+
+  <!-- Bottom label -->
+  <rect x="316" y="840" width="392" height="52" rx="14" fill="white" opacity="0.2"/>
+  <text x="512" y="874" font-family="Arial,sans-serif" font-size="28" fill="white" font-weight="bold" text-anchor="middle">Any ↔ Any Format</text>
+</svg>

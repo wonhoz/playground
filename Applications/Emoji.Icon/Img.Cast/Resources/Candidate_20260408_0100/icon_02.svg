@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg02ic" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#DC2626"/>
+      <stop offset="100%" stop-color="#9B1C1C"/>
+    </linearGradient>
+    <radialGradient id="furnaceGlow" cx="50%" cy="60%" r="50%">
+      <stop offset="0%" stop-color="#FDE047" stop-opacity="0.7"/>
+      <stop offset="60%" stop-color="#F97316" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#DC2626" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Background: deep red -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg02ic)"/>
+
+  <!-- Furnace/converter body -->
+  <rect x="290" y="380" width="444" height="380" rx="30" fill="#7F1D1D"/>
+  <rect x="310" y="400" width="404" height="340" rx="22" fill="#991B1B"/>
+
+  <!-- Furnace glow inside -->
+  <rect x="320" y="410" width="384" height="320" rx="18" fill="url(#furnaceGlow)"/>
+
+  <!-- Furnace window/portal -->
+  <ellipse cx="512" cy="570" rx="160" ry="120" fill="#FDE047" opacity="0.3"/>
+  <ellipse cx="512" cy="570" rx="120" ry="90" fill="#FEF3C7" opacity="0.4"/>
+
+  <!-- Flame inside -->
+  <path d="M480,620 Q490,560 512,540 Q534,560 544,620 Q530,600 512,610 Q494,600 480,620 Z" fill="#FDE047"/>
+  <path d="M495,620 Q502,575 512,560 Q522,575 529,620 Q522,607 512,612 Q502,607 495,620 Z" fill="#FFF9C4"/>
+
+  <!-- Input files on conveyor (top) -->
+  <!-- SVG input -->
+  <rect x="140" y="196" width="120" height="140" rx="12" fill="#DBEAFE"/>
+  <polygon points="220,196 220,248 260,248" fill="#93C5FD"/>
+  <rect x="150" y="278" width="100" height="34" rx="6" fill="#3B82F6"/>
+  <text x="200" y="302" font-family="Arial Black,Arial" font-size="22" fill="white" text-anchor="middle">SVG</text>
+  <!-- Arrow down into furnace -->
+  <line x1="200" y1="336" x2="200" y2="386" stroke="#FDE047" stroke-width="10" stroke-linecap="round" stroke-dasharray="12,8"/>
+  <polygon points="182,378 200,402 218,378" fill="#FDE047"/>
+
+  <!-- PNG input -->
+  <rect x="320" y="196" width="120" height="140" rx="12" fill="#D1FAE5"/>
+  <polygon points="400,196 400,248 440,248" fill="#6EE7B7"/>
+  <rect x="330" y="278" width="100" height="34" rx="6" fill="#059669"/>
+  <text x="380" y="302" font-family="Arial Black,Arial" font-size="22" fill="white" text-anchor="middle">PNG</text>
+  <line x1="380" y1="336" x2="380" y2="386" stroke="#FDE047" stroke-width="10" stroke-linecap="round" stroke-dasharray="12,8"/>
+  <polygon points="362,378 380,402 398,378" fill="#FDE047"/>
+
+  <!-- JPG input -->
+  <rect x="588" y="196" width="120" height="140" rx="12" fill="#FEF3C7"/>
+  <polygon points="668,196 668,248 708,248" fill="#FCD34D"/>
+  <rect x="598" y="278" width="100" height="34" rx="6" fill="#D97706"/>
+  <text x="648" y="302" font-family="Arial Black,Arial" font-size="22" fill="white" text-anchor="middle">JPG</text>
+  <line x1="648" y1="336" x2="648" y2="386" stroke="#FDE047" stroke-width="10" stroke-linecap="round" stroke-dasharray="12,8"/>
+  <polygon points="630,378 648,402 666,378" fill="#FDE047"/>
+
+  <!-- Output: ICO coming out bottom -->
+  <line x1="512" y1="760" x2="512" y2="830" stroke="#FDE047" stroke-width="12" stroke-linecap="round"/>
+  <polygon points="490,822 512,860 534,822" fill="#FDE047"/>
+  <!-- ICO output badge -->
+  <rect x="396" y="860" width="232" height="80" rx="18" fill="#FDE047"/>
+  <text x="512" y="913" font-family="Arial Black,Arial" font-size="48" fill="#92400E" font-weight="900" text-anchor="middle">ICO</text>
+
+  <!-- Sparks/stars from furnace -->
+  <text x="720" y="460" font-family="Arial,sans-serif" font-size="24" fill="#FDE047">✦</text>
+  <text x="760" y="520" font-family="Arial,sans-serif" font-size="18" fill="#FCD34D">★</text>
+  <text x="240" y="480" font-family="Arial,sans-serif" font-size="20" fill="#FDE047">✦</text>
+  <text x="200" y="540" font-family="Arial,sans-serif" font-size="16" fill="#FCA5A5">✦</text>
+</svg>

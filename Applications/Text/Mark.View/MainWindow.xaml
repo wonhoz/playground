@@ -341,6 +341,26 @@
                      Text="목차" FontSize="12" FontWeight="SemiBold"
                      Foreground="{StaticResource TextDimBrush}"
                      Padding="12,8"/>
+          <!-- TOC 검색 -->
+          <Grid DockPanel.Dock="Top" Margin="8,0,8,4">
+            <TextBox x:Name="TxtTocSearch"
+                     FontSize="11"
+                     TextChanged="TxtTocSearch_TextChanged"/>
+            <TextBlock Text="&#x1F50D; 헤딩 검색..." Foreground="#6888AA"
+                       FontSize="11" VerticalAlignment="Center" Margin="8,0,0,0"
+                       IsHitTestVisible="False" IsEnabled="False">
+              <TextBlock.Style>
+                <Style TargetType="TextBlock">
+                  <Setter Property="Visibility" Value="Collapsed"/>
+                  <Style.Triggers>
+                    <DataTrigger Binding="{Binding Text, ElementName=TxtTocSearch}" Value="">
+                      <Setter Property="Visibility" Value="Visible"/>
+                    </DataTrigger>
+                  </Style.Triggers>
+                </Style>
+              </TextBlock.Style>
+            </TextBlock>
+          </Grid>
           <ListBox x:Name="TocList"
                    Background="Transparent"
                    BorderThickness="0"

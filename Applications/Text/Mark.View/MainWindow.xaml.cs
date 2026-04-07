@@ -301,6 +301,7 @@ public partial class MainWindow : Window
             Viewer.CoreWebView2.NavigationCompleted += OnNavigationCompleted;
             Viewer.CoreWebView2.WebMessageReceived += OnWebViewMessageReceived;
             Viewer.CoreWebView2.NavigationStarting += OnNavigationStarting;
+            Viewer.CoreWebView2.ContextMenuRequested += OnWebViewContextMenuRequested;
             _webViewReady = true;
             _webViewReadyTcs.TrySetResult();
             HideLoading();
@@ -568,6 +569,86 @@ public partial class MainWindow : Window
         catch { }
     }
 
+    private void OnWebViewContextMenuRequested(object? sender, Microsoft.Web.WebView2.Core.CoreWebView2ContextMenuRequestedEventArgs e)
+    {
+        e.Handled = true; // 기본 메뉴 억제
+        var hasSelection = e.ContextMenuTarget.HasSelection;
+        var linkUri = e.ContextMenuTarget.HasLinkUri ? e.ContextMenuTarget.LinkUri : null;
+        var srcUri  = e.ContextMenuTarget.HasSourceUri ? e.ContextMenuTarget.SourceUri : null;
+
+        var menu = new ContextMenu { IsOpen = true };
+
+        if (hasSelection)
+        {
+            var copyItem = new MenuItem { Header = "텍스트 복사" };
+            copyItem.Click += async (_, _) =>
+            {
+                try
+                {
+                    var txt = await Viewer.ExecuteScriptAsync("window.getSelection().toString()");
+                    var clean = System.Text.Json.JsonSerializer.Deserialize<string>(txt) ?? "";
+                    if (!string.IsNullOrEmpty(clean)) Clipboard.SetText(clean);
+                }
+                catch { }
+            };
+            menu.Items.Add(copyItem);
+        }
+
+        if (!string.IsNullOrEmpty(linkUri))
+        {
+            var openItem = new MenuItem { Header = "링크 열기" };
+            openItem.Click += (_, _) =>
+            {
+                try { System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo(linkUri) { UseShellExecute = true }); }
+                catch { }
+            };
+            menu.Items.Add(openItem);
+
+            var copyLinkItem = new MenuItem { Header = "링크 주소 복사" };
+            copyLinkItem.Click += (_, _) => { try { Clipboard.SetText(linkUri); } catch { } };
+            menu.Items.Add(copyLinkItem);
+        }
+
+        if (!string.IsNullOrEmpty(srcUri))
+        {
+            var saveImgItem = new MenuItem { Header = "이미지 저장..." };
+            saveImgItem.Click += async (_, _) =>
+            {
+                try
+                {
+                    var dlg = new Microsoft.Win32.SaveFileDialog
+                    {
+                        FileName = System.IO.Path.GetFileName(new Uri(srcUri).LocalPath),
+                        Filter = "이미지 파일|*.png;*.jpg;*.jpeg;*.gif;*.webp;*.svg;*.bmp|모든 파일|*.*",
+                    };
+                    if (dlg.ShowDialog() != true) return;
+                    var bytes = await Viewer.CoreWebView2.CallDevToolsProtocolMethodAsync(
+                        "Page.captureScreenshot", "{}"); // fallback: HTTP 다운로드
+                    using var client = new System.Net.Http.HttpClient();
+                    var data = await client.GetByteArrayAsync(srcUri);
+                    await System.IO.File.WriteAllBytesAsync(dlg.FileName, data);
+                }
+                catch { }
+            };
+            menu.Items.Add(saveImgItem);
+        }
+
+        if (menu.Items.Count == 0)
+        {
+            var selectAllItem = new MenuItem { Header = "모두 선택" };
+            selectAllItem.Click += async (_, _) =>
+            {
+                try { await Viewer.ExecuteScriptAsync("document.execCommand('selectAll')"); }
+                catch { }
+            };
+            menu.Items.Add(selectAllItem);
+        }
+
+        menu.PlacementTarget = Viewer;
+        menu.Placement = System.Windows.Controls.Primitives.PlacementMode.MousePoint;
+        menu.IsOpen = true;
+    }
+
     private void OnWebViewMessageReceived(object? sender, CoreWebView2WebMessageReceivedEventArgs e)
     {
         var msg = e.TryGetWebMessageAsString();
@@ -697,6 +778,26 @@ public partial class MainWindow : Window
             }
         }
         catch { }
+        // 검색어가 있으면 새로 로드된 TOC에도 필터 적용
+        if (!string.IsNullOrEmpty(TxtTocSearch?.Text))
+            FilterToc(TxtTocSearch.Text);
+    }
+
+    private void FilterToc(string keyword)
+    {
+        foreach (var item in TocList.Items.OfType<ListBoxItem>())
+        {
+            item.Visibility = string.IsNullOrEmpty(keyword) ||
+                              item.Content?.ToString()?.Contains(keyword, StringComparison.OrdinalIgnoreCase) == true
+                ? Visibility.Visible
+                : Visibility.Collapsed;
+        }
+    }
+
+    private void TxtTocSearch_TextChanged(object sender, TextChangedEventArgs e)
+    {
+        if (!IsLoaded) return;
+        FilterToc(TxtTocSearch.Text);
     }
 
     // ── Loaded 초기화 ────────────────────────────────────────────────────
@@ -860,6 +961,7 @@ public partial class MainWindow : Window
 
         tab.MouseLeftButtonDown += Tab_Click;
         tab.MouseDown += Tab_MouseDown;
+        tab.MouseRightButtonUp += Tab_RightClick;
         tab.MouseEnter += (s, _) =>
         {
             if ((int)((Border)s).Tag != _activeIndex)
@@ -887,6 +989,55 @@ public partial class MainWindow : Window
             e.Handled = true;
             CloseTab((int)b.Tag);
         }
+    }
+
+    private void Tab_RightClick(object sender, MouseButtonEventArgs e)
+    {
+        e.Handled = true;
+        if (sender is not Border b) return;
+        var tabIdx = (int)b.Tag;
+        SwitchTo(tabIdx);
+        var doc = _docs[tabIdx];
+
+        var menu = new ContextMenu { IsOpen = false };
+
+        var copyPathItem = new MenuItem { Header = "경로 복사" };
+        copyPathItem.IsEnabled = !doc.IsNew;
+        copyPathItem.Click += (_, _) => { try { Clipboard.SetText(doc.FilePath); } catch { } };
+        menu.Items.Add(copyPathItem);
+
+        var openExplorerItem = new MenuItem { Header = "탐색기에서 열기" };
+        openExplorerItem.IsEnabled = !doc.IsNew && File.Exists(doc.FilePath);
+        openExplorerItem.Click += (_, _) =>
+        {
+            try { System.Diagnostics.Process.Start("explorer.exe", $"/select,\"{doc.FilePath}\""); }
+            catch { }
+        };
+        menu.Items.Add(openExplorerItem);
+
+        menu.Items.Add(new Separator());
+
+        var duplicateItem = new MenuItem { Header = "탭 복제" };
+        duplicateItem.Click += (_, _) =>
+        {
+            var clone = new MarkDocument { Content = doc.Content };
+            if (!doc.IsNew) clone.FilePath = doc.FilePath;
+            OpenDocument(clone);
+        };
+        menu.Items.Add(duplicateItem);
+
+        var closeOthersItem = new MenuItem { Header = "다른 탭 모두 닫기" };
+        closeOthersItem.IsEnabled = _docs.Count > 1;
+        closeOthersItem.Click += (_, _) =>
+        {
+            for (int i = _docs.Count - 1; i >= 0; i--)
+                if (i != _activeIndex) CloseTab(i);
+        };
+        menu.Items.Add(closeOthersItem);
+
+        menu.PlacementTarget = b;
+        menu.Placement = System.Windows.Controls.Primitives.PlacementMode.MousePoint;
+        menu.IsOpen = true;
     }
 
     private void CloseTab_Click(object sender, MouseButtonEventArgs e)
@@ -977,6 +1128,9 @@ public partial class MainWindow : Window
         }
 
         _activeIndex = -1;
+        // 탭 닫기 후 세션 즉시 저장 (강제종료 대비)
+        SaveSession();
+        _settings.Save();
         if (_docs.Count > 0)
             SwitchTo(Math.Min(index, _docs.Count - 1));
         else
@@ -1393,7 +1547,10 @@ public partial class MainWindow : Window
 
         var text = Editor.Text;
         var cmp = _caseSensitive ? StringComparison.Ordinal : StringComparison.OrdinalIgnoreCase;
-        var idx = text.IndexOf(find, cmp);
+        // 커서 위치 이후부터 검색, 없으면 처음부터 랩어라운드
+        var searchFrom = Math.Min(Editor.CaretIndex, text.Length);
+        var idx = text.IndexOf(find, searchFrom, cmp);
+        if (idx < 0) idx = text.IndexOf(find, cmp); // 랩어라운드
         if (idx < 0)
         {
             ShowReplaceStatus("없음");
@@ -1779,13 +1936,11 @@ public partial class MainWindow : Window
         catch { }
     }
 
-    // text[0..index) 안의 \n 개수
+    // text[0..index) 안의 \n 개수 — MemoryExtensions.Count 활용(O(n) SIMD 최적화)
     private static int CountNewlinesBefore(string text, int index)
     {
-        int count = 0, limit = Math.Min(index, text.Length);
-        for (int i = 0; i < limit; i++)
-            if (text[i] == '\n') count++;
-        return count;
+        var limit = Math.Min(index, text.Length);
+        return System.MemoryExtensions.Count(text.AsSpan(0, limit), '\n');
     }
 
     private void WrapSelection(string before, string after)
@@ -1884,6 +2039,14 @@ public partial class MainWindow : Window
         StatusCursor.ToolTip = parts.ToString();
     }
 
+    // 자동 닫기 쌍: 입력 키 → 삽입 쌍 (앞 마크, 뒤 마크)
+    private static readonly Dictionary<Key, (string Open, string Close)> _autoPairs = new()
+    {
+        { Key.OemOpenBrackets, ("[", "]") },      // [
+        { Key.D9,              ("(", ")") },       // (  (Shift 없이)
+        { Key.OemQuotes,       ("\"", "\"") },     // "
+    };
+
     private void Editor_KeyDown(object sender, KeyEventArgs e)
     {
         // 서식 단축키 — 에디터 포커스 시에만 적용
@@ -1893,6 +2056,29 @@ public partial class MainWindow : Window
         { WrapSelection("*", "*"); e.Handled = true; return; }
         if (e.Key == Key.K && Keyboard.Modifiers == ModifierKeys.Control)
         { WrapAsLink(); e.Handled = true; return; }
+
+        // 자동 닫기 마크 — 선택 영역이 있을 때만 (감싸기), 없으면 기본 동작
+        if (Keyboard.Modifiers == ModifierKeys.None && Editor.SelectionLength > 0
+            && _autoPairs.TryGetValue(e.Key, out var pair))
+        {
+            WrapSelection(pair.Open, pair.Close);
+            e.Handled = true;
+            return;
+        }
+        // * 키: 선택 영역 있으면 *로 감싸기 (Shift+8)
+        if (e.Key == Key.D8 && Keyboard.Modifiers == ModifierKeys.Shift && Editor.SelectionLength > 0)
+        {
+            WrapSelection("*", "*");
+            e.Handled = true;
+            return;
+        }
+        // ` 키: 선택 영역 있으면 `로 감싸기
+        if (e.Key == Key.OemTilde && Keyboard.Modifiers == ModifierKeys.None && Editor.SelectionLength > 0)
+        {
+            WrapSelection("`", "`");
+            e.Handled = true;
+            return;
+        }
 
         if (e.Key != Key.Tab) return;
         e.Handled = true;

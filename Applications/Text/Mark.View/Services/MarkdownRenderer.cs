@@ -57,7 +57,7 @@ public class MarkdownRenderer
             + "<style>" + GetCommonCss() + css + "</style>"
             + "</head><body>" + body
             + "<script src='https://cdn.jsdelivr.net/npm/highlight.js@11/dist/highlight.min.js'"
-            + " onload=\"if(typeof hljs!=='undefined')hljs.highlightAll();\""
+            + " onload=\"if(typeof hljs!=='undefined'){document.querySelectorAll('pre code:not(.language-mermaid)').forEach(function(b){hljs.highlightElement(b);});}\""
             + " onerror=\"document.querySelectorAll('pre code').forEach(function(b){b.style.fontFamily='Cascadia Code,Consolas,monospace';b.style.display='block';});\"></script>"
             + "<script defer src='https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js'"
             + " onerror=\"window.__katexFailed=true;\"></script>"
@@ -65,6 +65,23 @@ public class MarkdownRenderer
             + " onload=\"if(!window.__katexFailed&&typeof renderMathInElement!=='undefined')renderMathInElement(document.body,{throwOnError:false,delimiters:["
             + "{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false},"
             + "{left:'\\\\(',right:'\\\\)',display:false},{left:'\\\\[',right:'\\\\]',display:true}]})\"></script>"
+            // Mermaid 다이어그램: code.language-mermaid → div.mermaid 변환 후 렌더링
+            + "<script type='module'>"
+            + "(function(){"
+            + "var els=document.querySelectorAll('pre>code.language-mermaid');"
+            + "if(!els.length)return;"
+            + "els.forEach(function(el){"
+            + "var div=document.createElement('div');"
+            + "div.className='mermaid';"
+            + "div.textContent=el.textContent;"
+            + "el.parentNode.replaceWith(div);"
+            + "});"
+            + "import('https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs').then(function(m){"
+            + "m.default.initialize({startOnLoad:false,theme:'dark',securityLevel:'loose'});"
+            + "m.default.run();"
+            + "}).catch(function(){});"
+            + "})();"
+            + "</script>"
             + GetNavButtonsHtml()
             + "</body></html>";
     }

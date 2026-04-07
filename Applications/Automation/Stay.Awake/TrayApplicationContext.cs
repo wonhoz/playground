@@ -37,6 +37,8 @@ namespace StayAwake
         private DailyStats _dailyStats;
         private int _dailySimCount = 0;
         private int _dailySkipCount = 0;
+        private int _dailySlackSuccessCount = 0;
+        private int _dailySlackFailCount = 0;
         private DateTime _statsDate = DateTime.Today;
         private TimeSpan _todayActiveTime = TimeSpan.Zero;
         private DateTime _sessionRunStart;
@@ -50,6 +52,8 @@ namespace StayAwake
             _dailyStats = DailyStats.Load();
             _dailySimCount = _dailyStats.SimCount;
             _dailySkipCount = _dailyStats.SkipCount;
+            _dailySlackSuccessCount = _dailyStats.SlackSuccessCount;
+            _dailySlackFailCount = _dailyStats.SlackFailCount;
             _todayActiveTime = _dailyStats.ActiveTime;
             _statsDate = _dailyStats.Date.Date;
 
@@ -147,7 +151,8 @@ namespace StayAwake
             {
                 var item = new ToolStripMenuItem($"{min}분", null, (s, e) => SetInterval(min))
                 {
-                    Checked = (min == _intervalMinutes)
+                    Checked = (min == _intervalMinutes),
+                    Tag = min
                 };
                 _intervalItem.DropDownItems.Add(item);
             }
@@ -160,16 +165,18 @@ namespace StayAwake
             {
                 var item = new ToolStripMenuItem($"{px}px", null, (s, e) => SetDistance(px))
                 {
-                    Checked = (px == _simulator.MoveDistance)
+                    Checked = (px == _simulator.MoveDistance),
+                    Tag = px
                 };
                 _distanceItem.DropDownItems.Add(item);
             }
             menu.Items.Add(_distanceItem);
 
             // 활동 유형
-            _activityTypeItem = new ToolStripMenuItem("활동 유형");
-            _activityTypeItem.DropDownItems.Add(new ToolStripMenuItem("마우스 이동", null, (s, e) => SetActivityType(ActivityType.MouseMove)) { Checked = _simulator.ActivityType == ActivityType.MouseMove });
-            _activityTypeItem.DropDownItems.Add(new ToolStripMenuItem("마우스 + 키보드", null, (s, e) => SetActivityType(ActivityType.MouseAndKeyboard)) { Checked = _simulator.ActivityType == ActivityType.MouseAndKeyboard });
+            var activityLabel = _simulator.ActivityType == ActivityType.MouseAndKeyboard ? "마우스 + 키보드" : "마우스 이동";
+            _activityTypeItem = new ToolStripMenuItem($"활동 유형: {activityLabel}");
+            _activityTypeItem.DropDownItems.Add(new ToolStripMenuItem("마우스 이동", null, (s, e) => SetActivityType(ActivityType.MouseMove)) { Checked = _simulator.ActivityType == ActivityType.MouseMove, Tag = ActivityType.MouseMove });
+            _activityTypeItem.DropDownItems.Add(new ToolStripMenuItem("마우스 + 키보드", null, (s, e) => SetActivityType(ActivityType.MouseAndKeyboard)) { Checked = _simulator.ActivityType == ActivityType.MouseAndKeyboard, Tag = ActivityType.MouseAndKeyboard });
             menu.Items.Add(_activityTypeItem);
 
             // 디스플레이 절전 방지
@@ -251,7 +258,8 @@ namespace StayAwake
                 _startStopItem.Text = "▶ 시작";
                 _startStopItem.ForeColor = Color.FromArgb(67, 217, 123); // Green for start
                 _trayIcon.Icon = CreateIcon(false);
-                _trayIcon.Text = "StayAwake - 정지됨";
+                var stoppedTime = _todayActiveTime;
+                _trayIcon.Text = $"StayAwake - 정지됨 (오늘 {(int)stoppedTime.TotalHours:D2}:{stoppedTime:mm\\:ss})";
                 _statusItem.Text = "상태: 정지됨";
                 SaveDailyStats(); // 정지 시 활성 시간 포함 저장
 
@@ -276,10 +284,10 @@ namespace StayAwake
                 UpdateTooltip(); // 간격 변경 즉시 카운트다운 갱신
             }
 
-            // 체크 상태 업데이트
+            // 체크 상태 업데이트 (Tag 기반)
             foreach (ToolStripMenuItem item in _intervalItem.DropDownItems)
             {
-                item.Checked = item.Text == $"{minutes}분";
+                item.Checked = item.Tag is int val && val == minutes;
             }
 
             SaveSettings();
@@ -290,10 +298,10 @@ namespace StayAwake
             _simulator.MoveDistance = pixels;
             _distanceItem.Text = $"이동 거리: {pixels}px";
 
-            // 체크 상태 업데이트
+            // 체크 상태 업데이트 (Tag 기반)
             foreach (ToolStripMenuItem item in _distanceItem.DropDownItems)
             {
-                item.Checked = item.Text == $"{pixels}px";
+                item.Checked = item.Tag is int val && val == pixels;
             }
 
             SaveSettings();
@@ -303,10 +311,14 @@ namespace StayAwake
         {
             _simulator.ActivityType = type;
 
+            // 부모 레이블 갱신
+            var label = type == ActivityType.MouseAndKeyboard ? "마우스 + 키보드" : "마우스 이동";
+            _activityTypeItem.Text = $"활동 유형: {label}";
+
+            // 체크 상태 업데이트 (Tag 기반)
             foreach (ToolStripMenuItem item in _activityTypeItem.DropDownItems)
             {
-                item.Checked = (item.Text == "마우스 이동" && type == ActivityType.MouseMove) ||
-                               (item.Text == "마우스 + 키보드" && type == ActivityType.MouseAndKeyboard);
+                item.Checked = item.Tag is ActivityType t && t == type;
             }
 
             SaveSettings();
@@ -359,56 +371,66 @@ namespace StayAwake
             _sessionRunStart = DateTime.Now;
             _dailySimCount = 0;
             _dailySkipCount = 0;
+            _dailySlackSuccessCount = 0;
+            _dailySlackFailCount = 0;
             _statsDate = DateTime.Today;
             _dailyStats = new DailyStats();
         }
 
         private async void OnTimerTick(object? sender, EventArgs e)
         {
-            // 자정이 넘어가면 일일 통계 초기화 (히스토리 저장 후 리셋)
-            CheckMidnightReset();
+            try
+            {
+                // 자정이 넘어가면 일일 통계 초기화 (히스토리 저장 후 리셋)
+                CheckMidnightReset();
 
-            // UI 차단 방지: SimulateActivity()는 Thread.Sleep(110ms) 포함 → 배경 스레드에서 실행
-            bool simulated = await Task.Run(() => _simulator.SimulateActivity());
-            if (simulated)
-            {
-                _activityCount++;
-                _dailySimCount++;
+                // UI 차단 방지: SimulateActivity()는 Thread.Sleep(110ms) 포함 → 배경 스레드에서 실행
+                bool simulated = await Task.Run(() => _simulator.SimulateActivity());
+                if (simulated)
+                {
+                    _activityCount++;
+                    _dailySimCount++;
+                }
+                else
+                {
+                    _dailySkipCount++;
+                }
+                _lastActivityTime = DateTime.Now;
+                UpdateStatus(simulated);
+                SaveDailyStats();
             }
-            else
-            {
-                _dailySkipCount++;
-            }
-            _lastActivityTime = DateTime.Now;
-            UpdateStatus(simulated);
-            SaveDailyStats();
+            catch { /* 타이머 틱 예외 무시 — 다음 틱에서 재시도 */ }
         }
 
         private async void SimulateNow()
         {
-            // UI 차단 방지: SimulateActivity()는 Thread.Sleep(110ms) 포함 → 배경 스레드에서 실행
-            // 수동 실행이므로 메뉴 클릭에 의한 사용자 활동 감지를 무시하고 강제 실행
-            bool simulated = await Task.Run(() => _simulator.SimulateActivity(forceSimulate: true));
-            if (simulated)
-                _dailySimCount++;
-            else
-                _dailySkipCount++;
-
-            if (_isRunning && simulated)
+            try
             {
-                _activityCount++;
-                // 수동 실행 후 타이머 리셋 — 직후 자동 실행 방지
-                _activityTimer.Stop();
-                _lastActivityTime = DateTime.Now;
-                _activityTimer.Start();
-                UpdateStatus(simulated);
-                UpdateTooltip();
+                // UI 차단 방지: SimulateActivity()는 Thread.Sleep(110ms) 포함 → 배경 스레드에서 실행
+                // 수동 실행이므로 메뉴 클릭에 의한 사용자 활동 감지를 무시하고 강제 실행
+                bool simulated = await Task.Run(() => _simulator.SimulateActivity(forceSimulate: true));
+                if (simulated)
+                    _dailySimCount++;
+                else
+                    _dailySkipCount++;
+
+                if (_isRunning && simulated)
+                {
+                    _activityCount++;
+                    // 수동 실행 후 타이머 리셋 — 직후 자동 실행 방지
+                    _activityTimer.Stop();
+                    _lastActivityTime = DateTime.Now;
+                    _activityTimer.Start();
+                    UpdateStatus(simulated);
+                    UpdateTooltip();
+                }
+                SaveDailyStats();
+                var message = simulated
+                    ? $"활동 시뮬레이션 실행됨 ({_simulator.MoveDistance}px 이동)"
+                    : "사용자 활동 감지됨 - 시뮬레이션 건너뜀";
+                _trayIcon.ShowBalloonTip(1000, "StayAwake", message, ToolTipIcon.Info);
             }
-            SaveDailyStats();
-            var message = simulated
-                ? $"활동 시뮬레이션 실행됨 ({_simulator.MoveDistance}px 이동)"
-                : "사용자 활동 감지됨 - 시뮬레이션 건너뜀";
-            _trayIcon.ShowBalloonTip(1000, "StayAwake", message, ToolTipIcon.Info);
+            catch { /* 수동 실행 예외 무시 */ }
         }
 
         private void UpdateStatus(bool? lastSimulated = null)
@@ -426,6 +448,8 @@ namespace StayAwake
             _dailyStats.Date = DateTime.Today;
             _dailyStats.SimCount = _dailySimCount;
             _dailyStats.SkipCount = _dailySkipCount;
+            _dailyStats.SlackSuccessCount = _dailySlackSuccessCount;
+            _dailyStats.SlackFailCount = _dailySlackFailCount;
             _dailyStats.ActiveTime = currentActiveTime;
             _dailyStats.Save();
         }
@@ -474,6 +498,14 @@ namespace StayAwake
             sb.AppendLine($"• 누적 활성 시간: {(int)activeTime.TotalHours:D2}:{activeTime:mm\\:ss}");
             sb.AppendLine($"• 활성 비율: {activeRate:F1}%  ({(int)activeTime.TotalHours:D2}:{activeTime:mm\\:ss} / {(int)todayElapsed.TotalHours:D2}:{todayElapsed:mm\\:ss})");
 
+            // Slack 자동 상태 변경 통계 (오늘 변경이 1건 이상일 때만 표시)
+            if (_dailySlackSuccessCount > 0 || _dailySlackFailCount > 0)
+            {
+                sb.AppendLine();
+                sb.AppendLine("[Slack 자동 상태 변경]");
+                sb.AppendLine($"• 성공: {_dailySlackSuccessCount}회  /  실패: {_dailySlackFailCount}회");
+            }
+
             // 과거 히스토리 (오늘 제외 최대 6일)
             var history = StatsHistory.Load(6)
                 .Where(x => x.Date.Date != DateTime.Today)
@@ -483,7 +515,7 @@ namespace StayAwake
             if (history.Count > 0)
             {
                 sb.AppendLine();
-                sb.AppendLine("[최근 N일 히스토리]");
+                sb.AppendLine($"[최근 {history.Count}일 히스토리]");
                 sb.AppendLine($"{"날짜",-16} {"시뮬",-5} {"스킵",-5} {"활성시간",-10}");
                 sb.AppendLine(new string('─', 42));
                 foreach (var day in history)
@@ -493,6 +525,13 @@ namespace StayAwake
                     var at = day.ActiveTime;
                     sb.AppendLine($"{d:yyyy-MM-dd} ({dName})  {day.SimCount,4}회  {day.SkipCount,4}회   {(int)at.TotalHours:D2}:{at:mm\\:ss}");
                 }
+
+                // 주간 평균
+                var avgSim = history.Average(x => x.SimCount);
+                var avgSkip = history.Average(x => x.SkipCount);
+                var avgActive = TimeSpan.FromSeconds(history.Average(x => x.ActiveSeconds));
+                sb.AppendLine(new string('─', 42));
+                sb.AppendLine($"{"평균",-16}  {avgSim,5:F0}회  {avgSkip,4:F0}회   {(int)avgActive.TotalHours:D2}:{avgActive:mm\\:ss}");
             }
 
             DarkInfoDialog.Show("통계", sb.ToString(), 500, history.Count > 0 ? (int)(605 + 27.5 * (history.Count - 1)) : 450);
@@ -520,10 +559,27 @@ Slack 자리 비움 상태 방지 도구
 • API로도 강제 Active 불가, 자연스러운 활동만 인정
 
 [동작 방식]
-• 주기적으로 마우스를 이동 후 원위치
+• 주기적으로 마우스를 이동 후 원위치 (티 안 나게)
 • SetThreadExecutionState로 디스플레이 절전 방지
 • 사용자가 직접 활동 중이면 마우스 이동 자동 건너뜀
 • Slack 상태 변경: 클립보드 방식으로 슬래시 커맨드 전송 (한글 IME 대응)
+
+[사용법 — 단축키 & 기능]
+• 트레이 더블클릭          시작 / 정지 토글
+• 트레이 우클릭            메뉴 열기
+• 트레이 호버 (실행 중)    다음 활동까지 남은 시간 + 오늘 활성 시간
+• 트레이 호버 (정지 시)    오늘 누적 활성 시간
+• 메뉴 › 지금 활동 실행    즉시 강제 시뮬레이션 (타이머 리셋)
+• 메뉴 › 오늘 통계         시뮬레이션·스킵·활성 시간·주간 평균
+• 메뉴 › 간격              1 / 2 / 3 / 5 / 7분 선택
+• 메뉴 › 이동 거리         10 / 30 / 50 / 100 / 200px 선택
+• 메뉴 › 활동 유형         마우스 이동 / 마우스 + 키보드 (F15 키)
+• 메뉴 › 디스플레이 절전 방지   화면 꺼짐 방지 On/Off
+• 메뉴 › 사용 중이면 건너뛰기   직접 입력 중 시뮬레이션 스킵
+• 메뉴 › Slack › 자동 변경 활성화   출퇴근 시각에 Active/Away 자동 전환
+• 메뉴 › Slack › 시간 설정    출퇴근 시각 변경 (기본 08:55 / 18:55)
+• 메뉴 › Slack › 지금 활성/자리비움으로 변경   즉시 수동 전환
+• 권장 간격: 3~5분
 
 [현재 설정]
 • 간격: {_intervalMinutes}분
@@ -533,14 +589,6 @@ Slack 자리 비움 상태 방지 도구
 • 사용 중 건너뛰기: {(_simulator.SkipIfUserActive ? "켜짐" : "꺼짐")}
 • Slack 자동 상태 변경: {slackStatusLine}
 
-[사용법]
-• 더블클릭: 시작/정지 토글
-• 우클릭: 메뉴 열기
-• 트레이 호버: 다음 활동까지 남은 시간 표시
-• 오늘 통계 메뉴: 활성 시간 및 비율 확인
-• Slack → 시간 설정: 출퇴근 시간 변경 (기본 08:55 / 18:55)
-• 권장 간격: 3~5분
-
 © 2026 https://github.com/wonhoz";
 
             DarkInfoDialog.Show("StayAwake 정보", message, 750, 1070);
@@ -548,25 +596,33 @@ Slack 자리 비움 상태 방지 도구
 
         private async void OnScheduleTimerTick(object? sender, EventArgs e)
         {
-            var result = await _slackAutomation.CheckAndSetPresenceAsync();
-            if (result == null) return;
-
-            if (result.Success)
+            try
             {
-                // 변경 날짜 저장 — 재시작 시 중복 전송 방지
-                _settings.LastSlackActiveSetDate = _slackAutomation.LastActiveSet;
-                _settings.LastSlackAwaySetDate = _slackAutomation.LastAwaySet;
-                _settings.Save();
+                var result = await _slackAutomation.CheckAndSetPresenceAsync();
+                if (result == null) return;
 
-                var label = result.Status == "active" ? "활성" : "자리 비움";
-                _trayIcon.ShowBalloonTip(2000, "StayAwake",
-                    $"Slack 상태를 '{label}'으로 변경했습니다.", ToolTipIcon.Info);
+                if (result.Success)
+                {
+                    // 변경 날짜 저장 — 재시작 시 중복 전송 방지
+                    _settings.LastSlackActiveSetDate = _slackAutomation.LastActiveSet;
+                    _settings.LastSlackAwaySetDate = _slackAutomation.LastAwaySet;
+                    _settings.Save();
+                    _dailySlackSuccessCount++;
+                    SaveDailyStats();
+
+                    var label = result.Status == "active" ? "활성" : "자리 비움";
+                    _trayIcon.ShowBalloonTip(2000, "StayAwake",
+                        $"Slack 상태를 '{label}'으로 변경했습니다.", ToolTipIcon.Info);
+                }
+                else
+                {
+                    _dailySlackFailCount++;
+                    SaveDailyStats();
+                    _trayIcon.ShowBalloonTip(2500, "StayAwake",
+                        $"Slack 상태 변경 실패: {result.ErrorMessage}", ToolTipIcon.Warning);
+                }
             }
-            else
-            {
-                _trayIcon.ShowBalloonTip(2500, "StayAwake",
-                    $"Slack 상태 변경 실패: {result.ErrorMessage}", ToolTipIcon.Warning);
-            }
+            catch { /* 스케줄 타이머 예외 무시 */ }
         }
 
         private void OpenSlackSettings()
@@ -606,6 +662,8 @@ Slack 자리 비움 상태 방지 도구
         private async Task SetSlackActiveNowAsync()
         {
             var result = await _slackAutomation.SetActiveAsync();
+            if (result.Success) _dailySlackSuccessCount++; else _dailySlackFailCount++;
+            SaveDailyStats();
             _trayIcon.ShowBalloonTip(1500, "StayAwake",
                 result.Success ? "Slack 상태를 '활성'으로 변경했습니다." : $"실패: {result.ErrorMessage}",
                 result.Success ? ToolTipIcon.Info : ToolTipIcon.Warning);
@@ -614,6 +672,8 @@ Slack 자리 비움 상태 방지 도구
         private async Task SetSlackAwayNowAsync()
         {
             var result = await _slackAutomation.SetAwayAsync();
+            if (result.Success) _dailySlackSuccessCount++; else _dailySlackFailCount++;
+            SaveDailyStats();
             _trayIcon.ShowBalloonTip(1500, "StayAwake",
                 result.Success ? "Slack 상태를 '자리비움'으로 변경했습니다." : $"실패: {result.ErrorMessage}",
                 result.Success ? ToolTipIcon.Info : ToolTipIcon.Warning);

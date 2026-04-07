@@ -10,6 +10,8 @@ namespace StayAwake
         public DateTime Date { get; set; } = DateTime.Today;
         public int SimCount { get; set; } = 0;
         public int SkipCount { get; set; } = 0;
+        public int SlackSuccessCount { get; set; } = 0;
+        public int SlackFailCount { get; set; } = 0;
 
         /// <summary>오늘 누적 활성 시간 (초)</summary>
         public long ActiveSeconds { get; set; } = 0;

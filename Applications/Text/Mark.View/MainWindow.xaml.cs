@@ -87,14 +87,38 @@ public partial class MainWindow : Window
         var autosaves = Directory.GetFiles(autoSaveDir, "*.autosave.md");
         if (autosaves.Length == 0) return;
 
-        var result = MessageBox.Show(
-            $"이전 세션에서 자동 저장된 파일이 {autosaves.Length}개 있습니다.\n" +
-            $"저장 위치: {autoSaveDir}\n\n파일 탐색기에서 열어보시겠습니까?",
-            "자동 저장 파일 복구",
-            MessageBoxButton.YesNo, MessageBoxImage.Information);
-        if (result == MessageBoxResult.Yes)
+        // 차단 메시지박스 대신 상태바에 클릭 가능한 알림 표시
+        var prevTip = StatusPath.ToolTip;
+        StatusPath.Text = $"⚠ 자동 저장 파일 {autosaves.Length}개 — 클릭하여 폴더 열기";
+        StatusPath.ToolTip = $"자동 저장 위치: {autoSaveDir}\n(클릭하면 탐색기에서 엽니다)";
+        StatusPath.Tag = autoSaveDir;
+        StatusPath.MouseLeftButtonDown -= StatusPath_MouseLeftButtonDown;
+        StatusPath.MouseLeftButtonDown += AutosaveStatus_Click;
+
+        var timer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(10) };
+        timer.Tick += (_, _) =>
         {
-            try { System.Diagnostics.Process.Start("explorer.exe", autoSaveDir); }
+            timer.Stop();
+            if (StatusPath.Tag as string == autoSaveDir)
+            {
+                StatusPath.Tag = null;
+                StatusPath.MouseLeftButtonDown -= AutosaveStatus_Click;
+                StatusPath.MouseLeftButtonDown += StatusPath_MouseLeftButtonDown;
+                StatusPath.ToolTip = prevTip;
+                if (_activeIndex >= 0 && _activeIndex < _docs.Count)
+                    StatusPath.Text = _docs[_activeIndex].IsNew ? "새 문서 (저장되지 않음)" : _docs[_activeIndex].FilePath;
+                else
+                    StatusPath.Text = "파일을 열어주세요";
+            }
+        };
+        timer.Start();
+    }
+
+    private void AutosaveStatus_Click(object sender, System.Windows.Input.MouseButtonEventArgs e)
+    {
+        if (StatusPath.Tag is string dir && Directory.Exists(dir))
+        {
+            try { System.Diagnostics.Process.Start("explorer.exe", dir); }
             catch { }
         }
     }
@@ -390,30 +414,61 @@ public partial class MainWindow : Window
         'align-items:center;justify-content:center;cursor:zoom-out;}',
         '#__lb.open{display:flex;}',
         '#__lb img{max-width:92vw;max-height:92vh;border-radius:8px;',
-        'box-shadow:0 8px 40px rgba(0,0,0,0.6);pointer-events:none;}',
+        'box-shadow:0 8px 40px rgba(0,0,0,0.6);pointer-events:none;transition:opacity 0.15s;}',
+        '#__lb-prev,#__lb-next{position:absolute;top:50%;transform:translateY(-50%);',
+        'background:rgba(255,255,255,0.12);border:none;color:#fff;font-size:24px;',
+        'width:44px;height:64px;border-radius:6px;cursor:pointer;display:none;',
+        'align-items:center;justify-content:center;z-index:100000;',
+        'transition:background 0.15s;}',
+        '#__lb-prev{left:16px;}#__lb-next{right:16px;}',
+        '#__lb-prev:hover,#__lb-next:hover{background:rgba(255,255,255,0.28);}',
+        '#__lb-counter{position:absolute;bottom:16px;left:50%;transform:translateX(-50%);',
+        'color:rgba(255,255,255,0.7);font-size:13px;pointer-events:none;display:none;}',
         'article img,body>*:not(#__lb) img{cursor:zoom-in;}'
     ].join('');
     document.head.appendChild(style);
     var overlay = document.createElement('div');
     overlay.id = '__lb';
     var img = document.createElement('img');
-    overlay.appendChild(img);
+    var btnPrev = document.createElement('button');
+    btnPrev.id = '__lb-prev'; btnPrev.textContent = '❮';
+    var btnNext = document.createElement('button');
+    btnNext.id = '__lb-next'; btnNext.textContent = '❯';
+    var counter = document.createElement('div');
+    counter.id = '__lb-counter';
+    overlay.appendChild(btnPrev); overlay.appendChild(img);
+    overlay.appendChild(btnNext); overlay.appendChild(counter);
     document.body.appendChild(overlay);
-    overlay.addEventListener('click', function() {
-        overlay.classList.remove('open');
-        document.body.style.overflow = '';
+    var imgs = [], cur = 0;
+    function open(idx) {
+        cur = idx;
+        img.src = imgs[cur].src; img.alt = imgs[cur].alt;
+        overlay.classList.add('open'); document.body.style.overflow = 'hidden';
+        var show = imgs.length > 1;
+        btnPrev.style.display = show ? 'flex' : 'none';
+        btnNext.style.display = show ? 'flex' : 'none';
+        counter.style.display = show ? 'block' : 'none';
+        if (show) counter.textContent = (cur+1) + ' / ' + imgs.length;
+    }
+    function close() { overlay.classList.remove('open'); document.body.style.overflow = ''; }
+    overlay.addEventListener('click', function(e) {
+        if (e.target === overlay || e.target === img) close();
+    });
+    btnPrev.addEventListener('click', function(e) {
+        e.stopPropagation(); open((cur - 1 + imgs.length) % imgs.length);
+    });
+    btnNext.addEventListener('click', function(e) {
+        e.stopPropagation(); open((cur + 1) % imgs.length);
     });
     document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape') { overlay.classList.remove('open'); document.body.style.overflow = ''; }
+        if (!overlay.classList.contains('open')) return;
+        if (e.key === 'Escape') close();
+        else if (e.key === 'ArrowLeft') { e.preventDefault(); open((cur-1+imgs.length)%imgs.length); }
+        else if (e.key === 'ArrowRight') { e.preventDefault(); open((cur+1)%imgs.length); }
     });
-    document.querySelectorAll('img').forEach(function(i) {
-        i.addEventListener('click', function(e) {
-            e.stopPropagation();
-            img.src = i.src;
-            img.alt = i.alt;
-            overlay.classList.add('open');
-            document.body.style.overflow = 'hidden';
-        });
+    imgs = Array.from(document.querySelectorAll('article img, body>*:not(#__lb) img'));
+    imgs.forEach(function(i, idx) {
+        i.addEventListener('click', function(e) { e.stopPropagation(); open(idx); });
     });
 })()");
         }
@@ -1337,7 +1392,8 @@ public partial class MainWindow : Window
         if (string.IsNullOrEmpty(find)) return;
 
         var text = Editor.Text;
-        var idx = text.IndexOf(find, StringComparison.OrdinalIgnoreCase);
+        var cmp = _caseSensitive ? StringComparison.Ordinal : StringComparison.OrdinalIgnoreCase;
+        var idx = text.IndexOf(find, cmp);
         if (idx < 0)
         {
             ShowReplaceStatus("없음");
@@ -1361,9 +1417,10 @@ public partial class MainWindow : Window
         int count = 0;
         var sb = new StringBuilder();
         int pos = 0;
+        var cmpAll = _caseSensitive ? StringComparison.Ordinal : StringComparison.OrdinalIgnoreCase;
         while (pos <= text.Length)
         {
-            var idx = text.IndexOf(find, pos, StringComparison.OrdinalIgnoreCase);
+            var idx = text.IndexOf(find, pos, cmpAll);
             if (idx < 0) { sb.Append(text.AsSpan(pos)); break; }
             sb.Append(text.AsSpan(pos, idx - pos));
             sb.Append(replace);
@@ -1768,17 +1825,63 @@ public partial class MainWindow : Window
         Editor.CaretIndex = start + sel.Length + 3;
     }
 
+    private static readonly Regex _headingLineRegex = new(@"^(#{1,6})\s+(.+)", RegexOptions.Multiline | RegexOptions.Compiled);
+
     private void Editor_SelectionChanged(object sender, RoutedEventArgs e)
     {
         if (!IsLoaded || _activeIndex < 0 || _activeIndex >= _docs.Count) return;
         var text = Editor.Text;
         var caret = Editor.CaretIndex;
         if (caret < 0 || caret > text.Length) return;
-        var line = text.Take(caret).Count(c => c == '\n') + 1;
-        var lastNl = text.LastIndexOf('\n', Math.Max(0, caret - 1));
+        // O(n) LINQ 대신 Span 기반 순회로 최적화
+        var span = text.AsSpan(0, caret);
+        int line = 1, lastNl = -1;
+        for (int i = 0; i < span.Length; i++)
+        {
+            if (span[i] == '\n') { line++; lastNl = i; }
+        }
         var col = caret - (lastNl + 1) + 1;
         StatusCursor.Text = $"{line}:{col}";
         StatusCursor.Visibility = Visibility.Visible;
+
+        // Breadcrumb: 커서 앞 마지막 헤딩 표시
+        UpdateBreadcrumb(text, caret);
+    }
+
+    private void UpdateBreadcrumb(string text, int caret)
+    {
+        // 커서 위치까지의 텍스트에서 마지막 헤딩 탐색
+        var before = text.AsSpan(0, Math.Min(caret, text.Length));
+        int h1 = -1, h2 = -1, h3 = -1;
+        string h1Text = "", h2Text = "", h3Text = "";
+        int lineStart = 0;
+        for (int i = 0; i <= before.Length; i++)
+        {
+            if (i == before.Length || before[i] == '\n')
+            {
+                var lineSpan = before[lineStart..i];
+                if (lineSpan.StartsWith("#".AsSpan()))
+                {
+                    int level = 0;
+                    while (level < lineSpan.Length && lineSpan[level] == '#') level++;
+                    if (level <= 6 && level < lineSpan.Length && lineSpan[level] == ' ')
+                    {
+                        var title = lineSpan[(level + 1)..].TrimEnd().ToString();
+                        if (level == 1) { h1 = i; h1Text = title; h2 = -1; h2Text = ""; h3 = -1; h3Text = ""; }
+                        else if (level == 2) { h2 = i; h2Text = title; h3 = -1; h3Text = ""; }
+                        else if (level == 3) { h3 = i; h3Text = title; }
+                    }
+                }
+                lineStart = i + 1;
+            }
+        }
+        // 헤딩이 없으면 툴팁 제거
+        if (h1 < 0 && h2 < 0 && h3 < 0) { StatusCursor.ToolTip = null; return; }
+        var parts = new System.Text.StringBuilder();
+        if (h1 >= 0) parts.Append(h1Text);
+        if (h2 >= 0) { if (parts.Length > 0) parts.Append(" › "); parts.Append(h2Text); }
+        if (h3 >= 0) { if (parts.Length > 0) parts.Append(" › "); parts.Append(h3Text); }
+        StatusCursor.ToolTip = parts.ToString();
     }
 
     private void Editor_KeyDown(object sender, KeyEventArgs e)
@@ -1943,6 +2046,8 @@ public partial class MainWindow : Window
         { SetWordWrap(!_isWordWrap); e.Handled = true; }
         else if (e.Key == Key.C && Keyboard.Modifiers == ModifierKeys.Alt)
         { BtnCase_Click(this, new RoutedEventArgs()); e.Handled = true; }
+        else if (e.Key == Key.Enter && Keyboard.Modifiers == ModifierKeys.Control && _isEditMode)
+        { _previewTimer?.Stop(); RenderPreview(saveScroll: true); e.Handled = true; }
         else if (e.Key == Key.Escape && !string.IsNullOrEmpty(TxtFind.Text))
         { TxtFind.Text = ""; e.Handled = true; }
     }

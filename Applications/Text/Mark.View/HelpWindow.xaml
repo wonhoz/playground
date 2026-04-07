@@ -190,9 +190,11 @@
                 <local:ShortcutEntry Key="Alt + Z"            Desc="줄바꿈 토글 — 긴 줄 편집 시 wrap 끄기"/>
                 <local:ShortcutEntry Key="Tab"                Desc="들여쓰기 (4칸) / 범위 들여쓰기"/>
                 <local:ShortcutEntry Key="Shift + Tab"        Desc="내어쓰기 / 범위 내어쓰기"/>
+                <local:ShortcutEntry Key="Ctrl + Enter"       Desc="즉시 미리보기 갱신 (편집 모드 — 300ms 타이머 없이 바로 반영)"/>
                 <local:ShortcutEntry Key="Ctrl + Shift + V"   Desc="클립보드를 새 탭으로 열기"/>
                 <local:ShortcutEntry Key="이미지 파일 D&amp;D" Desc="편집 모드에서 이미지 드래그 → ![alt](path) 자동 삽입"/>
                 <local:ShortcutEntry Key="줄 번호"            Desc="편집 모드 진입 시 에디터 왼쪽에 줄 번호 자동 표시 (스크롤 동기화)"/>
+                <local:ShortcutEntry Key="커서 툴팁"          Desc="줄:컬럼 표시에 마우스 오버 → 현재 위치의 헤딩 구조(Breadcrumb) 표시"/>
               </ItemsControl.Items>
             </ItemsControl>
 
@@ -217,7 +219,7 @@
             <ItemsControl ItemTemplate="{StaticResource RowTpl}">
               <ItemsControl.Items>
                 <local:ShortcutEntry Key="코드 블록 hover"   Desc="Copy 버튼 표시 — 클릭 시 코드 클립보드 복사 (테마 색상 자동 적용)"/>
-                <local:ShortcutEntry Key="이미지 클릭"       Desc="라이트박스로 원본 크기 확대 — ESC 또는 클릭으로 닫기"/>
+                <local:ShortcutEntry Key="이미지 클릭"       Desc="라이트박스로 원본 크기 확대 — ESC/클릭으로 닫기 · ← → 또는 ❮ ❯ 버튼으로 이전/다음 이미지"/>
                 <local:ShortcutEntry Key="▲ 플로팅 버튼"    Desc="맨 위로 부드럽게 스크롤 (150px 이상 내리면 표시)"/>
                 <local:ShortcutEntry Key="↩ 플로팅 버튼"    Desc="TOC 클릭 전 위치로 되돌아가기"/>
                 <local:ShortcutEntry Key=".md 링크 클릭"     Desc="연결된 Markdown 파일을 앱 내 새 탭으로 열기"/>

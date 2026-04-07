@@ -29,7 +29,7 @@ public class AppSettings
     public bool IsWordWrap { get; set; } = true;
     public string ExportDir { get; set; } = "";
 
-    private const int MaxRecentFiles = 10;
+    private const int MaxRecentFiles = 20;
 
     public void AddRecentFile(string path)
     {

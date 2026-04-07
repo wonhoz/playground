@@ -91,6 +91,7 @@ public partial class MainWindow : Window
 
         UpdateDropHint();
         if (_settings.PreviewOnly) DeleteBtn.Content = "미리보기 실행";
+        UpdateSortIndicator();
     }
 
     private void OnClosing(object? sender, System.ComponentModel.CancelEventArgs e)
@@ -287,6 +288,7 @@ public partial class MainWindow : Window
         }
 
         _isScanning = true;
+        _cts?.Dispose();
         _cts = new CancellationTokenSource();
 
         var opts = BuildOptions();
@@ -351,9 +353,21 @@ public partial class MainWindow : Window
         ExportBtn.IsEnabled     = hasItems;
         DeleteBtn.IsEnabled     = hasItems;
 
-        StatusText.Text = hasItems
-            ? $"{results.Count:N0}개 항목 탐지됨  —  삭제할 항목을 선택하세요."
-            : "탐지된 항목이 없습니다.";
+        if (hasItems)
+        {
+            var empty = results.Count(r => r.Kind == FolderKind.Empty);
+            var vs    = results.Count(r => r.Kind == FolderKind.VsArtifact);
+            var files = results.Count(r => r.Kind == FolderKind.EmptyFile);
+            var parts = new List<string>();
+            if (empty > 0) parts.Add($"빈 폴더 {empty:N0}");
+            if (vs    > 0) parts.Add($"VS 아티팩트 {vs:N0}");
+            if (files > 0) parts.Add($"빈 파일 {files:N0}");
+            StatusText.Text = string.Join("  /  ", parts) + "  —  삭제할 항목을 선택하세요.";
+        }
+        else
+        {
+            StatusText.Text = "탐지된 항목이 없습니다.";
+        }
 
         _settings.LastScanTime = DateTime.Now;
         StatLastScan.Text = _settings.LastScanTime.Value.ToString("MM-dd HH:mm");
@@ -366,19 +380,31 @@ public partial class MainWindow : Window
 
     private void SelectAll_Click(object sender, RoutedEventArgs e)
     {
-        foreach (var item in _scanResults) item.IsSelected = true;
+        var visible = (ResultListView.ItemsSource as IEnumerable<FolderEntry>) ?? _scanResults;
+        foreach (var item in visible) item.IsSelected = true;
         UpdateStats();
     }
 
     private void SelectNone_Click(object sender, RoutedEventArgs e)
     {
-        foreach (var item in _scanResults) item.IsSelected = false;
+        var visible = (ResultListView.ItemsSource as IEnumerable<FolderEntry>) ?? _scanResults;
+        foreach (var item in visible) item.IsSelected = false;
         UpdateStats();
     }
 
     private void InvertSelection_Click(object sender, RoutedEventArgs e)
     {
-        foreach (var item in _scanResults) item.IsSelected = !item.IsSelected;
+        var visible = (ResultListView.ItemsSource as IEnumerable<FolderEntry>) ?? _scanResults;
+        foreach (var item in visible) item.IsSelected = !item.IsSelected;
+        UpdateStats();
+    }
+
+    private void ResultListView_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+    {
+        foreach (FolderEntry item in e.AddedItems.OfType<FolderEntry>())
+            item.IsSelected = true;
+        foreach (FolderEntry item in e.RemovedItems.OfType<FolderEntry>())
+            item.IsSelected = false;
         UpdateStats();
     }
 
@@ -592,6 +618,34 @@ public partial class MainWindow : Window
         OpenSelectedInExplorer();
     }
 
+    private void RemoveFromResults_Click(object sender, RoutedEventArgs e)
+    {
+        var targets = ResultListView.SelectedItems.Cast<FolderEntry>().ToList();
+        if (targets.Count == 0) return;
+        foreach (var t in targets) _scanResults.Remove(t);
+        ApplyFilter();
+        UpdateStats();
+        StatusText.Text = targets.Count == 1
+            ? $"결과에서 제거됨: {Path.GetFileName(targets[0].Path)}"
+            : $"결과에서 {targets.Count:N0}개 항목 제거됨";
+    }
+
+    private void AddToExclude_Click(object sender, RoutedEventArgs e)
+    {
+        if (ResultListView.SelectedItem is not FolderEntry entry) return;
+        string name = entry.Kind == FolderKind.EmptyFile
+            ? Path.GetFileName(Path.GetDirectoryName(entry.Path) ?? entry.Path)
+            : Path.GetFileName(entry.Path);
+        if (string.IsNullOrEmpty(name))  return;
+        if (_excludedFolders.Contains(name, StringComparer.OrdinalIgnoreCase))
+        {
+            StatusText.Text = $"이미 제외 목록에 있습니다: {name}";
+            return;
+        }
+        _excludedFolders.Add(name);
+        StatusText.Text = $"제외 폴더에 추가됨: {name}  (다음 스캔부터 적용)";
+    }
+
     private void OpenSelectedInExplorer()
     {
         if (ResultListView.SelectedItem is not FolderEntry entry) return;
@@ -611,10 +665,25 @@ public partial class MainWindow : Window
 
     // ── 컬럼 클릭 정렬 ──────────────────────────────────────────────────
 
+    private void UpdateSortIndicator()
+    {
+        if (ResultListView.View is not GridView gv) return;
+        foreach (var col in gv.Columns)
+        {
+            if (col.Header is string h)
+                col.Header = h.TrimEnd().TrimEnd('▲', '▼').TrimEnd();
+        }
+        if (string.IsNullOrEmpty(_sortColumn)) return;
+        var target = gv.Columns.FirstOrDefault(c =>
+            (c.Header as string)?.Trim() == _sortColumn);
+        if (target != null)
+            target.Header = _sortColumn + (_sortDirection == ListSortDirection.Ascending ? " ▲" : " ▼");
+    }
+
     private void ColumnHeader_Click(object sender, RoutedEventArgs e)
     {
         if (e.OriginalSource is not GridViewColumnHeader header) return;
-        var tag = header.Column?.Header as string;
+        var tag = (header.Column?.Header as string)?.TrimEnd().TrimEnd('▲', '▼').TrimEnd();
         if (string.IsNullOrEmpty(tag)) return;
 
         if (_sortColumn == tag)
@@ -641,6 +710,7 @@ public partial class MainWindow : Window
         };
 
         ApplyFilter();
+        UpdateSortIndicator();
     }
 
     // ── 도움말 ──────────────────────────────────────────────────────────
@@ -666,6 +736,7 @@ public partial class MainWindow : Window
                · VS 아티팩트: bin, obj 폴더와 .user 파일만 남은 폴더 탐지
 
             3. [스캔 시작] 또는 Enter → 결과 목록 확인
+               (완료 후 종류별 요약: 빈 폴더 N / VS 아티팩트 N / 빈 파일 N)
 
             4. 결과 필터링 (필터 바)
                · 종류별 필터: 전체 / 빈 폴더 / VS 아티팩트 / 빈 파일
@@ -673,7 +744,8 @@ public partial class MainWindow : Window
                · 검색: 경로 키워드로 결과 필터링
 
             5. 삭제할 항목 선택 (체크박스)
-               · 전체 선택 / 선택 해제 / 반전 버튼 사용
+               · 전체 선택 / 선택 해제 / 반전 — 현재 필터된 항목에만 적용
+               · 행 클릭 / Shift+클릭 (범위) / Ctrl+클릭 → 체크박스 연동
 
             6. [삭제] 클릭 또는 Delete 키
                · 휴지통으로 이동 (기본, 복구 가능)
@@ -682,7 +754,9 @@ public partial class MainWindow : Window
             ── 팁 ───────────────────────────────────
             · 결과 항목 더블클릭 또는 우클릭 → 탐색기에서 열기
             · 우클릭 → 경로 복사
-            · 컬럼 헤더 클릭 → 정렬 (오름/내림차순 토글, 정렬 상태 저장됨)
+            · 우클릭 → 결과에서 제거: 오탐 항목을 삭제 없이 목록에서만 제거
+            · 우클릭 → 제외 폴더에 추가: 다음 스캔부터 해당 폴더명 제외
+            · 컬럼 헤더 클릭 → 정렬 ▲/▼ (오름/내림차순, 상태 저장됨)
             · 아티팩트 폴더명 목록에서 bin, obj 외 폴더명 추가 가능
             · 제외 폴더에 추가 시 스캔 대상에서 제외
             """,

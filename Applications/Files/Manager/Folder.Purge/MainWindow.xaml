@@ -608,36 +608,31 @@
                           Visibility="Collapsed"
                           SelectionMode="Extended"
                           GridViewColumnHeader.Click="ColumnHeader_Click"
-                          MouseDoubleClick="ResultListView_MouseDoubleClick">
+                          MouseDoubleClick="ResultListView_MouseDoubleClick"
+                          SelectionChanged="ResultListView_SelectionChanged">
                     <ListView.ContextMenu>
                         <ContextMenu Background="#2A2A35" BorderBrush="#444455" Foreground="#E0E0E0"
                                      FontSize="12">
-                            <MenuItem Header="탐색기에서 열기" Click="OpenInExplorer_Click">
-                                <MenuItem.Style>
-                                    <Style TargetType="MenuItem">
-                                        <Setter Property="Background" Value="Transparent"/>
-                                        <Setter Property="Foreground" Value="#E0E0E0"/>
-                                        <Style.Triggers>
-                                            <Trigger Property="IsHighlighted" Value="True">
-                                                <Setter Property="Background" Value="#3A3A50"/>
-                                            </Trigger>
-                                        </Style.Triggers>
-                                    </Style>
-                                </MenuItem.Style>
-                            </MenuItem>
-                            <MenuItem Header="경로 복사" Click="CopyPath_Click">
-                                <MenuItem.Style>
-                                    <Style TargetType="MenuItem">
-                                        <Setter Property="Background" Value="Transparent"/>
-                                        <Setter Property="Foreground" Value="#E0E0E0"/>
-                                        <Style.Triggers>
-                                            <Trigger Property="IsHighlighted" Value="True">
-                                                <Setter Property="Background" Value="#3A3A50"/>
-                                            </Trigger>
-                                        </Style.Triggers>
-                                    </Style>
-                                </MenuItem.Style>
-                            </MenuItem>
+                            <ContextMenu.Resources>
+                                <Style TargetType="MenuItem">
+                                    <Setter Property="Background" Value="Transparent"/>
+                                    <Setter Property="Foreground" Value="#E0E0E0"/>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsHighlighted" Value="True">
+                                            <Setter Property="Background" Value="#3A3A50"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                                <Style TargetType="Separator">
+                                    <Setter Property="Background" Value="#444455"/>
+                                    <Setter Property="Margin" Value="4,2"/>
+                                </Style>
+                            </ContextMenu.Resources>
+                            <MenuItem Header="탐색기에서 열기" Click="OpenInExplorer_Click"/>
+                            <MenuItem Header="경로 복사"       Click="CopyPath_Click"/>
+                            <Separator/>
+                            <MenuItem Header="결과에서 제거"      Click="RemoveFromResults_Click"/>
+                            <MenuItem Header="제외 폴더에 추가"   Click="AddToExclude_Click"/>
                         </ContextMenu>
                     </ListView.ContextMenu>
                     <ListView.View>

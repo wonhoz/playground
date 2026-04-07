@@ -66,6 +66,7 @@ public class FolderScanner
         }
         catch (UnauthorizedAccessException) { return; }
         catch (IOException)                 { return; }
+        catch (Exception)                   { return; }
 
         // ── 0바이트 파일 탐지 ──
         if (_opts.ScanEmptyFiles)

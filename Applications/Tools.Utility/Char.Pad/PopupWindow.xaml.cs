@@ -20,6 +20,13 @@ public partial class PopupWindow : System.Windows.Window
     private bool      _customSortByName = false;
     private bool      _preserveClipboard = false;
 
+    // 검색 히스토리 (세션 내 메모리, 최대 10개)
+    private readonly List<string> _searchHistory = new();
+    private int                   _searchHistoryIdx = -1;
+
+    // 다중 문자 선택 (Ctrl+클릭)
+    private readonly List<CharEntry> _multiSelected = new();
+
     // ItemSize = 문자 버튼 1칸 크기 (폰트 크기 기반으로 자동 계산)
     private double ItemSize => _charFontSize + 28;
 
@@ -201,6 +208,7 @@ public partial class PopupWindow : System.Windows.Window
 
     private void SwitchTab(string tabId)
     {
+        _multiSelected.Clear();  // 탭 전환 시 다중 선택 해제
         _activeTab = tabId;
         _storage.SetSetting("last_tab", tabId);
 
@@ -344,9 +352,19 @@ public partial class PopupWindow : System.Windows.Window
         StatusText.Text += $" ({list.Count}개)";
         _lastStatusText = StatusText.Text;
 
-        // 탭 배지 업데이트 (즐겨찾기·커스텀 수)
+        // 탭 배지 업데이트 (즐겨찾기·커스텀·최근 수)
         UpdateTabBadge("favorite", favoritesList.Count);
         UpdateTabBadge("custom",   customChars.Count);
+        UpdateTabBadge("recent",   recentsList.Count);
+
+        // 검색어 히스토리 추가 (2자 이상의 의미 있는 쿼리만)
+        if (isSearchResult && query.Length >= 2)
+        {
+            _searchHistory.Remove(query);
+            _searchHistory.Insert(0, query);
+            if (_searchHistory.Count > 10) _searchHistory.RemoveAt(_searchHistory.Count - 1);
+            _searchHistoryIdx = -1;
+        }
 
         // 결과 없음 안내
         EmptyText.Visibility = list.Count == 0 ? Visibility.Visible : Visibility.Collapsed;
@@ -474,13 +492,35 @@ public partial class PopupWindow : System.Windows.Window
         border.GotKeyboardFocus  += (_, _) => border.Background = (SolidColorBrush)FindResource("CharHover");
         border.LostKeyboardFocus += (_, _) => border.Background = (SolidColorBrush)FindResource("TabInactive");
 
-        // 좌클릭: 삽입 / Shift+클릭: 복사만
+        // 다중 선택 상태이면 테두리 강조 복원
+        if (_multiSelected.Any(e => e.Char == entry.Char))
+        {
+            border.BorderBrush     = (SolidColorBrush)FindResource("AccentHover");
+            border.BorderThickness = new Thickness(2);
+        }
+
+        // 좌클릭: Ctrl → 다중 선택 / Shift → 복사만 / 기본 → 삽입
         border.MouseLeftButtonUp += (_, _) =>
         {
-            if (Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightShift))
+            if (Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl))
+            {
+                ToggleMultiSelect(entry, border);
+            }
+            else if (Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightShift))
+            {
                 CopyCharOnly(entry);
+            }
+            else if (_multiSelected.Count > 0)
+            {
+                // 다중 선택 중 일반 클릭 → 해당 문자 추가 후 즉시 연속 삽입
+                if (!_multiSelected.Any(e => e.Char == entry.Char))
+                    _multiSelected.Add(entry);
+                _ = InsertMultipleCharsAsync();
+            }
             else
+            {
                 InsertChar(entry);
+            }
         };
 
         // 우클릭: 즐겨찾기 토글 / 사용자 정의 탭에서는 편집/삭제 선택
@@ -698,6 +738,7 @@ public partial class PopupWindow : System.Windows.Window
         if (!_initialized) return;
         SearchPlaceholder.Visibility = string.IsNullOrEmpty(SearchBox.Text)
             ? Visibility.Visible : Visibility.Collapsed;
+        _searchHistoryIdx = -1;  // 직접 편집 시 히스토리 탐색 인덱스 초기화
         _searchTimer?.Stop();
         if (string.IsNullOrEmpty(SearchBox.Text))
             RefreshGrid();   // 검색어 지울 때는 즉시 갱신
@@ -715,15 +756,36 @@ public partial class PopupWindow : System.Windows.Window
                 Hide();
             e.Handled = true;
         }
+        else if (e.Key == Key.Up)
+        {
+            // 이전 검색어 히스토리 순환 (↑ 키)
+            if (_searchHistory.Count > 0)
+            {
+                _searchHistoryIdx = Math.Min(_searchHistoryIdx + 1, _searchHistory.Count - 1);
+                SearchBox.Text = _searchHistory[_searchHistoryIdx];
+                SearchBox.CaretIndex = SearchBox.Text.Length;
+                e.Handled = true;
+            }
+        }
         else if (e.Key == Key.Enter)
         {
-            // 첫 번째 문자 삽입
-            if (CharGrid.Children.Count > 0 &&
-                CharGrid.Children[0] is Grid g && g.Children[0] is Border b &&
-                b.Tag is CharEntry entry)
+            // 다중 선택 삽입 우선, 없으면 첫 번째 문자 삽입
+            if (_multiSelected.Count > 0)
+            {
+                _ = InsertMultipleCharsAsync();
+            }
+            else if (CharGrid.Children.Count > 0 &&
+                CharGrid.Children[0] is Grid g && g.Children.Count > 0 &&
+                g.Children[0] is Border b && b.Tag is CharEntry entry)
             {
                 InsertChar(entry);
             }
+            e.Handled = true;
+        }
+        else if (e.Key == Key.Escape && _multiSelected.Count > 0)
+        {
+            // 다중 선택 취소
+            ClearMultiSelection();
             e.Handled = true;
         }
         else if (e.Key == Key.Down ||
@@ -889,6 +951,89 @@ public partial class PopupWindow : System.Windows.Window
             _storage.AddCustomChar(dlg.ResultChar, dlg.ResultName);
             SwitchTab("custom");
             StatusText.Text = $"추가됨: {dlg.ResultChar}  {dlg.ResultName}";
+        }
+    }
+
+    // ── 다중 선택 ────────────────────────────────────────────────────────
+    private void ToggleMultiSelect(CharEntry entry, Border border)
+    {
+        var existing = _multiSelected.FirstOrDefault(e => e.Char == entry.Char);
+        if (existing != null)
+        {
+            _multiSelected.Remove(existing);
+            border.BorderBrush     = System.Windows.Media.Brushes.Transparent;
+            border.BorderThickness = new Thickness(0);
+        }
+        else
+        {
+            _multiSelected.Add(entry);
+            border.BorderBrush     = (SolidColorBrush)FindResource("AccentHover");
+            border.BorderThickness = new Thickness(2);
+        }
+        UpdateMultiSelectStatus();
+    }
+
+    private void ClearMultiSelection()
+    {
+        _multiSelected.Clear();
+        // 그리드 재렌더링으로 테두리 초기화
+        RefreshGrid();
+        StatusText.Text = _lastStatusText;
+    }
+
+    private void UpdateMultiSelectStatus()
+    {
+        if (_multiSelected.Count == 0)
+            StatusText.Text = _lastStatusText;
+        else
+        {
+            var preview = string.Concat(_multiSelected.Select(e => e.Char));
+            StatusText.Text = $"{_multiSelected.Count}개 선택됨: {preview}  — Enter 또는 클릭으로 삽입, Esc로 취소";
+        }
+    }
+
+    private async Task InsertMultipleCharsAsync()
+    {
+        if (_multiSelected.Count == 0) return;
+        var combined = string.Concat(_multiSelected.Select(e => e.Char));
+
+        try
+        {
+            string? prevClip = _preserveClipboard ? TryGetClipboardText() : null;
+            System.Windows.Clipboard.SetText(combined);
+            foreach (var entry in _multiSelected) _storage.AddRecent(entry.Char);
+
+            if (_pinned)
+            {
+                StatusText.Text = $"삽입됨: {combined}";
+                if (_targetHwnd != IntPtr.Zero)
+                {
+                    await Task.Delay(50);
+                    await InputHelper.PasteToWindowAsync(_targetHwnd);
+                    await Task.Delay(100);
+                    if (!string.IsNullOrEmpty(prevClip)) TrySetClipboardText(prevClip);
+                    SetForegroundWindow(new WindowInteropHelper(this).Handle);
+                }
+            }
+            else
+            {
+                Hide();
+                if (_targetHwnd != IntPtr.Zero)
+                {
+                    await Task.Delay(80);
+                    await InputHelper.PasteToWindowAsync(_targetHwnd);
+                    if (!string.IsNullOrEmpty(prevClip))
+                    {
+                        await Task.Delay(100);
+                        TrySetClipboardText(prevClip);
+                    }
+                }
+            }
+            _multiSelected.Clear();
+        }
+        catch (Exception ex)
+        {
+            StatusText.Text = $"삽입 실패: {ex.Message}";
         }
     }
 

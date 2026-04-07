@@ -14,10 +14,24 @@ public partial class App : System.Windows.Application
     [DllImport("dwmapi.dll")] static extern int DwmSetWindowAttribute(IntPtr hwnd, int attr, ref int val, int size);
 
     private const int HotkeyId  = 9001;
-    private const uint MOD_WIN   = 0x0008;
+    private const uint MOD_ALT   = 0x0001;
+    private const uint MOD_CTRL  = 0x0002;
     private const uint MOD_SHIFT = 0x0004;
+    private const uint MOD_WIN   = 0x0008;
     private const uint VK_OEM_1  = 0xBA; // ;
+    private const uint VK_SPACE  = 0x20;
+    private const uint VK_C      = 0x43;
     private const int WM_HOTKEY  = 0x0312;
+
+    // 미리 정의된 단축키 옵션 (표시명, modifier, vk)
+    private static readonly (string Label, uint Mod, uint Vk)[] HotkeyOptions =
+    {
+        ("Win+Shift+;",      MOD_WIN | MOD_SHIFT,              VK_OEM_1),
+        ("Win+Shift+Space",  MOD_WIN | MOD_SHIFT,              VK_SPACE),
+        ("Alt+Shift+C",      MOD_ALT | MOD_SHIFT,              VK_C),
+        ("Ctrl+Alt+C",       MOD_CTRL | MOD_ALT,               VK_C),
+        ("Ctrl+Alt+Shift+C", MOD_CTRL | MOD_ALT | MOD_SHIFT,  VK_C),
+    };
 
     private NotifyIcon?    _tray;
     private PopupWindow?   _popup;
@@ -66,10 +80,11 @@ public partial class App : System.Windows.Application
 
     private void BuildTray()
     {
+        var hotkeyLabel = _storage.GetSetting("hotkey_label") ?? "Win+Shift+;";
         _tray = new NotifyIcon
         {
             Icon    = LoadTrayIcon(),
-            Text    = "Char.Pad — Win+Shift+;",
+            Text    = $"Char.Pad — {hotkeyLabel}",
             Visible = true
         };
 
@@ -90,6 +105,25 @@ public partial class App : System.Windows.Application
         menu.Items.Add("↑  내보내기 (JSON)",  null, (_, _) => ExportData());
         menu.Items.Add("↓  가져오기 (JSON)",  null, (_, _) => ImportData());
         menu.Items.Add(new ToolStripSeparator());
+
+        // 단축키 변경 서브메뉴
+        var hotkeyMenu = new ToolStripMenuItem("⌨  단축키 변경")
+        {
+            ForeColor = ColorTranslator.FromHtml("#E0E0E0"),
+        };
+        var currentHotkeyLabel = _storage.GetSetting("hotkey_label") ?? "Win+Shift+;";
+        foreach (var (label, _, _) in HotkeyOptions)
+        {
+            var item = new ToolStripMenuItem(label)
+            {
+                ForeColor = ColorTranslator.FromHtml("#E0E0E0"),
+                Checked   = label == currentHotkeyLabel,
+            };
+            item.Click += (_, _) => ChangeHotkey(label);
+            hotkeyMenu.DropDownItems.Add(item);
+        }
+        menu.Items.Add(hotkeyMenu);
+        menu.Items.Add(new ToolStripSeparator());
         menu.Items.Add("✕  종료",            null, (_, _) => Shutdown());
 
         _tray.ContextMenuStrip = menu;
@@ -98,7 +132,7 @@ public partial class App : System.Windows.Application
             if (ev.Button == MouseButtons.Left) ShowPopup();
         };
 
-        _tray.ShowBalloonTip(2000, "Char.Pad", "Win+Shift+; 로 특수문자 입력", ToolTipIcon.Info);
+        _tray.ShowBalloonTip(2000, "Char.Pad", $"{hotkeyLabel} 로 특수문자 입력", ToolTipIcon.Info);
     }
 
     // ── 전역 단축키 등록 ────────────────────────────────────────────────
@@ -110,7 +144,47 @@ public partial class App : System.Windows.Application
         helper.EnsureHandle();
         _hwndSource = HwndSource.FromHwnd(helper.Handle);
         _hwndSource?.AddHook(WndProc);
-        RegisterHotKey(helper.Handle, HotkeyId, MOD_WIN | MOD_SHIFT, VK_OEM_1);
+
+        var (_, mod, vk) = GetCurrentHotkey();
+        RegisterHotKey(helper.Handle, HotkeyId, mod, vk);
+    }
+
+    private (string Label, uint Mod, uint Vk) GetCurrentHotkey()
+    {
+        var label = _storage.GetSetting("hotkey_label") ?? "Win+Shift+;";
+        return Array.Find(HotkeyOptions, h => h.Label == label) is { Label: not null } found
+            ? found
+            : HotkeyOptions[0];
+    }
+
+    private void ChangeHotkey(string newLabel)
+    {
+        if (_hwndSource == null) return;
+        var (_, newMod, newVk) = Array.Find(HotkeyOptions, h => h.Label == newLabel) is { Label: not null } found
+            ? found : HotkeyOptions[0];
+
+        UnregisterHotKey(_hwndSource.Handle, HotkeyId);
+        RegisterHotKey(_hwndSource.Handle, HotkeyId, newMod, newVk);
+        _storage.SetSetting("hotkey_label", newLabel);
+
+        // 트레이 아이콘 툴팁 + 메뉴 체크 상태 업데이트
+        if (_tray != null) _tray.Text = $"Char.Pad — {newLabel}";
+        if (_tray?.ContextMenuStrip != null)
+        {
+            foreach (ToolStripItem item in _tray.ContextMenuStrip.Items)
+            {
+                if (item is ToolStripMenuItem hotkeyMenu && (hotkeyMenu.Text?.Contains("단축키") == true))
+                {
+                    foreach (ToolStripItem sub in hotkeyMenu.DropDownItems)
+                    {
+                        if (sub is ToolStripMenuItem subItem)
+                            subItem.Checked = subItem.Text == newLabel;
+                    }
+                    break;
+                }
+            }
+        }
+        _tray?.ShowBalloonTip(1500, "Char.Pad", $"단축키 변경됨: {newLabel}", ToolTipIcon.Info);
     }
 
     private IntPtr WndProc(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
@@ -191,9 +265,11 @@ public partial class App : System.Windows.Application
             var json = System.IO.File.ReadAllText(dlg.FileName, System.Text.Encoding.UTF8);
             using var doc = JsonDocument.Parse(json);
 
-            var favorites   = doc.RootElement.GetProperty("favorites").EnumerateArray().Select(e => e.GetString()!).ToList();
+            var favorites   = doc.RootElement.GetProperty("favorites").EnumerateArray()
+                .Select(e => e.GetString()).Where(s => s != null).Select(s => s!).ToList();
             var customChars = doc.RootElement.GetProperty("customChars").EnumerateArray()
-                .Select(e => (e.GetProperty("Char").GetString()!, e.GetProperty("Name").GetString()!))
+                .Select(e => (e.GetProperty("Char").GetString() ?? "", e.GetProperty("Name").GetString() ?? ""))
+                .Where(t => t.Item1.Length > 0 && t.Item2.Length > 0)
                 .ToList();
 
             var overwrite = System.Windows.MessageBox.Show(

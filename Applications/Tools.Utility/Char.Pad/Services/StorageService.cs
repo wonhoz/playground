@@ -139,6 +139,42 @@ public class StorageService : IDisposable
         return result;
     }
 
+    /// <summary>즐겨찾기 순서를 한 칸 위(음수 delta)또는 아래(양수 delta)로 이동</summary>
+    public void MoveFavorite(string ch, int delta)
+    {
+        var list = GetFavoritesWithOrder();
+        int idx = list.FindIndex(x => x.Char == ch);
+        int newIdx = Math.Clamp(idx + delta, 0, list.Count - 1);
+        if (idx == newIdx) return;
+
+        var item = list[idx];
+        list.RemoveAt(idx);
+        list.Insert(newIdx, item);
+
+        // sort_order 재할당
+        using var tx = _db.BeginTransaction();
+        for (int i = 0; i < list.Count; i++)
+        {
+            using var cmd = _db.CreateCommand();
+            cmd.Transaction = tx;
+            cmd.CommandText = "UPDATE favorites SET sort_order = $order WHERE char = $ch";
+            cmd.Parameters.AddWithValue("$order", i);
+            cmd.Parameters.AddWithValue("$ch", list[i].Char);
+            cmd.ExecuteNonQuery();
+        }
+        tx.Commit();
+    }
+
+    private List<(string Char, int Order)> GetFavoritesWithOrder()
+    {
+        using var cmd = _db.CreateCommand();
+        cmd.CommandText = "SELECT char, sort_order FROM favorites ORDER BY sort_order";
+        var result = new List<(string, int)>();
+        using var reader = cmd.ExecuteReader();
+        while (reader.Read()) result.Add((reader.GetString(0), reader.GetInt32(1)));
+        return result;
+    }
+
     // ── Settings ─────────────────────────────────────────────────────────
 
     public string? GetSetting(string key)
@@ -209,6 +245,43 @@ public class StorageService : IDisposable
         using var reader = cmd.ExecuteReader();
         while (reader.Read()) result.Add((reader.GetString(0), reader.GetString(1)));
         return result;
+    }
+
+    // ── Export / Import ─────────────────────────────────────────────────
+
+    public record ExportData(List<string> Favorites, List<(string Char, string Name)> CustomChars);
+
+    public ExportData Export() => new(GetFavorites(), GetCustomChars());
+
+    public void Import(ExportData data, bool overwrite)
+    {
+        var favSql = overwrite
+            ? "INSERT OR REPLACE INTO favorites (char, sort_order) VALUES ($ch, (SELECT COALESCE(MAX(sort_order), 0) + 1 FROM favorites))"
+            : "INSERT OR IGNORE INTO favorites (char, sort_order) VALUES ($ch, (SELECT COALESCE(MAX(sort_order), 0) + 1 FROM favorites))";
+        var customSql = overwrite
+            ? "INSERT OR REPLACE INTO custom_chars (char, display_name, created_at) VALUES ($ch, $name, $now)"
+            : "INSERT OR IGNORE INTO custom_chars (char, display_name, created_at) VALUES ($ch, $name, $now)";
+
+        using var tx = _db.BeginTransaction();
+        foreach (var ch in data.Favorites)
+        {
+            using var cmd = _db.CreateCommand();
+            cmd.Transaction = tx;
+            cmd.CommandText = favSql;
+            cmd.Parameters.AddWithValue("$ch", ch);
+            cmd.ExecuteNonQuery();
+        }
+        foreach (var (ch, name) in data.CustomChars)
+        {
+            using var cmd = _db.CreateCommand();
+            cmd.Transaction = tx;
+            cmd.CommandText = customSql;
+            cmd.Parameters.AddWithValue("$ch", ch);
+            cmd.Parameters.AddWithValue("$name", name);
+            cmd.Parameters.AddWithValue("$now", DateTime.UtcNow.ToString("o"));
+            cmd.ExecuteNonQuery();
+        }
+        tx.Commit();
     }
 
     public void Dispose() => _db.Dispose();

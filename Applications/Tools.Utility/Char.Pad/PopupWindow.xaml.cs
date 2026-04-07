@@ -212,8 +212,10 @@ public partial class PopupWindow : System.Windows.Window
         }
 
         // 탭별 헤더 버튼 표시/숨김
-        ClearRecentsBtn.Visibility = tabId == "recent"  ? Visibility.Visible : Visibility.Collapsed;
-        SortCustomBtn.Visibility   = tabId == "custom"  ? Visibility.Visible : Visibility.Collapsed;
+        ClearRecentsBtn.Visibility = tabId == "recent"   ? Visibility.Visible : Visibility.Collapsed;
+        FavMoveUpBtn.Visibility    = tabId == "favorite" ? Visibility.Visible : Visibility.Collapsed;
+        FavMoveDownBtn.Visibility  = tabId == "favorite" ? Visibility.Visible : Visibility.Collapsed;
+        SortCustomBtn.Visibility   = tabId == "custom"   ? Visibility.Visible : Visibility.Collapsed;
 
         RefreshGrid();
     }
@@ -226,6 +228,11 @@ public partial class PopupWindow : System.Windows.Window
         // ItemSize 동기화
         CharGrid.ItemWidth  = ItemSize;
         CharGrid.ItemHeight = ItemSize;
+
+        // recents/favorites를 한 번씩만 조회 — 탭 entries 계산 + 즐겨찾기 별표 표시에 모두 재사용
+        var recentsList   = _storage.GetRecents();
+        var favoritesList = _storage.GetFavorites();  // sort_order 순서 보장
+        var favSet        = favoritesList.ToHashSet();
 
         var query = SearchBox.Text.Trim();
         IEnumerable<CharEntry> entries;
@@ -275,10 +282,10 @@ public partial class PopupWindow : System.Windows.Window
         {
             entries = _activeTab switch
             {
-                "recent"   => _storage.GetRecents()
+                "recent"   => recentsList
                                 .Select(c => CharDatabase.AllByChar.GetValueOrDefault(c))
                                 .Where(e => e is not null).Select(e => e!),
-                "favorite" => _storage.GetFavorites()
+                "favorite" => favoritesList  // sort_order 순서 유지
                                 .Select(c => CharDatabase.AllByChar.GetValueOrDefault(c))
                                 .Where(e => e is not null).Select(e => e!),
                 "custom"   => (_customSortByName
@@ -286,15 +293,11 @@ public partial class PopupWindow : System.Windows.Window
                                 : _storage.GetCustomChars())
                                 .Select(t => new CharEntry(t.Char, t.Name, "custom")),
                 // 카테고리 탭: 최근 사용한 문자를 앞에 표시
-                _ => SortByRecent(CharDatabase.GetByCategory(_activeTab)),
+                _ => SortByRecent(CharDatabase.GetByCategory(_activeTab), recentsList),
             };
             StatusText.Text = Tabs.FirstOrDefault(t => t.Id == _activeTab).StatusName
                               ?? _activeTab;
         }
-
-        // favorites를 한 번만 조회해서 HashSet으로 변환 (N+1 DB 쿼리 방지)
-        // entries 열거 전에 조회해야 즐겨찾기 탭의 이중 호출을 방지함
-        var favSet = _storage.GetFavorites().ToHashSet();
 
         var list = entries.ToList();
         StatusText.Text += $" ({list.Count}개)";
@@ -309,9 +312,8 @@ public partial class PopupWindow : System.Windows.Window
     }
 
     // ── 카테고리 탭: 최근 사용 문자를 앞으로 정렬 ──────────────────────
-    private IEnumerable<CharEntry> SortByRecent(IEnumerable<CharEntry> entries)
+    private static IEnumerable<CharEntry> SortByRecent(IEnumerable<CharEntry> entries, List<string> recents)
     {
-        var recents = _storage.GetRecents();
         var recentRank = recents
             .Select((c, i) => (c, i))
             .ToDictionary(x => x.c, x => x.i);
@@ -690,6 +692,8 @@ public partial class PopupWindow : System.Windows.Window
         if (_activeTab == "recent") RefreshGrid();
     }
 
+    public void Refresh() => RefreshGrid();
+
     public void ShowHelpOverlay()
         => Dispatcher.BeginInvoke(() => HelpOverlay.Visibility = Visibility.Visible,
                                   DispatcherPriority.Loaded);
@@ -747,6 +751,14 @@ public partial class PopupWindow : System.Windows.Window
         var dlg = new AddCustomCharDialog { Owner = this };
         if (dlg.ShowDialog() == true)
         {
+            // 이미 등록된 문자인 경우 덮어쓰기 확인
+            if (_storage.IsCustomChar(dlg.ResultChar))
+            {
+                var confirm = System.Windows.MessageBox.Show(
+                    $"'{dlg.ResultChar}' 는 이미 등록되어 있습니다.\n이름을 '{dlg.ResultName}'(으)로 덮어쓰시겠습니까?",
+                    "중복 문자 확인", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                if (confirm != MessageBoxResult.Yes) return;
+            }
             _storage.AddCustomChar(dlg.ResultChar, dlg.ResultName);
             SwitchTab("custom");
             StatusText.Text = $"추가됨: {dlg.ResultChar}  {dlg.ResultName}";
@@ -759,6 +771,26 @@ public partial class PopupWindow : System.Windows.Window
         _storage.ClearRecents();
         StatusText.Text = "최근 사용 목록이 초기화되었습니다";
         RefreshGrid();
+    }
+
+    // ── 즐겨찾기 순서 이동 ───────────────────────────────────────────────
+    private void FavMoveUpBtn_Click(object sender, RoutedEventArgs e)   => MoveFocusedFavorite(-1);
+    private void FavMoveDownBtn_Click(object sender, RoutedEventArgs e) => MoveFocusedFavorite(+1);
+
+    private void MoveFocusedFavorite(int delta)
+    {
+        // 현재 포커스된 문자 버튼의 CharEntry를 찾아 이동
+        var focused = FocusManager.GetFocusedElement(this) as Border;
+        if (focused?.Tag is not CharEntry entry) return;
+        _storage.MoveFavorite(entry.Char, delta);
+        StatusText.Text = $"순서 변경: {entry.Char}  {entry.Name}";
+        RefreshGrid();
+        // 이동 후 동일 문자에 포커스 복원
+        for (int i = 0; i < CharGrid.Children.Count; i++)
+        {
+            if (CharGrid.Children[i] is Grid g && g.Children[0] is Border b && b.Tag is CharEntry ce && ce.Char == entry.Char)
+            { b.Focus(); break; }
+        }
     }
 
     // ── 커스텀 탭 정렬 전환 ──────────────────────────────────────────────
@@ -797,6 +829,7 @@ public partial class PopupWindow : System.Windows.Window
 
     private void Window_Deactivated(object sender, EventArgs e)
     {
-        if (IsVisible && !_pinned) Hide();
+        // AddCustomCharDialog 등 OwnedWindow가 열려 있으면 숨기지 않음
+        if (IsVisible && !_pinned && OwnedWindows.Count == 0) Hide();
     }
 }

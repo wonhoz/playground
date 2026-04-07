@@ -1,4 +1,6 @@
 using System.Drawing;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Windows.Forms;
 
 namespace CharPad;
@@ -85,6 +87,9 @@ public partial class App : System.Windows.Application
         menu.Items.Add(new ToolStripSeparator());
         menu.Items.Add("🗑  최근 사용 초기화", null, (_, _) => ClearRecents());
         menu.Items.Add(new ToolStripSeparator());
+        menu.Items.Add("↑  내보내기 (JSON)",  null, (_, _) => ExportData());
+        menu.Items.Add("↓  가져오기 (JSON)",  null, (_, _) => ImportData());
+        menu.Items.Add(new ToolStripSeparator());
         menu.Items.Add("✕  종료",            null, (_, _) => Shutdown());
 
         _tray.ContextMenuStrip = menu;
@@ -138,6 +143,72 @@ public partial class App : System.Windows.Application
     {
         _storage.ClearRecents();
         _popup?.RefreshIfRecentTab();
+    }
+
+    // ── 내보내기 / 가져오기 ─────────────────────────────────────────────
+    private static readonly JsonSerializerOptions _jsonOpts = new() { WriteIndented = true };
+
+    [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.NoInlining)]
+    private void ExportData()
+    {
+        using var dlg = new SaveFileDialog
+        {
+            Title      = "Char.Pad 데이터 내보내기",
+            Filter     = "JSON 파일 (*.json)|*.json",
+            FileName   = $"charpad_export_{DateTime.Now:yyyyMMdd}.json",
+            DefaultExt = "json"
+        };
+        if (dlg.ShowDialog() != DialogResult.OK) return;
+
+        try
+        {
+            var data = _storage.Export();
+            var json = JsonSerializer.Serialize(new
+            {
+                favorites   = data.Favorites,
+                customChars = data.CustomChars.Select(x => new { x.Char, x.Name })
+            }, _jsonOpts);
+            System.IO.File.WriteAllText(dlg.FileName, json, System.Text.Encoding.UTF8);
+            _tray?.ShowBalloonTip(2000, "Char.Pad", $"내보내기 완료: {data.Favorites.Count}개 즐겨찾기, {data.CustomChars.Count}개 사용자 문자", ToolTipIcon.Info);
+        }
+        catch (Exception ex)
+        {
+            System.Windows.MessageBox.Show($"내보내기 실패: {ex.Message}", "오류", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+        }
+    }
+
+    private void ImportData()
+    {
+        using var dlg = new OpenFileDialog
+        {
+            Title  = "Char.Pad 데이터 가져오기",
+            Filter = "JSON 파일 (*.json)|*.json"
+        };
+        if (dlg.ShowDialog() != DialogResult.OK) return;
+
+        try
+        {
+            var json = System.IO.File.ReadAllText(dlg.FileName, System.Text.Encoding.UTF8);
+            using var doc = JsonDocument.Parse(json);
+
+            var favorites   = doc.RootElement.GetProperty("favorites").EnumerateArray().Select(e => e.GetString()!).ToList();
+            var customChars = doc.RootElement.GetProperty("customChars").EnumerateArray()
+                .Select(e => (e.GetProperty("Char").GetString()!, e.GetProperty("Name").GetString()!))
+                .ToList();
+
+            var overwrite = System.Windows.MessageBox.Show(
+                $"즐겨찾기 {favorites.Count}개, 사용자 문자 {customChars.Count}개를 가져옵니다.\n중복 항목을 덮어쓰시겠습니까?",
+                "가져오기 확인", System.Windows.MessageBoxButton.YesNoCancel, System.Windows.MessageBoxImage.Question);
+            if (overwrite == System.Windows.MessageBoxResult.Cancel) return;
+
+            _storage.Import(new(favorites, customChars), overwrite == System.Windows.MessageBoxResult.Yes);
+            _popup?.Refresh();
+            _tray?.ShowBalloonTip(2000, "Char.Pad", $"가져오기 완료: {favorites.Count}개 즐겨찾기, {customChars.Count}개 사용자 문자", ToolTipIcon.Info);
+        }
+        catch (Exception ex)
+        {
+            System.Windows.MessageBox.Show($"가져오기 실패: {ex.Message}", "오류", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+        }
     }
 
     private void ShowHelp()

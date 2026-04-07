@@ -7,7 +7,7 @@
         <SolidColorBrush x:Key="SurfaceBrush"  Color="#1A2535"/>
         <SolidColorBrush x:Key="BorderBrush"   Color="#1A3A55"/>
         <SolidColorBrush x:Key="AccentBrush"   Color="#0288D1"/>
-        <SolidColorBrush x:Key="AccentHover"   Color="#29B6F6"/>
+        <SolidColorBrush x:Key="AccentHover"   Color="#1DE9B6"/>
         <SolidColorBrush x:Key="TextPrimary"   Color="#E0E0E0"/>
         <SolidColorBrush x:Key="TextSecondary" Color="#888888"/>
         <SolidColorBrush x:Key="TabActive"     Color="#0288D1"/>
@@ -82,6 +82,59 @@
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsFocused" Value="True">
                                 <Setter Property="BorderBrush" Value="#1DE9B6"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- ContextMenu 스타일 -->
+        <Style TargetType="ContextMenu">
+            <Setter Property="Background"       Value="#1A1A2E"/>
+            <Setter Property="BorderBrush"      Value="#1A3A55"/>
+            <Setter Property="BorderThickness"  Value="1"/>
+            <Setter Property="Padding"          Value="2"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ContextMenu">
+                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="6"
+                                Padding="{TemplateBinding Padding}">
+                            <StackPanel IsItemsHost="True"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- MenuItem 스타일 -->
+        <Style TargetType="MenuItem">
+            <Setter Property="Background"   Value="Transparent"/>
+            <Setter Property="Foreground"   Value="#E0E0E0"/>
+            <Setter Property="FontFamily"   Value="Segoe UI"/>
+            <Setter Property="FontSize"     Value="13"/>
+            <Setter Property="Padding"      Value="12,6"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="MenuItem">
+                        <Border x:Name="Bd"
+                                Background="{TemplateBinding Background}"
+                                CornerRadius="4"
+                                Margin="2,1"
+                                Padding="{TemplateBinding Padding}">
+                            <ContentPresenter ContentSource="Header"
+                                              RecognizesAccessKey="True"
+                                              VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsHighlighted" Value="True">
+                                <Setter TargetName="Bd" Property="Background" Value="#1A3550"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Opacity" Value="0.4"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>

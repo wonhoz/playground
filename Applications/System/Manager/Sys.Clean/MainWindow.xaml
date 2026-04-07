@@ -86,20 +86,8 @@
                 <!-- 하단 정보 영역 (DockPanel.Dock="Bottom" 순서 주의) -->
                 <Border DockPanel.Dock="Bottom" Padding="14,12" BorderBrush="#252535" BorderThickness="0,1,0,0">
                     <StackPanel>
-                        <!-- 디스크 상태 -->
-                        <StackPanel Margin="0,0,0,10">
-                            <Grid Margin="0,0,0,3">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="Auto"/>
-                                </Grid.ColumnDefinitions>
-                                <TextBlock Text="C: 드라이브" FontSize="10" Foreground="#555"/>
-                                <TextBlock x:Name="TbDiskUsage" Grid.Column="1" FontSize="10" Foreground="#555"/>
-                            </Grid>
-                            <ProgressBar x:Name="PbDisk" Height="3" Value="0" Maximum="100"
-                                         Background="#2A2A2A" Foreground="#FF6B35" BorderThickness="0"/>
-                            <TextBlock x:Name="TbDiskFree" FontSize="10" Foreground="#444" Margin="0,2,0,0"/>
-                        </StackPanel>
+                        <!-- 드라이브 상태 (동적) -->
+                        <StackPanel x:Name="DriveInfoPanel" Margin="0,0,0,10"/>
 
                         <!-- 구분선 -->
                         <Separator Margin="0,0,0,8"/>

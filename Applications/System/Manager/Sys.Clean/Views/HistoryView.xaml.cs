@@ -118,7 +118,11 @@ public partial class HistoryView : UserControl
             if (System.IO.File.Exists(path))
                 System.IO.File.Delete(path);
         }
-        catch { }
+        catch (Exception ex)
+        {
+            MessageBox.Show($"기록 삭제 실패: {ex.Message}", "오류", MessageBoxButton.OK, MessageBoxImage.Error);
+            return;
+        }
 
         Refresh();
     }

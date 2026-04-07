@@ -144,6 +144,10 @@ public partial class RegistryView : UserControl
                 "문제가 발생하면 백업 파일을 더블클릭하여 복원하세요.",
                 "완료", MessageBoxButton.OK, MessageBoxImage.Information);
         }
+        catch (OperationCanceledException)
+        {
+            TbStatus.Text = "수정 취소됨";
+        }
         catch (Exception ex)
         {
             MessageBox.Show($"오류: {ex.Message}", "오류", MessageBoxButton.OK, MessageBoxImage.Error);

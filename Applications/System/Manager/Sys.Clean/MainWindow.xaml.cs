@@ -2,6 +2,7 @@ using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
 using SysClean.Services;
 using SysClean.Views;
 
@@ -60,22 +61,72 @@ public partial class MainWindow : Window
         SettingsService.Save(new AppSettings(Left, Top, Width, Height, activeTag));
     }
 
-    // ── 디스크 상태 ────────────────────────────────────────────────────
+    // ── 디스크 상태 (전체 드라이브) ──────────────────────────────────
     internal void UpdateDiskInfo()
     {
+        DriveInfoPanel.Children.Clear();
         try
         {
-            var drive = new DriveInfo("C");
-            if (!drive.IsReady) return;
+            var drives = DriveInfo.GetDrives()
+                .Where(d => d.IsReady && d.DriveType == DriveType.Fixed)
+                .ToList();
 
-            long total = drive.TotalSize;
-            long free = drive.AvailableFreeSpace;
-            long used = total - free;
-            double pct = total > 0 ? (double)used / total * 100 : 0;
+            foreach (var drive in drives)
+            {
+                try
+                {
+                    long total = drive.TotalSize;
+                    long free = drive.AvailableFreeSpace;
+                    long used = total - free;
+                    double pct = total > 0 ? (double)used / total * 100 : 0;
 
-            PbDisk.Value = pct;
-            TbDiskUsage.Text = $"{pct:F0}%";
-            TbDiskFree.Text = $"여유 {FormatSize(free)}  /  전체 {FormatSize(total)}";
+                    // 사용률에 따른 색상
+                    string barColor = pct >= 90 ? "#EF5350" : pct >= 75 ? "#FFA726" : "#FF6B35";
+
+                    var header = new System.Windows.Controls.Grid { Margin = new Thickness(0, 0, 0, 3) };
+                    header.ColumnDefinitions.Add(new System.Windows.Controls.ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
+                    header.ColumnDefinitions.Add(new System.Windows.Controls.ColumnDefinition { Width = GridLength.Auto });
+
+                    var labelBlock = new TextBlock
+                    {
+                        Text = $"{drive.Name.TrimEnd('\\')}",
+                        FontSize = 10,
+                        Foreground = new SolidColorBrush((System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString("#555"))
+                    };
+                    var pctBlock = new TextBlock
+                    {
+                        Text = $"{pct:F0}%",
+                        FontSize = 10,
+                        Foreground = new SolidColorBrush((System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString("#555"))
+                    };
+                    System.Windows.Controls.Grid.SetColumn(pctBlock, 1);
+                    header.Children.Add(labelBlock);
+                    header.Children.Add(pctBlock);
+
+                    var pb = new System.Windows.Controls.ProgressBar
+                    {
+                        Height = 3,
+                        Value = pct,
+                        Maximum = 100,
+                        Background = new SolidColorBrush((System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString("#2A2A2A")),
+                        Foreground = new SolidColorBrush((System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString(barColor)),
+                        BorderThickness = new Thickness(0)
+                    };
+
+                    var freeBlock = new TextBlock
+                    {
+                        Text = $"여유 {FormatSize(free)}  /  {FormatSize(total)}",
+                        FontSize = 10,
+                        Foreground = new SolidColorBrush((System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString("#444")),
+                        Margin = new Thickness(0, 2, 0, 6)
+                    };
+
+                    DriveInfoPanel.Children.Add(header);
+                    DriveInfoPanel.Children.Add(pb);
+                    DriveInfoPanel.Children.Add(freeBlock);
+                }
+                catch { }
+            }
         }
         catch { }
     }

@@ -36,22 +36,37 @@ public static class BackupService
 
     private static void ExportKey(StreamWriter w, string keyPath, List<RegistryIssue> issues)
     {
-        if (!keyPath.StartsWith(@"HKLM\")) return;
-        var subPath = keyPath[@"HKLM\".Length..];
+        RegistryKey hive;
+        string subPath;
+        string hiveFullName;
+
+        if (keyPath.StartsWith(@"HKLM\"))
+        {
+            hive = Registry.LocalMachine;
+            subPath = keyPath[@"HKLM\".Length..];
+            hiveFullName = "HKEY_LOCAL_MACHINE";
+        }
+        else if (keyPath.StartsWith(@"HKCU\"))
+        {
+            hive = Registry.CurrentUser;
+            subPath = keyPath[@"HKCU\".Length..];
+            hiveFullName = "HKEY_CURRENT_USER";
+        }
+        else return;
 
         // 설치경로/제거프로그램 카테고리는 서브키 전체를 백업
         bool isSubKeyDelete = issues.Any(i => i.Category is "설치 경로" or "제거 프로그램");
         if (isSubKeyDelete)
         {
-            ExportSubtree(w, Registry.LocalMachine, subPath, $@"HKEY_LOCAL_MACHINE\{subPath}");
+            ExportSubtree(w, hive, subPath, $@"{hiveFullName}\{subPath}");
         }
         else
         {
             // 특정 값만 백업
-            using var key = Registry.LocalMachine.OpenSubKey(subPath);
+            using var key = hive.OpenSubKey(subPath);
             if (key == null) return;
 
-            w.WriteLine($@"[HKEY_LOCAL_MACHINE\{subPath}]");
+            w.WriteLine($@"[{hiveFullName}\{subPath}]");
             foreach (var issue in issues)
                 WriteValue(w, key, issue.ValueName);
             w.WriteLine();

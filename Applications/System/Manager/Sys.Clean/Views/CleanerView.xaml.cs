@@ -20,12 +20,75 @@ public partial class CleanerView : UserControl
     {
         InitializeComponent();
         _targets = _service.GetTargets();
+        LoadCustomFolders();
         TargetList.ItemsSource = _targets;
 
         var last = _history.GetLast();
         TbStatus.Text = last != null
             ? $"마지막 청소: {CleanHistoryService.FormatRelativeTime(last.Time)}  ({CleanTarget.FormatSize(last.CleanedBytes)} 해제)"
             : "준비";
+    }
+
+    // ── 커스텀 폴더 로드 ──────────────────────────────────────────────
+    private void LoadCustomFolders()
+    {
+        var folders = CustomFolderService.Load();
+        if (folders.Count == 0) return;
+
+        _targets.Add(new CleanTarget { IsGroup = true, Name = "커스텀 폴더", Category = "custom", CleanerId = "grp_custom" });
+        foreach (var folder in folders)
+        {
+            _targets.Add(new CleanTarget
+            {
+                Name = Path.GetFileName(folder.TrimEnd('\\', '/')) is { Length: > 0 } n ? n : folder,
+                Description = folder,
+                Category = "custom",
+                CleanerId = $"custom_{folder.GetHashCode():X}",
+                Paths = [folder]
+            });
+        }
+    }
+
+    // ── 커스텀 폴더 추가 버튼 ────────────────────────────────────────
+    private void BtnAddFolder_Click(object sender, RoutedEventArgs e)
+    {
+        var dlg = new Microsoft.Win32.OpenFolderDialog
+        {
+            Title = "청소 대상 폴더를 선택하세요",
+            Multiselect = false
+        };
+
+        if (dlg.ShowDialog() != true) return;
+
+        var folder = dlg.FolderName;
+        if (string.IsNullOrEmpty(folder)) return;
+
+        if (_targets.Any(t => !t.IsGroup && t.Category == "custom" &&
+                               t.Paths.Length > 0 &&
+                               string.Equals(t.Paths[0], folder, StringComparison.OrdinalIgnoreCase)))
+        {
+            TbStatus.Text = "이미 추가된 폴더입니다.";
+            return;
+        }
+
+        // 커스텀 그룹 헤더가 없으면 추가
+        if (!_targets.Any(t => t.IsGroup && t.Category == "custom"))
+            _targets.Add(new CleanTarget { IsGroup = true, Name = "커스텀 폴더", Category = "custom", CleanerId = "grp_custom" });
+
+        _targets.Add(new CleanTarget
+        {
+            Name = Path.GetFileName(folder.TrimEnd('\\', '/')) is { Length: > 0 } n ? n : folder,
+            Description = folder,
+            Category = "custom",
+            CleanerId = $"custom_{folder.GetHashCode():X}",
+            Paths = [folder]
+        });
+
+        CustomFolderService.Add(folder);
+        TargetList.ItemsSource = null;
+        TargetList.ItemsSource = _targets;
+        _analyzed = false;
+        TbStatus.Text = $"'{folder}' 추가됨. 분석을 다시 실행하세요.";
     }
 
     // ── 키보드 단축키 트리거 (MainWindow에서 호출) ─────────────────────
@@ -217,6 +280,32 @@ public partial class CleanerView : UserControl
         ctx.Items.Add(sep);
         ctx.Items.Add(menuCleanNow);
 
+        // 커스텀 폴더는 목록에서 제거 옵션 추가
+        if (target.Category == "custom")
+        {
+            var sep2 = new Separator { Style = (Style)Application.Current.FindResource("MenuSeparator") };
+            var menuRemove = new MenuItem { Header = "🗑  목록에서 제거" };
+            menuRemove.Click += (_, _) =>
+            {
+                if (target.Paths.Length > 0)
+                    CustomFolderService.Remove(target.Paths[0]);
+                _targets.Remove(target);
+                // 커스텀 폴더가 없으면 그룹 헤더도 제거
+                if (!_targets.Any(t => !t.IsGroup && t.Category == "custom"))
+                    _targets.RemoveAll(t => t.IsGroup && t.Category == "custom");
+                TargetList.ItemsSource = null;
+                TargetList.ItemsSource = _targets;
+                _analyzed = false;
+                ResultPanel.Children.Clear();
+                TbTotalSize.Text = "";
+                TbResultHeader.Text = "분석 버튼을 클릭하면 정리 가능한 파일을 검색합니다.";
+                TbResultHeader.Foreground = (Brush)Application.Current.FindResource("BrFgSec");
+                TbStatus.Text = "커스텀 폴더 제거됨.";
+            };
+            ctx.Items.Add(sep2);
+            ctx.Items.Add(menuRemove);
+        }
+
         return new Border
         {
             Background = new SolidColorBrush(Color.FromRgb(0x22, 0x22, 0x22)),
@@ -270,7 +359,6 @@ public partial class CleanerView : UserControl
         MessageBox.Show(msg, "청소 완료", MessageBoxButton.OK, MessageBoxImage.Information);
 
         TbStatus.Text = $"'{target.Name}' — {CleanTarget.FormatSize(cleaned)} 해제";
-        _analyzed = false;
         UpdateResults();
         (Application.Current.MainWindow as MainWindow)?.UpdateDiskInfo();
     }
@@ -297,6 +385,12 @@ public partial class CleanerView : UserControl
     // ── 청소 ─────────────────────────────────────────────────────────
     private async void BtnClean_Click(object sender, RoutedEventArgs e)
     {
+        if (_cts != null)
+        {
+            _cts.Cancel();
+            return;
+        }
+
         if (!_analyzed) return;
 
         var toClean = _targets.Where(t => !t.IsGroup && t.IsSelected && t.Size > 0).ToList();
@@ -310,7 +404,30 @@ public partial class CleanerView : UserControl
 
         if (result != MessageBoxResult.OK) return;
 
-        BtnClean.IsEnabled = false;
+        // 브라우저 실행 중 경고
+        var runningBrowserWarnings = toClean
+            .Select(t => GetRunningBrowserName(t.CleanerId))
+            .Where(n => n != null)
+            .Distinct()
+            .ToList();
+
+        if (runningBrowserWarnings.Count > 0)
+        {
+            var warnResult = MessageBox.Show(
+                $"다음 브라우저가 실행 중입니다: {string.Join(", ", runningBrowserWarnings)}\n\n" +
+                "브라우저가 열려 있으면 캐시 파일 일부가 사용 중이어서 삭제되지 않을 수 있습니다.\n\n" +
+                "브라우저를 먼저 닫고 청소하면 더 많은 공간을 확보할 수 있습니다.\n\n" +
+                "그래도 계속하시겠습니까?",
+                "브라우저 실행 중",
+                MessageBoxButton.YesNo,
+                MessageBoxImage.Warning);
+            if (warnResult != MessageBoxResult.Yes) return;
+        }
+
+        BtnClean.Content = "⏹  중지";
+        BtnClean.Background = new SolidColorBrush(Color.FromRgb(0x3A, 0x1A, 0x1A));
+        BtnClean.Foreground = (Brush)Application.Current.FindResource("BrDanger");
+        BtnClean.BorderBrush = (Brush)Application.Current.FindResource("BrDanger");
         BtnAnalyze.IsEnabled = false;
         BtnCopy.IsEnabled = false;
         PbProgress.Visibility = Visibility.Visible;
@@ -324,11 +441,13 @@ public partial class CleanerView : UserControl
         long totalCleaned = 0;
         int totalErrors = 0;
         int done = 0;
+        bool cancelled = false;
 
         try
         {
             foreach (var target in toClean)
             {
+                if (ct.IsCancellationRequested) { cancelled = true; break; }
                 TbStatus.Text = $"청소 중: {target.Name}";
                 var (cleaned, errors) = await _service.CleanTargetAsync(target, ct);
                 totalCleaned += cleaned;
@@ -338,13 +457,33 @@ public partial class CleanerView : UserControl
                 PbProgress.Value = done;
             }
         }
+        catch (OperationCanceledException)
+        {
+            cancelled = true;
+        }
         finally
         {
             _cts?.Dispose();
             _cts = null;
             PbProgress.Visibility = Visibility.Collapsed;
+            BtnClean.Content = "🧹  청소 실행";
+            BtnClean.Background = new SolidColorBrush(Color.FromRgb(0x1B, 0x3A, 0x1F));
+            BtnClean.Foreground = new SolidColorBrush(Color.FromRgb(0x66, 0xBB, 0x6A));
+            BtnClean.BorderBrush = new SolidColorBrush(Color.FromRgb(0x38, 0x8E, 0x3C));
             BtnAnalyze.IsEnabled = true;
             _analyzed = false;
+        }
+
+        if (cancelled)
+        {
+            TbStatus.Text = totalCleaned > 0
+                ? $"청소 취소됨 — 취소 전 {CleanTarget.FormatSize(totalCleaned)} 해제"
+                : "청소 취소됨";
+            if (totalCleaned > 0)
+                _history.Append(new CleanHistoryEntry(DateTime.Now, done, totalCleaned));
+            UpdateResults();
+            (Application.Current.MainWindow as MainWindow)?.UpdateDiskInfo();
+            return;
         }
 
         // 이력 저장
@@ -372,6 +511,28 @@ public partial class CleanerView : UserControl
         bool allSelected = _targets.Where(t => !t.IsGroup).All(t => t.IsSelected);
         foreach (var t in _targets.Where(t => !t.IsGroup))
             t.IsSelected = !allSelected;
+        if (_analyzed) UpdateResults();
+    }
+
+    // ── 브라우저 프로세스 감지 ───────────────────────────────────────
+    private static string? GetRunningBrowserName(string cleanerId)
+    {
+        return cleanerId switch
+        {
+            "chrome_cache" or "chrome_history" or "chrome_cookies"
+                when Process.GetProcessesByName("chrome").Length > 0 => "Chrome",
+            "edge_cache" or "edge_history" or "edge_cookies"
+                when Process.GetProcessesByName("msedge").Length > 0 => "Edge",
+            "firefox_cache" or "firefox_history"
+                when Process.GetProcessesByName("firefox").Length > 0 => "Firefox",
+            "brave_cache"
+                when Process.GetProcessesByName("brave").Length > 0 => "Brave",
+            "vivaldi_cache"
+                when Process.GetProcessesByName("vivaldi").Length > 0 => "Vivaldi",
+            "opera_cache"
+                when Process.GetProcessesByName("opera").Length > 0 => "Opera",
+            _ => null
+        };
     }
 
     // ── 결과 클립보드 복사 ────────────────────────────────────────────

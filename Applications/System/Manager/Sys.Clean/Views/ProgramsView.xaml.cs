@@ -99,7 +99,7 @@ public partial class ProgramsView : UserControl
 
         if (_service.Uninstall(program))
         {
-            TbStatus.Text = $"'{program.Name}' 제거 프로세스 시작됨";
+            TbStatus.Text = $"'{program.Name}' 제거됨 — 레지스트리 탭에서 잔여 항목을 정리하세요.";
         }
         else
         {

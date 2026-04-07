@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Layer 1: 보라색 심야 배경 -->
+  <defs>
+    <radialGradient id="bg3" cx="40%" cy="40%" r="70%">
+      <stop offset="0%" stop-color="#7E57C2"/>
+      <stop offset="100%" stop-color="#311B92"/>
+    </radialGradient>
+    <linearGradient id="wand3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFD54F"/>
+      <stop offset="100%" stop-color="#FF8F00"/>
+    </linearGradient>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg3)"/>
+
+  <!-- Layer 2: 마법 지팡이 (대각선 배치) -->
+  <path d="M720 180 L260 760" stroke="url(#wand3)" stroke-width="70" stroke-linecap="round"/>
+  <!-- 지팡이 끝 별 -->
+  <polygon points="720,120 740,165 790,165 750,195 768,240 720,212 672,240 690,195 650,165 700,165" fill="#FFEE58" stroke="#FFB300" stroke-width="6"/>
+
+  <!-- Layer 2: 지팡이 끝에서 나오는 변환 마법 파티클들 -->
+  <!-- 큰 별 1 -->
+  <polygon points="820,300 834,342 878,342 844,368 857,410 820,386 783,410 796,368 762,342 806,342" fill="#FFCA28" opacity="0.9"/>
+  <!-- 큰 별 2 -->
+  <polygon points="860,500 872,535 908,535 882,556 892,591 860,572 828,591 838,556 812,535 848,535" fill="#FFF176" opacity="0.8"/>
+  <!-- 작은 별들 -->
+  <circle cx="750" cy="380" r="22" fill="#FFEE58" opacity="0.7"/>
+  <circle cx="820" cy="430" r="16" fill="#FFD54F" opacity="0.6"/>
+  <circle cx="760" cy="460" r="12" fill="#FFF9C4" opacity="0.8"/>
+
+  <!-- Layer 3: 변환 전/후 포맷 표시 -->
+  <!-- SVG 파일 (왼쪽 아래, 변환 전) -->
+  <rect x="100" y="650" width="220" height="150" rx="20" fill="#5C6BC0" opacity="0.9"/>
+  <text x="210" y="733" font-family="Arial Black, sans-serif" font-size="64" font-weight="900" fill="#E8EAF6" text-anchor="middle">SVG</text>
+  <text x="210" y="780" font-family="Arial, sans-serif" font-size="30" fill="#9FA8DA" text-anchor="middle">변환 전</text>
+
+  <!-- ICO 파일 (오른쪽 위, 변환 후) -->
+  <rect x="700" y="580" width="220" height="150" rx="20" fill="#FFB300" opacity="0.95"/>
+  <text x="810" y="663" font-family="Arial Black, sans-serif" font-size="64" font-weight="900" fill="white" text-anchor="middle">ICO</text>
+  <text x="810" y="710" font-family="Arial, sans-serif" font-size="30" fill="#FFF8E1" text-anchor="middle">변환 후</text>
+</svg>

@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Layer 1: 밝은 산호색 배경 -->
+  <defs>
+    <linearGradient id="bg4" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFF3E0"/>
+      <stop offset="100%" stop-color="#FFCC80"/>
+    </linearGradient>
+    <linearGradient id="center4" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FF7043"/>
+      <stop offset="100%" stop-color="#E64A19"/>
+    </linearGradient>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg4)"/>
+
+  <!-- Layer 2: 4개 포맷 섹터가 중앙으로 수렴하는 원형 -->
+  <!-- SVG 섹터 (파란색, 상단 왼쪽) -->
+  <path d="M512,512 L512,160 A352,352 0 0,0 160,512 Z" fill="#42A5F5" opacity="0.92"/>
+  <text x="316" y="370" font-family="Arial Black, sans-serif" font-size="76" font-weight="900" fill="white" text-anchor="middle">SVG</text>
+
+  <!-- PNG 섹터 (초록색, 상단 오른쪽) -->
+  <path d="M512,512 L864,512 A352,352 0 0,0 512,160 Z" fill="#66BB6A" opacity="0.92"/>
+  <text x="710" y="370" font-family="Arial Black, sans-serif" font-size="76" font-weight="900" fill="white" text-anchor="middle">PNG</text>
+
+  <!-- JPG 섹터 (보라색, 하단 오른쪽) -->
+  <path d="M512,512 L512,864 A352,352 0 0,0 864,512 Z" fill="#AB47BC" opacity="0.92"/>
+  <text x="710" y="720" font-family="Arial Black, sans-serif" font-size="76" font-weight="900" fill="white" text-anchor="middle">JPG</text>
+
+  <!-- ICO 섹터 (오렌지, 하단 왼쪽) -->
+  <path d="M512,512 L160,512 A352,352 0 0,0 512,864 Z" fill="#FF7043" opacity="0.92"/>
+  <text x="316" y="720" font-family="Arial Black, sans-serif" font-size="76" font-weight="900" fill="white" text-anchor="middle">ICO</text>
+
+  <!-- Layer 3: 중앙 원 (변환 포인트) -->
+  <circle cx="512" cy="512" r="100" fill="white" opacity="0.95"/>
+  <!-- 변환 화살표 (순환형) -->
+  <path d="M452,512 A60,60 0 1,1 572,512" stroke="#FF6D00" stroke-width="22" stroke-linecap="round" fill="none"/>
+  <polygon points="572,512 600,480 600,544" fill="#FF6D00"/>
+
+  <!-- 분리선 -->
+  <line x1="512" y1="160" x2="512" y2="450" stroke="white" stroke-width="6" opacity="0.5"/>
+  <line x1="512" y1="574" x2="512" y2="864" stroke="white" stroke-width="6" opacity="0.5"/>
+  <line x1="160" y1="512" x2="450" y2="512" stroke="white" stroke-width="6" opacity="0.5"/>
+  <line x1="574" y1="512" x2="864" y2="512" stroke="white" stroke-width="6" opacity="0.5"/>
+</svg>

@@ -51,6 +51,23 @@ namespace StayAwake
             return new DailyStats();
         }
 
+        /// <summary>
+        /// 날짜 검사 없이 파일 그대로 로드 (앱 재시작 시 전날 데이터 히스토리 저장 용도)
+        /// </summary>
+        public static DailyStats? LoadRaw()
+        {
+            try
+            {
+                if (File.Exists(_statsPath))
+                {
+                    var json = File.ReadAllText(_statsPath);
+                    return JsonSerializer.Deserialize<DailyStats>(json);
+                }
+            }
+            catch { }
+            return null;
+        }
+
         public void Save()
         {
             try

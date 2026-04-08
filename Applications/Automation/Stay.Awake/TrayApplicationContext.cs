@@ -16,6 +16,7 @@ namespace StayAwake
         private readonly SlackUiAutomation _slackAutomation;
 
         private Font? _menuFont;
+        private Font? _startStopFont;
 
         private ToolStripMenuItem _startStopItem = null!;
         private ToolStripMenuItem _intervalItem = null!;
@@ -49,6 +50,11 @@ namespace StayAwake
             _settings = AppSettings.Load();
 
             // 오늘 통계 로드 (앱 재시작 후에도 이어서 누적)
+            // 날짜가 바뀐 채 재시작된 경우 — 이전 날 데이터를 히스토리에 저장 후 새 통계 시작
+            var previousStats = DailyStats.LoadRaw();
+            if (previousStats != null && previousStats.Date.Date < DateTime.Today)
+                StatsHistory.Append(previousStats);
+
             _dailyStats = DailyStats.Load();
             _dailySimCount = _dailyStats.SimCount;
             _dailySkipCount = _dailyStats.SkipCount;
@@ -107,7 +113,7 @@ namespace StayAwake
                 Visible = true
             };
 
-            _trayIcon.DoubleClick += (s, e) => ToggleRunning();
+            _trayIcon.MouseClick += (s, e) => { if (e.Button == MouseButtons.Left) ToggleRunning(); };
 
             // 앱 실행 시 자동 시작
             ToggleRunning();
@@ -129,9 +135,10 @@ namespace StayAwake
             menu.Font = _menuFont;
 
             // 시작/정지
+            _startStopFont = new Font(_menuFont, FontStyle.Bold);
             _startStopItem = new ToolStripMenuItem("▶ 시작", null, (s, e) => ToggleRunning())
             {
-                Font = new Font(_menuFont, FontStyle.Bold),
+                Font = _startStopFont,
                 ForeColor = Color.FromArgb(67, 217, 123) // Green for start
             };
             menu.Items.Add(_startStopItem);
@@ -219,8 +226,11 @@ namespace StayAwake
             // 오늘 통계
             menu.Items.Add(new ToolStripMenuItem("오늘 통계", null, (s, e) => ShowStats()));
 
-            // 정보
-            menu.Items.Add(new ToolStripMenuItem("정보", null, (s, e) => ShowAbout()));
+            // 통계 CSV 내보내기
+            menu.Items.Add(new ToolStripMenuItem("통계 CSV 내보내기", null, (s, e) => ExportStatsCsv()));
+
+            // 정보 / 도움말
+            menu.Items.Add(new ToolStripMenuItem("정보 / 도움말", null, (s, e) => ShowAbout()));
 
             // 종료
             menu.Items.Add(new ToolStripMenuItem("종료", null, (s, e) => ExitApplication()));
@@ -259,7 +269,8 @@ namespace StayAwake
                 _startStopItem.ForeColor = Color.FromArgb(67, 217, 123); // Green for start
                 _trayIcon.Icon = CreateIcon(false);
                 var stoppedTime = _todayActiveTime;
-                _trayIcon.Text = $"StayAwake - 정지됨 (오늘 {(int)stoppedTime.TotalHours:D2}:{stoppedTime:mm\\:ss})";
+                var stoppedText = $"StayAwake - 정지됨 (오늘 {(int)stoppedTime.TotalHours:D2}:{stoppedTime:mm\\:ss})";
+                _trayIcon.Text = stoppedText.Length > 127 ? stoppedText[..127] : stoppedText;
                 _statusItem.Text = "상태: 정지됨";
                 SaveDailyStats(); // 정지 시 활성 시간 포함 저장
 
@@ -464,7 +475,9 @@ namespace StayAwake
             var nextActivity = _lastActivityTime.AddMinutes(_intervalMinutes) - DateTime.Now;
             if (nextActivity < TimeSpan.Zero) nextActivity = TimeSpan.Zero;
             var activeTime = _todayActiveTime + (DateTime.Now - _sessionRunStart);
-            _trayIcon.Text = $"StayAwake - 다음: {(int)nextActivity.TotalMinutes}분 {nextActivity.Seconds:D2}초 후 | {(int)activeTime.TotalHours:D2}:{activeTime:mm\\:ss} / {_dailySimCount}회";
+            var sessionElapsed = DateTime.Now - _sessionRunStart;
+            var text = $"StayAwake - 다음: {(int)nextActivity.TotalMinutes}분 {nextActivity.Seconds:D2}초 후 | 오늘 {(int)activeTime.TotalHours:D2}:{activeTime:mm\\:ss} / {_dailySimCount}회 | 세션 {(int)sessionElapsed.TotalHours:D2}:{sessionElapsed:mm\\:ss}";
+            _trayIcon.Text = text.Length > 127 ? text[..127] : text;
         }
 
         private void ShowStats()
@@ -534,7 +547,7 @@ namespace StayAwake
                 sb.AppendLine($"{"평균",-16}  {avgSim,5:F0}회  {avgSkip,4:F0}회   {(int)avgActive.TotalHours:D2}:{avgActive:mm\\:ss}");
             }
 
-            DarkInfoDialog.Show("통계", sb.ToString(), 500, history.Count > 0 ? (int)(605 + 27.5 * (history.Count - 1)) : 450);
+            DarkInfoDialog.Show("통계", sb.ToString(), 500, history.Count > 0 ? 605 + 28 * (history.Count - 1) : 450);
         }
 
         private void ShowAbout()
@@ -548,7 +561,7 @@ namespace StayAwake
                 : "마우스 이동";
 
             var version = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
-            var versionStr = version != null ? $"v{version.Major}.{version.Minor}.{version.Build}" : "v1.3.0";
+            var versionStr = version != null ? $"v{version.Major}.{version.Minor}.{version.Build}" : "v?";
             var message = $@"StayAwake {versionStr}
 
 Slack 자리 비움 상태 방지 도구
@@ -565,12 +578,13 @@ Slack 자리 비움 상태 방지 도구
 • Slack 상태 변경: 클립보드 방식으로 슬래시 커맨드 전송 (한글 IME 대응)
 
 [사용법 — 단축키 & 기능]
-• 트레이 더블클릭          시작 / 정지 토글
+• 트레이 좌클릭            시작 / 정지 토글
 • 트레이 우클릭            메뉴 열기
-• 트레이 호버 (실행 중)    다음 활동까지 남은 시간 + 오늘 활성 시간
+• 트레이 호버 (실행 중)    다음 활동까지 남은 시간 + 오늘 활성 시간 + 세션 경과 시간
 • 트레이 호버 (정지 시)    오늘 누적 활성 시간
 • 메뉴 › 지금 활동 실행    즉시 강제 시뮬레이션 (타이머 리셋)
-• 메뉴 › 오늘 통계         시뮬레이션·스킵·활성 시간·주간 평균
+• 메뉴 › 오늘 통계         시뮬레이션·스킵·활성 시간·최근 히스토리
+• 메뉴 › 통계 CSV 내보내기 오늘 + 최근 30일 히스토리를 CSV 파일로 저장
 • 메뉴 › 간격              1 / 2 / 3 / 5 / 7분 선택
 • 메뉴 › 이동 거리         10 / 30 / 50 / 100 / 200px 선택
 • 메뉴 › 활동 유형         마우스 이동 / 마우스 + 키보드 (F15 키)
@@ -579,6 +593,7 @@ Slack 자리 비움 상태 방지 도구
 • 메뉴 › Slack › 자동 변경 활성화   출퇴근 시각에 Active/Away 자동 전환
 • 메뉴 › Slack › 시간 설정    출퇴근 시각 변경 (기본 08:55 / 18:55)
 • 메뉴 › Slack › 지금 활성/자리비움으로 변경   즉시 수동 전환
+• 메뉴 › 정보 / 도움말     현재 설정·동작 방식 확인 (이 화면)
 • 권장 간격: 3~5분
 
 [현재 설정]
@@ -679,6 +694,39 @@ Slack 자리 비움 상태 방지 도구
                 result.Success ? ToolTipIcon.Info : ToolTipIcon.Warning);
         }
 
+        private void ExportStatsCsv()
+        {
+            try
+            {
+                using var dialog = new SaveFileDialog
+                {
+                    Title = "통계 CSV 내보내기",
+                    Filter = "CSV 파일 (*.csv)|*.csv",
+                    FileName = $"StayAwake_Stats_{DateTime.Today:yyyyMMdd}.csv",
+                    DefaultExt = "csv"
+                };
+                if (dialog.ShowDialog() != DialogResult.OK) return;
+
+                var activeTime = _isRunning
+                    ? _todayActiveTime + (DateTime.Now - _sessionRunStart)
+                    : _todayActiveTime;
+                var history = StatsHistory.Load(30).Where(x => x.Date.Date != DateTime.Today).ToList();
+
+                var lines = new System.Text.StringBuilder();
+                lines.AppendLine("날짜,시뮬레이션,스킵,활성시간(초),Slack성공,Slack실패");
+                lines.AppendLine($"{_statsDate:yyyy-MM-dd},{_dailySimCount},{_dailySkipCount},{(long)activeTime.TotalSeconds},{_dailySlackSuccessCount},{_dailySlackFailCount}");
+                foreach (var day in history)
+                    lines.AppendLine($"{day.Date:yyyy-MM-dd},{day.SimCount},{day.SkipCount},{day.ActiveSeconds},{day.SlackSuccessCount},{day.SlackFailCount}");
+
+                File.WriteAllText(dialog.FileName, lines.ToString(), System.Text.Encoding.UTF8);
+                _trayIcon.ShowBalloonTip(2000, "StayAwake", "통계 CSV 내보내기 완료", ToolTipIcon.Info);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"CSV 내보내기 실패: {ex.Message}", "StayAwake", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
         private void ExitApplication()
         {
             if (_isRunning)
@@ -711,6 +759,7 @@ Slack 자리 비움 상태 방지 도구
                 _trayIcon.Dispose();
                 _contextMenu.Dispose();
                 _menuFont?.Dispose();
+                _startStopFont?.Dispose();
             }
             base.Dispose(disposing);
         }

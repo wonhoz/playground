@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="g3" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FFF1F2"/>
+      <stop offset="100%" stop-color="#FECDD3"/>
+    </linearGradient>
+    <clipPath id="c3"><rect width="1024" height="1024" rx="190"/></clipPath>
+  </defs>
+  <!-- Layer 1: Coral/rose background -->
+  <rect width="1024" height="1024" rx="190" fill="url(#g3)"/>
+  <g clip-path="url(#c3)">
+    <!-- Layer 2: Circular timer ring -->
+    <!-- Outer ring track -->
+    <circle cx="512" cy="460" r="300" fill="none" stroke="#FECDD3" stroke-width="50"/>
+    <!-- Timer arc (about 80% filled = 15s → diminishing) -->
+    <!-- Using a thick stroke with dasharray to simulate arc -->
+    <circle cx="512" cy="460" r="300" fill="none" stroke="#EF4444" stroke-width="50"
+      stroke-dasharray="1508 1885" stroke-dashoffset="471"
+      stroke-linecap="round"
+      transform="rotate(-90 512 460)"/>
+    <!-- Inner circle -->
+    <circle cx="512" cy="460" r="240" fill="white" opacity="0.92"/>
+    <!-- "15" large timer number -->
+    <text x="512" y="512" font-family="Arial Black,Arial,sans-serif" font-size="230" fill="#EF4444" font-weight="900" text-anchor="middle">15</text>
+    <!-- "sec" sub-label -->
+    <text x="512" y="598" font-family="Arial,sans-serif" font-size="80" fill="#F87171" font-weight="bold" text-anchor="middle">sec</text>
+    <!-- Layer 3: Tick marks around the ring (12 positions) -->
+    <line x1="512" y1="150" x2="512" y2="178" stroke="#EF4444" stroke-width="10" stroke-linecap="round"/>
+    <line x1="662" y1="188" x2="649" y2="213" stroke="#EF4444" stroke-width="10" stroke-linecap="round"/>
+    <line x1="772" y1="310" x2="750" y2="323" stroke="#EF4444" stroke-width="10" stroke-linecap="round"/>
+    <line x1="812" y1="460" x2="784" y2="460" stroke="#EF4444" stroke-width="10" stroke-linecap="round"/>
+    <!-- "TIMER" bottom label -->
+    <text x="512" y="870" font-family="Arial Black,Arial,sans-serif" font-size="100" fill="#BE123C" font-weight="900" text-anchor="middle">TIMER</text>
+  </g>
+</svg>

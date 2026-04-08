@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="g5" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FFF7ED"/>
+      <stop offset="100%" stop-color="#FED7AA"/>
+    </linearGradient>
+    <linearGradient id="flame" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0%" stop-color="#EF4444"/>
+      <stop offset="50%" stop-color="#F97316"/>
+      <stop offset="100%" stop-color="#FCD34D"/>
+    </linearGradient>
+    <clipPath id="c5"><rect width="1024" height="1024" rx="190"/></clipPath>
+  </defs>
+  <!-- Layer 1: Warm orange background -->
+  <rect width="1024" height="1024" rx="190" fill="url(#g5)"/>
+  <g clip-path="url(#c5)">
+    <!-- Layer 2: Flame silhouette (center) -->
+    <!-- Main flame body -->
+    <path d="M512,760 C340,760 240,640 280,500 C310,400 380,360 380,260 C420,340 400,400 450,440 C460,340 520,240 512,140 C600,200 660,340 640,460 C680,400 700,340 690,280 C750,360 784,460 760,560 C780,540 800,480 800,440 C840,520 820,660 760,720 C720,750 620,760 512,760 Z" fill="url(#flame)"/>
+    <!-- Inner flame highlight -->
+    <path d="M512,680 C430,680 380,600 410,520 C430,460 480,440 480,380 C510,430 500,470 530,490 C530,420 560,360 556,300 C600,340 620,420 606,490 C630,460 640,420 634,390 C670,430 680,510 660,560 C672,548 680,510 680,490 C700,540 688,620 658,660 C636,678 576,680 512,680 Z" fill="#FEF3C7" opacity="0.6"/>
+    <!-- Layer 3: STREAK badge -->
+    <rect x="200" y="790" width="624" height="110" rx="24" fill="#EF4444"/>
+    <text x="512" y="863" font-family="Arial Black,Arial,sans-serif" font-size="88" fill="white" font-weight="900" text-anchor="middle">🔥 STREAK</text>
+    <!-- Streak number badge -->
+    <circle cx="820" cy="300" r="90" fill="#EF4444"/>
+    <text x="820" y="274" font-family="Arial Black,Arial,sans-serif" font-size="80" fill="white" font-weight="900" text-anchor="middle">×5</text>
+    <text x="820" y="358" font-family="Arial,sans-serif" font-size="56" fill="#FCA5A5" font-weight="bold" text-anchor="middle">BONUS</text>
+  </g>
+</svg>

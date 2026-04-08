@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <clipPath id="c3"><rect width="1024" height="1024" rx="190"/></clipPath>
+  </defs>
+  <!-- Layer 1: Light yellow background -->
+  <rect width="1024" height="1024" rx="190" fill="#FFFBEB"/>
+  <g clip-path="url(#c3)">
+    <!-- Layer 2: Folder shape (proper tab + body) -->
+    <path d="M 216,290 L 438,290 L 490,344 L 808,344 Q 832,344 832,368 L 832,748 Q 832,772 808,772 L 216,772 Q 192,772 192,748 L 192,314 Q 192,290 216,290 Z" fill="#F97316"/>
+    <!-- Folder inner shadow/depth line -->
+    <line x1="192" y1="344" x2="490" y2="344" stroke="#EA580C" stroke-width="8" opacity="0.5"/>
+    <!-- Layer 3: Copy badge (two stacked pages, bottom-right of folder) -->
+    <!-- Back page (light blue) -->
+    <rect x="580" y="600" width="198" height="158" rx="16" fill="#DBEAFE" stroke="#2563EB" stroke-width="10"/>
+    <!-- Front page (vivid blue) -->
+    <rect x="614" y="572" width="198" height="158" rx="16" fill="#2563EB"/>
+    <!-- Lines on front page (representing text) -->
+    <line x1="646" y1="610" x2="778" y2="610" stroke="white" stroke-width="18" stroke-linecap="round"/>
+    <line x1="646" y1="644" x2="778" y2="644" stroke="white" stroke-width="18" stroke-linecap="round"/>
+    <line x1="646" y1="678" x2="726" y2="678" stroke="white" stroke-width="18" stroke-linecap="round"/>
+    <!-- Folder tab label "PATH" -->
+    <text x="216" y="340" font-family="Arial,sans-serif" font-size="80" fill="white" font-weight="bold" opacity="0.90">PATH</text>
+  </g>
+</svg>

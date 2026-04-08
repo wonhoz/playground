@@ -6,8 +6,10 @@ if %errorlevel% neq 0 (
     exit /b
 )
 
+set PROJ=%~dp0
+
 echo [build] makeappx pack start...
-powershell -NoProfile -ExecutionPolicy Bypass -Command "& 'C:\Program Files (x86)\Windows Kits\10\bin\10.0.26100.0\x64\makeappx.exe' pack /d 'C:\Users\admin\source\repos\+Playground\Applications\System\Manager\Claude.Shell.Native\bin\Release' /p 'C:\Users\admin\source\repos\+Playground\Applications\System\Manager\Claude.Shell.Native\bin\ClaudeContextMenu.msix' /nv /o"
+powershell -NoProfile -ExecutionPolicy Bypass -Command "& 'C:\Program Files (x86)\Windows Kits\10\bin\10.0.26100.0\x64\makeappx.exe' pack /d '%PROJ%bin\Release' /p '%PROJ%bin\ClaudeContextMenu.msix' /nv /o"
 
 if %errorlevel% equ 0 (
     echo [build] done: ClaudeContextMenu.msix

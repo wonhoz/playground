@@ -1,6 +1,7 @@
 #include "ContextMenu.h"
 #include <shlwapi.h>
 #include <shellapi.h>
+#include <winreg.h>
 #include <new>
 #include <objbase.h>
 
@@ -22,11 +23,11 @@ ClaudeContextMenu::~ClaudeContextMenu()
     InterlockedDecrement(&g_cDllRef);
 }
 
-// ── 공유 유틸: claude.exe 존재 확인 (PATH → 하드코딩 경로 순) ────────────────
-bool FindClaudeExe()
+// ── 공유 유틸: claude.exe 설치 경로 반환 (없으면 빈 문자열) ──────────────────
+static std::wstring GetClaudeExePath()
 {
     WCHAR buf[MAX_PATH] = L"claude.exe";
-    if (PathFindOnPathW(buf, nullptr)) return true;
+    if (PathFindOnPathW(buf, nullptr)) return buf;
 
     WCHAR userProfile[MAX_PATH] = {}, localAppData[MAX_PATH] = {};
     ExpandEnvironmentStringsW(L"%USERPROFILE%",  userProfile,  MAX_PATH);
@@ -42,10 +43,12 @@ bool FindClaudeExe()
     {
         WCHAR path[MAX_PATH] = {};
         PathCombineW(path, e.base, e.rel);
-        if (PathFileExistsW(path)) return true;
+        if (PathFileExistsW(path)) return path;
     }
-    return false;
+    return {};
 }
+
+bool FindClaudeExe() { return !GetClaudeExePath().empty(); }
 
 // ── 공유 유틸: Windows Terminal(wt.exe) 탐색 ─────────────────────────────────
 bool FindWindowsTerminal()
@@ -60,14 +63,26 @@ bool FindWindowsTerminal()
     return PathFileExistsW(path) == TRUE;
 }
 
+// ── 공유 유틸: 레지스트리 커스텀 터미널 경로 반환 ─────────────────────────────
+// HKCU\Software\ClaudeCode 의 TerminalPath 값 (없으면 빈 문자열)
+static std::wstring GetCustomTerminal()
+{
+    WCHAR buf[MAX_PATH] = {};
+    DWORD sz = sizeof(buf);
+    if (RegGetValueW(HKEY_CURRENT_USER, L"Software\\ClaudeCode", L"TerminalPath",
+                     RRF_RT_REG_SZ, nullptr, buf, &sz) == ERROR_SUCCESS && buf[0])
+        return buf;
+    return {};
+}
+
 // ── 공유 유틸: Claude 실행 ────────────────────────────────────────────────────
 static void LaunchClaude(const std::wstring& folder, bool dangerous)
 {
     if (!FindClaudeExe())
     {
         MessageBoxW(nullptr,
-            L"Claude Code가 설치되지 않았습니다.\n"
-            L"https://claude.ai/download 에서 설치 후 다시 시도하세요.",
+            L"Claude Code\uAC00 \uC124\uCE58\uB418\uC9C0 \uC54A\uC558\uC2B5\uB2C8\uB2E4.\n"
+            L"https://claude.ai/download \uC5D0\uC11C \uC124\uCE58 \uD6C4 \uB2E4\uC2DC \uC2DC\uB3C4\uD558\uC138\uC694.",
             L"Claude Code", MB_OK | MB_ICONINFORMATION);
         return;
     }
@@ -80,18 +95,32 @@ static void LaunchClaude(const std::wstring& folder, bool dangerous)
     sei.lpVerb = L"open";
     sei.nShow  = SW_SHOWNORMAL;
 
+    // CommandLineToArgvW 호환: 닫는 " 직전 \ 가 있으면 \\ 로 이스케이프
+    // ex) "C:\" -> "C:\\" (드라이브 루트 trailing backslash 처리)
+    std::wstring quotedFolder = folder;
+    if (!quotedFolder.empty() && quotedFolder.back() == L'\\')
+        quotedFolder += L'\\';
+
     std::wstring args;
-    if (FindWindowsTerminal())
+    std::wstring customTerm = GetCustomTerminal();
+    if (!customTerm.empty())
     {
-        // Windows Terminal: wt.exe -d "folder" cmd /k claude
-        args = folder.empty()
+        // 레지스트리 커스텀 터미널: wt.exe 호환 인자 형식 사용
+        args = quotedFolder.empty()
             ? std::wstring(L"cmd /k ") + claudeArg
-            : std::wstring(L"-d \"") + folder + L"\" cmd /k " + claudeArg;
+            : std::wstring(L"-d \"") + quotedFolder + L"\" cmd /k " + claudeArg;
+        sei.lpFile = customTerm.c_str();
+    }
+    else if (FindWindowsTerminal())
+    {
+        args = quotedFolder.empty()
+            ? std::wstring(L"cmd /k ") + claudeArg
+            : std::wstring(L"-d \"") + quotedFolder + L"\" cmd /k " + claudeArg;
         sei.lpFile = L"wt.exe";
     }
     else
     {
-        // 기본 cmd.exe
+        // 기본 cmd.exe (cmd 는 따옴표 안 백슬래시를 이스케이프하지 않으므로 원본 경로 사용)
         args = folder.empty()
             ? std::wstring(L"/k ") + claudeArg
             : std::wstring(L"/k cd /d \"") + folder + L"\" && " + claudeArg;
@@ -102,7 +131,7 @@ static void LaunchClaude(const std::wstring& folder, bool dangerous)
     if (!ShellExecuteExW(&sei))
     {
         WCHAR msg[256];
-        swprintf_s(msg, L"Claude Code 실행 실패 (오류: %lu)", GetLastError());
+        swprintf_s(msg, L"Claude Code \uC2E4\uD589 \uC2E4\uD328 (\uC624\uB958: %lu)", GetLastError());
         MessageBoxW(nullptr, msg, L"Claude Code", MB_OK | MB_ICONERROR);
     }
 }
@@ -144,7 +173,13 @@ STDMETHODIMP ClaudeContextMenu::Initialize(PCIDLIST_ABSOLUTE pidlFolder, IDataOb
             if (hDrop)
             {
                 WCHAR buf[MAX_PATH] = {};
-                if (DragQueryFileW(hDrop, 0, buf, MAX_PATH)) m_folderPath = buf;
+                if (DragQueryFileW(hDrop, 0, buf, MAX_PATH))
+                {
+                    // 파일 선택 시 부모 폴더로 정규화
+                    if (!PathIsDirectoryW(buf))
+                        PathRemoveFileSpecW(buf);
+                    m_folderPath = buf;
+                }
                 GlobalUnlock(stg.hGlobal);
             }
             ReleaseStgMedium(&stg);
@@ -165,12 +200,12 @@ STDMETHODIMP ClaudeContextMenu::QueryContextMenu(HMENU hmenu, UINT indexMenu, UI
     if (m_hSubMenu) { DestroyMenu(m_hSubMenu); m_hSubMenu = nullptr; }
     m_hSubMenu = CreatePopupMenu();
     InsertMenuW(m_hSubMenu, 0, MF_BYPOSITION | MF_STRING, idCmdFirst + CMD_NORMAL,
-                L"Claude Code 열기");
+                L"Claude Code \uC5F4\uAE30");
     InsertMenuW(m_hSubMenu, 1, MF_BYPOSITION | MF_STRING, idCmdFirst + CMD_DANGEROUS,
-                L"Claude Code 열기 (권한 건너뜀)");
+                L"Claude Code \uC5F4\uAE30 (\uAD8C\uD55C \uAC74\uB108\uB220)");
     InsertMenuW(hmenu, indexMenu, MF_BYPOSITION | MF_POPUP,
                 reinterpret_cast<UINT_PTR>(m_hSubMenu),
-                L"Claude Code 열기");
+                L"Claude Code \uC5F4\uAE30");
     m_hSubMenu = nullptr; // 부모 hmenu에 소유권 이전 — 소멸자에서 재파괴 금지
 
     HBITMAP hbmp = GetOrCreateIconBitmap();
@@ -198,8 +233,8 @@ STDMETHODIMP ClaudeContextMenu::GetCommandString(UINT_PTR, UINT, UINT*, CHAR*, U
 STDMETHODIMP ClaudeContextMenu::GetTitle(IShellItemArray*, LPWSTR* ppszName)
 {
     const wchar_t* title = m_dangerous
-        ? L"Claude Code 열기 (권한 건너뜀)"
-        : L"Claude Code 열기";
+        ? L"Claude Code \uC5F4\uAE30 (\uAD8C\uD55C \uAC74\uB108\uB220)"
+        : L"Claude Code \uC5F4\uAE30";
     SIZE_T cb = (wcslen(title) + 1) * sizeof(WCHAR);
     *ppszName = static_cast<LPWSTR>(CoTaskMemAlloc(cb));
     if (!*ppszName) return E_OUTOFMEMORY;
@@ -238,6 +273,14 @@ STDMETHODIMP ClaudeContextMenu::Invoke(IShellItemArray* psia, IBindCtx*)
             {
                 folder = pszPath;
                 CoTaskMemFree(pszPath);
+                // 파일 선택 시 부모 폴더로 정규화
+                if (!PathIsDirectoryW(folder.c_str()))
+                {
+                    WCHAR buf[MAX_PATH] = {};
+                    wcscpy_s(buf, folder.c_str());
+                    PathRemoveFileSpecW(buf);
+                    folder = buf;
+                }
             }
             psi->Release();
         }
@@ -252,25 +295,49 @@ STDMETHODIMP ClaudeContextMenu::EnumSubCommands(IEnumExplorerCommand** ppEnum)
     { *ppEnum = nullptr; return E_NOTIMPL; }
 
 // ── 아이콘 비트맵 (스레드 안전 INIT_ONCE) ────────────────────────────────────
+// 32-bit DIBSection + pre-multiplied alpha — 다크 테마 Explorer 투명 렌더링 지원
 BOOL CALLBACK ClaudeContextMenu::InitBitmapOnce(PINIT_ONCE, PVOID, PVOID*)
 {
     std::wstring src = FindClaudeIconSource();
     if (src.empty()) return TRUE;
-    HICON large1 = nullptr, small1 = nullptr;
-    ExtractIconExW(src.c_str(), 0, &large1, &small1, 1);
-    HICON hIcon = small1 ? small1 : large1;
-    if (large1 && large1 != hIcon) DestroyIcon(large1);
+
+    HICON large = nullptr, small1 = nullptr;
+    ExtractIconExW(src.c_str(), 0, &large, &small1, 1);
+    HICON hIcon = small1 ? small1 : large;
+    if (large && large != hIcon) DestroyIcon(large);
     if (!hIcon) return TRUE;
-    int sz = 16;
-    HDC hdcS = GetDC(nullptr);
-    if (!hdcS) { DestroyIcon(hIcon); return TRUE; }
-    HDC hdcM = CreateCompatibleDC(hdcS);
-    if (!hdcM) { ReleaseDC(nullptr, hdcS); DestroyIcon(hIcon); return TRUE; }
-    HBITMAP hbmp = CreateCompatibleBitmap(hdcS, sz, sz);
-    if (!hbmp) { DeleteDC(hdcM); ReleaseDC(nullptr, hdcS); DestroyIcon(hIcon); return TRUE; }
-    HGDIOBJ hOld = SelectObject(hdcM, hbmp);
-    DrawIconEx(hdcM, 0, 0, hIcon, sz, sz, 0, nullptr, DI_NORMAL);
-    SelectObject(hdcM, hOld); DeleteDC(hdcM); ReleaseDC(nullptr, hdcS);
+
+    const int sz = GetSystemMetrics(SM_CXSMICON); // DPI 인식 아이콘 크기
+
+    BITMAPV4HEADER bmi = {};
+    bmi.bV4Size          = sizeof(bmi);
+    bmi.bV4Width         = sz;
+    bmi.bV4Height        = -sz; // top-down
+    bmi.bV4Planes        = 1;
+    bmi.bV4BitCount      = 32;
+    bmi.bV4V4Compression = BI_BITFIELDS;
+    bmi.bV4RedMask       = 0x00FF0000;
+    bmi.bV4GreenMask     = 0x0000FF00;
+    bmi.bV4BlueMask      = 0x000000FF;
+    bmi.bV4AlphaMask     = 0xFF000000;
+
+    void* pBits = nullptr;
+    HDC hdcScreen = GetDC(nullptr);
+    if (!hdcScreen) { DestroyIcon(hIcon); return TRUE; }
+    HDC hdcMem = CreateCompatibleDC(hdcScreen);
+    ReleaseDC(nullptr, hdcScreen);
+    if (!hdcMem) { DestroyIcon(hIcon); return TRUE; }
+
+    HBITMAP hbmp = CreateDIBSection(hdcMem,
+        reinterpret_cast<const BITMAPINFO*>(&bmi),
+        DIB_RGB_COLORS, &pBits, nullptr, 0);
+    if (!hbmp) { DeleteDC(hdcMem); DestroyIcon(hIcon); return TRUE; }
+
+    // pBits 는 0 초기화 (alpha=0, 완전 투명) — DrawIconEx 가 alpha 올바르게 설정
+    HGDIOBJ hOld = SelectObject(hdcMem, hbmp);
+    DrawIconEx(hdcMem, 0, 0, hIcon, sz, sz, 0, nullptr, DI_NORMAL);
+    SelectObject(hdcMem, hOld);
+    DeleteDC(hdcMem);
     DestroyIcon(hIcon);
     s_hBitmap = hbmp;
     return TRUE;
@@ -287,26 +354,17 @@ void ClaudeContextMenu::ReleaseStaticResources()
     if (s_hBitmap) { DeleteObject(s_hBitmap); s_hBitmap = nullptr; }
 }
 
-// ── 공유 유틸: Claude 실행파일/아이콘 탐색 ────────────────────────────────────
+// ── 공유 유틸: Claude 아이콘 소스 탐색 ───────────────────────────────────────
 std::wstring FindClaudeIconSource()
 {
-    WCHAR userProfile[MAX_PATH] = {}, localAppData[MAX_PATH] = {}, appData[MAX_PATH] = {};
-    ExpandEnvironmentStringsW(L"%USERPROFILE%",  userProfile,  MAX_PATH);
-    ExpandEnvironmentStringsW(L"%LOCALAPPDATA%", localAppData, MAX_PATH);
-    ExpandEnvironmentStringsW(L"%APPDATA%",      appData,      MAX_PATH);
+    // claude.exe 경로가 있으면 EXE 자체에서 아이콘 추출
+    std::wstring exePath = GetClaudeExePath();
+    if (!exePath.empty()) return exePath;
 
-    struct { const wchar_t* base; const wchar_t* rel; } exes[] = {
-        { userProfile,  L".local\\bin\\claude.exe"         },
-        { localAppData, L"AnthropicClaude\\claude.exe"     },
-        { localAppData, L"Programs\\claude\\claude.exe"    },
-        { localAppData, L"Programs\\Claude\\Claude.exe"    },
-    };
-    for (auto& e : exes)
-    {
-        WCHAR path[MAX_PATH] = {};
-        PathCombineW(path, e.base, e.rel);
-        if (PathFileExistsW(path)) return path;
-    }
+    // npm 전역 설치 아이콘 파일 폴백
+    WCHAR appData[MAX_PATH] = {};
+    ExpandEnvironmentStringsW(L"%APPDATA%", appData, MAX_PATH);
+
     struct { const wchar_t* rel; } icos[] = {
         { L"npm\\node_modules\\@anthropic-ai\\claude-code\\resources\\app.ico"  },
         { L"npm\\node_modules\\@anthropic-ai\\claude-code\\resources\\icon.ico" },

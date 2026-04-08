@@ -229,8 +229,11 @@ namespace StayAwake
             // 통계 CSV 내보내기
             menu.Items.Add(new ToolStripMenuItem("통계 CSV 내보내기", null, (s, e) => ExportStatsCsv()));
 
-            // 정보 / 도움말
-            menu.Items.Add(new ToolStripMenuItem("정보 / 도움말", null, (s, e) => ShowAbout()));
+            // 도움말
+            menu.Items.Add(new ToolStripMenuItem("도움말", null, (s, e) => ShowHelp()));
+
+            // 정보
+            menu.Items.Add(new ToolStripMenuItem("정보", null, (s, e) => ShowAbout()));
 
             // 종료
             menu.Items.Add(new ToolStripMenuItem("종료", null, (s, e) => ExitApplication()));
@@ -550,6 +553,41 @@ namespace StayAwake
             DarkInfoDialog.Show("통계", sb.ToString(), 500, history.Count > 0 ? 605 + 28 * (history.Count - 1) : 450);
         }
 
+        private void ShowHelp()
+        {
+            var message = @"[Slack 자리 비움 감지 방식]
+• 10분간 키보드/마우스 비활성 시 Away
+• Slack이 백그라운드에 있어도 시스템 활동 감지
+• API로도 강제 Active 불가, 자연스러운 활동만 인정
+
+[동작 방식]
+• 주기적으로 마우스를 이동 후 원위치 (티 안 나게)
+• SetThreadExecutionState로 디스플레이 절전 방지
+• 사용자가 직접 활동 중이면 마우스 이동 자동 건너뜀
+• Slack 상태 변경: 클립보드 방식으로 슬래시 커맨드 전송 (한글 IME 대응)
+
+[사용법 — 단축키 & 기능]
+• 트레이 좌클릭               시작 / 정지 토글
+• 트레이 우클릭               메뉴 열기
+• 트레이 호버 (실행 중)       다음 활동까지 남은 시간 + 오늘 활성 시간 + 세션 경과 시간
+• 트레이 호버 (정지 시)       오늘 누적 활성 시간
+• 메뉴 › ▶ 시작 / ⏹ 정지     시작 / 정지 토글
+• 메뉴 › 지금 활동 실행       즉시 강제 시뮬레이션 (타이머 리셋)
+• 메뉴 › 오늘 통계            시뮬레이션·스킵·활성 시간·최근 히스토리
+• 메뉴 › 통계 CSV 내보내기    오늘 + 최근 30일 히스토리를 CSV 파일로 저장
+• 메뉴 › 간격                 1 / 2 / 3 / 5 / 7분 선택
+• 메뉴 › 이동 거리            10 / 30 / 50 / 100 / 200px 선택
+• 메뉴 › 활동 유형            마우스 이동 / 마우스 + 키보드 (F15 키)
+• 메뉴 › 디스플레이 절전 방지  화면 꺼짐 방지 On/Off
+• 메뉴 › 사용 중이면 건너뛰기  직접 입력 중 시뮬레이션 스킵
+• 메뉴 › Slack › 자동 변경 활성화    출퇴근 시각에 Active/Away 자동 전환
+• 메뉴 › Slack › 시간 설정           출퇴근 시각 변경 (기본 08:55 / 18:55)
+• 메뉴 › Slack › 지금 활성/자리비움으로 변경   즉시 수동 전환
+• 권장 간격: 3~5분";
+
+            DarkInfoDialog.Show("도움말", message, 780, 680);
+        }
+
         private void ShowAbout()
         {
             var slackStatusLine = _slackAutomation.IsEnabled
@@ -563,38 +601,8 @@ namespace StayAwake
             var version = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
             var versionStr = version != null ? $"v{version.Major}.{version.Minor}.{version.Build}" : "v?";
             var message = $@"StayAwake {versionStr}
-
 Slack 자리 비움 상태 방지 도구
-
-[Slack 자리 비움 감지 방식]
-• 10분간 키보드/마우스 비활성 시 Away
-• Slack이 백그라운드에 있어도 시스템 활동 감지
-• API로도 강제 Active 불가, 자연스러운 활동만 인정
-
-[동작 방식]
-• 주기적으로 마우스를 이동 후 원위치 (티 안 나게)
-• SetThreadExecutionState로 디스플레이 절전 방지
-• 사용자가 직접 활동 중이면 마우스 이동 자동 건너뜀
-• Slack 상태 변경: 클립보드 방식으로 슬래시 커맨드 전송 (한글 IME 대응)
-
-[사용법 — 단축키 & 기능]
-• 트레이 좌클릭            시작 / 정지 토글
-• 트레이 우클릭            메뉴 열기
-• 트레이 호버 (실행 중)    다음 활동까지 남은 시간 + 오늘 활성 시간 + 세션 경과 시간
-• 트레이 호버 (정지 시)    오늘 누적 활성 시간
-• 메뉴 › 지금 활동 실행    즉시 강제 시뮬레이션 (타이머 리셋)
-• 메뉴 › 오늘 통계         시뮬레이션·스킵·활성 시간·최근 히스토리
-• 메뉴 › 통계 CSV 내보내기 오늘 + 최근 30일 히스토리를 CSV 파일로 저장
-• 메뉴 › 간격              1 / 2 / 3 / 5 / 7분 선택
-• 메뉴 › 이동 거리         10 / 30 / 50 / 100 / 200px 선택
-• 메뉴 › 활동 유형         마우스 이동 / 마우스 + 키보드 (F15 키)
-• 메뉴 › 디스플레이 절전 방지   화면 꺼짐 방지 On/Off
-• 메뉴 › 사용 중이면 건너뛰기   직접 입력 중 시뮬레이션 스킵
-• 메뉴 › Slack › 자동 변경 활성화   출퇴근 시각에 Active/Away 자동 전환
-• 메뉴 › Slack › 시간 설정    출퇴근 시각 변경 (기본 08:55 / 18:55)
-• 메뉴 › Slack › 지금 활성/자리비움으로 변경   즉시 수동 전환
-• 메뉴 › 정보 / 도움말     현재 설정·동작 방식 확인 (이 화면)
-• 권장 간격: 3~5분
+© 2026 https://github.com/wonhoz
 
 [현재 설정]
 • 간격: {_intervalMinutes}분
@@ -602,11 +610,9 @@ Slack 자리 비움 상태 방지 도구
 • 활동 유형: {activityTypeLabel}
 • 디스플레이 절전 방지: {(_simulator.PreventDisplaySleep ? "켜짐" : "꺼짐")}
 • 사용 중 건너뛰기: {(_simulator.SkipIfUserActive ? "켜짐" : "꺼짐")}
-• Slack 자동 상태 변경: {slackStatusLine}
+• Slack 자동 상태 변경: {slackStatusLine}";
 
-© 2026 https://github.com/wonhoz";
-
-            DarkInfoDialog.Show("StayAwake 정보", message, 750, 1070);
+            DarkInfoDialog.Show($"StayAwake {versionStr}", message, 600, 310);
         }
 
         private async void OnScheduleTimerTick(object? sender, EventArgs e)

@@ -303,6 +303,12 @@ public partial class MainWindow : Window
             Viewer.CoreWebView2.WebMessageReceived += OnWebViewMessageReceived;
             Viewer.CoreWebView2.NavigationStarting += OnNavigationStarting;
             Viewer.CoreWebView2.ContextMenuRequested += OnWebViewContextMenuRequested;
+            // 로컬 CDN 캐시 폴더를 가상 호스트로 서빙 (오프라인 지원)
+            Directory.CreateDirectory(CdnCache.CacheDir);
+            Viewer.CoreWebView2.SetVirtualHostNameToFolderMapping(
+                CdnCache.VirtualHost, CdnCache.CacheDir,
+                Microsoft.Web.WebView2.Core.CoreWebView2HostResourceAccessKind.Allow);
+            _ = CdnCache.WarmupAsync();
             _webViewReady = true;
             _webViewReadyTcs.TrySetResult();
             HideLoading();
@@ -1620,6 +1626,20 @@ public partial class MainWindow : Window
         StatusUndo.Visibility = _isEditMode && Editor.CanUndo ? Visibility.Visible : Visibility.Collapsed;
     }
 
+    // 상태바에 임시 메시지 표시 후 복원
+    private DispatcherTimer? _statusHintTimer;
+    private void ShowStatusHint(string message, int seconds = 3)
+    {
+        var prev = _activeIndex >= 0 && _activeIndex < _docs.Count
+            ? (_docs[_activeIndex].IsNew ? "새 문서 (저장되지 않음)" : _docs[_activeIndex].FilePath)
+            : "파일을 열어주세요";
+        StatusPath.Text = message;
+        _statusHintTimer?.Stop();
+        _statusHintTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(seconds) };
+        _statusHintTimer.Tick += (_, _) => { _statusHintTimer?.Stop(); StatusPath.Text = prev; };
+        _statusHintTimer.Start();
+    }
+
     // ── 찾기 ────────────────────────────────────────────────────────────
 
     private void FindInPreview(string keyword)
@@ -1923,8 +1943,7 @@ public partial class MainWindow : Window
             printSettings.ShouldPrintBackgrounds = true;
             await Viewer.CoreWebView2.PrintToPdfAsync(dlg.FileName, printSettings);
             HideLoading();
-            MessageBox.Show($"PDF 내보내기 완료:\n{dlg.FileName}", "완료",
-                MessageBoxButton.OK, MessageBoxImage.Information);
+            ShowStatusHint($"PDF 저장 완료 — {Path.GetFileName(dlg.FileName)}", 3);
         }
         catch (Exception ex)
         {
@@ -1999,8 +2018,7 @@ public partial class MainWindow : Window
                 File.WriteAllText(dlg.FileName, html, new UTF8Encoding(true));
             });
             HideLoading();
-            MessageBox.Show($"HTML 내보내기 완료:\n{dlg.FileName}", "완료",
-                MessageBoxButton.OK, MessageBoxImage.Information);
+            ShowStatusHint($"HTML 저장 완료 — {Path.GetFileName(dlg.FileName)}", 3);
         }
         catch (Exception ex)
         {
@@ -2142,6 +2160,88 @@ public partial class MainWindow : Window
         return System.MemoryExtensions.Count(text.AsSpan(0, limit), '\n');
     }
 
+    // Enter 키 → 자동 목록 계속 (unordered, ordered, blockquote)
+    private bool TryAutoListContinue()
+    {
+        var caret = Editor.CaretIndex;
+        var text  = Editor.Text;
+        if (caret <= 0) return false;
+
+        var lineStart = caret > 0 ? text.LastIndexOf('\n', caret - 1) + 1 : 0;
+        var lineText  = text[lineStart..caret];
+
+        // 순서 있는 목록: 1. 또는 1)
+        var om = _orderedListLineRegex.Match(lineText);
+        if (om.Success)
+        {
+            var indent  = om.Groups[1].Value;
+            var num     = int.Parse(om.Groups[2].Value);
+            var sep     = om.Groups[3].Value;
+            var content = lineText[om.Length..];
+            if (string.IsNullOrWhiteSpace(content))
+            {
+                Editor.Select(lineStart, caret - lineStart);
+                Editor.SelectedText = "\n";
+                Editor.CaretIndex = lineStart + 1;
+            }
+            else
+            {
+                var next = $"{indent}{num + 1}{sep} ";
+                Editor.Select(caret, 0);
+                Editor.SelectedText = $"\n{next}";
+                Editor.CaretIndex = caret + 1 + next.Length;
+            }
+            return true;
+        }
+
+        // 순서 없는 목록: - / * / +
+        var um = _unorderedListLineRegex.Match(lineText);
+        if (um.Success)
+        {
+            var indent  = um.Groups[1].Value;
+            var marker  = um.Groups[2].Value;
+            var content = lineText[um.Length..];
+            if (string.IsNullOrWhiteSpace(content))
+            {
+                Editor.Select(lineStart, caret - lineStart);
+                Editor.SelectedText = "\n";
+                Editor.CaretIndex = lineStart + 1;
+            }
+            else
+            {
+                var next = $"{indent}{marker} ";
+                Editor.Select(caret, 0);
+                Editor.SelectedText = $"\n{next}";
+                Editor.CaretIndex = caret + 1 + next.Length;
+            }
+            return true;
+        }
+
+        // 인용문: >
+        var bm = _blockquoteLineRegex.Match(lineText);
+        if (bm.Success)
+        {
+            var indent  = bm.Groups[1].Value;
+            var content = lineText[bm.Length..];
+            if (string.IsNullOrWhiteSpace(content))
+            {
+                Editor.Select(lineStart, caret - lineStart);
+                Editor.SelectedText = "\n";
+                Editor.CaretIndex = lineStart + 1;
+            }
+            else
+            {
+                var next = $"{indent}> ";
+                Editor.Select(caret, 0);
+                Editor.SelectedText = $"\n{next}";
+                Editor.CaretIndex = caret + 1 + next.Length;
+            }
+            return true;
+        }
+
+        return false;
+    }
+
     private void WrapSelection(string before, string after)
     {
         var start = Editor.SelectionStart;
@@ -2180,6 +2280,9 @@ public partial class MainWindow : Window
     }
 
     private static readonly Regex _headingLineRegex = new(@"^(#{1,6})\s+(.+)", RegexOptions.Multiline | RegexOptions.Compiled);
+    private static readonly Regex _orderedListLineRegex   = new(@"^(\s*)(\d+)([.)]) ", RegexOptions.Compiled);
+    private static readonly Regex _unorderedListLineRegex = new(@"^(\s*)([-*+]) ", RegexOptions.Compiled);
+    private static readonly Regex _blockquoteLineRegex    = new(@"^(\s*)(>) ", RegexOptions.Compiled);
 
     private void Editor_SelectionChanged(object sender, RoutedEventArgs e)
     {
@@ -2305,6 +2408,11 @@ public partial class MainWindow : Window
             WrapSelection("`", "`");
             e.Handled = true;
             return;
+        }
+
+        if (e.Key == Key.Return && Keyboard.Modifiers == ModifierKeys.None)
+        {
+            if (TryAutoListContinue()) { e.Handled = true; return; }
         }
 
         if (e.Key != Key.Tab) return;
@@ -2455,6 +2563,8 @@ public partial class MainWindow : Window
         { BtnCopyHtml_Click(this, new RoutedEventArgs()); e.Handled = true; }
         else if (e.Key == Key.V && Keyboard.Modifiers == (ModifierKeys.Control | ModifierKeys.Shift))
         { PasteClipboardAsNewTab(); e.Handled = true; }
+        else if (e.Key == Key.M && Keyboard.Modifiers == (ModifierKeys.Control | ModifierKeys.Shift))
+        { CopyMarkdownToClipboard(); e.Handled = true; }
         else if (e.Key == Key.Z && Keyboard.Modifiers == ModifierKeys.Alt)
         { SetWordWrap(!_isWordWrap); e.Handled = true; }
         else if (e.Key == Key.C && Keyboard.Modifiers == ModifierKeys.Alt)
@@ -2480,6 +2590,19 @@ public partial class MainWindow : Window
             AdjustPreviewFontSize(e.Delta > 0 ? 1 : -1);
             e.Handled = true;
         }
+    }
+
+    private void CopyMarkdownToClipboard()
+    {
+        if (_activeIndex < 0 || _activeIndex >= _docs.Count) return;
+        var text = _docs[_activeIndex].Content;
+        if (string.IsNullOrEmpty(text)) return;
+        try
+        {
+            Clipboard.SetText(text);
+            ShowStatusHint("Markdown 원문 복사 완료", 2);
+        }
+        catch { }
     }
 
     private void PasteClipboardAsNewTab()
@@ -2550,6 +2673,18 @@ public partial class MainWindow : Window
 
     private async Task OpenFileAsync(string path)
     {
+        // 대용량 파일 경고 (5만 줄 이상 or 10MB 이상)
+        var fileInfo = new FileInfo(path);
+        if (fileInfo.Exists && fileInfo.Length > 10 * 1024 * 1024)
+        {
+            var mb = fileInfo.Length / (1024.0 * 1024.0);
+            var result = MessageBox.Show(
+                $"'{Path.GetFileName(path)}' 파일이 {mb:F1}MB로 큽니다.\n열기 시 응답이 느려질 수 있습니다. 계속하시겠습니까?",
+                "대용량 파일",
+                MessageBoxButton.YesNo, MessageBoxImage.Warning);
+            if (result != MessageBoxResult.Yes) return;
+        }
+
         await ShowLoadingAsync("파일 열기 중...");
         try
         {

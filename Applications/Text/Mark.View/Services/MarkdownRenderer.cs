@@ -4,6 +4,7 @@ using Markdig.Extensions.AutoIdentifiers;
 
 namespace MarkView.Services;
 
+
 public class MarkdownRenderer
 {
     private readonly MarkdownPipeline _pipeline;
@@ -46,17 +47,27 @@ public class MarkdownRenderer
             : "";
 
         var css = GetThemeCss(theme);
-        var hlCss = (theme == "light" || theme == "sepia")
-            ? "atom-one-light" : "atom-one-dark";
+        var hlCssFile = (theme == "light" || theme == "sepia")
+            ? "atom-one-light.min.css" : "atom-one-dark.min.css";
+        var hlCssStem = hlCssFile.Replace(".min.css", "");
+
+        // 로컬 CDN 캐시 우선, 없으면 CDN 폴백
+        var vhost = CdnCache.VirtualHost;
+        var hlCssUrl = CdnCache.HasFile(hlCssFile)
+            ? $"https://{vhost}/{hlCssFile}"
+            : $"https://cdn.jsdelivr.net/npm/highlight.js@11/dist/styles/{hlCssStem}.min.css";
+        var hlJsUrl = CdnCache.HasFile("highlight.min.js")
+            ? $"https://{vhost}/highlight.min.js"
+            : "https://cdn.jsdelivr.net/npm/highlight.js@11/dist/highlight.min.js";
 
         return "<!DOCTYPE html><html><head><meta charset='utf-8'>" + baseTag
-            + $"<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/highlight.js@11/dist/styles/{hlCss}.min.css'"
+            + $"<link rel='stylesheet' href='{hlCssUrl}'"
             + " onerror=\"this.remove();\">"
             + "<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css'"
             + " onerror=\"this.remove();\">"
             + "<style>" + GetCommonCss() + css + "</style>"
             + "</head><body>" + body
-            + "<script src='https://cdn.jsdelivr.net/npm/highlight.js@11/dist/highlight.min.js'"
+            + $"<script src='{hlJsUrl}'"
             + " onload=\"if(typeof hljs!=='undefined'){document.querySelectorAll('pre code:not(.language-mermaid)').forEach(function(b){hljs.highlightElement(b);});}\""
             + " onerror=\"document.querySelectorAll('pre code').forEach(function(b){b.style.fontFamily='Cascadia Code,Consolas,monospace';b.style.display='block';});\"></script>"
             + "<script defer src='https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js'"

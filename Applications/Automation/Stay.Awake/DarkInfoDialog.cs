@@ -65,7 +65,6 @@ namespace StayAwake
             {
                 Text = "확인",
                 Size = new Size(90, 30),
-                Anchor = AnchorStyles.Bottom | AnchorStyles.Right,
                 BackColor = BtnColor,
                 ForeColor = TextColor,
                 FlatStyle = FlatStyle.Flat,

@@ -143,7 +143,9 @@
                          Height="34"
                          Text=""
                          TextChanged="SearchBox_TextChanged"
-                         KeyDown="SearchBox_KeyDown"/>
+                         KeyDown="SearchBox_KeyDown"
+                         GotFocus="SearchBox_GotFocus"
+                         LostFocus="SearchBox_LostFocus"/>
                 <TextBlock x:Name="SearchPlaceholder"
                            Text="🔍  문자 이름으로 검색… (예: arrow, copyright, 😀)"
                            Foreground="{StaticResource TextSecondary}"
@@ -151,6 +153,20 @@
                            IsHitTestVisible="False"
                            VerticalAlignment="Center"
                            Margin="10,0,0,0"/>
+                <!-- 검색 히스토리 드롭다운 -->
+                <Popup x:Name="HistoryPopup"
+                       PlacementTarget="{Binding ElementName=SearchBox}"
+                       Placement="Bottom"
+                       StaysOpen="True"
+                       AllowsTransparency="True">
+                    <Border Background="{StaticResource BgBrush}"
+                            BorderBrush="{StaticResource BorderBrush}"
+                            BorderThickness="1"
+                            CornerRadius="6"
+                            Padding="4">
+                        <StackPanel x:Name="HistoryList" MinWidth="200"/>
+                    </Border>
+                </Popup>
             </Grid>
 
             <!-- ── 카테고리 탭 ── -->
@@ -241,14 +257,14 @@
                             <TextBlock Grid.Row="2" Grid.Column="0" Text="Enter"              Style="{StaticResource KeyStyle}"/>
                             <TextBlock Grid.Row="2" Grid.Column="2" Text="첫 번째 문자 삽입 (다중 선택 중이면 선택한 문자들 연속 삽입)"  Style="{StaticResource DescStyle}"/>
 
-                            <TextBlock Grid.Row="3" Grid.Column="0" Text="↑ (검색창)"         Style="{StaticResource KeyStyle}"/>
-                            <TextBlock Grid.Row="3" Grid.Column="2" Text="이전 검색어 히스토리 순환 (최근 10개, 반복 누르면 더 이전으로)" Style="{StaticResource DescStyle}"/>
+                            <TextBlock Grid.Row="3" Grid.Column="0" Text="↑/↓ (검색창)"        Style="{StaticResource KeyStyle}"/>
+                            <TextBlock Grid.Row="3" Grid.Column="2" Text="검색어 히스토리 탐색 (↑ 이전·↓ 다음, 최근 10개) / 검색창 클릭 시 드롭다운 표시" Style="{StaticResource DescStyle}"/>
 
                             <TextBlock Grid.Row="4" Grid.Column="0" Text="Alt+1~9"            Style="{StaticResource KeyStyle}"/>
                             <TextBlock Grid.Row="4" Grid.Column="2" Text="탭 바로 이동 (최근·즐겨찾기·화살표 …)" Style="{StaticResource DescStyle}"/>
 
                             <TextBlock Grid.Row="5" Grid.Column="0" Text="↓ / Tab"            Style="{StaticResource KeyStyle}"/>
-                            <TextBlock Grid.Row="5" Grid.Column="2" Text="검색창 → 문자 그리드로 포커스 이동" Style="{StaticResource DescStyle}"/>
+                            <TextBlock Grid.Row="5" Grid.Column="2" Text="검색창 → 문자 그리드로 포커스 이동 (히스토리 탐색 중이면 ↓는 역방향 탐색)" Style="{StaticResource DescStyle}"/>
 
                             <TextBlock Grid.Row="6" Grid.Column="0" Text="← → ↑ ↓"           Style="{StaticResource KeyStyle}"/>
                             <TextBlock Grid.Row="6" Grid.Column="2" Text="그리드 내 문자 이동" Style="{StaticResource DescStyle}"/>
@@ -260,13 +276,13 @@
                             <TextBlock Grid.Row="8" Grid.Column="2" Text="문자 삽입 (클립보드 → 이전 창에 붙여넣기)" Style="{StaticResource DescStyle}"/>
 
                             <TextBlock Grid.Row="9" Grid.Column="0" Text="Ctrl+클릭"           Style="{StaticResource KeyStyle}"/>
-                            <TextBlock Grid.Row="9" Grid.Column="2" Text="다중 선택 — 여러 문자를 민트색 테두리로 선택 후 Enter로 연속 삽입" Style="{StaticResource DescStyle}"/>
+                            <TextBlock Grid.Row="9" Grid.Column="2" Text="다중 선택 — 선택 순서 숫자 배지(1·2·3…) 표시, Enter로 순서대로 연속 삽입" Style="{StaticResource DescStyle}"/>
 
                             <TextBlock Grid.Row="10" Grid.Column="0" Text="Shift+클릭"          Style="{StaticResource KeyStyle}"/>
-                            <TextBlock Grid.Row="10" Grid.Column="2" Text="클립보드 복사만 (붙여넣기 없음)" Style="{StaticResource DescStyle}"/>
+                            <TextBlock Grid.Row="10" Grid.Column="2" Text="클립보드 복사만 (붙여넣기 없음, 클립보드 유지 모드와 무관)" Style="{StaticResource DescStyle}"/>
 
-                            <TextBlock Grid.Row="11" Grid.Column="0" Text="우클릭 / F (그리드)" Style="{StaticResource KeyStyle}"/>
-                            <TextBlock Grid.Row="11" Grid.Column="2" Text="즐겨찾기 추가/제거 (사용자 탭: 즐겨찾기·편집·삭제 메뉴)" Style="{StaticResource DescStyle}"/>
+                            <TextBlock Grid.Row="11" Grid.Column="0" Text="우클릭 (그리드)"     Style="{StaticResource KeyStyle}"/>
+                            <TextBlock Grid.Row="11" Grid.Column="2" Text="컨텍스트 메뉴 — 즐겨찾기·코드포인트 복사 / 사용자 탭: 즐겨찾기·편집·삭제 / 키보드 F: 즐겨찾기 토글" Style="{StaticResource DescStyle}"/>
 
                             <TextBlock Grid.Row="12" Grid.Column="0" Text="Ctrl+휠"            Style="{StaticResource KeyStyle}"/>
                             <TextBlock Grid.Row="12" Grid.Column="2" Text="문자 크기 조절 (14~36px)" Style="{StaticResource DescStyle}"/>

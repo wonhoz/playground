@@ -473,9 +473,32 @@ public partial class PopupWindow : System.Windows.Window
             Visibility          = isSearchResult ? Visibility.Visible : Visibility.Collapsed,
         };
 
+        // 다중 선택 순서 배지 (좌상단 숫자, Ctrl+클릭 순서 표시)
+        int multiIdx = _multiSelected.FindIndex(e => e.Char == entry.Char);
+        var multiOrderBadge = new Border
+        {
+            Background          = (SolidColorBrush)FindResource("AccentHover"),
+            CornerRadius        = new CornerRadius(8),
+            Padding             = new Thickness(3, 1, 3, 1),
+            HorizontalAlignment = System.Windows.HorizontalAlignment.Left,
+            VerticalAlignment   = VerticalAlignment.Top,
+            Margin              = new Thickness(2, 2, 0, 0),
+            IsHitTestVisible    = false,
+            Visibility          = multiIdx >= 0 ? Visibility.Visible : Visibility.Collapsed,
+            Child               = new TextBlock
+            {
+                Text       = (multiIdx + 1).ToString(),
+                FontSize   = 8,
+                FontWeight = FontWeights.Bold,
+                Foreground = new SolidColorBrush(Colors.Black),
+            },
+            Tag = "multiOrderBadge",
+        };
+
         grid.Children.Add(border);
         grid.Children.Add(star);
         grid.Children.Add(catLabel);
+        grid.Children.Add(multiOrderBadge);
 
         // 호버 / 포커스 시각 피드백 + 상태바 미리보기
         border.MouseEnter += (_, _) =>
@@ -493,7 +516,7 @@ public partial class PopupWindow : System.Windows.Window
         border.LostKeyboardFocus += (_, _) => border.Background = (SolidColorBrush)FindResource("TabInactive");
 
         // 다중 선택 상태이면 테두리 강조 복원
-        if (_multiSelected.Any(e => e.Char == entry.Char))
+        if (multiIdx >= 0)
         {
             border.BorderBrush     = (SolidColorBrush)FindResource("AccentHover");
             border.BorderThickness = new Thickness(2);
@@ -523,14 +546,14 @@ public partial class PopupWindow : System.Windows.Window
             }
         };
 
-        // 우클릭: 즐겨찾기 토글 / 사용자 정의 탭에서는 편집/삭제 선택
+        // 우클릭: 컨텍스트 메뉴 (커스텀: 즐겨찾기·편집·삭제 / 일반: 즐겨찾기·코드포인트 복사)
         border.MouseRightButtonUp += (_, ev) =>
         {
             ev.Handled = true;
             if (entry.Category == "custom")
                 ShowCustomCharContextMenu(entry, border);
             else
-                ToggleFavorite(entry, star);
+                ShowCharContextMenu(entry, border, star);
         };
 
         // 키보드 탐색
@@ -706,6 +729,7 @@ public partial class PopupWindow : System.Windows.Window
     }
 
     // ── 복사 전용 (Shift+클릭) ──────────────────────────────────────────
+    // 클립보드에 넣는 것 자체가 목적이므로 _preserveClipboard 적용 대상 아님
     private void CopyCharOnly(CharEntry entry)
     {
         System.Windows.Clipboard.SetText(entry.Char);
@@ -732,6 +756,54 @@ public partial class PopupWindow : System.Windows.Window
         if (_activeTab == "favorite") RefreshGrid();
     }
 
+    // ── 검색 히스토리 드롭다운 ─────────────────────────────────────────────
+    private void SearchBox_GotFocus(object sender, RoutedEventArgs e) => ShowHistoryPopup();
+    private void SearchBox_LostFocus(object sender, RoutedEventArgs e)
+    {
+        // 히스토리 항목 클릭 시 LostFocus가 먼저 오므로 짧은 지연 후 닫기
+        Dispatcher.BeginInvoke(() => { if (!HistoryPopup.IsKeyboardFocusWithin) HistoryPopup.IsOpen = false; },
+                               DispatcherPriority.Background);
+    }
+
+    private void ShowHistoryPopup()
+    {
+        if (_searchHistory.Count == 0) { HistoryPopup.IsOpen = false; return; }
+
+        HistoryList.Children.Clear();
+        foreach (var hist in _searchHistory)
+        {
+            var item = new Border
+            {
+                Background   = System.Windows.Media.Brushes.Transparent,
+                CornerRadius = new CornerRadius(4),
+                Padding      = new Thickness(10, 5, 10, 5),
+                Cursor       = System.Windows.Input.Cursors.Hand,
+                Child        = new TextBlock
+                {
+                    Text       = hist,
+                    Foreground = (SolidColorBrush)FindResource("TextPrimary"),
+                    FontFamily = new WpfFontFamily("Segoe UI"),
+                    FontSize   = 12,
+                },
+            };
+            var captured = hist;
+            item.MouseEnter += (_, _) => item.Background = (SolidColorBrush)FindResource("CharHover");
+            item.MouseLeave += (_, _) => item.Background = System.Windows.Media.Brushes.Transparent;
+            item.MouseLeftButtonUp += (_, _) =>
+            {
+                HistoryPopup.IsOpen = false;
+                SearchBox.Text = captured;
+                SearchBox.CaretIndex = SearchBox.Text.Length;
+                SearchBox.Focus();
+            };
+            HistoryList.Children.Add(item);
+        }
+
+        // Popup 너비를 SearchBox에 맞춤
+        HistoryList.MinWidth = SearchBox.ActualWidth > 0 ? SearchBox.ActualWidth - 12 : 200;
+        HistoryPopup.IsOpen = true;
+    }
+
     // ── 이벤트 핸들러 ────────────────────────────────────────────────────
     private void SearchBox_TextChanged(object sender, TextChangedEventArgs e)
     {
@@ -740,6 +812,9 @@ public partial class PopupWindow : System.Windows.Window
             ? Visibility.Visible : Visibility.Collapsed;
         _searchHistoryIdx = -1;  // 직접 편집 시 히스토리 탐색 인덱스 초기화
         _searchTimer?.Stop();
+        // 검색창 비어있을 때 포커스 중이면 히스토리 팝업 다시 표시
+        if (string.IsNullOrEmpty(SearchBox.Text) && SearchBox.IsFocused) ShowHistoryPopup();
+        else HistoryPopup.IsOpen = false;
         if (string.IsNullOrEmpty(SearchBox.Text))
             RefreshGrid();   // 검색어 지울 때는 즉시 갱신
         else
@@ -750,7 +825,10 @@ public partial class PopupWindow : System.Windows.Window
     {
         if (e.Key == Key.Escape)
         {
-            if (!string.IsNullOrEmpty(SearchBox.Text))
+            // 우선순위: 다중 선택 해제 → 검색어 지우기 → 창 닫기
+            if (_multiSelected.Count > 0)
+                ClearMultiSelection();
+            else if (!string.IsNullOrEmpty(SearchBox.Text))
                 SearchBox.Clear();
             else
                 Hide();
@@ -767,6 +845,16 @@ public partial class PopupWindow : System.Windows.Window
                 e.Handled = true;
             }
         }
+        else if (e.Key == Key.Down &&
+                 e.KeyboardDevice.Modifiers == ModifierKeys.None &&
+                 _searchHistoryIdx >= 0 && _searchHistory.Count > 0)
+        {
+            // 검색어 히스토리 역방향 순환 (↓ 키 — 히스토리 탐색 중일 때만)
+            _searchHistoryIdx = Math.Max(_searchHistoryIdx - 1, -1);
+            SearchBox.Text = _searchHistoryIdx >= 0 ? _searchHistory[_searchHistoryIdx] : "";
+            SearchBox.CaretIndex = SearchBox.Text.Length;
+            e.Handled = true;
+        }
         else if (e.Key == Key.Enter)
         {
             // 다중 선택 삽입 우선, 없으면 첫 번째 문자 삽입
@@ -780,12 +868,6 @@ public partial class PopupWindow : System.Windows.Window
             {
                 InsertChar(entry);
             }
-            e.Handled = true;
-        }
-        else if (e.Key == Key.Escape && _multiSelected.Count > 0)
-        {
-            // 다중 선택 취소
-            ClearMultiSelection();
             e.Handled = true;
         }
         else if (e.Key == Key.Down ||
@@ -859,6 +941,54 @@ public partial class PopupWindow : System.Windows.Window
     public void ShowHelpOverlay()
         => Dispatcher.BeginInvoke(() => HelpOverlay.Visibility = Visibility.Visible,
                                   DispatcherPriority.Loaded);
+
+    // ── 일반 문자 우클릭 컨텍스트 메뉴 (즐겨찾기 · 코드포인트 복사) ─────
+    private void ShowCharContextMenu(CharEntry entry, UIElement anchor, TextBlock star)
+    {
+        var menu = new System.Windows.Controls.ContextMenu();
+        menu.Background      = (SolidColorBrush)FindResource("SurfaceBrush");
+        menu.BorderBrush     = (SolidColorBrush)FindResource("BorderBrush");
+        menu.BorderThickness = new Thickness(1);
+
+        bool isFav = _storage.IsFavorite(entry.Char);
+        var favItem = new System.Windows.Controls.MenuItem
+        {
+            Header     = isFav ? $"★  즐겨찾기 제거  ({entry.Char})" : $"☆  즐겨찾기 추가  ({entry.Char})",
+            Foreground = isFav
+                ? (SolidColorBrush)FindResource("FavColor")
+                : (SolidColorBrush)FindResource("TextPrimary"),
+            Background = System.Windows.Media.Brushes.Transparent,
+        };
+        favItem.Click += (_, _) => ToggleFavorite(entry, star);
+
+        // 코드포인트 문자열 생성 (예: U+2665 / U+D83D U+DC96)
+        var cp = new System.Text.StringBuilder();
+        for (int i = 0; i < entry.Char.Length; )
+        {
+            int code = char.ConvertToUtf32(entry.Char, i);
+            if (cp.Length > 0) cp.Append(' ');
+            cp.Append($"U+{code:X4}");
+            i += char.IsSurrogatePair(entry.Char, i) ? 2 : 1;
+        }
+        var cpStr = cp.ToString();
+        var cpItem = new System.Windows.Controls.MenuItem
+        {
+            Header     = $"⎘  코드포인트 복사  ({cpStr})",
+            Foreground = (SolidColorBrush)FindResource("TextPrimary"),
+            Background = System.Windows.Media.Brushes.Transparent,
+        };
+        cpItem.Click += (_, _) =>
+        {
+            TrySetClipboardText(cpStr);
+            StatusText.Text = $"코드포인트 복사됨: {cpStr}";
+        };
+
+        menu.Items.Add(favItem);
+        menu.Items.Add(new System.Windows.Controls.Separator());
+        menu.Items.Add(cpItem);
+        menu.PlacementTarget = anchor;
+        menu.IsOpen = true;
+    }
 
     // ── 사용자 정의 문자 삭제 ────────────────────────────────────────────
     private void DeleteCustomChar(CharEntry entry)
@@ -970,7 +1100,36 @@ public partial class PopupWindow : System.Windows.Window
             border.BorderBrush     = (SolidColorBrush)FindResource("AccentHover");
             border.BorderThickness = new Thickness(2);
         }
+        // 순서 변경으로 다른 셀의 배지 번호도 갱신 필요
+        UpdateMultiOrderBadges();
         UpdateMultiSelectStatus();
+    }
+
+    // 그리드 내 모든 셀의 다중 선택 순서 배지 갱신 (RefreshGrid 없이 DOM 직접 업데이트)
+    private void UpdateMultiOrderBadges()
+    {
+        foreach (UIElement item in CharGrid.Children)
+        {
+            if (item is not Grid g) continue;
+            Border? cellBorder = g.Children.Count > 0 ? g.Children[0] as Border : null;
+            if (cellBorder?.Tag is not CharEntry ce) continue;
+
+            // 순서 배지 Border (Tag == "multiOrderBadge")
+            Border? badge = g.Children.OfType<Border>()
+                             .FirstOrDefault(b => b.Tag is string s && s == "multiOrderBadge");
+            if (badge == null) continue;
+
+            int idx = _multiSelected.FindIndex(e => e.Char == ce.Char);
+            if (idx >= 0)
+            {
+                badge.Visibility = Visibility.Visible;
+                if (badge.Child is TextBlock tb) tb.Text = (idx + 1).ToString();
+            }
+            else
+            {
+                badge.Visibility = Visibility.Collapsed;
+            }
+        }
     }
 
     private void ClearMultiSelection()

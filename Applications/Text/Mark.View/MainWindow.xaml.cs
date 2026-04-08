@@ -1107,9 +1107,73 @@ public partial class MainWindow : Window
     {
         if (sender is Border b)
         {
+            if (e.ClickCount == 2)
+            {
+                e.Handled = true;
+                StartTabRename(b);
+                return;
+            }
             _tabDragStart = e.GetPosition(b);
             SwitchTo((int)b.Tag);
         }
+    }
+
+    private void StartTabRename(Border tab)
+    {
+        if (tab.Child is not StackPanel sp) return;
+        var titleBlock = sp.Children.OfType<TextBlock>().FirstOrDefault(t => t.Tag as string == "title");
+        if (titleBlock == null) return;
+
+        var idx = (int)tab.Tag;
+        var doc = _docs[idx];
+        titleBlock.Visibility = Visibility.Collapsed;
+
+        var tb = new TextBox
+        {
+            Text = doc.CustomTitle ?? doc.FileName,
+            FontSize = 12,
+            MinWidth = 60,
+            MaxWidth = 200,
+            Height = 22,
+            Padding = new Thickness(3, 1, 3, 1),
+            VerticalAlignment = VerticalAlignment.Center,
+            BorderThickness = new Thickness(1),
+            BorderBrush = (SolidColorBrush)FindResource("AccentBrush"),
+            Background = (SolidColorBrush)FindResource("Surface2Brush"),
+            Foreground = (SolidColorBrush)FindResource("TextBrush"),
+            CaretBrush = (SolidColorBrush)FindResource("AccentBrush"),
+        };
+
+        var titleIdx = sp.Children.IndexOf(titleBlock);
+        sp.Children.Insert(titleIdx, tb);
+
+        void Confirm()
+        {
+            if (!sp.Children.Contains(tb)) return;
+            var newName = tb.Text.Trim();
+            doc.CustomTitle = string.IsNullOrEmpty(newName) ? null : newName;
+            sp.Children.Remove(tb);
+            titleBlock.Visibility = Visibility.Visible;
+            UpdateTabTitle(idx);
+            if (idx == _activeIndex)
+                Title = $"Mark.View — {doc.TabTitle}";
+        }
+
+        void Cancel()
+        {
+            if (!sp.Children.Contains(tb)) return;
+            sp.Children.Remove(tb);
+            titleBlock.Visibility = Visibility.Visible;
+        }
+
+        tb.KeyDown += (_, ke) =>
+        {
+            if (ke.Key == Key.Enter) { Confirm(); ke.Handled = true; }
+            else if (ke.Key == Key.Escape) { Cancel(); ke.Handled = true; }
+        };
+        tb.LostFocus += (_, _) => Confirm();
+        Dispatcher.InvokeAsync(() => { tb.Focus(); tb.SelectAll(); },
+            System.Windows.Threading.DispatcherPriority.Input);
     }
 
     private void Tab_MouseMove(object sender, MouseEventArgs e)
@@ -1211,6 +1275,15 @@ public partial class MainWindow : Window
         };
         menu.Items.Add(duplicateItem);
 
+        var closeRightItem = new MenuItem { Header = "오른쪽 탭 모두 닫기" };
+        closeRightItem.IsEnabled = tabIdx < _docs.Count - 1;
+        closeRightItem.Click += (_, _) =>
+        {
+            for (int i = _docs.Count - 1; i > _activeIndex; i--)
+                CloseTab(i);
+        };
+        menu.Items.Add(closeRightItem);
+
         var closeOthersItem = new MenuItem { Header = "다른 탭 모두 닫기" };
         closeOthersItem.IsEnabled = _docs.Count > 1;
         closeOthersItem.Click += (_, _) =>
@@ -1221,6 +1294,56 @@ public partial class MainWindow : Window
         menu.Items.Add(closeOthersItem);
 
         menu.PlacementTarget = b;
+        menu.Placement = System.Windows.Controls.Primitives.PlacementMode.MousePoint;
+        menu.IsOpen = true;
+    }
+
+    private void Editor_ContextMenuOpening(object sender, ContextMenuEventArgs e)
+    {
+        e.Handled = true; // 기본 WPF 컨텍스트 메뉴 억제
+        var hasSel = Editor.SelectionLength > 0;
+        var menu = new ContextMenu();
+
+        var cutItem = new MenuItem { Header = "잘라내기\tCtrl+X", IsEnabled = hasSel };
+        cutItem.Click += (_, _) => Editor.Cut();
+        menu.Items.Add(cutItem);
+
+        var copyItem = new MenuItem { Header = "복사\tCtrl+C", IsEnabled = hasSel };
+        copyItem.Click += (_, _) => Editor.Copy();
+        menu.Items.Add(copyItem);
+
+        var pasteItem = new MenuItem { Header = "붙여넣기\tCtrl+V" };
+        pasteItem.Click += (_, _) => Editor.Paste();
+        menu.Items.Add(pasteItem);
+
+        menu.Items.Add(new Separator());
+
+        var selectAllItem = new MenuItem { Header = "모두 선택\tCtrl+A" };
+        selectAllItem.Click += (_, _) => Editor.SelectAll();
+        menu.Items.Add(selectAllItem);
+
+        if (_isEditMode)
+        {
+            menu.Items.Add(new Separator());
+
+            var boldItem = new MenuItem { Header = "굵게\tCtrl+B", IsEnabled = hasSel };
+            boldItem.Click += (_, _) => WrapSelection("**", "**");
+            menu.Items.Add(boldItem);
+
+            var italicItem = new MenuItem { Header = "기울임\tCtrl+I", IsEnabled = hasSel };
+            italicItem.Click += (_, _) => WrapSelection("*", "*");
+            menu.Items.Add(italicItem);
+
+            var codeItem = new MenuItem { Header = "인라인 코드", IsEnabled = hasSel };
+            codeItem.Click += (_, _) => WrapSelection("`", "`");
+            menu.Items.Add(codeItem);
+
+            var linkItem = new MenuItem { Header = "링크 삽입\tCtrl+K" };
+            linkItem.Click += (_, _) => WrapAsLink();
+            menu.Items.Add(linkItem);
+        }
+
+        menu.PlacementTarget = Editor;
         menu.Placement = System.Windows.Controls.Primitives.PlacementMode.MousePoint;
         menu.IsOpen = true;
     }
@@ -2306,6 +2429,22 @@ public partial class MainWindow : Window
 
         // Breadcrumb: 커서 앞 마지막 헤딩 표시
         UpdateBreadcrumb(text, caret);
+
+        // 선택 영역이 있으면 상태바에 선택 통계 표시
+        if (Editor.SelectionLength > 0)
+        {
+            var sel = Editor.SelectedText;
+            var selWords = _wordRegex.Matches(sel).Count;
+            StatusWords.Text = $"선택: {Editor.SelectionLength}자 · {selWords}단어";
+        }
+        else if (_activeIndex >= 0 && _activeIndex < _docs.Count)
+        {
+            // 선택 해제 시 문서 전체 통계로 복원
+            var doc = _docs[_activeIndex];
+            var docWords = string.IsNullOrWhiteSpace(doc.Content) ? 0 : _wordRegex.Matches(doc.Content).Count;
+            var readMin = Math.Max(1, (int)Math.Ceiling(docWords / 200.0));
+            StatusWords.Text = docWords > 0 ? $"{docWords}단어 · 약 {readMin}분" : "0단어";
+        }
     }
 
     private void UpdateCurrentLineHighlight(int caret)
@@ -2918,6 +3057,17 @@ public partial class MainWindow : Window
     {
         if (sender is Border b)
             b.Background = System.Windows.Media.Brushes.Transparent;
+    }
+
+    private void RemoveRecentFile_Click(object sender, RoutedEventArgs e)
+    {
+        if (sender is Button btn && btn.Tag is string path)
+        {
+            _settings.RecentFiles.Remove(path);
+            _settings.PinnedFiles.RemoveAll(p => p.Equals(path, StringComparison.OrdinalIgnoreCase));
+            _settings.Save();
+            RefreshRecentList();
+        }
     }
 
     // ── 종료 ────────────────────────────────────────────────────────────

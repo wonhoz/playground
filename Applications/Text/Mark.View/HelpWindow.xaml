@@ -126,12 +126,14 @@
                 <local:ShortcutEntry Key="F5"               Desc="현재 파일 새로고침"/>
                 <local:ShortcutEntry Key="F11"              Desc="집중 모드 (툴바/상태바 숨김)"/>
                 <local:ShortcutEntry Key="📌 버튼"          Desc="최근 파일 즐겨찾기 고정/해제"/>
+                <local:ShortcutEntry Key="✕ 버튼 (최근)"   Desc="최근 파일 목록에서 해당 항목 제거"/>
                 <local:ShortcutEntry Key="Ctrl + 클릭 (최근)" Desc="최근 파일을 새 탭으로 열기"/>
                 <local:ShortcutEntry Key="최근 파일 검색창" Desc="파일명/폴더명으로 최근 파일 실시간 필터링"/>
                 <local:ShortcutEntry Key="상태바 경로"      Desc="클릭 시 파일 탐색기에서 위치 열기"/>
                 <local:ShortcutEntry Key="상태바 ↩ 표시"   Desc="편집 모드에서 실행 취소(Ctrl+Z) 가능 상태 표시"/>
                 <local:ShortcutEntry Key="자동 저장"        Desc="편집 중단 30초 후 %AppData%\MarkView\autosave에 임시 저장"/>
-                <local:ShortcutEntry Key="탭 우클릭"       Desc="경로 복사 · 탐색기에서 열기 · 탭 복제 · 다른 탭 모두 닫기"/>
+                <local:ShortcutEntry Key="탭 더블클릭"     Desc="탭 이름 인라인 편집 — Enter 확정, Esc 취소"/>
+                <local:ShortcutEntry Key="탭 우클릭"       Desc="경로 복사 · 탐색기에서 열기 · 탭 복제 · 오른쪽 탭 모두 닫기 · 다른 탭 모두 닫기"/>
               </ItemsControl.Items>
             </ItemsControl>
 
@@ -165,6 +167,7 @@
               <ItemsControl.Items>
                 <local:ShortcutEntry Key="줄:컬럼"              Desc="에디터 커서 위치 (편집 모드에서 표시)"/>
                 <local:ShortcutEntry Key="N줄 · N단어 · 약 Nm" Desc="줄 수 / 단어 수 / 예상 읽기 시간 — 단어 수에 마우스 오버 시 헤딩·이미지·링크 수 툴팁 표시"/>
+                <local:ShortcutEntry Key="선택: Nchar · N단어" Desc="텍스트 선택 시 상태바에 선택 글자 수 및 단어 수 표시"/>
                 <local:ShortcutEntry Key="상태바 경로"          Desc="클릭 시 파일 탐색기에서 위치 열기"/>
               </ItemsControl.Items>
             </ItemsControl>
@@ -204,6 +207,7 @@
                 <local:ShortcutEntry Key="선택 후 [ ( &quot;"  Desc="선택 영역을 [ ] · ( ) · &quot; &quot; 로 자동 감싸기"/>
                 <local:ShortcutEntry Key="선택 후 * 또는 `"   Desc="선택 영역을 * 또는 ` 로 자동 감싸기 (Ctrl+B/I 와 동일 효과)"/>
                 <local:ShortcutEntry Key="탭 드래그 앤 드롭"   Desc="탭을 드래그하여 순서 재배치"/>
+                <local:ShortcutEntry Key="에디터 우클릭"       Desc="잘라내기 · 복사 · 붙여넣기 · 전체 선택 + 굵게/기울임/코드/링크 서식 메뉴 (편집 모드)"/>
               </ItemsControl.Items>
             </ItemsControl>
 

@@ -11,11 +11,13 @@ public class MarkDocument
     public double ScrollY { get; set; } = 0;
     public bool IsNew => string.IsNullOrEmpty(FilePath);
 
+    public string? CustomTitle { get; set; }
+
     public string TabTitle
     {
         get
         {
-            var name = IsNew ? "새 문서" : Path.GetFileName(FilePath);
+            var name = CustomTitle ?? (IsNew ? "새 문서" : Path.GetFileName(FilePath));
             return IsModified ? name + " •" : name;
         }
     }

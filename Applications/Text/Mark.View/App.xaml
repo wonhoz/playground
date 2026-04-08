@@ -408,6 +408,41 @@
       <Setter Property="Margin"          Value="4,2"/>
     </Style>
 
+    <!-- ── ListBox / ListBoxItem ────────────────────── -->
+    <Style TargetType="ListBox">
+      <Setter Property="Background"      Value="Transparent"/>
+      <Setter Property="BorderThickness" Value="0"/>
+      <Setter Property="Padding"         Value="0"/>
+      <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+    </Style>
+    <Style TargetType="ListBoxItem">
+      <Setter Property="Background"        Value="Transparent"/>
+      <Setter Property="Foreground"        Value="{StaticResource TextBrush}"/>
+      <Setter Property="Padding"           Value="8,4"/>
+      <Setter Property="FocusVisualStyle"  Value="{x:Null}"/>
+      <Setter Property="Template">
+        <Setter.Value>
+          <ControlTemplate TargetType="ListBoxItem">
+            <Border x:Name="bd"
+                    Background="{TemplateBinding Background}"
+                    Padding="{TemplateBinding Padding}"
+                    CornerRadius="4">
+              <ContentPresenter/>
+            </Border>
+            <ControlTemplate.Triggers>
+              <Trigger Property="IsSelected" Value="True">
+                <Setter TargetName="bd" Property="Background" Value="{StaticResource HoverBrush}"/>
+                <Setter Property="Foreground" Value="{StaticResource TextBrush}"/>
+              </Trigger>
+              <Trigger Property="IsMouseOver" Value="True">
+                <Setter TargetName="bd" Property="Background" Value="{StaticResource HoverBrush}"/>
+              </Trigger>
+            </ControlTemplate.Triggers>
+          </ControlTemplate>
+        </Setter.Value>
+      </Setter>
+    </Style>
+
     <!-- ── GridSplitter ──────────────────────────────── -->
     <Style TargetType="GridSplitter">
       <Setter Property="Background" Value="{StaticResource BorderBrush}"/>

@@ -31,6 +31,7 @@ public partial class MainWindow : Window
     private bool _caseSensitive;
     private HelpWindow? _helpWindow;
     private DispatcherTimer? _previewTimer;
+    private Point _tabDragStart;
 
     private DispatcherTimer? _autoSaveTimer;
     private string _currentTheme = "dark";
@@ -490,7 +491,7 @@ public partial class MainWindow : Window
             parent.replaceChild(document.createTextNode(el.textContent), el);
             parent.normalize();
         });
-        if (!keyword) return;
+        if (!keyword) { window.__shlCount = 0; return 0; }
         var target = caseSensitive ? keyword : keyword.toLowerCase();
         var walk = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, {
             acceptNode: function(node) {
@@ -503,6 +504,7 @@ public partial class MainWindow : Window
         });
         var nodes = [];
         while (walk.nextNode()) nodes.push(walk.currentNode);
+        var count = 0;
         nodes.forEach(function(node) {
             var text = node.nodeValue;
             if (!text) return;
@@ -515,15 +517,28 @@ public partial class MainWindow : Window
                 if (idx > pos) frag.appendChild(document.createTextNode(text.slice(pos, idx)));
                 var span = document.createElement('span');
                 span.className = '__shl';
-                span.style.cssText = 'background:#FFD700;color:#1a1a1a;border-radius:2px;padding:0 1px;';
+                span.dataset.idx = count;
+                span.style.cssText = 'background:#FFD700;color:#1a1a1a;border-radius:2px;padding:0 1px;transition:background 0.15s;';
                 span.textContent = text.slice(idx, idx + keyword.length);
                 frag.appendChild(span);
+                count++;
                 pos = idx + keyword.length;
                 idx = searchText.indexOf(target, pos);
             }
             if (pos < text.length) frag.appendChild(document.createTextNode(text.slice(pos)));
             node.parentNode.replaceChild(frag, node);
         });
+        window.__shlCount = count;
+        return count;
+    };
+    window.__searchFocus = function(idx) {
+        var els = document.querySelectorAll('.__shl');
+        els.forEach(function(el) { el.style.background = '#FFD700'; el.style.color = '#1a1a1a'; });
+        if (idx >= 0 && idx < els.length) {
+            els[idx].style.background = '#FF6B35';
+            els[idx].style.color = '#FFFFFF';
+            els[idx].scrollIntoView({behavior:'smooth',block:'center'});
+        }
     };
 })()");
         }
@@ -537,7 +552,24 @@ public partial class MainWindow : Window
         {
             var kw = System.Text.Json.JsonSerializer.Serialize(keyword);
             var cs = _caseSensitive ? "true" : "false";
-            await Viewer.ExecuteScriptAsync($"window.__searchHighlight && window.__searchHighlight({kw}, {cs})");
+            var countJson = await Viewer.ExecuteScriptAsync($"window.__searchHighlight ? window.__searchHighlight({kw}, {cs}) : 0");
+            if (int.TryParse(countJson.Trim('"'), out var count))
+            {
+                _findMatchCount = count;
+                if (count > 0)
+                {
+                    _findCurrentIndex = 1;
+                    StatusFind.Text = $"1 / {count}";
+                    StatusFind.Visibility = Visibility.Visible;
+                    await Viewer.ExecuteScriptAsync("window.__searchFocus && window.__searchFocus(0)");
+                }
+                else
+                {
+                    _findCurrentIndex = 0;
+                    StatusFind.Text = "없음";
+                    StatusFind.Visibility = Visibility.Visible;
+                }
+            }
         }
         catch { }
     }
@@ -622,8 +654,15 @@ public partial class MainWindow : Window
                         Filter = "이미지 파일|*.png;*.jpg;*.jpeg;*.gif;*.webp;*.svg;*.bmp|모든 파일|*.*",
                     };
                     if (dlg.ShowDialog() != true) return;
-                    var bytes = await Viewer.CoreWebView2.CallDevToolsProtocolMethodAsync(
-                        "Page.captureScreenshot", "{}"); // fallback: HTTP 다운로드
+                    if (srcUri.StartsWith("file://", StringComparison.OrdinalIgnoreCase))
+                    {
+                        var localPath = new Uri(srcUri).LocalPath;
+                        if (File.Exists(localPath))
+                        {
+                            File.Copy(localPath, dlg.FileName, overwrite: true);
+                            return;
+                        }
+                    }
                     using var client = new System.Net.Http.HttpClient();
                     var data = await client.GetByteArrayAsync(srcUri);
                     await System.IO.File.WriteAllBytesAsync(dlg.FileName, data);
@@ -833,10 +872,88 @@ public partial class MainWindow : Window
         // 뷰어 스크롤 동기화 (편집 모드에서만)
         if (!_isEditMode || !_webViewReady || _suppressEditorChange) return;
         if (e.ExtentHeight <= e.ViewportHeight) return;
-        var ratio = e.VerticalOffset / (e.ExtentHeight - e.ViewportHeight);
-        _ = Viewer.ExecuteScriptAsync(
-            $"(function(){{var h=document.documentElement.scrollHeight-window.innerHeight;" +
-            $"if(h>0)window.scrollTo(0,h*{ratio.ToString(System.Globalization.CultureInfo.InvariantCulture)});}})()");
+        _ = SyncScrollToViewerAsync(e);
+    }
+
+    private async Task SyncScrollToViewerAsync(ScrollChangedEventArgs e)
+    {
+        // 에디터 상단에 보이는 문자 인덱스 → 줄 번호 계산
+        var text = Editor.Text;
+        if (string.IsNullOrEmpty(text)) return;
+        int topCharIdx = Editor.GetCharacterIndexFromPoint(new Point(Editor.Padding.Left + 1, 1), snapToText: true);
+        int topLine = CountNewlinesBefore(text, topCharIdx);
+
+        // 에디터 텍스트에서 헤딩 줄 목록 추출 (0-based)
+        var headingLines = new List<int>();
+        var lines = text.Split('\n');
+        for (int i = 0; i < lines.Length; i++)
+        {
+            var line = lines[i].AsSpan().TrimStart();
+            if (line.StartsWith("#") && line.Length > 1)
+            {
+                int level = 0;
+                while (level < line.Length && line[level] == '#') level++;
+                if (level <= 6 && level < line.Length && line[level] == ' ')
+                    headingLines.Add(i);
+            }
+        }
+
+        // 현재 뷰포트 상단에 가장 가까운 이전 헤딩 찾기
+        int prevHeadingIdx = -1;
+        for (int i = headingLines.Count - 1; i >= 0; i--)
+        {
+            if (headingLines[i] <= topLine)
+            {
+                prevHeadingIdx = i;
+                break;
+            }
+        }
+
+        if (prevHeadingIdx < 0 || headingLines.Count < 2)
+        {
+            // 헤딩이 없거나 최소 2개 미만이면 기본 비율 동기화
+            var ratio = e.VerticalOffset / (e.ExtentHeight - e.ViewportHeight);
+            try
+            {
+                await Viewer.ExecuteScriptAsync(
+                    $"(function(){{var h=document.documentElement.scrollHeight-window.innerHeight;" +
+                    $"if(h>0)window.scrollTo(0,h*{ratio.ToString(System.Globalization.CultureInfo.InvariantCulture)});}})()");
+            }
+            catch { }
+            return;
+        }
+
+        // 현재 헤딩과 다음 헤딩 사이의 비율 계산
+        int curHeadingLine = headingLines[prevHeadingIdx];
+        int nextHeadingLine = prevHeadingIdx + 1 < headingLines.Count
+            ? headingLines[prevHeadingIdx + 1]
+            : lines.Length;
+        double interRatio = nextHeadingLine > curHeadingLine
+            ? Math.Clamp((double)(topLine - curHeadingLine) / (nextHeadingLine - curHeadingLine), 0, 1)
+            : 0;
+
+        try
+        {
+            var inv = System.Globalization.CultureInfo.InvariantCulture;
+            await Viewer.ExecuteScriptAsync($@"
+(function(){{
+    var headings = document.querySelectorAll('h1,h2,h3,h4,h5,h6');
+    var idx = {prevHeadingIdx};
+    if (idx >= headings.length) {{
+        var h = document.documentElement.scrollHeight - window.innerHeight;
+        if (h > 0) window.scrollTo(0, h * {(e.VerticalOffset / (e.ExtentHeight - e.ViewportHeight)).ToString(inv)});
+        return;
+    }}
+    var cur = headings[idx];
+    var curTop = cur.getBoundingClientRect().top + window.scrollY;
+    var nextTop = idx + 1 < headings.length
+        ? headings[idx+1].getBoundingClientRect().top + window.scrollY
+        : document.documentElement.scrollHeight;
+    var target = curTop + (nextTop - curTop) * {interRatio.ToString(inv)};
+    window.scrollTo(0, Math.max(0, target - 20));
+}})()");
+        }
+        catch { }
     }
 
     // ── 프리뷰 타이머 ───────────────────────────────────────────────────
@@ -960,8 +1077,12 @@ public partial class MainWindow : Window
         tab.Child = inner;
 
         tab.MouseLeftButtonDown += Tab_Click;
+        tab.MouseMove += Tab_MouseMove;
         tab.MouseDown += Tab_MouseDown;
         tab.MouseRightButtonUp += Tab_RightClick;
+        tab.AllowDrop = true;
+        tab.DragOver += Tab_DragOver;
+        tab.Drop += Tab_Drop;
         tab.MouseEnter += (s, _) =>
         {
             if ((int)((Border)s).Tag != _activeIndex)
@@ -979,7 +1100,65 @@ public partial class MainWindow : Window
     private void Tab_Click(object sender, MouseButtonEventArgs e)
     {
         if (sender is Border b)
+        {
+            _tabDragStart = e.GetPosition(b);
             SwitchTo((int)b.Tag);
+        }
+    }
+
+    private void Tab_MouseMove(object sender, MouseEventArgs e)
+    {
+        if (e.LeftButton != MouseButtonState.Pressed || sender is not Border b) return;
+        var pos = e.GetPosition(b);
+        if (Math.Abs(pos.X - _tabDragStart.X) < 10 && Math.Abs(pos.Y - _tabDragStart.Y) < 10) return;
+        DragDrop.DoDragDrop(b, new DataObject("TabIndex", (int)b.Tag), DragDropEffects.Move);
+    }
+
+    private void Tab_DragOver(object sender, DragEventArgs e)
+    {
+        if (e.Data.GetDataPresent("TabIndex"))
+            e.Effects = DragDropEffects.Move;
+        else
+            e.Effects = DragDropEffects.None;
+        e.Handled = true;
+    }
+
+    private void Tab_Drop(object sender, DragEventArgs e)
+    {
+        if (!e.Data.GetDataPresent("TabIndex") || sender is not Border target) return;
+        var fromIdx = (int)e.Data.GetData("TabIndex");
+        var toIdx = (int)target.Tag;
+        if (fromIdx == toIdx) return;
+        MoveTab(fromIdx, toIdx);
+    }
+
+    private void MoveTab(int from, int to)
+    {
+        var doc = _docs[from];
+        var tab = _tabs[from];
+        _docs.RemoveAt(from);
+        _tabs.RemoveAt(from);
+        TabBar.Children.RemoveAt(from);
+        _docs.Insert(to, doc);
+        _tabs.Insert(to, tab);
+        TabBar.Children.Insert(to, tab);
+        // 인덱스 재매핑
+        for (int i = 0; i < _tabs.Count; i++)
+        {
+            _tabs[i].Tag = i;
+            if (_tabs[i].Child is StackPanel sp)
+                foreach (var c in sp.Children.OfType<TextBlock>())
+                    if (c.Tag is int) c.Tag = i;
+        }
+        _activeIndex = to;
+        // 탭 스타일 갱신
+        for (int i = 0; i < _tabs.Count; i++)
+        {
+            _tabs[i].BorderBrush = i == _activeIndex
+                ? (SolidColorBrush)FindResource("AccentBrush") : Brushes.Transparent;
+            _tabs[i].Background = Brushes.Transparent;
+            UpdateTabTitle(i);
+        }
     }
 
     private void Tab_MouseDown(object sender, MouseButtonEventArgs e)
@@ -1201,6 +1380,7 @@ public partial class MainWindow : Window
             StatusUndo.Visibility = Visibility.Collapsed;
             FormatBar.Visibility = Visibility.Collapsed;
             LineNumColumn.Width = new GridLength(0);
+            EditorLineHighlight.Visibility = Visibility.Collapsed;
         }
         _settings.IsEditMode = editMode;
         _settings.Save();
@@ -1456,7 +1636,6 @@ public partial class MainWindow : Window
         }
         _findCurrentIndex = 0; // 검색어 변경 시 초기화
         _ = ApplySearchHighlightAsync(keyword);
-        _ = FindInPreviewAsync(keyword, reverse: false);
         if (_isEditMode) FindInEditor(keyword);
     }
 
@@ -1478,46 +1657,17 @@ public partial class MainWindow : Window
 
     private async Task FindInPreviewAsync(string keyword, bool reverse)
     {
+        if (!_webViewReady || string.IsNullOrEmpty(keyword)) return;
         try
         {
-            var kw = System.Text.Json.JsonSerializer.Serialize(keyword);
-            var caseSensitiveJs = _caseSensitive ? "true" : "false";
-            // 전체 매칭 개수 계산
-            var countJson = await Viewer.ExecuteScriptAsync($@"
-(function() {{
-    var text = document.body.innerText || '';
-    var caseSensitive = {caseSensitiveJs};
-    var searchText = caseSensitive ? text : text.toLowerCase();
-    var target = caseSensitive ? {kw} : {kw}.toLowerCase();
-    if (!target) return '0';
-    var count = 0, idx = 0;
-    while ((idx = searchText.indexOf(target, idx)) !== -1) {{ count++; idx += target.length; }}
-    return count.toString();
-}})()");
-            if (int.TryParse(countJson.Trim('"'), out var count))
-            {
-                _findMatchCount = count;
-                if (count > 0)
-                {
-                    // 방향에 따라 이동 (reverse=true: 역방향, caseSensitive 전달)
-                    var rev = reverse ? "true" : "false";
-                    await Viewer.ExecuteScriptAsync($"window.find({kw}, {caseSensitiveJs}, {rev}, true)");
-                    // 현재 위치 인덱스 업데이트
-                    if (_findCurrentIndex == 0)
-                        _findCurrentIndex = 1;
-                    else if (reverse)
-                        _findCurrentIndex = _findCurrentIndex <= 1 ? count : _findCurrentIndex - 1;
-                    else
-                        _findCurrentIndex = _findCurrentIndex >= count ? 1 : _findCurrentIndex + 1;
-                    StatusFind.Text = $"{_findCurrentIndex} / {count}";
-                }
-                else
-                {
-                    _findCurrentIndex = 0;
-                    StatusFind.Text = "없음";
-                }
-                StatusFind.Visibility = Visibility.Visible;
-            }
+            if (_findMatchCount <= 0) return;
+            if (reverse)
+                _findCurrentIndex = _findCurrentIndex <= 1 ? _findMatchCount : _findCurrentIndex - 1;
+            else
+                _findCurrentIndex = _findCurrentIndex >= _findMatchCount ? 1 : _findCurrentIndex + 1;
+            StatusFind.Text = $"{_findCurrentIndex} / {_findMatchCount}";
+            StatusFind.Visibility = Visibility.Visible;
+            await Viewer.ExecuteScriptAsync($"window.__searchFocus && window.__searchFocus({_findCurrentIndex - 1})");
         }
         catch { }
     }
@@ -1756,7 +1906,22 @@ public partial class MainWindow : Window
         await ShowLoadingAsync("PDF 내보내기 중...");
         try
         {
-            await Viewer.CoreWebView2.PrintToPdfAsync(dlg.FileName);
+            var printSettings = Viewer.CoreWebView2.Environment.CreatePrintSettings();
+            switch (_settings.PdfPageSize)
+            {
+                case "letter":
+                    printSettings.PageWidth = 21.59; printSettings.PageHeight = 27.94; break;
+                case "legal":
+                    printSettings.PageWidth = 21.59; printSettings.PageHeight = 35.56; break;
+                default: // A4
+                    printSettings.PageWidth = 21.0; printSettings.PageHeight = 29.7; break;
+            }
+            printSettings.MarginTop = _settings.PdfMarginCm;
+            printSettings.MarginBottom = _settings.PdfMarginCm;
+            printSettings.MarginLeft = _settings.PdfMarginCm;
+            printSettings.MarginRight = _settings.PdfMarginCm;
+            printSettings.ShouldPrintBackgrounds = true;
+            await Viewer.CoreWebView2.PrintToPdfAsync(dlg.FileName, printSettings);
             HideLoading();
             MessageBox.Show($"PDF 내보내기 완료:\n{dlg.FileName}", "완료",
                 MessageBoxButton.OK, MessageBoxImage.Information);
@@ -1767,6 +1932,40 @@ public partial class MainWindow : Window
             MessageBox.Show($"PDF 내보내기 실패:\n{ex.Message}", "오류",
                 MessageBoxButton.OK, MessageBoxImage.Error);
         }
+    }
+
+    private void BtnExportPdf_RightClick(object sender, MouseButtonEventArgs e)
+    {
+        e.Handled = true;
+        var menu = new ContextMenu();
+
+        var sizes = new[] { ("a4", "A4 (21×29.7cm)"), ("letter", "Letter (21.6×27.9cm)"), ("legal", "Legal (21.6×35.6cm)") };
+        foreach (var (tag, label) in sizes)
+        {
+            var item = new MenuItem { Header = (_settings.PdfPageSize == tag ? "  " : "    ") + label };
+            if (_settings.PdfPageSize == tag)
+                item.FontWeight = FontWeights.Bold;
+            var t = tag;
+            item.Click += (_, _) => { _settings.PdfPageSize = t; _settings.Save(); };
+            menu.Items.Add(item);
+        }
+
+        menu.Items.Add(new Separator());
+
+        var margins = new[] { (0.5, "0.5cm"), (1.0, "1.0cm"), (1.5, "1.5cm"), (2.0, "2.0cm") };
+        foreach (var (val, label) in margins)
+        {
+            var item = new MenuItem { Header = (Math.Abs(_settings.PdfMarginCm - val) < 0.01 ? "  " : "    ") + $"여백: {label}" };
+            if (Math.Abs(_settings.PdfMarginCm - val) < 0.01)
+                item.FontWeight = FontWeights.Bold;
+            var v = val;
+            item.Click += (_, _) => { _settings.PdfMarginCm = v; _settings.Save(); };
+            menu.Items.Add(item);
+        }
+
+        menu.PlacementTarget = (UIElement)sender;
+        menu.Placement = PlacementMode.Bottom;
+        menu.IsOpen = true;
     }
 
     private async void BtnExportHtml_Click(object sender, RoutedEventArgs e)
@@ -1999,8 +2198,36 @@ public partial class MainWindow : Window
         StatusCursor.Text = $"{line}:{col}";
         StatusCursor.Visibility = Visibility.Visible;
 
+        // 현재 줄 하이라이트
+        UpdateCurrentLineHighlight(caret);
+
         // Breadcrumb: 커서 앞 마지막 헤딩 표시
         UpdateBreadcrumb(text, caret);
+    }
+
+    private void UpdateCurrentLineHighlight(int caret)
+    {
+        if (!_isEditMode)
+        {
+            EditorLineHighlight.Visibility = Visibility.Collapsed;
+            return;
+        }
+        try
+        {
+            var rect = Editor.GetRectFromCharacterIndex(caret);
+            if (rect.IsEmpty || double.IsInfinity(rect.Top))
+            {
+                EditorLineHighlight.Visibility = Visibility.Collapsed;
+                return;
+            }
+            EditorLineHighlight.Height = rect.Height > 0 ? rect.Height : 20;
+            EditorLineHighlight.Margin = new Thickness(0, rect.Top, 8, 0);
+            EditorLineHighlight.Visibility = Visibility.Visible;
+        }
+        catch
+        {
+            EditorLineHighlight.Visibility = Visibility.Collapsed;
+        }
     }
 
     private void UpdateBreadcrumb(string text, int caret)

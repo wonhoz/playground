@@ -112,6 +112,7 @@
               <ItemsControl.Items>
                 <local:ShortcutEntry Key="Ctrl + Shift + E" Desc="HTML로 내보내기 (마지막 경로 기억)"/>
                 <local:ShortcutEntry Key="Ctrl + P"         Desc="PDF로 내보내기 (마지막 경로 기억)"/>
+                <local:ShortcutEntry Key="PDF 버튼 우클릭" Desc="PDF 용지 크기(A4/Letter/Legal) 및 여백 설정"/>
                 <local:ShortcutEntry Key="Ctrl + Shift + C" Desc="현재 문서 HTML을 클립보드에 복사"/>
               </ItemsControl.Items>
             </ItemsControl>
@@ -140,8 +141,8 @@
                 <local:ShortcutEntry Key="Ctrl + F"      Desc="찾기 포커스"/>
                 <local:ShortcutEntry Key="Enter"         Desc="다음 결과로 이동"/>
                 <local:ShortcutEntry Key="Shift + Enter" Desc="이전 결과로 이동"/>
-                <local:ShortcutEntry Key="▲ / ▼ 버튼"   Desc="이전/다음 찾기 결과 이동 — 결과 표시: 현재 / 전체 (예: 3 / 12)"/>
-                <local:ShortcutEntry Key="검색 하이라이트" Desc="검색어 입력 시 뷰어에서 모든 일치 항목을 황색으로 동시 표시"/>
+                <local:ShortcutEntry Key="▲ / ▼ 버튼"   Desc="이전/다음 찾기 결과 이동 — 현재 결과는 주황색 강조, 자동 스크롤"/>
+                <local:ShortcutEntry Key="검색 하이라이트" Desc="검색어 입력 시 뷰어에서 모든 일치 항목을 황색으로 표시, 현재 결과는 주황색"/>
                 <local:ShortcutEntry Key="Ctrl + H"      Desc="찾기/바꾸기 바 토글 (편집 모드)"/>
                 <local:ShortcutEntry Key="Alt + C"       Desc="대소문자 구분 검색 켜기/끄기 (Aa 버튼 — 켜짐 시 파란색)"/>
                 <local:ShortcutEntry Key="Esc"           Desc="찾기 초기화 및 하이라이트 제거"/>
@@ -152,7 +153,7 @@
             <TextBlock Text="동기 스크롤 / TOC" Style="{StaticResource Cat}"/>
             <ItemsControl ItemTemplate="{StaticResource RowTpl}">
               <ItemsControl.Items>
-                <local:ShortcutEntry Key="편집 모드 스크롤" Desc="에디터 스크롤 → 뷰어 자동 동기화"/>
+                <local:ShortcutEntry Key="편집 모드 스크롤" Desc="에디터 스크롤 → 뷰어 자동 동기화 (헤딩 기�� 정밀 동기화)"/>
                 <local:ShortcutEntry Key="TOC 켜짐 상태"   Desc="뷰어 스크롤 → 현재 섹션 자동 하이라이트"/>
               </ItemsControl.Items>
             </ItemsControl>
@@ -196,9 +197,11 @@
                 <local:ShortcutEntry Key="Ctrl + Shift + V"   Desc="클립보드를 새 탭으로 열기"/>
                 <local:ShortcutEntry Key="이미지 파일 D&amp;D" Desc="편집 모드에서 이미지 드래그 → ![alt](path) 자동 삽입"/>
                 <local:ShortcutEntry Key="줄 번호"            Desc="편집 모드 진입 시 에디터 왼쪽에 줄 번호 자동 표시 (스크롤 동기화)"/>
+                <local:ShortcutEntry Key="현재 줄 하이라이트"  Desc="편집 모드에서 커서가 위치한 줄을 미묘하게 강조 표시"/>
                 <local:ShortcutEntry Key="커서 툴팁"          Desc="줄:컬럼 표시에 마우스 오버 → 현재 위치의 헤딩 구조(Breadcrumb) 표시"/>
                 <local:ShortcutEntry Key="선택 후 [ ( &quot;"  Desc="선택 영역을 [ ] · ( ) · &quot; &quot; 로 자동 감싸기"/>
                 <local:ShortcutEntry Key="선택 후 * 또는 `"   Desc="선택 영역을 * 또는 ` 로 자동 감싸기 (Ctrl+B/I 와 동일 효과)"/>
+                <local:ShortcutEntry Key="탭 드래그 앤 드롭"   Desc="탭을 드래그하여 순서 재배치"/>
               </ItemsControl.Items>
             </ItemsControl>
 

@@ -28,6 +28,8 @@ public class AppSettings
     public bool IsFocusMode { get; set; } = false;
     public bool IsWordWrap { get; set; } = true;
     public string ExportDir { get; set; } = "";
+    public string PdfPageSize { get; set; } = "a4"; // a4, letter, legal
+    public double PdfMarginCm { get; set; } = 1.0;
 
     private const int MaxRecentFiles = 20;
 

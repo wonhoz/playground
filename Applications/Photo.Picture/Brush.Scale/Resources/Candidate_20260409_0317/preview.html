@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>Brush.Scale — Icon Candidates (20260409_0317)</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #0A2820;
+    color: #E2E8F0;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    padding: 40px 24px;
+    min-height: 100vh;
+  }
+  h1 { text-align: center; font-size: 22px; font-weight: 700; color: #F8FAFC; margin-bottom: 6px; letter-spacing: 0.04em; }
+  .subtitle { text-align: center; font-size: 13px; color: #6EE7B7; margin-bottom: 40px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 24px; max-width: 1200px; margin: 0 auto; }
+  .card { background: #0F3A2E; border-radius: 16px; padding: 20px 16px 16px; border: 1px solid #1A5C46; transition: transform 0.18s ease, box-shadow 0.18s ease; cursor: pointer; }
+  .card:hover { transform: translateY(-6px) scale(1.03); box-shadow: 0 20px 48px rgba(0,0,0,0.6); border-color: #10B981; }
+  .icon-wrap { width: 100%; aspect-ratio: 1; display: flex; align-items: center; justify-content: center; background: #F5F5F5; border-radius: 12px; overflow: hidden; margin-bottom: 14px; }
+  .icon-wrap img { width: 88%; height: 88%; object-fit: contain; transition: transform 0.18s ease; }
+  .card:hover .icon-wrap img { transform: scale(1.08); }
+  .filename { font-size: 13px; font-weight: 700; color: #A7F3D0; margin-bottom: 4px; font-family: 'Consolas', monospace; }
+  .concept { font-size: 12px; color: #6EE7B7; margin-bottom: 6px; line-height: 1.4; }
+  .type-badge { display: inline-block; padding: 2px 8px; border-radius: 99px; font-size: 10px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 8px; }
+  .type-literal  { background: #1E40AF; color: #BFDBFE; }
+  .type-metaphor { background: #6B21A8; color: #E9D5FF; }
+  .type-hybrid   { background: #065F46; color: #A7F3D0; }
+  .palette { display: flex; gap: 5px; flex-wrap: wrap; margin-top: 8px; }
+  .swatch { width: 20px; height: 20px; border-radius: 50%; border: 1.5px solid rgba(255,255,255,0.12); flex-shrink: 0; }
+  .pattern { font-size: 11px; color: #34D399; margin-top: 4px; }
+</style>
+</head>
+<body>
+<h1>Brush.Scale — Icon Candidates</h1>
+<div class="subtitle">Candidate_20260409_0317 &nbsp;·&nbsp; 8 icons &nbsp;·&nbsp; AI 모델로 이미지를 2×/4×/8× 고품질 업스케일</div>
+<div class="grid">
+
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_01.svg" alt="icon_01"></div>
+    <div class="filename">icon_01.svg</div>
+    <span class="type-badge type-literal">literal</span>
+    <div class="concept">큰 "4×" 배율 + 이미지 프레임<br>연결: 배율 숫자가 업스케일 핵심 기능 직접 표현</div>
+    <div class="pattern">중앙 심볼</div>
+    <div class="palette">
+      <div class="swatch" style="background:#FBBF24"></div>
+      <div class="swatch" style="background:#EA580C"></div>
+      <div class="swatch" style="background:#FFFFFF"></div>
+      <div class="swatch" style="background:#7DD3FC"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_02.svg" alt="icon_02"></div>
+    <div class="filename">icon_02.svg</div>
+    <span class="type-badge type-literal">literal</span>
+    <div class="concept">소→대 이미지 프레임 + "4×" 화살표<br>연결: 이미지가 4배 크기로 확대되는 과정</div>
+    <div class="pattern">대각선/동적</div>
+    <div class="palette">
+      <div class="swatch" style="background:#E0F2FE"></div>
+      <div class="swatch" style="background:#2563EB"></div>
+      <div class="swatch" style="background:#1D4ED8"></div>
+      <div class="swatch" style="background:#FFFFFF"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_03.svg" alt="icon_03"></div>
+    <div class="filename">icon_03.svg</div>
+    <span class="type-badge type-literal">literal</span>
+    <div class="concept">Before(픽셀)/After(선명) 좌우 분할<br>연결: AI 업스케일 전후 품질 직접 비교</div>
+    <div class="pattern">공간/장면</div>
+    <div class="palette">
+      <div class="swatch" style="background:#F8FAFC"></div>
+      <div class="swatch" style="background:#94A3B8"></div>
+      <div class="swatch" style="background:#F97316"></div>
+      <div class="swatch" style="background:#2563EB"></div>
+      <div class="swatch" style="background:#1E293B"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_04.svg" alt="icon_04"></div>
+    <div class="filename">icon_04.svg</div>
+    <span class="type-badge type-metaphor">metaphor</span>
+    <div class="concept">돋보기로 이미지 확대 (선명한 픽셀)<br>연결: 돋보기=확대·스케일업, 렌즈 속 선명한 픽셀</div>
+    <div class="pattern">레이어드</div>
+    <div class="palette">
+      <div class="swatch" style="background:#D1FAE5"></div>
+      <div class="swatch" style="background:#D97706"></div>
+      <div class="swatch" style="background:#EFF6FF"></div>
+      <div class="swatch" style="background:#78350F"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_05.svg" alt="icon_05"></div>
+    <div class="filename">icon_05.svg</div>
+    <span class="type-badge type-metaphor">metaphor</span>
+    <div class="concept">마법 붓(Brush)이 컬러 픽셀 생성<br>연결: Brush=앱 이름, 픽셀 생성=업스케일</div>
+    <div class="pattern">실루엣/캐릭터</div>
+    <div class="palette">
+      <div class="swatch" style="background:#4C1D95"></div>
+      <div class="swatch" style="background:#92400E"></div>
+      <div class="swatch" style="background:#FCD34D"></div>
+      <div class="swatch" style="background:#F97316"></div>
+      <div class="swatch" style="background:#EC4899"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_06.svg" alt="icon_06"></div>
+    <div class="filename">icon_06.svg</div>
+    <span class="type-badge type-metaphor">metaphor</span>
+    <div class="concept">픽셀 격자→선명 그라데이션 변환<br>연결: 거친 픽셀이 AI로 부드럽고 선명해짐</div>
+    <div class="pattern">기하학 추상</div>
+    <div class="palette">
+      <div class="swatch" style="background:#FF6B6B"></div>
+      <div class="swatch" style="background:#94A3B8"></div>
+      <div class="swatch" style="background:#FFFFFF"></div>
+      <div class="swatch" style="background:#F97316"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_07.svg" alt="icon_07"></div>
+    <div class="filename">icon_07.svg</div>
+    <span class="type-badge type-metaphor">metaphor</span>
+    <div class="concept">100px→400px 이미지 대각선 확대<br>연결: 이미지 크기가 4배로 급격히 커지는 동적 표현</div>
+    <div class="pattern">대각선/동적</div>
+    <div class="palette">
+      <div class="swatch" style="background:#D9F99D"></div>
+      <div class="swatch" style="background:#4ADE80"></div>
+      <div class="swatch" style="background:#15803D"></div>
+      <div class="swatch" style="background:#F0FDF4"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_08.svg" alt="icon_08"></div>
+    <div class="filename">icon_08.svg</div>
+    <span class="type-badge type-hybrid">hybrid</span>
+    <div class="concept">AI 텍스트 + 픽셀 업스케일 효과<br>연결: AI(literal) + 픽셀 변환(metaphor) 결합</div>
+    <div class="pattern">중앙 심볼</div>
+    <div class="palette">
+      <div class="swatch" style="background:#0F766E"></div>
+      <div class="swatch" style="background:#A855F7"></div>
+      <div class="swatch" style="background:#99F6E4"></div>
+      <div class="swatch" style="background:#F97316"></div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <clipPath id="c6"><rect width="1024" height="1024" rx="190"/></clipPath>
+    <clipPath id="left6"><rect x="0" y="0" width="512" height="1024"/></clipPath>
+    <clipPath id="right6"><rect x="512" y="0" width="512" height="1024"/></clipPath>
+    <linearGradient id="g6r" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FFF7F7"/>
+      <stop offset="100%" stop-color="#FCA5A5"/>
+    </linearGradient>
+  </defs>
+  <!-- Layer 1: Vivid coral background -->
+  <rect width="1024" height="1024" rx="190" fill="#FF6B6B"/>
+  <!-- Background split hint -->
+  <rect width="512" height="1024" rx="0" fill="#FF4444" opacity="0.25"/>
+  <g clip-path="url(#c6)">
+    <!-- Layer 2: Left half – blurry pixel grid (large gray squares) -->
+    <g clip-path="url(#left6)">
+      <rect x="96" y="256" width="416" height="416" rx="20" fill="#FECACA" opacity="0.7"/>
+      <!-- Large blocky low-res pixels (5×5 grid, each ~83px) -->
+      <rect x="96"  y="256" width="83" height="83" fill="#CBD5E1"/>
+      <rect x="179" y="256" width="83" height="83" fill="#94A3B8"/>
+      <rect x="262" y="256" width="83" height="83" fill="#CBD5E1"/>
+      <rect x="345" y="256" width="83" height="83" fill="#94A3B8"/>
+      <rect x="428" y="256" width="83" height="83" fill="#CBD5E1"/>
+      <rect x="96"  y="339" width="83" height="83" fill="#94A3B8"/>
+      <rect x="179" y="339" width="83" height="83" fill="#E2E8F0"/>
+      <rect x="262" y="339" width="83" height="83" fill="#94A3B8"/>
+      <rect x="345" y="339" width="83" height="83" fill="#CBD5E1"/>
+      <rect x="428" y="339" width="83" height="83" fill="#94A3B8"/>
+      <rect x="96"  y="422" width="83" height="83" fill="#E2E8F0"/>
+      <rect x="179" y="422" width="83" height="83" fill="#CBD5E1"/>
+      <rect x="262" y="422" width="83" height="83" fill="#94A3B8"/>
+      <rect x="345" y="422" width="83" height="83" fill="#E2E8F0"/>
+      <rect x="428" y="422" width="83" height="83" fill="#CBD5E1"/>
+      <rect x="96"  y="505" width="83" height="83" fill="#94A3B8"/>
+      <rect x="179" y="505" width="83" height="83" fill="#CBD5E1"/>
+      <rect x="262" y="505" width="83" height="83" fill="#E2E8F0"/>
+      <rect x="345" y="505" width="83" height="83" fill="#94A3B8"/>
+      <rect x="428" y="505" width="83" height="83" fill="#CBD5E1"/>
+      <rect x="96"  y="588" width="83" height="83" fill="#CBD5E1"/>
+      <rect x="179" y="588" width="83" height="83" fill="#94A3B8"/>
+      <rect x="262" y="588" width="83" height="83" fill="#CBD5E1"/>
+      <rect x="345" y="588" width="83" height="83" fill="#E2E8F0"/>
+      <rect x="428" y="588" width="83" height="83" fill="#94A3B8"/>
+    </g>
+    <!-- Layer 2: Right half – sharp AI upscaled (smooth gradient + fine detail) -->
+    <g clip-path="url(#right6)">
+      <rect x="512" y="256" width="416" height="416" rx="20" fill="url(#g6r)"/>
+      <!-- Fine colorful detail pixels (8×8 = 52px each, sharp) -->
+      <rect x="512" y="256" width="52" height="52" fill="#F97316" opacity="0.9"/>
+      <rect x="564" y="256" width="52" height="52" fill="#FB923C" opacity="0.9"/>
+      <rect x="616" y="256" width="52" height="52" fill="#FCD34D" opacity="0.9"/>
+      <rect x="668" y="256" width="52" height="52" fill="#FBBF24" opacity="0.9"/>
+      <rect x="512" y="308" width="52" height="52" fill="#EF4444" opacity="0.9"/>
+      <rect x="564" y="308" width="52" height="52" fill="#F97316" opacity="0.9"/>
+      <rect x="616" y="308" width="52" height="52" fill="#FBBF24" opacity="0.9"/>
+      <rect x="668" y="308" width="52" height="52" fill="#FCD34D" opacity="0.9"/>
+      <!-- Transition to smooth gradient in right portion -->
+      <rect x="720" y="256" width="208" height="416" fill="white" opacity="0.7"/>
+    </g>
+    <!-- Layer 3: Diagonal transition line + labels -->
+    <line x1="512" y1="224" x2="512" y2="704" stroke="white" stroke-width="8" stroke-dasharray="20,12"/>
+    <text x="256" y="760" font-family="Arial,sans-serif" font-size="82" fill="white" font-weight="bold" text-anchor="middle">Blurry</text>
+    <text x="720" y="760" font-family="Arial,sans-serif" font-size="82" fill="white" font-weight="bold" text-anchor="middle">Sharp</text>
+    <!-- Up arrow AI badge -->
+    <rect x="440" y="816" width="144" height="80" rx="16" fill="white" opacity="0.9"/>
+    <text x="512" y="876" font-family="Arial,sans-serif" font-size="86" fill="#FF6B6B" font-weight="900" text-anchor="middle">AI</text>
+  </g>
+</svg>

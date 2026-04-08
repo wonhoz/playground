@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="g6" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#CCFBF1"/>
+      <stop offset="100%" stop-color="#5EEAD4"/>
+    </linearGradient>
+    <clipPath id="c6"><rect width="1024" height="1024" rx="190"/></clipPath>
+    <clipPath id="left6"><rect x="0" y="0" width="500" height="1024"/></clipPath>
+    <clipPath id="right6"><rect x="524" y="0" width="500" height="1024"/></clipPath>
+  </defs>
+  <!-- Layer 1: Teal/cyan gradient background -->
+  <rect width="1024" height="1024" rx="190" fill="url(#g6)"/>
+  <g clip-path="url(#c6)">
+    <!-- Layer 2: Left side - smooth vector shape (circle = vector) -->
+    <g clip-path="url(#left6)">
+      <circle cx="302" cy="512" r="234" fill="#0D9488" opacity="0.9"/>
+      <!-- Smooth gradient fill inside circle to suggest "vector" smoothness -->
+      <circle cx="302" cy="512" r="234" fill="none" stroke="white" stroke-width="14"/>
+      <!-- "SVG" label inside -->
+      <text x="302" y="550" font-family="Arial Black,Arial,sans-serif" font-size="120" fill="white" font-weight="900" text-anchor="middle">SVG</text>
+      <!-- "Vector" label below -->
+      <text x="302" y="800" font-family="Arial,sans-serif" font-size="80" fill="#134E4A" font-weight="bold" text-anchor="middle">Vector</text>
+    </g>
+    <!-- Layer 2: Right side - pixelated/rasterized version (ICO raster) -->
+    <g clip-path="url(#right6)">
+      <!-- Grid of colored squares representing rasterized pixels -->
+      <rect x="612" y="288" width="316" height="316" rx="14" fill="#CCFBF1"/>
+      <!-- Pixel grid (4×4 of 79px each) simulating rasterized circle -->
+      <!-- Row 1 -->
+      <rect x="612" y="288" width="79" height="79" fill="#CCFBF1"/>
+      <rect x="691" y="288" width="79" height="79" fill="#5EEAD4"/>
+      <rect x="770" y="288" width="79" height="79" fill="#5EEAD4"/>
+      <rect x="849" y="288" width="79" height="79" fill="#CCFBF1"/>
+      <!-- Row 2 -->
+      <rect x="612" y="367" width="79" height="79" fill="#5EEAD4"/>
+      <rect x="691" y="367" width="79" height="79" fill="#0D9488"/>
+      <rect x="770" y="367" width="79" height="79" fill="#0D9488"/>
+      <rect x="849" y="367" width="79" height="79" fill="#5EEAD4"/>
+      <!-- Row 3 -->
+      <rect x="612" y="446" width="79" height="79" fill="#5EEAD4"/>
+      <rect x="691" y="446" width="79" height="79" fill="#0D9488"/>
+      <rect x="770" y="446" width="79" height="79" fill="#0D9488"/>
+      <rect x="849" y="446" width="79" height="79" fill="#5EEAD4"/>
+      <!-- Row 4 -->
+      <rect x="612" y="525" width="79" height="79" fill="#CCFBF1"/>
+      <rect x="691" y="525" width="79" height="79" fill="#5EEAD4"/>
+      <rect x="770" y="525" width="79" height="79" fill="#5EEAD4"/>
+      <rect x="849" y="525" width="79" height="79" fill="#CCFBF1"/>
+      <!-- Grid border -->
+      <rect x="612" y="288" width="316" height="316" rx="14" fill="none" stroke="white" stroke-width="10"/>
+      <!-- ".ico" label -->
+      <text x="770" y="800" font-family="Arial Black,Arial,sans-serif" font-size="100" fill="#134E4A" font-weight="900" text-anchor="middle">.ico</text>
+    </g>
+    <!-- Layer 3: Center divider + conversion arrow -->
+    <rect x="484" y="240" width="56" height="544" rx="14" fill="white" opacity="0.7"/>
+    <polygon points="484,488 540,512 484,536" fill="#0F766E"/>
+  </g>
+</svg>

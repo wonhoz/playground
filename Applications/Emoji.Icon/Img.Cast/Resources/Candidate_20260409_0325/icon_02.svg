@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="g2" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ECFDF5"/>
+      <stop offset="100%" stop-color="#A7F3D0"/>
+    </linearGradient>
+    <clipPath id="c2"><rect width="1024" height="1024" rx="190"/></clipPath>
+  </defs>
+  <!-- Layer 1: Mint green gradient -->
+  <rect width="1024" height="1024" rx="190" fill="url(#g2)"/>
+  <g clip-path="url(#c2)">
+    <!-- Layer 2: Source file (SVG, top left, tilted/flying) -->
+    <g transform="rotate(-12, 310, 320)">
+      <rect x="178" y="228" width="264" height="320" rx="22" fill="#FFFFFF" stroke="#059669" stroke-width="10"/>
+      <!-- File fold corner -->
+      <polygon points="380,228 442,228 442,290 380,290" fill="#D1FAE5"/>
+      <line x1="380" y1="228" x2="442" y2="290" stroke="#059669" stroke-width="8"/>
+      <!-- "SVG" text inside file -->
+      <text x="310" y="428" font-family="Arial Black,Arial,sans-serif" font-size="88" fill="#059669" font-weight="900" text-anchor="middle">SVG</text>
+    </g>
+    <!-- Layer 3: Bold diagonal arrow (movement) -->
+    <path d="M 430,440 Q 512,360 580,320" stroke="#10B981" stroke-width="72" stroke-linecap="round" fill="none"/>
+    <polygon points="560,262 620,376 510,356" fill="#10B981"/>
+    <!-- Drop zone (dashed rect, bottom right) -->
+    <rect x="516" y="548" width="380" height="316" rx="24" fill="none" stroke="#065F46" stroke-width="10" stroke-dasharray="24,14"/>
+    <!-- Down arrow inside drop zone -->
+    <line x1="706" y1="590" x2="706" y2="700" stroke="#065F46" stroke-width="60" stroke-linecap="round"/>
+    <polygon points="660,680 706,770 752,680" fill="#065F46"/>
+    <!-- Output "ICO" label inside drop zone -->
+    <text x="706" y="840" font-family="Arial Black,Arial,sans-serif" font-size="100" fill="#065F46" font-weight="900" text-anchor="middle">ICO</text>
+  </g>
+</svg>

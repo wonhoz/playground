@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="g3" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FEF3C7"/>
+      <stop offset="100%" stop-color="#FCD34D"/>
+    </linearGradient>
+    <clipPath id="c3"><rect width="1024" height="1024" rx="190"/></clipPath>
+  </defs>
+  <!-- Layer 1: Warm gold background -->
+  <rect width="1024" height="1024" rx="190" fill="url(#g3)"/>
+  <g clip-path="url(#c3)">
+    <!-- Layer 2: Mouse with right-click highlight (left) -->
+    <!-- Mouse body -->
+    <rect x="148" y="280" width="240" height="340" rx="120" fill="white"/>
+    <!-- Mouse divider (left/right click) -->
+    <line x1="268" y1="280" x2="268" y2="490" stroke="#E2E8F0" stroke-width="8"/>
+    <!-- Right button highlighted -->
+    <rect x="268" y="280" width="120" height="210" rx="0" fill="#7C3AED" opacity="0.9"/>
+    <rect x="268" y="280" width="120" height="120" rx="120" fill="#7C3AED" opacity="0.9"/>
+    <!-- Scroll wheel -->
+    <rect x="252" y="360" width="32" height="80" rx="16" fill="#CBD5E1"/>
+    <!-- Click waves -->
+    <circle cx="388" cy="350" r="50" fill="none" stroke="#7C3AED" stroke-width="10" opacity="0.6"/>
+    <circle cx="388" cy="350" r="80" fill="none" stroke="#7C3AED" stroke-width="6" opacity="0.3"/>
+    <!-- Arrow pointing right -->
+    <line x1="430" y1="512" x2="530" y2="512" stroke="#D97706" stroke-width="60" stroke-linecap="round"/>
+    <polygon points="506,454 594,512 506,570" fill="#D97706"/>
+    <!-- Layer 3: CLAUDE text (right) -->
+    <rect x="550" y="390" width="360" height="244" rx="22" fill="#7C3AED"/>
+    <text x="730" y="480" font-family="Arial Black,Arial,sans-serif" font-size="96" fill="white" font-weight="900" text-anchor="middle">CLAUDE</text>
+    <text x="730" y="590" font-family="Arial,sans-serif" font-size="84" fill="#DDD6FE" font-weight="bold" text-anchor="middle">CODE</text>
+  </g>
+</svg>

@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="g5" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FFF1F2"/>
+      <stop offset="100%" stop-color="#FECDD3"/>
+    </linearGradient>
+    <clipPath id="c5"><rect width="1024" height="1024" rx="190"/></clipPath>
+  </defs>
+  <!-- Layer 1: Coral/rose background -->
+  <rect width="1024" height="1024" rx="190" fill="url(#g5)"/>
+  <g clip-path="url(#c5)">
+    <!-- Layer 2: Large mouse cursor silhouette (center) -->
+    <!-- Cursor body - arrow pointing up-left -->
+    <polygon points="280,200 280,680 380,572 440,720 540,678 480,528 620,516" fill="#BE123C"/>
+    <polygon points="280,200 280,680 380,572 440,720 540,678 480,528 620,516" fill="none" stroke="white" stroke-width="18" stroke-linejoin="round"/>
+    <!-- Right-click highlight on cursor right side -->
+    <polygon points="420,240 420,400 480,340 620,516 480,528 540,678 540,510 420,400 420,240" fill="#F43F5E" opacity="0.5"/>
+    <!-- Layer 3: Click effect waves (centered around cursor tip) -->
+    <circle cx="280" cy="200" r="80" fill="none" stroke="#F43F5E" stroke-width="14" opacity="0.7"/>
+    <circle cx="280" cy="200" r="130" fill="none" stroke="#F43F5E" stroke-width="10" opacity="0.45"/>
+    <circle cx="280" cy="200" r="180" fill="none" stroke="#F43F5E" stroke-width="6" opacity="0.25"/>
+    <!-- SHELL label badge -->
+    <rect x="580" y="280" width="300" height="100" rx="22" fill="#BE123C"/>
+    <text x="730" y="348" font-family="Arial Black,Arial,sans-serif" font-size="84" fill="white" font-weight="900" text-anchor="middle">SHELL</text>
+    <!-- EXT sub-label -->
+    <rect x="600" y="394" width="260" height="80" rx="18" fill="#FB7185"/>
+    <text x="730" y="451" font-family="Arial,sans-serif" font-size="80" fill="white" font-weight="bold" text-anchor="middle">EXT</text>
+  </g>
+</svg>

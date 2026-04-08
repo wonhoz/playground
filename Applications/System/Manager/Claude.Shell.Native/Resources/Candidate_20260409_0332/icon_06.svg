@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="g6" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#F0FDF4"/>
+      <stop offset="100%" stop-color="#86EFAC"/>
+    </linearGradient>
+    <clipPath id="c6"><rect width="1024" height="1024" rx="190"/></clipPath>
+  </defs>
+  <!-- Layer 1: Lime green background -->
+  <rect width="1024" height="1024" rx="190" fill="url(#g6)"/>
+  <g clip-path="url(#c6)">
+    <!-- Layer 2: Large terminal prompt symbol ">_" -->
+    <rect x="140" y="320" width="744" height="380" rx="30" fill="#166534"/>
+    <!-- Terminal title bar -->
+    <rect x="140" y="320" width="744" height="58" rx="30" fill="#14532D"/>
+    <rect x="140" y="349" width="744" height="29" fill="#14532D"/>
+    <!-- Traffic lights -->
+    <circle cx="186" cy="349" r="14" fill="#EF4444"/>
+    <circle cx="222" cy="349" r="14" fill="#F59E0B"/>
+    <circle cx="258" cy="349" r="14" fill="#22C55E"/>
+    <!-- >_ text -->
+    <text x="200" y="600" font-family="Consolas,monospace" font-size="200" fill="#4ADE80" font-weight="bold">&gt;_</text>
+    <!-- Layer 3: RC badge (Right-Click indicator) -->
+    <circle cx="800" cy="270" r="90" fill="#16A34A"/>
+    <text x="800" y="248" font-family="Arial Black,Arial,sans-serif" font-size="56" fill="white" font-weight="900" text-anchor="middle">RIGHT</text>
+    <text x="800" y="314" font-family="Arial Black,Arial,sans-serif" font-size="56" fill="#BBF7D0" font-weight="900" text-anchor="middle">CLICK</text>
+    <!-- Arrow from badge to terminal -->
+    <line x1="800" y1="362" x2="800" y2="394" stroke="#16A34A" stroke-width="20" stroke-linecap="round"/>
+    <polygon points="780,386 800,412 820,386" fill="#16A34A"/>
+  </g>
+</svg>

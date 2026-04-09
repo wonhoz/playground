@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- icon_08: metaphor | 안개 흐림→선명한 산 (AI 처리 전/후) | 공간/장면 | 청록-에메랄드+안개 -->
+  <defs>
+    <linearGradient id="bg08" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#B2EBF2"/>
+      <stop offset="50%" stop-color="#80DEEA"/>
+      <stop offset="100%" stop-color="#4DD0E1"/>
+    </linearGradient>
+    <linearGradient id="sky08" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#00ACC1"/>
+      <stop offset="100%" stop-color="#26C6DA"/>
+    </linearGradient>
+    <linearGradient id="mtn08" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#00695C"/>
+      <stop offset="100%" stop-color="#004D40"/>
+    </linearGradient>
+    <linearGradient id="mtn08b" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#00897B"/>
+      <stop offset="100%" stop-color="#00695C"/>
+    </linearGradient>
+    <linearGradient id="fogGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%"   stop-color="white" stop-opacity="0.92"/>
+      <stop offset="40%"  stop-color="white" stop-opacity="0.75"/>
+      <stop offset="70%"  stop-color="white" stop-opacity="0.30"/>
+      <stop offset="100%" stop-color="white" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="clearGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%"   stop-color="white" stop-opacity="0"/>
+      <stop offset="30%"  stop-color="white" stop-opacity="0"/>
+      <stop offset="60%"  stop-color="#E0F7FA" stop-opacity="0.0"/>
+      <stop offset="100%" stop-color="#E0F7FA" stop-opacity="0"/>
+    </linearGradient>
+    <clipPath id="clip08">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+    <filter id="blur08">
+      <feGaussianBlur stdDeviation="16"/>
+    </filter>
+  </defs>
+
+  <!-- Layer 1: 청록 하늘 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg08)"/>
+
+  <g clip-path="url(#clip08)">
+    <!-- 하늘 영역 -->
+    <rect x="0" y="0" width="1024" height="600" fill="url(#sky08)"/>
+
+    <!-- 태양 (우측 상단) -->
+    <circle cx="800" cy="200" r="80" fill="#FFF176" opacity="0.9"/>
+    <circle cx="800" cy="200" r="110" fill="#FFFDE7" opacity="0.35"/>
+
+    <!-- Layer 2: 선명한 산 (우측) -->
+    <polygon points="520,680 720,300 920,680" fill="url(#mtn08)"/>
+    <polygon points="680,680 840,420 1000,680" fill="url(#mtn08b)"/>
+    <!-- 눈 덮인 봉우리 -->
+    <polygon points="720,300 700,360 740,360" fill="white" opacity="0.9"/>
+    <polygon points="840,420 824,472 856,472" fill="white" opacity="0.7"/>
+
+    <!-- 초록 땅 (선명) -->
+    <ellipse cx="760" cy="720" rx="300" ry="80" fill="#2E7D32" opacity="0.7"/>
+    <rect x="520" y="680" width="504" height="344" fill="#388E3C"/>
+
+    <!-- 반사 호수 (선명) -->
+    <ellipse cx="750" cy="750" rx="180" ry="45" fill="#00ACC1" opacity="0.6"/>
+
+    <!-- Layer 3: 안개 (좌측) — 흐릿한 버전 오버레이 -->
+    <!-- 흐릿한 산 형태 -->
+    <polygon points="80,680 280,350 480,680" fill="#B2DFDB" opacity="0.45" filter="url(#blur08)"/>
+    <polygon points="200,680 380,440 560,680" fill="#80CBC4" opacity="0.35" filter="url(#blur08)"/>
+    <!-- 안개 그라데이션 오버레이 -->
+    <rect x="0" y="0" width="600" height="1024" fill="url(#fogGrad)"/>
+
+    <!-- 안개 레이어 (다층) -->
+    <ellipse cx="200" cy="500" rx="280" ry="120" fill="white" opacity="0.50" filter="url(#blur08)"/>
+    <ellipse cx="150" cy="650" rx="250" ry="100" fill="white" opacity="0.55" filter="url(#blur08)"/>
+    <ellipse cx="280" cy="400" rx="220" ry="80" fill="white" opacity="0.40" filter="url(#blur08)"/>
+
+    <!-- 중앙 분할선 (수직 흐릿 경계) -->
+    <rect x="490" y="200" width="40" height="600" fill="url(#fogGrad)" opacity="0.5"/>
+
+    <!-- AI 처리 화살표 (중앙 하단) -->
+    <polygon points="512,850 580,800 556,800 556,770 468,770 468,800 444,800"
+             fill="#004D40" opacity="0.85"/>
+    <!-- SHARP 텍스트 (우측 하단) -->
+    <text x="760" y="920" font-family="Arial Black, sans-serif" font-size="72" font-weight="900"
+          fill="#004D40" text-anchor="middle" opacity="0.85">SHARP</text>
+    <!-- 안개 텍스트 (좌측 하단) -->
+    <text x="240" y="920" font-family="Arial Black, sans-serif" font-size="72" font-weight="900"
+          fill="#78909C" text-anchor="middle" opacity="0.55">BLUR</text>
+  </g>
+</svg>

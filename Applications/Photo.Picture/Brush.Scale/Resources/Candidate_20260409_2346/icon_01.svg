@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- icon_01: literal | 슬라이더 비교 뷰 Before/After | 레이어드 | 연보라+회색+비비드 -->
+  <!-- Layer 1: 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg01)"/>
+  <defs>
+    <linearGradient id="bg01" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#E8DFFE"/>
+      <stop offset="100%" stop-color="#C5B3FF"/>
+    </linearGradient>
+    <clipPath id="clip01">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+    <clipPath id="leftClip">
+      <rect x="100" y="130" width="410" height="764"/>
+    </clipPath>
+    <clipPath id="rightClip">
+      <rect x="514" y="130" width="410" height="764"/>
+    </clipPath>
+  </defs>
+
+  <!-- Layer 2: Before 패널 (좌) — 흐릿한 이미지 표현 -->
+  <g clip-path="url(#leftClip)">
+    <rect x="100" y="130" width="410" height="764" rx="24" fill="#D0C8E8"/>
+    <!-- 흐릿한 산 실루엣 -->
+    <ellipse cx="240" cy="650" rx="180" ry="120" fill="#B8AEDD" opacity="0.7"/>
+    <ellipse cx="380" cy="680" rx="140" ry="100" fill="#C4BBE8" opacity="0.6"/>
+    <!-- 흐릿한 하늘 -->
+    <rect x="100" y="130" width="410" height="340" fill="#CBBFF0" opacity="0.5"/>
+    <!-- 픽셀 노이즈 표현 -->
+    <rect x="120" y="200" width="40" height="40" fill="#BBB0DE" opacity="0.5"/>
+    <rect x="200" y="240" width="50" height="50" fill="#C8BEE8" opacity="0.4"/>
+    <rect x="310" y="180" width="45" height="45" fill="#B5AADA" opacity="0.5"/>
+    <rect x="380" y="230" width="38" height="38" fill="#BFB4E4" opacity="0.4"/>
+    <!-- BEFORE 라벨 -->
+    <text x="305" y="830" font-family="Arial Black, sans-serif" font-size="56" font-weight="900" fill="#8878C0" text-anchor="middle" opacity="0.8">BEFORE</text>
+  </g>
+
+  <!-- Layer 2: After 패널 (우) — 선명한 이미지 표현 -->
+  <g clip-path="url(#rightClip)">
+    <rect x="514" y="130" width="410" height="764" rx="24" fill="#EEF0FF"/>
+    <!-- 선명한 하늘 그라데이션 -->
+    <defs>
+      <linearGradient id="sky01" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#87CEEB"/>
+        <stop offset="100%" stop-color="#4A90D9"/>
+      </linearGradient>
+      <linearGradient id="mtn01" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#6B7B8D"/>
+        <stop offset="100%" stop-color="#3D4F5C"/>
+      </linearGradient>
+    </defs>
+    <rect x="514" y="130" width="410" height="470" fill="url(#sky01)"/>
+    <!-- 선명한 산 -->
+    <polygon points="514,600 660,340 806,600" fill="url(#mtn01)"/>
+    <polygon points="660,600 780,400 900,600" fill="#4A5C6A"/>
+    <polygon points="514,600 924,600 924,894 514,894" fill="#8DAF7A"/>
+    <!-- AFTER 라벨 -->
+    <text x="719" y="830" font-family="Arial Black, sans-serif" font-size="56" font-weight="900" fill="#5B7ED9" text-anchor="middle">AFTER</text>
+  </g>
+
+  <!-- Layer 3: 슬라이더 분할선 + 핸들 -->
+  <rect x="504" y="130" width="20" height="764" fill="white" opacity="0.95"/>
+  <circle cx="514" cy="512" r="38" fill="white" stroke="#7B5EFF" stroke-width="8"/>
+  <!-- 핸들 화살표 -->
+  <polyline points="504,512 490,498 490,526 504,512" fill="#7B5EFF"/>
+  <polyline points="524,512 538,498 538,526 524,512" fill="#7B5EFF"/>
+</svg>

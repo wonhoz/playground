@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- icon_07: hybrid | 붓+캔버스+선명 스파크 | 실루엣/캐릭터 | 보라-인디고+흰+오렌지 -->
+  <defs>
+    <linearGradient id="bg07" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#4527A0"/>
+      <stop offset="50%" stop-color="#5E35B1"/>
+      <stop offset="100%" stop-color="#311B92"/>
+    </linearGradient>
+    <linearGradient id="canvasGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#EDE7F6"/>
+      <stop offset="100%" stop-color="#D1C4E9"/>
+    </linearGradient>
+    <linearGradient id="brushHandle07" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FFE0B2"/>
+      <stop offset="100%" stop-color="#FFCC80"/>
+    </linearGradient>
+    <radialGradient id="sparkCenter07" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="40%" stop-color="#FFD54F"/>
+      <stop offset="100%" stop-color="#FF6D00" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="glow07">
+      <feGaussianBlur stdDeviation="14" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <clipPath id="clip07">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+  </defs>
+
+  <!-- Layer 1: 보라-인디고 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg07)"/>
+
+  <g clip-path="url(#clip07)">
+    <!-- 배경 광원 효과 -->
+    <circle cx="620" cy="380" r="260" fill="#FF6D00" opacity="0.10"/>
+
+    <!-- Layer 2: 캔버스 (사선 배치) -->
+    <rect x="120" y="300" width="560" height="420" rx="20"
+          fill="url(#canvasGrad)" transform="rotate(-8 400 510)"
+          filter="url(#glow07)" opacity="0.92"/>
+
+    <!-- 캔버스 위 흐린 이미지 (좌측) -->
+    <g transform="rotate(-8 400 510)">
+      <rect x="140" y="320" width="260" height="200" rx="8" fill="#C5CAE9" opacity="0.6"/>
+      <polygon points="140,520 220,400 300,520" fill="#9FA8DA" opacity="0.5"/>
+      <ellipse cx="360" cy="380" rx="50" ry="50" fill="#FFF9C4" opacity="0.4"/>
+    </g>
+
+    <!-- 붓 실루엣 (사선 방향, 오른쪽 위로) -->
+    <!-- 붓대 -->
+    <rect x="410" y="100" width="52" height="480" rx="18"
+          fill="url(#brushHandle07)" transform="rotate(38 436 340)"/>
+    <!-- 금속 링 -->
+    <rect x="390" y="480" width="92" height="38" rx="8"
+          fill="#B0BEC5" transform="rotate(38 436 499)"/>
+    <!-- 붓털 (흰색) -->
+    <ellipse cx="640" cy="250" rx="46" ry="100"
+             fill="white" transform="rotate(38 640 250)" filter="url(#glow07)"/>
+    <!-- 붓털 끝 -->
+    <ellipse cx="672" cy="180" rx="20" ry="38"
+             fill="#F3E5F5" transform="rotate(38 672 180)" filter="url(#glow07)"/>
+
+    <!-- Layer 3: 스파크/선명도 이펙트 (붓 끝 주변) -->
+    <circle cx="690" cy="190" r="100" fill="url(#sparkCenter07)" opacity="0.85"/>
+
+    <!-- 별 모양 스파크 -->
+    <polygon points="690,120 706,172 762,172 718,204 734,256 690,224 646,256 662,204 618,172 674,172"
+             fill="#FFD54F" filter="url(#glow07)" opacity="0.95"/>
+
+    <!-- 선명해진 이미지 조각 (캔버스 우측) -->
+    <g transform="rotate(-8 400 510)">
+      <rect x="420" y="320" width="220" height="200" rx="8" fill="white" opacity="0.15"/>
+      <rect x="420" y="320" width="220" height="200" rx="8" fill="none" stroke="#FFD54F" stroke-width="4"/>
+      <!-- 선명한 산 -->
+      <polygon points="420,520 510,380 600,520" fill="#5C6BC0" opacity="0.7"/>
+      <rect x="420" y="520" width="220" height="30" fill="#66BB6A" opacity="0.6"/>
+    </g>
+
+    <!-- 작은 스파크들 -->
+    <circle cx="780" cy="140" r="16" fill="#FF6D00" opacity="0.9" filter="url(#glow07)"/>
+    <circle cx="820" cy="240" r="12" fill="#FFD54F" opacity="0.85"/>
+    <circle cx="740" cy="100" r="10" fill="#FFFFFF" opacity="0.8"/>
+    <circle cx="840" cy="170" r="8"  fill="#FFB74D" opacity="0.75"/>
+
+    <!-- 광선 -->
+    <line x1="690" y1="100" x2="690" y2="60"  stroke="#FFD54F" stroke-width="7" stroke-linecap="round" opacity="0.7"/>
+    <line x1="760" y1="130" x2="810" y2="90"  stroke="#FF6D00" stroke-width="6" stroke-linecap="round" opacity="0.65"/>
+    <line x1="620" y1="130" x2="570" y2="90"  stroke="#FFD54F" stroke-width="6" stroke-linecap="round" opacity="0.65"/>
+  </g>
+</svg>

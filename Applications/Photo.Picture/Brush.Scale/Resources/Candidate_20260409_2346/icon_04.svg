@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- icon_04: metaphor | 돋보기: 밖=흐림, 안=선명 | 공간/장면 | 오렌지-산호+청록 -->
+  <defs>
+    <linearGradient id="bg04" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FFE0CC"/>
+      <stop offset="100%" stop-color="#FFBBA0"/>
+    </linearGradient>
+    <radialGradient id="lensInner" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#E0FFF8"/>
+      <stop offset="100%" stop-color="#80DEEA"/>
+    </radialGradient>
+    <linearGradient id="mountain04" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#37474F"/>
+      <stop offset="100%" stop-color="#263238"/>
+    </linearGradient>
+    <clipPath id="lensClip">
+      <circle cx="440" cy="430" r="240"/>
+    </clipPath>
+    <clipPath id="mainClip">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+    <filter id="blur04">
+      <feGaussianBlur stdDeviation="10"/>
+    </filter>
+  </defs>
+
+  <!-- Layer 1: 따뜻한 오렌지 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg04)"/>
+
+  <g clip-path="url(#mainClip)">
+    <!-- Layer 2: 배경 흐린 이미지 (돋보기 밖) -->
+    <!-- 흐릿한 하늘 -->
+    <rect x="100" y="150" width="824" height="400" rx="0" fill="#FFCC99" opacity="0.6" filter="url(#blur04)"/>
+    <!-- 흐릿한 산 -->
+    <polygon points="100,600 350,280 600,600" fill="#D4956A" opacity="0.4" filter="url(#blur04)"/>
+    <polygon points="350,600 600,350 850,600" fill="#C47A55" opacity="0.35" filter="url(#blur04)"/>
+    <polygon points="100,600 924,600 924,900 100,900" fill="#A0C060" opacity="0.4" filter="url(#blur04)"/>
+
+    <!-- Layer 2: 돋보기 렌즈 내부 — 선명한 이미지 -->
+    <g clip-path="url(#lensClip)">
+      <!-- 선명한 하늘 -->
+      <rect x="200" y="190" width="480" height="300" fill="#29B6F6"/>
+      <!-- 선명한 산 -->
+      <polygon points="200,540 350,310 500,540" fill="url(#mountain04)"/>
+      <polygon points="330,540 460,370 590,540" fill="#455A64"/>
+      <rect x="200" y="540" width="480" height="140" fill="#66BB6A"/>
+      <!-- 태양 -->
+      <circle cx="600" cy="250" r="50" fill="#FFF176"/>
+    </g>
+
+    <!-- Layer 2: 돋보기 테두리 -->
+    <circle cx="440" cy="430" r="240" fill="none" stroke="white" stroke-width="32"/>
+    <circle cx="440" cy="430" r="240" fill="none" stroke="#FF7043" stroke-width="18"/>
+
+    <!-- Layer 3: 돋보기 손잡이 -->
+    <line x1="630" y1="620" x2="820" y2="820" stroke="#FF7043" stroke-width="64" stroke-linecap="round"/>
+    <line x1="630" y1="620" x2="820" y2="820" stroke="white" stroke-width="32" stroke-linecap="round"/>
+
+    <!-- 선명도 표시 — 렌즈 상단에 스파크 -->
+    <circle cx="560" cy="220" r="18" fill="#00E5FF" opacity="0.9"/>
+    <circle cx="320" cy="200" r="14" fill="#00E5FF" opacity="0.7"/>
+    <line x1="440" y1="190" x2="440" y2="160" stroke="#00E5FF" stroke-width="8" stroke-linecap="round" opacity="0.8"/>
+  </g>
+</svg>

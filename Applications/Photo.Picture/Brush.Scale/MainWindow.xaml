@@ -311,7 +311,7 @@
 
     <!-- ── 좌측 패널 ───────────────────────────────────────────────────── -->
     <Border Grid.Column="0" Background="#16213E" BorderBrush="#333355" BorderThickness="0,0,1,0">
-      <ScrollViewer VerticalScrollBarVisibility="Auto">
+      <ScrollViewer x:Name="LeftScroll" VerticalScrollBarVisibility="Auto">
         <StackPanel Margin="16">
 
           <!-- 타이틀 -->
@@ -468,7 +468,7 @@
           <!-- 실행 버튼 -->
           <Button x:Name="BtnRun" Content="업스케일 실행  (Enter)" Style="{StaticResource PrimaryBtn}"
                   Click="BtnRun_Click" IsEnabled="{Binding IsIdle}" Margin="0,0,0,8"/>
-          <Grid Margin="0,0,0,20">
+          <Grid Margin="0,0,0,8">
             <Grid.ColumnDefinitions>
               <ColumnDefinition/>
               <ColumnDefinition Width="Auto"/>
@@ -479,6 +479,10 @@
                     Click="BtnCopy_Click" IsEnabled="{Binding HasResult}" Grid.Column="1"
                     Margin="6,0,0,0" Padding="10,8" ToolTip="결과 클립보드 복사 (Ctrl+C)"/>
           </Grid>
+          <Button Content="이어서 업스케일 →" Style="{StaticResource SecondaryBtn}"
+                  Click="BtnReUpscale_Click" IsEnabled="{Binding CanReUpscale}"
+                  Margin="0,0,0,20"
+                  ToolTip="결과를 소스로 재사용 — 이어서 업스케일 (2× → 4× 총 효과)"/>
 
           <Separator Background="#333355" Margin="0,0,0,16"/>
 
@@ -515,8 +519,20 @@
           <TextBlock Text="{}{name} = 원본 파일명,  {scale} = 배율" Foreground="#666688"
                      FontSize="10" Margin="0,0,0,12"/>
 
-          <Button Content="배치 실행" Style="{StaticResource PrimaryBtn}"
-                  Click="BtnBatch_Click" IsEnabled="{Binding IsIdle}" Margin="0,0,0,8"/>
+          <CheckBox Content="완료 후 출력 폴더 열기" IsChecked="{Binding OpenOutputOnComplete}"
+                    Margin="0,0,0,8"/>
+
+          <Grid Margin="0,0,0,8">
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition/>
+              <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Button Content="배치 실행" Style="{StaticResource PrimaryBtn}"
+                    Click="BtnBatch_Click" IsEnabled="{Binding IsIdle}" Grid.Column="0"/>
+            <Button Content="폴더 열기" Style="{StaticResource SecondaryBtn}"
+                    Command="{Binding OpenBatchOutputCommand}" Grid.Column="1"
+                    Margin="6,0,0,0" Padding="10,8" ToolTip="출력 폴더를 탐색기에서 열기"/>
+          </Grid>
           <Button Content="취소" Style="{StaticResource SecondaryBtn}"
                   Command="{Binding CancelCommand}" Margin="0,0,0,16"/>
 

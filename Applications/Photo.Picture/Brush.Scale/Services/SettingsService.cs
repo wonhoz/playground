@@ -8,10 +8,11 @@ public class AppSettings
     public int    ScaleFactor     { get; set; } = 4;
     public string OutputFormat    { get; set; } = "Png";
     public int    JpegQuality     { get; set; } = 95;
-    public string BatchInputDir   { get; set; } = "";
-    public string BatchOutputDir  { get; set; } = "";
-    public string OutputPattern   { get; set; } = "{name}_{scale}x";
-    public bool   BatchRecursive  { get; set; } = false;
+    public string BatchInputDir       { get; set; } = "";
+    public string BatchOutputDir      { get; set; } = "";
+    public string OutputPattern       { get; set; } = "{name}_{scale}x";
+    public bool   BatchRecursive      { get; set; } = false;
+    public bool   OpenOutputOnComplete { get; set; } = false;
 }
 
 public static class SettingsService

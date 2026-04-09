@@ -74,6 +74,7 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
           </Grid.RowDefinitions>
 
           <Border Grid.Row="0" Grid.Column="0" Margin="0,0,8,5" Background="#16213E" CornerRadius="4" Padding="8,4">
@@ -106,10 +107,15 @@
           </Border>
           <TextBlock Grid.Row="5" Grid.Column="1" Text="처리 취소" Foreground="#E0E0E0" FontSize="12" VerticalAlignment="Center" Margin="0,0,0,5"/>
 
-          <Border Grid.Row="6" Grid.Column="0" Margin="0,0,8,0" Background="#16213E" CornerRadius="4" Padding="8,4">
+          <Border Grid.Row="6" Grid.Column="0" Margin="0,0,8,5" Background="#16213E" CornerRadius="4" Padding="8,4">
+            <TextBlock Text="Space" FontFamily="Consolas" Foreground="#9A6FFF" FontWeight="SemiBold"/>
+          </Border>
+          <TextBlock Grid.Row="6" Grid.Column="1" Text="원본/결과 전체 화면 토글" Foreground="#E0E0E0" FontSize="12" VerticalAlignment="Center" Margin="0,0,0,5"/>
+
+          <Border Grid.Row="7" Grid.Column="0" Margin="0,0,8,0" Background="#16213E" CornerRadius="4" Padding="8,4">
             <TextBlock Text="F1" FontFamily="Consolas" Foreground="#9A6FFF" FontWeight="SemiBold"/>
           </Border>
-          <TextBlock Grid.Row="6" Grid.Column="1" Text="이 도움말 열기" Foreground="#E0E0E0" FontSize="12" VerticalAlignment="Center"/>
+          <TextBlock Grid.Row="7" Grid.Column="1" Text="이 도움말 열기" Foreground="#E0E0E0" FontSize="12" VerticalAlignment="Center"/>
         </Grid>
 
         <!-- 뷰어 조작 -->

@@ -36,12 +36,7 @@ public partial class MainWindow : Window
         tg.Children.Add(_imgTranslate);
         ImageWrapper.RenderTransform = tg;
 
-        _vm.BatchCompleted += count =>
-            System.Windows.MessageBox.Show(
-                $"{count}개 파일 처리가 완료되었습니다.",
-                "배치 완료",
-                System.Windows.MessageBoxButton.OK,
-                System.Windows.MessageBoxImage.Information);
+        // 배치 완료 — MessageBox 대신 상태바 메시지 사용 (ViewModel에서 StatusText 설정)
 
         Loaded   += OnLoaded;
         Drop     += OnDrop;
@@ -62,10 +57,23 @@ public partial class MainWindow : Window
     // ── 드래그&드롭 ──────────────────────────────────────────────────────
     void OnDrop(object s, DragEventArgs e)
     {
-        if (e.Data.GetData(DataFormats.FileDrop) is string[] paths)
+        if (e.Data.GetData(DataFormats.FileDrop) is not string[] paths) return;
+        var images = paths.Where(IsImageFile).ToList();
+        if (images.Count == 0) return;
+        if (images.Count >= 2)
         {
-            var img = paths.FirstOrDefault(IsImageFile);
-            if (img is not null) _vm.LoadImage(img);
+            // 다중 파일 → 배치 모드 자동 진입
+            var dir = Path.GetDirectoryName(images[0]);
+            if (dir is not null)
+            {
+                _vm.BatchInputDir = dir;
+                _vm.StatusText    = $"{images.Count}개 파일 감지 — 배치 모드: 입력 폴더 자동 설정됨";
+                LeftScroll.ScrollToEnd();
+            }
+        }
+        else
+        {
+            _vm.LoadImage(images[0]);
         }
     }
 
@@ -106,6 +114,11 @@ public partial class MainWindow : Window
                 _vm.CancelCommand.Execute(null);
                 e.Handled = true;
                 break;
+            case Key.Space when _vm.HasResult:
+                _sliderX = _sliderX > 0.5 ? 0.0 : 1.0;
+                UpdateSlider();
+                e.Handled = true;
+                break;
             case Key.F1:
                 BtnHelp_Click(null!, null!);
                 e.Handled = true;
@@ -143,8 +156,14 @@ public partial class MainWindow : Window
             FileName = Path.GetFileNameWithoutExtension(_vm.InputFileName) +
                        $"_{_vm.ScaleFactor}x" + _vm.SelectedFormat.Format.Extension(),
         };
-        if (dlg.ShowDialog() == true) _vm.SaveResultDirect(dlg.FileName);
+        if (dlg.ShowDialog() == true)
+        {
+            _vm.SaveResultDirect(dlg.FileName);
+            System.Diagnostics.Process.Start("explorer", $"/select,\"{dlg.FileName}\"");
+        }
     }
+
+    void BtnReUpscale_Click(object s, RoutedEventArgs e) => _vm.ReUpscaleResult();
 
     void BtnCopy_Click(object s, RoutedEventArgs e) => _vm.CopyResultToClipboard();
 

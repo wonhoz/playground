@@ -17,6 +17,11 @@ public partial class HelpWindow : Window
             int v = 1;
             DwmSetWindowAttribute(h, 20, ref v, sizeof(int));
         };
+        KeyDown += (_, e) =>
+        {
+            if (e.Key is System.Windows.Input.Key.Escape or System.Windows.Input.Key.Enter)
+                Close();
+        };
     }
 
     void BtnClose_Click(object sender, RoutedEventArgs e) => Close();

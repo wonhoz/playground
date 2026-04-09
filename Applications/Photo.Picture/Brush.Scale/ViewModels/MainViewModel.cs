@@ -11,6 +11,7 @@ public class MainViewModel : INotifyPropertyChanged, IDisposable
     bool _settingsDirty = false;
 
     // ── 이미지 상태 ───────────────────────────────────────────────────────
+    string? _tempInputPath; // 자동 생성 임시 입력 파일 경로 (클립보드·재업스케일)
     string? _inputPath;
     public string? InputPath
     {
@@ -32,7 +33,7 @@ public class MainViewModel : INotifyPropertyChanged, IDisposable
     public BitmapSource? ResultBitmap
     {
         get => _resultBitmap;
-        set { _resultBitmap = value; OnPropertyChanged(); OnPropertyChanged(nameof(HasResult)); OnPropertyChanged(nameof(ResultInfo)); }
+        set { _resultBitmap = value; OnPropertyChanged(); OnPropertyChanged(nameof(HasResult)); OnPropertyChanged(nameof(ResultInfo)); OnPropertyChanged(nameof(CanReUpscale)); }
     }
 
     public bool HasResult => _resultBitmap is not null;
@@ -114,12 +115,19 @@ public class MainViewModel : INotifyPropertyChanged, IDisposable
         set { _batchRecursive = value; OnPropertyChanged(); SaveSettings(); }
     }
 
+    bool _openOutputOnComplete = false;
+    public bool OpenOutputOnComplete
+    {
+        get => _openOutputOnComplete;
+        set { _openOutputOnComplete = value; OnPropertyChanged(); SaveSettings(); }
+    }
+
     // ── 진행 ──────────────────────────────────────────────────────────────
     bool _isBusy;
     public bool IsBusy
     {
         get => _isBusy;
-        set { _isBusy = value; OnPropertyChanged(); OnPropertyChanged(nameof(IsIdle)); }
+        set { _isBusy = value; OnPropertyChanged(); OnPropertyChanged(nameof(IsIdle)); OnPropertyChanged(nameof(CanReUpscale)); }
     }
     public bool IsIdle => !_isBusy;
 
@@ -143,7 +151,8 @@ public class MainViewModel : INotifyPropertyChanged, IDisposable
     public event Action<int>? BatchCompleted;
 
     // ── 커맨드 ────────────────────────────────────────────────────────────
-    public ICommand CancelCommand { get; }
+    public ICommand CancelCommand          { get; }
+    public ICommand OpenBatchOutputCommand { get; }
 
     public MainViewModel()
     {
@@ -163,6 +172,9 @@ public class MainViewModel : INotifyPropertyChanged, IDisposable
         _selectedFormat = OutputFormats[0];
 
         CancelCommand = new RelayCommand(_ => _cts?.Cancel(), _ => IsBusy);
+        OpenBatchOutputCommand = new RelayCommand(
+            _ => System.Diagnostics.Process.Start("explorer", $"\"{_batchOutputDir}\""),
+            _ => !string.IsNullOrEmpty(_batchOutputDir) && Directory.Exists(_batchOutputDir));
 
         // 설정 복원
         LoadSettings();
@@ -189,11 +201,12 @@ public class MainViewModel : INotifyPropertyChanged, IDisposable
             if (fi is not null) _selectedFormat = fi;
         }
 
-        _jpegQuality    = Math.Clamp(s.JpegQuality, 60, 100);
-        _batchInputDir  = s.BatchInputDir;
-        _batchOutputDir = s.BatchOutputDir;
-        _outputPattern  = string.IsNullOrEmpty(s.OutputPattern) ? "{name}_{scale}x" : s.OutputPattern;
-        _batchRecursive = s.BatchRecursive;
+        _jpegQuality         = Math.Clamp(s.JpegQuality, 60, 100);
+        _batchInputDir       = s.BatchInputDir;
+        _batchOutputDir      = s.BatchOutputDir;
+        _outputPattern       = string.IsNullOrEmpty(s.OutputPattern) ? "{name}_{scale}x" : s.OutputPattern;
+        _batchRecursive      = s.BatchRecursive;
+        _openOutputOnComplete = s.OpenOutputOnComplete;
     }
 
     void SaveSettings()
@@ -206,14 +219,15 @@ public class MainViewModel : INotifyPropertyChanged, IDisposable
             _settingsDirty = false;
             SettingsService.Save(new AppSettings
             {
-                SelectedModel   = _selectedModel?.ModelType.ToString() ?? "Bicubic",
-                ScaleFactor     = _scaleFactor,
-                OutputFormat    = _selectedFormat?.Format.ToString() ?? "Png",
-                JpegQuality     = _jpegQuality,
-                BatchInputDir   = _batchInputDir,
-                BatchOutputDir  = _batchOutputDir,
-                OutputPattern   = _outputPattern,
-                BatchRecursive  = _batchRecursive,
+                SelectedModel        = _selectedModel?.ModelType.ToString() ?? "Bicubic",
+                ScaleFactor          = _scaleFactor,
+                OutputFormat         = _selectedFormat?.Format.ToString() ?? "Png",
+                JpegQuality          = _jpegQuality,
+                BatchInputDir        = _batchInputDir,
+                BatchOutputDir       = _batchOutputDir,
+                OutputPattern        = _outputPattern,
+                BatchRecursive       = _batchRecursive,
+                OpenOutputOnComplete = _openOutputOnComplete,
             });
         }, System.Windows.Threading.DispatcherPriority.Background);
     }
@@ -227,6 +241,7 @@ public class MainViewModel : INotifyPropertyChanged, IDisposable
             StatusText = $"이미지 로드 실패: {Path.GetFileName(path)}";
             return;
         }
+        DeleteTempInput();
         InputPath      = path;
         ResultBitmap   = null;
         OriginalBitmap = bmp;
@@ -240,11 +255,15 @@ public class MainViewModel : INotifyPropertyChanged, IDisposable
         if (src is null) return;
 
         var tmp = Path.Combine(Path.GetTempPath(), $"brushscale_clip_{DateTime.Now:yyyyMMddHHmmssfff}.png");
-        using var fs = File.OpenWrite(tmp);
-        var enc = new PngBitmapEncoder();
-        enc.Frames.Add(BitmapFrame.Create(src));
-        enc.Save(fs);
+        using (var fs = File.OpenWrite(tmp))
+        {
+            var enc = new PngBitmapEncoder();
+            enc.Frames.Add(BitmapFrame.Create(src));
+            enc.Save(fs);
+        }
 
+        DeleteTempInput();
+        _tempInputPath  = tmp;
         InputPath      = tmp;
         ResultBitmap   = null;
         OriginalBitmap = src;
@@ -301,14 +320,30 @@ public class MainViewModel : INotifyPropertyChanged, IDisposable
     public void SaveResultDirect(string outputPath)
     {
         if (_resultBitmap is null || _selectedFormat is null) return;
-        var enc = new PngBitmapEncoder();
-        enc.Frames.Add(BitmapFrame.Create(_resultBitmap));
-        using var ms = new System.IO.MemoryStream();
-        enc.Save(ms);
-        ms.Seek(0, SeekOrigin.Begin);
-        using var skBmp = SKBitmap.Decode(ms);
+        // BitmapSource → SKBitmap 직접 변환 (PNG 인코드/디코드 라운드트립 없음)
+        using var skBmp = WpfBitmapToSkia(_resultBitmap);
         UpscaleService.SaveImage(skBmp, outputPath, _selectedFormat.Format, _jpegQuality);
         StatusText = $"저장됨: {Path.GetFileName(outputPath)}";
+    }
+
+    // ── 결과를 소스로 재사용 ──────────────────────────────────────────────
+    public bool CanReUpscale => _resultBitmap is not null && !_isBusy;
+
+    public void ReUpscaleResult()
+    {
+        if (_resultBitmap is null) return;
+        var prev = _resultBitmap;
+        var tmp  = Path.Combine(Path.GetTempPath(), $"brushscale_reup_{DateTime.Now:yyyyMMddHHmmssfff}.png");
+        var enc  = new PngBitmapEncoder();
+        enc.Frames.Add(BitmapFrame.Create(prev));
+        using (var fs = File.OpenWrite(tmp))
+            enc.Save(fs);
+        DeleteTempInput();
+        _tempInputPath = tmp;
+        InputPath      = tmp;
+        ResultBitmap   = null;
+        OriginalBitmap = prev;
+        StatusText = $"결과를 소스로 재사용 ({prev.PixelWidth} × {prev.PixelHeight}) — 이어서 업스케일 가능";
     }
 
     // ── 배치 ──────────────────────────────────────────────────────────────
@@ -362,6 +397,8 @@ public class MainViewModel : INotifyPropertyChanged, IDisposable
             StatusText = $"배치 완료 — {jobs.Count}개 파일 처리";
             Progress = 100;
             BatchCompleted?.Invoke(jobs.Count);
+            if (_openOutputOnComplete && Directory.Exists(_batchOutputDir))
+                System.Diagnostics.Process.Start("explorer", $"\"{_batchOutputDir}\"");
         }
         catch (OperationCanceledException) { StatusText = "배치 취소됨"; Progress = 0; }
         catch (Exception ex)              { StatusText = $"배치 오류: {ex.Message}"; Progress = 0; }
@@ -376,7 +413,29 @@ public class MainViewModel : INotifyPropertyChanged, IDisposable
     }
 
     // ── IDisposable ───────────────────────────────────────────────────────
-    public void Dispose() => _svc.Dispose();
+    public void Dispose()
+    {
+        _svc.Dispose();
+        DeleteTempInput();
+    }
+
+    void DeleteTempInput()
+    {
+        if (_tempInputPath is null) return;
+        try { File.Delete(_tempInputPath); } catch { }
+        _tempInputPath = null;
+    }
+
+    // WPF BitmapSource → SKBitmap 직접 변환 (PNG 코덱 라운드트립 없음)
+    static SKBitmap WpfBitmapToSkia(BitmapSource src)
+    {
+        var converted = new FormatConvertedBitmap(src, PixelFormats.Bgra32, null, 0);
+        int w = converted.PixelWidth, h = converted.PixelHeight, stride = w * 4;
+        var info  = new SKImageInfo(w, h, SKColorType.Bgra8888, SKAlphaType.Premul);
+        var skBmp = new SKBitmap(info);
+        converted.CopyPixels(new Int32Rect(0, 0, w, h), skBmp.GetPixels(), stride * h, stride);
+        return skBmp;
+    }
 
     // ── 헬퍼 ──────────────────────────────────────────────────────────────
     static BitmapSource? LoadBitmapSource(string path)

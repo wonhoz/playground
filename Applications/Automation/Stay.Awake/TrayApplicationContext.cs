@@ -12,7 +12,7 @@ namespace StayAwake
         private readonly System.Windows.Forms.Timer _activityTimer;
         private readonly System.Windows.Forms.Timer _scheduleTimer;
         private readonly System.Windows.Forms.Timer _tooltipTimer;
-        private readonly System.Windows.Forms.Timer _pauseTimer;
+        // private readonly System.Windows.Forms.Timer _pauseTimer;
         private readonly ActivitySimulator _simulator;
         private readonly SlackUiAutomation _slackAutomation;
 
@@ -27,11 +27,11 @@ namespace StayAwake
         private ToolStripMenuItem _slackAutoStatusItem = null!;
         private ToolStripMenuItem _preventSleepItem = null!;
         private ToolStripMenuItem _activityTypeItem = null!;
-        private ToolStripMenuItem _pauseItem = null!;
-        private ToolStripMenuItem _pauseCancelItem = null!;
+        // private ToolStripMenuItem _pauseItem = null!;
+        // private ToolStripMenuItem _pauseCancelItem = null!;
 
-        private bool _isPaused = false;
-        private DateTime _pauseEndTime;
+        // private bool _isPaused = false;
+        // private DateTime _pauseEndTime;
 
         private bool _isRunning = false;
         private int _intervalMinutes = 3; // 기본 3분 (Slack 10분 타임아웃의 1/3)
@@ -107,9 +107,9 @@ namespace StayAwake
             _tooltipTimer = new System.Windows.Forms.Timer { Interval = 1000 };
             _tooltipTimer.Tick += OnTooltipTimerTick;
 
-            // 일시 중지 타이머 (만료 시 자동 재시작)
-            _pauseTimer = new System.Windows.Forms.Timer();
-            _pauseTimer.Tick += OnPauseTimerTick;
+            // 일시 중지 타이머 (비활성화)
+            // _pauseTimer = new System.Windows.Forms.Timer();
+            // _pauseTimer.Tick += OnPauseTimerTick;
 
             // 컨텍스트 메뉴 생성
             _contextMenu = CreateContextMenu();
@@ -216,15 +216,15 @@ namespace StayAwake
             // 지금 실행
             menu.Items.Add(new ToolStripMenuItem("지금 활동 실행", null, (s, e) => SimulateNow()));
 
-            // 일시 중지
-            _pauseItem = new ToolStripMenuItem("일시 중지");
-            _pauseItem.DropDownItems.Add(new ToolStripMenuItem("15분 후 재시작", null, (s, e) => StartPause(15)));
-            _pauseItem.DropDownItems.Add(new ToolStripMenuItem("30분 후 재시작", null, (s, e) => StartPause(30)));
-            _pauseItem.DropDownItems.Add(new ToolStripMenuItem("1시간 후 재시작", null, (s, e) => StartPause(60)));
-            _pauseItem.DropDownItems.Add(new ToolStripSeparator());
-            _pauseCancelItem = new ToolStripMenuItem("취소", null, (s, e) => CancelPause()) { Enabled = false };
-            _pauseItem.DropDownItems.Add(_pauseCancelItem);
-            menu.Items.Add(_pauseItem);
+            // 일시 중지 (비활성화)
+            // _pauseItem = new ToolStripMenuItem("일시 중지");
+            // _pauseItem.DropDownItems.Add(new ToolStripMenuItem("15분 후 재시작", null, (s, e) => StartPause(15)));
+            // _pauseItem.DropDownItems.Add(new ToolStripMenuItem("30분 후 재시작", null, (s, e) => StartPause(30)));
+            // _pauseItem.DropDownItems.Add(new ToolStripMenuItem("1시간 후 재시작", null, (s, e) => StartPause(60)));
+            // _pauseItem.DropDownItems.Add(new ToolStripSeparator());
+            // _pauseCancelItem = new ToolStripMenuItem("취소", null, (s, e) => CancelPause()) { Enabled = false };
+            // _pauseItem.DropDownItems.Add(_pauseCancelItem);
+            // menu.Items.Add(_pauseItem);
 
             menu.Items.Add(new ToolStripSeparator());
 
@@ -264,14 +264,14 @@ namespace StayAwake
 
         private void ToggleRunning()
         {
-            // 수동 토글 시 일시 중지 상태 해제
-            if (_isPaused)
-            {
-                _isPaused = false;
-                _pauseTimer.Stop();
-                _pauseCancelItem.Enabled = false;
-                _pauseCancelItem.Text = "취소";
-            }
+            // 수동 토글 시 일시 중지 상태 해제 (비활성화)
+            // if (_isPaused)
+            // {
+            //     _isPaused = false;
+            //     _pauseTimer.Stop();
+            //     _pauseCancelItem.Enabled = false;
+            //     _pauseCancelItem.Text = "취소";
+            // }
 
             _isRunning = !_isRunning;
 
@@ -501,17 +501,17 @@ namespace StayAwake
         private void OnTooltipTimerTick(object? sender, EventArgs e)
         {
             if (_isRunning) UpdateTooltip();
-            else if (_isPaused) UpdatePauseTooltip();
+            // else if (_isPaused) UpdatePauseTooltip();
         }
 
-        private void UpdatePauseTooltip()
-        {
-            var remaining = _pauseEndTime - DateTime.Now;
-            if (remaining < TimeSpan.Zero) remaining = TimeSpan.Zero;
-            var text = $"StayAwake - 일시 중지 ({(int)remaining.TotalMinutes}분 {remaining.Seconds:D2}초 후 재시작)";
-            _trayIcon.Text = text.Length > 127 ? text[..127] : text;
-            _pauseCancelItem.Text = $"취소 ({(int)remaining.TotalMinutes}분 {remaining.Seconds:D2}초 남음)";
-        }
+        // private void UpdatePauseTooltip()
+        // {
+        //     var remaining = _pauseEndTime - DateTime.Now;
+        //     if (remaining < TimeSpan.Zero) remaining = TimeSpan.Zero;
+        //     var text = $"StayAwake - 일시 중지 ({(int)remaining.TotalMinutes}분 {remaining.Seconds:D2}초 후 재시작)";
+        //     _trayIcon.Text = text.Length > 127 ? text[..127] : text;
+        //     _pauseCancelItem.Text = $"취소 ({(int)remaining.TotalMinutes}분 {remaining.Seconds:D2}초 남음)";
+        // }
 
         private void UpdateTooltip()
         {
@@ -630,11 +630,9 @@ namespace StayAwake
 • 트레이 좌클릭 (더블클릭)    오늘 통계 바로 보기
 • 트레이 우클릭               메뉴 열기
 • 트레이 호버 (실행 중)       다음 활동까지 남은 시간 + 오늘 활성 시간 + 세션 경과 시간
-• 트레이 호버 (일시 중지)     재시작까지 남은 시간
 • 트레이 호버 (정지 시)       오늘 누적 활성 시간
 • 메뉴 › ▶ 시작 / ⏹ 정지     시작 / 정지 토글
 • 메뉴 › 지금 활동 실행       즉시 강제 시뮬레이션 (타이머 리셋)
-• 메뉴 › 일시 중지            15분 / 30분 / 1시간 후 자동 재시작 (발표·회의 중 활용)
 • 메뉴 › 오늘 통계            시뮬레이션·스킵·활성 시간·히스토리·차트
 • 메뉴 › 통계 CSV 내보내기    오늘 + 최근 30일 히스토리를 CSV 파일로 저장
 • 메뉴 › 간격                 1 / 2 / 3 / 5 / 7분 선택
@@ -795,40 +793,40 @@ Slack 자리 비움 상태 방지 도구
             }
         }
 
-        private void StartPause(int minutes)
-        {
-            if (_isRunning) ToggleRunning(); // 실행 중이면 정지 (일시 중지 상태는 ToggleRunning에서 처리)
-            _isPaused = true;
-            _pauseEndTime = DateTime.Now.AddMinutes(minutes);
-            _pauseTimer.Interval = minutes * 60 * 1000;
-            _pauseTimer.Start();
-            _tooltipTimer.Start(); // 카운트다운 표시
-            _pauseCancelItem.Enabled = true;
-            UpdatePauseTooltip();
-            _trayIcon.ShowBalloonTip(1500, "StayAwake", $"일시 중지 — {minutes}분 후 자동 재시작", ToolTipIcon.Info);
-        }
+        // private void StartPause(int minutes)
+        // {
+        //     if (_isRunning) ToggleRunning(); // 실행 중이면 정지 (일시 중지 상태는 ToggleRunning에서 처리)
+        //     _isPaused = true;
+        //     _pauseEndTime = DateTime.Now.AddMinutes(minutes);
+        //     _pauseTimer.Interval = minutes * 60 * 1000;
+        //     _pauseTimer.Start();
+        //     _tooltipTimer.Start(); // 카운트다운 표시
+        //     _pauseCancelItem.Enabled = true;
+        //     UpdatePauseTooltip();
+        //     _trayIcon.ShowBalloonTip(1500, "StayAwake", $"일시 중지 — {minutes}분 후 자동 재시작", ToolTipIcon.Info);
+        // }
 
-        private void CancelPause()
-        {
-            _isPaused = false;
-            _pauseTimer.Stop();
-            _tooltipTimer.Stop();
-            _pauseCancelItem.Enabled = false;
-            _pauseCancelItem.Text = "취소";
-            var stoppedTime = _todayActiveTime;
-            var text = $"StayAwake - 정지됨 (오늘 {(int)stoppedTime.TotalHours:D2}:{stoppedTime:mm\\:ss})";
-            _trayIcon.Text = text.Length > 127 ? text[..127] : text;
-            _trayIcon.ShowBalloonTip(1500, "StayAwake", "일시 중지 취소됨", ToolTipIcon.Info);
-        }
+        // private void CancelPause()
+        // {
+        //     _isPaused = false;
+        //     _pauseTimer.Stop();
+        //     _tooltipTimer.Stop();
+        //     _pauseCancelItem.Enabled = false;
+        //     _pauseCancelItem.Text = "취소";
+        //     var stoppedTime = _todayActiveTime;
+        //     var text = $"StayAwake - 정지됨 (오늘 {(int)stoppedTime.TotalHours:D2}:{stoppedTime:mm\\:ss})";
+        //     _trayIcon.Text = text.Length > 127 ? text[..127] : text;
+        //     _trayIcon.ShowBalloonTip(1500, "StayAwake", "일시 중지 취소됨", ToolTipIcon.Info);
+        // }
 
-        private void OnPauseTimerTick(object? sender, EventArgs e)
-        {
-            _isPaused = false;
-            _pauseTimer.Stop();
-            _pauseCancelItem.Enabled = false;
-            _pauseCancelItem.Text = "취소";
-            if (!_isRunning) ToggleRunning(); // 자동 재시작
-        }
+        // private void OnPauseTimerTick(object? sender, EventArgs e)
+        // {
+        //     _isPaused = false;
+        //     _pauseTimer.Stop();
+        //     _pauseCancelItem.Enabled = false;
+        //     _pauseCancelItem.Text = "취소";
+        //     if (!_isRunning) ToggleRunning(); // 자동 재시작
+        // }
 
         private void ExitApplication()
         {
@@ -839,7 +837,7 @@ Slack 자리 비움 상태 방지 도구
             _scheduleTimer.Stop();
             _activityTimer.Stop();
             _tooltipTimer.Stop();
-            _pauseTimer.Stop();
+            // _pauseTimer.Stop();
             _simulator.AllowSleep(); // 절전 방지 해제
             _trayIcon.Visible = false;
             Application.Exit();
@@ -860,7 +858,7 @@ Slack 자리 비움 상태 방지 도구
                 _scheduleTimer.Dispose();
                 _activityTimer.Dispose();
                 _tooltipTimer.Dispose();
-                _pauseTimer.Dispose();
+                // _pauseTimer.Dispose();
                 _trayIcon.Dispose();
                 _contextMenu.Dispose();
                 _menuFont?.Dispose();

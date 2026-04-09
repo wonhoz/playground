@@ -40,9 +40,9 @@ namespace StayAwake
             DwmSetWindowAttribute(Handle, 20, ref dark, sizeof(int));
 
             // 슬림 스크롤바 너비·여백
-            const int scrollW = 8;
-            const int rightPad = 14;   // 스크롤바 우측 여백
-            const int gap = 6;         // 텍스트박스 ↔ 스크롤바 간격
+            const int scrollW  = 8;
+            const int rightPad = 14;
+            const int gap      = 6;
 
             var textBox = new SlimScrollRichTextBox
             {
@@ -52,7 +52,7 @@ namespace StayAwake
                 BackColor = BgColor,
                 ForeColor = TextColor,
                 Font = new Font("Consolas", 9.5f),
-                ScrollBars = RichTextBoxScrollBars.Vertical,   // 네이티브 스크롤바 (핸들 생성 후 숨김)
+                ScrollBars = RichTextBoxScrollBars.Vertical, // 핸들 생성 후 EM_SHOWSCROLLBAR 로 숨김
                 Dock = DockStyle.None,
                 Location = new Point(16, 16),
                 Size = new Size(width - 16 - gap - scrollW - rightPad, height - 80),
@@ -71,11 +71,8 @@ namespace StayAwake
                 Size = new Size(scrollW, height - 80)
             };
 
-            // 30ms 폴링으로 스크롤 위치 동기화 (키보드·휠·클릭 모두 커버)
-            var syncTimer = new System.Windows.Forms.Timer { Interval = 30 };
-            syncTimer.Tick += (s, e) => { if (!scrollBar.IsDisposed) scrollBar.Invalidate(); };
-            Load += (s, e) => syncTimer.Start();
-            FormClosed += (s, e) => { syncTimer.Stop(); syncTimer.Dispose(); };
+            // 스크롤 발생 시에만 커스텀 스크롤바 갱신 (타이머 없음 → 깜빡임 없음)
+            textBox.VScroll += (s, e) => scrollBar.Invalidate();
 
             var btnOk = new Button
             {
@@ -98,29 +95,22 @@ namespace StayAwake
         }
 
         // ─────────────────────────────────────────────────────────────────
-        // 네이티브 수직 스크롤바를 숨기는 RichTextBox 서브클래스
+        // 네이티브 스크롤바를 RichEdit 레벨에서 숨기는 서브클래스
+        // EM_SHOWSCROLLBAR 사용 — WndProc 인터셉션 없음 → 리페인트 루프 없음
         // ─────────────────────────────────────────────────────────────────
         private class SlimScrollRichTextBox : RichTextBox
         {
             [DllImport("user32.dll")]
-            private static extern bool ShowScrollBar(IntPtr hWnd, int wBar, bool bShow);
+            private static extern IntPtr SendMessage(IntPtr hWnd, int Msg, IntPtr wParam, IntPtr lParam);
 
-            private const int SB_VERT  = 1;
-            private const int WM_PAINT = 0x000F;
-            private const int WM_SIZE  = 0x0005;
+            private const int EM_SHOWSCROLLBAR = 0x0460;
+            private const int SB_VERT          = 1;
 
             protected override void OnHandleCreated(EventArgs e)
             {
                 base.OnHandleCreated(e);
-                ShowScrollBar(Handle, SB_VERT, false);
-            }
-
-            protected override void WndProc(ref Message m)
-            {
-                base.WndProc(ref m);
-                // WM_PAINT / WM_SIZE 이후 OS가 스크롤바를 복원할 수 있으므로 재숨김
-                if (m.Msg == WM_PAINT || m.Msg == WM_SIZE)
-                    ShowScrollBar(Handle, SB_VERT, false);
+                // lParam = 0(FALSE) → 숨김, 스크롤 정보(pos/range/page)는 유지됨
+                SendMessage(Handle, EM_SHOWSCROLLBAR, (IntPtr)SB_VERT, IntPtr.Zero);
             }
         }
 
@@ -151,6 +141,8 @@ namespace StayAwake
             private const int SIF_ALL          = 0x17;
             private const int SB_LINEUP        = 0;
             private const int SB_LINEDOWN      = 1;
+            private const int SB_PAGEUP        = 2;
+            private const int SB_PAGEDOWN      = 3;
             private const int SB_THUMBPOSITION = 4;
 
             private static readonly Color TrackColor = Color.FromArgb(42, 42, 42);
@@ -175,15 +167,12 @@ namespace StayAwake
 
                 MouseDown  += OnMouseDown;
                 MouseMove  += OnMouseMove;
-                MouseUp    += (s, e) => _dragging = false;
+                MouseUp    += (s, e) => { _dragging = false; Invalidate(); };
                 MouseEnter += (s, e) => { _thumbHovered = true;  Invalidate(); };
                 MouseLeave += (s, e) => { _thumbHovered = false; Invalidate(); };
-
-                // 커서가 스크롤바 위에 있을 때 휠 이벤트를 RichTextBox로 전달
                 MouseWheel += OnMouseWheel;
             }
 
-            // 스크롤 정보 조회
             private (int pos, int max, int page, int min) FetchScrollInfo()
             {
                 var si = new SCROLLINFO
@@ -195,7 +184,6 @@ namespace StayAwake
                 return (si.nPos, si.nMax, (int)si.nPage, si.nMin);
             }
 
-            // 썸 위치·크기 계산
             private (int top, int height) CalcThumb(int pos, int max, int page, int min)
             {
                 var range = max - min;
@@ -223,7 +211,7 @@ namespace StayAwake
                 g.SmoothingMode = SmoothingMode.AntiAlias;
                 var color = (_dragging || _thumbHovered) ? ThumbHover : ThumbColor;
                 using var brush = new SolidBrush(color);
-                using var path = RoundedRect(thumbRect, 4);
+                using var path  = RoundedRect(thumbRect, 4);
                 g.FillPath(brush, path);
             }
 
@@ -239,16 +227,13 @@ namespace StayAwake
 
                 if (e.Y >= thumbTop && e.Y <= thumbTop + thumbH)
                 {
-                    // 썸 드래그 시작
                     _dragging     = true;
                     _dragStartY   = e.Y;
                     _dragStartPos = pos;
                 }
                 else
                 {
-                    // 트랙 클릭 → 페이지 단위 이동
-                    var action = e.Y < thumbTop ? SB_LINEUP - 2 + 2 : 3; // SB_PAGEUP=2 / SB_PAGEDOWN=3
-                    if (e.Y < thumbTop) action = 2; else action = 3;
+                    var action = e.Y < thumbTop ? SB_PAGEUP : SB_PAGEDOWN;
                     SendMessage(_rtb.Handle, WM_VSCROLL, (IntPtr)action, IntPtr.Zero);
                     Invalidate();
                 }
@@ -259,16 +244,15 @@ namespace StayAwake
                 if (!_dragging) return;
 
                 var (_, max, page, min) = FetchScrollInfo();
-                var range = max - min;
-                if (range <= 0) return;
+                var scrollable = max - min - page;
+                if (scrollable <= 0) return;
 
-                var scrollable = range - page;
                 var (_, thumbH) = CalcThumb(_dragStartPos, max, page, min);
-                var trackRange = Height - thumbH;
+                var trackRange  = Height - thumbH;
                 if (trackRange <= 0) return;
 
-                var delta    = e.Y - _dragStartY;
-                var newPos   = (int)Math.Round(_dragStartPos + (double)delta * scrollable / trackRange);
+                var delta  = e.Y - _dragStartY;
+                var newPos = (int)Math.Round(_dragStartPos + (double)delta * scrollable / trackRange);
                 newPos = Math.Max(min, Math.Min(min + scrollable, newPos));
 
                 var wp = (IntPtr)((uint)SB_THUMBPOSITION | ((uint)newPos << 16));
@@ -278,20 +262,20 @@ namespace StayAwake
 
             private void OnMouseWheel(object? sender, MouseEventArgs e)
             {
-                var lines = e.Delta > 0 ? SB_LINEUP : SB_LINEDOWN;
+                var action = e.Delta > 0 ? SB_LINEUP : SB_LINEDOWN;
                 for (int i = 0; i < 3; i++)
-                    SendMessage(_rtb.Handle, WM_VSCROLL, (IntPtr)lines, IntPtr.Zero);
+                    SendMessage(_rtb.Handle, WM_VSCROLL, (IntPtr)action, IntPtr.Zero);
                 Invalidate();
             }
 
             private static GraphicsPath RoundedRect(Rectangle r, int radius)
             {
-                var d = radius * 2;
+                var d    = radius * 2;
                 var path = new GraphicsPath();
-                path.AddArc(r.X,             r.Y,              d, d, 180, 90);
-                path.AddArc(r.Right - d,     r.Y,              d, d, 270, 90);
-                path.AddArc(r.Right - d,     r.Bottom - d,     d, d,   0, 90);
-                path.AddArc(r.X,             r.Bottom - d,     d, d,  90, 90);
+                path.AddArc(r.X,         r.Y,          d, d, 180, 90);
+                path.AddArc(r.Right - d, r.Y,          d, d, 270, 90);
+                path.AddArc(r.Right - d, r.Bottom - d, d, d,   0, 90);
+                path.AddArc(r.X,         r.Bottom - d, d, d,  90, 90);
                 path.CloseFigure();
                 return path;
             }

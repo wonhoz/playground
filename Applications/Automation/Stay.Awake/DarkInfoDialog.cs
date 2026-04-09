@@ -11,10 +11,8 @@ namespace StayAwake
         [DllImport("dwmapi.dll")]
         private static extern int DwmSetWindowAttribute(IntPtr hwnd, int attr, ref int attrValue, int attrSize);
 
-        private static readonly Color BgColor     = Color.FromArgb(30, 30, 30);
-        private static readonly Color TextColor   = Color.FromArgb(224, 224, 224);
-        private static readonly Color BorderColor = Color.FromArgb(60, 60, 60);
-        private static readonly Color BtnColor    = Color.FromArgb(55, 55, 55);
+        private static readonly Color BgColor   = Color.FromArgb(30, 30, 30);
+        private static readonly Color TextColor = Color.FromArgb(224, 224, 224);
 
         /// <summary>다크 테마 정보 다이얼로그를 표시합니다.</summary>
         public static void Show(string title, string message, int width = 480, int height = 400)
@@ -55,7 +53,7 @@ namespace StayAwake
                 ScrollBars = RichTextBoxScrollBars.Vertical, // 핸들 생성 후 EM_SHOWSCROLLBAR 로 숨김
                 Dock = DockStyle.None,
                 Location = new Point(16, 16),
-                Size = new Size(width - 16 - gap - scrollW - rightPad, height - 80),
+                Size = new Size(width - 16 - gap - scrollW - rightPad, height - 32),
                 TabStop = false,
                 DetectUrls = true
             };
@@ -68,29 +66,17 @@ namespace StayAwake
             var scrollBar = new ModernVScrollBar(textBox)
             {
                 Location = new Point(16 + textBox.Width + gap, 16),
-                Size = new Size(scrollW, height - 80)
+                Size = new Size(scrollW, height - 32)
             };
 
             // 스크롤 발생 시에만 커스텀 스크롤바 갱신 (타이머 없음 → 깜빡임 없음)
             textBox.VScroll += (s, e) => scrollBar.Invalidate();
 
-            var btnOk = new Button
-            {
-                Text = "확인",
-                Size = new Size(90, 30),
-                BackColor = BtnColor,
-                ForeColor = TextColor,
-                FlatStyle = FlatStyle.Flat,
-                DialogResult = DialogResult.OK,
-                Font = new Font("Segoe UI", 9.5f)
-            };
-            btnOk.FlatAppearance.BorderColor = BorderColor;
-            btnOk.FlatAppearance.BorderSize = 1;
-            btnOk.Location = new Point(width - btnOk.Width - 45, ClientSize.Height - btnOk.Height - 25);
+            // 확인 버튼 없음 — Esc 또는 X로 닫기
+            KeyPreview = true;
+            KeyDown += (s, e) => { if (e.KeyCode == Keys.Escape || e.KeyCode == Keys.Enter) Close(); };
 
-            AcceptButton = btnOk;
             Controls.Add(scrollBar);
-            Controls.Add(btnOk);
             Controls.Add(textBox);
         }
 

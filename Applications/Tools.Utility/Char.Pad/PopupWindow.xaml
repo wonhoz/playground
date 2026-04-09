@@ -256,11 +256,13 @@
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
 
                             <!-- 단축키 행들 -->
                             <TextBlock Grid.Row="0" Grid.Column="0" Text="Win+Shift+;"         Style="{StaticResource KeyStyle}"/>
-                            <TextBlock Grid.Row="0" Grid.Column="2" Text="팝업 열기/닫기 (트레이 &gt; 단축키 변경으로 커스터마이징 가능)" Style="{StaticResource DescStyle}"/>
+                            <TextBlock Grid.Row="0" Grid.Column="2" Text="팝업 열기/닫기 (상태바 단축키 텍스트 클릭으로 즉시 변경 가능)" Style="{StaticResource DescStyle}"/>
 
                             <TextBlock Grid.Row="1" Grid.Column="0" Text="Esc"                  Style="{StaticResource KeyStyle}"/>
                             <TextBlock Grid.Row="1" Grid.Column="2" Text="검색어 지우기 / 다중 선택 해제 / 팝업 닫기" Style="{StaticResource DescStyle}"/>
@@ -337,7 +339,13 @@
                             <TextBlock Grid.Row="25" Grid.Column="0" Text="검색 히스토리"         Style="{StaticResource KeyStyle}"/>
                             <TextBlock Grid.Row="25" Grid.Column="2" Text="검색창 포커스 시 드롭다운 표시, 클릭으로 재검색 — DB 저장으로 앱 재시작 후에도 유지" Style="{StaticResource DescStyle}"/>
 
-                            <TextBlock Grid.Row="26" Grid.Column="0" Grid.ColumnSpan="3"
+                            <TextBlock Grid.Row="26" Grid.Column="0" Text="Ctrl+A"               Style="{StaticResource KeyStyle}"/>
+                            <TextBlock Grid.Row="26" Grid.Column="2" Text="현재 그리드 전체 선택 (다중 선택 모드 진입, Enter로 모두 연속 삽입)" Style="{StaticResource DescStyle}"/>
+
+                            <TextBlock Grid.Row="27" Grid.Column="0" Text="상태바 단축키"         Style="{StaticResource KeyStyle}"/>
+                            <TextBlock Grid.Row="27" Grid.Column="2" Text="하단 단축키 텍스트 클릭 → 단축키 변경 메뉴 (5가지 조합 선택)" Style="{StaticResource DescStyle}"/>
+
+                            <TextBlock Grid.Row="28" Grid.Column="0" Grid.ColumnSpan="3"
                                        Text="아무 곳이나 클릭하면 닫힙니다"
                                        Foreground="{StaticResource TextSecondary}"
                                        FontFamily="Segoe UI" FontSize="11"
@@ -365,10 +373,13 @@
                                FontFamily="Segoe UI" FontSize="11"
                                VerticalAlignment="Center"/>
                     <StackPanel Grid.Column="1" Orientation="Horizontal">
-                        <TextBlock Text="Win+Shift+;"
+                        <TextBlock x:Name="HotkeyHintText"
                                    Foreground="{StaticResource TextSecondary}"
                                    FontFamily="Segoe UI" FontSize="11"
-                                   VerticalAlignment="Center" Margin="0,0,8,0"/>
+                                   VerticalAlignment="Center" Margin="0,0,8,0"
+                                   Cursor="Hand"
+                                   ToolTip="클릭하여 단축키 변경"
+                                   MouseLeftButtonUp="HotkeyHintText_Click"/>
                         <!-- 크기 조절 핸들 (우측 하단) -->
                         <TextBlock Text="⠿"
                                    Foreground="{StaticResource TextSecondary}"

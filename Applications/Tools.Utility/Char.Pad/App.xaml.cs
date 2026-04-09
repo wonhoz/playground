@@ -157,7 +157,7 @@ public partial class App : System.Windows.Application
             : HotkeyOptions[0];
     }
 
-    private void ChangeHotkey(string newLabel)
+    internal void ChangeHotkey(string newLabel)
     {
         if (_hwndSource == null) return;
         var (_, newMod, newVk) = Array.Find(HotkeyOptions, h => h.Label == newLabel) is { Label: not null } found

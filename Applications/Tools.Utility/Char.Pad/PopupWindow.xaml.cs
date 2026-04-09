@@ -86,7 +86,47 @@ public partial class PopupWindow : System.Windows.Window
         _initialized = true;
         var lastTab = _storage.GetSetting("last_tab") ?? "recent";
         SwitchTab(lastTab);
+        UpdateHotkeyHint();
         SearchBox.Focus();
+    }
+
+    // ── 상태바 단축키 힌트 동기화 ───────────────────────────────────────────
+    internal void UpdateHotkeyHint()
+    {
+        var label = _storage.GetSetting("hotkey_label") ?? "Win+Shift+;";
+        HotkeyHintText.Text = label;
+    }
+
+    // ── 상태바 단축키 클릭 → 단축키 변경 메뉴 ──────────────────────────────
+    private void HotkeyHintText_Click(object sender, System.Windows.Input.MouseButtonEventArgs e)
+    {
+        if (System.Windows.Application.Current is not App app) return;
+        var current = _storage.GetSetting("hotkey_label") ?? "Win+Shift+;";
+
+        var menu = new System.Windows.Controls.ContextMenu();
+        string[] options = ["Win+Shift+;", "Win+Shift+Space", "Alt+Shift+C", "Ctrl+Alt+C", "Ctrl+Alt+Shift+C"];
+        foreach (var opt in options)
+        {
+            var item = new System.Windows.Controls.MenuItem
+            {
+                Header     = (opt == current ? "✓  " : "    ") + opt,
+                Foreground = opt == current
+                    ? (SolidColorBrush)FindResource("AccentHover")
+                    : (SolidColorBrush)FindResource("TextPrimary"),
+                Background = System.Windows.Media.Brushes.Transparent,
+            };
+            var captured = opt;
+            item.Click += (_, _) =>
+            {
+                app.ChangeHotkey(captured);
+                UpdateHotkeyHint();
+            };
+            menu.Items.Add(item);
+        }
+        menu.PlacementTarget = HotkeyHintText;
+        menu.Placement       = System.Windows.Controls.Primitives.PlacementMode.Top;
+        menu.IsOpen          = true;
+        e.Handled = true;
     }
 
     // ── 팝업 위치 결정 및 표시 ──────────────────────────────────────────
@@ -130,6 +170,7 @@ public partial class PopupWindow : System.Windows.Window
         }
 
         _pinnedInsertCount = 0;  // 팝업 열릴 때마다 누적 카운터 초기화
+        if (_initialized) UpdateHotkeyHint();
         Dispatcher.BeginInvoke(() =>
         {
             HelpOverlay.Visibility = Visibility.Collapsed;
@@ -434,7 +475,7 @@ public partial class PopupWindow : System.Windows.Window
             i += char.IsSurrogatePair(entry.Char, i) ? 2 : 1;
         }
         var tip = $"{entry.Char}  {entry.Name}  {codepoints}";
-        if (useCount.HasValue && useCount.Value > 1)
+        if (useCount.HasValue && useCount.Value >= 1)
             tip += $"  ({useCount.Value}회 사용)";
         return tip;
     }
@@ -679,6 +720,7 @@ public partial class PopupWindow : System.Windows.Window
             _charFontSize = Math.Clamp(_charFontSize + (e.Delta > 0 ? 2 : -2), 14, 36);
             _storage.SetSetting("char_font_size", _charFontSize.ToString());
             RefreshGrid();
+            StatusText.Text = $"문자 크기: {_charFontSize}px  (Ctrl+휠로 조절)";
             e.Handled = true;
             return;
         }
@@ -933,7 +975,17 @@ public partial class PopupWindow : System.Windows.Window
     {
         if (e.Key == Key.Escape)
         {
-            Hide();
+            // 도움말 오버레이가 열려있으면 먼저 닫기, 그 외엔 팝업 숨김
+            if (HelpOverlay.Visibility == Visibility.Visible)
+                HelpOverlay.Visibility = Visibility.Collapsed;
+            else
+                Hide();
+            e.Handled = true;
+        }
+        // Ctrl+A: 현재 그리드 전체 선택
+        else if (e.Key == Key.A && e.KeyboardDevice.Modifiers == ModifierKeys.Control)
+        {
+            SelectAllChars();
             e.Handled = true;
         }
         // Alt+1~9: 탭 전환 (Alt 키는 e.SystemKey로 확인)
@@ -1188,6 +1240,22 @@ public partial class PopupWindow : System.Windows.Window
         // 그리드 재렌더링으로 테두리 초기화
         RefreshGrid();
         StatusText.Text = _lastStatusText;
+    }
+
+    // ── Ctrl+A: 현재 그리드 전체 선택 ───────────────────────────────────────
+    private void SelectAllChars()
+    {
+        _multiSelected.Clear();
+        foreach (UIElement item in CharGrid.Children)
+        {
+            if (item is Grid g && g.Children.Count > 0 &&
+                g.Children[0] is Border b && b.Tag is CharEntry ce)
+                _multiSelected.Add(ce);
+        }
+        UpdateMultiOrderBadges();
+        UpdateMultiSelectStatus();
+        // 그리드 재렌더링으로 선택 테두리 반영
+        RefreshGrid();
     }
 
     private void UpdateMultiSelectStatus()

@@ -42,6 +42,11 @@ public partial class MainWindow : Window
         _db = new Database(_appSettings.ResolvedDbPath);
         _vm = new MainViewModel(_db, _appSettings.LastSortOrder);
         DataContext = _vm;
+
+        // 저장된 창 위치가 있으면 CenterScreen 비활성
+        if (!double.IsNaN(_appSettings.WindowLeft) && _appSettings.WindowLeft >= 0)
+            WindowStartupLocation = WindowStartupLocation.Manual;
+
         InitializeComponent();
 
         Loaded   += OnLoaded;
@@ -54,6 +59,17 @@ public partial class MainWindow : Window
         var handle = new WindowInteropHelper(this).Handle;
         int v = 1;
         DwmSetWindowAttribute(handle, 20, ref v, sizeof(int));
+
+        // 창 위치/크기 복원
+        if (!double.IsNaN(_appSettings.WindowLeft) && _appSettings.WindowLeft >= 0)
+        {
+            Left   = _appSettings.WindowLeft;
+            Top    = _appSettings.WindowTop;
+            Width  = _appSettings.WindowWidth;
+            Height = _appSettings.WindowHeight;
+            if (_appSettings.WindowState == "Maximized")
+                WindowState = WindowState.Maximized;
+        }
 
         // 전역 단축키 등록 (Win+Shift+P)
         RegisterHotKey(handle, HotkeyId, MOD_WIN | MOD_SHIFT, VK_P);
@@ -235,6 +251,17 @@ public partial class MainWindow : Window
         UnregisterHotKey(handle, HotkeyId);
         _appSettings.LastSortOrder  = _vm.SortOrder;
         _appSettings.RecentSearches = [.. _recentSearches];
+
+        // 창 위치/크기 저장 (최대화 상태가 아닐 때만 좌표 저장)
+        _appSettings.WindowState = WindowState == WindowState.Maximized ? "Maximized" : "Normal";
+        if (WindowState == WindowState.Normal)
+        {
+            _appSettings.WindowLeft   = Left;
+            _appSettings.WindowTop    = Top;
+            _appSettings.WindowWidth  = Width;
+            _appSettings.WindowHeight = Height;
+        }
+
         _appSettings.Save();
         _db.Dispose();
     }
@@ -366,7 +393,6 @@ public partial class MainWindow : Window
 
     void TagLabel_Click(object sender, System.Windows.Input.MouseButtonEventArgs e)
     {
-        if ((Keyboard.Modifiers & ModifierKeys.Control) == 0) return;
         if (sender is not TextBlock tb || string.IsNullOrWhiteSpace(tb.Text)) return;
         var firstTag = tb.Text.Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries)
                               .FirstOrDefault();
@@ -789,28 +815,43 @@ public partial class MainWindow : Window
         var dlg = new Microsoft.Win32.SaveFileDialog
         {
             Title      = "프롬프트 내보내기",
-            Filter     = "JSON 파일 (*.json)|*.json",
+            Filter     = "JSON 파일 (*.json)|*.json|CSV 파일 (*.csv)|*.csv",
             DefaultExt = ".json",
             FileName   = $"prompts_{DateTime.Now:yyyyMMdd}"
         };
         if (dlg.ShowDialog() != true) return;
 
-        var data = source.Select(p => new
+        bool useCsv = dlg.FilterIndex == 2;
+        if (useCsv)
         {
-            title      = p.Title,
-            content    = p.Content,
-            tags       = p.Tags,
-            service    = p.Service,
-            isFavorite = p.IsFavorite,
-            version    = p.Version,
-            notes      = p.Notes,
-            useCount   = p.UseCount,
-            sortOrder  = p.SortOrder
-        });
-        var json = System.Text.Json.JsonSerializer.Serialize(data,
-            new System.Text.Json.JsonSerializerOptions { WriteIndented = true });
-        File.WriteAllText(dlg.FileName, json, System.Text.Encoding.UTF8);
-        _vm.StatusText = $"내보내기 완료 — {source.Count}개";
+            var sb = new System.Text.StringBuilder();
+            sb.AppendLine("제목,내용,태그,서비스,메모,즐겨찾기,사용횟수,버전");
+            foreach (var p in source)
+                sb.AppendLine(string.Join(",",
+                    CsvEscape(p.Title), CsvEscape(p.Content), CsvEscape(p.Tags),
+                    CsvEscape(p.Service), CsvEscape(p.Notes),
+                    p.IsFavorite ? "1" : "0", p.UseCount, p.Version));
+            File.WriteAllText(dlg.FileName, sb.ToString(), new System.Text.UTF8Encoding(true));
+        }
+        else
+        {
+            var data = source.Select(p => new
+            {
+                title      = p.Title,
+                content    = p.Content,
+                tags       = p.Tags,
+                service    = p.Service,
+                isFavorite = p.IsFavorite,
+                version    = p.Version,
+                notes      = p.Notes,
+                useCount   = p.UseCount,
+                sortOrder  = p.SortOrder
+            });
+            var json = System.Text.Json.JsonSerializer.Serialize(data,
+                new System.Text.Json.JsonSerializerOptions { WriteIndented = true });
+            File.WriteAllText(dlg.FileName, json, System.Text.Encoding.UTF8);
+        }
+        _vm.StatusText = $"내보내기 완료 — {source.Count}개 ({(useCsv ? "CSV" : "JSON")})";
     }
 
     void Import_Click(object sender, RoutedEventArgs e)
@@ -978,6 +1019,20 @@ public partial class MainWindow : Window
         LstRecentSearches.SelectedItem = null;
     }
 
+    // ── 우클릭 내용 복사 ──────────────────────────────────────────────────────
+
+    void CopyFromMenu_Click(object sender, RoutedEventArgs e)
+    {
+        if (_vm.Selected == null || string.IsNullOrEmpty(_vm.Selected.Content)) return;
+        try
+        {
+            Clipboard.SetText(_vm.Selected.Content);
+            _vm.IncrementUseCount(_vm.Selected.Id);
+            _vm.StatusText = "클립보드에 복사됨";
+        }
+        catch { _vm.StatusText = "클립보드 복사 실패"; }
+    }
+
     // ── 복수 선택 일괄 태그 편집 ─────────────────────────────────────────────
 
     void BulkTagEdit_Click(object sender, RoutedEventArgs e)
@@ -1008,6 +1063,8 @@ public partial class MainWindow : Window
         RefreshFilterCombos();
         _vm.StatusText = $"{selected.Count}개 항목 태그 업데이트 완료";
     }
+
+    static string CsvEscape(string s) => $"\"{s.Replace("\"", "\"\"")}\"";
 
     private record ImportDto(
         string? Title, string? Content, string? Tags,

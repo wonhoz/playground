@@ -10,7 +10,7 @@ sealed class GistSync : IDisposable
     public GistSync(string pat)
     {
         _http = new HttpClient();
-        _http.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("token", pat);
+        _http.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", pat);
         _http.DefaultRequestHeaders.UserAgent.ParseAdd("Prompt.Forge/1.0");
         _http.DefaultRequestHeaders.Accept.ParseAdd("application/vnd.github+json");
         _http.Timeout = TimeSpan.FromSeconds(30);

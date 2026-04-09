@@ -14,6 +14,13 @@ public sealed class AppSettings
     public string LastSortOrder  { get; set; } = "updated";  // updated / use_count / custom
     public List<string> RecentSearches { get; set; } = [];
 
+    // 창 위치/크기 — double.NaN은 저장 없음 (CenterScreen 사용)
+    public double WindowLeft   { get; set; } = double.NaN;
+    public double WindowTop    { get; set; } = double.NaN;
+    public double WindowWidth  { get; set; } = 1000;
+    public double WindowHeight { get; set; } = 680;
+    public string WindowState  { get; set; } = "Normal";
+
     // 런타임에서 사용하는 평문 PAT (직렬화 제외)
     [System.Text.Json.Serialization.JsonIgnore]
     public string GithubPat

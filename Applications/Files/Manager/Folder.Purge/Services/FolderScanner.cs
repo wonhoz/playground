@@ -3,7 +3,9 @@ namespace FolderPurge.Services;
 public class ScanProgress
 {
     public int Scanned { get; set; }
+    public int Total { get; set; }
     public string CurrentPath { get; set; } = string.Empty;
+    public double Percent => Total > 0 ? Math.Min(100.0, Scanned * 100.0 / Total) : 0;
 }
 
 public class FolderScanner
@@ -21,18 +23,27 @@ public class FolderScanner
         IEnumerable<string> roots,
         IProgress<ScanProgress>? progress = null)
     {
-        var results = new List<FolderEntry>();
-        var prog = new ScanProgress();
+        var results  = new List<FolderEntry>();
+        var prog     = new ScanProgress();
+        var rootList = roots.Where(Directory.Exists).ToList();
 
         await Task.Run(() =>
         {
-            foreach (var root in roots)
+            // 1단계: 전체 디렉토리 수 파악 (ProgressBar 실제 진행률용)
+            foreach (var root in rootList)
             {
                 _ct.ThrowIfCancellationRequested();
-                if (!Directory.Exists(root)) continue;
+                try { prog.Total += Directory.GetDirectories(root, "*", SearchOption.AllDirectories).Length + 1; }
+                catch { prog.Total++; }
+            }
+            progress?.Report(prog);
+
+            // 2단계: 실제 스캔
+            foreach (var root in rootList)
+            {
+                _ct.ThrowIfCancellationRequested();
                 ScanDirectory(root, results, prog, progress);
             }
-            // 마지막 진행 상황 항상 보고
             progress?.Report(prog);
         }, _ct);
 
@@ -68,7 +79,10 @@ public class FolderScanner
         catch (IOException)                 { return; }
         catch (Exception)                   { return; }
 
-        // ── 0바이트 파일 탐지 ──
+        // 최근 수정 폴더 제외 옵션 — 탐지만 스킵, 하위 재귀는 계속
+        bool skipDetection = _opts.ExcludeRecentFolders && IsRecentlyModified(path);
+
+        // ── 0바이트 파일 탐지 (나이 필터 미적용) ──
         if (_opts.ScanEmptyFiles)
         {
             foreach (var f in files)
@@ -91,9 +105,7 @@ public class FolderScanner
         }
 
         // ── VS 아티팩트 탐지 ──
-        // 현재 폴더의 하위 폴더가 bin/obj 등 아티팩트 폴더만 있고,
-        // 파일이 없거나 .user 등 아티팩트 파일 확장자만 있는 경우 VS 아티팩트로 간주
-        if (_opts.ScanVsArtifacts)
+        if (!skipDetection && _opts.ScanVsArtifacts)
         {
             bool hasOnlyArtifactDirs = subDirs.Length > 0
                 && subDirs.All(d => _opts.VsArtifactNames.Contains(Path.GetFileName(d)));
@@ -114,14 +126,12 @@ public class FolderScanner
             }
         }
 
-        // ── 빈 폴더 탐지 (재귀 후 판단) ──
-        // 하위 재귀 먼저
+        // ── 하위 재귀 ──
         foreach (var sub in subDirs)
             ScanDirectory(sub, results, prog, progress);
 
-        // 이 폴더가 비어있는지 재확인 (재귀 후 하위가 비어서 삭제 대상 등록될 수 있으므로
-        // 여기서는 원본 상태로 판단 — 빈 폴더는 처음부터 비어있어야 함)
-        if (_opts.ScanEmptyFolders && subDirs.Length == 0 && files.Length == 0)
+        // ── 빈 폴더 탐지 ──
+        if (!skipDetection && _opts.ScanEmptyFolders && subDirs.Length == 0 && files.Length == 0)
         {
             results.Add(new FolderEntry
             {
@@ -131,6 +141,12 @@ public class FolderScanner
                 ItemCount = 0
             });
         }
+    }
+
+    private bool IsRecentlyModified(string path)
+    {
+        try { return (DateTime.Now - Directory.GetLastWriteTime(path)).TotalDays < _opts.MinAgeDays; }
+        catch { return false; }
     }
 
     // ── 헬퍼: 폴더 전체 크기 + 항목 수 단일 순회 계산 ──

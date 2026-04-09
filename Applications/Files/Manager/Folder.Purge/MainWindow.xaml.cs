@@ -23,6 +23,8 @@ public partial class MainWindow : Window
     private AppSettings _settings = new();
     private string? _sortColumn;
     private ListSortDirection _sortDirection = ListSortDirection.Ascending;
+    private bool _suppressSelectionSync;
+    private IntPtr _hwnd;
 
     public MainWindow()
     {
@@ -56,9 +58,9 @@ public partial class MainWindow : Window
     private void OnLoaded(object sender, RoutedEventArgs e)
     {
         // 다크 타이틀바
-        var hwnd = new WindowInteropHelper(this).Handle;
+        _hwnd = new WindowInteropHelper(this).Handle;
         int dark = 1;
-        DwmSetWindowAttribute(hwnd, 20, ref dark, sizeof(int));
+        DwmSetWindowAttribute(_hwnd, 20, ref dark, sizeof(int));
 
         // 설정 복원
         _settings = AppSettings.Load();
@@ -69,11 +71,14 @@ public partial class MainWindow : Window
         foreach (var a in _settings.VsArtifactFolderNames)
             _artifactFolderNames.Add(a);
 
-        ChkEmpty.IsChecked      = _settings.ScanEmptyFolders;
-        ChkVsArtifact.IsChecked = _settings.ScanVsArtifacts;
-        ChkEmptyFile.IsChecked  = _settings.ScanEmptyFiles;
-        ChkRecycleBin.IsChecked = _settings.UseRecycleBin;
-        ChkPreview.IsChecked    = _settings.PreviewOnly;
+        ChkEmpty.IsChecked         = _settings.ScanEmptyFolders;
+        ChkVsArtifact.IsChecked    = _settings.ScanVsArtifacts;
+        ChkEmptyFile.IsChecked     = _settings.ScanEmptyFiles;
+        ChkRecycleBin.IsChecked    = _settings.UseRecycleBin;
+        ChkPreview.IsChecked       = _settings.PreviewOnly;
+        ChkExcludeRecent.IsChecked = _settings.ExcludeRecentFolders;
+        MinAgeDaysInput.Text       = _settings.MinAgeDays.ToString();
+        UpdateMinAgeDaysPanel();
 
         // 정렬 상태 복원
         if (!string.IsNullOrEmpty(_settings.SortColumn))
@@ -104,9 +109,14 @@ public partial class MainWindow : Window
         _settings.ScanEmptyFiles         = ChkEmptyFile.IsChecked == true;
         _settings.UseRecycleBin          = ChkRecycleBin.IsChecked == true;
         _settings.PreviewOnly            = ChkPreview.IsChecked == true;
+        _settings.ExcludeRecentFolders   = ChkExcludeRecent.IsChecked == true;
+        _settings.MinAgeDays             = int.TryParse(MinAgeDaysInput.Text.Trim(), out int ageDays) && ageDays > 0 ? ageDays : 7;
         _settings.SortColumn             = _sortColumn ?? string.Empty;
         _settings.SortDescending         = _sortDirection == ListSortDirection.Descending;
-        _settings.Save();
+        if (!_settings.Save())
+            System.Windows.MessageBox.Show(
+                "설정 저장에 실패했습니다.\n다음 실행 시 설정이 유지되지 않을 수 있습니다.",
+                "저장 오류", MessageBoxButton.OK, MessageBoxImage.Warning);
     }
 
     // ── 드래그 앤 드롭 ──────────────────────────────────────────────────
@@ -234,6 +244,19 @@ public partial class MainWindow : Window
         DeleteBtn.Content = "삭제";
     }
 
+    private void ExcludeRecent_Changed(object sender, RoutedEventArgs e)
+    {
+        if (!IsLoaded) return;
+        UpdateMinAgeDaysPanel();
+    }
+
+    private void UpdateMinAgeDaysPanel()
+    {
+        bool enabled = ChkExcludeRecent.IsChecked == true;
+        MinAgeDaysPanel.IsEnabled = enabled;
+        MinAgeDaysPanel.Opacity   = enabled ? 1.0 : 0.4;
+    }
+
     // ── 필터 ────────────────────────────────────────────────────────────
 
     private void Filter_Changed(object sender, RoutedEventArgs e)
@@ -267,8 +290,12 @@ public partial class MainWindow : Window
             filtered = filtered.Where(r => r.SizeBytes >= minBytes);
 
         var list = filtered.ToList();
+        // ItemsSource 재바인딩 시 SelectionChanged가 RemovedItems로 호출되어
+        // IsSelected=false 덮어쓰기를 방지 — 가드 플래그로 동기화 일시 중단
+        _suppressSelectionSync = true;
         ResultListView.ItemsSource = null;
         ResultListView.ItemsSource = list;
+        _suppressSelectionSync = false;
 
         bool hasItems = list.Count > 0;
         ResultListView.Visibility = hasItems ? Visibility.Visible   : Visibility.Collapsed;
@@ -302,6 +329,11 @@ public partial class MainWindow : Window
             var prog = new Progress<ScanProgress>(p =>
             {
                 ProgressText.Text = $"스캔 중... {p.Scanned:N0}개 처리  |  {TrimPath(p.CurrentPath, 60)}";
+                if (p.Total > 0)
+                {
+                    ScanProgressBar.IsIndeterminate = false;
+                    ScanProgressBar.Value = p.Percent;
+                }
             });
 
             _scanResults = await scanner.ScanAsync([.. _targetFolders], prog);
@@ -311,8 +343,7 @@ public partial class MainWindow : Window
             if (!IsActive && _scanResults.Count > 0)
             {
                 SystemSounds.Asterisk.Play();
-                var hwnd = new WindowInteropHelper(this).Handle;
-                FlashWindow(hwnd, true);
+                FlashWindow(_hwnd, true);
             }
         }
         catch (OperationCanceledException)
@@ -328,22 +359,38 @@ public partial class MainWindow : Window
 
     private ScanOptions BuildOptions() => new()
     {
-        ScanEmptyFolders   = ChkEmpty.IsChecked == true,
-        ScanVsArtifacts    = ChkVsArtifact.IsChecked == true,
-        ScanEmptyFiles     = ChkEmptyFile.IsChecked == true,
-        UseRecycleBin      = ChkRecycleBin.IsChecked == true,
-        PreviewOnly        = ChkPreview.IsChecked == true,
-        ExcludedFolderNames = new HashSet<string>(
+        ScanEmptyFolders     = ChkEmpty.IsChecked == true,
+        ScanVsArtifacts      = ChkVsArtifact.IsChecked == true,
+        ScanEmptyFiles       = ChkEmptyFile.IsChecked == true,
+        UseRecycleBin        = ChkRecycleBin.IsChecked == true,
+        PreviewOnly          = ChkPreview.IsChecked == true,
+        ExcludeRecentFolders = ChkExcludeRecent.IsChecked == true,
+        MinAgeDays           = int.TryParse(MinAgeDaysInput.Text.Trim(), out int d) && d > 0 ? d : 7,
+        ExcludedFolderNames  = new HashSet<string>(
             _excludedFolders, StringComparer.OrdinalIgnoreCase),
-        VsArtifactNames = new HashSet<string>(
+        VsArtifactNames      = new HashSet<string>(
             _artifactFolderNames, StringComparer.OrdinalIgnoreCase),
         VsArtifactFileExtensions = new HashSet<string>(
             _settings.VsArtifactFileExtensions, StringComparer.OrdinalIgnoreCase),
     };
 
+    private List<FolderEntry> ApplySort(List<FolderEntry> list) =>
+        (_sortColumn, _sortDirection) switch
+        {
+            ("종류",   ListSortDirection.Ascending)  => [.. list.OrderBy(r => r.Kind)],
+            ("종류",   ListSortDirection.Descending) => [.. list.OrderByDescending(r => r.Kind)],
+            ("경로",   ListSortDirection.Ascending)  => [.. list.OrderBy(r => r.Path)],
+            ("경로",   ListSortDirection.Descending) => [.. list.OrderByDescending(r => r.Path)],
+            ("크기",   ListSortDirection.Ascending)  => [.. list.OrderBy(r => r.SizeBytes)],
+            ("크기",   ListSortDirection.Descending) => [.. list.OrderByDescending(r => r.SizeBytes)],
+            ("항목 수", ListSortDirection.Ascending)  => [.. list.OrderBy(r => r.ItemCount)],
+            ("항목 수", ListSortDirection.Descending) => [.. list.OrderByDescending(r => r.ItemCount)],
+            _ => list
+        };
+
     private void ShowResults(List<FolderEntry> results)
     {
-        _scanResults = results;
+        _scanResults = ApplySort(results);
 
         bool hasItems = results.Count > 0;
         SelectAllBtn.IsEnabled  = hasItems;
@@ -401,6 +448,7 @@ public partial class MainWindow : Window
 
     private void ResultListView_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
     {
+        if (_suppressSelectionSync) return;
         foreach (FolderEntry item in e.AddedItems.OfType<FolderEntry>())
             item.IsSelected = true;
         foreach (FolderEntry item in e.RemovedItems.OfType<FolderEntry>())
@@ -489,10 +537,11 @@ public partial class MainWindow : Window
 
         if (!previewOnly)
         {
-            string method  = useRecycleBin ? "휴지통으로 이동" : "영구 삭제";
-            string warning = useRecycleBin ? "" : "\n\n⚠️ 영구 삭제 선택 시 복구할 수 없습니다.";
+            string method    = useRecycleBin ? "휴지통으로 이동" : "영구 삭제";
+            string totalSize = FormatSize(toDelete.Sum(r => r.SizeBytes));
+            string warning   = useRecycleBin ? "" : "\n\n⚠️ 영구 삭제 선택 시 복구할 수 없습니다.";
             var confirm = System.Windows.MessageBox.Show(
-                $"{toDelete.Count:N0}개 항목을 {method}하겠습니까?{warning}",
+                $"{toDelete.Count:N0}개 항목 ({totalSize})을 {method}하겠습니까?{warning}",
                 "삭제 확인", MessageBoxButton.YesNo,
                 useRecycleBin ? MessageBoxImage.Question : MessageBoxImage.Warning);
             if (confirm != MessageBoxResult.Yes) return;
@@ -544,9 +593,21 @@ public partial class MainWindow : Window
 
         SetScanningState(false);
 
-        // 삭제된 항목 목록에서 제거
+        // 삭제된 항목 목록에서 제거 + 이력 기록
         if (!previewOnly)
         {
+            if (successCount > 0)
+            {
+                _settings.AddHistory(new ScanHistoryEntry
+                {
+                    Time         = DateTime.Now,
+                    FoundCount   = _scanResults.Count,
+                    FreedBytes   = freedBytes,
+                    DeletedCount = successCount,
+                    Roots        = [.. _targetFolders]
+                });
+                _settings.Save();
+            }
             foreach (var item in toDelete.Where(t => !Directory.Exists(t.Path) && !File.Exists(t.Path)))
                 _scanResults.Remove(item);
             ShowResults(_scanResults);
@@ -589,7 +650,15 @@ public partial class MainWindow : Window
         ExportBtn.IsEnabled         = !scanning && _scanResults.Count > 0;
         ProgressBarPanel.Visibility = scanning ? Visibility.Visible   : Visibility.Collapsed;
         ProgressText.Visibility     = scanning ? Visibility.Visible   : Visibility.Collapsed;
-        if (!scanning) ProgressText.Text = string.Empty;
+        if (scanning)
+        {
+            ScanProgressBar.IsIndeterminate = true;
+            ScanProgressBar.Value = 0;
+        }
+        else
+        {
+            ProgressText.Text = string.Empty;
+        }
     }
 
     // ── 유틸리티 ────────────────────────────────────────────────────────
@@ -696,18 +765,7 @@ public partial class MainWindow : Window
             _sortDirection = ListSortDirection.Ascending;
         }
 
-        _scanResults = (_sortColumn, _sortDirection) switch
-        {
-            ("종류",   ListSortDirection.Ascending)  => [.. _scanResults.OrderBy(r => r.Kind)],
-            ("종류",   ListSortDirection.Descending) => [.. _scanResults.OrderByDescending(r => r.Kind)],
-            ("경로",   ListSortDirection.Ascending)  => [.. _scanResults.OrderBy(r => r.Path)],
-            ("경로",   ListSortDirection.Descending) => [.. _scanResults.OrderByDescending(r => r.Path)],
-            ("크기",   ListSortDirection.Ascending)  => [.. _scanResults.OrderBy(r => r.SizeBytes)],
-            ("크기",   ListSortDirection.Descending) => [.. _scanResults.OrderByDescending(r => r.SizeBytes)],
-            ("항목 수", ListSortDirection.Ascending)  => [.. _scanResults.OrderBy(r => r.ItemCount)],
-            ("항목 수", ListSortDirection.Descending) => [.. _scanResults.OrderByDescending(r => r.ItemCount)],
-            _ => _scanResults
-        };
+        _scanResults = ApplySort(_scanResults);
 
         ApplyFilter();
         UpdateSortIndicator();
@@ -719,49 +777,7 @@ public partial class MainWindow : Window
 
     private void ShowHelp()
     {
-        System.Windows.MessageBox.Show(
-            """
-            ── 단축키 ──────────────────────────────
-            F1          도움말 표시
-            Enter       스캔 시작 (폴더 목록에 항목이 있을 때)
-            Delete      선택된 항목 삭제 확인
-
-            ── 사용 방법 ────────────────────────────
-            1. 폴더 추가
-               · [+ 폴더 추가] 버튼 클릭, 또는
-               · 탐색기에서 폴더를 드래그 앤 드롭
-
-            2. 스캔 옵션 설정
-               · 빈 폴더 / VS 빌드 아티팩트 / 0바이트 파일 선택
-               · VS 아티팩트: bin, obj 폴더와 .user 파일만 남은 폴더 탐지
-
-            3. [스캔 시작] 또는 Enter → 결과 목록 확인
-               (완료 후 종류별 요약: 빈 폴더 N / VS 아티팩트 N / 빈 파일 N)
-
-            4. 결과 필터링 (필터 바)
-               · 종류별 필터: 전체 / 빈 폴더 / VS 아티팩트 / 빈 파일
-               · 최소 크기: 지정 KB 이상 항목만 표시
-               · 검색: 경로 키워드로 결과 필터링
-
-            5. 삭제할 항목 선택 (체크박스)
-               · 전체 선택 / 선택 해제 / 반전 — 현재 필터된 항목에만 적용
-               · 행 클릭 / Shift+클릭 (범위) / Ctrl+클릭 → 체크박스 연동
-
-            6. [삭제] 클릭 또는 Delete 키
-               · 휴지통으로 이동 (기본, 복구 가능)
-               · 미리보기 모드: 실제 삭제 없이 대상 확인
-
-            ── 팁 ───────────────────────────────────
-            · 결과 항목 더블클릭 또는 우클릭 → 탐색기에서 열기
-            · 우클릭 → 경로 복사
-            · 우클릭 → 결과에서 제거: 오탐 항목을 삭제 없이 목록에서만 제거
-            · 우클릭 → 제외 폴더에 추가: 다음 스캔부터 해당 폴더명 제외
-            · 컬럼 헤더 클릭 → 정렬 ▲/▼ (오름/내림차순, 상태 저장됨)
-            · 아티팩트 폴더명 목록에서 bin, obj 외 폴더명 추가 가능
-            · 제외 폴더에 추가 시 스캔 대상에서 제외
-            """,
-            "Folder.Purge 도움말",
-            MessageBoxButton.OK,
-            MessageBoxImage.Information);
+        var win = new HelpWindow(_settings.ScanHistory) { Owner = this };
+        win.ShowDialog();
     }
 }

@@ -11,7 +11,7 @@ public enum FolderKind
 
 public class FolderEntry : INotifyPropertyChanged
 {
-    private bool _isSelected = true;
+    private bool _isSelected;
 
     public string Path { get; init; } = string.Empty;
     public FolderKind Kind { get; init; }

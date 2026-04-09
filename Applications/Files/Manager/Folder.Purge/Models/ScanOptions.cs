@@ -8,6 +8,10 @@ public class ScanOptions
     public bool UseRecycleBin { get; set; } = true;
     public bool PreviewOnly { get; set; } = false;
 
+    // 최근 N일 이내 수정된 폴더는 탐지에서 제외 (LastWriteTime 기준)
+    public bool ExcludeRecentFolders { get; set; } = false;
+    public int MinAgeDays { get; set; } = 7;
+
     // 제외할 폴더명 (대소문자 무시) — BuildOptions()에서 AppSettings 값으로 채워짐
     public HashSet<string> ExcludedFolderNames { get; set; } = new(StringComparer.OrdinalIgnoreCase);
 

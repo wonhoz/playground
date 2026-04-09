@@ -80,31 +80,42 @@ public partial class ProgramsView : UserControl
 
     private void BtnUninstall_Click(object sender, RoutedEventArgs e)
     {
-        if (ProgramList.SelectedItem is not InstalledProgram program) return;
+        var selected = ProgramList.SelectedItems.Cast<InstalledProgram>().ToList();
+        if (selected.Count == 0) return;
 
-        if (string.IsNullOrEmpty(program.UninstallString))
+        // 제거 문자열이 없는 항목 필터링
+        var canUninstall = selected.Where(p => !string.IsNullOrEmpty(p.UninstallString)).ToList();
+        var noUninstaller = selected.Count - canUninstall.Count;
+
+        if (canUninstall.Count == 0)
         {
-            MessageBox.Show("이 프로그램의 제거 명령을 찾을 수 없습니다.", "오류",
+            MessageBox.Show("선택한 프로그램의 제거 명령을 찾을 수 없습니다.", "오류",
                 MessageBoxButton.OK, MessageBoxImage.Warning);
             return;
         }
 
-        var result = MessageBox.Show(
-            $"'{program.Name}'을 제거하시겠습니까?\n\n제거 프로그램이 실행됩니다.",
-            "제거 확인",
-            MessageBoxButton.OKCancel,
-            MessageBoxImage.Question);
+        var msg = canUninstall.Count == 1
+            ? $"'{canUninstall[0].Name}'을 제거하시겠습니까?\n\n제거 프로그램이 실행됩니다."
+            : $"선택한 {canUninstall.Count}개 프로그램을 순차적으로 제거하시겠습니까?\n\n각 프로그램의 제거 창이 순서대로 실행됩니다.";
 
+        if (noUninstaller > 0)
+            msg += $"\n\n※ 제거 명령 없음 {noUninstaller}개는 건너뜁니다.";
+
+        var result = MessageBox.Show(msg, "제거 확인", MessageBoxButton.OKCancel, MessageBoxImage.Question);
         if (result != MessageBoxResult.OK) return;
 
-        if (_service.Uninstall(program))
+        int succeeded = 0;
+        foreach (var program in canUninstall)
         {
-            TbStatus.Text = $"'{program.Name}' 제거됨 — 레지스트리 탭에서 잔여 항목을 정리하세요.";
+            if (_service.Uninstall(program))
+                succeeded++;
+            else
+                MessageBox.Show($"'{program.Name}' 제거 프로그램을 실행할 수 없습니다.", "오류",
+                    MessageBoxButton.OK, MessageBoxImage.Error);
         }
-        else
-        {
-            MessageBox.Show("제거 프로그램을 실행할 수 없습니다.", "오류",
-                MessageBoxButton.OK, MessageBoxImage.Error);
-        }
+
+        TbStatus.Text = succeeded > 0
+            ? $"{succeeded}개 제거 완료 — 레지스트리 탭에서 잔여 항목을 정리하세요."
+            : "제거에 실패했습니다.";
     }
 }

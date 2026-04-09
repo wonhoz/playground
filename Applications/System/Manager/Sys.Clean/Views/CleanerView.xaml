@@ -108,6 +108,9 @@
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
 
                 <!-- 상태 텍스트 -->
@@ -117,33 +120,45 @@
                                FontWeight="SemiBold" Margin="12,0,0,0"/>
                 </StackPanel>
 
-                <!-- 전체 선택 -->
-                <Button Grid.Column="1" x:Name="BtnSelectAll" Content="전체 선택"
-                        Click="BtnSelectAll_Click" Margin="0,0,6,0"
-                        Padding="10,6" FontSize="12"/>
+                <!-- 프리셋 버튼 -->
+                <Button Grid.Column="1" Content="빠른 청소"
+                        Click="BtnPresetQuick_Click" Margin="0,0,4,0"
+                        Padding="10,6" FontSize="11"
+                        Background="#252525" Foreground="#888" BorderBrush="#3A3A3A"
+                        ToolTip="시스템 임시 파일 + 브라우저 캐시만 선택"/>
+                <Button Grid.Column="2" Content="브라우저 정리"
+                        Click="BtnPresetBrowser_Click" Margin="0,0,4,0"
+                        Padding="10,6" FontSize="11"
+                        Background="#252525" Foreground="#888" BorderBrush="#3A3A3A"
+                        ToolTip="브라우저 캐시 + 방문 기록 선택"/>
+                <Button Grid.Column="3" Content="전체"
+                        Click="BtnPresetAll_Click" Margin="0,0,6,0"
+                        Padding="10,6" FontSize="11"
+                        Background="#252525" Foreground="#888" BorderBrush="#3A3A3A"
+                        ToolTip="모든 항목 선택"/>
 
                 <!-- 폴더 추가 버튼 -->
-                <Button Grid.Column="2" x:Name="BtnAddFolder" Content="📁  폴더 추가"
+                <Button Grid.Column="4" x:Name="BtnAddFolder" Content="📁  폴더 추가"
                         Click="BtnAddFolder_Click" Margin="0,0,6,0"
                         Padding="10,6" FontSize="12"
                         Background="#252535" Foreground="#888" BorderBrush="#3A3A5A"
                         ToolTip="청소 대상 커스텀 폴더 추가"/>
 
                 <!-- 복사 버튼 -->
-                <Button Grid.Column="3" x:Name="BtnCopy" Content="📋  복사"
+                <Button Grid.Column="5" x:Name="BtnCopy" Content="📋  복사"
                         Click="BtnCopy_Click" Margin="0,0,6,0"
                         Padding="10,6" FontSize="12" IsEnabled="False"
                         ToolTip="분석 결과를 클립보드에 복사"/>
 
                 <!-- 분석 버튼 -->
-                <Button Grid.Column="4" x:Name="BtnAnalyze" Content="🔍  분석"
+                <Button Grid.Column="6" x:Name="BtnAnalyze" Content="🔍  분석"
                         Click="BtnAnalyze_Click" Margin="0,0,6,0"
                         Padding="14,7" FontSize="13"
                         Background="{StaticResource BrAccentDim}" Foreground="{StaticResource BrAccent}"
                         BorderBrush="{StaticResource BrAccent}"/>
 
                 <!-- 청소 버튼 -->
-                <Button Grid.Column="5" x:Name="BtnClean" Content="🧹  청소 실행"
+                <Button Grid.Column="7" x:Name="BtnClean" Content="🧹  청소 실행"
                         Click="BtnClean_Click" IsEnabled="False"
                         Padding="14,7" FontSize="13"
                         Background="#1B3A1F" Foreground="#66BB6A" BorderBrush="#388E3C"/>

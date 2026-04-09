@@ -94,8 +94,28 @@ public partial class CleanerView : UserControl
     // ── 키보드 단축키 트리거 (MainWindow에서 호출) ─────────────────────
     internal void TriggerAnalyze() => BtnAnalyze_Click(BtnAnalyze, new RoutedEventArgs());
     internal void TriggerClean()   { if (BtnClean.IsEnabled) BtnClean_Click(BtnClean, new RoutedEventArgs()); }
-    internal void TriggerSelectAll() => BtnSelectAll_Click(BtnSelectAll, new RoutedEventArgs());
+    internal void TriggerSelectAll() => BtnSelectAll_Click(null!, new RoutedEventArgs());
     internal bool IsCleanEnabled => BtnClean.IsEnabled;
+
+    // ── 프리셋 ────────────────────────────────────────────────────────
+    // 프리셋 카테고리 배열 — null이면 모두 선택
+    private static readonly string[]? QuickPreset   = ["system", "browser_cache"];
+    private static readonly string[]? BrowserPreset = ["browser_cache", "browser_history"];
+    private static readonly string[]? AllPreset      = null;
+
+    internal void ApplyPreset(string[]? categories)
+    {
+        foreach (var t in _targets.Where(t => !t.IsGroup))
+            t.IsSelected = categories == null || categories.Contains(t.Category);
+
+        if (_analyzed) UpdateResults();
+        TargetList.ItemsSource = null;
+        TargetList.ItemsSource = _targets;
+    }
+
+    private void BtnPresetQuick_Click(object sender, RoutedEventArgs e)   => ApplyPreset(QuickPreset);
+    private void BtnPresetBrowser_Click(object sender, RoutedEventArgs e) => ApplyPreset(BrowserPreset);
+    private void BtnPresetAll_Click(object sender, RoutedEventArgs e)     => ApplyPreset(AllPreset);
 
     // ── 분석 ──────────────────────────────────────────────────────────
     private async void BtnAnalyze_Click(object sender, RoutedEventArgs e)
@@ -306,16 +326,85 @@ public partial class CleanerView : UserControl
             ctx.Items.Add(menuRemove);
         }
 
-        return new Border
+        var card = new Border
         {
             Background = new SolidColorBrush(Color.FromRgb(0x22, 0x22, 0x22)),
             CornerRadius = new CornerRadius(5),
             Padding = new Thickness(12, 8, 12, 8),
             Margin = new Thickness(0, 2, 0, 2),
             Child = grid,
-            ToolTip = target.Description,
-            ContextMenu = ctx
+            ToolTip = "클릭: 대상 파일 미리 보기  |  " + (target.Description ?? ""),
+            ContextMenu = ctx,
+            Cursor = System.Windows.Input.Cursors.Hand
         };
+
+        card.MouseLeftButtonUp += (_, _) => ShowFilePreview(target);
+        return card;
+    }
+
+    // ── 파일 미리 보기 팝업 ───────────────────────────────────────────
+    private void ShowFilePreview(CleanTarget target)
+    {
+        var files = _service.GetPreviewFiles(target);
+
+        var panel = new StackPanel { Margin = new Thickness(0, 8, 0, 0) };
+
+        if (files.Count == 0)
+        {
+            panel.Children.Add(new TextBlock
+            {
+                Text = "표시할 파일이 없습니다.",
+                Foreground = new SolidColorBrush(Color.FromRgb(0x88, 0x88, 0x88)),
+                FontSize = 12
+            });
+        }
+        else
+        {
+            foreach (var f in files)
+            {
+                panel.Children.Add(new TextBlock
+                {
+                    Text = f,
+                    FontFamily = new System.Windows.Media.FontFamily("Consolas"),
+                    FontSize = 11,
+                    Foreground = new SolidColorBrush(Color.FromRgb(0xC0, 0xC0, 0xC0)),
+                    TextTrimming = TextTrimming.CharacterEllipsis,
+                    Margin = new Thickness(0, 1, 0, 1),
+                    ToolTip = f
+                });
+            }
+            if (files.Count >= 200)
+            {
+                panel.Children.Add(new TextBlock
+                {
+                    Text = "… (최대 200개 표시)",
+                    Foreground = new SolidColorBrush(Color.FromRgb(0x66, 0x66, 0x66)),
+                    FontSize = 11, Margin = new Thickness(0, 4, 0, 0)
+                });
+            }
+        }
+
+        var scroll = new ScrollViewer
+        {
+            Content = panel,
+            MaxHeight = 340,
+            VerticalScrollBarVisibility = ScrollBarVisibility.Auto,
+            Padding = new Thickness(4, 0, 4, 0)
+        };
+
+        var win = new Window
+        {
+            Title = $"파일 미리 보기 — {target.Name}  ({CleanTarget.FormatSize(target.Size)}, {files.Count}개)",
+            Width = 620, Height = 420,
+            Background = new SolidColorBrush(Color.FromRgb(0x1A, 0x1A, 0x1A)),
+            FontFamily = new System.Windows.Media.FontFamily("Segoe UI"),
+            WindowStartupLocation = WindowStartupLocation.CenterOwner,
+            Owner = Application.Current.MainWindow,
+            ResizeMode = ResizeMode.CanResize,
+            ShowInTaskbar = false,
+            Content = new Border { Padding = new Thickness(16), Child = scroll }
+        };
+        win.ShowDialog();
     }
 
     // ── 개별 항목 즉시 청소 ────────────────────────────────────────────
@@ -348,6 +437,8 @@ public partial class CleanerView : UserControl
             _cts?.Dispose();
             _cts = null;
             BtnAnalyze.IsEnabled = true;
+            BtnClean.IsEnabled = true;
+            BtnCopy.IsEnabled = true;
         }
 
         if (cleaned > 0)
@@ -471,6 +562,7 @@ public partial class CleanerView : UserControl
             BtnClean.Foreground = new SolidColorBrush(Color.FromRgb(0x66, 0xBB, 0x6A));
             BtnClean.BorderBrush = new SolidColorBrush(Color.FromRgb(0x38, 0x8E, 0x3C));
             BtnAnalyze.IsEnabled = true;
+            BtnCopy.IsEnabled = true;
             _analyzed = false;
         }
 

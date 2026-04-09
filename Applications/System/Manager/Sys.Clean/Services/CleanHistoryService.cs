@@ -36,6 +36,16 @@ public class CleanHistoryService
 
     public CleanHistoryEntry? GetLast() => Load().FirstOrDefault();
 
+    public void Clear()
+    {
+        try
+        {
+            if (File.Exists(_filePath))
+                File.Delete(_filePath);
+        }
+        catch { }
+    }
+
     public static string FormatRelativeTime(DateTime time)
     {
         var diff = DateTime.Now - time;

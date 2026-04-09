@@ -168,7 +168,20 @@
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn Width="420">
+                    <GridViewColumn Width="80">
+                        <GridViewColumn.Header>
+                            <GridViewColumnHeader Content="영향도" Tag="ImpactLevel"/>
+                        </GridViewColumn.Header>
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding ImpactLevel}"
+                                           Foreground="{Binding ImpactColor}"
+                                           FontSize="11" FontWeight="SemiBold" Margin="4,0"
+                                           ToolTip="실행 파일 크기 기반 부팅 지연 추정"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Width="340">
                         <GridViewColumn.Header>
                             <GridViewColumnHeader Content="명령" Tag="Command"/>
                         </GridViewColumn.Header>

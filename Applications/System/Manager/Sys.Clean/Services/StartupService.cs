@@ -24,7 +24,8 @@ public class StartupService
                         Name = name,
                         Command = cmd,
                         Location = StartupLocation.HklmRun,
-                        IsEnabled = true
+                        IsEnabled = true,
+                        ImpactLevel = EstimateImpact(cmd)
                     });
                 }
             }
@@ -43,7 +44,8 @@ public class StartupService
                         Name = name,
                         Command = cmd,
                         Location = StartupLocation.HkcuRun,
-                        IsEnabled = true
+                        IsEnabled = true,
+                        ImpactLevel = EstimateImpact(cmd)
                     });
                 }
             }
@@ -80,6 +82,28 @@ public class StartupService
                 // StartupApproved에만 있고 Run에는 없는 경우 스킵
             }
         }
+    }
+
+    private static string EstimateImpact(string command)
+    {
+        // 명령에서 실행 파일 경로 추출
+        var path = command.Trim().TrimStart('"');
+        var endQuote = path.IndexOf('"');
+        if (endQuote > 0) path = path[..endQuote];
+        path = path.Split(' ')[0];
+
+        try
+        {
+            if (File.Exists(path))
+            {
+                long size = new FileInfo(path).Length;
+                if (size > 50 * 1024 * 1024) return "높음";  // 50MB 초과
+                if (size > 10 * 1024 * 1024) return "중간";  // 10MB 초과
+                return "낮음";
+            }
+        }
+        catch { /* 파일 접근 실패 무시 */ }
+        return "—";
     }
 
     public bool SetEnabled(StartupEntry entry, bool enabled)

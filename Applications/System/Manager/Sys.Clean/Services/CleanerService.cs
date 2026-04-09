@@ -221,6 +221,40 @@ public class CleanerService
             .ToArray();
     }
 
+    public List<string> GetPreviewFiles(CleanTarget target, int maxFiles = 200)
+    {
+        if (target.IsGroup || target.Paths.Length == 0) return [];
+        if (target.CleanerId == "recycle_bin") return ["(휴지통 — 파일 목록 표시 불가)"];
+
+        var result = new List<string>();
+        bool dbOnly = target.CleanerId == "thumbnail";
+        bool sqliteOnly = target.CleanerId == "firefox_history";
+
+        foreach (var path in target.Paths)
+        {
+            try
+            {
+                if (File.Exists(path))
+                {
+                    result.Add(path);
+                }
+                else if (Directory.Exists(path))
+                {
+                    foreach (var f in Directory.EnumerateFiles(path, "*", SearchOption.AllDirectories))
+                    {
+                        var ext = Path.GetExtension(f).ToLower();
+                        if (dbOnly && ext != ".db") continue;
+                        if (sqliteOnly && ext != ".sqlite") continue;
+                        result.Add(f);
+                        if (result.Count >= maxFiles) return result;
+                    }
+                }
+            }
+            catch { /* 접근 거부 무시 */ }
+        }
+        return result;
+    }
+
     public async Task<long> ScanTargetAsync(CleanTarget target, CancellationToken ct)
     {
         if (target.IsGroup) return 0;

@@ -112,11 +112,7 @@ public partial class HistoryView : UserControl
 
         try
         {
-            var path = System.IO.Path.Combine(
-                Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
-                "SysClean", "history.json");
-            if (System.IO.File.Exists(path))
-                System.IO.File.Delete(path);
+            _history.Clear();
         }
         catch (Exception ex)
         {

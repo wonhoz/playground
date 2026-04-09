@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg7" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FDE68A"/>
+      <stop offset="100%" stop-color="#F59E0B"/>
+    </linearGradient>
+  </defs>
+
+  <!-- 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg7)"/>
+
+  <!-- 왼쪽: 큰 픽셀 격자 (저해상도) -->
+  <!-- 3x3 큰 블록 = 픽셀화된 이미지 -->
+  <g>
+    <rect x="90" y="260" width="115" height="115" rx="4" fill="#EF4444"/>
+    <rect x="210" y="260" width="115" height="115" rx="4" fill="#F97316"/>
+    <rect x="330" y="260" width="115" height="115" rx="4" fill="#FBBF24"/>
+
+    <rect x="90" y="380" width="115" height="115" rx="4" fill="#F97316"/>
+    <rect x="210" y="380" width="115" height="115" rx="4" fill="#EF4444"/>
+    <rect x="330" y="380" width="115" height="115" rx="4" fill="#F97316"/>
+
+    <rect x="90" y="500" width="115" height="115" rx="4" fill="#FBBF24"/>
+    <rect x="210" y="500" width="115" height="115" rx="4" fill="#F97316"/>
+    <rect x="330" y="500" width="115" height="115" rx="4" fill="#EF4444"/>
+
+    <!-- 픽셀 테두리 -->
+    <rect x="88" y="258" width="359" height="359" rx="10" fill="none" stroke="rgba(0,0,0,0.2)" stroke-width="6"/>
+  </g>
+
+  <!-- 픽셀 레이블 -->
+  <text x="267" y="680" text-anchor="middle" font-family="Arial,sans-serif" font-weight="bold" font-size="38" fill="rgba(120,40,0,0.7)">Low</text>
+
+  <!-- 가운데 변환 화살표 -->
+  <g fill="#1D4ED8">
+    <rect x="475" y="455" width="80" height="28" rx="6"/>
+    <polygon points="580,400 580,540 660,469"/>
+  </g>
+
+  <!-- 오른쪽: 선명한 이미지 -->
+  <rect x="690" y="260" width="250" height="250" rx="16" fill="#EFF6FF"/>
+  <!-- 선명한 이미지 내용: 풍경 -->
+  <rect x="690" y="260" width="250" height="120" rx="8" fill="#BAE6FD"/>
+  <circle cx="850" cy="310" r="30" fill="#FDE047"/>
+  <polygon points="690,510 760,360 830,510" fill="#6366F1"/>
+  <polygon points="790,510 860,340 930,510" fill="#4F46E5"/>
+  <rect x="690" y="478" width="250" height="32" rx="4" fill="#4ADE80"/>
+  <rect x="690" y="260" width="250" height="250" rx="16" fill="none" stroke="#2563EB" stroke-width="8"/>
+
+  <!-- 선명 레이블 -->
+  <text x="815" y="562" text-anchor="middle" font-family="Arial,sans-serif" font-weight="bold" font-size="38" fill="#1D4ED8">Sharp</text>
+
+  <!-- 하단 배율 표시 -->
+  <rect x="340" y="740" width="340" height="90" rx="20" fill="rgba(255,255,255,0.6)"/>
+  <text x="512" y="800" text-anchor="middle" font-family="Arial Black,sans-serif" font-weight="900" font-size="56" fill="#DC2626">×2 ×4 ×8</text>
+</svg>

@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Brush.Scale — Icon Candidates (Candidate_20260410_0713)</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: linear-gradient(135deg, #1e1b4b 0%, #312e81 40%, #4c1d95 100%);
+    min-height: 100vh;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    color: #e0e7ff;
+    padding: 40px 20px 60px;
+  }
+
+  header {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+  header h1 {
+    font-size: 2rem;
+    font-weight: 800;
+    color: #c7d2fe;
+    letter-spacing: 0.04em;
+    margin-bottom: 6px;
+  }
+  header p {
+    font-size: 0.95rem;
+    color: #a5b4fc;
+    letter-spacing: 0.02em;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 28px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .card {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(165,180,252,0.2);
+    border-radius: 20px;
+    padding: 28px 20px 22px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    transition: transform 0.22s ease, box-shadow 0.22s ease, background 0.22s ease;
+    cursor: default;
+  }
+  .card:hover {
+    transform: translateY(-6px) scale(1.035);
+    box-shadow: 0 16px 48px rgba(0,0,0,0.45);
+    background: rgba(255,255,255,0.12);
+  }
+
+  .icon-wrap {
+    width: 192px;
+    height: 192px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    filter: drop-shadow(0 6px 18px rgba(0,0,0,0.4));
+    transition: filter 0.22s ease;
+  }
+  .card:hover .icon-wrap {
+    filter: drop-shadow(0 10px 28px rgba(0,0,0,0.55));
+  }
+  .icon-wrap img {
+    width: 192px;
+    height: 192px;
+    object-fit: contain;
+  }
+
+  .icon-label {
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: #818cf8;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .concept {
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: #c7d2fe;
+    text-align: center;
+    line-height: 1.4;
+  }
+
+  .meta {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .tag {
+    font-size: 0.72rem;
+    padding: 3px 10px;
+    border-radius: 999px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+  }
+  .tag-type-literal   { background: #1e40af; color: #bfdbfe; }
+  .tag-type-metaphor  { background: #6b21a8; color: #e9d5ff; }
+  .tag-type-hybrid    { background: #065f46; color: #a7f3d0; }
+
+  .tag-pattern { background: rgba(255,255,255,0.1); color: #a5b4fc; }
+
+  .palette {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+  }
+  .swatch {
+    width: 18px;
+    height: 18px;
+    border-radius: 4px;
+    border: 1px solid rgba(255,255,255,0.2);
+  }
+
+  .sizes {
+    display: flex;
+    gap: 14px;
+    align-items: flex-end;
+    margin-top: 4px;
+    padding: 10px 14px;
+    background: rgba(0,0,0,0.25);
+    border-radius: 12px;
+  }
+  .sizes img {
+    object-fit: contain;
+    image-rendering: pixelated;
+  }
+  .size-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+  }
+  .size-label {
+    font-size: 0.65rem;
+    color: #6b7280;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Brush.Scale — Icon Candidates</h1>
+  <p>Candidate_20260410_0713 &nbsp;·&nbsp; 8 icons &nbsp;·&nbsp; AI Image Upscaler</p>
+</header>
+
+<div class="grid">
+
+  <!-- icon_01 -->
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_01.svg" alt="icon_01"/></div>
+    <div class="icon-label">icon_01</div>
+    <div class="concept">Before / After 이미지 분할 비교<br>(픽셀화 ↔ 선명한 풍경)</div>
+    <div class="meta">
+      <span class="tag tag-type-literal">Literal</span>
+      <span class="tag tag-pattern">레이어드</span>
+    </div>
+    <div class="palette">
+      <div class="swatch" style="background:#7C3AED" title="#7C3AED"></div>
+      <div class="swatch" style="background:#2563EB" title="#2563EB"></div>
+      <div class="swatch" style="background:#FB923C" title="#FB923C"></div>
+      <div class="swatch" style="background:#4ADE80" title="#4ADE80"></div>
+      <div class="swatch" style="background:#FDE047" title="#FDE047"></div>
+    </div>
+    <div class="sizes">
+      <div class="size-group"><img src="icon_01.svg" width="48" height="48"/><span class="size-label">48</span></div>
+      <div class="size-group"><img src="icon_01.svg" width="32" height="32"/><span class="size-label">32</span></div>
+      <div class="size-group"><img src="icon_01.svg" width="16" height="16"/><span class="size-label">16</span></div>
+    </div>
+  </div>
+
+  <!-- icon_02 -->
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_02.svg" alt="icon_02"/></div>
+    <div class="icon-label">icon_02</div>
+    <div class="concept">확대경 안에서 선명한 이미지 확인<br>(HD 해상도 강조)</div>
+    <div class="meta">
+      <span class="tag tag-type-literal">Literal</span>
+      <span class="tag tag-pattern">중앙 심볼</span>
+    </div>
+    <div class="palette">
+      <div class="swatch" style="background:#FF8E53" title="#FF8E53"></div>
+      <div class="swatch" style="background:#FF4545" title="#FF4545"></div>
+      <div class="swatch" style="background:#FFFFFF" title="#FFFFFF"></div>
+      <div class="swatch" style="background:#FDE047" title="#FDE047"></div>
+      <div class="swatch" style="background:#6366F1" title="#6366F1"></div>
+    </div>
+    <div class="sizes">
+      <div class="size-group"><img src="icon_02.svg" width="48" height="48"/><span class="size-label">48</span></div>
+      <div class="size-group"><img src="icon_02.svg" width="32" height="32"/><span class="size-label">32</span></div>
+      <div class="size-group"><img src="icon_02.svg" width="16" height="16"/><span class="size-label">16</span></div>
+    </div>
+  </div>
+
+  <!-- icon_03 -->
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_03.svg" alt="icon_03"/></div>
+    <div class="icon-label">icon_03</div>
+    <div class="concept">×4 업스케일 배율 텍스트<br>(1x → 4K 직관적 표현)</div>
+    <div class="meta">
+      <span class="tag tag-type-literal">Literal</span>
+      <span class="tag tag-pattern">중앙 심볼</span>
+    </div>
+    <div class="palette">
+      <div class="swatch" style="background:#34D399" title="#34D399"></div>
+      <div class="swatch" style="background:#059669" title="#059669"></div>
+      <div class="swatch" style="background:#FFFFFF" title="#FFFFFF"></div>
+    </div>
+    <div class="sizes">
+      <div class="size-group"><img src="icon_03.svg" width="48" height="48"/><span class="size-label">48</span></div>
+      <div class="size-group"><img src="icon_03.svg" width="32" height="32"/><span class="size-label">32</span></div>
+      <div class="size-group"><img src="icon_03.svg" width="16" height="16"/><span class="size-label">16</span></div>
+    </div>
+  </div>
+
+  <!-- icon_04 -->
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_04.svg" alt="icon_04"/></div>
+    <div class="icon-label">icon_04</div>
+    <div class="concept">마법의 붓(Brush)이 이미지를 선명하게 그림<br>(앱 이름 Brush 활용)</div>
+    <div class="meta">
+      <span class="tag tag-type-metaphor">Metaphor</span>
+      <span class="tag tag-pattern">대각선/동적</span>
+    </div>
+    <div class="palette">
+      <div class="swatch" style="background:#FEF3C7" title="#FEF3C7"></div>
+      <div class="swatch" style="background:#2563EB" title="#2563EB"></div>
+      <div class="swatch" style="background:#EC4899" title="#EC4899"></div>
+      <div class="swatch" style="background:#F97316" title="#F97316"></div>
+      <div class="swatch" style="background:#FBBF24" title="#FBBF24"></div>
+    </div>
+    <div class="sizes">
+      <div class="size-group"><img src="icon_04.svg" width="48" height="48"/><span class="size-label">48</span></div>
+      <div class="size-group"><img src="icon_04.svg" width="32" height="32"/><span class="size-label">32</span></div>
+      <div class="size-group"><img src="icon_04.svg" width="16" height="16"/><span class="size-label">16</span></div>
+    </div>
+  </div>
+
+  <!-- icon_05 -->
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_05.svg" alt="icon_05"/></div>
+    <div class="icon-label">icon_05</div>
+    <div class="concept">안개 뒤에서 선명한 산이 나타남<br>(흐릿함 → 선명함 은유)</div>
+    <div class="meta">
+      <span class="tag tag-type-metaphor">Metaphor</span>
+      <span class="tag tag-pattern">공간/장면</span>
+    </div>
+    <div class="palette">
+      <div class="swatch" style="background:#0EA5E9" title="#0EA5E9"></div>
+      <div class="swatch" style="background:#38BDF8" title="#38BDF8"></div>
+      <div class="swatch" style="background:#FDE047" title="#FDE047"></div>
+      <div class="swatch" style="background:#4338CA" title="#4338CA"></div>
+      <div class="swatch" style="background:#FFFFFF" title="#FFFFFF"></div>
+    </div>
+    <div class="sizes">
+      <div class="size-group"><img src="icon_05.svg" width="48" height="48"/><span class="size-label">48</span></div>
+      <div class="size-group"><img src="icon_05.svg" width="32" height="32"/><span class="size-label">32</span></div>
+      <div class="size-group"><img src="icon_05.svg" width="16" height="16"/><span class="size-label">16</span></div>
+    </div>
+  </div>
+
+  <!-- icon_06 -->
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_06.svg" alt="icon_06"/></div>
+    <div class="icon-label">icon_06</div>
+    <div class="concept">빛나는 다이아몬드<br>(원석→보석 = 저해상→고해상 은유)</div>
+    <div class="meta">
+      <span class="tag tag-type-metaphor">Metaphor</span>
+      <span class="tag tag-pattern">기하학 추상</span>
+    </div>
+    <div class="palette">
+      <div class="swatch" style="background:#DDD6FE" title="#DDD6FE"></div>
+      <div class="swatch" style="background:#67E8F9" title="#67E8F9"></div>
+      <div class="swatch" style="background:#06B6D4" title="#06B6D4"></div>
+      <div class="swatch" style="background:#0E7490" title="#0E7490"></div>
+      <div class="swatch" style="background:#F59E0B" title="#F59E0B"></div>
+    </div>
+    <div class="sizes">
+      <div class="size-group"><img src="icon_06.svg" width="48" height="48"/><span class="size-label">48</span></div>
+      <div class="size-group"><img src="icon_06.svg" width="32" height="32"/><span class="size-label">32</span></div>
+      <div class="size-group"><img src="icon_06.svg" width="16" height="16"/><span class="size-label">16</span></div>
+    </div>
+  </div>
+
+  <!-- icon_07 -->
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_07.svg" alt="icon_07"/></div>
+    <div class="icon-label">icon_07</div>
+    <div class="concept">픽셀 격자 → 화살표 → 선명한 이미지<br>(×2 ×4 ×8 배율 표시)</div>
+    <div class="meta">
+      <span class="tag tag-type-hybrid">Hybrid</span>
+      <span class="tag tag-pattern">기하학 추상</span>
+    </div>
+    <div class="palette">
+      <div class="swatch" style="background:#FDE68A" title="#FDE68A"></div>
+      <div class="swatch" style="background:#F59E0B" title="#F59E0B"></div>
+      <div class="swatch" style="background:#EF4444" title="#EF4444"></div>
+      <div class="swatch" style="background:#1D4ED8" title="#1D4ED8"></div>
+      <div class="swatch" style="background:#6366F1" title="#6366F1"></div>
+    </div>
+    <div class="sizes">
+      <div class="size-group"><img src="icon_07.svg" width="48" height="48"/><span class="size-label">48</span></div>
+      <div class="size-group"><img src="icon_07.svg" width="32" height="32"/><span class="size-label">32</span></div>
+      <div class="size-group"><img src="icon_07.svg" width="16" height="16"/><span class="size-label">16</span></div>
+    </div>
+  </div>
+
+  <!-- icon_08 -->
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_08.svg" alt="icon_08"/></div>
+    <div class="icon-label">icon_08</div>
+    <div class="concept">AI 회로 네트워크 → 이미지 프레임<br>(AI 기술이 이미지를 처리)</div>
+    <div class="meta">
+      <span class="tag tag-type-hybrid">Hybrid</span>
+      <span class="tag tag-pattern">레이어드</span>
+    </div>
+    <div class="palette">
+      <div class="swatch" style="background:#4F46E5" title="#4F46E5"></div>
+      <div class="swatch" style="background:#7C3AED" title="#7C3AED"></div>
+      <div class="swatch" style="background:#A78BFA" title="#A78BFA"></div>
+      <div class="swatch" style="background:#F472B6" title="#F472B6"></div>
+      <div class="swatch" style="background:#7DD3FC" title="#7DD3FC"></div>
+    </div>
+    <div class="sizes">
+      <div class="size-group"><img src="icon_08.svg" width="48" height="48"/><span class="size-label">48</span></div>
+      <div class="size-group"><img src="icon_08.svg" width="32" height="32"/><span class="size-label">32</span></div>
+      <div class="size-group"><img src="icon_08.svg" width="16" height="16"/><span class="size-label">16</span></div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

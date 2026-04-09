@@ -1,0 +1,92 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#7C3AED"/>
+      <stop offset="100%" stop-color="#2563EB"/>
+    </linearGradient>
+    <clipPath id="leftPanel">
+      <rect x="100" y="210" width="340" height="320" rx="14"/>
+    </clipPath>
+    <clipPath id="rightPanel">
+      <rect x="580" y="210" width="340" height="320" rx="14"/>
+    </clipPath>
+  </defs>
+
+  <!-- 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg1)"/>
+
+  <!-- 왼쪽 패널 테두리 -->
+  <rect x="100" y="210" width="340" height="320" rx="14" fill="rgba(255,255,255,0.18)"/>
+
+  <!-- 픽셀화된 이미지 (큰 블록들) -->
+  <g clip-path="url(#leftPanel)">
+    <rect x="100" y="210" width="57" height="64" fill="#C084FC"/>
+    <rect x="157" y="210" width="57" height="64" fill="#60A5FA"/>
+    <rect x="214" y="210" width="57" height="64" fill="#4ADE80"/>
+    <rect x="271" y="210" width="57" height="64" fill="#FDE047"/>
+    <rect x="328" y="210" width="57" height="64" fill="#F87171"/>
+    <rect x="385" y="210" width="57" height="64" fill="#C084FC"/>
+
+    <rect x="100" y="274" width="57" height="64" fill="#60A5FA"/>
+    <rect x="157" y="274" width="57" height="64" fill="#F87171"/>
+    <rect x="214" y="274" width="57" height="64" fill="#C084FC"/>
+    <rect x="271" y="274" width="57" height="64" fill="#4ADE80"/>
+    <rect x="328" y="274" width="57" height="64" fill="#60A5FA"/>
+    <rect x="385" y="274" width="57" height="64" fill="#FDE047"/>
+
+    <rect x="100" y="338" width="57" height="64" fill="#4ADE80"/>
+    <rect x="157" y="338" width="57" height="64" fill="#FDE047"/>
+    <rect x="214" y="338" width="57" height="64" fill="#F87171"/>
+    <rect x="271" y="338" width="57" height="64" fill="#60A5FA"/>
+    <rect x="328" y="338" width="57" height="64" fill="#C084FC"/>
+    <rect x="385" y="338" width="57" height="64" fill="#4ADE80"/>
+
+    <rect x="100" y="402" width="57" height="64" fill="#FDE047"/>
+    <rect x="157" y="402" width="57" height="64" fill="#C084FC"/>
+    <rect x="214" y="402" width="57" height="64" fill="#60A5FA"/>
+    <rect x="271" y="402" width="57" height="64" fill="#F87171"/>
+    <rect x="328" y="402" width="57" height="64" fill="#4ADE80"/>
+    <rect x="385" y="402" width="57" height="64" fill="#FDE047"/>
+
+    <rect x="100" y="466" width="57" height="64" fill="#F87171"/>
+    <rect x="157" y="466" width="57" height="64" fill="#4ADE80"/>
+    <rect x="214" y="466" width="57" height="64" fill="#FDE047"/>
+    <rect x="271" y="466" width="57" height="64" fill="#C084FC"/>
+    <rect x="328" y="466" width="57" height="64" fill="#F87171"/>
+    <rect x="385" y="466" width="57" height="64" fill="#60A5FA"/>
+  </g>
+  <rect x="100" y="210" width="340" height="320" rx="14" fill="none" stroke="rgba(255,255,255,0.75)" stroke-width="7"/>
+
+  <!-- 오른쪽 패널 (선명한 이미지) -->
+  <rect x="580" y="210" width="340" height="320" rx="14" fill="#93C5FD"/>
+  <g clip-path="url(#rightPanel)">
+    <!-- 하늘 -->
+    <rect x="580" y="210" width="340" height="165" fill="#BAE6FD"/>
+    <!-- 태양 -->
+    <circle cx="810" cy="275" r="38" fill="#FDE047"/>
+    <!-- 구름 -->
+    <ellipse cx="650" cy="270" rx="42" ry="24" fill="white" opacity="0.9"/>
+    <ellipse cx="688" cy="258" rx="30" ry="19" fill="white" opacity="0.9"/>
+    <!-- 산 배경 -->
+    <polygon points="580,530 660,340 740,530" fill="#818CF8"/>
+    <polygon points="700,530 800,320 900,530" fill="#6366F1"/>
+    <!-- 초록 땅 -->
+    <rect x="580" y="490" width="340" height="50" fill="#4ADE80"/>
+  </g>
+  <rect x="580" y="210" width="340" height="320" rx="14" fill="none" stroke="rgba(255,255,255,0.75)" stroke-width="7"/>
+
+  <!-- 가운데 오렌지 화살표 -->
+  <polygon points="460,335 510,295 510,318 554,318 554,352 510,352 510,374" fill="#FB923C"/>
+
+  <!-- 레이블 텍스트 -->
+  <text x="270" y="590" text-anchor="middle" font-family="Arial,sans-serif" font-weight="bold" font-size="46" fill="rgba(255,255,255,0.92)">Before</text>
+  <text x="750" y="590" text-anchor="middle" font-family="Arial,sans-serif" font-weight="bold" font-size="46" fill="rgba(255,255,255,0.92)">After</text>
+
+  <!-- 하단 장식 라인 -->
+  <rect x="180" y="650" width="660" height="8" rx="4" fill="rgba(255,255,255,0.25)"/>
+
+  <!-- 반짝임 포인트 -->
+  <circle cx="755" cy="175" r="12" fill="#FDE047" opacity="0.9"/>
+  <circle cx="785" cy="155" r="7" fill="#FDE047" opacity="0.7"/>
+  <circle cx="728" cy="158" r="9" fill="#FDE047" opacity="0.7"/>
+</svg>

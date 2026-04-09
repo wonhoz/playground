@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg6" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#EDE9FE"/>
+      <stop offset="100%" stop-color="#DDD6FE"/>
+    </linearGradient>
+    <linearGradient id="diamTop" x1="50%" y1="0%" x2="50%" y2="100%">
+      <stop offset="0%" stop-color="#67E8F9"/>
+      <stop offset="100%" stop-color="#06B6D4"/>
+    </linearGradient>
+    <linearGradient id="diamLeft" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#A5F3FC"/>
+      <stop offset="100%" stop-color="#22D3EE"/>
+    </linearGradient>
+    <linearGradient id="diamRight" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#0891B2"/>
+      <stop offset="100%" stop-color="#06B6D4"/>
+    </linearGradient>
+    <linearGradient id="diamBottom" x1="50%" y1="0%" x2="50%" y2="100%">
+      <stop offset="0%" stop-color="#0E7490"/>
+      <stop offset="100%" stop-color="#164E63"/>
+    </linearGradient>
+  </defs>
+
+  <!-- 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg6)"/>
+
+  <!-- 다이아몬드 기하학 도형 -->
+  <!-- 상단 면 (크라운) -->
+  <polygon points="512,180 680,380 512,380 344,380" fill="url(#diamTop)"/>
+
+  <!-- 좌상 크라운 면 -->
+  <polygon points="344,380 512,180 428,380" fill="#A5F3FC"/>
+  <!-- 우상 크라운 면 -->
+  <polygon points="680,380 512,180 596,380" fill="#67E8F9"/>
+
+  <!-- 크라운 내부 상단 라인 분할 -->
+  <polygon points="428,380 512,180 512,380" fill="#BAF5FB" opacity="0.6"/>
+
+  <!-- 좌 파빌리온 -->
+  <polygon points="344,380 512,380 420,620 280,460" fill="url(#diamLeft)"/>
+
+  <!-- 우 파빌리온 -->
+  <polygon points="680,380 512,380 604,620 744,460" fill="url(#diamRight)"/>
+
+  <!-- 하단 뾰족한 부분 -->
+  <polygon points="420,620 512,380 604,620 512,820" fill="url(#diamBottom)"/>
+
+  <!-- 중앙 하이라이트 선 -->
+  <line x1="512" y1="180" x2="512" y2="820" stroke="rgba(255,255,255,0.4)" stroke-width="4"/>
+  <line x1="280" y1="460" x2="744" y2="460" stroke="rgba(255,255,255,0.3)" stroke-width="3"/>
+  <line x1="344" y1="380" x2="680" y2="380" stroke="rgba(255,255,255,0.5)" stroke-width="5"/>
+
+  <!-- 반짝임 하이라이트 -->
+  <ellipse cx="440" cy="290" rx="40" ry="18" fill="white" opacity="0.45" transform="rotate(-25,440,290)"/>
+
+  <!-- 골드 반짝임 별들 -->
+  <g fill="#F59E0B">
+    <polygon points="160,260 170,290 202,290 177,308 187,338 160,321 133,338 143,308 118,290 150,290"/>
+    <polygon points="840,180 848,203 872,203 852,217 860,240 840,228 820,240 828,217 808,203 832,203"/>
+    <polygon points="820,680 827,700 848,700 832,712 838,732 820,722 802,732 808,712 792,700 813,700"/>
+  </g>
+
+  <!-- 퍼플 작은 반짝임 -->
+  <circle cx="200" cy="380" r="10" fill="#A78BFA" opacity="0.8"/>
+  <circle cx="790" cy="340" r="8" fill="#C084FC" opacity="0.7"/>
+  <circle cx="750" cy="720" r="12" fill="#7C3AED" opacity="0.6"/>
+  <circle cx="230" cy="680" r="9" fill="#8B5CF6" opacity="0.7"/>
+</svg>

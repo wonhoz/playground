@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg8" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4F46E5"/>
+      <stop offset="100%" stop-color="#7C3AED"/>
+    </linearGradient>
+    <linearGradient id="imgGrad8" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#93C5FD"/>
+      <stop offset="100%" stop-color="#60A5FA"/>
+    </linearGradient>
+  </defs>
+
+  <!-- 배경 (원형) -->
+  <circle cx="512" cy="512" r="490" fill="url(#bg8)"/>
+
+  <!-- AI 회로 네트워크 노드들 (외곽) -->
+  <!-- 노드 연결선들 -->
+  <g stroke="rgba(255,255,255,0.35)" stroke-width="8" stroke-linecap="round">
+    <!-- 상단 노드들 → 중앙 이미지 프레임 -->
+    <line x1="200" y1="220" x2="320" y2="360"/>
+    <line x1="512" y1="160" x2="512" y2="310"/>
+    <line x1="824" y1="220" x2="704" y2="360"/>
+    <!-- 측면 노드들 -->
+    <line x1="130" y1="500" x2="290" y2="500"/>
+    <line x1="734" y1="500" x2="894" y2="500"/>
+    <!-- 하단 노드들 → 중앙 -->
+    <line x1="200" y1="780" x2="320" y2="640"/>
+    <line x1="512" y1="840" x2="512" y2="690"/>
+    <line x1="824" y1="780" x2="704" y2="640"/>
+  </g>
+
+  <!-- 외곽 AI 노드들 (원형) -->
+  <g fill="#A78BFA" stroke="white" stroke-width="6">
+    <circle cx="200" cy="220" r="32"/>
+    <circle cx="512" cy="160" r="32"/>
+    <circle cx="824" cy="220" r="32"/>
+    <circle cx="130" cy="500" r="32"/>
+    <circle cx="894" cy="500" r="32"/>
+    <circle cx="200" cy="780" r="32"/>
+    <circle cx="512" cy="840" r="32"/>
+    <circle cx="824" cy="780" r="32"/>
+  </g>
+
+  <!-- 핑크 강조 노드 (중간 레이어) -->
+  <g fill="#F472B6" stroke="white" stroke-width="5">
+    <circle cx="320" cy="360" r="22"/>
+    <circle cx="704" cy="360" r="22"/>
+    <circle cx="290" cy="500" r="22"/>
+    <circle cx="734" cy="500" r="22"/>
+    <circle cx="320" cy="640" r="22"/>
+    <circle cx="704" cy="640" r="22"/>
+  </g>
+
+  <!-- 중앙 이미지 프레임 -->
+  <rect x="310" y="310" width="404" height="380" rx="20" fill="url(#imgGrad8)" stroke="white" stroke-width="10"/>
+
+  <!-- 프레임 내 선명한 이미지 내용 -->
+  <!-- 하늘 영역 -->
+  <rect x="310" y="310" width="404" height="190" rx="10" fill="#7DD3FC"/>
+  <!-- 태양 -->
+  <circle cx="668" cy="390" r="44" fill="#FDE047"/>
+  <!-- 구름 -->
+  <ellipse cx="395" cy="380" rx="52" ry="28" fill="white" opacity="0.9"/>
+  <ellipse cx="435" cy="368" rx="36" ry="22" fill="white" opacity="0.9"/>
+  <!-- 산 -->
+  <polygon points="310,690 420,430 530,690" fill="#6366F1"/>
+  <polygon points="460,690 580,400 700,690" fill="#4F46E5"/>
+  <!-- 땅 -->
+  <rect x="310" y="658" width="404" height="32" rx="4" fill="#4ADE80"/>
+
+  <!-- 프레임 코너 장식 (고해상도 느낌) -->
+  <g stroke="white" stroke-width="8" fill="none" opacity="0.7">
+    <path d="M310,355 L310,310 L355,310"/>
+    <path d="M669,310 L714,310 L714,355"/>
+    <path d="M310,645 L310,690 L355,690"/>
+    <path d="M669,690 L714,690 L714,645"/>
+  </g>
+
+  <!-- AI 텍스트 레이블 (노드 안) -->
+  <text x="512" y="168" text-anchor="middle" font-family="Arial,sans-serif" font-weight="bold" font-size="28" fill="white">AI</text>
+</svg>

@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="brushGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2563EB"/>
+      <stop offset="100%" stop-color="#1D4ED8"/>
+    </linearGradient>
+    <linearGradient id="strokeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#EC4899"/>
+      <stop offset="100%" stop-color="#F97316"/>
+    </linearGradient>
+    <linearGradient id="bgWarm" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FEF3C7"/>
+      <stop offset="100%" stop-color="#FDE68A"/>
+    </linearGradient>
+  </defs>
+
+  <!-- 배경 (크림/따뜻한 노랑) -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bgWarm)"/>
+
+  <!-- 붓터치 궤적 (핑크→오렌지, 대각선) -->
+  <path d="M 140 820 Q 300 720 420 600 Q 520 500 640 400 Q 720 340 820 260"
+        stroke="url(#strokeGrad)" stroke-width="90" stroke-linecap="round" stroke-linejoin="round" fill="none" opacity="0.85"/>
+
+  <!-- 붓터치 위에 나타나는 선명한 이미지 힌트 (작은 선명한 픽셀들) -->
+  <g opacity="0.9">
+    <!-- 선명한 이미지 사각형들이 붓터치 위에 -->
+    <rect x="180" y="720" width="70" height="60" rx="6" fill="#7C3AED" opacity="0.8"/>
+    <rect x="255" y="690" width="55" height="45" rx="5" fill="#4F46E5" opacity="0.7"/>
+    <rect x="310" y="650" width="65" height="55" rx="6" fill="#6366F1" opacity="0.75"/>
+    <rect x="400" y="560" width="70" height="60" rx="6" fill="#8B5CF6" opacity="0.7"/>
+    <rect x="475" y="510" width="55" height="50" rx="5" fill="#A78BFA" opacity="0.65"/>
+  </g>
+
+  <!-- 붓 본체 (대각선, 위쪽 방향) -->
+  <g transform="rotate(-42, 512, 512)">
+    <!-- 붓 손잡이 -->
+    <rect x="400" y="160" width="36" height="380" rx="10" fill="url(#brushGrad)"/>
+    <!-- 붓 연결부 (금속) -->
+    <rect x="388" y="520" width="60" height="50" rx="5" fill="#94A3B8"/>
+    <!-- 붓 털 부분 -->
+    <ellipse cx="418" cy="620" rx="40" ry="70" fill="#E0E7FF"/>
+    <ellipse cx="418" cy="660" rx="28" ry="48" fill="#C7D2FE"/>
+    <!-- 붓 끝 -->
+    <ellipse cx="418" cy="700" rx="14" ry="24" fill="#A5B4FC"/>
+    <ellipse cx="418" cy="718" rx="6" ry="10" fill="#6366F1"/>
+  </g>
+
+  <!-- 반짝임 (붓 끝 주변) -->
+  <g fill="#FBBF24">
+    <polygon points="680,290 690,318 720,318 696,334 706,362 680,347 654,362 664,334 640,318 670,318"/>
+    <circle cx="740" cy="260" r="8" opacity="0.8"/>
+    <circle cx="660" cy="240" r="6" opacity="0.6"/>
+    <circle cx="710" cy="220" r="5" opacity="0.5"/>
+  </g>
+
+  <!-- AI 업스케일 표시 -->
+  <rect x="690" y="700" width="230" height="90" rx="16" fill="#2563EB" opacity="0.9"/>
+  <text x="805" y="757" text-anchor="middle" font-family="Arial Black,sans-serif" font-weight="900" font-size="52" fill="white">×4</text>
+</svg>

@@ -74,15 +74,22 @@ public partial class MainWindow : Window
         ChkIco64.IsChecked  = sizes.Contains(64);
         ChkIco128.IsChecked = sizes.Contains(128);
         ChkIco256.IsChecked = sizes.Contains(256);
+
+        // SVG 출력 크기 복원
+        if      (_settings.SvgOutputSize == 256)  RbSvg256.IsChecked  = true;
+        else if (_settings.SvgOutputSize == 512)  RbSvg512.IsChecked  = true;
+        else if (_settings.SvgOutputSize == 2048) RbSvg2048.IsChecked = true;
+        else                                       RbSvg1024.IsChecked = true;
     }
 
     void SaveSettings()
     {
-        _settings.OutputFormat = GetOutputFormatTag();
-        _settings.InputFilter  = GetInputFilterTag();
-        _settings.Overwrite    = ChkOverwrite.IsChecked == true;
-        _settings.JpgQuality   = (int)SliderQuality.Value;
-        _settings.IcoSizes     = GetIcoSizes();
+        _settings.OutputFormat  = GetOutputFormatTag();
+        _settings.InputFilter   = GetInputFilterTag();
+        _settings.Overwrite     = ChkOverwrite.IsChecked == true;
+        _settings.JpgQuality    = (int)SliderQuality.Value;
+        _settings.IcoSizes      = GetIcoSizes();
+        _settings.SvgOutputSize = GetSvgOutputSize();
         _settings.Save();
     }
 
@@ -110,36 +117,44 @@ public partial class MainWindow : Window
     async void Window_Drop(object sender, DragEventArgs e)
     {
         AnimateDropZone(false);
-        if (_converting)
+        try
         {
-            SetStatus("변환 중입니다. 완료 후 다시 드롭하세요.");
-            return;
+            if (_converting)
+            {
+                SetStatus("변환 중입니다. 완료 후 다시 드롭하세요.");
+                return;
+            }
+            if (e.Data.GetData(DataFormats.FileDrop) is not string[] dropped || dropped.Length == 0) return;
+
+            var filter = GetInputFilter();
+            var files  = ImageConverter.CollectFiles(dropped, filter);
+
+            if (files.Length == 0)
+            {
+                SetStatus("지원하는 이미지 파일이 없습니다 (SVG · PNG · JPG · BMP · ICO)");
+                return;
+            }
+
+            BtnOpenFolder.Visibility = Visibility.Collapsed;
+            _lastOutputDir = Path.GetDirectoryName(files[0]);
+
+            // 단일 파일이면 포맷별 미리보기 표시
+            if (files.Length == 1 && files[0].EndsWith(".svg", StringComparison.OrdinalIgnoreCase))
+                await ShowSvgPreviewAsync(files[0]);
+            else if (files.Length == 1 && files[0].EndsWith(".ico", StringComparison.OrdinalIgnoreCase))
+                await ShowIcoPreviewAsync(files[0]);
+            else if (files.Length == 1 && IsBitmapPreviewable(files[0]))
+                await ShowBitmapPreviewAsync(files[0]);
+            else
+                ShowFileSummary(files);
+
+            await RunConversionAsync(files);
         }
-        if (e.Data.GetData(DataFormats.FileDrop) is not string[] dropped || dropped.Length == 0) return;
-
-        var filter = GetInputFilter();
-        var files  = ImageConverter.CollectFiles(dropped, filter);
-
-        if (files.Length == 0)
+        catch (Exception ex)
         {
-            SetStatus("지원하는 이미지 파일이 없습니다 (SVG · PNG · JPG · BMP · ICO)");
-            return;
+            SetStatus($"오류: {ex.Message}");
+            ResetDropZone();
         }
-
-        BtnOpenFolder.Visibility = Visibility.Collapsed;
-        _lastOutputDir = Path.GetDirectoryName(files[0]);
-
-        // 단일 파일이면 포맷별 미리보기 표시
-        if (files.Length == 1 && files[0].EndsWith(".svg", StringComparison.OrdinalIgnoreCase))
-            await ShowSvgPreviewAsync(files[0]);
-        else if (files.Length == 1 && files[0].EndsWith(".ico", StringComparison.OrdinalIgnoreCase))
-            await ShowIcoPreviewAsync(files[0]);
-        else if (files.Length == 1 && IsBitmapPreviewable(files[0]))
-            await ShowBitmapPreviewAsync(files[0]);
-        else
-            ShowFileSummary(files);
-
-        await RunConversionAsync(files);
     }
 
     void AnimateDropZone(bool hover)
@@ -163,6 +178,7 @@ public partial class MainWindow : Window
         bool overwrite = ChkOverwrite.IsChecked == true;
         int  quality   = (int)SliderQuality.Value;
         int[] icoSizes = GetIcoSizes();
+        int svgSize    = GetSvgOutputSize();
 
         var progress = new Progress<(int Current, int Total, string File)>(p =>
         {
@@ -173,7 +189,7 @@ public partial class MainWindow : Window
         ConversionResult? result = null;
         try
         {
-            result = await ImageConverter.ConvertAsync(files, output, overwrite, quality, icoSizes, progress, _cts.Token);
+            result = await ImageConverter.ConvertAsync(files, output, overwrite, quality, icoSizes, svgSize, progress, _cts.Token);
         }
         finally
         {
@@ -399,6 +415,7 @@ public partial class MainWindow : Window
         var fmt = GetOutputFormat();
         JpgQualityPanel.Visibility = fmt == OutputFormat.JPG ? Visibility.Visible  : Visibility.Collapsed;
         IcoSizesPanel.Visibility   = fmt == OutputFormat.ICO ? Visibility.Visible  : Visibility.Collapsed;
+        SvgSizePanel.Visibility    = fmt != OutputFormat.ICO ? Visibility.Visible  : Visibility.Collapsed;
     }
 
     void SliderQuality_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
@@ -439,6 +456,14 @@ public partial class MainWindow : Window
 
     string GetOutputFormatTag() =>
         (CbOutput.SelectedItem as System.Windows.Controls.ComboBoxItem)?.Tag as string ?? "ICO";
+
+    int GetSvgOutputSize()
+    {
+        if (RbSvg256.IsChecked  == true) return 256;
+        if (RbSvg512.IsChecked  == true) return 512;
+        if (RbSvg2048.IsChecked == true) return 2048;
+        return 1024;
+    }
 
     int[] GetIcoSizes()
     {

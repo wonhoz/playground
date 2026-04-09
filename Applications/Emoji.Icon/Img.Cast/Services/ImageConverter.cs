@@ -62,6 +62,7 @@ public static class ImageConverter
         bool overwrite,
         int jpgQuality,
         int[]? icoSizes,
+        int svgOutputSize,
         IProgress<(int Current, int Total, string File)>? progress,
         CancellationToken ct)
     {
@@ -95,7 +96,7 @@ public static class ImageConverter
 
                 try
                 {
-                    ConvertSingle(src, output, overwrite, jpgQuality, sizes);
+                    ConvertSingle(src, output, overwrite, jpgQuality, sizes, svgOutputSize);
                     success++;
                 }
                 catch (Exception ex)
@@ -110,7 +111,7 @@ public static class ImageConverter
     }
 
     // ─── 단일 파일 변환 ──────────────────────────────────────────────────────
-    static void ConvertSingle(string src, OutputFormat output, bool overwrite, int jpgQuality, int[] icoSizes)
+    static void ConvertSingle(string src, OutputFormat output, bool overwrite, int jpgQuality, int[] icoSizes, int svgOutputSize)
     {
         string ext = Path.GetExtension(src).ToLowerInvariant();
         string outExt = output switch
@@ -129,7 +130,9 @@ public static class ImageConverter
             return;
         }
 
-        using SKBitmap src_bmp = LoadAsBitmap(src, ext, 0);
+        // SVG 소스는 선택된 출력 크기로 래스터화, 래스터 소스는 원본 크기 유지
+        int loadSize = ext == ".svg" ? svgOutputSize : 0;
+        using SKBitmap src_bmp = LoadAsBitmap(src, ext, loadSize);
 
         switch (output)
         {
@@ -173,7 +176,7 @@ public static class ImageConverter
     static SKBitmap LoadAsBitmap(string path, string ext, int targetSize)
     {
         if (ext == ".svg")
-            return LoadSvgAsBitmap(path, targetSize > 0 ? targetSize : 256);
+            return LoadSvgAsBitmap(path, targetSize > 0 ? targetSize : 1024);
 
         // ICO / PNG / JPG / BMP — SkiaSharp 기본 디코더로 처리
         using var original = SKBitmap.Decode(path)

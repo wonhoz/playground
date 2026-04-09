@@ -9,7 +9,8 @@ public class AppSettings
     public string InputFilter  { get; set; } = "All";
     public bool   Overwrite    { get; set; } = true;
     public int    JpgQuality   { get; set; } = 95;
-    public int[]  IcoSizes     { get; set; } = [16, 32, 48, 64, 128, 256];
+    public int[]  IcoSizes      { get; set; } = [16, 32, 48, 64, 128, 256];
+    public int    SvgOutputSize { get; set; } = 1024;
 
     static readonly string FilePath = Path.Combine(
         Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),

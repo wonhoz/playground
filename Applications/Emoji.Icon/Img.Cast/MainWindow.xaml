@@ -306,6 +306,45 @@
       </Setter>
     </Style>
 
+    <!-- ── RadioButton ControlTemplate ── -->
+    <Style TargetType="RadioButton">
+      <Setter Property="Foreground" Value="{StaticResource TextBrush}"/>
+      <Setter Property="FontSize" Value="13"/>
+      <Setter Property="VerticalContentAlignment" Value="Center"/>
+      <Setter Property="Cursor" Value="Hand"/>
+      <Setter Property="Template">
+        <Setter.Value>
+          <ControlTemplate TargetType="RadioButton">
+            <StackPanel Orientation="Horizontal">
+              <Border x:Name="Box"
+                      Width="16" Height="16"
+                      Background="{StaticResource SurfaceBrush}"
+                      BorderBrush="{StaticResource BorderBrush}"
+                      BorderThickness="1.5"
+                      CornerRadius="8"
+                      VerticalAlignment="Center"
+                      Margin="0,0,7,0">
+                <Ellipse x:Name="Dot"
+                         Width="8" Height="8"
+                         Fill="{StaticResource AccentBrush}"
+                         Visibility="Collapsed"/>
+              </Border>
+              <ContentPresenter VerticalAlignment="Center"/>
+            </StackPanel>
+            <ControlTemplate.Triggers>
+              <Trigger Property="IsChecked" Value="True">
+                <Setter TargetName="Dot" Property="Visibility" Value="Visible"/>
+                <Setter TargetName="Box" Property="BorderBrush" Value="{StaticResource AccentBrush}"/>
+              </Trigger>
+              <Trigger Property="IsMouseOver" Value="True">
+                <Setter TargetName="Box" Property="BorderBrush" Value="{StaticResource AccentBrush}"/>
+              </Trigger>
+            </ControlTemplate.Triggers>
+          </ControlTemplate>
+        </Setter.Value>
+      </Setter>
+    </Style>
+
     <!-- ── ScrollBar ── -->
     <Style TargetType="ScrollBar">
       <Setter Property="Background" Value="Transparent"/>
@@ -405,9 +444,11 @@
                          TextWrapping="Wrap">
                 <Run Text="① 출력 포맷을 선택합니다."/>
                 <LineBreak/>
-                <Run Text="② 옵션을 조정합니다 (품질, ICO 사이즈 등)."/>
+                <Run Text="② 옵션을 조정합니다 (품질, ICO 사이즈, SVG 크기 등)."/>
                 <LineBreak/>
                 <Run Text="③ 파일이나 폴더를 드래그&amp;드롭합니다."/>
+                <LineBreak/>
+                <Run Text="   폴더 드롭 시 하위 폴더까지 자동 수집됩니다."/>
                 <LineBreak/>
                 <Run Text="④ 변환이 완료되면 폴더 열기 버튼으로 확인합니다."/>
               </TextBlock>
@@ -569,6 +610,20 @@
             <CheckBox x:Name="ChkIco64"  Content="64"  IsChecked="True" Margin="0,0,14,0" Unchecked="ChkIco_Unchecked" Checked="ChkIco_Checked"/>
             <CheckBox x:Name="ChkIco128" Content="128" IsChecked="True" Margin="0,0,14,0" Unchecked="ChkIco_Unchecked" Checked="ChkIco_Checked"/>
             <CheckBox x:Name="ChkIco256" Content="256" IsChecked="True"                    Unchecked="ChkIco_Unchecked" Checked="ChkIco_Checked"/>
+          </StackPanel>
+        </StackPanel>
+
+        <!-- SVG 래스터 크기 (PNG/JPG/BMP 출력 시 표시) -->
+        <StackPanel x:Name="SvgSizePanel" Visibility="Collapsed" Margin="0,0,0,10">
+          <TextBlock Text="SVG 래스터 크기 (px)"
+                     Foreground="{StaticResource SubTextBrush}"
+                     FontSize="11"
+                     Margin="0,0,0,7"/>
+          <StackPanel Orientation="Horizontal">
+            <RadioButton x:Name="RbSvg256"  Content="256"  GroupName="SvgSize" Margin="0,0,14,0"/>
+            <RadioButton x:Name="RbSvg512"  Content="512"  GroupName="SvgSize" Margin="0,0,14,0"/>
+            <RadioButton x:Name="RbSvg1024" Content="1024" GroupName="SvgSize" IsChecked="True" Margin="0,0,14,0"/>
+            <RadioButton x:Name="RbSvg2048" Content="2048" GroupName="SvgSize"/>
           </StackPanel>
         </StackPanel>
 

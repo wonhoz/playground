@@ -40,6 +40,20 @@ public partial class AddCustomCharDialog : System.Windows.Window
     {
         CharPlaceholder.Visibility = string.IsNullOrEmpty(CharBox.Text)
             ? Visibility.Visible : Visibility.Collapsed;
+
+        // grapheme cluster 수 검증 — 1개 초과 시 경고 표시
+        var text = CharBox.Text;
+        if (!string.IsNullOrEmpty(text))
+        {
+            var info = new System.Globalization.StringInfo(text);
+            CharWarning.Visibility = info.LengthInTextElements > 1
+                ? Visibility.Visible : Visibility.Collapsed;
+        }
+        else
+        {
+            CharWarning.Visibility = Visibility.Collapsed;
+        }
+
         UpdateAddBtn();
     }
 
@@ -58,7 +72,12 @@ public partial class AddCustomCharDialog : System.Windows.Window
 
     private void AddBtn_Click(object sender, RoutedEventArgs e)
     {
-        ResultChar = CharBox.Text.Trim();
+        var raw = CharBox.Text.Trim();
+        // 다중 grapheme cluster 입력 시 첫 번째 문자만 사용
+        var info = new System.Globalization.StringInfo(raw);
+        ResultChar = info.LengthInTextElements > 1
+            ? System.Globalization.StringInfo.GetNextTextElement(raw)
+            : raw;
         ResultName = NameBox.Text.Trim();
         DialogResult = true;
     }

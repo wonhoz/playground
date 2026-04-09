@@ -18,6 +18,7 @@ public partial class PopupWindow : System.Windows.Window
     private bool      _suppressSizeChanged = false;
     private string    _lastStatusText = "";
     private bool      _customSortByName = false;
+    private bool      _favSortByName    = false;
     private bool      _preserveClipboard = false;
 
     // 검색 히스토리 (세션 내 메모리, 최대 10개)
@@ -26,6 +27,8 @@ public partial class PopupWindow : System.Windows.Window
 
     // 다중 문자 선택 (Ctrl+클릭)
     private readonly List<CharEntry> _multiSelected = new();
+    // 핀 고정 모드 누적 삽입 카운터
+    private int _pinnedInsertCount = 0;
 
     // ItemSize = 문자 버튼 1칸 크기 (폰트 크기 기반으로 자동 계산)
     private double ItemSize => _charFontSize + 28;
@@ -72,7 +75,11 @@ public partial class PopupWindow : System.Windows.Window
         _suppressSizeChanged = false;
 
         _customSortByName  = _storage.GetSetting("custom_sort_by_name")  == "1";
+        _favSortByName     = _storage.GetSetting("fav_sort_by_name")    == "1";
         _preserveClipboard = _storage.GetSetting("preserve_clipboard")  == "1";
+
+        // 검색 히스토리 DB에서 복원
+        _searchHistory.AddRange(_storage.GetSearchHistory());
         BuildTabs();
         UpdatePinBtn();
         UpdateClipboardPreserveBtn();
@@ -122,6 +129,7 @@ public partial class PopupWindow : System.Windows.Window
             Activate();
         }
 
+        _pinnedInsertCount = 0;  // 팝업 열릴 때마다 누적 카운터 초기화
         Dispatcher.BeginInvoke(() =>
         {
             HelpOverlay.Visibility = Visibility.Collapsed;
@@ -225,8 +233,15 @@ public partial class PopupWindow : System.Windows.Window
 
         // 탭별 헤더 버튼 표시/숨김
         ClearRecentsBtn.Visibility = tabId == "recent"   ? Visibility.Visible : Visibility.Collapsed;
-        FavMoveUpBtn.Visibility    = tabId == "favorite" ? Visibility.Visible : Visibility.Collapsed;
-        FavMoveDownBtn.Visibility  = tabId == "favorite" ? Visibility.Visible : Visibility.Collapsed;
+        // 즐겨찾기 탭: 자동 정렬 여부에 따라 이동 버튼↔정렬 버튼 전환
+        FavMoveUpBtn.Visibility    = tabId == "favorite" && !_favSortByName ? Visibility.Visible : Visibility.Collapsed;
+        FavMoveDownBtn.Visibility  = tabId == "favorite" && !_favSortByName ? Visibility.Visible : Visibility.Collapsed;
+        FavSortBtn.Visibility      = tabId == "favorite" ? Visibility.Visible : Visibility.Collapsed;
+        if (tabId == "favorite")
+        {
+            FavSortBtn.Content  = _favSortByName ? "↑A" : "↕";
+            FavSortBtn.ToolTip  = _favSortByName ? "정렬: 이름순 (클릭하면 추가순으로 전환)" : "정렬 전환 (추가순 / 이름순)";
+        }
         SortCustomBtn.Visibility   = tabId == "custom"   ? Visibility.Visible : Visibility.Collapsed;
 
         RefreshGrid();
@@ -332,11 +347,18 @@ public partial class PopupWindow : System.Windows.Window
                                          ?? (customLookup.TryGetValue(c, out var cn)
                                              ? new CharEntry(c, cn, "custom") : null))
                                 .Where(e => e is not null).Select(e => e!),
-                "favorite" => favoritesList  // sort_order 순서 유지 (커스텀 문자 포함)
-                                .Select(c => CharDatabase.AllByChar.GetValueOrDefault(c)
-                                         ?? (customLookup.TryGetValue(c, out var fn)
-                                             ? new CharEntry(c, fn, "custom") : null))
-                                .Where(e => e is not null).Select(e => e!),
+                "favorite" => (_favSortByName
+                                ? favoritesList
+                                    .Select(c => CharDatabase.AllByChar.GetValueOrDefault(c)
+                                             ?? (customLookup.TryGetValue(c, out var fn)
+                                                 ? new CharEntry(c, fn, "custom") : null))
+                                    .Where(e => e is not null).Select(e => e!)
+                                    .OrderBy(e => e.Name)
+                                : (IEnumerable<CharEntry>)favoritesList  // sort_order 순서 유지 (커스텀 문자 포함)
+                                    .Select(c => CharDatabase.AllByChar.GetValueOrDefault(c)
+                                             ?? (customLookup.TryGetValue(c, out var fn2)
+                                                 ? new CharEntry(c, fn2, "custom") : null))
+                                    .Where(e => e is not null).Select(e => e!)),
                 "custom"   => (_customSortByName
                                 ? (IEnumerable<(string Char, string Name)>)customChars.OrderBy(t => t.Name)
                                 : customChars)
@@ -364,6 +386,7 @@ public partial class PopupWindow : System.Windows.Window
             _searchHistory.Insert(0, query);
             if (_searchHistory.Count > 10) _searchHistory.RemoveAt(_searchHistory.Count - 1);
             _searchHistoryIdx = -1;
+            _storage.AddSearchHistory(query);
         }
 
         // 결과 없음 안내
@@ -522,14 +545,21 @@ public partial class PopupWindow : System.Windows.Window
             border.BorderThickness = new Thickness(2);
         }
 
-        // 좌클릭: Ctrl → 다중 선택 / Shift → 복사만 / 기본 → 삽입
+        // 좌클릭: Ctrl+Shift → 코드포인트 복사 / Ctrl → 다중 선택 / Shift → 문자 복사만 / 기본 → 삽입
         border.MouseLeftButtonUp += (_, _) =>
         {
-            if (Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl))
+            bool ctrl  = Keyboard.IsKeyDown(Key.LeftCtrl)  || Keyboard.IsKeyDown(Key.RightCtrl);
+            bool shift = Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightShift);
+
+            if (ctrl && shift)
+            {
+                CopyCodepoint(entry);
+            }
+            else if (ctrl)
             {
                 ToggleMultiSelect(entry, border);
             }
-            else if (Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightShift))
+            else if (shift)
             {
                 CopyCharOnly(entry);
             }
@@ -545,6 +575,7 @@ public partial class PopupWindow : System.Windows.Window
                 InsertChar(entry);
             }
         };
+
 
         // 우클릭: 컨텍스트 메뉴 (커스텀: 즐겨찾기·편집·삭제 / 일반: 즐겨찾기·코드포인트 복사)
         border.MouseRightButtonUp += (_, ev) =>
@@ -635,7 +666,8 @@ public partial class PopupWindow : System.Windows.Window
 
     private int GetItemsPerRow()
     {
-        double w = CharGrid.ActualWidth > 0 ? CharGrid.ActualWidth : (Width - 24);
+        // ActualWidth가 0이면 렌더링 전 — ScrollViewer 마진(24) + 스크롤바(6) 제외 추정값 사용
+        double w = CharGrid.ActualWidth > 0 ? CharGrid.ActualWidth : Math.Max(0, Width - 36);
         return Math.Max(1, (int)(w / ItemSize));
     }
 
@@ -667,7 +699,9 @@ public partial class PopupWindow : System.Windows.Window
             if (_pinned)
             {
                 // 핀 고정 모드: 팝업 유지 + 이전 창에 붙여넣기 후 팝업 다시 활성화
-                StatusText.Text = $"삽입됨: {entry.Char}  {entry.Name}";
+                _pinnedInsertCount++;
+                StatusText.Text = $"삽입됨: {entry.Char}  {entry.Name}" +
+                    (_pinnedInsertCount > 1 ? $"  (총 {_pinnedInsertCount}회)" : "");
                 if (_targetHwnd != IntPtr.Zero)
                 {
                     await Task.Delay(50);
@@ -735,6 +769,22 @@ public partial class PopupWindow : System.Windows.Window
         System.Windows.Clipboard.SetText(entry.Char);
         _storage.AddRecent(entry.Char);
         StatusText.Text = $"복사됨: {entry.Char}  {entry.Name}";
+    }
+
+    // ── 코드포인트 복사 (Ctrl+Shift+클릭) ──────────────────────────────
+    private void CopyCodepoint(CharEntry entry)
+    {
+        var cp = new System.Text.StringBuilder();
+        for (int i = 0; i < entry.Char.Length; )
+        {
+            int code = char.ConvertToUtf32(entry.Char, i);
+            if (cp.Length > 0) cp.Append(' ');
+            cp.Append($"U+{code:X4}");
+            i += char.IsSurrogatePair(entry.Char, i) ? 2 : 1;
+        }
+        var cpStr = cp.ToString();
+        TrySetClipboardText(cpStr);
+        StatusText.Text = $"코드포인트 복사됨: {cpStr}";
     }
 
     // ── 즐겨찾기 토글 ────────────────────────────────────────────────────
@@ -1164,7 +1214,9 @@ public partial class PopupWindow : System.Windows.Window
 
             if (_pinned)
             {
-                StatusText.Text = $"삽입됨: {combined}";
+                _pinnedInsertCount++;
+                StatusText.Text = $"삽입됨: {combined}" +
+                    (_pinnedInsertCount > 1 ? $"  (총 {_pinnedInsertCount}회)" : "");
                 if (_targetHwnd != IntPtr.Zero)
                 {
                     await Task.Delay(50);
@@ -1189,6 +1241,8 @@ public partial class PopupWindow : System.Windows.Window
                 }
             }
             _multiSelected.Clear();
+            // 핀 고정 모드에서 팝업이 유지되므로 배지/테두리 즉시 초기화
+            if (_pinned) RefreshGrid();
         }
         catch (Exception ex)
         {
@@ -1222,6 +1276,19 @@ public partial class PopupWindow : System.Windows.Window
             if (CharGrid.Children[i] is Grid g && g.Children[0] is Border b && b.Tag is CharEntry ce && ce.Char == entry.Char)
             { b.Focus(); break; }
         }
+    }
+
+    // ── 즐겨찾기 탭 정렬 전환 ───────────────────────────────────────────
+    private void FavSortBtn_Click(object sender, RoutedEventArgs e)
+    {
+        _favSortByName = !_favSortByName;
+        _storage.SetSetting("fav_sort_by_name", _favSortByName ? "1" : "0");
+        FavSortBtn.Content  = _favSortByName ? "↑A" : "↕";
+        FavSortBtn.ToolTip  = _favSortByName ? "정렬: 이름순 (클릭하면 추가순으로 전환)" : "정렬 전환 (추가순 / 이름순)";
+        // 이름순 정렬 시 수동 이동 버튼 숨김
+        FavMoveUpBtn.Visibility   = _favSortByName ? Visibility.Collapsed : Visibility.Visible;
+        FavMoveDownBtn.Visibility = _favSortByName ? Visibility.Collapsed : Visibility.Visible;
+        RefreshGrid();
     }
 
     // ── 커스텀 탭 정렬 전환 ──────────────────────────────────────────────

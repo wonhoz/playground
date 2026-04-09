@@ -42,6 +42,10 @@ public class StorageService : IDisposable
                 display_name TEXT NOT NULL,
                 created_at   TEXT NOT NULL
             );
+            CREATE TABLE IF NOT EXISTS search_history (
+                query      TEXT NOT NULL PRIMARY KEY,
+                used_at    TEXT NOT NULL
+            );
             """;
         cmd.ExecuteNonQuery();
 
@@ -256,6 +260,43 @@ public class StorageService : IDisposable
         var result = new List<(string, string)>();
         using var reader = cmd.ExecuteReader();
         while (reader.Read()) result.Add((reader.GetString(0), reader.GetString(1)));
+        return result;
+    }
+
+    // ── Search History ───────────────────────────────────────────────────
+
+    private const int MaxSearchHistory = 10;
+
+    public void AddSearchHistory(string query)
+    {
+        using var cmd = _db.CreateCommand();
+        cmd.CommandText = """
+            INSERT INTO search_history (query, used_at) VALUES ($q, $now)
+            ON CONFLICT(query) DO UPDATE SET used_at = $now;
+            """;
+        cmd.Parameters.AddWithValue("$q", query);
+        cmd.Parameters.AddWithValue("$now", DateTime.UtcNow.ToString("o"));
+        cmd.ExecuteNonQuery();
+
+        using var trim = _db.CreateCommand();
+        trim.CommandText = """
+            DELETE FROM search_history
+            WHERE query NOT IN (
+                SELECT query FROM search_history ORDER BY used_at DESC LIMIT $max
+            );
+            """;
+        trim.Parameters.AddWithValue("$max", MaxSearchHistory);
+        trim.ExecuteNonQuery();
+    }
+
+    public List<string> GetSearchHistory()
+    {
+        using var cmd = _db.CreateCommand();
+        cmd.CommandText = "SELECT query FROM search_history ORDER BY used_at DESC LIMIT $max";
+        cmd.Parameters.AddWithValue("$max", MaxSearchHistory);
+        var result = new List<string>();
+        using var reader = cmd.ExecuteReader();
+        while (reader.Read()) result.Add(reader.GetString(0));
         return result;
     }
 

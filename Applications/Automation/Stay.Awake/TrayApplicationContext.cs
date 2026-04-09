@@ -250,11 +250,15 @@ namespace StayAwake
             // 통계 CSV 내보내기
             menu.Items.Add(new ToolStripMenuItem("통계 CSV 내보내기", null, (s, e) => ExportStatsCsv()));
 
+            menu.Items.Add(new ToolStripSeparator());
+
             // 도움말
             menu.Items.Add(new ToolStripMenuItem("도움말", null, (s, e) => ShowHelp()));
 
             // 정보
             menu.Items.Add(new ToolStripMenuItem("정보", null, (s, e) => ShowAbout()));
+
+            menu.Items.Add(new ToolStripSeparator());
 
             // 종료
             menu.Items.Add(new ToolStripMenuItem("종료", null, (s, e) => ExitApplication()));
@@ -587,7 +591,7 @@ namespace StayAwake
                 var avgSkip = history.Average(x => x.SkipCount);
                 var avgActive = TimeSpan.FromSeconds(history.Average(x => x.ActiveSeconds));
                 sb.AppendLine(new string('─', 42));
-                sb.AppendLine($"{"평균",-16}  {avgSim,5:F0}회  {avgSkip,4:F0}회   {(int)avgActive.TotalHours:D2}:{avgActive:mm\\:ss}");
+                sb.AppendLine($"{"평균",-13} {avgSim,5:F0}회 {avgSkip,5:F0}회   {(int)avgActive.TotalHours:D2}:{avgActive:mm\\:ss}");
 
                 // ASCII 활성시간 차트
                 var chartData = history.Take(7).Reverse().ToList();
@@ -609,23 +613,12 @@ namespace StayAwake
                 }
             }
 
-            DarkInfoDialog.Show("통계", sb.ToString(), 500, history.Count > 0 ? 605 + 28 * (history.Count - 1) : 450);
+            DarkInfoDialog.Show("통계", sb.ToString(), 500, history.Count > 0 ? 605 + 30 * (history.Count - 1) : 450);
         }
 
         private void ShowHelp()
         {
-            var message = @"[Slack 자리 비움 감지 방식]
-• 10분간 키보드/마우스 비활성 시 Away
-• Slack이 백그라운드에 있어도 시스템 활동 감지
-• API로도 강제 Active 불가, 자연스러운 활동만 인정
-
-[동작 방식]
-• 주기적으로 마우스를 이동 후 원위치 (티 안 나게)
-• SetThreadExecutionState로 디스플레이 절전 방지
-• 사용자가 직접 활동 중이면 마우스 이동 자동 건너뜀
-• Slack 상태 변경: 클립보드 방식으로 슬래시 커맨드 전송 (한글 IME 대응)
-
-[사용법 — 단축키 & 기능]
+            var message = @"[사용법 — 단축키 & 기능]
 • 트레이 좌클릭               시작 / 정지 토글
 • 트레이 좌클릭 (더블클릭)    오늘 통계 바로 보기
 • 트레이 우클릭               메뉴 열기
@@ -645,7 +638,7 @@ namespace StayAwake
 • 메뉴 › Slack › 지금 활성/자리비움으로 변경   즉시 수동 전환
 • 권장 간격: 3~5분";
 
-            DarkInfoDialog.Show("도움말", message, 780, 730);
+            DarkInfoDialog.Show("도움말", message, 900, 730);
         }
 
         private void ShowAbout()
@@ -664,6 +657,17 @@ namespace StayAwake
 Slack 자리 비움 상태 방지 도구
 © 2026 https://github.com/wonhoz
 
+[Slack 자리 비움 감지 방식]
+• 10분간 키보드/마우스 비활성 시 Away
+• Slack이 백그라운드에 있어도 시스템 활동 감지
+• API로도 강제 Active 불가, 자연스러운 활동만 인정
+
+[동작 방식]
+• 주기적으로 마우스를 이동 후 원위치 (티 안 나게)
+• SetThreadExecutionState로 디스플레이 절전 방지
+• 사용자가 직접 활동 중이면 마우스 이동 자동 건너뜀
+• Slack 상태 변경: 클립보드 방식으로 슬래시 커맨드 전송 (한글 IME 대응)
+
 [현재 설정]
 • 간격: {_intervalMinutes}분
 • 이동 거리: {_simulator.MoveDistance}px
@@ -672,7 +676,7 @@ Slack 자리 비움 상태 방지 도구
 • 사용 중 건너뛰기: {(_simulator.SkipIfUserActive ? "켜짐" : "꺼짐")}
 • Slack 자동 상태 변경: {slackStatusLine}";
 
-            DarkInfoDialog.Show($"StayAwake {versionStr}", message, 600, 310);
+            DarkInfoDialog.Show($"StayAwake {versionStr}", message, 750, 770);
         }
 
         private async void OnScheduleTimerTick(object? sender, EventArgs e)

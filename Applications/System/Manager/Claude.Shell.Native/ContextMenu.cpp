@@ -63,37 +63,46 @@ bool FindWindowsTerminal()
     return PathFileExistsW(path) == TRUE;
 }
 
-// ── 공유 유틸: 레지스트리 커스텀 터미널 경로 반환 ─────────────────────────────
-// HKCU\Software\ClaudeCode 의 TerminalPath 값 (없으면 빈 문자열)
-static std::wstring GetCustomTerminal()
+// ── 공유 유틸: 레지스트리 HKCU\Software\ClaudeCode 문자열 값 읽기 ─────────────
+static std::wstring GetRegistryString(const wchar_t* name)
 {
     WCHAR buf[MAX_PATH] = {};
     DWORD sz = sizeof(buf);
-    if (RegGetValueW(HKEY_CURRENT_USER, L"Software\\ClaudeCode", L"TerminalPath",
+    if (RegGetValueW(HKEY_CURRENT_USER, L"Software\\ClaudeCode", name,
                      RRF_RT_REG_SZ, nullptr, buf, &sz) == ERROR_SUCCESS && buf[0])
         return buf;
     return {};
 }
 
+// ── 공유 유틸: NewTab 플래그 (HKCU\Software\ClaudeCode\NewTab DWORD) ──────────
+static bool GetNewTabFlag()
+{
+    DWORD val = 0, sz = sizeof(val);
+    RegGetValueW(HKEY_CURRENT_USER, L"Software\\ClaudeCode", L"NewTab",
+                 RRF_RT_REG_DWORD, nullptr, &val, &sz);
+    return val != 0;
+}
+
 // ── 공유 유틸: Claude 실행 ────────────────────────────────────────────────────
-static void LaunchClaude(const std::wstring& folder, bool dangerous)
+// fileArgs: "@file1.txt @file2.cpp" 형식의 파일 인자 (없으면 빈 문자열)
+static void LaunchClaude(const std::wstring& folder, bool dangerous,
+                         const std::wstring& fileArgs = {})
 {
     if (!FindClaudeExe())
     {
-        MessageBoxW(nullptr,
-            L"Claude Code\uAC00 \uC124\uCE58\uB418\uC9C0 \uC54A\uC558\uC2B5\uB2C8\uB2E4.\n"
-            L"https://claude.ai/download \uC5D0\uC11C \uC124\uCE58 \uD6C4 \uB2E4\uC2DC \uC2DC\uB3C4\uD558\uC138\uC694.",
-            L"Claude Code", MB_OK | MB_ICONINFORMATION);
+        // 브라우저로 다운로드 페이지 열기
+        ShellExecuteW(nullptr, L"open",
+                      L"https://claude.ai/download",
+                      nullptr, nullptr, SW_SHOWNORMAL);
         return;
     }
 
-    const wchar_t* claudeArg = dangerous
-        ? L"claude --dangerously-skip-permissions" : L"claude";
-
-    SHELLEXECUTEINFOW sei = {};
-    sei.cbSize = sizeof(sei);
-    sei.lpVerb = L"open";
-    sei.nShow  = SW_SHOWNORMAL;
+    // claude 기본 명령 + 파일 인자 조합
+    std::wstring claudeCmd = dangerous
+        ? L"claude --dangerously-skip-permissions"
+        : L"claude";
+    if (!fileArgs.empty())
+        claudeCmd += L" " + fileArgs;
 
     // CommandLineToArgvW 호환: 닫는 " 직전 \ 가 있으면 \\ 로 이스케이프
     // ex) "C:\" -> "C:\\" (드라이브 루트 trailing backslash 처리)
@@ -101,29 +110,56 @@ static void LaunchClaude(const std::wstring& folder, bool dangerous)
     if (!quotedFolder.empty() && quotedFolder.back() == L'\\')
         quotedFolder += L'\\';
 
+    SHELLEXECUTEINFOW sei = {};
+    sei.cbSize = sizeof(sei);
+    sei.lpVerb = L"open";
+    sei.nShow  = SW_SHOWNORMAL;
+
+    // TerminalPath: 레지스트리 커스텀 터미널 경로 (없거나 파일이 존재하지 않으면 무시)
+    std::wstring customTerm = GetRegistryString(L"TerminalPath");
+    if (!customTerm.empty() && !PathFileExistsW(customTerm.c_str()))
+        customTerm.clear(); // 경로 무효 → 폴백
+
+    // TerminalType: "wt"/"auto"(기본) → wt.exe 인자, "cmd" → cmd.exe 인자
+    std::wstring termType = GetRegistryString(L"TerminalType");
+    bool useCmdArgs = (termType == L"cmd");
+
+    // NewTab: 1 이면 wt.exe에 --window 0 new-tab 추가
+    bool newTab = GetNewTabFlag();
+    const std::wstring wtNewTabPrefix = newTab ? L"--window 0 new-tab " : L"";
+
     std::wstring args;
-    std::wstring customTerm = GetCustomTerminal();
     if (!customTerm.empty())
     {
-        // 레지스트리 커스텀 터미널: wt.exe 호환 인자 형식 사용
-        args = quotedFolder.empty()
-            ? std::wstring(L"cmd /k ") + claudeArg
-            : std::wstring(L"-d \"") + quotedFolder + L"\" cmd /k " + claudeArg;
+        if (useCmdArgs)
+        {
+            // cmd.exe 인자 형식
+            args = folder.empty()
+                ? std::wstring(L"/k ") + claudeCmd
+                : std::wstring(L"/k cd /d \"") + folder + L"\" && " + claudeCmd;
+        }
+        else
+        {
+            // wt.exe 호환 인자 형식 (기본)
+            args = quotedFolder.empty()
+                ? wtNewTabPrefix + L"cmd /k " + claudeCmd
+                : wtNewTabPrefix + std::wstring(L"-d \"") + quotedFolder + L"\" cmd /k " + claudeCmd;
+        }
         sei.lpFile = customTerm.c_str();
     }
     else if (FindWindowsTerminal())
     {
         args = quotedFolder.empty()
-            ? std::wstring(L"cmd /k ") + claudeArg
-            : std::wstring(L"-d \"") + quotedFolder + L"\" cmd /k " + claudeArg;
+            ? wtNewTabPrefix + L"cmd /k " + claudeCmd
+            : wtNewTabPrefix + std::wstring(L"-d \"") + quotedFolder + L"\" cmd /k " + claudeCmd;
         sei.lpFile = L"wt.exe";
     }
     else
     {
         // 기본 cmd.exe (cmd 는 따옴표 안 백슬래시를 이스케이프하지 않으므로 원본 경로 사용)
         args = folder.empty()
-            ? std::wstring(L"/k ") + claudeArg
-            : std::wstring(L"/k cd /d \"") + folder + L"\" && " + claudeArg;
+            ? std::wstring(L"/k ") + claudeCmd
+            : std::wstring(L"/k cd /d \"") + folder + L"\" && " + claudeCmd;
         sei.lpFile = L"cmd.exe";
     }
     sei.lpParameters = args.c_str();
@@ -163,6 +199,7 @@ STDMETHODIMP_(ULONG) ClaudeContextMenu::Release()
 STDMETHODIMP ClaudeContextMenu::Initialize(PCIDLIST_ABSOLUTE pidlFolder, IDataObject* pdtobj, HKEY)
 {
     m_folderPath.clear();
+    m_selectedFiles.clear();
     if (pdtobj)
     {
         FORMATETC fe = { CF_HDROP, nullptr, DVASPECT_CONTENT, -1, TYMED_HGLOBAL };
@@ -172,14 +209,30 @@ STDMETHODIMP ClaudeContextMenu::Initialize(PCIDLIST_ABSOLUTE pidlFolder, IDataOb
             HDROP hDrop = reinterpret_cast<HDROP>(GlobalLock(stg.hGlobal));
             if (hDrop)
             {
-                WCHAR buf[MAX_PATH] = {};
-                if (DragQueryFileW(hDrop, 0, buf, MAX_PATH))
+                UINT count = DragQueryFileW(hDrop, 0xFFFFFFFF, nullptr, 0);
+                std::wstring fileArgs;
+                for (UINT i = 0; i < count; i++)
                 {
-                    // 파일 선택 시 부모 폴더로 정규화
+                    WCHAR buf[MAX_PATH] = {};
+                    if (!DragQueryFileW(hDrop, i, buf, MAX_PATH)) continue;
+
+                    if (i == 0)
+                    {
+                        // 첫 번째 항목으로 작업 폴더 결정
+                        WCHAR folder[MAX_PATH] = {};
+                        wcscpy_s(folder, buf);
+                        if (!PathIsDirectoryW(buf))
+                            PathRemoveFileSpecW(folder);
+                        m_folderPath = folder;
+                    }
+                    // 파일 선택 시 "@파일명" 인자 수집 (폴더는 제외)
                     if (!PathIsDirectoryW(buf))
-                        PathRemoveFileSpecW(buf);
-                    m_folderPath = buf;
+                    {
+                        if (!fileArgs.empty()) fileArgs += L" ";
+                        fileArgs += std::wstring(L"@") + PathFindFileNameW(buf);
+                    }
                 }
+                m_selectedFiles = fileArgs;
                 GlobalUnlock(stg.hGlobal);
             }
             ReleaseStgMedium(&stg);
@@ -223,11 +276,22 @@ STDMETHODIMP ClaudeContextMenu::QueryContextMenu(HMENU hmenu, UINT indexMenu, UI
 STDMETHODIMP ClaudeContextMenu::InvokeCommand(LPCMINVOKECOMMANDINFO pici)
 {
     if (HIWORD(pici->lpVerb) != 0) return E_FAIL;
-    LaunchClaude(m_folderPath, LOWORD(pici->lpVerb) == CMD_DANGEROUS);
+    LaunchClaude(m_folderPath, LOWORD(pici->lpVerb) == CMD_DANGEROUS, m_selectedFiles);
     return S_OK;
 }
-STDMETHODIMP ClaudeContextMenu::GetCommandString(UINT_PTR, UINT, UINT*, CHAR*, UINT)
-    { return E_NOTIMPL; }
+
+STDMETHODIMP ClaudeContextMenu::GetCommandString(UINT_PTR idCmd, UINT uType, UINT*, CHAR* pszName, UINT cchMax)
+{
+    if (uType == GCS_HELPTEXTW)
+    {
+        const wchar_t* text = (idCmd == CMD_DANGEROUS)
+            ? L"Claude Code \uC5F4\uAE30 (\uC704\uD5D8: \uAD8C\uD55C \uAC74\uB108\uB220)"
+            : L"Claude Code \uC5F4\uAE30";
+        wcsncpy_s(reinterpret_cast<wchar_t*>(pszName), cchMax, text, _TRUNCATE);
+        return S_OK;
+    }
+    return E_NOTIMPL;
+}
 
 // ── IExplorerCommand (신 컨텍스트 메뉴 — ECF_DEFAULT, m_dangerous 로 분기) ──
 STDMETHODIMP ClaudeContextMenu::GetTitle(IShellItemArray*, LPWSTR* ppszName)
@@ -260,35 +324,51 @@ STDMETHODIMP ClaudeContextMenu::GetCanonicalName(GUID* pguid)
 }
 STDMETHODIMP ClaudeContextMenu::GetState(IShellItemArray*, BOOL, EXPCMDSTATE* pState)
     { *pState = ECS_ENABLED; return S_OK; }
+
 STDMETHODIMP ClaudeContextMenu::Invoke(IShellItemArray* psia, IBindCtx*)
 {
     std::wstring folder;
+    std::wstring fileArgs;
     if (psia)
     {
-        IShellItem* psi = nullptr;
-        if (SUCCEEDED(psia->GetItemAt(0, &psi)) && psi)
+        DWORD count = 0;
+        psia->GetCount(&count);
+        for (DWORD i = 0; i < count; i++)
         {
+            IShellItem* psi = nullptr;
+            if (!SUCCEEDED(psia->GetItemAt(i, &psi)) || !psi) continue;
+
             LPWSTR pszPath = nullptr;
             if (SUCCEEDED(psi->GetDisplayName(SIGDN_FILESYSPATH, &pszPath)) && pszPath)
             {
-                folder = pszPath;
-                CoTaskMemFree(pszPath);
-                // 파일 선택 시 부모 폴더로 정규화
-                if (!PathIsDirectoryW(folder.c_str()))
+                if (i == 0)
                 {
-                    WCHAR buf[MAX_PATH] = {};
-                    wcscpy_s(buf, folder.c_str());
-                    PathRemoveFileSpecW(buf);
-                    folder = buf;
+                    // 첫 번째 항목으로 작업 폴더 결정
+                    folder = pszPath;
+                    if (!PathIsDirectoryW(folder.c_str()))
+                    {
+                        WCHAR buf[MAX_PATH] = {};
+                        wcscpy_s(buf, folder.c_str());
+                        PathRemoveFileSpecW(buf);
+                        folder = buf;
+                    }
                 }
+                // 파일 선택 시 "@파일명" 인자 수집 (폴더는 제외)
+                if (!PathIsDirectoryW(pszPath))
+                {
+                    if (!fileArgs.empty()) fileArgs += L" ";
+                    fileArgs += std::wstring(L"@") + PathFindFileNameW(pszPath);
+                }
+                CoTaskMemFree(pszPath);
             }
             psi->Release();
         }
     }
     if (folder.empty()) folder = m_folderPath;
-    LaunchClaude(folder, m_dangerous);
+    LaunchClaude(folder, m_dangerous, fileArgs.empty() ? m_selectedFiles : fileArgs);
     return S_OK;
 }
+
 STDMETHODIMP ClaudeContextMenu::GetFlags(EXPCMDFLAGS* pFlags)
     { *pFlags = ECF_DEFAULT; return S_OK; }
 STDMETHODIMP ClaudeContextMenu::EnumSubCommands(IEnumExplorerCommand** ppEnum)

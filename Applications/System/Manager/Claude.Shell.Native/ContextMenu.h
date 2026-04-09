@@ -51,8 +51,9 @@ public:
 
 private:
     LONG          m_cRef;
-    bool          m_dangerous;   // true = --dangerously-skip-permissions
+    bool          m_dangerous;    // true = --dangerously-skip-permissions
     std::wstring  m_folderPath;
+    std::wstring  m_selectedFiles; // space-joined "@file" args for file selections
     HMENU         m_hSubMenu;
 
     static HBITMAP   s_hBitmap;

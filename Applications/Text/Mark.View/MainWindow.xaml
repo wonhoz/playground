@@ -232,7 +232,7 @@
           <!-- PDF 내보내기 (우클릭: 용지 설정) -->
           <Button Style="{StaticResource IconButton}" Click="BtnExportPdf_Click"
                   MouseRightButtonUp="BtnExportPdf_RightClick"
-                  ToolTip="PDF로 내보내기 (Ctrl+P) — 우클릭: 용지 설정" Margin="0,0,2,0" Padding="8,5">
+                  ToolTip="PDF로 내보내기 (Ctrl+Shift+P) — 우클릭: 용지 설정" Margin="0,0,2,0" Padding="8,5">
             <TextBlock Text="&#x1F4CB;" FontSize="14"/>
           </Button>
           <!-- 새로고침 -->
@@ -607,6 +607,33 @@
       </Border>
     </Popup>
 
+    <!-- ══ Quick Open 팝업 (Ctrl+P) ══════════════════════ -->
+    <Popup x:Name="QuickOpenPopup"
+           Grid.Row="0" Grid.RowSpan="3"
+           AllowsTransparency="True"
+           StaysOpen="False"
+           HorizontalAlignment="Center" VerticalAlignment="Top"
+           HorizontalOffset="-220" VerticalOffset="48">
+      <Border Background="{StaticResource SurfaceBrush}"
+              BorderBrush="{StaticResource AccentBrush}" BorderThickness="1"
+              CornerRadius="8" Padding="0">
+        <StackPanel Width="440">
+          <TextBox x:Name="TxtQuickOpen"
+                   Margin="10,10,10,6"
+                   FontSize="13"
+                   KeyDown="TxtQuickOpen_KeyDown"
+                   TextChanged="TxtQuickOpen_TextChanged"/>
+          <ListBox x:Name="QuickOpenList"
+                   MaxHeight="300"
+                   BorderThickness="0"
+                   Background="Transparent"
+                   FocusVisualStyle="{x:Null}"
+                   MouseDoubleClick="QuickOpenList_DoubleClick"
+                   KeyDown="QuickOpenList_KeyDown"/>
+        </StackPanel>
+      </Border>
+    </Popup>
+
     <!-- ══ 상태바 ═════════════════════════════════════════ -->
     <Border x:Name="StatusBarBorder" Grid.Row="2"
             Background="{StaticResource SurfaceBrush}"
@@ -661,7 +688,10 @@
           <TextBlock x:Name="StatusMode"
                      FontSize="11"
                      Foreground="{StaticResource AccentBrush}"
-                     VerticalAlignment="Center"/>
+                     VerticalAlignment="Center"
+                     Cursor="Hand"
+                     ToolTip="우클릭: 자동 저장 주기 설정"
+                     MouseRightButtonUp="StatusMode_RightClick"/>
         </StackPanel>
       </Grid>
     </Border>

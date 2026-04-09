@@ -39,6 +39,7 @@ public partial class MainWindow : Window
     private bool _webViewReady = false;
     private readonly TaskCompletionSource _webViewReadyTcs = new();
     private readonly Dictionary<string, FileSystemWatcher> _fileWatchers = new(StringComparer.OrdinalIgnoreCase);
+    private readonly HashSet<string> _recentlySavedPaths = new(StringComparer.OrdinalIgnoreCase);
     private double _editorFontSize = 13;
     private double _previewFontSize = 15;
     private int _findMatchCount = 0;
@@ -954,7 +955,8 @@ public partial class MainWindow : Window
 
     private void SetupAutoSaveTimer()
     {
-        _autoSaveTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(30) };
+        var interval = Math.Clamp(_settings.AutoSaveIntervalSec, 10, 300);
+        _autoSaveTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(interval) };
         _autoSaveTimer.Tick += AutoSave_Tick;
     }
 
@@ -1341,7 +1343,37 @@ public partial class MainWindow : Window
             _docs[_activeIndex].ScrollY = await GetScrollYAsync();
             var prevDoc = _docs[_activeIndex];
             if (!prevDoc.IsNew)
+            {
                 _settings.FileCursorPositions[prevDoc.FilePath] = Editor.CaretIndex;
+                // 최대 100개 유지
+                if (_settings.FileCursorPositions.Count > 100)
+                {
+                    var oldest = _settings.FileCursorPositions.Keys
+                        .Where(k => !_docs.Any(d => d.FilePath == k))
+                        .FirstOrDefault();
+                    if (oldest != null) _settings.FileCursorPositions.Remove(oldest);
+                }
+                // 에디터 스크롤 위치 저장 (첫 번째 표시 줄 번호)
+                try
+                {
+                    var text = Editor.Text;
+                    if (!string.IsNullOrEmpty(text))
+                    {
+                        int topCharIdx = Editor.GetCharacterIndexFromPoint(
+                            new Point(Editor.Padding.Left + 1, 1), snapToText: true);
+                        int firstLine = CountNewlinesBefore(text, topCharIdx);
+                        _settings.FileScrollPositions[prevDoc.FilePath] = firstLine;
+                        if (_settings.FileScrollPositions.Count > 100)
+                        {
+                            var oldestScroll = _settings.FileScrollPositions.Keys
+                                .Where(k => !_docs.Any(d => d.FilePath == k))
+                                .FirstOrDefault();
+                            if (oldestScroll != null) _settings.FileScrollPositions.Remove(oldestScroll);
+                        }
+                    }
+                }
+                catch { }
+            }
         }
 
         // 이전 탭 스타일 복원
@@ -1371,7 +1403,15 @@ public partial class MainWindow : Window
         {
             var caret = Math.Clamp(savedCaret, 0, Editor.Text.Length);
             Editor.CaretIndex = caret;
-            try { Editor.ScrollToLine(Editor.GetLineIndexFromCharacterIndex(caret)); } catch { }
+            // 에디터 스크롤 위치 복원 (저장된 첫 번째 줄 기준)
+            if (_settings.FileScrollPositions.TryGetValue(doc.FilePath, out var savedScrollLine))
+            {
+                try { Editor.ScrollToLine((int)Math.Clamp(savedScrollLine, 0, Editor.LineCount - 1)); } catch { }
+            }
+            else
+            {
+                try { Editor.ScrollToLine(Editor.GetLineIndexFromCharacterIndex(caret)); } catch { }
+            }
         }
         _suppressEditorChange = false;
 
@@ -1627,6 +1667,13 @@ public partial class MainWindow : Window
         if (doc.IsNew) return SaveDocumentAs(doc);
         try
         {
+            // 자체 저장임을 FileSystemWatcher에 알림 (1초 유예)
+            _recentlySavedPaths.Add(doc.FilePath);
+            var savedPath = doc.FilePath;
+            var t = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1) };
+            t.Tick += (_, _) => { t.Stop(); _recentlySavedPaths.Remove(savedPath); };
+            t.Start();
+
             File.WriteAllText(doc.FilePath, doc.Content, new UTF8Encoding(true));
             doc.IsModified = false;
             int i = _docs.IndexOf(doc);
@@ -1689,6 +1736,13 @@ public partial class MainWindow : Window
 
     private void StatusPath_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
     {
+        // 내보내기 경로 힌트 모드 — Tag에 파일 경로 저장됨
+        if (StatusPath.Tag is string exportPath && File.Exists(exportPath))
+        {
+            try { System.Diagnostics.Process.Start("explorer.exe", $"/select,\"{exportPath}\""); }
+            catch { }
+            return;
+        }
         if (_activeIndex < 0 || _activeIndex >= _docs.Count) return;
         var doc = _docs[_activeIndex];
         if (doc.IsNew || !File.Exists(doc.FilePath)) return;
@@ -1697,6 +1751,31 @@ public partial class MainWindow : Window
             System.Diagnostics.Process.Start("explorer.exe", $"/select,\"{doc.FilePath}\"");
         }
         catch { }
+    }
+
+    private void StatusMode_RightClick(object sender, MouseButtonEventArgs e)
+    {
+        e.Handled = true;
+        var menu = new ContextMenu();
+        foreach (var (label, sec) in new[] { ("30초", 30), ("1분", 60), ("2분", 120) })
+        {
+            var s = sec;
+            var item = new MenuItem { Header = $"자동 저장: {label}" };
+            if (_settings.AutoSaveIntervalSec == s)
+                item.Header = $"✓ 자동 저장: {label}";
+            item.Click += (_, _) =>
+            {
+                _settings.AutoSaveIntervalSec = s;
+                _settings.Save();
+                if (_autoSaveTimer != null)
+                    _autoSaveTimer.Interval = TimeSpan.FromSeconds(s);
+                ShowStatusHint($"자동 저장 주기: {label}", 2);
+            };
+            menu.Items.Add(item);
+        }
+        menu.PlacementTarget = StatusMode;
+        menu.Placement = System.Windows.Controls.Primitives.PlacementMode.Top;
+        menu.IsOpen = true;
     }
 
     private static readonly Regex _headingRegex = new(@"^#{1,6}\s", RegexOptions.Compiled | RegexOptions.Multiline);
@@ -1731,15 +1810,34 @@ public partial class MainWindow : Window
 
     // 상태바에 임시 메시지 표시 후 복원
     private DispatcherTimer? _statusHintTimer;
-    private void ShowStatusHint(string message, int seconds = 3)
+    private void ShowStatusHint(string message, int seconds = 3, string? clickPath = null)
     {
         var prev = _activeIndex >= 0 && _activeIndex < _docs.Count
             ? (_docs[_activeIndex].IsNew ? "새 문서 (저장되지 않음)" : _docs[_activeIndex].FilePath)
             : "파일을 열어주세요";
         StatusPath.Text = message;
+
+        // 내보낸 파일 경로 클릭으로 탐색기 열기
+        if (clickPath != null)
+        {
+            StatusPath.Tag = clickPath;
+            StatusPath.ToolTip = $"클릭하여 폴더 열기: {Path.GetDirectoryName(clickPath)}";
+            StatusPath.Cursor = Cursors.Hand;
+        }
+
         _statusHintTimer?.Stop();
         _statusHintTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(seconds) };
-        _statusHintTimer.Tick += (_, _) => { _statusHintTimer?.Stop(); StatusPath.Text = prev; };
+        _statusHintTimer.Tick += (_, _) =>
+        {
+            _statusHintTimer?.Stop();
+            StatusPath.Text = prev;
+            if (clickPath != null)
+            {
+                StatusPath.Tag = null;
+                StatusPath.ToolTip = "클릭하여 파일 위치 열기";
+                StatusPath.Cursor = Cursors.Arrow;
+            }
+        };
         _statusHintTimer.Start();
     }
 
@@ -1793,6 +1891,135 @@ public partial class MainWindow : Window
             await Viewer.ExecuteScriptAsync($"window.__searchFocus && window.__searchFocus({_findCurrentIndex - 1})");
         }
         catch { }
+    }
+
+    // ── Quick Open (Ctrl+P) ──────────────────────────────────────────────
+
+    private record QuickOpenItem(string Label, string SubLabel, string? FilePath, int? TabIndex);
+
+    private void OpenQuickOpen()
+    {
+        TxtQuickOpen.Text = "";
+        RefreshQuickOpenList("");
+        QuickOpenPopup.IsOpen = true;
+        Dispatcher.InvokeAsync(() => TxtQuickOpen.Focus(), System.Windows.Threading.DispatcherPriority.Input);
+    }
+
+    private void RefreshQuickOpenList(string keyword)
+    {
+        QuickOpenList.Items.Clear();
+        var items = new List<QuickOpenItem>();
+
+        // 열린 탭
+        for (int i = 0; i < _docs.Count; i++)
+        {
+            var d = _docs[i];
+            var label = d.TabTitle.TrimEnd('•').Trim();
+            var sub = d.IsNew ? "(새 문서)" : d.FilePath;
+            items.Add(new QuickOpenItem(label, sub, d.IsNew ? null : d.FilePath, i));
+        }
+
+        // 최근 파일 (탭에 이미 열린 것 제외)
+        var openPaths = new HashSet<string>(_docs.Where(d => !d.IsNew).Select(d => d.FilePath), StringComparer.OrdinalIgnoreCase);
+        foreach (var path in _settings.RecentFiles.Where(File.Exists).Where(p => !openPaths.Contains(p)))
+            items.Add(new QuickOpenItem(Path.GetFileName(path), path, path, null));
+
+        // 검색어 필터
+        var filtered = string.IsNullOrEmpty(keyword)
+            ? items
+            : items.Where(it => it.Label.Contains(keyword, StringComparison.OrdinalIgnoreCase)
+                              || it.SubLabel.Contains(keyword, StringComparison.OrdinalIgnoreCase)).ToList();
+
+        foreach (var item in filtered)
+        {
+            var border = new Border
+            {
+                Padding = new Thickness(12, 6, 12, 6),
+                Cursor = Cursors.Hand,
+                Tag = item,
+            };
+            var stack = new StackPanel();
+            var labelBlock = new TextBlock
+            {
+                Text = (item.TabIndex.HasValue ? "  " : "📄 ") + item.Label,
+                FontSize = 12,
+                Foreground = (SolidColorBrush)FindResource("TextBrush"),
+            };
+            var subBlock = new TextBlock
+            {
+                Text = "    " + item.SubLabel,
+                FontSize = 10,
+                Foreground = (SolidColorBrush)FindResource("TextDimBrush"),
+                TextTrimming = TextTrimming.CharacterEllipsis,
+            };
+            stack.Children.Add(labelBlock);
+            stack.Children.Add(subBlock);
+            border.Child = stack;
+            border.MouseEnter += (s, _) => ((Border)s).Background = (SolidColorBrush)FindResource("HoverBrush");
+            border.MouseLeave += (s, _) => ((Border)s).Background = Brushes.Transparent;
+            border.MouseLeftButtonDown += (_, _) => { ExecuteQuickOpenItem(item); };
+            QuickOpenList.Items.Add(new ListBoxItem { Content = border, Tag = item, Padding = new Thickness(0) });
+        }
+
+        if (QuickOpenList.Items.Count > 0)
+            QuickOpenList.SelectedIndex = 0;
+    }
+
+    private void ExecuteQuickOpenItem(QuickOpenItem item)
+    {
+        QuickOpenPopup.IsOpen = false;
+        if (item.TabIndex.HasValue)
+            SwitchTo(item.TabIndex.Value);
+        else if (item.FilePath != null)
+            OpenFile(item.FilePath);
+    }
+
+    private void TxtQuickOpen_TextChanged(object sender, TextChangedEventArgs e)
+    {
+        RefreshQuickOpenList(TxtQuickOpen.Text);
+    }
+
+    private void TxtQuickOpen_KeyDown(object sender, KeyEventArgs e)
+    {
+        if (e.Key == Key.Escape) { QuickOpenPopup.IsOpen = false; e.Handled = true; }
+        else if (e.Key == Key.Enter)
+        {
+            if (QuickOpenList.SelectedItem is ListBoxItem li && li.Tag is QuickOpenItem item)
+                ExecuteQuickOpenItem(item);
+            e.Handled = true;
+        }
+        else if (e.Key == Key.Down)
+        {
+            if (QuickOpenList.Items.Count > 0)
+            {
+                QuickOpenList.SelectedIndex = Math.Min(QuickOpenList.SelectedIndex + 1, QuickOpenList.Items.Count - 1);
+                QuickOpenList.ScrollIntoView(QuickOpenList.SelectedItem);
+            }
+            e.Handled = true;
+        }
+        else if (e.Key == Key.Up)
+        {
+            if (QuickOpenList.Items.Count > 0)
+            {
+                QuickOpenList.SelectedIndex = Math.Max(QuickOpenList.SelectedIndex - 1, 0);
+                QuickOpenList.ScrollIntoView(QuickOpenList.SelectedItem);
+            }
+            e.Handled = true;
+        }
+    }
+
+    private void QuickOpenList_KeyDown(object sender, KeyEventArgs e)
+    {
+        if (e.Key == Key.Enter && QuickOpenList.SelectedItem is ListBoxItem li && li.Tag is QuickOpenItem item)
+        { ExecuteQuickOpenItem(item); e.Handled = true; }
+        else if (e.Key == Key.Escape)
+        { QuickOpenPopup.IsOpen = false; e.Handled = true; }
+    }
+
+    private void QuickOpenList_DoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+    {
+        if (QuickOpenList.SelectedItem is ListBoxItem li && li.Tag is QuickOpenItem item)
+            ExecuteQuickOpenItem(item);
     }
 
     // ── 찾기/바꾸기 ─────────────────────────────────────────────────────
@@ -2046,7 +2273,7 @@ public partial class MainWindow : Window
             printSettings.ShouldPrintBackgrounds = true;
             await Viewer.CoreWebView2.PrintToPdfAsync(dlg.FileName, printSettings);
             HideLoading();
-            ShowStatusHint($"PDF 저장 완료 — {Path.GetFileName(dlg.FileName)}", 3);
+            ShowStatusHint($"PDF 저장 완료 — {Path.GetFileName(dlg.FileName)}", 5, dlg.FileName);
         }
         catch (Exception ex)
         {
@@ -2121,7 +2348,7 @@ public partial class MainWindow : Window
                 File.WriteAllText(dlg.FileName, html, new UTF8Encoding(true));
             });
             HideLoading();
-            ShowStatusHint($"HTML 저장 완료 — {Path.GetFileName(dlg.FileName)}", 3);
+            ShowStatusHint($"HTML 저장 완료 — {Path.GetFileName(dlg.FileName)}", 5, dlg.FileName);
         }
         catch (Exception ex)
         {
@@ -2498,6 +2725,26 @@ public partial class MainWindow : Window
 
     private void Editor_KeyDown(object sender, KeyEventArgs e)
     {
+        // Ctrl+Shift+V: 서식 없는 붙여넣기 (탭→공백 4개, 연속공백 정리)
+        if (e.Key == Key.V && Keyboard.Modifiers == (ModifierKeys.Control | ModifierKeys.Shift))
+        {
+            try
+            {
+                var text = Clipboard.GetText();
+                if (!string.IsNullOrEmpty(text))
+                {
+                    text = text.Replace("\t", "    ")
+                               .Replace("\r\n", "\n").Replace("\r", "\n");
+                    var start = Editor.SelectionStart;
+                    Editor.SelectedText = text;
+                    Editor.CaretIndex = start + text.Length;
+                }
+            }
+            catch { }
+            e.Handled = true;
+            return;
+        }
+
         // 서식 단축키 — 에디터 포커스 시에만 적용
         if (e.Key == Key.B && Keyboard.Modifiers == ModifierKeys.Control)
         { WrapSelection("**", "**"); e.Handled = true; return; }
@@ -2665,6 +2912,8 @@ public partial class MainWindow : Window
         else if (e.Key == Key.Tab && Keyboard.Modifiers == (ModifierKeys.Control | ModifierKeys.Shift) && _docs.Count > 1)
         { SwitchTo((_activeIndex - 1 + _docs.Count) % _docs.Count); e.Handled = true; }
         else if (e.Key == Key.P && Keyboard.Modifiers == ModifierKeys.Control)
+        { OpenQuickOpen(); e.Handled = true; }
+        else if (e.Key == Key.P && Keyboard.Modifiers == (ModifierKeys.Control | ModifierKeys.Shift))
         { BtnExportPdf_Click(this, new RoutedEventArgs()); e.Handled = true; }
         else if (e.Key == Key.OemPlus && Keyboard.Modifiers == ModifierKeys.Control)
         { AdjustEditorFontSize(1); e.Handled = true; }
@@ -2922,6 +3171,8 @@ public partial class MainWindow : Window
 
     private void NotifyFileChanged(string path)
     {
+        // 자체 저장 직후 발생한 이벤트는 무시
+        if (_recentlySavedPaths.Contains(path)) return;
         var idx = _docs.FindIndex(d => string.Equals(d.FilePath, path, StringComparison.OrdinalIgnoreCase));
         if (idx < 0) return;
 
@@ -2981,17 +3232,19 @@ public partial class MainWindow : Window
     private void RefreshRecentList()
     {
         var validRecent = _settings.RecentFiles.Where(File.Exists).ToList();
+        var validPinned = _settings.PinnedFiles.Where(File.Exists).ToList();
+        bool changed = false;
         if (validRecent.Count != _settings.RecentFiles.Count)
         {
             _settings.RecentFiles = validRecent;
-            _settings.Save();
+            changed = true;
         }
-        var validPinned = _settings.PinnedFiles.Where(File.Exists).ToList();
         if (validPinned.Count != _settings.PinnedFiles.Count)
         {
             _settings.PinnedFiles = validPinned;
-            _settings.Save();
+            changed = true;
         }
+        if (changed) _settings.Save();
 
         // 핀된 파일을 상단에, 나머지 최근 파일 하단에 표시
         var pinned = validPinned
@@ -3152,12 +3405,25 @@ public partial class MainWindow : Window
             .Select(d => d.FilePath)
             .ToList();
         _settings.ActiveTabIndex = _activeIndex >= 0 ? _activeIndex : 0;
-        // 현재 활성 탭의 커서 위치 저장
+        // 현재 활성 탭의 커서·스크롤 위치 저장
         if (_activeIndex >= 0 && _activeIndex < _docs.Count)
         {
             var doc = _docs[_activeIndex];
             if (!doc.IsNew)
+            {
                 _settings.FileCursorPositions[doc.FilePath] = Editor.CaretIndex;
+                try
+                {
+                    var text = Editor.Text;
+                    if (!string.IsNullOrEmpty(text))
+                    {
+                        int topCharIdx = Editor.GetCharacterIndexFromPoint(
+                            new Point(Editor.Padding.Left + 1, 1), snapToText: true);
+                        _settings.FileScrollPositions[doc.FilePath] = CountNewlinesBefore(text, topCharIdx);
+                    }
+                }
+                catch { }
+            }
         }
     }
 }

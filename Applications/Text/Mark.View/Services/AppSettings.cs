@@ -30,6 +30,7 @@ public class AppSettings
     public string ExportDir { get; set; } = "";
     public string PdfPageSize { get; set; } = "a4"; // a4, letter, legal
     public double PdfMarginCm { get; set; } = 1.0;
+    public int AutoSaveIntervalSec { get; set; } = 30; // 30, 60, 120
     public Dictionary<string, int> FileCursorPositions { get; set; } = [];
     public Dictionary<string, double> FileScrollPositions { get; set; } = [];
 

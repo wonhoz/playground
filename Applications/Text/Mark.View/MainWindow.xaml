@@ -586,6 +586,27 @@
       </Grid>
     </Grid>
 
+    <!-- ══ 줄 이동 팝업 (Ctrl+G) ════════════════════════════ -->
+    <Popup x:Name="GotoLinePopup"
+           Grid.Row="0" Grid.RowSpan="3"
+           AllowsTransparency="True"
+           StaysOpen="False">
+      <Border Background="{StaticResource SurfaceBrush}"
+              BorderBrush="{StaticResource AccentBrush}" BorderThickness="1"
+              CornerRadius="6" Padding="14,10">
+        <StackPanel Orientation="Horizontal">
+          <TextBlock Text="줄 이동:" FontSize="12" VerticalAlignment="Center"
+                     Foreground="{StaticResource TextDimBrush}" Margin="0,0,8,0"/>
+          <TextBox x:Name="TxtGotoLine" Width="90" FontSize="12"
+                   KeyDown="TxtGotoLine_KeyDown"/>
+          <TextBlock x:Name="TxtGotoLineHint" FontSize="11"
+                     Foreground="{StaticResource TextDimBrush}"
+                     VerticalAlignment="Center" Margin="8,0,0,0"
+                     Visibility="Collapsed"/>
+        </StackPanel>
+      </Border>
+    </Popup>
+
     <!-- ══ 상태바 ═════════════════════════════════════════ -->
     <Border x:Name="StatusBarBorder" Grid.Row="2"
             Background="{StaticResource SurfaceBrush}"

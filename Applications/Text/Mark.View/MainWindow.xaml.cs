@@ -165,7 +165,6 @@ public partial class MainWindow : Window
         Editor.FontSize = _editorFontSize;
     }
 
-    private DispatcherTimer? _fontSizeHintTimer;
 
     private void AdjustEditorFontSize(double delta)
     {
@@ -185,14 +184,7 @@ public partial class MainWindow : Window
         _settings.PreviewFontSize = _previewFontSize;
         _settings.Save();
         _ = ApplyPreviewFontSizeAsync();
-        var prev = _activeIndex >= 0 && _activeIndex < _docs.Count
-            ? (_docs[_activeIndex].IsNew ? "새 문서 (저장되지 않음)" : _docs[_activeIndex].FilePath)
-            : "파일을 열어주세요";
-        StatusPath.Text = "폰트 크기 초기화 (에디터 13px · 프리뷰 15px)";
-        _fontSizeHintTimer?.Stop();
-        _fontSizeHintTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(2) };
-        _fontSizeHintTimer.Tick += (_, _) => { _fontSizeHintTimer?.Stop(); StatusPath.Text = prev; };
-        _fontSizeHintTimer.Start();
+        ShowStatusHint("폰트 크기 초기화 (에디터 13px · 프리뷰 15px)", 2);
     }
 
     private void AdjustPreviewFontSize(double delta)
@@ -201,12 +193,7 @@ public partial class MainWindow : Window
         _settings.PreviewFontSize = _previewFontSize;
         _settings.Save();
         _ = ApplyPreviewFontSizeAsync();
-        var prev = StatusPath.Text;
-        StatusPath.Text = $"프리뷰 폰트: {(int)_previewFontSize}px";
-        _fontSizeHintTimer?.Stop();
-        _fontSizeHintTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(2) };
-        _fontSizeHintTimer.Tick += (_, _) => { _fontSizeHintTimer?.Stop(); StatusPath.Text = prev; };
-        _fontSizeHintTimer.Start();
+        ShowStatusHint($"프리뷰 폰트: {(int)_previewFontSize}px", 2);
     }
 
     private async Task ApplyPreviewFontSizeAsync()
@@ -222,18 +209,7 @@ public partial class MainWindow : Window
 
     private void ShowFontSizeHint()
     {
-        var prev = _activeIndex >= 0 && _activeIndex < _docs.Count
-            ? (_docs[_activeIndex].IsNew ? "새 문서 (저장되지 않음)" : _docs[_activeIndex].FilePath)
-            : "파일을 열어주세요";
-        StatusPath.Text = $"에디터 폰트: {(int)_editorFontSize}px";
-        _fontSizeHintTimer?.Stop();
-        _fontSizeHintTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(2) };
-        _fontSizeHintTimer.Tick += (_, _) =>
-        {
-            _fontSizeHintTimer?.Stop();
-            StatusPath.Text = prev;
-        };
-        _fontSizeHintTimer.Start();
+        ShowStatusHint($"에디터 폰트: {(int)_editorFontSize}px", 2);
     }
 
     private void ApplySavedTheme()
@@ -1359,9 +1335,14 @@ public partial class MainWindow : Window
     {
         if (index < 0 || index >= _docs.Count) return;
 
-        // 현재 탭 스크롤 저장
+        // 현재 탭 스크롤·커서 저장
         if (_activeIndex >= 0 && _activeIndex < _docs.Count)
+        {
             _docs[_activeIndex].ScrollY = await GetScrollYAsync();
+            var prevDoc = _docs[_activeIndex];
+            if (!prevDoc.IsNew)
+                _settings.FileCursorPositions[prevDoc.FilePath] = Editor.CaretIndex;
+        }
 
         // 이전 탭 스타일 복원
         if (_activeIndex >= 0 && _activeIndex < _tabs.Count)
@@ -1385,6 +1366,13 @@ public partial class MainWindow : Window
     {
         _suppressEditorChange = true;
         Editor.Text = doc.Content;
+        // 저장된 커서 위치 복원
+        if (!doc.IsNew && _settings.FileCursorPositions.TryGetValue(doc.FilePath, out var savedCaret))
+        {
+            var caret = Math.Clamp(savedCaret, 0, Editor.Text.Length);
+            Editor.CaretIndex = caret;
+            try { Editor.ScrollToLine(Editor.GetLineIndexFromCharacterIndex(caret)); } catch { }
+        }
         _suppressEditorChange = false;
 
         if (_isEditMode) UpdateLineNumbers();
@@ -1634,8 +1622,6 @@ public partial class MainWindow : Window
 
     // ── 파일 작업 ────────────────────────────────────────────────────────
 
-    private DispatcherTimer? _saveHintTimer;
-
     private bool SaveDocument(MarkDocument doc)
     {
         if (doc.IsNew) return SaveDocumentAs(doc);
@@ -1649,13 +1635,7 @@ public partial class MainWindow : Window
             {
                 Title = $"Mark.View — {doc.TabTitle}";
                 UpdateStatusBar(doc);
-                // 저장 완료 피드백 (2초)
-                var savedPath = StatusPath.Text;
-                StatusPath.Text = $"저장 완료 — {doc.FileName}";
-                _saveHintTimer?.Stop();
-                _saveHintTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(2) };
-                _saveHintTimer.Tick += (_, _) => { _saveHintTimer?.Stop(); StatusPath.Text = savedPath; };
-                _saveHintTimer.Start();
+                ShowStatusHint($"저장 완료 — {doc.FileName}", 2);
             }
             // 대응하는 autosave 파일 삭제
             DeleteAutosaveFile(doc);
@@ -2710,8 +2690,12 @@ public partial class MainWindow : Window
         { BtnCase_Click(this, new RoutedEventArgs()); e.Handled = true; }
         else if (e.Key == Key.Enter && Keyboard.Modifiers == ModifierKeys.Control && _isEditMode)
         { _previewTimer?.Stop(); RenderPreview(saveScroll: true); e.Handled = true; }
+        else if (e.Key == Key.G && Keyboard.Modifiers == ModifierKeys.Control)
+        { ShowGotoLinePopup(); e.Handled = true; }
         else if (e.Key == Key.Escape && !string.IsNullOrEmpty(TxtFind.Text))
         { TxtFind.Text = ""; e.Handled = true; }
+        else if (e.Key == Key.Escape && GotoLinePopup.IsOpen)
+        { GotoLinePopup.IsOpen = false; e.Handled = true; }
     }
 
     protected override void OnPreviewMouseWheel(MouseWheelEventArgs e)
@@ -2751,6 +2735,56 @@ public partial class MainWindow : Window
         var doc = new MarkDocument { Content = text };
         OpenDocument(doc);
         if (!_isEditMode) SetEditMode(true);
+    }
+
+    // ── 줄 이동 (Ctrl+G) ────────────────────────────────────────────────
+
+    private void ShowGotoLinePopup()
+    {
+        if (!_isEditMode || _activeIndex < 0) return;
+        TxtGotoLine.Text = "";
+        TxtGotoLineHint.Visibility = Visibility.Collapsed;
+        GotoLinePopup.PlacementTarget = this;
+        GotoLinePopup.Placement = System.Windows.Controls.Primitives.PlacementMode.Center;
+        GotoLinePopup.IsOpen = true;
+        Dispatcher.InvokeAsync(() => TxtGotoLine.Focus(),
+            System.Windows.Threading.DispatcherPriority.Input);
+    }
+
+    private void TxtGotoLine_KeyDown(object sender, KeyEventArgs e)
+    {
+        if (e.Key == Key.Enter)
+        {
+            if (int.TryParse(TxtGotoLine.Text.Trim(), out int lineNum) && lineNum > 0)
+            {
+                GoToLine(lineNum);
+                GotoLinePopup.IsOpen = false;
+            }
+            else
+            {
+                TxtGotoLineHint.Text = "숫자를 입력하세요";
+                TxtGotoLineHint.Visibility = Visibility.Visible;
+            }
+            e.Handled = true;
+        }
+        else if (e.Key == Key.Escape)
+        {
+            GotoLinePopup.IsOpen = false;
+            e.Handled = true;
+        }
+    }
+
+    private void GoToLine(int lineNumber)
+    {
+        var text = Editor.Text;
+        var totalLines = string.IsNullOrEmpty(text) ? 1 : text.Split('\n').Length;
+        lineNumber = Math.Clamp(lineNumber, 1, totalLines);
+        var idx = Editor.GetCharacterIndexFromLineIndex(lineNumber - 1);
+        if (idx < 0) idx = 0;
+        Editor.CaretIndex = idx;
+        Editor.ScrollToLine(lineNumber - 1);
+        Editor.Focus();
+        ShowStatusHint($"{lineNumber}줄로 이동", 2);
     }
 
     private bool IsMouseOverEditor()
@@ -3118,5 +3152,12 @@ public partial class MainWindow : Window
             .Select(d => d.FilePath)
             .ToList();
         _settings.ActiveTabIndex = _activeIndex >= 0 ? _activeIndex : 0;
+        // 현재 활성 탭의 커서 위치 저장
+        if (_activeIndex >= 0 && _activeIndex < _docs.Count)
+        {
+            var doc = _docs[_activeIndex];
+            if (!doc.IsNew)
+                _settings.FileCursorPositions[doc.FilePath] = Editor.CaretIndex;
+        }
     }
 }

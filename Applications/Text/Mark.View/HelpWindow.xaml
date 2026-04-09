@@ -132,6 +132,7 @@
                 <local:ShortcutEntry Key="상태바 경로"      Desc="클릭 시 파일 탐색기에서 위치 열기"/>
                 <local:ShortcutEntry Key="상태바 ↩ 표시"   Desc="편집 모드에서 실행 취소(Ctrl+Z) 가능 상태 표시"/>
                 <local:ShortcutEntry Key="자동 저장"        Desc="편집 중단 30초 후 %AppData%\MarkView\autosave에 임시 저장"/>
+                <local:ShortcutEntry Key="커서 위치 기억"  Desc="파일별 마지막 커서 위치 저장 — 앱 재시작 후 해당 파일을 열면 마지막 편집 위치로 자동 이동"/>
                 <local:ShortcutEntry Key="탭 더블클릭"     Desc="탭 이름 인라인 편집 — Enter 확정, Esc 취소"/>
                 <local:ShortcutEntry Key="탭 우클릭"       Desc="경로 복사 · 탐색기에서 열기 · 탭 복제 · 오른쪽 탭 모두 닫기 · 다른 탭 모두 닫기"/>
               </ItemsControl.Items>
@@ -186,6 +187,7 @@
             <ItemsControl ItemTemplate="{StaticResource RowTpl}">
               <ItemsControl.Items>
                 <local:ShortcutEntry Key="Ctrl + E"           Desc="편집 모드 전환 (서식 도구모음 + 줄 번호 표시)"/>
+                <local:ShortcutEntry Key="Ctrl + G"           Desc="줄 이동 — 번호 입력 후 Enter, 해당 줄로 커서 이동 (편집 모드)"/>
                 <local:ShortcutEntry Key="Ctrl + B"           Desc="굵게 (선택 텍스트를 **bold** 처리)"/>
                 <local:ShortcutEntry Key="Ctrl + I"           Desc="기울임 (선택 텍스트를 *italic* 처리)"/>
                 <local:ShortcutEntry Key="Ctrl + K"           Desc="링크 삽입 [텍스트]() — 괄호 안에 URL 입력"/>

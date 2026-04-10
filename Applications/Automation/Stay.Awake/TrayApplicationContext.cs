@@ -12,6 +12,7 @@ namespace StayAwake
         private readonly System.Windows.Forms.Timer _activityTimer;
         private readonly System.Windows.Forms.Timer _scheduleTimer;
         private readonly System.Windows.Forms.Timer _tooltipTimer;
+        private readonly System.Windows.Forms.Timer _singleClickTimer; // 더블클릭 구분용
         // private readonly System.Windows.Forms.Timer _pauseTimer;
         private readonly ActivitySimulator _simulator;
         private readonly SlackUiAutomation _slackAutomation;
@@ -107,6 +108,10 @@ namespace StayAwake
             _tooltipTimer = new System.Windows.Forms.Timer { Interval = 1000 };
             _tooltipTimer.Tick += OnTooltipTimerTick;
 
+            // 싱글클릭/더블클릭 구분용 타이머 (OS DoubleClickTime 기준)
+            _singleClickTimer = new System.Windows.Forms.Timer { Interval = SystemInformation.DoubleClickTime };
+            _singleClickTimer.Tick += (s, e) => { _singleClickTimer.Stop(); ToggleRunning(); };
+
             // 일시 중지 타이머 (비활성화)
             // _pauseTimer = new System.Windows.Forms.Timer();
             // _pauseTimer.Tick += OnPauseTimerTick;
@@ -123,8 +128,23 @@ namespace StayAwake
                 Visible = true
             };
 
-            _trayIcon.MouseClick += (s, e) => { if (e.Button == MouseButtons.Left) ToggleRunning(); };
-            _trayIcon.MouseDoubleClick += (s, e) => { if (e.Button == MouseButtons.Left) ShowStats(); };
+            // 싱글클릭 vs 더블클릭 구분: DoubleClickTime 이후에도 DoubleClick 이벤트가 없으면 ToggleRunning 실행
+            _trayIcon.MouseClick += (s, e) =>
+            {
+                if (e.Button == MouseButtons.Left)
+                {
+                    _singleClickTimer.Stop();
+                    _singleClickTimer.Start();
+                }
+            };
+            _trayIcon.MouseDoubleClick += (s, e) =>
+            {
+                if (e.Button == MouseButtons.Left)
+                {
+                    _singleClickTimer.Stop(); // 싱글클릭 액션 취소
+                    ShowStats();
+                }
+            };
 
             // 앱 실행 시 자동 시작
             ToggleRunning();
@@ -793,7 +813,7 @@ Slack 자리 비움 상태 방지 도구
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"CSV 내보내기 실패: {ex.Message}", "StayAwake", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                DarkInfoDialog.Show("내보내기 실패", $"CSV 내보내기 실패:\n{ex.Message}", 400, 200);
             }
         }
 
@@ -862,6 +882,7 @@ Slack 자리 비움 상태 방지 도구
                 _scheduleTimer.Dispose();
                 _activityTimer.Dispose();
                 _tooltipTimer.Dispose();
+                _singleClickTimer.Dispose();
                 // _pauseTimer.Dispose();
                 _trayIcon.Dispose();
                 _contextMenu.Dispose();

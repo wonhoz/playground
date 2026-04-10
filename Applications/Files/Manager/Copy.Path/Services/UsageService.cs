@@ -35,7 +35,8 @@ public class UsageService : IDisposable
             );
             CREATE TABLE IF NOT EXISTS format_visibility (
                 key     TEXT NOT NULL PRIMARY KEY,
-                hidden  INTEGER NOT NULL DEFAULT 0
+                hidden  INTEGER NOT NULL DEFAULT 0,
+                pinned  INTEGER NOT NULL DEFAULT 0
             );
             CREATE TABLE IF NOT EXISTS settings (
                 key    TEXT NOT NULL PRIMARY KEY,
@@ -44,14 +45,16 @@ public class UsageService : IDisposable
             """;
         cmd.ExecuteNonQuery();
 
-        // 기존 DB에 starred 컬럼이 없을 경우 마이그레이션
-        try
+        // 기존 DB 마이그레이션
+        foreach (var migration in new[]
         {
-            using var alter = _db.CreateCommand();
-            alter.CommandText = "ALTER TABLE recent_paths ADD COLUMN starred INTEGER NOT NULL DEFAULT 0";
-            alter.ExecuteNonQuery();
+            "ALTER TABLE recent_paths ADD COLUMN starred INTEGER NOT NULL DEFAULT 0",
+            "ALTER TABLE format_visibility ADD COLUMN pinned INTEGER NOT NULL DEFAULT 0",
+        })
+        {
+            try { using var a = _db.CreateCommand(); a.CommandText = migration; a.ExecuteNonQuery(); }
+            catch { /* 이미 존재하면 무시 */ }
         }
-        catch { /* 이미 존재하면 무시 */ }
     }
 
     // ── 포맷 사용 빈도 ────────────────────────────────────────────────────
@@ -107,12 +110,13 @@ public class UsageService : IDisposable
 
     public async Task<List<RecentPath>> GetRecentPathsAsync()
     {
+        int limit = await GetMaxRecentPathsAsync();
         using var cmd = _db.CreateCommand();
         // 별표 고정 항목 먼저, 이후 최신순
         cmd.CommandText = $"""
             SELECT path, starred FROM recent_paths
             ORDER BY starred DESC, used_at DESC
-            LIMIT {MaxRecentPaths}
+            LIMIT {limit}
             """;
         var result = new List<RecentPath>();
         using var r = await cmd.ExecuteReaderAsync();
@@ -137,7 +141,7 @@ public class UsageService : IDisposable
         await cmd.ExecuteNonQueryAsync();
     }
 
-    // ── 포맷 숨기기 ───────────────────────────────────────────────────────
+    // ── 포맷 숨기기 / 핀 ─────────────────────────────────────────────────
 
     public async Task<HashSet<string>> GetHiddenFormatsAsync()
     {
@@ -161,26 +165,81 @@ public class UsageService : IDisposable
         await cmd.ExecuteNonQueryAsync();
     }
 
-    // ── 설정 ─────────────────────────────────────────────────────────────
-
-    public async Task<int> GetHideDelayAsync()
+    public async Task<HashSet<string>> GetPinnedFormatsAsync()
     {
         using var cmd = _db.CreateCommand();
-        cmd.CommandText = "SELECT value FROM settings WHERE key = 'hide_delay'";
-        var val = await cmd.ExecuteScalarAsync();
-        return val is string s && int.TryParse(s, out int ms) ? ms : 400;
+        cmd.CommandText = "SELECT key FROM format_visibility WHERE pinned = 1";
+        var result = new HashSet<string>();
+        using var r = await cmd.ExecuteReaderAsync();
+        while (await r.ReadAsync()) result.Add(r.GetString(0));
+        return result;
     }
 
-    public async Task SetHideDelayAsync(int ms)
+    public async Task ToggleFormatPinAsync(string key)
     {
         using var cmd = _db.CreateCommand();
         cmd.CommandText = """
-            INSERT INTO settings (key, value) VALUES ('hide_delay', $v)
-            ON CONFLICT(key) DO UPDATE SET value = $v;
+            INSERT INTO format_visibility (key, pinned) VALUES ($k, 1)
+            ON CONFLICT(key) DO UPDATE SET pinned = 1 - pinned;
             """;
-        cmd.Parameters.AddWithValue("$v", ms.ToString());
+        cmd.Parameters.AddWithValue("$k", key);
         await cmd.ExecuteNonQueryAsync();
     }
+
+    // ── 설정 ─────────────────────────────────────────────────────────────
+
+    private async Task<string?> GetSettingAsync(string key)
+    {
+        using var cmd = _db.CreateCommand();
+        cmd.CommandText = "SELECT value FROM settings WHERE key = $k";
+        cmd.Parameters.AddWithValue("$k", key);
+        var val = await cmd.ExecuteScalarAsync();
+        return val as string;
+    }
+
+    private async Task SetSettingAsync(string key, string? value)
+    {
+        using var cmd = _db.CreateCommand();
+        if (value == null)
+        {
+            cmd.CommandText = "DELETE FROM settings WHERE key = $k";
+            cmd.Parameters.AddWithValue("$k", key);
+        }
+        else
+        {
+            cmd.CommandText = """
+                INSERT INTO settings (key, value) VALUES ($k, $v)
+                ON CONFLICT(key) DO UPDATE SET value = $v;
+                """;
+            cmd.Parameters.AddWithValue("$k", key);
+            cmd.Parameters.AddWithValue("$v", value);
+        }
+        await cmd.ExecuteNonQueryAsync();
+    }
+
+    public async Task<int> GetHideDelayAsync()
+    {
+        var val = await GetSettingAsync("hide_delay");
+        return val != null && int.TryParse(val, out int ms) ? ms : 400;
+    }
+
+    public async Task SetHideDelayAsync(int ms)
+        => await SetSettingAsync("hide_delay", ms.ToString());
+
+    public async Task<int> GetMaxRecentPathsAsync()
+    {
+        var val = await GetSettingAsync("max_recent_paths");
+        return val != null && int.TryParse(val, out int n) ? n : MaxRecentPaths;
+    }
+
+    public async Task SetMaxRecentPathsAsync(int count)
+        => await SetSettingAsync("max_recent_paths", count.ToString());
+
+    public async Task<string?> GetBasePathAsync()
+        => await GetSettingAsync("base_path");
+
+    public async Task SetBasePathAsync(string? path)
+        => await SetSettingAsync("base_path", path);
 
     // ── 포맷 전체 복원 ────────────────────────────────────────────────────
 

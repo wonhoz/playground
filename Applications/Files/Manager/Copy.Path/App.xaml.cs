@@ -76,11 +76,60 @@ public partial class App : System.Windows.Application
         foreach (var (label, ms) in new[] { ("즉시 닫기", 0), ("200ms", 200), ("400ms (기본)", 400), ("600ms", 600) })
         {
             int delay = ms;
+            string lbl = label;
             delayMenu.Items.Add(label, null, async (_, _) =>
             {
                 await _usage.SetHideDelayAsync(delay);
+                _tray?.ShowBalloonTip(1500, "Copy.Path", $"자동 닫힘 딜레이: {lbl}", ToolTipIcon.Info);
             });
         }
+
+        // 최근 경로 개수 서브메뉴
+        var recentCountMenu = new ContextMenuStrip
+        {
+            ShowImageMargin = false,
+            Font            = new Font("Segoe UI", 9.5f),
+            BackColor       = darkBg,
+            ForeColor       = darkFg,
+            Renderer        = darkRnd
+        };
+        foreach (var (label, count) in new[] { ("5개", 5), ("10개 (기본)", 10), ("20개", 20) })
+        {
+            int n = count; string lbl = label;
+            recentCountMenu.Items.Add(label, null, async (_, _) =>
+            {
+                await _usage.SetMaxRecentPathsAsync(n);
+                _tray?.ShowBalloonTip(1500, "Copy.Path", $"최근 경로 표시: {lbl}", ToolTipIcon.Info);
+            });
+        }
+
+        // 상대 경로 기준 서브메뉴
+        var relPathMenu = new ContextMenuStrip
+        {
+            ShowImageMargin = false,
+            Font            = new Font("Segoe UI", 9.5f),
+            BackColor       = darkBg,
+            ForeColor       = darkFg,
+            Renderer        = darkRnd
+        };
+        relPathMenu.Items.Add("📁  기준 폴더 선택...", null, async (_, _) =>
+        {
+            using var dlg = new System.Windows.Forms.FolderBrowserDialog
+            {
+                Description = "상대 경로 계산 기준 폴더를 선택하세요",
+                UseDescriptionForTitle = true,
+            };
+            if (dlg.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                await _usage.SetBasePathAsync(dlg.SelectedPath);
+                _tray?.ShowBalloonTip(2000, "Copy.Path", $"기준 폴더: {dlg.SelectedPath}", ToolTipIcon.Info);
+            }
+        });
+        relPathMenu.Items.Add("✕  기준 폴더 해제", null, async (_, _) =>
+        {
+            await _usage.SetBasePathAsync(null);
+            _tray?.ShowBalloonTip(1500, "Copy.Path", "상대 경로 기준 폴더가 해제되었습니다", ToolTipIcon.Info);
+        });
 
         var menu = new ContextMenuStrip
         {
@@ -98,9 +147,18 @@ public partial class App : System.Windows.Application
         delayItem.DropDown = delayMenu;
         menu.Items.Add(delayItem);
 
+        var recentItem = new ToolStripMenuItem("📋  최근 경로 표시 개수") { BackColor = darkBg, ForeColor = darkFg };
+        recentItem.DropDown = recentCountMenu;
+        menu.Items.Add(recentItem);
+
+        var relPathItem = new ToolStripMenuItem("📐  상대 경로 기준 폴더") { BackColor = darkBg, ForeColor = darkFg };
+        relPathItem.DropDown = relPathMenu;
+        menu.Items.Add(relPathItem);
+
         menu.Items.Add("🔄  숨긴 포맷 복원", null, async (_, _) =>
         {
             await _usage.RestoreAllFormatsAsync();
+            _popup?.RefreshFormats([]);
         });
         menu.Items.Add(new ToolStripSeparator());
         menu.Items.Add("✕  종료", null, (_, _) => Shutdown());
@@ -152,19 +210,26 @@ public partial class App : System.Windows.Application
             "  2. 원하는 포맷 행을 클릭하면 클립보드에 복사됩니다.\n" +
             "  3. 팝업 창에 파일/폴더를 직접 드래그해도 됩니다.\n" +
             "     (복수 파일 드래그 시 '복수 복사' 버튼이 표시됩니다)\n" +
-            "  4. 하단 '최근 경로' 항목을 클릭하면 이전 경로를 재사용합니다.\n\n" +
+            "  4. 하단 '최근 경로' 항목을 클릭하면 이전 경로를 재사용합니다.\n" +
+            "  5. 클립보드에 경로 또는 file:/// URL이 있으면 자동으로 로드됩니다.\n" +
+            "  6. 경로 입력창 테두리가 초록이면 존재하는 경로, 빨간이면 미존재 경로입니다.\n\n" +
             "⭐ 최근 경로 관리\n" +
             "  ☆ / ★ 아이콘 클릭   해당 경로 즐겨찾기 고정 / 해제\n" +
             "  ✕ 버튼 (마우스 올리면 표시)   해당 경로 삭제\n\n" +
             "🔧 포맷 관리\n" +
-            "  포맷 행 우클릭   해당 포맷 숨기기\n" +
+            "  포맷 행 우클릭 → 📌 상단 고정   자주 쓰는 포맷을 항상 최상단에 고정\n" +
+            "  포맷 행 우클릭 → 🙈 이 포맷 숨기기   해당 포맷 목록에서 숨김\n" +
             "  트레이 우클릭 → 숨긴 포맷 복원   모든 포맷 다시 표시\n\n" +
-            "⏱ 자동 닫힘 딜레이\n" +
-            "  트레이 우클릭 → 자동 닫힘 딜레이   복사 후 팝업 닫힘 속도 설정\n\n" +
-            "💡 지원 포맷 (9종)\n" +
+            "📐 상대 경로\n" +
+            "  트레이 우클릭 → 상대 경로 기준 폴더 → 기준 폴더 선택\n" +
+            "  기준 폴더 설정 시 '상대 경로' 포맷이 목록에 추가됩니다.\n\n" +
+            "⚙ 설정 (트레이 우클릭)\n" +
+            "  자동 닫힘 딜레이   복사 후 팝업 닫힘 속도 (즉시/200/400/600ms)\n" +
+            "  최근 경로 표시 개수   5 / 10 / 20개\n\n" +
+            "💡 지원 포맷 (9종 + 상대 경로)\n" +
             "  전체 경로 (백슬래시 / 슬래시) · C# 리터럴 · 파일명 ·\n" +
             "  확장자 없는 파일명 · 상위 폴더 · file:/// URL ·\n" +
-            "  Unix 스타일 · UNC 경로",
+            "  Unix 스타일 · UNC 경로 · 상대 경로 (기준 폴더 설정 시)",
             "Copy.Path 사용법",
             System.Windows.MessageBoxButton.OK,
             System.Windows.MessageBoxImage.Information);

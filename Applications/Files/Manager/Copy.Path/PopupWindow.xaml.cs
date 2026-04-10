@@ -10,10 +10,12 @@ public partial class PopupWindow : System.Windows.Window
     private readonly UsageService _usage;
     private Dictionary<string, int> _usageCounts = [];
     private HashSet<string> _hiddenFormats = [];
+    private HashSet<string> _pinnedFormats = [];
     private string[] _multiPaths = [];   // 탐색기 복수 선택 경로
     private bool _closing;               // Hide 중복 방어
     private bool _initialized;
     private int _hideDelay = 400;        // 복사 후 자동 숨김 딜레이(ms)
+    private CancellationTokenSource? _hideCts;
 
     public PopupWindow(UsageService usage)
     {
@@ -42,10 +44,14 @@ public partial class PopupWindow : System.Windows.Window
     internal async Task ShowAndActivateAsync()
     {
         _closing = false;
+        _hideCts?.Cancel();
+        _hideCts = null;
+        PositionNearCursor();   // 핫키 누른 직후 커서 위치 즉시 캡처
         _usageCounts   = await _usage.GetAllAsync();
         _hiddenFormats = await _usage.GetHiddenFormatsAsync();
+        _pinnedFormats = await _usage.GetPinnedFormatsAsync();
         _hideDelay     = await _usage.GetHideDelayAsync();
-        PositionNearCursor();
+        PathFormatter.BasePathForRelative = await _usage.GetBasePathAsync();
         if (!IsVisible) Show();
         base.Activate();
         TryGetExplorerPath();
@@ -92,8 +98,24 @@ public partial class PopupWindow : System.Windows.Window
         try
         {
             var clip = System.Windows.Clipboard.GetText().Trim().Trim('"');
-            if (!string.IsNullOrWhiteSpace(clip) &&
-                (clip.Length >= 2 && (clip[1] == ':' || clip.StartsWith(@"\\"))))
+            if (string.IsNullOrWhiteSpace(clip)) { SetNoPathStatus(); return; }
+
+            // file:/// URL 감지
+            if (clip.StartsWith("file:///", StringComparison.OrdinalIgnoreCase))
+            {
+                try
+                {
+                    var path = Uri.UnescapeDataString(new Uri(clip).LocalPath);
+                    PathBox.Text = path;
+                    PathBox.SelectAll();
+                    StatusText.Text = "클립보드의 file:/// URL을 경로로 변환했습니다";
+                    return;
+                }
+                catch { }
+            }
+
+            // 일반 경로 감지 (드라이브 문자 또는 UNC)
+            if (clip.Length >= 2 && (clip[1] == ':' || clip.StartsWith(@"\\")))
             {
                 PathBox.Text = clip;
                 PathBox.SelectAll();
@@ -102,8 +124,11 @@ public partial class PopupWindow : System.Windows.Window
             }
         }
         catch { }
-        StatusText.Text = "탐색기 선택 없음 — 경로를 입력하거나 파일을 드래그하세요";
+        SetNoPathStatus();
     }
+
+    private void SetNoPathStatus()
+        => StatusText.Text = "탐색기 선택 없음 — 경로를 입력하거나 파일을 드래그하세요";
 
     private async Task LoadRecentPathsAsync()
     {
@@ -203,6 +228,16 @@ public partial class PopupWindow : System.Windows.Window
         if (sender is Border b) b.Background = System.Windows.Media.Brushes.Transparent;
     }
 
+    // ── 외부 갱신 요청 ──────────────────────────────────────────────────────
+    internal void RefreshFormats(HashSet<string> hiddenFormats)
+    {
+        if (!IsVisible) return;
+        _hiddenFormats = hiddenFormats;
+        RenderResults(PathBox.Text);
+        StatusText.Text = "모든 포맷이 복원되었습니다";
+        StatusText.Foreground = (SolidColorBrush)FindResource("SuccessColor");
+    }
+
     // ── 결과 렌더링 ──────────────────────────────────────────────────────
     private void RenderResults(string rawPath)
     {
@@ -211,19 +246,35 @@ public partial class PopupWindow : System.Windows.Window
         var path  = rawPath.Trim().Trim('"');
         bool valid = !string.IsNullOrWhiteSpace(path);
 
-        var results = PathFormatter.FormatAll(path);
-        var sorted  = results
-            .Where(r => !_hiddenFormats.Contains(r.Key))
-            .OrderByDescending(r => _usageCounts.GetValueOrDefault(r.Key, 0))
-            .ToArray();
+        // 경로 유효성 표시 (PathBox 테두리 색)
+        if (valid)
+        {
+            bool exists = File.Exists(path) || Directory.Exists(path);
+            PathBox.BorderBrush = exists
+                ? new SolidColorBrush((System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString("#3ACF7A"))
+                : new SolidColorBrush((System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString("#FF6B6B"));
+        }
+        else
+        {
+            PathBox.BorderBrush = (SolidColorBrush)FindResource("BorderBrush");
+        }
 
-        foreach (var (label, key, value) in sorted)
-            ResultPanel.Children.Add(MakeRow(label, key, value, valid));
+        var results = PathFormatter.FormatAll(path);
+        var visible = results.Where(r => !_hiddenFormats.Contains(r.Key)).ToArray();
+
+        // 핀된 포맷 먼저(원래 순서 유지), 이후 사용 빈도 내림차순
+        var pinned   = visible.Where(r =>  _pinnedFormats.Contains(r.Key)).ToArray();
+        var unpinned = visible.Where(r => !_pinnedFormats.Contains(r.Key))
+                              .OrderByDescending(r => _usageCounts.GetValueOrDefault(r.Key, 0))
+                              .ToArray();
+
+        foreach (var (label, key, value) in pinned.Concat(unpinned))
+            ResultPanel.Children.Add(MakeRow(label, key, value, valid, _pinnedFormats.Contains(key)));
 
         if (!valid) StatusText.Text = "경로를 입력하세요";
     }
 
-    private UIElement MakeRow(string label, string key, string value, bool hasValue)
+    private UIElement MakeRow(string label, string key, string value, bool hasValue, bool isPinned)
     {
         var border = new Border
         {
@@ -240,7 +291,7 @@ public partial class PopupWindow : System.Windows.Window
 
         var lbl = new TextBlock
         {
-            Text              = label,
+            Text              = isPinned ? $"📌 {label}" : label,
             Foreground        = (SolidColorBrush)FindResource("LabelColor"),
             FontFamily        = new WpfFontFamily("Segoe UI"),
             FontSize          = 11,
@@ -249,8 +300,8 @@ public partial class PopupWindow : System.Windows.Window
 
         var val = new TextBlock
         {
-            Text              = hasValue ? value : "—",
-            Foreground        = hasValue
+            Text              = hasValue ? (string.IsNullOrEmpty(value) ? "—" : value) : "—",
+            Foreground        = hasValue && !string.IsNullOrEmpty(value)
                 ? (SolidColorBrush)FindResource("TextPrimary")
                 : (SolidColorBrush)FindResource("TextSecondary"),
             FontFamily        = new WpfFontFamily("Consolas, Segoe UI"),
@@ -272,7 +323,7 @@ public partial class PopupWindow : System.Windows.Window
             border.MouseLeave += (_, _) => border.Background = (SolidColorBrush)FindResource("SurfaceBrush");
             border.MouseLeftButtonUp += async (_, _) =>
             {
-                if (_closing) return;
+                if (_closing || string.IsNullOrEmpty(copyVal)) return;
                 System.Windows.Clipboard.SetText(copyVal);
                 await _usage.IncrementAsync(copyKey);
                 await _usage.AddRecentPathAsync(PathBox.Text.Trim().Trim('"'));
@@ -282,14 +333,51 @@ public partial class PopupWindow : System.Windows.Window
                 ScheduleHide();
             };
 
-            // 우클릭 → 포맷 숨기기
+            // 우클릭 → 컨텍스트 메뉴 (핀 토글 / 숨기기)
             border.MouseRightButtonUp += async (_, _) =>
             {
-                _hiddenFormats.Add(copyKey);
-                await _usage.SetFormatHiddenAsync(copyKey, true);
-                RenderResults(PathBox.Text);
-                StatusText.Text = $"'{copyLabel}' 숨김 (트레이 우클릭 → 포맷 복원)";
-                StatusText.Foreground = (SolidColorBrush)FindResource("TextSecondary");
+                var cm = new System.Windows.Controls.ContextMenu
+                {
+                    Background = new SolidColorBrush((System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString("#1A1E2A")),
+                    BorderBrush = (SolidColorBrush)FindResource("BorderBrush"),
+                    BorderThickness = new Thickness(1),
+                };
+
+                bool pinned = _pinnedFormats.Contains(copyKey);
+                var pinItem = new System.Windows.Controls.MenuItem
+                {
+                    Header = pinned ? "📌 상단 고정 해제" : "📌 상단 고정",
+                    Foreground = (SolidColorBrush)FindResource("TextPrimary"),
+                    Background = System.Windows.Media.Brushes.Transparent,
+                };
+                pinItem.Click += async (_, _) =>
+                {
+                    await _usage.ToggleFormatPinAsync(copyKey);
+                    _pinnedFormats = await _usage.GetPinnedFormatsAsync();
+                    RenderResults(PathBox.Text);
+                    StatusText.Text = pinned ? $"'{copyLabel}' 고정 해제됨" : $"'{copyLabel}' 상단 고정됨";
+                    StatusText.Foreground = (SolidColorBrush)FindResource("SuccessColor");
+                };
+
+                var hideItem = new System.Windows.Controls.MenuItem
+                {
+                    Header = "🙈 이 포맷 숨기기",
+                    Foreground = (SolidColorBrush)FindResource("TextSecondary"),
+                    Background = System.Windows.Media.Brushes.Transparent,
+                };
+                hideItem.Click += async (_, _) =>
+                {
+                    _hiddenFormats.Add(copyKey);
+                    await _usage.SetFormatHiddenAsync(copyKey, true);
+                    RenderResults(PathBox.Text);
+                    StatusText.Text = $"'{copyLabel}' 숨김 (트레이 우클릭 → 포맷 복원)";
+                    StatusText.Foreground = (SolidColorBrush)FindResource("TextSecondary");
+                };
+
+                cm.Items.Add(pinItem);
+                cm.Items.Add(new System.Windows.Controls.Separator());
+                cm.Items.Add(hideItem);
+                cm.IsOpen = true;
             };
         }
 
@@ -300,8 +388,13 @@ public partial class PopupWindow : System.Windows.Window
     {
         if (_closing) return;
         _closing = true;
+        _hideCts?.Cancel();
         if (_hideDelay == 0) { Hide(); return; }
-        Task.Delay(_hideDelay).ContinueWith(_ => Dispatcher.BeginInvoke(Hide));
+        var cts = new CancellationTokenSource();
+        _hideCts = cts;
+        Task.Delay(_hideDelay, cts.Token).ContinueWith(
+            t => { if (!t.IsCanceled) Dispatcher.BeginInvoke(Hide); },
+            CancellationToken.None);
     }
 
     // ── 이벤트 ───────────────────────────────────────────────────────────

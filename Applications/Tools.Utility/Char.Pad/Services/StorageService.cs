@@ -300,6 +300,14 @@ public class StorageService : IDisposable
         return result;
     }
 
+    public void RemoveSearchHistory(string query)
+    {
+        using var cmd = _db.CreateCommand();
+        cmd.CommandText = "DELETE FROM search_history WHERE query = $q";
+        cmd.Parameters.AddWithValue("$q", query);
+        cmd.ExecuteNonQuery();
+    }
+
     // ── Export / Import ─────────────────────────────────────────────────
 
     public record ExportData(List<string> Favorites, List<(string Char, string Name)> CustomChars);

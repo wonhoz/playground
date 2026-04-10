@@ -215,8 +215,14 @@ public partial class App : System.Windows.Application
 
     private void ClearRecents()
     {
+        var confirm = System.Windows.MessageBox.Show(
+            "최근 사용 목록을 모두 지우시겠습니까?",
+            "초기화 확인", System.Windows.MessageBoxButton.YesNo, System.Windows.MessageBoxImage.Question);
+        if (confirm != System.Windows.MessageBoxResult.Yes) return;
+
         _storage.ClearRecents();
         _popup?.RefreshIfRecentTab();
+        _tray?.ShowBalloonTip(1500, "Char.Pad", "최근 사용 목록이 초기화되었습니다", ToolTipIcon.Info);
     }
 
     // ── 내보내기 / 가져오기 ─────────────────────────────────────────────

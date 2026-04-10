@@ -16,6 +16,7 @@ public partial class PopupWindow : System.Windows.Window
     private double    _charFontSize = 20;
     private bool      _pinned       = false;
     private bool      _suppressSizeChanged = false;
+    private DispatcherTimer? _sizeTimer;
     private string    _lastStatusText = "";
     private bool      _customSortByName = false;
     private bool      _favSortByName    = false;
@@ -53,6 +54,13 @@ public partial class PopupWindow : System.Windows.Window
         InitializeComponent();
         _searchTimer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(150) };
         _searchTimer.Tick += (_, _) => { _searchTimer.Stop(); RefreshGrid(); };
+        _sizeTimer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(300) };
+        _sizeTimer.Tick += (_, _) =>
+        {
+            _sizeTimer.Stop();
+            _storage.SetSetting("popup_width",  Width.ToString());
+            _storage.SetSetting("popup_height", Height.ToString());
+        };
         Loaded += OnLoaded;
         SizeChanged += OnSizeChanged;
     }
@@ -864,6 +872,10 @@ public partial class PopupWindow : System.Windows.Window
         HistoryList.Children.Clear();
         foreach (var hist in _searchHistory)
         {
+            var row = new Grid();
+            row.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
+            row.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
+
             var item = new Border
             {
                 Background   = System.Windows.Media.Brushes.Transparent,
@@ -878,9 +890,39 @@ public partial class PopupWindow : System.Windows.Window
                     FontSize   = 12,
                 },
             };
+            var delBtn = new TextBlock
+            {
+                Text                = "✕",
+                FontSize            = 10,
+                Foreground          = (SolidColorBrush)FindResource("TextSecondary"),
+                VerticalAlignment   = VerticalAlignment.Center,
+                Cursor              = System.Windows.Input.Cursors.Hand,
+                Padding             = new Thickness(6, 4, 8, 4),
+                Visibility          = Visibility.Collapsed,
+            };
+            Grid.SetColumn(item, 0);
+            Grid.SetColumn(delBtn, 1);
+            row.Children.Add(item);
+            row.Children.Add(delBtn);
+
+            var outerBorder = new Border
+            {
+                Background   = System.Windows.Media.Brushes.Transparent,
+                CornerRadius = new CornerRadius(4),
+                Child        = row,
+            };
+
             var captured = hist;
-            item.MouseEnter += (_, _) => item.Background = (SolidColorBrush)FindResource("CharHover");
-            item.MouseLeave += (_, _) => item.Background = System.Windows.Media.Brushes.Transparent;
+            outerBorder.MouseEnter += (_, _) =>
+            {
+                outerBorder.Background = (SolidColorBrush)FindResource("CharHover");
+                delBtn.Visibility = Visibility.Visible;
+            };
+            outerBorder.MouseLeave += (_, _) =>
+            {
+                outerBorder.Background = System.Windows.Media.Brushes.Transparent;
+                delBtn.Visibility = Visibility.Collapsed;
+            };
             item.MouseLeftButtonUp += (_, _) =>
             {
                 HistoryPopup.IsOpen = false;
@@ -888,7 +930,14 @@ public partial class PopupWindow : System.Windows.Window
                 SearchBox.CaretIndex = SearchBox.Text.Length;
                 SearchBox.Focus();
             };
-            HistoryList.Children.Add(item);
+            delBtn.MouseLeftButtonUp += (_, ev) =>
+            {
+                ev.Handled = true;
+                _searchHistory.Remove(captured);
+                _storage.RemoveSearchHistory(captured);
+                ShowHistoryPopup();
+            };
+            HistoryList.Children.Add(outerBorder);
         }
 
         // Popup 너비를 SearchBox에 맞춤
@@ -988,6 +1037,21 @@ public partial class PopupWindow : System.Windows.Window
             SelectAllChars();
             e.Handled = true;
         }
+        // Alt+↑/↓: 즐겨찾기 탭에서 포커스 항목 순서 이동 (이름순 정렬 중이면 무시)
+        else if (e.Key == Key.System && e.KeyboardDevice.Modifiers == ModifierKeys.Alt
+                 && _activeTab == "favorite" && !_favSortByName)
+        {
+            if (e.SystemKey == Key.Up)
+            {
+                MoveFocusedFavorite(-1);
+                e.Handled = true;
+            }
+            else if (e.SystemKey == Key.Down)
+            {
+                MoveFocusedFavorite(+1);
+                e.Handled = true;
+            }
+        }
         // Alt+1~9: 탭 전환 (Alt 키는 e.SystemKey로 확인)
         else if (e.Key == Key.System && e.KeyboardDevice.Modifiers == ModifierKeys.Alt)
         {
@@ -1015,8 +1079,8 @@ public partial class PopupWindow : System.Windows.Window
     private void OnSizeChanged(object sender, SizeChangedEventArgs e)
     {
         if (_suppressSizeChanged || !_initialized) return;
-        _storage.SetSetting("popup_width",  Width.ToString());
-        _storage.SetSetting("popup_height", Height.ToString());
+        _sizeTimer?.Stop();
+        _sizeTimer?.Start();
     }
 
     [DllImport("user32.dll")] static extern IntPtr SendMessage(IntPtr hwnd, uint msg, IntPtr wParam, IntPtr lParam);
@@ -1095,6 +1159,11 @@ public partial class PopupWindow : System.Windows.Window
     // ── 사용자 정의 문자 삭제 ────────────────────────────────────────────
     private void DeleteCustomChar(CharEntry entry)
     {
+        var confirm = System.Windows.MessageBox.Show(
+            $"'{entry.Char}  {entry.Name}' 을(를) 삭제하시겠습니까?",
+            "삭제 확인", MessageBoxButton.YesNo, MessageBoxImage.Question);
+        if (confirm != MessageBoxResult.Yes) return;
+
         _storage.RemoveCustomChar(entry.Char);
         StatusText.Text = $"삭제됨: {entry.Char}  {entry.Name}";
         RefreshGrid();
@@ -1321,6 +1390,11 @@ public partial class PopupWindow : System.Windows.Window
     // ── 최근 사용 초기화 ──────────────────────────────────────────────────
     private void ClearRecentsBtn_Click(object sender, RoutedEventArgs e)
     {
+        var confirm = System.Windows.MessageBox.Show(
+            "최근 사용 목록을 모두 지우시겠습니까?",
+            "초기화 확인", MessageBoxButton.YesNo, MessageBoxImage.Question);
+        if (confirm != MessageBoxResult.Yes) return;
+
         _storage.ClearRecents();
         StatusText.Text = "최근 사용 목록이 초기화되었습니다";
         RefreshGrid();
@@ -1367,6 +1441,17 @@ public partial class PopupWindow : System.Windows.Window
         SortCustomBtn.Content  = _customSortByName ? "↑A" : "↕";
         SortCustomBtn.ToolTip  = _customSortByName ? "정렬: 이름순 (클릭하면 추가순으로 전환)" : "정렬 전환 (추가순 / 이름순)";
         RefreshGrid();
+    }
+
+    private void ResetSizeBtn_Click(object sender, RoutedEventArgs e)
+    {
+        _suppressSizeChanged = true;
+        Width  = 575;
+        Height = 420;
+        _suppressSizeChanged = false;
+        _storage.SetSetting("popup_width",  "575");
+        _storage.SetSetting("popup_height", "420");
+        StatusText.Text = "창 크기가 초기화되었습니다 (575×420)";
     }
 
     private void HelpBtn_Click(object sender, RoutedEventArgs e)

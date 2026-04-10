@@ -61,6 +61,7 @@
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
                 <TextBlock Text="⌨ Char.Pad"
                            Foreground="{StaticResource AccentBrush}"
@@ -83,6 +84,7 @@
                         Foreground="{StaticResource TextSecondary}"
                         Background="Transparent"
                         Visibility="Collapsed"
+                        Focusable="False"
                         Click="FavMoveUpBtn_Click"
                         ToolTip="선택한 즐겨찾기를 위로"/>
                 <Button x:Name="FavMoveDownBtn"
@@ -91,6 +93,7 @@
                         Foreground="{StaticResource TextSecondary}"
                         Background="Transparent"
                         Visibility="Collapsed"
+                        Focusable="False"
                         Click="FavMoveDownBtn_Click"
                         ToolTip="선택한 즐겨찾기를 아래로"/>
                 <!-- 즐겨찾기 탭 전용: 자동 정렬 전환 (Column 2 공유) -->
@@ -133,12 +136,18 @@
                         Click="ClipboardPreserveBtn_Click"
                         ToolTip="클립보드 유지 — 삽입 후 원본 클립보드 복원"/>
                 <Button Grid.Column="6" Width="28" Height="28"
+                        Content="⊡" FontSize="11"
+                        Foreground="{StaticResource TextSecondary}"
+                        Background="Transparent"
+                        Click="ResetSizeBtn_Click"
+                        ToolTip="창 크기 초기화 (기본값 575×420)"/>
+                <Button Grid.Column="7" Width="28" Height="28"
                         Content="?" FontSize="12" FontWeight="SemiBold"
                         Foreground="{StaticResource TextSecondary}"
                         Background="Transparent"
                         Click="HelpBtn_Click"
                         ToolTip="단축키 안내"/>
-                <Button Grid.Column="7" Width="28" Height="28"
+                <Button Grid.Column="8" Width="28" Height="28"
                         Content="✕" FontSize="11"
                         Foreground="{StaticResource TextSecondary}"
                         Background="Transparent"
@@ -258,6 +267,7 @@
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
 
                             <!-- 단축키 행들 -->
@@ -318,8 +328,8 @@
                             <TextBlock Grid.Row="18" Grid.Column="0" Text="🗑 버튼 (최근 탭)"    Style="{StaticResource KeyStyle}"/>
                             <TextBlock Grid.Row="18" Grid.Column="2" Text="최근 사용 목록 초기화" Style="{StaticResource DescStyle}"/>
 
-                            <TextBlock Grid.Row="19" Grid.Column="0" Text="↑↓ 버튼 (즐겨찾기)"  Style="{StaticResource KeyStyle}"/>
-                            <TextBlock Grid.Row="19" Grid.Column="2" Text="포커스 항목 순서 위/아래로 이동 (↕↑A 버튼: 이름순 자동 정렬 전환)" Style="{StaticResource DescStyle}"/>
+                            <TextBlock Grid.Row="19" Grid.Column="0" Text="↑↓ 버튼 / Alt+↑↓"   Style="{StaticResource KeyStyle}"/>
+                            <TextBlock Grid.Row="19" Grid.Column="2" Text="즐겨찾기 탭에서 포커스 항목 순서 위/아래 이동 (버튼 클릭 또는 Alt+↑↓ 키, 이름순 정렬 중 비활성)" Style="{StaticResource DescStyle}"/>
 
                             <TextBlock Grid.Row="20" Grid.Column="0" Text="↕/↑A (사용자·즐겨찾기)" Style="{StaticResource KeyStyle}"/>
                             <TextBlock Grid.Row="20" Grid.Column="2" Text="정렬 전환 (추가순 ↔ 이름순, 앱 재시작 후 복원) — 이름순 정렬 시 수동 이동 버튼 비활성화" Style="{StaticResource DescStyle}"/>
@@ -337,7 +347,7 @@
                             <TextBlock Grid.Row="24" Grid.Column="2" Text="문자 위에 마우스 올리면 사용 횟수 표시 (N회 사용)" Style="{StaticResource DescStyle}"/>
 
                             <TextBlock Grid.Row="25" Grid.Column="0" Text="검색 히스토리"         Style="{StaticResource KeyStyle}"/>
-                            <TextBlock Grid.Row="25" Grid.Column="2" Text="검색창 포커스 시 드롭다운 표시, 클릭으로 재검색 — DB 저장으로 앱 재시작 후에도 유지" Style="{StaticResource DescStyle}"/>
+                            <TextBlock Grid.Row="25" Grid.Column="2" Text="검색창 포커스 시 드롭다운 표시, 클릭으로 재검색 / 항목 호버 → ✕ 클릭으로 개별 삭제 — DB 저장으로 앱 재시작 후 복원" Style="{StaticResource DescStyle}"/>
 
                             <TextBlock Grid.Row="26" Grid.Column="0" Text="Ctrl+A"               Style="{StaticResource KeyStyle}"/>
                             <TextBlock Grid.Row="26" Grid.Column="2" Text="현재 그리드 전체 선택 (다중 선택 모드 진입, Enter로 모두 연속 삽입)" Style="{StaticResource DescStyle}"/>
@@ -345,7 +355,10 @@
                             <TextBlock Grid.Row="27" Grid.Column="0" Text="상태바 단축키"         Style="{StaticResource KeyStyle}"/>
                             <TextBlock Grid.Row="27" Grid.Column="2" Text="하단 단축키 텍스트 클릭 → 단축키 변경 메뉴 (5가지 조합 선택)" Style="{StaticResource DescStyle}"/>
 
-                            <TextBlock Grid.Row="28" Grid.Column="0" Grid.ColumnSpan="3"
+                            <TextBlock Grid.Row="28" Grid.Column="0" Text="⊡ 버튼"                Style="{StaticResource KeyStyle}"/>
+                            <TextBlock Grid.Row="28" Grid.Column="2" Text="창 크기를 기본값(575×420)으로 초기화" Style="{StaticResource DescStyle}"/>
+
+                            <TextBlock Grid.Row="29" Grid.Column="0" Grid.ColumnSpan="3"
                                        Text="아무 곳이나 클릭하면 닫힙니다"
                                        Foreground="{StaticResource TextSecondary}"
                                        FontFamily="Segoe UI" FontSize="11"

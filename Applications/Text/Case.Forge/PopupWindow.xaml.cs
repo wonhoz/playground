@@ -23,7 +23,8 @@ public partial class PopupWindow : System.Windows.Window
         _initialized = true;
         _settings = SettingsService.Load();
         UpdateHotkeyHint();
-        TryLoadClipboard();
+        if (_settings.AutoLoadClipboard)
+            TryLoadClipboard();
         InputBox.Focus();
         InputBox.SelectAll();
     }
@@ -50,7 +51,9 @@ public partial class PopupWindow : System.Windows.Window
         if (!IsVisible) Show();
         base.Activate();
         PositionNearCursor();
-        TryLoadClipboard();
+        // AutoLoadClipboard 설정 + 기존 입력 없을 때만 클립보드 로드 (재오픈 시 입력 유지)
+        if (_settings.AutoLoadClipboard && string.IsNullOrWhiteSpace(InputBox.Text))
+            TryLoadClipboard();
         InputBox.Focus();
         InputBox.SelectAll();
     }
@@ -108,25 +111,29 @@ public partial class PopupWindow : System.Windows.Window
     private void RenderSingleLine(string input)
     {
         var results = CaseConverter.ConvertAll(input);
+        var resultMap = results.ToDictionary(r => r.Key);
+
+        // 즐겨찾기는 PinnedCases 저장 순서 기준으로 표시
+        var pinnedSet = _settings.PinnedCases.Count > 0
+            ? _settings.PinnedCases
+                .Where(k => resultMap.ContainsKey(k))
+                .Select(k => resultMap[k])
+                .ToArray()
+            : [];
 
         if (_pinnedOnly)
         {
-            var pinned = results.Where(r => _settings.PinnedCases.Contains(r.Key)).ToArray();
-            if (pinned.Length == 0)
+            if (pinnedSet.Length == 0)
             {
                 AddSectionLabel("즐겨찾기 없음 — ☆ 버튼으로 추가하세요");
                 StatusText.Text = "";
                 return;
             }
-            foreach (var (label, key, value) in pinned)
+            foreach (var (label, key, value) in pinnedSet)
                 AddResultRow(label, key, value);
-            StatusText.Text = $"즐겨찾기 {pinned.Length}개 — 클릭 또는 ↑↓ Enter";
+            StatusText.Text = $"즐겨찾기 {pinnedSet.Length}개 — 클릭 또는 ↑↓ Enter";
             return;
         }
-
-        var pinnedSet = _settings.PinnedCases.Count > 0
-            ? results.Where(r => _settings.PinnedCases.Contains(r.Key)).ToArray()
-            : [];
 
         if (pinnedSet.Length > 0)
         {
@@ -189,26 +196,63 @@ public partial class PopupWindow : System.Windows.Window
         var history = _settings.RecentHistory;
         if (history.Count == 0) return;
 
-        AddSectionLabel("최근 입력");
+        AddSectionLabel("최근 입력 (클릭: 입력창 채움 / ⎘ 클릭: 원문 즉시 복사)");
         foreach (var h in history.Take(8))
         {
             var border = new Border
             {
                 Margin       = new Thickness(0, 2, 0, 2),
-                Padding      = new Thickness(12, 7, 12, 7),
+                Padding      = new Thickness(12, 7, 8, 7),
                 CornerRadius = new CornerRadius(6),
                 Background   = (SolidColorBrush)FindResource("SurfaceBrush"),
                 Cursor       = System.Windows.Input.Cursors.Hand,
             };
-            border.Child = new TextBlock
+
+            var rowGrid = new Grid();
+            rowGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
+            rowGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
+
+            var tb = new TextBlock
             {
-                Text         = h,
-                Foreground   = (SolidColorBrush)FindResource("TextPrimary"),
-                FontFamily   = new WpfFontFamily("Consolas, Segoe UI"),
-                FontSize     = 12,
-                TextTrimming = TextTrimming.CharacterEllipsis,
+                Text              = h,
+                Foreground        = (SolidColorBrush)FindResource("TextPrimary"),
+                FontFamily        = new WpfFontFamily("Consolas, Segoe UI"),
+                FontSize          = 12,
+                TextTrimming      = TextTrimming.CharacterEllipsis,
+                VerticalAlignment = VerticalAlignment.Center,
             };
+
+            // 원문 즉시 복사 버튼
             string t = h;
+            var copyTb = new TextBlock
+            {
+                Text                = "⎘",
+                FontSize            = 13,
+                Foreground          = (SolidColorBrush)FindResource("TextSecondary"),
+                VerticalAlignment   = VerticalAlignment.Center,
+                HorizontalAlignment = System.Windows.HorizontalAlignment.Center,
+                Cursor              = System.Windows.Input.Cursors.Hand,
+                Width               = 22,
+                TextAlignment       = TextAlignment.Center,
+                ToolTip             = "원문 즉시 복사",
+            };
+            copyTb.MouseEnter += (_, _) => copyTb.Foreground = (SolidColorBrush)FindResource("AccentBrush");
+            copyTb.MouseLeave += (_, _) => copyTb.Foreground = (SolidColorBrush)FindResource("TextSecondary");
+            copyTb.MouseLeftButtonUp += (_, args) =>
+            {
+                args.Handled = true;
+                try { System.Windows.Clipboard.SetText(t); } catch { }
+                StatusText.Foreground = (SolidColorBrush)FindResource("CopyFeedback");
+                StatusText.Text = $"✓ 이력 복사됨!";
+                _ = Task.Delay(500).ContinueWith(_ => Dispatcher.Invoke(Hide));
+            };
+
+            Grid.SetColumn(tb, 0);
+            Grid.SetColumn(copyTb, 1);
+            rowGrid.Children.Add(tb);
+            rowGrid.Children.Add(copyTb);
+            border.Child = rowGrid;
+
             border.MouseEnter        += (_, _) => { if (_rows.IndexOf(border) != _selectedIndex) border.Background = (SolidColorBrush)FindResource("RowHover"); };
             border.MouseLeave        += (_, _) => { if (_rows.IndexOf(border) != _selectedIndex) border.Background = (SolidColorBrush)FindResource("SurfaceBrush"); };
             border.MouseLeftButtonUp += (_, _) =>
@@ -315,12 +359,8 @@ public partial class PopupWindow : System.Windows.Window
                 if (_rows.IndexOf(border) != _selectedIndex)
                     border.Background = (SolidColorBrush)FindResource("SurfaceBrush");
             };
-            border.MouseLeftButtonUp += (s, args) =>
-            {
-                // 핀 버튼 클릭은 버블링 차단됨 — 행 전체 클릭만 처리
-                if (args.OriginalSource is not System.Windows.Controls.Button)
-                    CopyAndClose(copyValue, label);
-            };
+            // 핀 TextBlock이 args.Handled=true로 버블링 차단하므로 여기까지 오면 행 클릭
+            border.MouseLeftButtonUp += (_, _) => CopyAndClose(copyValue, label);
         }
 
         return border;
@@ -346,7 +386,7 @@ public partial class PopupWindow : System.Windows.Window
         try
         {
             System.Windows.Clipboard.SetText(text);
-            SettingsService.AddHistory(InputBox.Text.Trim());
+            SettingsService.AddHistory(_settings, InputBox.Text.Trim()); // 이중 Load() 없이 1회 Save
             StatusText.Foreground = (SolidColorBrush)FindResource("CopyFeedback");
             StatusText.Text = $"✓ {label} 복사됨!";
         }
@@ -392,11 +432,18 @@ public partial class PopupWindow : System.Windows.Window
     }
 
     // ── 이벤트 ───────────────────────────────────────────────────────────
+    private void ClearInputBtn_Click(object sender, RoutedEventArgs e)
+    {
+        InputBox.Clear();
+        InputBox.Focus();
+    }
+
     private void InputBox_TextChanged(object sender, TextChangedEventArgs e)
     {
         if (!_initialized) return;
-        Placeholder.Visibility = string.IsNullOrEmpty(InputBox.Text)
-            ? Visibility.Visible : Visibility.Collapsed;
+        bool empty = string.IsNullOrEmpty(InputBox.Text);
+        Placeholder.Visibility  = empty ? Visibility.Visible  : Visibility.Collapsed;
+        ClearInputBtn.Visibility = empty ? Visibility.Collapsed : Visibility.Visible;
         RenderResults(InputBox.Text);
     }
 

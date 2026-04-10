@@ -5,10 +5,11 @@ namespace CaseForge.Services;
 
 public class AppSettings
 {
-    public uint         HotkeyModifiers { get; set; } = 0x000C; // MOD_WIN | MOD_SHIFT
-    public uint         HotkeyVK        { get; set; } = 0x43;   // C
-    public List<string> PinnedCases     { get; set; } = [];
-    public List<string> RecentHistory   { get; set; } = [];
+    public uint         HotkeyModifiers   { get; set; } = 0x000C; // MOD_WIN | MOD_SHIFT
+    public uint         HotkeyVK          { get; set; } = 0x43;   // C
+    public List<string> PinnedCases       { get; set; } = [];
+    public List<string> RecentHistory     { get; set; } = [];
+    public bool         AutoLoadClipboard { get; set; } = true;
 }
 
 public static class SettingsService
@@ -40,15 +41,15 @@ public static class SettingsService
         catch { }
     }
 
-    public static void AddHistory(string text)
+    // 기존 settings 객체에 이력 추가 — Load() 없이 파일 I/O 1회만 발생
+    public static void AddHistory(AppSettings settings, string text)
     {
         if (string.IsNullOrWhiteSpace(text)) return;
-        var s = Load();
-        s.RecentHistory.Remove(text);
-        s.RecentHistory.Insert(0, text);
-        if (s.RecentHistory.Count > 10)
-            s.RecentHistory = s.RecentHistory[..10];
-        Save(s);
+        settings.RecentHistory.Remove(text);
+        settings.RecentHistory.Insert(0, text);
+        if (settings.RecentHistory.Count > 10)
+            settings.RecentHistory = settings.RecentHistory[..10];
+        Save(settings);
     }
 
     // Win+Shift+C → "Win + Shift + C" 형태로 변환

@@ -21,22 +21,103 @@ public partial class SettingsWindow : System.Windows.Window
         _newVK    = _settings.HotkeyVK;
         HotkeyDisplay.Text = SettingsService.FormatHotkey(_newMods, _newVK);
 
-        // 케이스별 핀 체크박스 동적 생성
-        foreach (var (label, key, _) in CaseConverter.Definitions)
-        {
-            PinnedPanel.Children.Add(new System.Windows.Controls.CheckBox
-            {
-                Content   = label,
-                Tag       = key,
-                IsChecked = _settings.PinnedCases.Contains(key),
-                Margin    = new Thickness(0, 0, 14, 8),
-                Foreground = (SolidColorBrush)FindResource("TextPrimary"),
-                FontFamily = new WpfFontFamily("Consolas, Segoe UI"),
-                FontSize   = 12,
-            });
-        }
+        AutoLoadClipboardCb.IsChecked = _settings.AutoLoadClipboard;
 
+        BuildPinnedPanel();
         RefreshHistory();
+    }
+
+    // 케이스 목록 StackPanel 구성 — 핀된 항목 우선, 순서 변경 ↑↓ 지원
+    private void BuildPinnedPanel()
+    {
+        PinnedPanel.Children.Clear();
+
+        // 핀된 순서 → 나머지 순서
+        var allKeys = CaseConverter.Definitions.Select(d => d.Key).ToList();
+        var orderedKeys = _settings.PinnedCases
+            .Concat(allKeys.Except(_settings.PinnedCases))
+            .ToList();
+
+        foreach (var key in orderedKeys)
+        {
+            var def = CaseConverter.Definitions.FirstOrDefault(d => d.Key == key);
+            if (def == default) continue;
+            PinnedPanel.Children.Add(BuildPinnedRow(def.Label, key, _settings.PinnedCases.Contains(key)));
+        }
+    }
+
+    private UIElement BuildPinnedRow(string label, string key, bool isPinned)
+    {
+        var row = new Grid { Margin = new Thickness(0, 2, 0, 2) };
+        row.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
+        row.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
+        row.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
+
+        var cb = new System.Windows.Controls.CheckBox
+        {
+            Content    = label,
+            Tag        = key,
+            IsChecked  = isPinned,
+            Foreground = (SolidColorBrush)FindResource("TextPrimary"),
+            FontFamily = new WpfFontFamily("Consolas, Segoe UI"),
+            FontSize   = 12,
+            VerticalAlignment = VerticalAlignment.Center,
+        };
+
+        var upBtn   = MakePinnedArrowBtn("↑");
+        var downBtn = MakePinnedArrowBtn("↓");
+        upBtn.Click   += (_, _) => MovePinnedRow(row, -1);
+        downBtn.Click += (_, _) => MovePinnedRow(row, +1);
+
+        Grid.SetColumn(cb,      0);
+        Grid.SetColumn(upBtn,   1);
+        Grid.SetColumn(downBtn, 2);
+        row.Children.Add(cb);
+        row.Children.Add(upBtn);
+        row.Children.Add(downBtn);
+        return row;
+    }
+
+    private System.Windows.Controls.Button MakePinnedArrowBtn(string content)
+    {
+        var btn = new System.Windows.Controls.Button
+        {
+            Content           = content,
+            Width             = 22,
+            Height            = 22,
+            FontSize          = 11,
+            Foreground        = (SolidColorBrush)FindResource("TextSecondary"),
+            Background        = System.Windows.Media.Brushes.Transparent,
+            BorderThickness   = new Thickness(0),
+            Cursor            = System.Windows.Input.Cursors.Hand,
+            Margin            = new Thickness(2, 0, 0, 0),
+            VerticalAlignment = VerticalAlignment.Center,
+        };
+        // 호버 효과를 위한 간단한 ControlTemplate (TemplateBinding 불필요)
+        var tpl = new ControlTemplate(typeof(System.Windows.Controls.Button));
+        var bd  = new FrameworkElementFactory(typeof(Border));
+        bd.Name = "bd";
+        bd.SetValue(Border.BackgroundProperty, System.Windows.Media.Brushes.Transparent);
+        bd.SetValue(Border.CornerRadiusProperty, new CornerRadius(4));
+        var cp = new FrameworkElementFactory(typeof(ContentPresenter));
+        cp.SetValue(ContentPresenter.HorizontalAlignmentProperty, System.Windows.HorizontalAlignment.Center);
+        cp.SetValue(ContentPresenter.VerticalAlignmentProperty,   VerticalAlignment.Center);
+        bd.AppendChild(cp);
+        tpl.VisualTree = bd;
+        var hover = new Trigger { Property = System.Windows.Controls.Button.IsMouseOverProperty, Value = true };
+        hover.Setters.Add(new Setter(Border.BackgroundProperty, new SolidColorBrush(System.Windows.Media.Color.FromRgb(0x25, 0x25, 0x40))) { TargetName = "bd" });
+        tpl.Triggers.Add(hover);
+        btn.Template = tpl;
+        return btn;
+    }
+
+    private void MovePinnedRow(Grid row, int direction)
+    {
+        int idx    = PinnedPanel.Children.IndexOf(row);
+        int newIdx = idx + direction;
+        if (newIdx < 0 || newIdx >= PinnedPanel.Children.Count) return;
+        PinnedPanel.Children.Remove(row);
+        PinnedPanel.Children.Insert(newIdx, row);
     }
 
     private void RefreshHistory()
@@ -54,17 +135,49 @@ public partial class SettingsWindow : System.Windows.Window
             });
             return;
         }
-        foreach (var h in _settings.RecentHistory)
+        foreach (var h in _settings.RecentHistory.ToList())
         {
-            HistoryPanel.Children.Add(new TextBlock
+            string item = h;
+            var row = new Grid { Margin = new Thickness(0, 1, 0, 1) };
+            row.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
+            row.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
+
+            var tb = new TextBlock
             {
-                Text         = $"  {h}",
+                Text         = $"  {item}",
                 Foreground   = (SolidColorBrush)FindResource("TextPrimary"),
                 FontFamily   = new WpfFontFamily("Consolas, Segoe UI"),
                 FontSize     = 12,
                 TextTrimming = TextTrimming.CharacterEllipsis,
-                Margin       = new Thickness(0, 1, 0, 1),
-            });
+                VerticalAlignment = VerticalAlignment.Center,
+            };
+
+            var delTb = new TextBlock
+            {
+                Text                = "✕",
+                FontSize            = 11,
+                Foreground          = (SolidColorBrush)FindResource("TextSecondary"),
+                VerticalAlignment   = VerticalAlignment.Center,
+                HorizontalAlignment = System.Windows.HorizontalAlignment.Center,
+                Cursor              = System.Windows.Input.Cursors.Hand,
+                Width               = 20,
+                TextAlignment       = TextAlignment.Center,
+                ToolTip             = "이 항목 삭제",
+            };
+            delTb.MouseEnter += (_, _) => delTb.Foreground = (SolidColorBrush)FindResource("TextPrimary");
+            delTb.MouseLeave += (_, _) => delTb.Foreground = (SolidColorBrush)FindResource("TextSecondary");
+            delTb.MouseLeftButtonUp += (_, _) =>
+            {
+                _settings.RecentHistory.Remove(item);
+                SettingsService.Save(_settings);
+                RefreshHistory();
+            };
+
+            Grid.SetColumn(tb,    0);
+            Grid.SetColumn(delTb, 1);
+            row.Children.Add(tb);
+            row.Children.Add(delTb);
+            HistoryPanel.Children.Add(row);
         }
     }
 
@@ -130,19 +243,25 @@ public partial class SettingsWindow : System.Windows.Window
     private void ClearHistory_Click(object sender, RoutedEventArgs e)
     {
         _settings.RecentHistory.Clear();
+        SettingsService.Save(_settings);
         RefreshHistory();
     }
 
     // ── 저장/취소 ────────────────────────────────────────────────────────
     private void SaveBtn_Click(object sender, RoutedEventArgs e)
     {
-        _settings.HotkeyModifiers = _newMods;
-        _settings.HotkeyVK        = _newVK;
+        _settings.HotkeyModifiers   = _newMods;
+        _settings.HotkeyVK          = _newVK;
+        _settings.AutoLoadClipboard = AutoLoadClipboardCb.IsChecked == true;
+
+        // StackPanel 순서 그대로 핀 목록 저장 (↑↓ 순서 반영)
         _settings.PinnedCases = PinnedPanel.Children
-            .OfType<System.Windows.Controls.CheckBox>()
-            .Where(cb => cb.IsChecked == true)
-            .Select(cb => (string)cb.Tag)
+            .OfType<Grid>()
+            .Select(row => row.Children.OfType<System.Windows.Controls.CheckBox>().FirstOrDefault())
+            .Where(cb => cb?.IsChecked == true)
+            .Select(cb => (string)cb!.Tag)
             .ToList();
+
         SettingsService.Save(_settings);
         ((App)System.Windows.Application.Current).ReapplyHotkey(_settings);
         Close();

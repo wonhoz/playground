@@ -591,7 +591,7 @@ public partial class MainWindow : Window
         var linkUri = e.ContextMenuTarget.HasLinkUri ? e.ContextMenuTarget.LinkUri : null;
         var srcUri  = e.ContextMenuTarget.HasSourceUri ? e.ContextMenuTarget.SourceUri : null;
 
-        var menu = new ContextMenu { IsOpen = true };
+        var menu = new ContextMenu();
 
         if (hasSelection)
         {
@@ -1757,7 +1757,7 @@ public partial class MainWindow : Window
     {
         e.Handled = true;
         var menu = new ContextMenu();
-        foreach (var (label, sec) in new[] { ("30초", 30), ("1분", 60), ("2분", 120) })
+        foreach (var (label, sec) in new[] { ("30초", 30), ("1분", 60), ("2분", 120), ("5분", 300) })
         {
             var s = sec;
             var item = new MenuItem { Header = $"자동 저장: {label}" };
@@ -1768,7 +1768,11 @@ public partial class MainWindow : Window
                 _settings.AutoSaveIntervalSec = s;
                 _settings.Save();
                 if (_autoSaveTimer != null)
+                {
+                    _autoSaveTimer.Stop();
                     _autoSaveTimer.Interval = TimeSpan.FromSeconds(s);
+                    _autoSaveTimer.Start();
+                }
                 ShowStatusHint($"자동 저장 주기: {label}", 2);
             };
             menu.Items.Add(item);
@@ -1785,25 +1789,30 @@ public partial class MainWindow : Window
     private void UpdateStatusBar(MarkDocument doc)
     {
         StatusPath.Text = doc.IsNew ? "새 문서 (저장되지 않음)" : doc.FilePath;
-        var lines = doc.Content.Split('\n').Length;
-        var words = string.IsNullOrWhiteSpace(doc.Content)
-            ? 0
-            : _wordRegex.Matches(doc.Content).Count;
-        StatusLines.Text = $"{lines}줄";
-        var readMin = Math.Max(1, (int)Math.Ceiling(words / 200.0));
-        StatusWords.Text = words > 0 ? $"{words}단어 · 약 {readMin}분" : "0단어";
-        // 문서 구조 통계 툴팁
-        if (!string.IsNullOrWhiteSpace(doc.Content))
+        // 내용이 바뀐 경우에만 통계 재계산 (대용량 문서 성능)
+        if (!ReferenceEquals(doc.Content, doc.CachedStatsContent))
         {
-            var headings = _headingRegex.Matches(doc.Content).Count;
-            var images   = _imageRegex.Matches(doc.Content).Count;
-            var links    = _linkRegex.Matches(doc.Content).Count;
-            StatusWords.ToolTip = $"헤딩: {headings}개  이미지: {images}개  링크: {links}개";
+            doc.CachedStatsContent = doc.Content;
+            if (string.IsNullOrWhiteSpace(doc.Content))
+            {
+                doc.CachedWordCount = 0; doc.CachedLineCount = 1;
+                doc.CachedHeadingCount = 0; doc.CachedImageCount = 0; doc.CachedLinkCount = 0;
+            }
+            else
+            {
+                doc.CachedWordCount    = _wordRegex.Matches(doc.Content).Count;
+                doc.CachedLineCount    = doc.Content.Split('\n').Length;
+                doc.CachedHeadingCount = _headingRegex.Matches(doc.Content).Count;
+                doc.CachedImageCount   = _imageRegex.Matches(doc.Content).Count;
+                doc.CachedLinkCount    = _linkRegex.Matches(doc.Content).Count;
+            }
         }
-        else
-        {
-            StatusWords.ToolTip = null;
-        }
+        StatusLines.Text = $"{doc.CachedLineCount}줄";
+        var readMin = Math.Max(1, (int)Math.Ceiling(doc.CachedWordCount / 200.0));
+        StatusWords.Text = doc.CachedWordCount > 0 ? $"{doc.CachedWordCount}단어 · 약 {readMin}분" : "0단어";
+        StatusWords.ToolTip = doc.CachedWordCount > 0
+            ? $"헤딩: {doc.CachedHeadingCount}개  이미지: {doc.CachedImageCount}개  링크: {doc.CachedLinkCount}개"
+            : null;
         StatusMode.Text = _isEditMode ? "편집" : "뷰";
         StatusUndo.Visibility = _isEditMode && Editor.CanUndo ? Visibility.Visible : Visibility.Collapsed;
     }
@@ -1865,13 +1874,11 @@ public partial class MainWindow : Window
         if (string.IsNullOrEmpty(keyword) || _activeIndex < 0) return;
         var text = Editor.Text;
         var cmp = _caseSensitive ? StringComparison.Ordinal : StringComparison.OrdinalIgnoreCase;
-        var idx = text.IndexOf(keyword, cmp);
+        // 현재 선택 위치 이후부터 검색 → 없으면 wrap-around (처음부터 재검색)
+        var searchStart = Editor.SelectionStart + Editor.SelectionLength;
+        var idx = searchStart < text.Length ? text.IndexOf(keyword, searchStart, cmp) : -1;
+        if (idx < 0) idx = text.IndexOf(keyword, cmp); // wrap-around
         if (idx < 0) return;
-        if (Editor.SelectionStart >= idx && Editor.SelectionStart < idx + keyword.Length)
-        {
-            var nextIdx = text.IndexOf(keyword, idx + keyword.Length, cmp);
-            if (nextIdx >= 0) idx = nextIdx;
-        }
         Editor.Select(idx, keyword.Length);
         Editor.ScrollToLine(Editor.GetLineIndexFromCharacterIndex(idx));
     }
@@ -1941,7 +1948,7 @@ public partial class MainWindow : Window
             var stack = new StackPanel();
             var labelBlock = new TextBlock
             {
-                Text = (item.TabIndex.HasValue ? "  " : "📄 ") + item.Label,
+                Text = (item.TabIndex.HasValue ? "⬤ " : "📄 ") + item.Label,
                 FontSize = 12,
                 Foreground = (SolidColorBrush)FindResource("TextBrush"),
             };
@@ -2874,11 +2881,28 @@ public partial class MainWindow : Window
     private void TocList_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
         if (!IsLoaded || _suppressTocSelection) return;
-        if (TocList.SelectedItem is ListBoxItem item && item.Tag is string id && !string.IsNullOrEmpty(id))
+        if (TocList.SelectedItem is not ListBoxItem item) return;
+        // 프리뷰 스크롤
+        if (item.Tag is string id && !string.IsNullOrEmpty(id))
         {
             var jsId2 = System.Text.Json.JsonSerializer.Serialize(id);
             _ = Viewer.ExecuteScriptAsync(
                 $"window.__sp&&window.__sp();document.getElementById({jsId2})?.scrollIntoView({{behavior:'smooth'}})");
+        }
+        // 편집 모드: 에디터도 해당 헤딩 줄로 이동
+        if (_isEditMode && item.Content is string headingText && _activeIndex >= 0)
+        {
+            var text = Editor.Text;
+            var lines = text.Split('\n');
+            for (int i = 0; i < lines.Length; i++)
+            {
+                var trimmed = lines[i].TrimStart('#').TrimStart();
+                if (trimmed.Equals(headingText, StringComparison.OrdinalIgnoreCase))
+                {
+                    try { Editor.ScrollToLine(i); Editor.Focus(); } catch { }
+                    break;
+                }
+            }
         }
     }
 

@@ -43,7 +43,7 @@ public class MarkdownRenderer
     private string WrapInPage(string body, string? filePath, string theme)
     {
         var baseTag = filePath != null
-            ? "<base href=\"file:///" + string.Join("/", filePath.Split('\\').Select(Uri.EscapeDataString)) + "\">"
+            ? "<base href=\"" + new Uri(filePath).AbsoluteUri + "\">"
             : "";
 
         var css = GetThemeCss(theme);

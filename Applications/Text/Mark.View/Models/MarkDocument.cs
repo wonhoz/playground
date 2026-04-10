@@ -24,4 +24,12 @@ public class MarkDocument
 
     public string FileName => IsNew ? "새 문서" : Path.GetFileName(FilePath);
     public string? Directory => IsNew ? null : Path.GetDirectoryName(FilePath);
+
+    // 통계 캐시 — Content가 변경될 때만 재계산
+    public string? CachedStatsContent { get; set; }
+    public int CachedWordCount { get; set; }
+    public int CachedLineCount { get; set; }
+    public int CachedHeadingCount { get; set; }
+    public int CachedImageCount { get; set; }
+    public int CachedLinkCount { get; set; }
 }

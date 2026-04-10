@@ -98,11 +98,11 @@
             <TextBlock Text="탐색" Style="{StaticResource Cat}"/>
             <ItemsControl ItemTemplate="{StaticResource RowTpl}">
               <ItemsControl.Items>
-                <local:ShortcutEntry Key="Ctrl + P"           Desc="Quick Open — 열린 탭 + 최근 파일 통합 검색 (↑↓ 탐색, Enter 열기)"/>
+                <local:ShortcutEntry Key="Ctrl + P"           Desc="Quick Open — 열린 탭(⬤) + 최근 파일(📄) 통합 검색 (↑↓ 탐색, Enter 열기)"/>
                 <local:ShortcutEntry Key="Ctrl + Tab"         Desc="다음 탭"/>
                 <local:ShortcutEntry Key="Ctrl + Shift + Tab" Desc="이전 탭"/>
                 <local:ShortcutEntry Key="Ctrl + T"           Desc="목차 (TOC) 패널 토글"/>
-                <local:ShortcutEntry Key="TOC 항목 클릭"      Desc="해당 섹션으로 부드럽게 이동"/>
+                <local:ShortcutEntry Key="TOC 항목 클릭"      Desc="해당 섹션으로 부드럽게 이동 — 편집 모드에서는 에디터도 해당 헤딩 줄로 동시 이동"/>
                 <local:ShortcutEntry Key="TOC 검색창"         Desc="TOC 패널 상단 검색창으로 헤딩 실시간 필터링"/>
               </ItemsControl.Items>
             </ItemsControl>
@@ -132,7 +132,7 @@
                 <local:ShortcutEntry Key="최근 파일 검색창" Desc="파일명/폴더명으로 최근 파일 실시간 필터링"/>
                 <local:ShortcutEntry Key="상태바 경로"      Desc="클릭 시 파일 탐색기에서 위치 열기"/>
                 <local:ShortcutEntry Key="상태바 ↩ 표시"   Desc="편집 모드에서 실행 취소(Ctrl+Z) 가능 상태 표시"/>
-                <local:ShortcutEntry Key="자동 저장"        Desc="편집 중단 후 자동 저장 (기본 30초) — 상태바 우클릭으로 30초/1분/2분 변경 가능"/>
+                <local:ShortcutEntry Key="자동 저장"        Desc="편집 중단 후 자동 저장 (기본 30초) — 상태바 우클릭으로 30초/1분/2분/5분 변경 가능"/>
                 <local:ShortcutEntry Key="커서·스크롤 기억" Desc="파일별 마지막 커서 위치 및 에디터 스크롤 위치 저장 — 앱 재시작 후 해당 파일을 열면 마지막 위치로 자동 이동"/>
                 <local:ShortcutEntry Key="내보내기 경로"    Desc="HTML/PDF 저장 완료 후 상태바에 파일명 표시 — 클릭 시 탐색기에서 파일 위치 열기 (5초간 유지)"/>
                 <local:ShortcutEntry Key="탭 더블클릭"     Desc="탭 이름 인라인 편집 — Enter 확정, Esc 취소"/>
@@ -145,9 +145,9 @@
             <ItemsControl ItemTemplate="{StaticResource RowTpl}">
               <ItemsControl.Items>
                 <local:ShortcutEntry Key="Ctrl + F"      Desc="찾기 포커스"/>
-                <local:ShortcutEntry Key="Enter"         Desc="다음 결과로 이동"/>
+                <local:ShortcutEntry Key="Enter"         Desc="다음 결과로 이동 (끝에 도달하면 처음으로 순환)"/>
                 <local:ShortcutEntry Key="Shift + Enter" Desc="이전 결과로 이동"/>
-                <local:ShortcutEntry Key="▲ / ▼ 버튼"   Desc="이전/다음 찾기 결과 이동 — 현재 결과는 주황색 강조, 자동 스크롤"/>
+                <local:ShortcutEntry Key="▲ / ▼ 버튼"   Desc="이전/다음 찾기 결과 이동 — 현재 결과는 주황색 강조, 자동 스크롤. 편집 모드에서는 에디터도 wrap-around 검색"/>
                 <local:ShortcutEntry Key="검색 하이라이트" Desc="검색어 입력 시 뷰어에서 모든 일치 항목을 황색으로 표시, 현재 결과는 주황색"/>
                 <local:ShortcutEntry Key="Ctrl + H"      Desc="찾기/바꾸기 바 토글 (편집 모드)"/>
                 <local:ShortcutEntry Key="Alt + C"       Desc="대소문자 구분 검색 켜기/끄기 (Aa 버튼 — 켜짐 시 파란색)"/>

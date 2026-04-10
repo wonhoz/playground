@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg02" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00E5C3"/>
+      <stop offset="100%" stop-color="#00ACC1"/>
+    </linearGradient>
+    <linearGradient id="circle02" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.95"/>
+      <stop offset="100%" stop-color="#E0F7FA" stop-opacity="0.9"/>
+    </linearGradient>
+    <filter id="glow02">
+      <feGaussianBlur stdDeviation="12" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg02)"/>
+  <!-- Decorative circles background -->
+  <circle cx="200" cy="200" r="90" fill="#FFFFFF" fill-opacity="0.12"/>
+  <circle cx="820" cy="820" r="120" fill="#FFFFFF" fill-opacity="0.10"/>
+  <!-- Layer 2: Main white circle -->
+  <circle cx="512" cy="460" r="280" fill="url(#circle02)" filter="url(#glow02)"/>
+  <!-- Big question mark -->
+  <text x="512" y="410" font-family="Arial Black, sans-serif" font-size="300" font-weight="900" fill="#00838F" text-anchor="middle" dominant-baseline="middle">?</text>
+  <!-- Layer 3: Timer badge at bottom -->
+  <rect x="352" y="780" width="320" height="120" rx="60" fill="#FF6D00"/>
+  <text x="512" y="840" font-family="Arial Black, sans-serif" font-size="90" font-weight="900" fill="#FFFFFF" text-anchor="middle" dominant-baseline="middle">15</text>
+  <!-- Timer tick marks around circle -->
+  <g stroke="#FFFFFF" stroke-width="12" stroke-linecap="round" opacity="0.7">
+    <line x1="512" y1="155" x2="512" y2="190"/>
+    <line x1="512" y1="730" x2="512" y2="765"/>
+    <line x1="207" y1="460" x2="242" y2="460"/>
+    <line x1="782" y1="460" x2="817" y2="460"/>
+  </g>
+</svg>

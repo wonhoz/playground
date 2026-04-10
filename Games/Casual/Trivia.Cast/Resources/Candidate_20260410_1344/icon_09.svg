@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg09" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00C853"/>
+      <stop offset="100%" stop-color="#00897B"/>
+    </linearGradient>
+    <linearGradient id="ring09" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="100%" stop-color="#E0F2F1"/>
+    </linearGradient>
+    <filter id="shadow09">
+      <feDropShadow dx="0" dy="8" stdDeviation="18" flood-color="#00000055"/>
+    </filter>
+  </defs>
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg09)"/>
+  <!-- Background pattern: small circles -->
+  <circle cx="200" cy="200" r="50" fill="#FFFFFF" fill-opacity="0.1"/>
+  <circle cx="824" cy="200" r="70" fill="#FFFFFF" fill-opacity="0.08"/>
+  <circle cx="200" cy="824" r="60" fill="#FFFFFF" fill-opacity="0.08"/>
+  <circle cx="824" cy="824" r="50" fill="#FFFFFF" fill-opacity="0.1"/>
+  <!-- Layer 2: Timer ring (outer) -->
+  <circle cx="512" cy="480" r="300" fill="none" stroke="#FFFFFF" stroke-width="36" stroke-opacity="0.3" filter="url(#shadow09)"/>
+  <!-- Timer progress arc (almost full = success) -->
+  <circle cx="512" cy="480" r="300" fill="none" stroke="#FFFFFF" stroke-width="36"
+    stroke-dasharray="1760 1885"
+    stroke-dashoffset="471"
+    stroke-linecap="round"/>
+  <!-- Timer ring (inner face) -->
+  <circle cx="512" cy="480" r="240" fill="url(#ring09)" opacity="0.95"/>
+  <!-- Timer tick marks -->
+  <g stroke="#00897B" stroke-width="10" stroke-linecap="round">
+    <line x1="512" y1="255" x2="512" y2="285"/>
+    <line x1="512" y1="675" x2="512" y2="705"/>
+    <line x1="287" y1="480" x2="317" y2="480"/>
+    <line x1="707" y1="480" x2="737" y2="480"/>
+    <line x1="350" y1="318" x2="371" y2="339"/>
+    <line x1="653" y1="621" x2="674" y2="642"/>
+    <line x1="674" y1="318" x2="653" y2="339"/>
+    <line x1="371" y1="621" x2="350" y2="642"/>
+  </g>
+  <!-- Timer hand -->
+  <line x1="512" y1="480" x2="512" y2="295" stroke="#00897B" stroke-width="16" stroke-linecap="round"/>
+  <line x1="512" y1="480" x2="610" y2="480" stroke="#00897B" stroke-width="12" stroke-linecap="round"/>
+  <circle cx="512" cy="480" r="22" fill="#00897B"/>
+  <!-- Layer 3: Check badge overlaid -->
+  <circle cx="700" cy="700" r="130" fill="#FFFFFF" filter="url(#shadow09)"/>
+  <circle cx="700" cy="700" r="110" fill="#00C853"/>
+  <path d="M645 700 L685 745 L760 658" stroke="#FFFFFF" stroke-width="28" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <!-- Text: TIME'S UP / DONE -->
+  <text x="512" y="820" font-family="Arial Black, sans-serif" font-size="72" font-weight="900" fill="#FFFFFF" text-anchor="middle" opacity="0.9">CLEAR!</text>
+</svg>

@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg08" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1A237E"/>
+      <stop offset="100%" stop-color="#283593"/>
+    </linearGradient>
+    <filter id="glow08">
+      <feGaussianBlur stdDeviation="20" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg08)"/>
+  <!-- Layer 2: Central burst circle -->
+  <circle cx="512" cy="512" r="160" fill="#FFFFFF" opacity="0.12"/>
+  <circle cx="512" cy="512" r="100" fill="#FFFFFF" opacity="0.18" filter="url(#glow08)"/>
+  <!-- Big check mark -->
+  <path d="M390 510 L470 600 L650 400" stroke="#4CAF50" stroke-width="60" stroke-linecap="round" stroke-linejoin="round" fill="none" filter="url(#glow08)"/>
+  <!-- Layer 3: Confetti burst -->
+  <!-- Confetti pieces - rectangles rotated -->
+  <rect x="200" y="180" width="48" height="22" rx="6" fill="#FF4081" transform="rotate(30 224 191)"/>
+  <rect x="750" y="160" width="48" height="22" rx="6" fill="#FFD740" transform="rotate(-25 774 171)"/>
+  <rect x="820" y="350" width="48" height="22" rx="6" fill="#00E5FF" transform="rotate(45 844 361)"/>
+  <rect x="800" y="700" width="48" height="22" rx="6" fill="#FF6D00" transform="rotate(-40 824 711)"/>
+  <rect x="160" y="700" width="48" height="22" rx="6" fill="#69F0AE" transform="rotate(20 184 711)"/>
+  <rect x="150" y="350" width="48" height="22" rx="6" fill="#EA80FC" transform="rotate(-30 174 361)"/>
+  <rect x="380" y="130" width="48" height="22" rx="6" fill="#00E5FF" transform="rotate(15 404 141)"/>
+  <rect x="600" y="140" width="48" height="22" rx="6" fill="#FF4081" transform="rotate(-20 624 151)"/>
+  <rect x="860" y="520" width="36" height="18" rx="5" fill="#69F0AE" transform="rotate(55 878 529)"/>
+  <rect x="130" y="520" width="36" height="18" rx="5" fill="#FFD740" transform="rotate(-55 148 529)"/>
+  <!-- Circle confetti -->
+  <circle cx="290" cy="250" r="22" fill="#FFD740"/>
+  <circle cx="734" cy="260" r="18" fill="#FF4081"/>
+  <circle cx="870" cy="440" r="20" fill="#EA80FC"/>
+  <circle cx="840" cy="620" r="16" fill="#00E5FF"/>
+  <circle cx="290" cy="760" r="22" fill="#FF6D00"/>
+  <circle cx="180" cy="600" r="18" fill="#69F0AE"/>
+  <circle cx="450" cy="170" r="16" fill="#FF4081"/>
+  <circle cx="600" cy="850" r="20" fill="#FFD740"/>
+  <!-- Streamer lines -->
+  <path d="M512 350 Q600 280 700 200" stroke="#FF4081" stroke-width="10" stroke-linecap="round" fill="none" opacity="0.8"/>
+  <path d="M512 350 Q400 280 300 200" stroke="#FFD740" stroke-width="10" stroke-linecap="round" fill="none" opacity="0.8"/>
+  <path d="M512 670 Q620 750 720 820" stroke="#00E5FF" stroke-width="10" stroke-linecap="round" fill="none" opacity="0.8"/>
+  <path d="M512 670 Q400 750 300 820" stroke="#69F0AE" stroke-width="10" stroke-linecap="round" fill="none" opacity="0.8"/>
+  <!-- Stars -->
+  <polygon points="512,200 522,228 552,228 529,244 537,272 512,256 487,272 495,244 472,228 502,228" fill="#FFD740" filter="url(#glow08)"/>
+</svg>

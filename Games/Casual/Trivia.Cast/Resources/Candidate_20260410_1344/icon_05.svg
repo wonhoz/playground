@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg05" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFF8E1"/>
+      <stop offset="100%" stop-color="#FFD740"/>
+    </linearGradient>
+    <linearGradient id="trophy05" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFD700"/>
+      <stop offset="100%" stop-color="#FF8F00"/>
+    </linearGradient>
+    <linearGradient id="flame05" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#FF1744"/>
+      <stop offset="60%" stop-color="#FF6D00"/>
+      <stop offset="100%" stop-color="#FFD740"/>
+    </linearGradient>
+  </defs>
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg05)"/>
+  <!-- Sparkles -->
+  <polygon points="150,200 162,236 200,236 170,258 182,294 150,272 118,294 130,258 100,236 138,236" fill="#FFD700" opacity="0.8"/>
+  <polygon points="874,180 883,207 912,207 889,223 898,250 874,234 850,250 859,223 836,207 865,207" fill="#FFA000"/>
+  <polygon points="870,750 879,777 908,777 885,793 894,820 870,804 846,820 855,793 832,777 861,777" fill="#FF6D00" opacity="0.7"/>
+  <!-- Layer 2: Trophy body -->
+  <!-- Cup -->
+  <path d="M312 220 L712 220 L680 560 Q660 640 512 660 Q364 640 344 560 Z" fill="url(#trophy05)" stroke="#E65100" stroke-width="10"/>
+  <!-- Trophy handles -->
+  <path d="M312 260 Q200 280 210 400 Q220 480 344 480" fill="none" stroke="url(#trophy05)" stroke-width="50" stroke-linecap="round"/>
+  <path d="M712 260 Q824 280 814 400 Q804 480 680 480" fill="none" stroke="url(#trophy05)" stroke-width="50" stroke-linecap="round"/>
+  <!-- Trophy stem -->
+  <rect x="452" y="660" width="120" height="100" rx="12" fill="#E65100"/>
+  <!-- Trophy base -->
+  <rect x="340" y="760" width="344" height="60" rx="18" fill="#E65100"/>
+  <!-- Trophy shine -->
+  <ellipse cx="430" cy="380" rx="50" ry="80" fill="#FFFFFF" opacity="0.25" transform="rotate(-20 430 380)"/>
+  <!-- Layer 3: Flames overlay on trophy top -->
+  <ellipse cx="512" cy="228" rx="160" ry="30" fill="#FF6D00" opacity="0.3"/>
+  <path d="M440 230 Q430 160 480 140 Q460 200 510 180 Q480 230 540 200 Q520 240 570 210 Q560 250 600 230 Q580 160 630 130 Q600 180 590 230 Q560 200 512 228 Q480 230 440 230Z" fill="url(#flame05)"/>
+  <!-- Streak counter badge -->
+  <circle cx="760" cy="280" r="80" fill="#FF1744"/>
+  <text x="760" y="260" font-family="Arial Black, sans-serif" font-size="52" font-weight="900" fill="#FFFFFF" text-anchor="middle" dominant-baseline="middle">x5</text>
+  <text x="760" y="318" font-family="sans-serif" font-size="36" fill="#FFD740" text-anchor="middle">🔥</text>
+</svg>

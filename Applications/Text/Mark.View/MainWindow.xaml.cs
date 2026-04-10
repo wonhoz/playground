@@ -339,6 +339,9 @@ public partial class MainWindow : Window
         // 현재 검색어가 있으면 하이라이트 복원
         if (!string.IsNullOrEmpty(TxtFind.Text))
             _ = ApplySearchHighlightAsync(TxtFind.Text);
+        // 프리뷰→에디터 역방향 점프 (편집 모드에서 더블클릭)
+        if (_isEditMode)
+            _ = InjectPreviewDoubleClickAsync();
     }
 
     private async Task InjectCopyButtonsAsync()
@@ -584,6 +587,59 @@ public partial class MainWindow : Window
         catch { }
     }
 
+    private async Task InjectPreviewDoubleClickAsync()
+    {
+        if (!_webViewReady) return;
+        try
+        {
+            await Viewer.ExecuteScriptAsync(@"
+(function() {
+    if (window.__dblClickInstalled) return;
+    window.__dblClickInstalled = true;
+    document.addEventListener('dblclick', function(e) {
+        var sel = window.getSelection();
+        if (!sel || !sel.toString().trim()) return;
+        var word = sel.toString().trim();
+        // 주변 컨텍스트: 선택된 단어가 포함된 가장 가까운 블록 요소의 텍스트
+        var node = sel.anchorNode;
+        while (node && node.nodeType !== 1) node = node.parentNode;
+        if (!node) return;
+        var context = (node.textContent || '').substring(0, 200);
+        window.chrome.webview.postMessage('dblclick:' + JSON.stringify({word: word, context: context}));
+    });
+})()");
+        }
+        catch { }
+    }
+
+    private void JumpToEditorFromPreview(string json)
+    {
+        if (!_isEditMode || _activeIndex < 0) return;
+        try
+        {
+            var data = System.Text.Json.JsonDocument.Parse(json);
+            var word = data.RootElement.GetProperty("word").GetString() ?? "";
+            var context = data.RootElement.GetProperty("context").GetString() ?? "";
+            if (string.IsNullOrEmpty(word)) return;
+
+            var text = Editor.Text;
+            // 컨텍스트의 앞 50자를 기준으로 에디터에서 위치 탐색
+            var searchContext = context.Length > 50 ? context[..50] : context;
+            var contextIdx = text.IndexOf(searchContext, StringComparison.OrdinalIgnoreCase);
+            int wordIdx;
+            if (contextIdx >= 0)
+                wordIdx = text.IndexOf(word, contextIdx, StringComparison.OrdinalIgnoreCase);
+            else
+                wordIdx = text.IndexOf(word, StringComparison.OrdinalIgnoreCase);
+
+            if (wordIdx < 0) return;
+            Editor.Focus();
+            Editor.Select(wordIdx, word.Length);
+            Editor.ScrollToLine(Editor.GetLineIndexFromCharacterIndex(wordIdx));
+        }
+        catch { }
+    }
+
     private void OnWebViewContextMenuRequested(object? sender, Microsoft.Web.WebView2.Core.CoreWebView2ContextMenuRequestedEventArgs e)
     {
         e.Handled = true; // 기본 메뉴 억제
@@ -678,6 +734,11 @@ public partial class MainWindow : Window
         {
             var id = msg[4..];
             HighlightTocEntry(id);
+        }
+        else if (msg?.StartsWith("dblclick:") == true)
+        {
+            // 프리뷰→에디터 역방향 점프: 더블클릭된 텍스트 컨텍스트로 에디터에서 위치 찾기
+            JumpToEditorFromPreview(msg[9..]);
         }
         else if (msg?.StartsWith("anchor:") == true)
         {
@@ -1646,11 +1707,8 @@ public partial class MainWindow : Window
 
     // ── Word Wrap ────────────────────────────────────────────────────────
 
-    private bool _isWordWrap = true;
-
     private void SetWordWrap(bool wrap)
     {
-        _isWordWrap = wrap;
         Editor.TextWrapping = wrap ? TextWrapping.Wrap : TextWrapping.NoWrap;
         Editor.HorizontalScrollBarVisibility = wrap ? ScrollBarVisibility.Disabled : ScrollBarVisibility.Auto;
         TxtWordWrapIcon.Foreground = wrap
@@ -2175,7 +2233,7 @@ public partial class MainWindow : Window
 
     private void BtnWordWrap_Click(object sender, RoutedEventArgs e)
     {
-        SetWordWrap(!_isWordWrap);
+        SetWordWrap(!_settings.IsWordWrap);
     }
 
     private void BtnHelp_Click(object sender, RoutedEventArgs e)
@@ -2641,8 +2699,19 @@ public partial class MainWindow : Window
         // 현재 줄 하이라이트
         UpdateCurrentLineHighlight(caret);
 
-        // Breadcrumb: 커서 앞 마지막 헤딩 표시
-        UpdateBreadcrumb(text, caret);
+        // Breadcrumb: 디바운스로 대용량 문서 성능 보호
+        _breadcrumbTimer?.Stop();
+        _breadcrumbTimer ??= new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(150) };
+        var breadcrumbText = text;
+        var breadcrumbCaret = caret;
+        _breadcrumbTimer.Tick += BreadcrumbOnce;
+        void BreadcrumbOnce(object? s, EventArgs a)
+        {
+            _breadcrumbTimer.Stop();
+            _breadcrumbTimer.Tick -= BreadcrumbOnce;
+            UpdateBreadcrumb(breadcrumbText, breadcrumbCaret);
+        }
+        _breadcrumbTimer.Start();
 
         // 선택 영역이 있으면 상태바에 선택 통계 표시
         if (Editor.SelectionLength > 0)
@@ -2958,13 +3027,23 @@ public partial class MainWindow : Window
         else if (e.Key == Key.M && Keyboard.Modifiers == (ModifierKeys.Control | ModifierKeys.Shift))
         { CopyMarkdownToClipboard(); e.Handled = true; }
         else if (e.Key == Key.Z && Keyboard.Modifiers == ModifierKeys.Alt)
-        { SetWordWrap(!_isWordWrap); e.Handled = true; }
+        { SetWordWrap(!_settings.IsWordWrap); e.Handled = true; }
         else if (e.Key == Key.C && Keyboard.Modifiers == ModifierKeys.Alt)
         { BtnCase_Click(this, new RoutedEventArgs()); e.Handled = true; }
         else if (e.Key == Key.Enter && Keyboard.Modifiers == ModifierKeys.Control && _isEditMode)
         { _previewTimer?.Stop(); RenderPreview(saveScroll: true); e.Handled = true; }
         else if (e.Key == Key.G && Keyboard.Modifiers == ModifierKeys.Control)
         { ShowGotoLinePopup(); e.Handled = true; }
+        else if (e.Key == Key.D && Keyboard.Modifiers == ModifierKeys.Control && _isEditMode)
+        { DuplicateLine(); e.Handled = true; }
+        else if (e.Key == Key.D && Keyboard.Modifiers == (ModifierKeys.Control | ModifierKeys.Shift) && _isEditMode && Editor.SelectionLength > 0)
+        { DuplicateLine(); e.Handled = true; }
+        else if (e.Key == Key.K && Keyboard.Modifiers == (ModifierKeys.Control | ModifierKeys.Shift) && _isEditMode)
+        { DeleteLine(); e.Handled = true; }
+        else if (e.Key == Key.Up && Keyboard.Modifiers == ModifierKeys.Alt && _isEditMode)
+        { MoveLineUp(); e.Handled = true; }
+        else if (e.Key == Key.Down && Keyboard.Modifiers == ModifierKeys.Alt && _isEditMode)
+        { MoveLineDown(); e.Handled = true; }
         else if (e.Key == Key.Escape && !string.IsNullOrEmpty(TxtFind.Text))
         { TxtFind.Text = ""; e.Handled = true; }
         else if (e.Key == Key.Escape && GotoLinePopup.IsOpen)
@@ -3058,6 +3137,98 @@ public partial class MainWindow : Window
         Editor.ScrollToLine(lineNumber - 1);
         Editor.Focus();
         ShowStatusHint($"{lineNumber}줄로 이동", 2);
+    }
+
+    // ── 줄 조작 (복제/삭제/이동) ────────────────────────────────────────
+
+    private (int Start, int End) GetCurrentLineRange()
+    {
+        var text = Editor.Text;
+        var caret = Editor.CaretIndex;
+        var lineStart = caret > 0 ? text.LastIndexOf('\n', caret - 1) + 1 : 0;
+        var lineEnd = text.IndexOf('\n', caret);
+        if (lineEnd < 0) lineEnd = text.Length;
+        return (lineStart, lineEnd);
+    }
+
+    private void DuplicateLine()
+    {
+        if (_activeIndex < 0) return;
+        var text = Editor.Text;
+        if (Editor.SelectionLength > 0)
+        {
+            // Ctrl+Shift+D 동작: 선택 영역 복제
+            var selStart = Editor.SelectionStart;
+            var selText = Editor.SelectedText;
+            Editor.Select(selStart + selText.Length, 0);
+            Editor.SelectedText = selText;
+            Editor.Select(selStart + selText.Length, selText.Length);
+            return;
+        }
+        var (lineStart, lineEnd) = GetCurrentLineRange();
+        var lineContent = text[lineStart..lineEnd];
+        Editor.Select(lineEnd, 0);
+        Editor.SelectedText = "\n" + lineContent;
+        Editor.CaretIndex = lineEnd + 1 + lineContent.Length;
+    }
+
+    private void DeleteLine()
+    {
+        if (_activeIndex < 0) return;
+        var text = Editor.Text;
+        var (lineStart, lineEnd) = GetCurrentLineRange();
+        // 줄 끝의 \n도 포함하여 삭제 (마지막 줄이면 앞의 \n 삭제)
+        int delStart, delEnd;
+        if (lineEnd < text.Length)
+        {
+            delStart = lineStart;
+            delEnd = lineEnd + 1; // \n 포함
+        }
+        else if (lineStart > 0)
+        {
+            delStart = lineStart - 1; // 앞의 \n 포함
+            delEnd = lineEnd;
+        }
+        else
+        {
+            delStart = 0;
+            delEnd = lineEnd;
+        }
+        Editor.Select(delStart, delEnd - delStart);
+        Editor.SelectedText = "";
+        Editor.CaretIndex = Math.Min(delStart, Editor.Text.Length);
+    }
+
+    private void MoveLineUp()
+    {
+        if (_activeIndex < 0) return;
+        var text = Editor.Text;
+        var (lineStart, lineEnd) = GetCurrentLineRange();
+        if (lineStart == 0) return; // 이미 첫 줄
+        var prevLineStart = text.LastIndexOf('\n', lineStart - 2) + 1;
+        var currentLine = text[lineStart..lineEnd];
+        var prevLine = text[prevLineStart..(lineStart - 1)]; // \n 제외
+        var caretOffset = Editor.CaretIndex - lineStart;
+        Editor.Select(prevLineStart, lineEnd - prevLineStart);
+        Editor.SelectedText = currentLine + "\n" + prevLine;
+        Editor.CaretIndex = prevLineStart + Math.Min(caretOffset, currentLine.Length);
+    }
+
+    private void MoveLineDown()
+    {
+        if (_activeIndex < 0) return;
+        var text = Editor.Text;
+        var (lineStart, lineEnd) = GetCurrentLineRange();
+        if (lineEnd >= text.Length) return; // 이미 마지막 줄
+        var nextLineEnd = text.IndexOf('\n', lineEnd + 1);
+        if (nextLineEnd < 0) nextLineEnd = text.Length;
+        var currentLine = text[lineStart..lineEnd];
+        var nextLine = text[(lineEnd + 1)..nextLineEnd];
+        var caretOffset = Editor.CaretIndex - lineStart;
+        Editor.Select(lineStart, nextLineEnd - lineStart);
+        Editor.SelectedText = nextLine + "\n" + currentLine;
+        var newLineStart = lineStart + nextLine.Length + 1;
+        Editor.CaretIndex = newLineStart + Math.Min(caretOffset, currentLine.Length);
     }
 
     private bool IsMouseOverEditor()
@@ -3177,6 +3348,7 @@ public partial class MainWindow : Window
 
     private DispatcherTimer? _replaceStatusTimer;
     private DispatcherTimer? _fileChangedDebounce;
+    private DispatcherTimer? _breadcrumbTimer;
 
     private void OnWatchedFileChanged(object sender, FileSystemEventArgs e)
     {

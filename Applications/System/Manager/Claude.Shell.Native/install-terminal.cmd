@@ -52,13 +52,15 @@ goto END
 :SET_TYPE
 echo.
 echo Terminal argument style:
-echo   wt  - Windows Terminal style: -d "path" cmd /k claude  (default)
-echo   cmd - cmd.exe style:          /k cd /d "path" ^&^& claude
+echo   wt   - Windows Terminal style: -d "path" cmd /k claude  (default)
+echo   cmd  - cmd.exe style:          /k cd /d "path" ^&^& claude
+echo   pwsh - PowerShell 7 style:     -NoExit -WorkingDirectory "path" -Command "claude"
 echo.
-set /p TERM_TYPE=Type (wt/cmd):
-if /i "%TERM_TYPE%"=="wt"  goto SET_TYPE_WT
-if /i "%TERM_TYPE%"=="cmd" goto SET_TYPE_CMD
-echo Invalid input. Use "wt" or "cmd".
+set /p TERM_TYPE=Type (wt/cmd/pwsh):
+if /i "%TERM_TYPE%"=="wt"   goto SET_TYPE_WT
+if /i "%TERM_TYPE%"=="cmd"  goto SET_TYPE_CMD
+if /i "%TERM_TYPE%"=="pwsh" goto SET_TYPE_PWSH
+echo Invalid input. Use "wt", "cmd", or "pwsh".
 goto END
 
 :SET_TYPE_WT
@@ -69,6 +71,11 @@ goto END
 :SET_TYPE_CMD
 reg add "HKCU\Software\ClaudeCode" /v TerminalType /t REG_SZ /d "cmd" /f >nul
 echo TerminalType set to "cmd".
+goto END
+
+:SET_TYPE_PWSH
+reg add "HKCU\Software\ClaudeCode" /v TerminalType /t REG_SZ /d "pwsh" /f >nul
+echo TerminalType set to "pwsh".
 goto END
 
 :SET_NEWTAB

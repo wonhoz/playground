@@ -16,6 +16,7 @@ extern LONG        g_cDllRef;
 std::wstring FindClaudeIconSource();
 bool         FindClaudeExe();        // claude.exe 설치 여부 확인 (PATH + 하드코딩 경로)
 bool         FindWindowsTerminal();  // wt.exe 탐색 (PATH + WindowsApps 경로)
+bool         FindPowerShell7();      // pwsh.exe 탐색 (PATH + 일반 설치 경로)
 
 class ClaudeContextMenu : public IShellExtInit, public IContextMenu, public IExplorerCommand
 {
@@ -51,9 +52,11 @@ public:
 
 private:
     LONG          m_cRef;
-    bool          m_dangerous;    // true = --dangerously-skip-permissions
+    bool          m_dangerous;      // true = --dangerously-skip-permissions
     std::wstring  m_folderPath;
-    std::wstring  m_selectedFiles; // space-joined "@file" args for file selections
+    std::wstring  m_selectedFiles;  // space-joined "@file" args for file selections
+    UINT          m_fileArgCount;   // number of non-directory files collected
+    UINT          m_extraDirCount;  // number of additional directories ignored (>1)
     HMENU         m_hSubMenu;
 
     static HBITMAP   s_hBitmap;

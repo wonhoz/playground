@@ -13,7 +13,7 @@ HBITMAP   ClaudeContextMenu::s_hBitmap  = nullptr;
 INIT_ONCE ClaudeContextMenu::s_initOnce = INIT_ONCE_STATIC_INIT;
 
 ClaudeContextMenu::ClaudeContextMenu(bool dangerous)
-    : m_cRef(1), m_dangerous(dangerous), m_hSubMenu(nullptr)
+    : m_cRef(1), m_dangerous(dangerous), m_fileArgCount(0), m_extraDirCount(0), m_hSubMenu(nullptr)
 {
     InterlockedIncrement(&g_cDllRef);
 }
@@ -63,6 +63,30 @@ bool FindWindowsTerminal()
     return PathFileExistsW(path) == TRUE;
 }
 
+// ── 공유 유틸: PowerShell 7(pwsh.exe) 탐색 ───────────────────────────────────
+bool FindPowerShell7()
+{
+    WCHAR buf[MAX_PATH] = L"pwsh.exe";
+    if (PathFindOnPathW(buf, nullptr)) return true;
+
+    WCHAR programFiles[MAX_PATH] = {}, programFilesX86[MAX_PATH] = {};
+    ExpandEnvironmentStringsW(L"%ProgramFiles%",      programFiles,    MAX_PATH);
+    ExpandEnvironmentStringsW(L"%ProgramFiles(x86)%", programFilesX86, MAX_PATH);
+
+    struct { const wchar_t* base; const wchar_t* rel; } paths[] = {
+        { programFiles,    L"PowerShell\\7\\pwsh.exe"   },
+        { programFiles,    L"PowerShell\\7-preview\\pwsh.exe" },
+        { programFilesX86, L"PowerShell\\7\\pwsh.exe"   },
+    };
+    for (auto& p : paths)
+    {
+        WCHAR full[MAX_PATH] = {};
+        PathCombineW(full, p.base, p.rel);
+        if (PathFileExistsW(full)) return true;
+    }
+    return false;
+}
+
 // ── 공유 유틸: 레지스트리 HKCU\Software\ClaudeCode 문자열 값 읽기 ─────────────
 static std::wstring GetRegistryString(const wchar_t* name)
 {
@@ -81,6 +105,40 @@ static bool GetNewTabFlag()
     RegGetValueW(HKEY_CURRENT_USER, L"Software\\ClaudeCode", L"NewTab",
                  RRF_RT_REG_DWORD, nullptr, &val, &sz);
     return val != 0;
+}
+
+// ── 레지스트리 캐시 — LaunchClaude 매 호출 시 3회 읽기 방지 ──────────────────
+struct RegCache {
+    std::wstring terminalPath;
+    std::wstring terminalType;
+    bool         newTab  = false;
+    bool         loaded  = false;
+};
+static RegCache& GetRegCache()
+{
+    static RegCache s;
+    if (!s.loaded)
+    {
+        s.terminalPath = GetRegistryString(L"TerminalPath");
+        s.terminalType = GetRegistryString(L"TerminalType");
+        s.newTab       = GetNewTabFlag();
+        s.loaded       = true;
+    }
+    return s;
+}
+
+// ── PowerShell -Command 인자 내 큰따옴표 이스케이프 ───────────────────────────
+// "-Command \"...\"" 내부에 이미 큰따옴표가 있으면 \" 로 이스케이프해야 함
+static std::wstring EscapeForPwshCommand(const std::wstring& s)
+{
+    std::wstring r;
+    r.reserve(s.size() + 8);
+    for (wchar_t c : s)
+    {
+        if (c == L'"') r += L"\\\"";
+        else            r += c;
+    }
+    return r;
 }
 
 // ── 공유 유틸: Claude 실행 ────────────────────────────────────────────────────
@@ -115,23 +173,39 @@ static void LaunchClaude(const std::wstring& folder, bool dangerous,
     sei.lpVerb = L"open";
     sei.nShow  = SW_SHOWNORMAL;
 
-    // TerminalPath: 레지스트리 커스텀 터미널 경로 (없거나 파일이 존재하지 않으면 무시)
-    std::wstring customTerm = GetRegistryString(L"TerminalPath");
+    // 레지스트리 설정 (캐시 사용 — 매 호출 시 3회 읽기 방지)
+    const RegCache& rc = GetRegCache();
+
+    // TerminalPath: 커스텀 터미널 경로 (파일 존재 확인)
+    std::wstring customTerm = rc.terminalPath;
     if (!customTerm.empty() && !PathFileExistsW(customTerm.c_str()))
         customTerm.clear(); // 경로 무효 → 폴백
 
-    // TerminalType: "wt"/"auto"(기본) → wt.exe 인자, "cmd" → cmd.exe 인자
-    std::wstring termType = GetRegistryString(L"TerminalType");
-    bool useCmdArgs = (termType == L"cmd");
+    // TerminalType: "pwsh" → PowerShell 7, "cmd" → cmd.exe, 그 외 → wt.exe 호환
+    const std::wstring& termType = rc.terminalType;
+    bool usePwshArgs = (termType == L"pwsh");
+    bool useCmdArgs  = (termType == L"cmd");
 
-    // NewTab: 1 이면 wt.exe에 --window 0 new-tab 추가
-    bool newTab = GetNewTabFlag();
-    const std::wstring wtNewTabPrefix = newTab ? L"--window 0 new-tab " : L"";
+    // NewTab: 1 이면 wt.exe 에 --window 0 new-tab 추가
+    const std::wstring wtNewTabPrefix = rc.newTab ? L"--window 0 new-tab " : L"";
 
     std::wstring args;
     if (!customTerm.empty())
     {
-        if (useCmdArgs)
+        if (usePwshArgs)
+        {
+            // PowerShell 7 인자 형식: -NoExit [-WorkingDirectory "dir"] -Command "claude [--% args]"
+            // --%  stop-parsing prefix 로 @ 스플래팅 방지, 따옴표는 \" 이스케이프
+            std::wstring pwshCmd = dangerous
+                ? L"claude --% --dangerously-skip-permissions"
+                : L"claude --%";
+            if (!fileArgs.empty())
+                pwshCmd += L" " + EscapeForPwshCommand(fileArgs);
+            args = quotedFolder.empty()
+                ? std::wstring(L"-NoExit -Command \"") + pwshCmd + L"\""
+                : std::wstring(L"-NoExit -WorkingDirectory \"") + quotedFolder + L"\" -Command \"" + pwshCmd + L"\"";
+        }
+        else if (useCmdArgs)
         {
             // cmd.exe 인자 형식
             args = folder.empty()
@@ -153,6 +227,19 @@ static void LaunchClaude(const std::wstring& folder, bool dangerous,
             ? wtNewTabPrefix + L"cmd /k " + claudeCmd
             : wtNewTabPrefix + std::wstring(L"-d \"") + quotedFolder + L"\" cmd /k " + claudeCmd;
         sei.lpFile = L"wt.exe";
+    }
+    else if (FindPowerShell7())
+    {
+        // PowerShell 7 자동 감지 폴백 — wt 없을 때 pwsh 사용
+        std::wstring pwshCmd = dangerous
+            ? L"claude --% --dangerously-skip-permissions"
+            : L"claude --%";
+        if (!fileArgs.empty())
+            pwshCmd += L" " + EscapeForPwshCommand(fileArgs);
+        args = quotedFolder.empty()
+            ? std::wstring(L"-NoExit -Command \"") + pwshCmd + L"\""
+            : std::wstring(L"-NoExit -WorkingDirectory \"") + quotedFolder + L"\" -Command \"" + pwshCmd + L"\"";
+        sei.lpFile = L"pwsh.exe";
     }
     else
     {
@@ -200,6 +287,8 @@ STDMETHODIMP ClaudeContextMenu::Initialize(PCIDLIST_ABSOLUTE pidlFolder, IDataOb
 {
     m_folderPath.clear();
     m_selectedFiles.clear();
+    m_fileArgCount  = 0;
+    m_extraDirCount = 0;
     if (pdtobj)
     {
         FORMATETC fe = { CF_HDROP, nullptr, DVASPECT_CONTENT, -1, TYMED_HGLOBAL };
@@ -211,27 +300,38 @@ STDMETHODIMP ClaudeContextMenu::Initialize(PCIDLIST_ABSOLUTE pidlFolder, IDataOb
             {
                 UINT count = DragQueryFileW(hDrop, 0xFFFFFFFF, nullptr, 0);
                 std::wstring fileArgs;
+                UINT dirCount = 0;
                 for (UINT i = 0; i < count; i++)
                 {
                     WCHAR buf[MAX_PATH] = {};
                     if (!DragQueryFileW(hDrop, i, buf, MAX_PATH)) continue;
+
+                    bool isDir = PathIsDirectoryW(buf) != FALSE;
+                    if (isDir) dirCount++;
 
                     if (i == 0)
                     {
                         // 첫 번째 항목으로 작업 폴더 결정
                         WCHAR folder[MAX_PATH] = {};
                         wcscpy_s(folder, buf);
-                        if (!PathIsDirectoryW(buf))
-                            PathRemoveFileSpecW(folder);
+                        if (!isDir) PathRemoveFileSpecW(folder);
                         m_folderPath = folder;
                     }
                     // 파일 선택 시 "@파일명" 인자 수집 (폴더는 제외)
-                    if (!PathIsDirectoryW(buf))
+                    if (!isDir)
                     {
                         if (!fileArgs.empty()) fileArgs += L" ";
-                        fileArgs += std::wstring(L"@") + PathFindFileNameW(buf);
+                        std::wstring fname = PathFindFileNameW(buf);
+                        // 공백 포함 파일명은 따옴표로 감쌈 — cmd/wt 가 단일 인자로 전달
+                        if (fname.find(L' ') != std::wstring::npos)
+                            fileArgs += L"\"@" + fname + L"\"";
+                        else
+                            fileArgs += L"@" + fname;
+                        m_fileArgCount++;
                     }
                 }
+                // 두 번째 이상의 디렉터리 수 (경고용)
+                m_extraDirCount = (dirCount > 1) ? (dirCount - 1) : 0;
                 m_selectedFiles = fileArgs;
                 GlobalUnlock(stg.hGlobal);
             }
@@ -276,6 +376,27 @@ STDMETHODIMP ClaudeContextMenu::QueryContextMenu(HMENU hmenu, UINT indexMenu, UI
 STDMETHODIMP ClaudeContextMenu::InvokeCommand(LPCMINVOKECOMMANDINFO pici)
 {
     if (HIWORD(pici->lpVerb) != 0) return E_FAIL;
+
+    // 다중 폴더 선택 경고 — 첫 번째 폴더만 사용됨
+    if (m_extraDirCount > 0)
+    {
+        WCHAR msg[MAX_PATH + 128];
+        swprintf_s(msg, L"%u\uAC1C \uD3F4\uB354\uAC00 \uC120\uD0DD\uB418\uC5C8\uC2B5\uB2C8\uB2E4.\n"
+                        L"\uCCAB \uBC88\uC9F8 \uD3F4\uB354\uC5D0\uC11C\uB9CC \uC5F4\uB9BD\uB2C8\uB2E4:\n%s",
+                   m_extraDirCount + 1, m_folderPath.c_str());
+        MessageBoxW(nullptr, msg, L"Claude Code", MB_OK | MB_ICONINFORMATION);
+    }
+
+    // 파일 100개 이상 선택 시 확인
+    if (m_fileArgCount >= 100)
+    {
+        WCHAR msg[128];
+        swprintf_s(msg, L"%u\uAC1C \uD30C\uC77C\uC774 \uC120\uD0DD\uB418\uC5C8\uC2B5\uB2C8\uB2E4.\n"
+                        L"\uACC4\uC18D\uD558\uC2DC\uACA0\uC2B5\uB2C8\uAE4C?", m_fileArgCount);
+        if (MessageBoxW(nullptr, msg, L"Claude Code", MB_YESNO | MB_ICONWARNING) != IDYES)
+            return S_OK;
+    }
+
     LaunchClaude(m_folderPath, LOWORD(pici->lpVerb) == CMD_DANGEROUS, m_selectedFiles);
     return S_OK;
 }
@@ -307,16 +428,30 @@ STDMETHODIMP ClaudeContextMenu::GetTitle(IShellItemArray*, LPWSTR* ppszName)
 }
 STDMETHODIMP ClaudeContextMenu::GetIcon(IShellItemArray*, LPWSTR* ppszIcon)
 {
-    std::wstring src = FindClaudeIconSource();
-    if (src.empty()) { *ppszIcon = nullptr; return S_FALSE; }
-    SIZE_T cb = (src.size() + 1) * sizeof(WCHAR);
+    // 프로세스 수명 동안 캐시 — Explorer 컨텍스트 메뉴 표시마다 파일시스템 탐색 방지
+    static std::wstring s_src;
+    static bool s_checked = false;
+    if (!s_checked) { s_src = FindClaudeIconSource(); s_checked = true; }
+    if (s_src.empty()) { *ppszIcon = nullptr; return S_FALSE; }
+    SIZE_T cb = (s_src.size() + 1) * sizeof(WCHAR);
     *ppszIcon = static_cast<LPWSTR>(CoTaskMemAlloc(cb));
     if (!*ppszIcon) return E_OUTOFMEMORY;
-    wcscpy_s(*ppszIcon, cb / sizeof(WCHAR), src.c_str());
+    wcscpy_s(*ppszIcon, cb / sizeof(WCHAR), s_src.c_str());
     return S_OK;
 }
 STDMETHODIMP ClaudeContextMenu::GetToolTip(IShellItemArray*, LPWSTR* ppszTip)
-    { *ppszTip = nullptr; return S_FALSE; }
+{
+    // 미설치 시 다운로드 안내, 설치된 경우 실행 파일 경로 표시
+    std::wstring exePath = FindClaudeIconSource(); // claude.exe or icon fallback
+    const wchar_t* tip = exePath.empty()
+        ? L"Claude Code \uAC00 \uC124\uCE58\uB418\uC9C0 \uC54A\uC558\uC2B5\uB2C8\uB2E4. claude.ai/download"
+        : exePath.c_str();
+    SIZE_T cb = (wcslen(tip) + 1) * sizeof(WCHAR);
+    *ppszTip = static_cast<LPWSTR>(CoTaskMemAlloc(cb));
+    if (!*ppszTip) return E_OUTOFMEMORY;
+    wcscpy_s(*ppszTip, cb / sizeof(WCHAR), tip);
+    return S_OK;
+}
 STDMETHODIMP ClaudeContextMenu::GetCanonicalName(GUID* pguid)
 {
     *pguid = m_dangerous ? CLSID_ClaudeContextMenuDangerous : CLSID_ClaudeContextMenu;
@@ -329,10 +464,13 @@ STDMETHODIMP ClaudeContextMenu::Invoke(IShellItemArray* psia, IBindCtx*)
 {
     std::wstring folder;
     std::wstring fileArgs;
+    UINT fileArgCount  = 0;
+    UINT extraDirCount = 0;
     if (psia)
     {
         DWORD count = 0;
         psia->GetCount(&count);
+        UINT dirCount = 0;
         for (DWORD i = 0; i < count; i++)
         {
             IShellItem* psi = nullptr;
@@ -341,11 +479,14 @@ STDMETHODIMP ClaudeContextMenu::Invoke(IShellItemArray* psia, IBindCtx*)
             LPWSTR pszPath = nullptr;
             if (SUCCEEDED(psi->GetDisplayName(SIGDN_FILESYSPATH, &pszPath)) && pszPath)
             {
+                bool isDir = PathIsDirectoryW(pszPath) != FALSE;
+                if (isDir) dirCount++;
+
                 if (i == 0)
                 {
                     // 첫 번째 항목으로 작업 폴더 결정
                     folder = pszPath;
-                    if (!PathIsDirectoryW(folder.c_str()))
+                    if (!isDir)
                     {
                         WCHAR buf[MAX_PATH] = {};
                         wcscpy_s(buf, folder.c_str());
@@ -354,17 +495,46 @@ STDMETHODIMP ClaudeContextMenu::Invoke(IShellItemArray* psia, IBindCtx*)
                     }
                 }
                 // 파일 선택 시 "@파일명" 인자 수집 (폴더는 제외)
-                if (!PathIsDirectoryW(pszPath))
+                if (!isDir)
                 {
                     if (!fileArgs.empty()) fileArgs += L" ";
-                    fileArgs += std::wstring(L"@") + PathFindFileNameW(pszPath);
+                    std::wstring fname = PathFindFileNameW(pszPath);
+                    // 공백 포함 파일명은 따옴표로 감쌈 — cmd/wt 가 단일 인자로 전달
+                    if (fname.find(L' ') != std::wstring::npos)
+                        fileArgs += L"\"@" + fname + L"\"";
+                    else
+                        fileArgs += L"@" + fname;
+                    fileArgCount++;
                 }
                 CoTaskMemFree(pszPath);
             }
             psi->Release();
         }
+        extraDirCount = (dirCount > 1) ? (dirCount - 1) : 0;
     }
     if (folder.empty()) folder = m_folderPath;
+
+    // 다중 폴더 선택 경고
+    if (extraDirCount > 0)
+    {
+        WCHAR msg[MAX_PATH + 128];
+        swprintf_s(msg, L"%u\uAC1C \uD3F4\uB354\uAC00 \uC120\uD0DD\uB418\uC5C8\uC2B5\uB2C8\uB2E4.\n"
+                        L"\uCCAB \uBC88\uC9F8 \uD3F4\uB354\uC5D0\uC11C\uB9CC \uC5F4\uB9BD\uB2C8\uB2E4:\n%s",
+                   extraDirCount + 1, folder.c_str());
+        MessageBoxW(nullptr, msg, L"Claude Code", MB_OK | MB_ICONINFORMATION);
+    }
+
+    // 파일 100개 이상 선택 시 확인
+    UINT fc = fileArgCount > 0 ? fileArgCount : m_fileArgCount;
+    if (fc >= 100)
+    {
+        WCHAR msg[128];
+        swprintf_s(msg, L"%u\uAC1C \uD30C\uC77C\uC774 \uC120\uD0DD\uB418\uC5C8\uC2B5\uB2C8\uB2E4.\n"
+                        L"\uACC4\uC18D\uD558\uC2DC\uACA0\uC2B5\uB2C8\uAE4C?", fc);
+        if (MessageBoxW(nullptr, msg, L"Claude Code", MB_YESNO | MB_ICONWARNING) != IDYES)
+            return S_OK;
+    }
+
     LaunchClaude(folder, m_dangerous, fileArgs.empty() ? m_selectedFiles : fileArgs);
     return S_OK;
 }

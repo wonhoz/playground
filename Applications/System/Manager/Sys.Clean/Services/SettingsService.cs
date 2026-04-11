@@ -2,7 +2,9 @@ using System.Text.Json;
 
 namespace SysClean.Services;
 
-public record AppSettings(double Left, double Top, double Width, double Height, string LastTab);
+public record AppSettings(
+    double Left, double Top, double Width, double Height,
+    string LastTab, string[]? SelectedCleanerIds = null);
 
 public static class SettingsService
 {

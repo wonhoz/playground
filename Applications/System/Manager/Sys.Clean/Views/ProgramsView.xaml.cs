@@ -78,6 +78,49 @@ public partial class ProgramsView : UserControl
     private void TxtSearch_TextChanged(object sender, TextChangedEventArgs e) => ApplyFilter();
     private void BtnRefresh_Click(object sender, RoutedEventArgs e) => Refresh();
 
+    private void BtnExport_Click(object sender, RoutedEventArgs e)
+    {
+        if (_allPrograms.Count == 0)
+        {
+            DarkMessageBox.Show("내보낼 프로그램이 없습니다.", "내보내기",
+                MessageBoxButton.OK, MessageBoxImage.Information);
+            return;
+        }
+
+        var dlg = new Microsoft.Win32.SaveFileDialog
+        {
+            Title = "프로그램 목록 내보내기",
+            Filter = "CSV 파일 (*.csv)|*.csv",
+            FileName = $"installed_programs_{DateTime.Now:yyyyMMdd}.csv"
+        };
+        if (dlg.ShowDialog() != true) return;
+
+        try
+        {
+            var sb = new System.Text.StringBuilder();
+            sb.AppendLine("이름,제조사,버전,크기,설치일");
+            foreach (var p in _allPrograms)
+            {
+                var name = CsvEscape(p.Name);
+                var pub = CsvEscape(p.Publisher);
+                var ver = CsvEscape(p.Version);
+                sb.AppendLine($"{name},{pub},{ver},{p.SizeText},{p.InstallDate}");
+            }
+            File.WriteAllText(dlg.FileName, sb.ToString(), System.Text.Encoding.UTF8);
+            TbStatus.Text = $"CSV 내보내기 완료: {dlg.FileName}";
+        }
+        catch (Exception ex)
+        {
+            DarkMessageBox.Show($"내보내기 실패: {ex.Message}", "오류",
+                MessageBoxButton.OK, MessageBoxImage.Error);
+        }
+    }
+
+    private static string CsvEscape(string s)
+        => s.Contains(',') || s.Contains('"') || s.Contains('\n')
+            ? $"\"{s.Replace("\"", "\"\"")}\""
+            : s;
+
     private void BtnUninstall_Click(object sender, RoutedEventArgs e)
     {
         var selected = ProgramList.SelectedItems.Cast<InstalledProgram>().ToList();
@@ -89,7 +132,7 @@ public partial class ProgramsView : UserControl
 
         if (canUninstall.Count == 0)
         {
-            MessageBox.Show("선택한 프로그램의 제거 명령을 찾을 수 없습니다.", "오류",
+            DarkMessageBox.Show("선택한 프로그램의 제거 명령을 찾을 수 없습니다.", "오류",
                 MessageBoxButton.OK, MessageBoxImage.Warning);
             return;
         }
@@ -101,7 +144,7 @@ public partial class ProgramsView : UserControl
         if (noUninstaller > 0)
             msg += $"\n\n※ 제거 명령 없음 {noUninstaller}개는 건너뜁니다.";
 
-        var result = MessageBox.Show(msg, "제거 확인", MessageBoxButton.OKCancel, MessageBoxImage.Question);
+        var result = DarkMessageBox.Show(msg, "제거 확인", MessageBoxButton.OKCancel, MessageBoxImage.Question);
         if (result != MessageBoxResult.OK) return;
 
         int succeeded = 0;
@@ -110,7 +153,7 @@ public partial class ProgramsView : UserControl
             if (_service.Uninstall(program))
                 succeeded++;
             else
-                MessageBox.Show($"'{program.Name}' 제거 프로그램을 실행할 수 없습니다.", "오류",
+                DarkMessageBox.Show($"'{program.Name}' 제거 프로그램을 실행할 수 없습니다.", "오류",
                     MessageBoxButton.OK, MessageBoxImage.Error);
         }
 

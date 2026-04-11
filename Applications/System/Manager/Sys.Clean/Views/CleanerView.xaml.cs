@@ -91,6 +91,19 @@ public partial class CleanerView : UserControl
         TbStatus.Text = $"'{folder}' 추가됨. 분석을 다시 실행하세요.";
     }
 
+    // ── 선택 상태 영속화 ─────────────────────────────────────────────────
+    internal string[] GetSelectedCleanerIds()
+        => _targets.Where(t => !t.IsGroup && t.IsSelected).Select(t => t.CleanerId).ToArray();
+
+    internal void RestoreSelections(string[] selectedIds)
+    {
+        var set = new HashSet<string>(selectedIds);
+        foreach (var t in _targets.Where(t => !t.IsGroup))
+            t.IsSelected = set.Contains(t.CleanerId);
+        TargetList.ItemsSource = null;
+        TargetList.ItemsSource = _targets;
+    }
+
     // ── 키보드 단축키 트리거 (MainWindow에서 호출) ─────────────────────
     internal void TriggerAnalyze() => BtnAnalyze_Click(BtnAnalyze, new RoutedEventArgs());
     internal void TriggerClean()   { if (BtnClean.IsEnabled) BtnClean_Click(BtnClean, new RoutedEventArgs()); }
@@ -412,7 +425,7 @@ public partial class CleanerView : UserControl
     {
         if (_cts != null) return; // 이미 작업 중
 
-        var result = MessageBox.Show(
+        var result = DarkMessageBox.Show(
             $"'{target.Name}' ({CleanTarget.FormatSize(target.Size)})을 지금 청소하시겠습니까?\n\n이 작업은 되돌릴 수 없습니다.",
             "청소 확인",
             MessageBoxButton.OKCancel,
@@ -447,7 +460,7 @@ public partial class CleanerView : UserControl
         var msg = errors > 0
             ? $"'{target.Name}' 청소 완료!\n해제된 공간: {CleanTarget.FormatSize(cleaned)}\n실패: {errors}개 (사용 중인 파일 등)"
             : $"'{target.Name}' 청소 완료!\n해제된 공간: {CleanTarget.FormatSize(cleaned)}";
-        MessageBox.Show(msg, "청소 완료", MessageBoxButton.OK, MessageBoxImage.Information);
+        DarkMessageBox.Show(msg, "청소 완료", MessageBoxButton.OK, MessageBoxImage.Information);
 
         TbStatus.Text = $"'{target.Name}' — {CleanTarget.FormatSize(cleaned)} 해제";
         UpdateResults();
@@ -487,7 +500,7 @@ public partial class CleanerView : UserControl
         var toClean = _targets.Where(t => !t.IsGroup && t.IsSelected && t.Size > 0).ToList();
         if (toClean.Count == 0) return;
 
-        var result = MessageBox.Show(
+        var result = DarkMessageBox.Show(
             $"선택한 {toClean.Count}개 항목 ({CleanTarget.FormatSize(toClean.Sum(t => t.Size))})을 삭제하시겠습니까?\n\n이 작업은 되돌릴 수 없습니다.",
             "청소 확인",
             MessageBoxButton.OKCancel,
@@ -504,7 +517,7 @@ public partial class CleanerView : UserControl
 
         if (runningBrowserWarnings.Count > 0)
         {
-            var warnResult = MessageBox.Show(
+            var warnResult = DarkMessageBox.Show(
                 $"다음 브라우저가 실행 중입니다: {string.Join(", ", runningBrowserWarnings)}\n\n" +
                 "브라우저가 열려 있으면 캐시 파일 일부가 사용 중이어서 삭제되지 않을 수 있습니다.\n\n" +
                 "브라우저를 먼저 닫고 청소하면 더 많은 공간을 확보할 수 있습니다.\n\n" +
@@ -586,7 +599,7 @@ public partial class CleanerView : UserControl
             ? $"청소 완료!\n\n해제된 공간: {CleanTarget.FormatSize(totalCleaned)}\n실패 항목: {totalErrors}개 (사용 중인 파일 등)"
             : $"청소 완료!\n\n해제된 공간: {CleanTarget.FormatSize(totalCleaned)}";
 
-        MessageBox.Show(msg, "청소 완료", MessageBoxButton.OK, MessageBoxImage.Information);
+        DarkMessageBox.Show(msg, "청소 완료", MessageBoxButton.OK, MessageBoxImage.Information);
         TbStatus.Text = $"청소 완료 — {CleanTarget.FormatSize(totalCleaned)} 해제";
         TbTotalSize.Text = "";
         TbResultHeader.Text = "청소가 완료되었습니다. 다시 분석하려면 분석 버튼을 클릭하세요.";
@@ -625,6 +638,59 @@ public partial class CleanerView : UserControl
                 when Process.GetProcessesByName("opera").Length > 0 => "Opera",
             _ => null
         };
+    }
+
+    // ── 드래그 앤 드롭 폴더 추가 ─────────────────────────────────────
+    private void OnDragOver(object sender, DragEventArgs e)
+    {
+        if (e.Data.GetDataPresent(DataFormats.FileDrop))
+        {
+            var paths = (string[])e.Data.GetData(DataFormats.FileDrop)!;
+            e.Effects = paths.Any(Directory.Exists) ? DragDropEffects.Copy : DragDropEffects.None;
+        }
+        else
+        {
+            e.Effects = DragDropEffects.None;
+        }
+        e.Handled = true;
+    }
+
+    private void OnDrop(object sender, DragEventArgs e)
+    {
+        if (!e.Data.GetDataPresent(DataFormats.FileDrop)) return;
+
+        var paths = (string[])e.Data.GetData(DataFormats.FileDrop)!;
+        int added = 0;
+        foreach (var folder in paths.Where(Directory.Exists))
+        {
+            if (_targets.Any(t => !t.IsGroup && t.Category == "custom" &&
+                                   t.Paths.Length > 0 &&
+                                   string.Equals(t.Paths[0], folder, StringComparison.OrdinalIgnoreCase)))
+                continue;
+
+            if (!_targets.Any(t => t.IsGroup && t.Category == "custom"))
+                _targets.Add(new CleanTarget { IsGroup = true, Name = "커스텀 폴더", Category = "custom", CleanerId = "grp_custom" });
+
+            _targets.Add(new CleanTarget
+            {
+                Name = Path.GetFileName(folder.TrimEnd('\\', '/')) is { Length: > 0 } n ? n : folder,
+                Description = folder,
+                Category = "custom",
+                CleanerId = $"custom_{folder.GetHashCode():X}",
+                Paths = [folder]
+            });
+
+            CustomFolderService.Add(folder);
+            added++;
+        }
+
+        if (added > 0)
+        {
+            TargetList.ItemsSource = null;
+            TargetList.ItemsSource = _targets;
+            _analyzed = false;
+            TbStatus.Text = $"{added}개 폴더 추가됨. 분석을 다시 실행하세요.";
+        }
     }
 
     // ── 결과 클립보드 복사 ────────────────────────────────────────────

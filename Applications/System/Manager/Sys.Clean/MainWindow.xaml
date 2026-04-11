@@ -170,6 +170,18 @@
                         </StackPanel>
                     </Button>
 
+                    <Button x:Name="BtnNavDiskAnalyzer"
+                            Style="{StaticResource NavButton}"
+                            Click="Nav_Click" Tag="DiskAnalyzer">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="📊" FontSize="15" Margin="0,0,10,0" VerticalAlignment="Center"/>
+                            <StackPanel>
+                                <TextBlock Text="대용량 파일" FontSize="13" FontWeight="SemiBold"/>
+                                <TextBlock Text="디스크 공간 분석" FontSize="10" Foreground="#666"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </Button>
+
                     <Separator Margin="16,12"/>
 
                     <TextBlock Text="기록" Foreground="#444" FontSize="10" FontWeight="SemiBold"
@@ -194,11 +206,12 @@
              우측 콘텐츠 영역
         ══════════════════════════════════════════════════════════ -->
         <Grid Grid.Column="1">
-            <views:CleanerView  x:Name="ViewCleaner"  Visibility="Visible"/>
-            <views:RegistryView x:Name="ViewRegistry" Visibility="Collapsed"/>
-            <views:StartupView  x:Name="ViewStartup"  Visibility="Collapsed"/>
-            <views:ProgramsView x:Name="ViewPrograms" Visibility="Collapsed"/>
-            <views:HistoryView  x:Name="ViewHistory"  Visibility="Collapsed"/>
+            <views:CleanerView      x:Name="ViewCleaner"      Visibility="Visible"/>
+            <views:RegistryView     x:Name="ViewRegistry"     Visibility="Collapsed"/>
+            <views:StartupView      x:Name="ViewStartup"      Visibility="Collapsed"/>
+            <views:ProgramsView     x:Name="ViewPrograms"     Visibility="Collapsed"/>
+            <views:DiskAnalyzerView x:Name="ViewDiskAnalyzer" Visibility="Collapsed"/>
+            <views:HistoryView      x:Name="ViewHistory"      Visibility="Collapsed"/>
         </Grid>
     </Grid>
 </Window>

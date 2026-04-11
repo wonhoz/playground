@@ -102,7 +102,7 @@ public partial class HistoryView : UserControl
 
     private void BtnClear_Click(object sender, RoutedEventArgs e)
     {
-        var result = MessageBox.Show(
+        var result = DarkMessageBox.Show(
             "청소 기록을 모두 지우시겠습니까?",
             "기록 삭제",
             MessageBoxButton.OKCancel,
@@ -116,7 +116,7 @@ public partial class HistoryView : UserControl
         }
         catch (Exception ex)
         {
-            MessageBox.Show($"기록 삭제 실패: {ex.Message}", "오류", MessageBoxButton.OK, MessageBoxImage.Error);
+            DarkMessageBox.Show($"기록 삭제 실패: {ex.Message}", "오류", MessageBoxButton.OK, MessageBoxImage.Error);
             return;
         }
 

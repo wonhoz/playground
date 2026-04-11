@@ -96,7 +96,7 @@ public partial class StartupView : UserControl
         }
         else
         {
-            MessageBox.Show("관리자 권한이 필요합니다.", "권한 오류", MessageBoxButton.OK, MessageBoxImage.Warning);
+            DarkMessageBox.Show("관리자 권한이 필요합니다.", "권한 오류", MessageBoxButton.OK, MessageBoxImage.Warning);
         }
     }
 
@@ -105,7 +105,7 @@ public partial class StartupView : UserControl
         var selected = StartupList.SelectedItems.Cast<StartupEntry>().ToList();
         if (selected.Count == 0) return;
 
-        var result = MessageBox.Show(
+        var result = DarkMessageBox.Show(
             $"선택한 {selected.Count}개 항목을 시작 프로그램에서 삭제하시겠습니까?",
             "삭제 확인",
             MessageBoxButton.OKCancel,
@@ -165,13 +165,13 @@ public partial class StartupView : UserControl
 
         if (string.IsNullOrEmpty(name))
         {
-            MessageBox.Show("이름을 입력하세요.", "입력 오류", MessageBoxButton.OK, MessageBoxImage.Warning);
+            DarkMessageBox.Show("이름을 입력하세요.", "입력 오류", MessageBoxButton.OK, MessageBoxImage.Warning);
             TxtAddName.Focus();
             return;
         }
         if (string.IsNullOrEmpty(command))
         {
-            MessageBox.Show("명령(실행 파일 경로)을 입력하세요.", "입력 오류", MessageBoxButton.OK, MessageBoxImage.Warning);
+            DarkMessageBox.Show("명령(실행 파일 경로)을 입력하세요.", "입력 오류", MessageBoxButton.OK, MessageBoxImage.Warning);
             TxtAddCommand.Focus();
             return;
         }
@@ -188,7 +188,7 @@ public partial class StartupView : UserControl
         }
         else
         {
-            MessageBox.Show("추가에 실패했습니다. HKLM(모든 사용자)은 관리자 권한이 필요합니다.",
+            DarkMessageBox.Show("추가에 실패했습니다. HKLM(모든 사용자)은 관리자 권한이 필요합니다.",
                 "오류", MessageBoxButton.OK, MessageBoxImage.Warning);
         }
     }

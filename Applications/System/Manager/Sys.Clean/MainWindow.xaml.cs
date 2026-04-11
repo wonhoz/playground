@@ -38,16 +38,21 @@ public partial class MainWindow : Window
         Width = s.Width;
         Height = s.Height;
 
+        // 청소 항목 선택 상태 복원
+        if (s.SelectedCleanerIds != null)
+            ViewCleaner.RestoreSelections(s.SelectedCleanerIds);
+
         // 마지막 탭 복원
         if (s.LastTab != "Cleaner")
         {
             var btn = s.LastTab switch
             {
-                "Registry" => BtnNavRegistry,
-                "Startup"  => BtnNavStartup,
-                "Programs" => BtnNavPrograms,
-                "History"  => BtnNavHistory,
-                _          => null
+                "Registry"     => BtnNavRegistry,
+                "Startup"      => BtnNavStartup,
+                "Programs"     => BtnNavPrograms,
+                "DiskAnalyzer" => BtnNavDiskAnalyzer,
+                "History"      => BtnNavHistory,
+                _              => null
             };
             if (btn != null)
                 Nav_Click(btn, new RoutedEventArgs());
@@ -59,7 +64,8 @@ public partial class MainWindow : Window
     {
         base.OnClosing(e);
         var activeTag = _activeNavBtn.Tag?.ToString() ?? "Cleaner";
-        SettingsService.Save(new AppSettings(Left, Top, Width, Height, activeTag));
+        var selectedIds = ViewCleaner.GetSelectedCleanerIds();
+        SettingsService.Save(new AppSettings(Left, Top, Width, Height, activeTag, selectedIds));
     }
 
     private static SolidColorBrush Hex(string hex)
@@ -189,18 +195,20 @@ public partial class MainWindow : Window
         btn.Style = (Style)Resources["NavButtonActive"];
         _activeNavBtn = btn;
 
-        ViewCleaner.Visibility  = Visibility.Collapsed;
-        ViewRegistry.Visibility = Visibility.Collapsed;
-        ViewStartup.Visibility  = Visibility.Collapsed;
-        ViewPrograms.Visibility = Visibility.Collapsed;
-        ViewHistory.Visibility  = Visibility.Collapsed;
+        ViewCleaner.Visibility      = Visibility.Collapsed;
+        ViewRegistry.Visibility     = Visibility.Collapsed;
+        ViewStartup.Visibility      = Visibility.Collapsed;
+        ViewPrograms.Visibility     = Visibility.Collapsed;
+        ViewDiskAnalyzer.Visibility = Visibility.Collapsed;
+        ViewHistory.Visibility      = Visibility.Collapsed;
 
         switch (tag)
         {
-            case "Cleaner":  ViewCleaner.Visibility  = Visibility.Visible; break;
-            case "Registry": ViewRegistry.Visibility = Visibility.Visible; break;
-            case "Startup":  ViewStartup.Visibility  = Visibility.Visible; break;
-            case "Programs": ViewPrograms.Visibility = Visibility.Visible; break;
+            case "Cleaner":      ViewCleaner.Visibility      = Visibility.Visible; break;
+            case "Registry":     ViewRegistry.Visibility     = Visibility.Visible; break;
+            case "Startup":      ViewStartup.Visibility      = Visibility.Visible; break;
+            case "Programs":     ViewPrograms.Visibility     = Visibility.Visible; break;
+            case "DiskAnalyzer": ViewDiskAnalyzer.Visibility = Visibility.Visible; break;
             case "History":
                 ViewHistory.Visibility = Visibility.Visible;
                 ViewHistory.Refresh();

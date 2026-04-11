@@ -27,7 +27,26 @@
         <!-- 검색 -->
         <Border Grid.Row="1" Padding="16,10,16,0">
             <TextBox x:Name="TxtSearch" Padding="8,6"
-                     TextChanged="TxtSearch_TextChanged"/>
+                     TextChanged="TxtSearch_TextChanged">
+                <TextBox.Style>
+                    <Style TargetType="TextBox" BasedOn="{StaticResource {x:Type TextBox}}">
+                        <Style.Triggers>
+                            <Trigger Property="Text" Value="">
+                                <Setter Property="Background">
+                                    <Setter.Value>
+                                        <VisualBrush AlignmentX="Left" AlignmentY="Center" Stretch="None">
+                                            <VisualBrush.Visual>
+                                                <TextBlock Text="🔍  프로그램 이름 또는 제조사로 검색..."
+                                                           Foreground="#555" FontSize="13" Margin="10,0,0,0"/>
+                                            </VisualBrush.Visual>
+                                        </VisualBrush>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBox.Style>
+            </TextBox>
         </Border>
 
         <!-- 프로그램 목록 -->
@@ -106,15 +125,21 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
 
                 <TextBlock Grid.Column="0" x:Name="TbStatus" Text="프로그램을 선택하세요."
                            Foreground="#888" FontSize="12" VerticalAlignment="Center"/>
 
-                <Button Grid.Column="1" Content="🔄  새로고침" Click="BtnRefresh_Click"
+                <Button Grid.Column="1" Content="📥  내보내기" Click="BtnExport_Click"
+                        Padding="10,6" Margin="0,0,6,0" FontSize="12"
+                        Background="#252535" Foreground="#888" BorderBrush="#3A3A5A"
+                        ToolTip="설치된 프로그램 목록을 CSV 파일로 내보내기"/>
+
+                <Button Grid.Column="2" Content="🔄  새로고침" Click="BtnRefresh_Click"
                         Padding="10,6" Margin="0,0,6,0" FontSize="12"/>
 
-                <Button Grid.Column="2" x:Name="BtnUninstall" Content="🗑  제거"
+                <Button Grid.Column="3" x:Name="BtnUninstall" Content="🗑  제거"
                         Click="BtnUninstall_Click" Padding="14,7" FontSize="13"
                         Background="#3A1A1A" Foreground="#EF5350" BorderBrush="#C62828"/>
             </Grid>

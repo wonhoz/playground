@@ -147,7 +147,7 @@ public class StartupService
 
     public bool Delete(StartupEntry entry)
     {
-        var runPath = HklmRunPath;
+        var runPath = entry.Location == StartupLocation.HklmRun ? HklmRunPath : HkcuRunPath;
         var hive = entry.Location == StartupLocation.HklmRun
             ? Registry.LocalMachine
             : Registry.CurrentUser;

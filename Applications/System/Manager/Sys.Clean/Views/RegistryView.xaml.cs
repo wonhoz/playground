@@ -103,12 +103,12 @@ public partial class RegistryView : UserControl
         }
         catch (Exception ex)
         {
-            MessageBox.Show($"백업 생성 실패: {ex.Message}\n\n안전을 위해 수정을 중단합니다.",
+            DarkMessageBox.Show($"백업 생성 실패: {ex.Message}\n\n안전을 위해 수정을 중단합니다.",
                 "백업 오류", MessageBoxButton.OK, MessageBoxImage.Error);
             return;
         }
 
-        var result = MessageBox.Show(
+        var result = DarkMessageBox.Show(
             $"{toFix.Count}개의 레지스트리 항목을 수정하시겠습니까?\n\n" +
             $"백업 파일이 생성되었습니다:\n{backupPath}\n\n" +
             "복원하려면 위 파일을 더블클릭하세요.",
@@ -136,7 +136,7 @@ public partial class RegistryView : UserControl
             TbStatus.Text = "수정 완료";
             TbCount.Text = _issues.Count > 0 ? $"— 잔여 {_issues.Count}개" : "— 모두 수정됨";
 
-            MessageBox.Show(
+            DarkMessageBox.Show(
                 $"레지스트리 수정 완료!\n\n" +
                 $"수정된 항목: {fixedCount}개\n\n" +
                 $"백업 파일: {Path.GetFileName(backupPath)}\n" +
@@ -150,7 +150,7 @@ public partial class RegistryView : UserControl
         }
         catch (Exception ex)
         {
-            MessageBox.Show($"오류: {ex.Message}", "오류", MessageBoxButton.OK, MessageBoxImage.Error);
+            DarkMessageBox.Show($"오류: {ex.Message}", "오류", MessageBoxButton.OK, MessageBoxImage.Error);
         }
         finally
         {

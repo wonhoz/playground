@@ -32,14 +32,7 @@ public class FolderEntry : INotifyPropertyChanged
         _                     => string.Empty
     };
 
-    public string SizeText => SizeBytes switch
-    {
-        0           => "0 B",
-        < 1024      => $"{SizeBytes} B",
-        < 1048576   => $"{SizeBytes / 1024.0:F1} KB",
-        < 1073741824 => $"{SizeBytes / 1048576.0:F1} MB",
-        _           => $"{SizeBytes / 1073741824.0:F2} GB"
-    };
+    public string SizeText => Helpers.SizeFormatter.Format(SizeBytes);
 
     public string ItemCountText => Kind == FolderKind.Empty
         ? "비어있음"

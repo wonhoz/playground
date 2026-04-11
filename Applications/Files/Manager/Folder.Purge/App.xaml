@@ -2,5 +2,39 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              StartupUri="MainWindow.xaml">
-    <Application.Resources/>
+    <Application.Resources>
+        <!-- 공통 Brushes -->
+        <SolidColorBrush x:Key="AppAccentBrush"       Color="#C85030"/>
+        <SolidColorBrush x:Key="AppAccentHoverBrush"   Color="#E06030"/>
+        <SolidColorBrush x:Key="AppTextPrimary"        Color="#E0E0E0"/>
+        <SolidColorBrush x:Key="AppTextSecondary"      Color="#888888"/>
+        <SolidColorBrush x:Key="AppGreenBrush"         Color="#4CAF50"/>
+        <SolidColorBrush x:Key="AppPanelBrush"         Color="#242424"/>
+        <SolidColorBrush x:Key="AppBorderBrush"        Color="#333333"/>
+
+        <!-- 공통 ScrollBar (Window 로컬 스타일이 있으면 그쪽이 우선) -->
+        <Style TargetType="ScrollBar">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Width" Value="6"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ScrollBar">
+                        <Grid>
+                            <Track x:Name="PART_Track" IsDirectionReversed="True">
+                                <Track.Thumb>
+                                    <Thumb>
+                                        <Thumb.Template>
+                                            <ControlTemplate TargetType="Thumb">
+                                                <Border Background="#444455" CornerRadius="3"/>
+                                            </ControlTemplate>
+                                        </Thumb.Template>
+                                    </Thumb>
+                                </Track.Thumb>
+                            </Track>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Application.Resources>
 </Application>

@@ -10,14 +10,7 @@ public class ScanHistoryEntry
     public int DeletedCount { get; set; }  // 실제 삭제된 항목 수 (스캔만 한 경우 0)
     public List<string> Roots { get; set; } = [];
 
-    public string FreedBytesText => FreedBytes switch
-    {
-        0            => "0 B",
-        < 1024       => $"{FreedBytes} B",
-        < 1048576    => $"{FreedBytes / 1024.0:F1} KB",
-        < 1073741824 => $"{FreedBytes / 1048576.0:F1} MB",
-        _            => $"{FreedBytes / 1073741824.0:F2} GB"
-    };
+    public string FreedBytesText => Helpers.SizeFormatter.Format(FreedBytes);
 }
 
 public class AppSettings

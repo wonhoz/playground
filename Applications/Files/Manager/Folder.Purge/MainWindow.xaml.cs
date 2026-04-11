@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.Media;
 using System.Text;
 using System.Windows.Media;
+using System.Windows.Threading;
 
 namespace FolderPurge;
 
@@ -25,6 +26,7 @@ public partial class MainWindow : Window
     private ListSortDirection _sortDirection = ListSortDirection.Ascending;
     private bool _suppressSelectionSync;
     private IntPtr _hwnd;
+    private readonly DispatcherTimer _filterDebounce;
 
     public MainWindow()
     {
@@ -32,6 +34,8 @@ public partial class MainWindow : Window
         FolderListBox.ItemsSource   = _targetFolders;
         ExcludeListBox.ItemsSource  = _excludedFolders;
         ArtifactListBox.ItemsSource = _artifactFolderNames;
+        _filterDebounce = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(300) };
+        _filterDebounce.Tick += (_, _) => { _filterDebounce.Stop(); ApplyFilter(); };
         Loaded  += OnLoaded;
         Closing += OnClosing;
         KeyDown += OnWindowKeyDown;
@@ -262,7 +266,14 @@ public partial class MainWindow : Window
     private void Filter_Changed(object sender, RoutedEventArgs e)
     {
         if (!IsLoaded) return;
-        ApplyFilter();
+        // RadioButton 변경은 즉시, TextBox 입력은 디바운스
+        if (sender is System.Windows.Controls.RadioButton)
+            ApplyFilter();
+        else
+        {
+            _filterDebounce.Stop();
+            _filterDebounce.Start();
+        }
     }
 
     private FolderKind? ActiveFilterKind()
@@ -409,7 +420,23 @@ public partial class MainWindow : Window
             if (empty > 0) parts.Add($"빈 폴더 {empty:N0}");
             if (vs    > 0) parts.Add($"VS 아티팩트 {vs:N0}");
             if (files > 0) parts.Add($"빈 파일 {files:N0}");
-            StatusText.Text = string.Join("  /  ", parts) + "  —  삭제할 항목을 선택하세요.";
+
+            // 루트별 요약 (2개 이상 루트일 때만)
+            if (_targetFolders.Count > 1)
+            {
+                var rootSummary = _targetFolders
+                    .Select(root => (Name: Path.GetFileName(root) ?? root,
+                                     Count: results.Count(r => r.Path.StartsWith(root, StringComparison.OrdinalIgnoreCase))))
+                    .Where(x => x.Count > 0)
+                    .Select(x => $"{x.Name}({x.Count:N0})");
+                StatusText.Text = string.Join("  /  ", parts)
+                    + "  [" + string.Join(", ", rootSummary) + "]"
+                    + "  —  삭제할 항목을 선택하세요.";
+            }
+            else
+            {
+                StatusText.Text = string.Join("  /  ", parts) + "  —  삭제할 항목을 선택하세요.";
+            }
         }
         else
         {
@@ -461,9 +488,10 @@ public partial class MainWindow : Window
     private void UpdateStats()
     {
         var selected = _scanResults.Where(r => r.IsSelected).ToList();
-        StatFound.Text    = $"{_scanResults.Count:N0}개";
-        StatSelected.Text = $"{selected.Count:N0}개";
-        StatSize.Text     = FormatSize(selected.Sum(r => r.SizeBytes));
+        StatFound.Text     = $"{_scanResults.Count:N0}개";
+        StatSelected.Text  = $"{selected.Count:N0}개";
+        StatTotalSize.Text = FormatSize(_scanResults.Sum(r => r.SizeBytes));
+        StatSize.Text      = FormatSize(selected.Sum(r => r.SizeBytes));
     }
 
     // ── 결과 복사 ───────────────────────────────────────────────────────
@@ -484,7 +512,7 @@ public partial class MainWindow : Window
 
     // ── 내보내기 ─────────────────────────────────────────────────────────
 
-    private void Export_Click(object sender, RoutedEventArgs e)
+    private async void Export_Click(object sender, RoutedEventArgs e)
     {
         if (_scanResults.Count == 0) return;
 
@@ -516,8 +544,9 @@ public partial class MainWindow : Window
             sb.AppendLine($"총 {_scanResults.Count:N0}개  /  {FormatSize(_scanResults.Sum(r => r.SizeBytes))}");
         }
 
-        File.WriteAllText(dlg.FileName, sb.ToString(), Encoding.UTF8);
-        StatusText.Text = $"결과가 저장되었습니다: {Path.GetFileName(dlg.FileName)}";
+        var fileName = dlg.FileName;
+        await File.WriteAllTextAsync(fileName, sb.ToString(), Encoding.UTF8);
+        StatusText.Text = $"결과가 저장되었습니다: {Path.GetFileName(fileName)}";
     }
 
     // ── 삭제 ────────────────────────────────────────────────────────────
@@ -622,12 +651,23 @@ public partial class MainWindow : Window
         DeleteResultText.Text = summary + "\n" + log.ToString();
         DeleteResultPanel.Visibility = Visibility.Visible;
 
+        // 휴지통 삭제 시 복원 안내 버튼 표시
+        OpenRecycleBinBtn.Visibility = !previewOnly && useRecycleBin && successCount > 0
+            ? Visibility.Visible
+            : Visibility.Collapsed;
+
         StatusText.Text = summary;
     }
 
     private void CloseResult_Click(object sender, RoutedEventArgs e)
     {
         DeleteResultPanel.Visibility = Visibility.Collapsed;
+    }
+
+    private void OpenRecycleBin_Click(object sender, RoutedEventArgs e)
+    {
+        try { Process.Start("explorer.exe", "shell:RecycleBinFolder"); }
+        catch { /* 탐색기 실행 실패 무시 */ }
     }
 
     // ── 취소 ────────────────────────────────────────────────────────────
@@ -663,14 +703,7 @@ public partial class MainWindow : Window
 
     // ── 유틸리티 ────────────────────────────────────────────────────────
 
-    private static string FormatSize(long bytes) => bytes switch
-    {
-        0           => "0 B",
-        < 1024      => $"{bytes} B",
-        < 1048576   => $"{bytes / 1024.0:F1} KB",
-        < 1073741824 => $"{bytes / 1048576.0:F1} MB",
-        _           => $"{bytes / 1073741824.0:F2} GB"
-    };
+    private static string FormatSize(long bytes) => Helpers.SizeFormatter.Format(bytes);
 
     private static string TrimPath(string path, int maxLen) =>
         path.Length <= maxLen ? path : "..." + path[^(maxLen - 3)..];

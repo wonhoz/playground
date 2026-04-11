@@ -9,6 +9,7 @@
         ResizeMode="CanResize">
 
     <Window.Resources>
+        <!-- Brush aliases — App.xaml 공통 리소스 참조 -->
         <SolidColorBrush x:Key="AccentBrush"     Color="#C85030"/>
         <SolidColorBrush x:Key="TextPrimary"     Color="#E0E0E0"/>
         <SolidColorBrush x:Key="TextSecondary"   Color="#888888"/>
@@ -16,29 +17,7 @@
         <SolidColorBrush x:Key="PanelBrush"      Color="#242424"/>
         <SolidColorBrush x:Key="BorderBrush"     Color="#333333"/>
 
-        <Style TargetType="ScrollBar">
-            <Setter Property="Background" Value="Transparent"/>
-            <Setter Property="Width" Value="6"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="ScrollBar">
-                        <Grid>
-                            <Track x:Name="PART_Track" IsDirectionReversed="True">
-                                <Track.Thumb>
-                                    <Thumb>
-                                        <Thumb.Template>
-                                            <ControlTemplate TargetType="Thumb">
-                                                <Border Background="#444455" CornerRadius="3"/>
-                                            </ControlTemplate>
-                                        </Thumb.Template>
-                                    </Thumb>
-                                </Track.Thumb>
-                            </Track>
-                        </Grid>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
+        <!-- ScrollBar: App.xaml 글로벌 스타일 상속 -->
 
         <Style x:Key="SectionHeader" TargetType="TextBlock">
             <Setter Property="FontSize"     Value="12"/>
@@ -135,6 +114,8 @@
                     <Run>   · 진행률 바로 실시간 확인 가능</Run>
                     <LineBreak/>
                     <Run>   · 완료 후 종류별 요약: 빈 폴더 N / VS 아티팩트 N / 빈 파일 N</Run>
+                    <LineBreak/>
+                    <Run>   · 여러 루트 폴더 스캔 시 루트별 탐지 개수 요약 표시</Run>
                     <LineBreak/><LineBreak/>
                     <Run FontWeight="SemiBold" Foreground="{StaticResource AccentBrush}">4. 결과 필터링 (필터 바)</Run>
                     <LineBreak/>
@@ -155,6 +136,8 @@
                     <Run>   · 휴지통으로 이동 (기본, 복구 가능)</Run>
                     <LineBreak/>
                     <Run>   · 미리보기 모드: 실제 삭제 없이 대상 확인</Run>
+                    <LineBreak/>
+                    <Run>   · 휴지통 삭제 후 [휴지통 열기] 버튼으로 복원 가능</Run>
                 </TextBlock>
 
                 <!-- 팁 -->
@@ -171,6 +154,10 @@
                     <Run>· 컬럼 헤더 클릭 → 정렬 ▲/▼ (오름/내림차순, 상태 저장됨)</Run>
                     <LineBreak/>
                     <Run>· 아티팩트 폴더명 목록에서 bin, obj 외 폴더명 추가 가능</Run>
+                    <LineBreak/>
+                    <Run>· 통계 패널에서 전체 용량 / 선택 용량을 분리 확인 가능</Run>
+                    <LineBreak/>
+                    <Run>· 검색·크기 필터 입력 시 300ms 디바운스 적용 (대량 결과 시 부드러운 입력)</Run>
                 </TextBlock>
 
                 <!-- 최근 삭제 이력 -->

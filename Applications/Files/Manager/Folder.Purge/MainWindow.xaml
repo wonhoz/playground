@@ -481,7 +481,12 @@
                                        Foreground="{StaticResource TextPrimary}" HorizontalAlignment="Right"/>
                         </Grid>
                         <Grid Margin="0,1">
-                            <TextBlock Text="확보 예상 용량" FontSize="10" Foreground="{StaticResource TextSecondary}"/>
+                            <TextBlock Text="전체 용량" FontSize="10" Foreground="{StaticResource TextSecondary}"/>
+                            <TextBlock x:Name="StatTotalSize" Text="0 B" FontSize="10"
+                                       Foreground="{StaticResource TextSecondary}" HorizontalAlignment="Right"/>
+                        </Grid>
+                        <Grid Margin="0,1">
+                            <TextBlock Text="선택 용량" FontSize="10" Foreground="{StaticResource TextSecondary}"/>
                             <TextBlock x:Name="StatSize" Text="0 B" FontSize="10"
                                        Foreground="{StaticResource GreenBrush}" HorizontalAlignment="Right"/>
                         </Grid>
@@ -624,6 +629,8 @@
                           ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                           Visibility="Collapsed"
                           SelectionMode="Extended"
+                          VirtualizingPanel.IsVirtualizing="True"
+                          VirtualizingPanel.VirtualizationMode="Recycling"
                           GridViewColumnHeader.Click="ColumnHeader_Click"
                           MouseDoubleClick="ResultListView_MouseDoubleClick"
                           SelectionChanged="ResultListView_SelectionChanged">
@@ -736,10 +743,16 @@
                         <TextBlock x:Name="DeleteResultText" FontSize="11"
                                    Foreground="#A0D0A0" TextWrapping="Wrap"/>
                     </ScrollViewer>
-                    <Button Grid.Column="2" Content="닫기"
-                            Style="{StaticResource GhostButton}"
-                            Padding="8,4" Margin="10,0,0,0"
-                            Click="CloseResult_Click" VerticalAlignment="Top"/>
+                    <StackPanel Grid.Column="2" VerticalAlignment="Top">
+                        <Button x:Name="OpenRecycleBinBtn" Content="휴지통 열기"
+                                Style="{StaticResource GhostButton}"
+                                Padding="8,4" Margin="10,0,0,4"
+                                Click="OpenRecycleBin_Click" Visibility="Collapsed"/>
+                        <Button Content="닫기"
+                                Style="{StaticResource GhostButton}"
+                                Padding="8,4" Margin="10,0,0,0"
+                                Click="CloseResult_Click"/>
+                    </StackPanel>
                 </Grid>
             </Border>
 

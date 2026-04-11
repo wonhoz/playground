@@ -21,7 +21,7 @@ public static class TextHighlighter
     public static string GetQuery(DependencyObject obj) => (string)obj.GetValue(QueryProperty);
     public static void SetQuery(DependencyObject obj, string value) => obj.SetValue(QueryProperty, value);
 
-    static readonly Brush HighlightBg = new SolidColorBrush(Color.FromRgb(0x7C, 0x3A, 0xED));
+    static readonly Brush HighlightBg = new SolidColorBrush(Color.FromRgb(0x19, 0x76, 0xD2));
     static readonly Brush HighlightFg = Brushes.White;
 
     static void OnChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)

@@ -63,6 +63,9 @@ sealed class Database : IDisposable
         try { Execute("ALTER TABLE prompts ADD COLUMN use_count INTEGER NOT NULL DEFAULT 0;"); }
         catch { }
 
+        try { Execute("ALTER TABLE prompts ADD COLUMN is_pinned INTEGER NOT NULL DEFAULT 0;"); }
+        catch { }
+
         bool sortOrderAdded = false;
         try
         {
@@ -202,9 +205,9 @@ sealed class Database : IDisposable
 
         var order = sortOrder switch
         {
-            "use_count" => "p.use_count DESC, p.is_favorite DESC, p.updated_at DESC",
-            "custom"    => "p.sort_order ASC",
-            _           => "p.is_favorite DESC, p.updated_at DESC"
+            "use_count" => "p.is_pinned DESC, p.use_count DESC, p.is_favorite DESC, p.updated_at DESC",
+            "custom"    => "p.is_pinned DESC, p.sort_order ASC",
+            _           => "p.is_pinned DESC, p.is_favorite DESC, p.updated_at DESC"
         };
         cmd.CommandText = baseTable + where + $" ORDER BY {order}";
 
@@ -231,12 +234,12 @@ sealed class Database : IDisposable
     {
         var cmd = _conn.CreateCommand();
         cmd.CommandText = @"
-            INSERT INTO prompts (title, content, tags, service, is_favorite, version, notes, parent_id, sort_order, use_count)
+            INSERT INTO prompts (title, content, tags, service, is_favorite, version, notes, parent_id, sort_order, use_count, is_pinned)
             VALUES ($title, $content, $tags, $svc, $fav, $ver, $notes, $pid,
                     CASE WHEN $pid IS NULL
                          THEN (SELECT COALESCE(MAX(sort_order), -1) + 1 FROM prompts WHERE parent_id IS NULL)
                          ELSE 0 END,
-                    $use_count);
+                    $use_count, $pinned);
             SELECT last_insert_rowid();";
         BindParams(cmd, p);
         return Convert.ToInt32(cmd.ExecuteScalar());
@@ -249,7 +252,7 @@ sealed class Database : IDisposable
             UPDATE prompts SET
                 title = $title, content = $content, tags = $tags,
                 service = $svc, is_favorite = $fav, version = $ver,
-                notes = $notes, updated_at = datetime('now')
+                notes = $notes, is_pinned = $pinned, updated_at = datetime('now')
             WHERE id = $id";
         cmd.Parameters.AddWithValue("$id", p.Id);
         BindParams(cmd, p);
@@ -276,6 +279,14 @@ sealed class Database : IDisposable
     {
         var cmd = _conn.CreateCommand();
         cmd.CommandText = "UPDATE prompts SET is_favorite = NOT is_favorite WHERE id = $id";
+        cmd.Parameters.AddWithValue("$id", id);
+        cmd.ExecuteNonQuery();
+    }
+
+    public void TogglePin(int id)
+    {
+        var cmd = _conn.CreateCommand();
+        cmd.CommandText = "UPDATE prompts SET is_pinned = NOT is_pinned WHERE id = $id";
         cmd.Parameters.AddWithValue("$id", id);
         cmd.ExecuteNonQuery();
     }
@@ -322,6 +333,7 @@ sealed class Database : IDisposable
         cmd.Parameters.AddWithValue("$notes",     p.Notes);
         cmd.Parameters.AddWithValue("$pid",       p.ParentId.HasValue ? (object)p.ParentId.Value : DBNull.Value);
         cmd.Parameters.AddWithValue("$use_count", p.UseCount);
+        cmd.Parameters.AddWithValue("$pinned",    p.IsPinned ? 1 : 0);
     }
 
     static List<PromptItem> ReadItems(SqliteCommand cmd)
@@ -341,6 +353,7 @@ sealed class Database : IDisposable
                 Version    = r.GetInt32(r.GetOrdinal("version")),
                 Notes      = r.GetString(r.GetOrdinal("notes")),
                 UseCount   = r.IsDBNull(r.GetOrdinal("use_count")) ? 0 : r.GetInt32(r.GetOrdinal("use_count")),
+                IsPinned   = !r.IsDBNull(r.GetOrdinal("is_pinned")) && r.GetInt32(r.GetOrdinal("is_pinned")) == 1,
                 ParentId   = r.IsDBNull(r.GetOrdinal("parent_id")) ? null : r.GetInt32(r.GetOrdinal("parent_id")),
                 SortOrder  = r.IsDBNull(r.GetOrdinal("sort_order")) ? 0 : r.GetInt32(r.GetOrdinal("sort_order")),
                 CreatedAt  = DateTime.Parse(r.GetString(r.GetOrdinal("created_at"))),

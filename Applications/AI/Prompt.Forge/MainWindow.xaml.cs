@@ -164,9 +164,10 @@ public partial class MainWindow : Window
         if (e.Key == Key.Up || e.Key == Key.Down)
         {
             if (_vm.Items.Count == 0) return;
-            var cur = _vm.Items.IndexOf(_vm.Selected!);
+            var cur = _vm.Selected == null ? -1 : _vm.Items.IndexOf(_vm.Selected);
             if (e.Key == Key.Up   && cur > 0)                       _vm.Selected = _vm.Items[cur - 1];
-            if (e.Key == Key.Down && cur < _vm.Items.Count - 1)     _vm.Selected = _vm.Items[cur + 1];
+            else if (e.Key == Key.Down && cur < _vm.Items.Count - 1) _vm.Selected = _vm.Items[cur + 1];
+            else if (cur < 0)                                        _vm.Selected = _vm.Items[0];
             if (_vm.Selected != null) LstItems.ScrollIntoView(_vm.Selected);
             LoadSelected();
             e.Handled = true;
@@ -190,11 +191,26 @@ public partial class MainWindow : Window
                 return;
             }
 
-            // Ctrl+F: 검색창 포커스 + 전체 선택
+            // Ctrl+F: 검���창 포커스 + 전체 선택
             if (e.Key == Key.F)
             {
                 TxtSearch.Focus();
                 TxtSearch.SelectAll();
+                e.Handled = true;
+                return;
+            }
+
+            // Ctrl+G: 본문 내 텍스�� 찾기
+            if (e.Key == Key.G)
+            {
+                OpenFindBar();
+                e.Handled = true;
+                return;
+            }
+
+            if (e.Key == Key.P && _vm.HasSelection)
+            {
+                Pin_Click(this, new RoutedEventArgs());
                 e.Handled = true;
                 return;
             }
@@ -247,23 +263,29 @@ public partial class MainWindow : Window
 
     void OnClosing(object? s, System.ComponentModel.CancelEventArgs e)
     {
-        var handle = new WindowInteropHelper(this).Handle;
-        UnregisterHotKey(handle, HotkeyId);
-        _appSettings.LastSortOrder  = _vm.SortOrder;
-        _appSettings.RecentSearches = [.. _recentSearches];
-
-        // 창 위치/크기 저장 (최대화 상태가 아닐 때만 좌표 저장)
-        _appSettings.WindowState = WindowState == WindowState.Maximized ? "Maximized" : "Normal";
-        if (WindowState == WindowState.Normal)
+        try
         {
-            _appSettings.WindowLeft   = Left;
-            _appSettings.WindowTop    = Top;
-            _appSettings.WindowWidth  = Width;
-            _appSettings.WindowHeight = Height;
-        }
+            var handle = new WindowInteropHelper(this).Handle;
+            UnregisterHotKey(handle, HotkeyId);
+            _appSettings.LastSortOrder  = _vm.SortOrder;
+            _appSettings.RecentSearches = [.. _recentSearches];
 
-        _appSettings.Save();
-        _db.Dispose();
+            // 창 위치/크기 저장 (최대화 상태가 아닐 때만 좌표 저장)
+            _appSettings.WindowState = WindowState == WindowState.Maximized ? "Maximized" : "Normal";
+            if (WindowState == WindowState.Normal)
+            {
+                _appSettings.WindowLeft   = Left;
+                _appSettings.WindowTop    = Top;
+                _appSettings.WindowWidth  = Width;
+                _appSettings.WindowHeight = Height;
+            }
+
+            _appSettings.Save();
+        }
+        finally
+        {
+            _db.Dispose();
+        }
     }
 
     // ── 필터 갱신 ─────────────────────────────────────────────────────────────
@@ -379,6 +401,7 @@ public partial class MainWindow : Window
             TxtService.Text = "";
             TxtNotes.Text = "";
             BtnFav.Content = "☆";
+            UpdatePinButton();
             return;
         }
         TxtTitle.Text   = p.Title;
@@ -387,6 +410,14 @@ public partial class MainWindow : Window
         TxtService.Text = p.Service;
         TxtNotes.Text   = p.Notes;
         BtnFav.Content  = p.IsFavorite ? "★" : "☆";
+        UpdatePinButton();
+    }
+
+    void UpdatePinButton()
+    {
+        var pinned = _vm.Selected?.IsPinned == true;
+        BtnPin.Content = pinned ? "📌" : "📍";
+        BtnPin.ToolTip = pinned ? "상단 고정 해제 (Ctrl+P)" : "상단 고정 (Ctrl+P)";
     }
 
     // ── 에디터 이벤트 ─────────────────────────────────────────────────────────
@@ -470,6 +501,14 @@ public partial class MainWindow : Window
         if (_vm.Selected == null) return;
         _vm.ToggleFavorite(_vm.Selected);
         BtnFav.Content = _vm.Selected?.IsFavorite == true ? "★" : "☆";
+    }
+
+    void Pin_Click(object sender, RoutedEventArgs e)
+    {
+        if (_vm.Selected == null) return;
+        _vm.TogglePin(_vm.Selected);
+        UpdatePinButton();
+        RefreshFilterCombos();
     }
 
     void Copy_Click(object sender, RoutedEventArgs e)
@@ -660,7 +699,8 @@ public partial class MainWindow : Window
                 title = p.Title, content = p.Content, tags = p.Tags,
                 service = p.Service, isFavorite = p.IsFavorite,
                 version = p.Version, notes = p.Notes,
-                useCount = p.UseCount, sortOrder = p.SortOrder
+                useCount = p.UseCount, sortOrder = p.SortOrder,
+                isPinned = p.IsPinned
             });
             var json = System.Text.Json.JsonSerializer.Serialize(data,
                 new System.Text.Json.JsonSerializerOptions { WriteIndented = true });
@@ -768,7 +808,8 @@ public partial class MainWindow : Window
                     IsFavorite = item.IsFavorite,
                     Version    = item.Version > 0 ? item.Version : 1,
                     Notes      = item.Notes ?? "",
-                    UseCount   = item.UseCount
+                    UseCount   = item.UseCount,
+                    IsPinned   = item.IsPinned
                 });
                 imported++;
             }
@@ -891,7 +932,8 @@ public partial class MainWindow : Window
                     IsFavorite = item.IsFavorite,
                     Version    = item.Version > 0 ? item.Version : 1,
                     Notes      = item.Notes ?? "",
-                    UseCount   = item.UseCount
+                    UseCount   = item.UseCount,
+                    IsPinned   = item.IsPinned
                 });
                 imported++;
             }
@@ -916,6 +958,92 @@ public partial class MainWindow : Window
         p.Tags    = TxtTags.Text.Trim();
         p.Service = TxtService.Text.Trim();
         p.Notes   = TxtNotes.Text.Trim();
+    }
+
+    // ── 본문 텍스트 찾기 (Ctrl+G) ─────────────────────────────────────────────
+
+    int _findIndex = -1;
+    List<int> _findPositions = [];
+
+    void OpenFindBar()
+    {
+        FindBar.Visibility = Visibility.Visible;
+        TxtFind.Focus();
+        TxtFind.SelectAll();
+    }
+
+    void TxtFind_TextChanged(object sender, TextChangedEventArgs e)
+    {
+        UpdateFindPositions();
+    }
+
+    void UpdateFindPositions()
+    {
+        _findPositions.Clear();
+        _findIndex = -1;
+        var query = TxtFind.Text;
+        if (string.IsNullOrEmpty(query) || string.IsNullOrEmpty(TxtContent.Text))
+        {
+            TxtFindCount.Text = "";
+            return;
+        }
+        int pos = 0;
+        while (pos < TxtContent.Text.Length)
+        {
+            var idx = TxtContent.Text.IndexOf(query, pos, StringComparison.OrdinalIgnoreCase);
+            if (idx < 0) break;
+            _findPositions.Add(idx);
+            pos = idx + query.Length;
+        }
+        TxtFindCount.Text = _findPositions.Count == 0
+            ? "0개"
+            : $"0/{_findPositions.Count}";
+        if (_findPositions.Count > 0) FindNext();
+    }
+
+    void FindNext()
+    {
+        if (_findPositions.Count == 0) return;
+        _findIndex = (_findIndex + 1) % _findPositions.Count;
+        SelectFindMatch();
+    }
+
+    void FindPrev()
+    {
+        if (_findPositions.Count == 0) return;
+        _findIndex = (_findIndex - 1 + _findPositions.Count) % _findPositions.Count;
+        SelectFindMatch();
+    }
+
+    void SelectFindMatch()
+    {
+        var pos = _findPositions[_findIndex];
+        TxtContent.Focus();
+        TxtContent.Select(pos, TxtFind.Text.Length);
+        var rect = TxtContent.GetRectFromCharacterIndex(pos);
+        if (!rect.IsEmpty) TxtContent.ScrollToLine(TxtContent.GetLineIndexFromCharacterIndex(pos));
+        TxtFindCount.Text = $"{_findIndex + 1}/{_findPositions.Count}";
+        TxtFind.Focus();
+    }
+
+    void FindNext_Click(object sender, RoutedEventArgs e) => FindNext();
+    void FindPrev_Click(object sender, RoutedEventArgs e) => FindPrev();
+    void FindClose_Click(object sender, RoutedEventArgs e) => FindBar.Visibility = Visibility.Collapsed;
+
+    void TxtFind_KeyDown(object sender, KeyEventArgs e)
+    {
+        if (e.Key == Key.Enter)
+        {
+            if (Keyboard.Modifiers == ModifierKeys.Shift) FindPrev();
+            else FindNext();
+            e.Handled = true;
+        }
+        else if (e.Key == Key.Escape)
+        {
+            FindBar.Visibility = Visibility.Collapsed;
+            TxtContent.Focus();
+            e.Handled = true;
+        }
     }
 
     // ── 검색 초기화 ───────────────────────────────────────────────────────────
@@ -1064,10 +1192,62 @@ public partial class MainWindow : Window
         _vm.StatusText = $"{selected.Count}개 항목 태그 업데이트 완료";
     }
 
+    void Stats_Click(object sender, RoutedEventArgs e)
+    {
+        var all = _db.GetAll();
+        if (all.Count == 0)
+        {
+            MessageBox.Show("프롬프트가 없습니다.", "통계", MessageBoxButton.OK, MessageBoxImage.Information);
+            return;
+        }
+
+        var totalUse = all.Sum(p => p.UseCount);
+        var topUsed = all.Where(p => p.UseCount > 0)
+                         .OrderByDescending(p => p.UseCount)
+                         .Take(5)
+                         .ToList();
+        var favCount = all.Count(p => p.IsFavorite);
+        var tagCounts = all.SelectMany(p => p.Tags.Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries))
+                           .GroupBy(t => t, StringComparer.OrdinalIgnoreCase)
+                           .OrderByDescending(g => g.Count())
+                           .Take(5)
+                           .ToList();
+        var recentlyUpdated = all.OrderByDescending(p => p.UpdatedAt).Take(3).ToList();
+        var neverUsed = all.Count(p => p.UseCount == 0);
+
+        var sb = new System.Text.StringBuilder();
+        sb.AppendLine($"총 프롬프트: {all.Count}개  |  즐겨찾기: {favCount}개");
+        sb.AppendLine($"총 사용 횟수: {totalUse}회  |  미사용: {neverUsed}개");
+        sb.AppendLine();
+
+        if (topUsed.Count > 0)
+        {
+            sb.AppendLine("🏆 가장 많이 사용한 프롬프트:");
+            foreach (var p in topUsed)
+                sb.AppendLine($"  {p.UseCount,4}회  {p.Title}");
+            sb.AppendLine();
+        }
+
+        if (tagCounts.Count > 0)
+        {
+            sb.AppendLine("🏷️ 인기 태그:");
+            foreach (var g in tagCounts)
+                sb.AppendLine($"  {g.Count(),4}개  {g.Key}");
+            sb.AppendLine();
+        }
+
+        sb.AppendLine("🕐 최근 수정:");
+        foreach (var p in recentlyUpdated)
+            sb.AppendLine($"  {p.UpdatedAt:yyyy-MM-dd HH:mm}  {p.Title}");
+
+        MessageBox.Show(sb.ToString(), "프롬프트 사용 통계",
+            MessageBoxButton.OK, MessageBoxImage.Information);
+    }
+
     static string CsvEscape(string s) => $"\"{s.Replace("\"", "\"\"")}\"";
 
     private record ImportDto(
         string? Title, string? Content, string? Tags,
         string? Service, bool IsFavorite, int Version, string? Notes,
-        int UseCount = 0, int SortOrder = 0);
+        int UseCount = 0, int SortOrder = 0, bool IsPinned = false);
 }

@@ -100,16 +100,24 @@ sealed class MainViewModel : INotifyPropertyChanged
 
         // 태그/서비스 콤보 갱신
         var tags = _db.GetAllTags();
-        Tags.Clear();
-        Tags.Add("모든 태그");
-        foreach (var t in tags) Tags.Add(t);
+        var newTags = new List<string> { "모든 태그" };
+        newTags.AddRange(tags);
+        ReplaceAll(Tags, newTags);
 
         var svcs = _db.GetAllServices();
-        Services.Clear();
-        Services.Add("모든 서비스");
-        foreach (var s in svcs) Services.Add(s);
+        var newSvcs = new List<string> { "모든 서비스" };
+        newSvcs.AddRange(svcs);
+        ReplaceAll(Services, newSvcs);
 
         StatusText = $"총 {Items.Count:N0}개";
+    }
+
+    /// 내용이 동일하면 스킵, 변경 시에만 Clear+Add 수행하여 불필요한 UI 갱신 방지
+    static void ReplaceAll<T>(ObservableCollection<T> col, IList<T> newItems)
+    {
+        if (col.Count == newItems.Count && col.SequenceEqual(newItems)) return;
+        col.Clear();
+        foreach (var item in newItems) col.Add(item);
     }
 
     public PromptItem CreateNew()
@@ -159,6 +167,13 @@ sealed class MainViewModel : INotifyPropertyChanged
     public void ToggleFavorite(PromptItem p)
     {
         _db.ToggleFavorite(p.Id);
+        Refresh();
+        Selected = Items.FirstOrDefault(x => x.Id == p.Id);
+    }
+
+    public void TogglePin(PromptItem p)
+    {
+        _db.TogglePin(p.Id);
         Refresh();
         Selected = Items.FirstOrDefault(x => x.Id == p.Id);
     }

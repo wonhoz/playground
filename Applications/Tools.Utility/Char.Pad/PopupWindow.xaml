@@ -272,7 +272,7 @@
 
                             <!-- 단축키 행들 -->
                             <TextBlock Grid.Row="0" Grid.Column="0" Text="Win+Shift+;"         Style="{StaticResource KeyStyle}"/>
-                            <TextBlock Grid.Row="0" Grid.Column="2" Text="팝업 열기/닫기 (상태바 단축키 텍스트 클릭으로 즉시 변경 가능)" Style="{StaticResource DescStyle}"/>
+                            <TextBlock Grid.Row="0" Grid.Column="2" Text="팝업 열기/닫기 토글 (열린 상태에서 다시 누르면 닫기, 상태바 텍스트 클릭으로 변경 가능)" Style="{StaticResource DescStyle}"/>
 
                             <TextBlock Grid.Row="1" Grid.Column="0" Text="Esc"                  Style="{StaticResource KeyStyle}"/>
                             <TextBlock Grid.Row="1" Grid.Column="2" Text="검색어 지우기 / 다중 선택 해제 / 팝업 닫기" Style="{StaticResource DescStyle}"/>
@@ -358,7 +358,10 @@
                             <TextBlock Grid.Row="28" Grid.Column="0" Text="⊡ 버튼"                Style="{StaticResource KeyStyle}"/>
                             <TextBlock Grid.Row="28" Grid.Column="2" Text="창 크기를 기본값(575×420)으로 초기화" Style="{StaticResource DescStyle}"/>
 
-                            <TextBlock Grid.Row="29" Grid.Column="0" Grid.ColumnSpan="3"
+                            <TextBlock Grid.Row="29" Grid.Column="0" Text="한글 카테고리 검색"     Style="{StaticResource KeyStyle}"/>
+                            <TextBlock Grid.Row="29" Grid.Column="2" Text="카테고리 한글명으로 검색 시 해당 카테고리 전체 표시 (예: '화살표' → 화살표 전체, '수학' → 수학 기호 전체)" Style="{StaticResource DescStyle}"/>
+
+                            <TextBlock Grid.Row="30" Grid.Column="0" Grid.ColumnSpan="3"
                                        Text="아무 곳이나 클릭하면 닫힙니다"
                                        Foreground="{StaticResource TextSecondary}"
                                        FontFamily="Segoe UI" FontSize="11"

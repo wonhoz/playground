@@ -200,6 +200,13 @@ public partial class App : System.Windows.Application
     // ── 팝업 열기 ───────────────────────────────────────────────────────
     internal void ShowPopup()
     {
+        // 핫키 토글: 팝업이 이미 열려 있으면 닫기
+        if (_popup != null && _popup.IsVisible)
+        {
+            _popup.Hide();
+            return;
+        }
+
         _prevHwnd = GetForegroundWindow();
 
         if (_popup == null || !_popup.IsLoaded)
@@ -215,10 +222,10 @@ public partial class App : System.Windows.Application
 
     private void ClearRecents()
     {
-        var confirm = System.Windows.MessageBox.Show(
+        var confirm = DarkMessageBox.Show(
             "최근 사용 목록을 모두 지우시겠습니까?",
-            "초기화 확인", System.Windows.MessageBoxButton.YesNo, System.Windows.MessageBoxImage.Question);
-        if (confirm != System.Windows.MessageBoxResult.Yes) return;
+            "초기화 확인", MessageBoxButton.YesNo, MessageBoxImage.Question);
+        if (confirm != MessageBoxResult.Yes) return;
 
         _storage.ClearRecents();
         _popup?.RefreshIfRecentTab();
@@ -253,7 +260,7 @@ public partial class App : System.Windows.Application
         }
         catch (Exception ex)
         {
-            System.Windows.MessageBox.Show($"내보내기 실패: {ex.Message}", "오류", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+            DarkMessageBox.Show($"내보내기 실패: {ex.Message}", "오류", MessageBoxButton.OK, MessageBoxImage.Error);
         }
     }
 
@@ -278,18 +285,18 @@ public partial class App : System.Windows.Application
                 .Where(t => t.Item1.Length > 0 && t.Item2.Length > 0)
                 .ToList();
 
-            var overwrite = System.Windows.MessageBox.Show(
+            var overwrite = DarkMessageBox.Show(
                 $"즐겨찾기 {favorites.Count}개, 사용자 문자 {customChars.Count}개를 가져옵니다.\n중복 항목을 덮어쓰시겠습니까?",
-                "가져오기 확인", System.Windows.MessageBoxButton.YesNoCancel, System.Windows.MessageBoxImage.Question);
-            if (overwrite == System.Windows.MessageBoxResult.Cancel) return;
+                "가져오기 확인", MessageBoxButton.YesNoCancel, MessageBoxImage.Question);
+            if (overwrite == MessageBoxResult.Cancel) return;
 
-            _storage.Import(new(favorites, customChars), overwrite == System.Windows.MessageBoxResult.Yes);
+            _storage.Import(new(favorites, customChars), overwrite == MessageBoxResult.Yes);
             _popup?.Refresh();
             _tray?.ShowBalloonTip(2000, "Char.Pad", $"가져오기 완료: {favorites.Count}개 즐겨찾기, {customChars.Count}개 사용자 문자", ToolTipIcon.Info);
         }
         catch (Exception ex)
         {
-            System.Windows.MessageBox.Show($"가져오기 실패: {ex.Message}", "오류", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+            DarkMessageBox.Show($"가져오기 실패: {ex.Message}", "오류", MessageBoxButton.OK, MessageBoxImage.Error);
         }
     }
 

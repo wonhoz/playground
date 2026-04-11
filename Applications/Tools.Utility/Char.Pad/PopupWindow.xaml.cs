@@ -146,15 +146,10 @@ public partial class PopupWindow : System.Windows.Window
         var screen = System.Windows.Forms.Screen.FromPoint(pt);
         var wa = screen.WorkingArea;
 
-        // DPI 스케일 획득: window 표시 전이면 PresentationSource가 null → Graphics 폴백
-        double dpiScale;
-        if (PresentationSource.FromVisual(this) is { } src)
-            dpiScale = src.CompositionTarget.TransformToDevice.M11;
-        else
-        {
-            using var g = System.Drawing.Graphics.FromHwnd(IntPtr.Zero);
-            dpiScale = g.DpiX / 96.0;
-        }
+        // WPF Left/Top 좌표는 기본 모니터 DPI 기준 — PresentationSource.FromVisual은
+        // 이전에 표시된 모니터의 DPI를 반환하여 멀티 모니터 환경에서 위치 오류 발생
+        using var g = System.Drawing.Graphics.FromHwnd(IntPtr.Zero);
+        double dpiScale = g.DpiX / 96.0;
 
         // 물리 픽셀 → DIP 변환 후 경계 보정 (Left/Top/Width/Height 모두 DIP 단위)
         double wxDip = (pt.X + 10) / dpiScale;
@@ -341,6 +336,15 @@ public partial class PopupWindow : System.Windows.Window
                     StatusText.Text = $"U+{codepoint:X4} 검색";
                 }
                 catch { entries = []; StatusText.Text = "잘못된 코드포인트"; }
+            }
+            // 한글/영문 카테고리명 매칭 (예: "화살표" → arrow 전체, "emoji" → 이모지 전체)
+            else if (query.Length >= 2 &&
+                     Array.Find(Tabs, t => t.Id is not "recent" and not "favorite" and not "custom"
+                         && (t.StatusName.Contains(query, StringComparison.OrdinalIgnoreCase)
+                          || t.Id.Contains(query, StringComparison.OrdinalIgnoreCase))) is { Id: not null } matchedTab)
+            {
+                entries = CharDatabase.GetByCategory(matchedTab.Id);
+                StatusText.Text = $"{matchedTab.StatusName}";
             }
             // 커스텀 탭: CharDatabase가 아닌 StorageService에서 검색
             else if (_activeTab == "custom")
@@ -1159,7 +1163,7 @@ public partial class PopupWindow : System.Windows.Window
     // ── 사용자 정의 문자 삭제 ────────────────────────────────────────────
     private void DeleteCustomChar(CharEntry entry)
     {
-        var confirm = System.Windows.MessageBox.Show(
+        var confirm = DarkMessageBox.Show(
             $"'{entry.Char}  {entry.Name}' 을(를) 삭제하시겠습니까?",
             "삭제 확인", MessageBoxButton.YesNo, MessageBoxImage.Question);
         if (confirm != MessageBoxResult.Yes) return;
@@ -1244,7 +1248,7 @@ public partial class PopupWindow : System.Windows.Window
             // 이미 등록된 문자인 경우 덮어쓰기 확인
             if (_storage.IsCustomChar(dlg.ResultChar))
             {
-                var confirm = System.Windows.MessageBox.Show(
+                var confirm = DarkMessageBox.Show(
                     $"'{dlg.ResultChar}' 는 이미 등록되어 있습니다.\n이름을 '{dlg.ResultName}'(으)로 덮어쓰시겠습니까?",
                     "중복 문자 확인", MessageBoxButton.YesNo, MessageBoxImage.Question);
                 if (confirm != MessageBoxResult.Yes) return;
@@ -1390,7 +1394,7 @@ public partial class PopupWindow : System.Windows.Window
     // ── 최근 사용 초기화 ──────────────────────────────────────────────────
     private void ClearRecentsBtn_Click(object sender, RoutedEventArgs e)
     {
-        var confirm = System.Windows.MessageBox.Show(
+        var confirm = DarkMessageBox.Show(
             "최근 사용 목록을 모두 지우시겠습니까?",
             "초기화 확인", MessageBoxButton.YesNo, MessageBoxImage.Question);
         if (confirm != MessageBoxResult.Yes) return;

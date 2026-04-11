@@ -19,6 +19,8 @@ namespace StayAwake
 
         private Font? _menuFont;
         private Font? _startStopFont;
+        private Icon? _cachedRunningIcon;
+        private Icon? _cachedStoppedIcon;
 
         private ToolStripMenuItem _startStopItem = null!;
         private ToolStripMenuItem _intervalItem = null!;
@@ -35,6 +37,7 @@ namespace StayAwake
         // private DateTime _pauseEndTime;
 
         private bool _isRunning = false;
+        private bool _isFirstStart = true;
         private int _intervalMinutes = 3; // 기본 3분 (Slack 10분 타임아웃의 1/3)
         private int _activityCount = 0;
         private DateTime _startTime;
@@ -118,6 +121,10 @@ namespace StayAwake
 
             // 컨텍스트 메뉴 생성
             _contextMenu = CreateContextMenu();
+
+            // 트레이 아이콘 캐싱 (매 토글마다 새 Icon 생성 → 리소스 누수 방지)
+            _cachedRunningIcon = IconGenerator.LoadRunningIcon();
+            _cachedStoppedIcon = IconGenerator.LoadStoppedIcon();
 
             // 트레이 아이콘 설정
             _trayIcon = new NotifyIcon
@@ -313,8 +320,17 @@ namespace StayAwake
                 UpdateTooltip();
                 UpdateStatus();
 
-                _trayIcon.ShowBalloonTip(1500, "StayAwake",
-                    $"활동 시뮬레이션 시작됨 ({_intervalMinutes}분 간격, {_simulator.MoveDistance}px)", ToolTipIcon.Info);
+                if (_isFirstStart)
+                {
+                    _isFirstStart = false;
+                    _trayIcon.ShowBalloonTip(2000, "StayAwake",
+                        $"StayAwake 실행됨 — {_intervalMinutes}분 간격으로 활동 시뮬레이션을 시작합니다.", ToolTipIcon.Info);
+                }
+                else
+                {
+                    _trayIcon.ShowBalloonTip(1500, "StayAwake",
+                        $"활동 시뮬레이션 시작됨 ({_intervalMinutes}분 간격, {_simulator.MoveDistance}px)", ToolTipIcon.Info);
+                }
             }
             else
             {
@@ -633,32 +649,50 @@ namespace StayAwake
                 }
             }
 
-            DarkInfoDialog.Show("통계", sb.ToString(), 500, history.Count > 0 ? 605 + 30 * (history.Count - 1) : 450);
+            const int statsBaseHeight = 450;
+            const int historyBaseHeight = 605;
+            const int historyRowHeight = 30;
+            var dialogHeight = history.Count > 0
+                ? historyBaseHeight + historyRowHeight * (history.Count - 1)
+                : statsBaseHeight;
+            DarkInfoDialog.Show("통계", sb.ToString(), 500, dialogHeight);
         }
 
         private void ShowHelp()
         {
-            var message = @"[사용법 — 단축키 & 기능]
-• 트레이 좌클릭               시작 / 정지 토글
-• 트레이 좌클릭 (더블클릭)    오늘 통계 바로 보기
-• 트레이 우클릭               메뉴 열기
-• 트레이 호버 (실행 중)       다음 활동까지 남은 시간 + 오늘 활성 시간 + 세션 경과 시간
-• 트레이 호버 (정지 시)       오늘 누적 활성 시간
-• 메뉴 › ▶ 시작 / ⏹ 정지     시작 / 정지 토글
-• 메뉴 › 지금 활동 실행       즉시 강제 시뮬레이션 (타이머 리셋)
-• 메뉴 › 오늘 통계            시뮬레이션·스킵·활성 시간·히스토리·차트
-• 메뉴 › 통계 CSV 내보내기    오늘 + 최근 30일 히스토리를 CSV 파일로 저장
-• 메뉴 › 간격                 1 / 2 / 3 / 5 / 7분 선택
-• 메뉴 › 이동 거리            10 / 30 / 50 / 100 / 200px 선택
-• 메뉴 › 활동 유형            마우스 이동 / 마우스 + 키보드 (F15 키)
-• 메뉴 › 디스플레이 절전 방지  화면 꺼짐 방지 On/Off
-• 메뉴 › 사용 중이면 건너뛰기  직접 입력 중 시뮬레이션 스킵
-• 메뉴 › Slack › 자동 변경 활성화    출퇴근 시각에 Active/Away 자동 전환
-• 메뉴 › Slack › 시간 설정           출퇴근 시각 변경 (기본 08:55 / 18:55)
-• 메뉴 › Slack › 지금 활성/자리비움으로 변경   즉시 수동 전환
-• 권장 간격: 3~5분";
+            var message = @"[트레이 아이콘 조작]
+• 좌클릭              시작 / 정지 토글
+• 더블클릭            오늘 통계 바로 보기
+• 우클릭              메뉴 열기
+• 마우스 호버         다음 활동 카운트다운 + 오늘 활성 시간 + 세션 경과 시간
+                      (정지 시: 오늘 누적 활성 시간)
 
-            DarkInfoDialog.Show("도움말", message, 900, 730);
+[메뉴 — 시뮬레이션]
+• ▶ 시작 / ⏹ 정지     시작 / 정지 토글
+• 지금 활동 실행       즉시 강제 시뮬레이션 (타이머 리셋)
+
+[메뉴 — 설정]
+• 간격                 1 / 2 / 3 / 5 / 7분 선택 (권장: 3~5분)
+• 이동 거리            10 / 30 / 50 / 100 / 200px 선택
+• 활동 유형            마우스 이동 / 마우스 + 키보드 (F15)
+• 디스플레이 절전 방지  화면 꺼짐 방지 On/Off
+• 사용 중이면 건너뛰기  직접 입력 중 시뮬레이션 스킵
+
+[메뉴 — Slack 자동 상태 변경]
+• 자동 변경 활성화     출퇴근 시각에 Active/Away 자동 전환
+• 시간 설정            출퇴근 시각 변경 (기본 08:55 / 18:55)
+• 지금 활성/자리비움   즉시 수동 전환 (진행 상태 풍선 알림 표시)
+
+[메뉴 — 통계]
+• 오늘 통계            시뮬레이션·스킵·활성 시간·히스토리·차트
+• 통계 CSV 내보내기    오늘 + 최근 30일 히스토리를 CSV 저장
+
+[참고]
+• 앱 실행 시 자동으로 시뮬레이션이 시작됩니다
+• Slack 자동 전환은 Slack 데스크탑 앱이 실행 중이어야 합니다
+• 설정은 자동 저장되며 앱 재시작 후에도 유지됩니다";
+
+            DarkInfoDialog.Show("도움말", message, 720, 780);
         }
 
         private void ShowAbout()
@@ -766,6 +800,7 @@ Slack 자리 비움 상태 방지 도구
 
         private async Task SetSlackActiveNowAsync()
         {
+            _trayIcon.ShowBalloonTip(1000, "StayAwake", "Slack 상태를 '활성'으로 변경 중...", ToolTipIcon.None);
             var result = await _slackAutomation.SetActiveAsync();
             if (result.Success) _dailySlackSuccessCount++; else _dailySlackFailCount++;
             SaveDailyStats();
@@ -776,6 +811,7 @@ Slack 자리 비움 상태 방지 도구
 
         private async Task SetSlackAwayNowAsync()
         {
+            _trayIcon.ShowBalloonTip(1000, "StayAwake", "Slack 상태를 '자리비움'으로 변경 중...", ToolTipIcon.None);
             var result = await _slackAutomation.SetAwayAsync();
             if (result.Success) _dailySlackSuccessCount++; else _dailySlackFailCount++;
             SaveDailyStats();
@@ -867,11 +903,9 @@ Slack 자리 비움 상태 방지 도구
             Application.Exit();
         }
 
-        private static Icon CreateIcon(bool isRunning)
+        private Icon CreateIcon(bool isRunning)
         {
-            return isRunning
-                ? IconGenerator.LoadRunningIcon()
-                : IconGenerator.LoadStoppedIcon();
+            return isRunning ? _cachedRunningIcon! : _cachedStoppedIcon!;
         }
 
         protected override void Dispose(bool disposing)
@@ -888,6 +922,8 @@ Slack 자리 비움 상태 방지 도구
                 _contextMenu.Dispose();
                 _menuFont?.Dispose();
                 _startStopFont?.Dispose();
+                _cachedRunningIcon?.Dispose();
+                _cachedStoppedIcon?.Dispose();
             }
             base.Dispose(disposing);
         }

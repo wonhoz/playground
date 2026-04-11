@@ -13,6 +13,7 @@ echo Current settings:
 reg query "HKCU\Software\ClaudeCode" /v TerminalPath 2>nul || echo   TerminalPath: (not set - auto detect)
 reg query "HKCU\Software\ClaudeCode" /v TerminalType 2>nul || echo   TerminalType: (not set - wt)
 reg query "HKCU\Software\ClaudeCode" /v NewTab       2>nul || echo   NewTab:       (not set - 0)
+reg query "HKCU\Software\ClaudeCode" /v LastFolder   2>nul || echo   LastFolder:   (none)
 echo.
 echo Options:
 echo   1. Set custom terminal path

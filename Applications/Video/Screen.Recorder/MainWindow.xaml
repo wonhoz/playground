@@ -130,7 +130,7 @@
                                               IsHitTestVisible="False"/>
                             <Popup x:Name="PART_Popup" IsOpen="{TemplateBinding IsDropDownOpen}"
                                    Placement="Bottom" Focusable="False" AllowsTransparency="True">
-                                <Border Background="#2D2D44" BorderBrush="#444466" BorderThickness="1"
+                                <Border Background="#2D2D2D" BorderBrush="#444444" BorderThickness="1"
                                         CornerRadius="4" Margin="0,2,0,0" Padding="0,4">
                                     <ScrollViewer MaxHeight="200">
                                         <StackPanel IsItemsHost="True"/>
@@ -209,7 +209,8 @@
                             Click="SelectRegion_Click"/>
                     <Button x:Name="FullScreenBtn" Content="⬜ 전체 화면"
                             Style="{StaticResource GrayBtn}" Padding="10,5" Margin="0,0,0,4"
-                            Click="SelectFullScreen_Click"/>
+                            Click="SelectFullScreen_Click" MouseRightButtonUp="FullScreen_RightClick"
+                            ToolTip="클릭: 기본 모니터 | 우클릭: 모니터 선택"/>
                     <Button x:Name="LastRegionBtn" Content="↩ 이전 영역"
                             Style="{StaticResource GrayBtn}" Padding="10,5"
                             IsEnabled="False" Click="UseLastRegion_Click"/>
@@ -223,6 +224,7 @@
                 CornerRadius="8" Padding="16,12" Margin="0,0,0,12">
             <Grid>
                 <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
@@ -277,10 +279,20 @@
                     <ComboBoxItem Content="10분"/>
                 </ComboBox>
 
-                <!-- 저장 폴더 -->
-                <TextBlock Grid.Row="4" Grid.Column="0" Text="저장 위치"
+                <!-- 파일명 접두사 -->
+                <TextBlock Grid.Row="4" Grid.Column="0" Text="파일명"
                            FontSize="13" Foreground="{StaticResource TextSec}" VerticalAlignment="Center"/>
-                <Grid Grid.Row="4" Grid.Column="1">
+                <TextBox Grid.Row="4" Grid.Column="1" x:Name="FileNamePrefixBox"
+                         FontSize="13" Foreground="#E0E0E0" Background="#2D2D2D"
+                         BorderBrush="#444444" BorderThickness="1" Padding="8,4"
+                         Margin="0,0,0,8" MaxLength="50"
+                         TextChanged="FileNamePrefixBox_TextChanged"
+                         ToolTip="파일명 접두사 (예: recording → recording_20260412_120000.mp4)"/>
+
+                <!-- 저장 폴더 -->
+                <TextBlock Grid.Row="5" Grid.Column="0" Text="저장 위치"
+                           FontSize="13" Foreground="{StaticResource TextSec}" VerticalAlignment="Center"/>
+                <Grid Grid.Row="5" Grid.Column="1">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="Auto"/>

@@ -14,6 +14,7 @@ public class RecordingSettings
     public int LastRegionWidth { get; set; } = 0;
     public int LastRegionHeight { get; set; } = 0;
     public int MaxRecordingSeconds { get; set; } = 0;  // 0 = 무제한
+    public string FileNamePrefix { get; set; } = "recording";
 
     private static readonly string SettingsPath = Path.Combine(
         Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),

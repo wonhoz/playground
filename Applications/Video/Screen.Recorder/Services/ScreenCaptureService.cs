@@ -51,7 +51,7 @@ public sealed class ScreenCaptureService : IDisposable
     private readonly List<string> _framePaths = [];
     private CancellationTokenSource? _cts;
     private Task? _captureTask;
-    private bool _paused;
+    private volatile bool _paused;
     private string? _tempDir;
 
     public ScreenCaptureService(Int32Rect region, int fps, string outputPath, bool isGif, bool captureMouse = true)

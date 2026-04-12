@@ -53,6 +53,7 @@ public partial class MainWindow : Window
         Loaded += OnLoaded;
 
         OutputFolderText.Text = _settings.OutputFolder;
+        FileNamePrefixBox.Text = _settings.FileNamePrefix;
 
         // 저장된 최대 녹화 시간 복원
         MaxTimeCombo.SelectedIndex = _settings.MaxRecordingSeconds switch
@@ -93,7 +94,9 @@ public partial class MainWindow : Window
         _timer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(100) };
         _timer.Tick += (_, _) =>
         {
-            TimerText.Text = _stopwatch.Elapsed.ToString(@"mm\:ss");
+            TimerText.Text = _stopwatch.Elapsed.TotalHours >= 1
+                ? _stopwatch.Elapsed.ToString(@"h\:mm\:ss")
+                : _stopwatch.Elapsed.ToString(@"mm\:ss");
         };
     }
 
@@ -322,6 +325,46 @@ public partial class MainWindow : Window
         SetRegion(new Int32Rect(0, 0, physW, physH));
     }
 
+    private void FullScreen_RightClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+    {
+        var screens = System.Windows.Forms.Screen.AllScreens;
+        if (screens.Length <= 1) return;
+
+        var menu = new System.Windows.Controls.ContextMenu
+        {
+            Background = ColorBrush("#2D2D2D"),
+            BorderBrush = ColorBrush("#444444"),
+            Foreground = ColorBrush("#E0E0E0")
+        };
+
+        for (var i = 0; i < screens.Length; i++)
+        {
+            var screen = screens[i];
+            var bounds = screen.Bounds;
+            var label = $"모니터 {i + 1}: {bounds.Width}×{bounds.Height}";
+            if (screen.Primary) label += " (기본)";
+
+            var item = new System.Windows.Controls.MenuItem
+            {
+                Header = label,
+                Foreground = ColorBrush("#E0E0E0"),
+                Tag = screen
+            };
+            item.Click += (_, _) =>
+            {
+                var s = (System.Windows.Forms.Screen)item.Tag;
+                var b = s.Bounds;
+                var w = b.Width % 2 == 0 ? b.Width : b.Width - 1;
+                var h = b.Height % 2 == 0 ? b.Height : b.Height - 1;
+                SetRegion(new Int32Rect(b.X, b.Y, w, h));
+            };
+            menu.Items.Add(item);
+        }
+
+        menu.IsOpen = true;
+        e.Handled = true;
+    }
+
     private void UseLastRegion_Click(object sender, RoutedEventArgs e)
     {
         SetRegion(new Int32Rect(
@@ -393,6 +436,7 @@ public partial class MainWindow : Window
         msg.AppendLine("【 영역 선택 】");
         msg.AppendLine("  ▣ 영역 선택 — 드래그로 녹화 범위 지정");
         msg.AppendLine("  ⬜ 전체 화면 — 기본 모니터 전체 캡처");
+        msg.AppendLine("     (우클릭: 멀티 모니터 선택)");
         msg.AppendLine("  ↩ 이전 영역 — 마지막으로 선택한 영역 재사용");
         msg.AppendLine();
         msg.AppendLine("【 글로벌 단축키 】");
@@ -405,11 +449,17 @@ public partial class MainWindow : Window
         msg.AppendLine("  FPS: 10 / 15 / 24 / 30");
         msg.AppendLine("  최대 시간: 지정 시간 도달 시 자동 정지");
         msg.AppendLine("  마우스 포인터 포함 여부 선택 가능");
+        msg.AppendLine("  파일명: 접두사 지정 (기본: recording)");
+        msg.AppendLine();
+        msg.AppendLine("【 녹화 완료 】");
+        msg.AppendLine("  [예] 파일 열기  |  [아니요] 폴더 열기");
+        msg.AppendLine("  파일 크기가 함께 표시됩니다.");
         msg.AppendLine();
         msg.AppendLine("【 FFmpeg 】");
         msg.AppendLine("  MP4 녹화에 FFmpeg가 필요합니다.");
         msg.AppendLine("  '설치' 버튼으로 winget/choco 자동 설치,");
         msg.AppendLine("  '↻' 버튼으로 설치 후 재검색 가능합니다.");
+        msg.AppendLine("  GIF는 FFmpeg 없이도 녹화 가능합니다.");
 
         System.Windows.MessageBox.Show(msg.ToString(), "사용법", MessageBoxButton.OK, MessageBoxImage.Information);
     }
@@ -425,6 +475,15 @@ public partial class MainWindow : Window
     {
         if (!IsLoaded) return;
         _settings.ShowCursor = CursorCheckBox.IsChecked == true;
+        _settings.Save();
+    }
+
+    private void FileNamePrefixBox_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
+    {
+        if (!IsLoaded) return;
+        var prefix = FileNamePrefixBox.Text.Trim();
+        if (string.IsNullOrEmpty(prefix)) prefix = "recording";
+        _settings.FileNamePrefix = prefix;
         _settings.Save();
     }
 
@@ -489,7 +548,8 @@ public partial class MainWindow : Window
         var isGif = IsGifFormat();
         var ext = isGif ? "gif" : "mp4";
         var timestamp = DateTime.Now.ToString("yyyyMMdd_HHmmss");
-        var outputPath = Path.Combine(_settings.OutputFolder, $"recording_{timestamp}.{ext}");
+        var prefix = string.IsNullOrWhiteSpace(_settings.FileNamePrefix) ? "recording" : _settings.FileNamePrefix;
+        var outputPath = Path.Combine(_settings.OutputFolder, $"{prefix}_{timestamp}.{ext}");
 
         Directory.CreateDirectory(_settings.OutputFolder);
 
@@ -553,12 +613,22 @@ public partial class MainWindow : Window
 
         if (completedPath is not null)
         {
+            var fileSize = new FileInfo(completedPath).Length;
+            var sizeText = fileSize switch
+            {
+                >= 1024 * 1024 => $"{fileSize / (1024.0 * 1024.0):F1} MB",
+                >= 1024        => $"{fileSize / 1024.0:F1} KB",
+                _              => $"{fileSize} B"
+            };
+
             var result = System.Windows.MessageBox.Show(
-                $"녹화 완료!\n{completedPath}\n\n파일을 열까요?",
-                "Screen.Recorder", MessageBoxButton.YesNo, MessageBoxImage.Information);
+                $"녹화 완료!\n{completedPath}\n파일 크기: {sizeText}\n\n[예] 파일 열기  |  [아니요] 폴더 열기  |  [취소] 닫기",
+                "Screen.Recorder", MessageBoxButton.YesNoCancel, MessageBoxImage.Information);
 
             if (result == MessageBoxResult.Yes)
                 Process.Start(new ProcessStartInfo(completedPath) { UseShellExecute = true });
+            else if (result == MessageBoxResult.No)
+                Process.Start(new ProcessStartInfo("explorer.exe", $"/select,\"{completedPath}\"") { UseShellExecute = true });
         }
     }
 

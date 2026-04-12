@@ -214,19 +214,44 @@ public static class EncoderService
     {
         var result = new Bitmap(source.Width, source.Height, PixelFormat.Format8bppIndexed);
 
-        // 간단한 양자화: 고정 팔레트 사용
+        var srcData = source.LockBits(new Rectangle(0, 0, source.Width, source.Height),
+            ImageLockMode.ReadOnly, PixelFormat.Format24bppRgb);
+
+        // 1단계: 색상 히스토그램 수집 (5비트 축소 → 32768 버킷)
+        var histogram = new int[32768];
+        var colorMap = new int[32768 * 3]; // R,G,B 합계
+
+        unsafe
+        {
+            for (var y = 0; y < source.Height; y++)
+            {
+                var row = (byte*)srcData.Scan0 + y * srcData.Stride;
+                for (var x = 0; x < source.Width; x++)
+                {
+                    int b = row[x * 3];
+                    int g = row[x * 3 + 1];
+                    int r = row[x * 3 + 2];
+                    var idx = ((r >> 3) << 10) | ((g >> 3) << 5) | (b >> 3);
+                    histogram[idx]++;
+                    colorMap[idx * 3] += r;
+                    colorMap[idx * 3 + 1] += g;
+                    colorMap[idx * 3 + 2] += b;
+                }
+            }
+        }
+
+        // 2단계: Median Cut으로 256색 팔레트 생성
+        var paletteColors = MedianCut(histogram, colorMap, 256);
         var palette = result.Palette;
         for (var i = 0; i < 256; i++)
         {
-            var r = (i >> 5) * 36;
-            var g = ((i >> 2) & 0x07) * 36;
-            var b = (i & 0x03) * 85;
-            palette.Entries[i] = Color.FromArgb(r, g, b);
+            palette.Entries[i] = i < paletteColors.Length
+                ? paletteColors[i]
+                : Color.Black;
         }
         result.Palette = palette;
 
-        var srcData = source.LockBits(new Rectangle(0, 0, source.Width, source.Height),
-            ImageLockMode.ReadOnly, PixelFormat.Format24bppRgb);
+        // 3단계: 각 픽셀에 가장 가까운 팔레트 색상 매핑
         var dstData = result.LockBits(new Rectangle(0, 0, result.Width, result.Height),
             ImageLockMode.WriteOnly, PixelFormat.Format8bppIndexed);
 
@@ -239,10 +264,10 @@ public static class EncoderService
 
                 for (var x = 0; x < source.Width; x++)
                 {
-                    var b = srcRow[x * 3] / 85;       // 0-3
-                    var g = srcRow[x * 3 + 1] / 36;   // 0-7
-                    var r = srcRow[x * 3 + 2] / 36;   // 0-7
-                    dstRow[x] = (byte)((r << 5) | (g << 2) | b);
+                    int b = srcRow[x * 3];
+                    int g = srcRow[x * 3 + 1];
+                    int r = srcRow[x * 3 + 2];
+                    dstRow[x] = (byte)FindClosestColor(paletteColors, r, g, b);
                 }
             }
         }
@@ -251,6 +276,139 @@ public static class EncoderService
         result.UnlockBits(dstData);
 
         return result;
+    }
+
+    private static int FindClosestColor(Color[] palette, int r, int g, int b)
+    {
+        var bestIdx = 0;
+        var bestDist = int.MaxValue;
+        for (var i = 0; i < palette.Length; i++)
+        {
+            var dr = r - palette[i].R;
+            var dg = g - palette[i].G;
+            var db = b - palette[i].B;
+            var dist = dr * dr + dg * dg + db * db;
+            if (dist < bestDist)
+            {
+                bestDist = dist;
+                bestIdx = i;
+                if (dist == 0) break;
+            }
+        }
+        return bestIdx;
+    }
+
+    private static Color[] MedianCut(int[] histogram, int[] colorMap, int maxColors)
+    {
+        // 사용된 색상 인덱스 수집
+        var indices = new List<int>();
+        for (var i = 0; i < histogram.Length; i++)
+        {
+            if (histogram[i] > 0) indices.Add(i);
+        }
+
+        if (indices.Count <= maxColors)
+        {
+            return indices.Select(idx =>
+            {
+                var count = histogram[idx];
+                return Color.FromArgb(
+                    colorMap[idx * 3] / count,
+                    colorMap[idx * 3 + 1] / count,
+                    colorMap[idx * 3 + 2] / count);
+            }).ToArray();
+        }
+
+        var boxes = new List<(List<int> indices, int volume)> { (indices, ComputeVolume(indices)) };
+
+        while (boxes.Count < maxColors)
+        {
+            // 가장 큰 box를 분할
+            var maxVol = -1;
+            var splitIdx = 0;
+            for (var i = 0; i < boxes.Count; i++)
+            {
+                if (boxes[i].indices.Count > 1 && boxes[i].volume > maxVol)
+                {
+                    maxVol = boxes[i].volume;
+                    splitIdx = i;
+                }
+            }
+
+            if (maxVol <= 0) break;
+
+            var box = boxes[splitIdx];
+            boxes.RemoveAt(splitIdx);
+
+            // 가장 넓은 채널 찾기
+            int rMin = 31, rMax = 0, gMin = 31, gMax = 0, bMin = 31, bMax = 0;
+            foreach (var idx in box.indices)
+            {
+                var r = (idx >> 10) & 31;
+                var g = (idx >> 5) & 31;
+                var b = idx & 31;
+                if (r < rMin) rMin = r; if (r > rMax) rMax = r;
+                if (g < gMin) gMin = g; if (g > gMax) gMax = g;
+                if (b < bMin) bMin = b; if (b > bMax) bMax = b;
+            }
+
+            var rRange = rMax - rMin;
+            var gRange = gMax - gMin;
+            var bRange = bMax - bMin;
+
+            // 가장 넓은 채널 기준 정렬 후 중앙 분할
+            int channel; // 0=R, 1=G, 2=B
+            if (rRange >= gRange && rRange >= bRange) channel = 0;
+            else if (gRange >= bRange) channel = 1;
+            else channel = 2;
+
+            box.indices.Sort((a, b2) =>
+            {
+                var va = channel switch { 0 => (a >> 10) & 31, 1 => (a >> 5) & 31, _ => a & 31 };
+                var vb = channel switch { 0 => (b2 >> 10) & 31, 1 => (b2 >> 5) & 31, _ => b2 & 31 };
+                return va.CompareTo(vb);
+            });
+
+            var mid = box.indices.Count / 2;
+            var left = box.indices.GetRange(0, mid);
+            var right = box.indices.GetRange(mid, box.indices.Count - mid);
+
+            boxes.Add((left, ComputeVolume(left)));
+            boxes.Add((right, ComputeVolume(right)));
+        }
+
+        return boxes.Select(box =>
+        {
+            long rSum = 0, gSum = 0, bSum = 0, totalCount = 0;
+            foreach (var idx in box.indices)
+            {
+                var count = histogram[idx];
+                rSum += colorMap[idx * 3] ;
+                gSum += colorMap[idx * 3 + 1];
+                bSum += colorMap[idx * 3 + 2];
+                totalCount += count;
+            }
+            if (totalCount == 0) return Color.Black;
+            return Color.FromArgb(
+                (int)Math.Clamp(rSum / totalCount, 0, 255),
+                (int)Math.Clamp(gSum / totalCount, 0, 255),
+                (int)Math.Clamp(bSum / totalCount, 0, 255));
+        }).ToArray();
+
+        static int ComputeVolume(List<int> indices)
+        {
+            int rMin = 31, rMax = 0, gMin = 31, gMax = 0, bMin = 31, bMax = 0;
+            foreach (var idx in indices)
+            {
+                var r = (idx >> 10) & 31;
+                var g = (idx >> 5) & 31;
+                var b = idx & 31;
+                if (r < rMin) rMin = r; if (r > rMax) rMax = r;
+                if (g < gMin) gMin = g; if (g > gMax) gMax = g;
+                if (b < bMin) bMin = b; if (b > bMax) bMax = b;
+            }
+            return (rMax - rMin + 1) * (gMax - gMin + 1) * (bMax - bMin + 1);
+        }
     }
 
     private static ImageCodecInfo GetGifEncoder()

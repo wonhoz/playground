@@ -77,10 +77,16 @@ public partial class MainWindow : Window
     private bool _bgmMuted;
     private const double BgmVolume = 0.35;
 
-    // High score persistence
+    // Fullscreen
+    private bool _isFullscreen;
+    private WindowState _prevWindowState;
+    private WindowStyle _prevWindowStyle;
+
+    // High score & settings persistence
     private static readonly string SaveDir = System.IO.Path.Combine(
         Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "BrickBlitz");
     private static readonly string SaveFile = System.IO.Path.Combine(SaveDir, "highscore.txt");
+    private static readonly string SettingsFile = System.IO.Path.Combine(SaveDir, "settings.txt");
 
     public MainWindow()
     {
@@ -97,6 +103,9 @@ public partial class MainWindow : Window
         }
 
         LoadHighScore();
+        LoadSettings();
+        UpdateMuteIndicator();
+        ShowTitle();
         _loop.OnUpdate += OnUpdate;
         _loop.OnRender += OnRender;
         _loop.Start();
@@ -113,14 +122,57 @@ public partial class MainWindow : Window
         catch { }
     }
 
-    private void SaveHighScore()
+    private void SaveHighScoreAsync()
+    {
+        int score = _highScore;
+        _ = Task.Run(() =>
+        {
+            try
+            {
+                Directory.CreateDirectory(SaveDir);
+                File.WriteAllText(SaveFile, score.ToString());
+            }
+            catch { }
+        });
+    }
+
+    private void LoadSettings()
     {
         try
         {
-            Directory.CreateDirectory(SaveDir);
-            File.WriteAllText(SaveFile, _highScore.ToString());
+            if (!File.Exists(SettingsFile)) return;
+            foreach (var line in File.ReadAllLines(SettingsFile))
+            {
+                var parts = line.Split('=', 2);
+                if (parts.Length != 2) continue;
+                switch (parts[0].Trim())
+                {
+                    case "muted": _bgmMuted = parts[1].Trim() == "1"; break;
+                    case "input": _useMouseInput = parts[1].Trim() == "mouse"; break;
+                }
+            }
         }
         catch { }
+    }
+
+    private void SaveSettingsAsync()
+    {
+        bool muted = _bgmMuted;
+        string input = _useMouseInput ? "mouse" : "keyboard";
+        _ = Task.Run(() =>
+        {
+            try
+            {
+                Directory.CreateDirectory(SaveDir);
+                File.WriteAllText(SettingsFile, $"muted={(muted ? 1 : 0)}\ninput={input}\n");
+            }
+            catch { }
+        });
+    }
+
+    private void UpdateMuteIndicator()
+    {
+        MuteIndicator.Visibility = _bgmMuted ? Visibility.Visible : Visibility.Collapsed;
     }
 
     // ── Game Start / Stage Setup ──────────────────────
@@ -136,6 +188,20 @@ public partial class MainWindow : Window
         LoadStage(_stage);
         ShowPlaying();
         SoundGen.PlayBgm(Sounds.Bgm);
+        SoundGen.SetBgmVolume(_bgmMuted ? 0 : BgmVolume);
+    }
+
+    private void RetryStage()
+    {
+        // 현재 스테이지·점수·하이스코어 유지, 라이프만 리셋하여 재시작
+        _lives = StartLives;
+        _combo = 0;
+        _comboTimer = 0;
+        ClearPowerUpEffects();
+        LoadStage(_stage);
+        ShowPlaying();
+        SoundGen.PlayBgm(Sounds.Bgm);
+        SoundGen.SetBgmVolume(_bgmMuted ? 0 : BgmVolume);
     }
 
     private void LoadStage(int stage)
@@ -190,7 +256,7 @@ public partial class MainWindow : Window
         _stage++;
         if (_stage > MaxStages)
         {
-            if (_score > _highScore) { _highScore = _score; SaveHighScore(); }
+            if (_score > _highScore) { _highScore = _score; SaveHighScoreAsync(); }
             SoundGen.StopBgm();
             SoundGen.Sfx(Sounds.StageClearSfx);
             _state = GameState.AllClear;
@@ -200,6 +266,10 @@ public partial class MainWindow : Window
             HudPanel.Visibility = Visibility.Collapsed;
             return;
         }
+        // 콤보·콤보 표시는 스테이지 경계에서 리셋 (다음 스테이지로 이월 방지)
+        _combo = 0;
+        _comboTimer = 0;
+        ComboText.Visibility = Visibility.Collapsed;
         LoadStage(_stage);
         ShowPlaying();
     }
@@ -310,7 +380,7 @@ public partial class MainWindow : Window
 
             if (_lives <= 0)
             {
-                if (_score > _highScore) { _highScore = _score; SaveHighScore(); }
+                if (_score > _highScore) { _highScore = _score; SaveHighScoreAsync(); }
                 SoundGen.StopBgm();
                 _state = GameState.GameOver;
                 FinalScoreText.Text = $"SCORE: {_score}";
@@ -962,11 +1032,11 @@ public partial class MainWindow : Window
         {
             case Key.Left or Key.A:
                 _keyLeft = true;
-                _useMouseInput = false;
+                if (_useMouseInput) { _useMouseInput = false; SaveSettingsAsync(); }
                 break;
             case Key.Right or Key.D:
                 _keyRight = true;
-                _useMouseInput = false;
+                if (_useMouseInput) { _useMouseInput = false; SaveSettingsAsync(); }
                 break;
             case Key.Space when _state == GameState.Playing:
                 foreach (var b in _balls)
@@ -980,6 +1050,9 @@ public partial class MainWindow : Window
             case Key.Enter when _state == GameState.GameOver:
                 StartGame();
                 break;
+            case Key.R when _state == GameState.GameOver:
+                RetryStage();
+                break;
             case Key.Enter when _state == GameState.StageClear:
                 NextStage();
                 break;
@@ -989,14 +1062,21 @@ public partial class MainWindow : Window
             case Key.P when _state == GameState.Playing:
                 _state = GameState.Paused;
                 PausedOverlay.Visibility = Visibility.Visible;
+                SoundGen.PauseBgm();
                 break;
             case Key.P when _state == GameState.Paused:
                 _state = GameState.Playing;
                 PausedOverlay.Visibility = Visibility.Collapsed;
+                if (!_bgmMuted) SoundGen.ResumeBgm();
                 break;
             case Key.M:
                 _bgmMuted = !_bgmMuted;
                 SoundGen.SetBgmVolume(_bgmMuted ? 0 : BgmVolume);
+                UpdateMuteIndicator();
+                SaveSettingsAsync();
+                break;
+            case Key.F11:
+                ToggleFullscreen();
                 break;
             case Key.H when _state == GameState.Playing || _state == GameState.Paused:
                 HelpOverlay.Visibility = HelpOverlay.Visibility == Visibility.Visible
@@ -1039,7 +1119,27 @@ public partial class MainWindow : Window
     {
         var pos = e.GetPosition(GameCanvas);
         _mouseX = pos.X;
-        _useMouseInput = true;
+        if (!_useMouseInput) { _useMouseInput = true; SaveSettingsAsync(); }
+    }
+
+    private void ToggleFullscreen()
+    {
+        if (!_isFullscreen)
+        {
+            _prevWindowState = WindowState;
+            _prevWindowStyle = WindowStyle;
+            ResizeMode = ResizeMode.NoResize;
+            WindowStyle = WindowStyle.None;
+            WindowState = WindowState.Maximized;
+            _isFullscreen = true;
+        }
+        else
+        {
+            WindowStyle = _prevWindowStyle;
+            WindowState = _prevWindowState;
+            ResizeMode = ResizeMode.NoResize;
+            _isFullscreen = false;
+        }
     }
 }
 

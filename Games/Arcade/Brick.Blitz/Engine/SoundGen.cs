@@ -140,6 +140,9 @@ public static class SoundGen
         if (_bgmFile != null) { try { File.Delete(_bgmFile); } catch { } _bgmFile = null; }
     }
 
+    public static void PauseBgm() => _bgm?.Pause();
+    public static void ResumeBgm() => _bgm?.Play();
+
     public static void SetBgmVolume(double volume)
     {
         if (_bgm != null) _bgm.Volume = Math.Clamp(volume, 0, 1);

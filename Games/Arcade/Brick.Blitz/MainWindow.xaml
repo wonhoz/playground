@@ -40,8 +40,14 @@
 
         <!-- Combo indicator -->
         <TextBlock x:Name="ComboText" Text="" FontSize="13" FontWeight="Bold"
-                   Foreground="#FFD700" FontFamily="Consolas"
+                   Foreground="#FFAA00" FontFamily="Consolas"
                    HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,28,0,0"
+                   Visibility="Collapsed"/>
+
+        <!-- Mute indicator (always visible when muted) -->
+        <TextBlock x:Name="MuteIndicator" Text="♪̸ MUTE" FontSize="11" FontWeight="Bold"
+                   Foreground="#FF66AA" FontFamily="Consolas"
+                   HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,8,12,0"
                    Visibility="Collapsed"/>
 
         <!-- PowerUp active indicator -->
@@ -77,6 +83,8 @@
                 <Run Text="P  Pause / Resume"/>
                 <LineBreak/>
                 <Run Text="M  BGM Mute Toggle"/>
+                <LineBreak/>
+                <Run Text="F11  Fullscreen Toggle"/>
                 <LineBreak/>
                 <Run Text="H  Show Controls"/>
                 <LineBreak/>
@@ -115,8 +123,10 @@
                            FontFamily="Consolas"/>
                 <TextBlock x:Name="FinalStageText" Text="" FontSize="14" Foreground="#888888"
                            HorizontalAlignment="Center" Margin="0,4,0,0" FontFamily="Consolas"/>
-                <TextBlock Text="[ ENTER to Retry ]" FontSize="16" Foreground="#888888"
+                <TextBlock Text="[ ENTER  New Game from Stage 1 ]" FontSize="14" Foreground="#00FFCC"
                            HorizontalAlignment="Center" Margin="0,24,0,0" FontFamily="Consolas"/>
+                <TextBlock Text="[ R  Retry Current Stage ]" FontSize="14" Foreground="#FFAA00"
+                           HorizontalAlignment="Center" Margin="0,6,0,0" FontFamily="Consolas"/>
             </StackPanel>
         </Border>
 
@@ -151,6 +161,8 @@
                         <Run Text="                 Pause / Resume" Foreground="#888888"/><LineBreak/>
                         <Run Text="M"/>
                         <Run Text="                 BGM Mute Toggle" Foreground="#888888"/><LineBreak/>
+                        <Run Text="F11"/>
+                        <Run Text="               Fullscreen Toggle" Foreground="#888888"/><LineBreak/>
                         <Run Text="H"/>
                         <Run Text="                 Show / Hide Help" Foreground="#888888"/><LineBreak/>
                         <Run Text="ESC"/>

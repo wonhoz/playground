@@ -474,7 +474,7 @@
                                     </Viewbox>
                                 </Border>
 
-                                <TextBlock Text="파일을 드래그하세요"
+                                <TextBlock Text="파일 또는 폴더를 드래그하세요"
                                            FontSize="16" FontWeight="SemiBold"
                                            Foreground="{StaticResource TextPrimaryBrush}"
                                            HorizontalAlignment="Center"/>
@@ -583,6 +583,12 @@
                                         Click="SelectDestination_Click"
                                         HorizontalAlignment="Left"
                                         Padding="12,6"/>
+                                <StackPanel x:Name="RecentDestPanel" Visibility="Collapsed" Margin="0,6,0,0">
+                                    <TextBlock Text="최근 폴더"
+                                               FontSize="10"
+                                               Foreground="{StaticResource TextSecondaryBrush}"
+                                               Margin="0,0,0,2"/>
+                                </StackPanel>
 
                                 <!-- Separator -->
                                 <Border Height="1" Background="{StaticResource BorderBrush}" Margin="0,14"/>
@@ -690,6 +696,7 @@
                                 </Grid>
                                 <ListBox x:Name="FileListBox"
                                          Style="{StaticResource DarkListBoxStyle}"
+                                         SelectionMode="Extended"
                                          Height="120"
                                          Margin="0,6,0,0"
                                          KeyDown="FileListBox_KeyDown">

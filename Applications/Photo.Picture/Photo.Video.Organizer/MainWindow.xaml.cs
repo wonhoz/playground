@@ -39,6 +39,7 @@ namespace Photo.Video.Organizer
             SaveLogCheckBox.IsChecked = _settings.SaveLog;
             MoveFilesCheckBox.IsChecked = _settings.MoveFiles;
 
+            UpdateRecentDestinations();
             UpdateStartButton();
         }
 
@@ -86,8 +87,20 @@ namespace Photo.Video.Organizer
         {
             if (FileListBox.SelectedItems.Count == 0) return;
 
-            var selectedNames = FileListBox.SelectedItems.Cast<string>().ToHashSet();
-            _selectedFiles.RemoveAll(f => selectedNames.Contains(Path.GetFileName(f)));
+            var selectedIndices = new HashSet<int>();
+            var items = FileListBox.Items;
+            foreach (var sel in FileListBox.SelectedItems)
+            {
+                int idx = items.IndexOf(sel);
+                if (idx >= 0)
+                    selectedIndices.Add(idx);
+            }
+
+            for (int i = _selectedFiles.Count - 1; i >= 0; i--)
+            {
+                if (selectedIndices.Contains(i))
+                    _selectedFiles.RemoveAt(i);
+            }
             UpdateFileList();
             UpdateStartButton();
         }
@@ -237,13 +250,55 @@ namespace Photo.Video.Organizer
 
             if (dialog.ShowDialog() == WinForms.DialogResult.OK)
             {
-                _destinationPath = dialog.SelectedPath;
-                DestinationPathText.Text = _destinationPath;
-                DestinationPathText.Foreground = new System.Windows.Media.SolidColorBrush(
-                    System.Windows.Media.Color.FromRgb(238, 238, 238));
-                UpdateStartButton();
-                SaveSettings();
+                SetDestination(dialog.SelectedPath);
             }
+        }
+
+        private void SetDestination(string path)
+        {
+            _destinationPath = path;
+            DestinationPathText.Text = _destinationPath;
+            DestinationPathText.Foreground = new System.Windows.Media.SolidColorBrush(
+                System.Windows.Media.Color.FromRgb(238, 238, 238));
+            _settings.AddRecentDestination(path);
+            UpdateRecentDestinations();
+            UpdateStartButton();
+            SaveSettings();
+        }
+
+        private void UpdateRecentDestinations()
+        {
+            RecentDestPanel.Children.Clear();
+            foreach (var path in _settings.RecentDestinations)
+            {
+                if (path == _destinationPath) continue;
+                if (!Directory.Exists(path)) continue;
+
+                var btn = new System.Windows.Controls.Button
+                {
+                    Content = path,
+                    Cursor = System.Windows.Input.Cursors.Hand,
+                    HorizontalContentAlignment = System.Windows.HorizontalAlignment.Left,
+                    Padding = new Thickness(8, 5, 8, 5),
+                    Margin = new Thickness(0, 2, 0, 0),
+                    FontSize = 10,
+                    Foreground = new System.Windows.Media.SolidColorBrush(
+                        System.Windows.Media.Color.FromRgb(158, 158, 158)),
+                    Background = System.Windows.Media.Brushes.Transparent,
+                    BorderThickness = new Thickness(0),
+                };
+
+                var capturedPath = path;
+                btn.Click += (_, _) => SetDestination(capturedPath);
+                btn.MouseEnter += (_, _) => btn.Foreground = new System.Windows.Media.SolidColorBrush(
+                    System.Windows.Media.Color.FromRgb(238, 238, 238));
+                btn.MouseLeave += (_, _) => btn.Foreground = new System.Windows.Media.SolidColorBrush(
+                    System.Windows.Media.Color.FromRgb(158, 158, 158));
+
+                RecentDestPanel.Children.Add(btn);
+            }
+            RecentDestPanel.Visibility = RecentDestPanel.Children.Count > 0
+                ? Visibility.Visible : Visibility.Collapsed;
         }
 
         #endregion
@@ -289,7 +344,7 @@ namespace Photo.Video.Organizer
                 var error = FileOrganizer.ValidateCustomPattern(customPattern ?? "");
                 if (error != null)
                 {
-                    System.Windows.MessageBox.Show($"패턴 오류: {error}", "유효하지 않은 패턴",
+                    DarkMessageBox.Show($"패턴 오류: {error}", "유효하지 않은 패턴",
                         MessageBoxButton.OK, MessageBoxImage.Warning);
                     return;
                 }
@@ -337,7 +392,7 @@ namespace Photo.Video.Organizer
                 var error = FileOrganizer.ValidateCustomPattern(customPattern ?? "");
                 if (error != null)
                 {
-                    System.Windows.MessageBox.Show($"패턴 오류: {error}", "유효하지 않은 패턴",
+                    DarkMessageBox.Show($"패턴 오류: {error}", "유효하지 않은 패턴",
                         MessageBoxButton.OK, MessageBoxImage.Warning);
                     return;
                 }
@@ -388,7 +443,7 @@ namespace Photo.Video.Organizer
             }
             catch (Exception ex)
             {
-                System.Windows.MessageBox.Show($"오류가 발생했습니다: {ex.Message}", "오류",
+                DarkMessageBox.Show($"오류가 발생했습니다: {ex.Message}", "오류",
                     MessageBoxButton.OK, MessageBoxImage.Error);
             }
             finally

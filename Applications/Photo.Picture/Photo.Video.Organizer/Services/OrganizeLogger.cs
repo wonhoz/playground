@@ -38,11 +38,13 @@ namespace Photo.Video.Organizer.Services
 
                 var note = result.ErrorMessage ?? "";
 
-                sb.AppendLine($"\"{result.SourcePath}\",\"{result.DestinationPath ?? ""}\",\"{mediaDate}\",\"{mediaType}\",\"{status}\",\"{note}\"");
+                sb.AppendLine($"\"{Esc(result.SourcePath)}\",\"{Esc(result.DestinationPath ?? "")}\",\"{mediaDate}\",\"{mediaType}\",\"{status}\",\"{Esc(note)}\"");
             }
 
             await File.WriteAllTextAsync(logPath, sb.ToString(), new UTF8Encoding(encoderShouldEmitUTF8Identifier: true));
             return logPath;
         }
+
+        private static string Esc(string value) => value.Replace("\"", "\"\"");
     }
 }

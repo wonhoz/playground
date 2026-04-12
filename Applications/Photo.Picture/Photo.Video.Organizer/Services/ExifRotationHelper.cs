@@ -73,18 +73,32 @@ namespace Photo.Video.Organizer.Services
             }
 
             var flipType = ToRotateFlipType(orientation);
-            using var bmp = new Bitmap(sourcePath);
-            bmp.RotateFlip(flipType);
-            ResetOrientationTag(bmp);   // Orientation → 1(정상)로 리셋
+            Bitmap bmp;
+            try
+            {
+                bmp = new Bitmap(sourcePath);
+            }
+            catch (OutOfMemoryException)
+            {
+                // 이미지가 너무 커서 로드 불가 → 회전 없이 복사
+                File.Copy(sourcePath, destinationPath, overwrite: false);
+                return false;
+            }
 
-            if (JpegExtensions.Contains(ext))
-                SaveAsJpeg(bmp, destinationPath);
-            else if (TiffExtensions.Contains(ext))
-                bmp.Save(destinationPath, ImageFormat.Tiff);
-            else if (ext.Equals(".png", StringComparison.OrdinalIgnoreCase))
-                bmp.Save(destinationPath, ImageFormat.Png);
-            else
-                bmp.Save(destinationPath, ImageFormat.Bmp);
+            using (bmp)
+            {
+                bmp.RotateFlip(flipType);
+                ResetOrientationTag(bmp);   // Orientation → 1(정상)로 리셋
+
+                if (JpegExtensions.Contains(ext))
+                    SaveAsJpeg(bmp, destinationPath);
+                else if (TiffExtensions.Contains(ext))
+                    bmp.Save(destinationPath, ImageFormat.Tiff);
+                else if (ext.Equals(".png", StringComparison.OrdinalIgnoreCase))
+                    bmp.Save(destinationPath, ImageFormat.Png);
+                else
+                    bmp.Save(destinationPath, ImageFormat.Bmp);
+            }
 
             return true;
         }

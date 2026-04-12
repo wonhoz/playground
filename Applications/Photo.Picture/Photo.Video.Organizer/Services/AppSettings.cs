@@ -11,6 +11,15 @@ namespace Photo.Video.Organizer.Services
         public bool AutoRotate { get; set; } = false;
         public bool SaveLog { get; set; } = false;
         public bool MoveFiles { get; set; } = false;
+        public List<string> RecentDestinations { get; set; } = new();
+
+        public void AddRecentDestination(string path)
+        {
+            RecentDestinations.Remove(path);
+            RecentDestinations.Insert(0, path);
+            if (RecentDestinations.Count > 5)
+                RecentDestinations.RemoveRange(5, RecentDestinations.Count - 5);
+        }
 
         private static readonly string _settingsPath = Path.Combine(
             Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),

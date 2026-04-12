@@ -214,7 +214,7 @@ namespace Photo.Video.Organizer.Services
                 // SHA256 해시 기반 중복 파일 감지 (크기가 같을 때만 해시 계산)
                 long sourceSize = new FileInfo(sourcePath).Length;
                 string? sourceHash = null;
-                foreach (var existingFile in Directory.GetFiles(destinationFolder))
+                foreach (var existingFile in Directory.EnumerateFiles(destinationFolder))
                 {
                     if (new FileInfo(existingFile).Length != sourceSize) continue;
                     sourceHash ??= ComputeFileHash(sourcePath);

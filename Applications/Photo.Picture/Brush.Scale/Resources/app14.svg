@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <radialGradient id="bg2" cx="50%" cy="45%" r="52%">
+      <stop offset="0%" stop-color="#FF8E53"/>
+      <stop offset="100%" stop-color="#FF4545"/>
+    </radialGradient>
+    <clipPath id="lensClip">
+      <circle cx="468" cy="450" r="230"/>
+    </clipPath>
+  </defs>
+
+  <!-- 배경 (원형) -->
+  <circle cx="512" cy="512" r="490" fill="url(#bg2)"/>
+
+  <!-- 확대경 손잡이 -->
+  <line x1="648" y1="638" x2="800" y2="790" stroke="white" stroke-width="74" stroke-linecap="round"/>
+  <line x1="648" y1="638" x2="800" y2="790" stroke="#FBBF24" stroke-width="40" stroke-linecap="round"/>
+
+  <!-- 확대경 테두리 -->
+  <circle cx="468" cy="450" r="248" fill="none" stroke="white" stroke-width="48"/>
+
+  <!-- 확대경 내부 이미지 (선명한 풍경) -->
+  <circle cx="468" cy="450" r="230" fill="#BAE6FD"/>
+  <g clip-path="url(#lensClip)">
+    <!-- 하늘 -->
+    <rect x="238" y="220" width="460" height="220" fill="#7DD3FC"/>
+    <!-- 구름 -->
+    <ellipse cx="360" cy="310" rx="55" ry="30" fill="white" opacity="0.95"/>
+    <ellipse cx="400" cy="298" rx="40" ry="25" fill="white" opacity="0.95"/>
+    <ellipse cx="570" cy="330" rx="48" ry="26" fill="white" opacity="0.95"/>
+    <!-- 산 -->
+    <polygon points="238,680 368,340 498,680" fill="#6366F1"/>
+    <polygon points="420,680 560,360 700,680" fill="#4F46E5"/>
+    <!-- 나무 -->
+    <rect x="300" y="590" width="22" height="70" fill="#78350F"/>
+    <polygon points="311,520 268,610 354,610" fill="#16A34A"/>
+    <rect x="620" y="580" width="22" height="80" fill="#78350F"/>
+    <polygon points="631,508 588,598 674,598" fill="#15803D"/>
+    <!-- 땅 -->
+    <rect x="238" y="630" width="460" height="100" fill="#4ADE80"/>
+  </g>
+
+  <!-- 확대경 반짝임 하이라이트 -->
+  <ellipse cx="370" cy="320" rx="60" ry="30" fill="white" opacity="0.2"/>
+
+  <!-- 오른쪽 위 반짝임 별들 -->
+  <g fill="#FDE047">
+    <polygon points="760,170 775,210 818,210 784,234 797,275 760,252 723,275 736,234 702,210 745,210" opacity="0.95"/>
+    <polygon points="840,260 850,285 876,285 856,299 863,324 840,310 817,324 824,299 804,285 830,285" opacity="0.8"/>
+    <circle cx="710" cy="290" r="9" opacity="0.7"/>
+  </g>
+
+  <!-- 해상도 텍스트 힌트 -->
+  <text x="468" y="870" text-anchor="middle" font-family="Arial,sans-serif" font-weight="bold" font-size="52" fill="rgba(255,255,255,0.88)">HD</text>
+</svg>

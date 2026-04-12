@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- icon_03: literal | "4×" 텍스트 + 업화살표 | 중앙 심볼 | 코발트+흰색+노랑 -->
+  <defs>
+    <linearGradient id="bg03" x1="0" y1="0" x2="0.5" y2="1">
+      <stop offset="0%" stop-color="#2962FF"/>
+      <stop offset="100%" stop-color="#1A3DA0"/>
+    </linearGradient>
+    <linearGradient id="arrow03" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0%" stop-color="#FFD700"/>
+      <stop offset="100%" stop-color="#FFF176"/>
+    </linearGradient>
+    <filter id="shadow03">
+      <feDropShadow dx="0" dy="6" stdDeviation="10" flood-color="#00000044"/>
+    </filter>
+  </defs>
+
+  <!-- Layer 1: 코발트 블루 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg03)"/>
+
+  <!-- 배경 원형 데코 -->
+  <circle cx="512" cy="512" r="400" fill="white" opacity="0.04"/>
+  <circle cx="512" cy="512" r="320" fill="white" opacity="0.04"/>
+
+  <!-- Layer 2: 화살표 (상단) -->
+  <polygon points="512,148 660,340 568,340 568,520 456,520 456,340 364,340" fill="url(#arrow03)" filter="url(#shadow03)"/>
+
+  <!-- Layer 3: "4×" 텍스트 -->
+  <text x="512" y="820" font-family="Arial Black, Impact, sans-serif" font-size="300" font-weight="900" fill="white" text-anchor="middle" filter="url(#shadow03)" letter-spacing="-10">4×</text>
+
+  <!-- 작은 이미지 아이콘 (좌하단) -->
+  <rect x="140" y="720" width="120" height="90" rx="12" fill="white" opacity="0.18"/>
+  <polyline points="140,790 180,750 210,768 250,738 260,810 140,810" fill="white" opacity="0.22"/>
+  <!-- 크게 확대된 이미지 아이콘 (우하단 표시 제거하고 배율 강조) -->
+</svg>

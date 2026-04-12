@@ -36,9 +36,13 @@ public class MainViewModel : INotifyPropertyChanged, IDisposable
         set { _resultBitmap = value; OnPropertyChanged(); OnPropertyChanged(nameof(HasResult)); OnPropertyChanged(nameof(ResultInfo)); OnPropertyChanged(nameof(CanReUpscale)); }
     }
 
+    long _resultByteSize;
+
     public bool HasResult => _resultBitmap is not null;
     public string ResultInfo => _resultBitmap is null ? "" :
-        $"{_resultBitmap.PixelWidth} × {_resultBitmap.PixelHeight}";
+        _resultByteSize > 0
+            ? $"{_resultBitmap.PixelWidth} × {_resultBitmap.PixelHeight} · PNG ~{ModelDownloadService.FormatBytes(_resultByteSize)}"
+            : $"{_resultBitmap.PixelWidth} × {_resultBitmap.PixelHeight}";
 
     // ── 모델 / 설정 ───────────────────────────────────────────────────────
     public ObservableCollection<ModelItem> Models            { get; } = [];
@@ -173,7 +177,7 @@ public class MainViewModel : INotifyPropertyChanged, IDisposable
 
         CancelCommand = new RelayCommand(_ => _cts?.Cancel(), _ => IsBusy);
         OpenBatchOutputCommand = new RelayCommand(
-            _ => System.Diagnostics.Process.Start("explorer", $"\"{_batchOutputDir}\""),
+            _ => OpenInExplorer(_batchOutputDir),
             _ => !string.IsNullOrEmpty(_batchOutputDir) && Directory.Exists(_batchOutputDir));
 
         // 설정 복원
@@ -233,9 +237,10 @@ public class MainViewModel : INotifyPropertyChanged, IDisposable
     }
 
     // ── 이미지 로드 ───────────────────────────────────────────────────────
-    public void LoadImage(string path)
+    public async void LoadImage(string path)
     {
-        var bmp = LoadBitmapSource(path);
+        StatusText = $"이미지 로드 중: {Path.GetFileName(path)}";
+        var bmp = await Task.Run(() => LoadBitmapSource(path));
         if (bmp is null)
         {
             StatusText = $"이미지 로드 실패: {Path.GetFileName(path)}";
@@ -298,6 +303,7 @@ public class MainViewModel : INotifyPropertyChanged, IDisposable
         IsBusy   = true;
         Progress = 0;
         ResultBitmap = null;
+        _resultByteSize = 0;
 
         _cts = new CancellationTokenSource();
         try
@@ -307,7 +313,9 @@ public class MainViewModel : INotifyPropertyChanged, IDisposable
             var prog  = new Progress<double>(v => { Progress = v * 100; });
             using var result = await _svc.UpscaleAsync(src, _selectedModel.ModelType, _scaleFactor, prog, _cts.Token);
 
-            ResultBitmap = SkiaBitmapToWpf(result);
+            var (wpfBmp, size) = SkiaBitmapToWpf(result);
+            _resultByteSize = size;
+            ResultBitmap    = wpfBmp;
             StatusText = $"완료  {result.Width} × {result.Height}";
             Progress = 100;
         }
@@ -339,10 +347,11 @@ public class MainViewModel : INotifyPropertyChanged, IDisposable
         using (var fs = File.OpenWrite(tmp))
             enc.Save(fs);
         DeleteTempInput();
-        _tempInputPath = tmp;
-        InputPath      = tmp;
-        ResultBitmap   = null;
-        OriginalBitmap = prev;
+        _tempInputPath  = tmp;
+        InputPath       = tmp;
+        _resultByteSize = 0;
+        ResultBitmap    = null;
+        OriginalBitmap  = prev;
         StatusText = $"결과를 소스로 재사용 ({prev.PixelWidth} × {prev.PixelHeight}) — 이어서 업스케일 가능";
     }
 
@@ -361,9 +370,13 @@ public class MainViewModel : INotifyPropertyChanged, IDisposable
         var searchOpt = _batchRecursive
             ? SearchOption.AllDirectories
             : SearchOption.TopDirectoryOnly;
-        var files = Directory.GetFiles(_batchInputDir, "*.*", searchOpt)
-                             .Where(f => exts.Contains(Path.GetExtension(f)))
-                             .ToList();
+
+        StatusText = "파일 목록 수집 중...";
+        var inputDir = _batchInputDir;
+        var files = await Task.Run(() =>
+            Directory.EnumerateFiles(inputDir, "*.*", searchOpt)
+                     .Where(f => exts.Contains(Path.GetExtension(f)))
+                     .ToList());
         if (files.Count == 0) { StatusText = "처리할 이미지가 없습니다"; return; }
 
         var fmt = _selectedFormat?.Format ?? OutputFormat.Png;
@@ -398,7 +411,7 @@ public class MainViewModel : INotifyPropertyChanged, IDisposable
             Progress = 100;
             BatchCompleted?.Invoke(jobs.Count);
             if (_openOutputOnComplete && Directory.Exists(_batchOutputDir))
-                System.Diagnostics.Process.Start("explorer", $"\"{_batchOutputDir}\"");
+                OpenInExplorer(_batchOutputDir);
         }
         catch (OperationCanceledException) { StatusText = "배치 취소됨"; Progress = 0; }
         catch (Exception ex)              { StatusText = $"배치 오류: {ex.Message}"; Progress = 0; }
@@ -417,6 +430,16 @@ public class MainViewModel : INotifyPropertyChanged, IDisposable
     {
         _svc.Dispose();
         DeleteTempInput();
+    }
+
+    static void OpenInExplorer(string path)
+    {
+        System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo
+        {
+            FileName        = "explorer.exe",
+            Arguments       = $"\"{path}\"",
+            UseShellExecute = true,
+        });
     }
 
     void DeleteTempInput()
@@ -453,18 +476,19 @@ public class MainViewModel : INotifyPropertyChanged, IDisposable
         catch { return null; }
     }
 
-    static BitmapSource SkiaBitmapToWpf(SKBitmap bmp)
+    static (BitmapSource Bitmap, long ByteSize) SkiaBitmapToWpf(SKBitmap bmp)
     {
         using var image = SKImage.FromBitmap(bmp);
         using var data  = image.Encode(SKEncodedImageFormat.Png, 100);
-        using var ms    = new System.IO.MemoryStream(data.ToArray());
+        var bytes = data.ToArray();
+        using var ms    = new System.IO.MemoryStream(bytes);
         var bi = new BitmapImage();
         bi.BeginInit();
         bi.CacheOption  = BitmapCacheOption.OnLoad;
         bi.StreamSource = ms;
         bi.EndInit();
         bi.Freeze();
-        return bi;
+        return (bi, bytes.LongLength);
     }
 
     public event PropertyChangedEventHandler? PropertyChanged;

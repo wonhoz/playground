@@ -317,7 +317,9 @@ public class UpscaleService : IDisposable
     // ── 이미지 저장 ───────────────────────────────────────────────────────
     public static void SaveImage(SKBitmap bmp, string path, OutputFormat fmt, int jpegQuality)
     {
-        Directory.CreateDirectory(Path.GetDirectoryName(path)!);
+        var dir = Path.GetDirectoryName(path);
+        if (!string.IsNullOrEmpty(dir))
+            Directory.CreateDirectory(dir);
         using var image  = SKImage.FromBitmap(bmp);
         using var stream = File.OpenWrite(path);
         var encFmt = fmt switch
@@ -413,6 +415,9 @@ public class UpscaleService : IDisposable
     {
         int h = bmp.Height, w = bmp.Width;
         var t = new DenseTensor<float>([1, 3, h, w]);
+        // DenseTensor NCHW row-major: R plane [0..plane), G [plane..2*plane), B [2*plane..3*plane)
+        var span  = t.Buffer.Span;
+        int plane = h * w;
 
         SKBitmap? converted = bmp.ColorType != SKColorType.Bgra8888
             ? bmp.Copy(SKColorType.Bgra8888)
@@ -420,17 +425,20 @@ public class UpscaleService : IDisposable
         var src = converted ?? bmp;
         try
         {
-            byte* ptr      = (byte*)src.GetPixels().ToPointer();
-            int   rowBytes = src.RowBytes;
+            byte* ptr = (byte*)src.GetPixels().ToPointer();
+            int rowBytes = src.RowBytes;
+            const float inv255 = 1f / 255f;
             for (int y = 0; y < h; y++)
             {
                 byte* row = ptr + y * rowBytes;
+                int rowOff = y * w;
                 for (int x = 0; x < w; x++)
                 {
-                    byte* p = row + x * 4;  // BGRA: p[0]=B, p[1]=G, p[2]=R
-                    t[0, 0, y, x] = p[2] / 255f;
-                    t[0, 1, y, x] = p[1] / 255f;
-                    t[0, 2, y, x] = p[0] / 255f;
+                    byte* p = row + x * 4;  // BGRA
+                    int idx = rowOff + x;
+                    span[idx]             = p[2] * inv255; // R
+                    span[plane + idx]     = p[1] * inv255; // G
+                    span[2 * plane + idx] = p[0] * inv255; // B
                 }
             }
         }
@@ -438,10 +446,12 @@ public class UpscaleService : IDisposable
         return t;
     }
 
-    // 고정 크기 모델용: 타일이 targetH×targetW보다 작으면 zero-padding
+    // 고정 크기 모델용: 타일이 targetH×targetW보다 작으면 zero-padding (DenseTensor는 0으로 초기화됨)
     static unsafe DenseTensor<float> BitmapToTensorPadded(SKBitmap bmp, int targetH, int targetW)
     {
         var t  = new DenseTensor<float>([1, 3, targetH, targetW]);
+        var span  = t.Buffer.Span;
+        int plane = targetH * targetW;
         int h  = Math.Min(bmp.Height, targetH);
         int w  = Math.Min(bmp.Width,  targetW);
 
@@ -451,17 +461,20 @@ public class UpscaleService : IDisposable
         var src = converted ?? bmp;
         try
         {
-            byte* ptr      = (byte*)src.GetPixels().ToPointer();
-            int   rowBytes = src.RowBytes;
+            byte* ptr = (byte*)src.GetPixels().ToPointer();
+            int rowBytes = src.RowBytes;
+            const float inv255 = 1f / 255f;
             for (int y = 0; y < h; y++)
             {
                 byte* row = ptr + y * rowBytes;
+                int rowOff = y * targetW;
                 for (int x = 0; x < w; x++)
                 {
                     byte* p = row + x * 4;
-                    t[0, 0, y, x] = p[2] / 255f;
-                    t[0, 1, y, x] = p[1] / 255f;
-                    t[0, 2, y, x] = p[0] / 255f;
+                    int idx = rowOff + x;
+                    span[idx]             = p[2] * inv255; // R
+                    span[plane + idx]     = p[1] * inv255; // G
+                    span[2 * plane + idx] = p[0] * inv255; // B
                 }
             }
         }

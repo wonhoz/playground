@@ -159,7 +159,12 @@ public partial class MainWindow : Window
         if (dlg.ShowDialog() == true)
         {
             _vm.SaveResultDirect(dlg.FileName);
-            System.Diagnostics.Process.Start("explorer", $"/select,\"{dlg.FileName}\"");
+            System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo
+            {
+                FileName        = "explorer.exe",
+                Arguments       = $"/select,\"{dlg.FileName}\"",
+                UseShellExecute = true,
+            });
         }
     }
 

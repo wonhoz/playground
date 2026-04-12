@@ -11,6 +11,8 @@ public class AppSettings
     public int    JpgQuality   { get; set; } = 95;
     public int[]  IcoSizes      { get; set; } = [16, 32, 48, 64, 128, 256];
     public int    SvgOutputSize { get; set; } = 1024;
+    public string? LastOutputDir  { get; set; }
+    public string? LastResultText { get; set; }
 
     static readonly string FilePath = Path.Combine(
         Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),

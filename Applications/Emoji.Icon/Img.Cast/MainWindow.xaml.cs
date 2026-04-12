@@ -80,6 +80,15 @@ public partial class MainWindow : Window
         else if (_settings.SvgOutputSize == 512)  RbSvg512.IsChecked  = true;
         else if (_settings.SvgOutputSize == 2048) RbSvg2048.IsChecked = true;
         else                                       RbSvg1024.IsChecked = true;
+
+        // 최근 변환 이력 복원
+        if (_settings.LastResultText is not null)
+        {
+            SetStatus($"이전: {_settings.LastResultText}");
+            _lastOutputDir = _settings.LastOutputDir;
+            if (_lastOutputDir is not null && Directory.Exists(_lastOutputDir))
+                BtnOpenFolder.Visibility = Visibility.Visible;
+        }
     }
 
     void SaveSettings()
@@ -90,6 +99,7 @@ public partial class MainWindow : Window
         _settings.JpgQuality    = (int)SliderQuality.Value;
         _settings.IcoSizes      = GetIcoSizes();
         _settings.SvgOutputSize = GetSvgOutputSize();
+        _settings.LastOutputDir  = _lastOutputDir;
         _settings.Save();
     }
 
@@ -98,7 +108,7 @@ public partial class MainWindow : Window
     {
         if (!e.Data.GetDataPresent(DataFormats.FileDrop)) { e.Effects = DragDropEffects.None; return; }
         var dropped = e.Data.GetData(DataFormats.FileDrop) as string[];
-        bool hasSupported = dropped is { Length: > 0 } && ImageConverter.CollectFiles(dropped, GetInputFilter()).Length > 0;
+        bool hasSupported = dropped is { Length: > 0 } && ImageConverter.HasSupportedFiles(dropped, GetInputFilter());
         e.Effects = hasSupported ? DragDropEffects.Copy : DragDropEffects.None;
         if (hasSupported) AnimateDropZone(true);
     }
@@ -131,7 +141,7 @@ public partial class MainWindow : Window
 
             if (files.Length == 0)
             {
-                SetStatus("지원하는 이미지 파일이 없습니다 (SVG · PNG · JPG · BMP · ICO)");
+                SetStatus("지원하는 이미지 파일이 없습니다 (SVG · PNG · JPG · BMP · WEBP · ICO)");
                 return;
             }
 
@@ -226,6 +236,7 @@ public partial class MainWindow : Window
         string statusMsg = $"완료 — 성공 {result.Success}개 / 실패 {result.Failed}개";
         if (result.Skipped > 0) statusMsg += $" / 스킵 {result.Skipped}개 (동일 포맷)";
         SetStatus(statusMsg);
+        _settings.LastResultText = statusMsg;
 
         if (result.Success > 0 && _lastOutputDir is not null)
             BtnOpenFolder.Visibility = Visibility.Visible;
@@ -235,12 +246,12 @@ public partial class MainWindow : Window
             string msg = $"✅ 성공: {result.Success}개\n❌ 실패: {result.Failed}개\n\n실패 목록:\n";
             foreach (var (file, err) in result.Errors)
                 msg += $"• {Path.GetFileName(file)}\n  {err}\n";
-            MessageBox.Show(msg.TrimEnd(), "변환 완료 (일부 실패)", MessageBoxButton.OK, MessageBoxImage.Warning);
+            DarkMessageBox.Show(msg.TrimEnd(), "변환 완료 (일부 실패)", MessageBoxButton.OK, MessageBoxImage.Warning);
             ResetDropZone();
         }
         else if (result.Skipped > 0 && result.Success == 0)
         {
-            MessageBox.Show($"모든 파일이 이미 출력 포맷과 동일하여 스킵되었습니다.\n출력 포맷을 변경해 주세요.",
+            DarkMessageBox.Show($"모든 파일이 이미 출력 포맷과 동일하여 스킵되었습니다.\n출력 포맷을 변경해 주세요.",
                 "스킵됨", MessageBoxButton.OK, MessageBoxImage.Information);
             ResetDropZone();
         }
@@ -277,7 +288,7 @@ public partial class MainWindow : Window
     static bool IsBitmapPreviewable(string path)
     {
         var ext = Path.GetExtension(path).ToLowerInvariant();
-        return ext is ".png" or ".jpg" or ".jpeg" or ".bmp";
+        return ext is ".png" or ".jpg" or ".jpeg" or ".bmp" or ".webp";
     }
 
     async Task ShowBitmapPreviewAsync(string path)
@@ -318,7 +329,7 @@ public partial class MainWindow : Window
     {
         using var img  = SKImage.FromBitmap(bitmap);
         using var data = img.Encode(SKEncodedImageFormat.Png, 100);
-        using var ms   = new MemoryStream(data.ToArray());
+        using var ms   = data.AsStream();
         var bmp = new BitmapImage();
         bmp.BeginInit();
         bmp.CacheOption  = BitmapCacheOption.OnLoad;
@@ -378,6 +389,50 @@ public partial class MainWindow : Window
             HelpPopup.IsOpen = !HelpPopup.IsOpen;
             e.Handled = true;
         }
+        else if (e.Key == System.Windows.Input.Key.V && System.Windows.Input.Keyboard.Modifiers == System.Windows.Input.ModifierKeys.Control)
+        {
+            _ = PasteFromClipboardAsync();
+            e.Handled = true;
+        }
+    }
+
+    // ─── 클립보드 붙여넣기 ─────────────────────────────────────────────────────
+    async Task PasteFromClipboardAsync()
+    {
+        if (_converting)
+        {
+            SetStatus("변환 중입니다. 완료 후 다시 시도하세요.");
+            return;
+        }
+
+        if (!Clipboard.ContainsImage())
+        {
+            SetStatus("클립보드에 이미지가 없습니다.");
+            return;
+        }
+
+        var bitmapSource = Clipboard.GetImage();
+        if (bitmapSource is null)
+        {
+            SetStatus("클립보드 이미지를 읽을 수 없습니다.");
+            return;
+        }
+
+        // 클립보드 이미지를 임시 PNG로 저장 후 변환
+        var tempDir = Path.Combine(Path.GetTempPath(), "ImgCast");
+        Directory.CreateDirectory(tempDir);
+        var tempPath = Path.Combine(tempDir, $"clipboard_{DateTime.Now:yyyyMMdd_HHmmss}.png");
+
+        var encoder = new PngBitmapEncoder();
+        encoder.Frames.Add(BitmapFrame.Create(bitmapSource));
+        using (var fs = File.Create(tempPath))
+            encoder.Save(fs);
+
+        BtnOpenFolder.Visibility = Visibility.Collapsed;
+        _lastOutputDir = tempDir;
+
+        await ShowBitmapPreviewAsync(tempPath);
+        await RunConversionAsync([tempPath]);
     }
 
     void ChkIco_Unchecked(object sender, RoutedEventArgs e)
@@ -413,7 +468,8 @@ public partial class MainWindow : Window
     {
         if (!IsLoaded) return;
         var fmt = GetOutputFormat();
-        JpgQualityPanel.Visibility = fmt == OutputFormat.JPG ? Visibility.Visible  : Visibility.Collapsed;
+        JpgQualityPanel.Visibility = fmt is OutputFormat.JPG or OutputFormat.WEBP ? Visibility.Visible : Visibility.Collapsed;
+        TbQualityLabel.Text        = fmt == OutputFormat.WEBP ? "WEBP 품질" : "JPG 품질";
         IcoSizesPanel.Visibility   = fmt == OutputFormat.ICO ? Visibility.Visible  : Visibility.Collapsed;
         SvgSizePanel.Visibility    = fmt != OutputFormat.ICO ? Visibility.Visible  : Visibility.Collapsed;
     }
@@ -434,8 +490,9 @@ public partial class MainWindow : Window
             "PNG" => InputFilter.PNG,
             "JPG" => InputFilter.JPG,
             "BMP" => InputFilter.BMP,
-            "ICO" => InputFilter.ICO,
-            _     => InputFilter.All
+            "ICO"  => InputFilter.ICO,
+            "WEBP" => InputFilter.WEBP,
+            _      => InputFilter.All
         };
     }
 
@@ -449,8 +506,9 @@ public partial class MainWindow : Window
         {
             "PNG" => OutputFormat.PNG,
             "JPG" => OutputFormat.JPG,
-            "BMP" => OutputFormat.BMP,
-            _     => OutputFormat.ICO
+            "BMP"  => OutputFormat.BMP,
+            "WEBP" => OutputFormat.WEBP,
+            _      => OutputFormat.ICO
         };
     }
 

@@ -6,10 +6,10 @@ namespace ImgCast.Services;
 /// <summary>
 /// Svg.Skia 미지원 SVG 기능을 로드 전에 호환 형식으로 변환.
 /// - CSS Color Level 4 8자리 hex (#RRGGBBAA) → 6자리 + *-opacity 분리
-/// - feDropShadow → feGaussianBlur+feOffset+feFlood+feComposite+feMerge 확장
 /// - dominant-baseline → dy 오프셋 보정
 /// - &lt;defs&gt; 전방 참조 방지 — SVG 최상단으로 이동
 /// - 필터 영역 → filterUnits="userSpaceOnUse" + 캔버스 전체 커버 (텍스트 앵커점 OBB 오계산 방지)
+/// Note: feDropShadow는 Svg.Skia 3.x에서 네이티브 지원 (수동 확장 제거됨)
 /// </summary>
 internal static class SvgPreprocessor
 {
@@ -22,11 +22,6 @@ internal static class SvgPreprocessor
     static readonly Regex Hex8CssRegex = new(
         @"(fill|stroke|flood-color|stop-color)\s*:\s*#([0-9A-Fa-f]{6})([0-9A-Fa-f]{2})",
         RegexOptions.Compiled | RegexOptions.IgnoreCase);
-
-    // <feDropShadow ... />
-    static readonly Regex DropShadowRegex = new(
-        @"<feDropShadow([^/]*?)/>",
-        RegexOptions.Compiled | RegexOptions.Singleline);
 
     // dominant-baseline
     static readonly Regex DominantBaselineCentralRegex = new(
@@ -83,7 +78,6 @@ internal static class SvgPreprocessor
         svgText = EnsureFiltersUserSpaceOnUse(svgText, vbW, vbH);
         svgText = ConvertHex8AttrColors(svgText);
         svgText = ConvertHex8CssColors(svgText);
-        svgText = ExpandDropShadows(svgText);
         svgText = FixDominantBaseline(svgText);
         return svgText;
     }
@@ -122,28 +116,6 @@ internal static class SvgPreprocessor
             return $"<filter{cleaned} filterUnits=\"userSpaceOnUse\" x=\"{x}\" y=\"{y}\" width=\"{w}\" height=\"{h}\">";
         });
     }
-
-    // ─── feDropShadow → SVG 1.1 동등 필터 프리미티브 ──────────────────────────
-    static string ExpandDropShadows(string svg) =>
-        DropShadowRegex.Replace(svg, m =>
-        {
-            var attrs = ParseAttrs(m.Groups[1].Value);
-            string dx  = attrs.GetValueOrDefault("dx",            "0");
-            string dy  = attrs.GetValueOrDefault("dy",            "0");
-            string std = attrs.GetValueOrDefault("stdDeviation",  "0");
-            string fc  = attrs.GetValueOrDefault("flood-color",   "#000000");
-            string fo  = attrs.GetValueOrDefault("flood-opacity", "1");
-
-            return
-                $"<feGaussianBlur in=\"SourceAlpha\" stdDeviation=\"{std}\" result=\"ds_blur\"/>" +
-                $"<feOffset dx=\"{dx}\" dy=\"{dy}\" result=\"ds_offset\"/>" +
-                $"<feFlood flood-color=\"{fc}\" flood-opacity=\"{fo}\" result=\"ds_flood\"/>" +
-                $"<feComposite in=\"ds_flood\" in2=\"ds_offset\" operator=\"in\" result=\"ds_shadow\"/>" +
-                $"<feMerge>" +
-                $"<feMergeNode in=\"ds_shadow\"/>" +
-                $"<feMergeNode in=\"SourceGraphic\"/>" +
-                $"</feMerge>";
-        });
 
     // ─── attribute 형식: fill="#RRGGBBAA" → fill="#RRGGBB" fill-opacity="X" ──
     static string ConvertHex8AttrColors(string svg) =>

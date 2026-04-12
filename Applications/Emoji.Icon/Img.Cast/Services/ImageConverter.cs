@@ -7,15 +7,33 @@ namespace ImgCast.Services;
 
 public record ConversionResult(int Success, int Failed, IReadOnlyList<(string File, string Error)> Errors, bool Cancelled = false, int Skipped = 0);
 
-public enum OutputFormat { ICO, PNG, JPG, BMP }
-public enum InputFilter  { All, SVG, PNG, JPG, BMP, ICO }
+public enum OutputFormat { ICO, PNG, JPG, BMP, WEBP }
+public enum InputFilter  { All, SVG, PNG, JPG, BMP, ICO, WEBP }
 
 public static class ImageConverter
 {
     static readonly int[] DefaultIcoSizes = [16, 32, 48, 64, 128, 256];
 
-    static readonly string[] SupportedExts = [".svg", ".png", ".jpg", ".jpeg", ".bmp", ".ico"];
+    static readonly string[] SupportedExts = [".svg", ".png", ".jpg", ".jpeg", ".bmp", ".ico", ".webp"];
 
+
+    // ─── 빠른 지원 파일 존재 확인 (DragEnter용, 재귀 수집 없이 첫 매치에서 반환) ──
+    public static bool HasSupportedFiles(string[] dropped, InputFilter filter)
+    {
+        foreach (var path in dropped)
+        {
+            if (Directory.Exists(path))
+            {
+                if (Directory.EnumerateFiles(path, "*.*", SearchOption.AllDirectories)
+                    .Any(f => IsSupported(f) && (filter == InputFilter.All || MatchesFilter(f, filter))))
+                    return true;
+            }
+            else if (File.Exists(path) && IsSupported(path)
+                     && (filter == InputFilter.All || MatchesFilter(path, filter)))
+                return true;
+        }
+        return false;
+    }
 
     // ─── 파일 수집 ───────────────────────────────────────────────────────────
     public static string[] CollectFiles(string[] dropped, InputFilter filter)
@@ -50,8 +68,9 @@ public static class ImageConverter
             InputFilter.PNG => ext == ".png",
             InputFilter.JPG => ext is ".jpg" or ".jpeg",
             InputFilter.BMP => ext == ".bmp",
-            InputFilter.ICO => ext == ".ico",
-            _               => true
+            InputFilter.ICO  => ext == ".ico",
+            InputFilter.WEBP => ext == ".webp",
+            _                => true
         };
     }
 
@@ -83,10 +102,11 @@ public static class ImageConverter
                 string srcExt = Path.GetExtension(src).ToLowerInvariant();
                 string outExt = output switch
                 {
-                    OutputFormat.ICO => ".ico",
-                    OutputFormat.JPG => ".jpg",
-                    OutputFormat.BMP => ".bmp",
-                    _                => ".png"
+                    OutputFormat.ICO  => ".ico",
+                    OutputFormat.JPG  => ".jpg",
+                    OutputFormat.BMP  => ".bmp",
+                    OutputFormat.WEBP => ".webp",
+                    _                 => ".png"
                 };
                 if (srcExt == outExt || (srcExt == ".jpeg" && outExt == ".jpg"))
                 {
@@ -116,10 +136,11 @@ public static class ImageConverter
         string ext = Path.GetExtension(src).ToLowerInvariant();
         string outExt = output switch
         {
-            OutputFormat.ICO => ".ico",
-            OutputFormat.JPG => ".jpg",
-            OutputFormat.BMP => ".bmp",
-            _                => ".png"
+            OutputFormat.ICO  => ".ico",
+            OutputFormat.JPG  => ".jpg",
+            OutputFormat.BMP  => ".bmp",
+            OutputFormat.WEBP => ".webp",
+            _                 => ".png"
         };
 
         string dest = BuildDestPath(src, outExt, overwrite);
@@ -144,6 +165,9 @@ public static class ImageConverter
                 break;
             case OutputFormat.BMP:
                 SaveEncoded(src_bmp, dest, SKEncodedImageFormat.Bmp, 100);
+                break;
+            case OutputFormat.WEBP:
+                SaveEncoded(src_bmp, dest, SKEncodedImageFormat.Webp, jpgQuality);
                 break;
         }
     }
@@ -190,25 +214,17 @@ public static class ImageConverter
 
     static SKBitmap LoadSvgAsBitmap(string path, int size)
     {
-        // SVG 전처리: 8자리 hex 색상 변환 + feDropShadow 확장 + dominant-baseline 보정
-        string svgText  = File.ReadAllText(path, Encoding.UTF8);
+        // SVG 전처리: 8자리 hex 색상 변환 + dominant-baseline 보정
+        string svgText   = File.ReadAllText(path, Encoding.UTF8);
         string processed = SvgPreprocessor.Process(svgText);
-        string tempPath  = Path.Combine(Path.GetTempPath(), $"imgcast_{Guid.NewGuid():N}.svg");
-        try
-        {
-            File.WriteAllText(tempPath, processed, new UTF8Encoding(false));
-            return RenderSvg(tempPath, size);
-        }
-        finally
-        {
-            try { File.Delete(tempPath); } catch { }
-        }
+        return RenderSvgFromString(processed, size);
     }
 
-    static SKBitmap RenderSvg(string path, int size)
+    static SKBitmap RenderSvgFromString(string svgContent, int size)
     {
         var svg = new SKSvg();
-        svg.Load(path);
+        using var stream = new MemoryStream(Encoding.UTF8.GetBytes(svgContent));
+        svg.Load(stream);
         if (svg.Picture is null)
             throw new InvalidOperationException("SVG 파싱 실패");
 

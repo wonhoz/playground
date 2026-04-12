@@ -48,7 +48,7 @@ namespace Music.Player
                 }
                 else
                 {
-                    MessageBox.Show($"파일을 찾을 수 없습니다:\n{entry.FilePath}", "파일 없음",
+                    Services.DarkMessageBox.Show($"파일을 찾을 수 없습니다:\n{entry.FilePath}", "파일 없음",
                         MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
             }

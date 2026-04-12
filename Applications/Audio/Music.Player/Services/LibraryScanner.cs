@@ -5,8 +5,8 @@ namespace Music.Player.Services
 {
     public static class LibraryScanner
     {
-        private static readonly string[] SupportedExtensions =
-            { ".mp3", ".wav", ".flac", ".m4a", ".wma", ".aac", ".ogg" };
+        public static readonly string[] SupportedExtensions =
+            [".mp3", ".wav", ".flac", ".m4a", ".wma", ".aac", ".ogg"];
 
         public static async Task<List<TrackInfo>> ScanFolderAsync(
             string folderPath,

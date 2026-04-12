@@ -14,7 +14,7 @@
         <SolidColorBrush x:Key="BackgroundBrush" Color="#1E1E1E"/>
         <SolidColorBrush x:Key="CardBrush" Color="#2D2D2D"/>
         <SolidColorBrush x:Key="BorderBrush" Color="#404040"/>
-        <SolidColorBrush x:Key="AccentBrush" Color="#FF6B35"/>
+        <SolidColorBrush x:Key="AccentBrush" Color="#9C27B0"/>
         <SolidColorBrush x:Key="TextPrimaryBrush" Color="#EEEEEE"/>
         <SolidColorBrush x:Key="TextSecondaryBrush" Color="#9E9E9E"/>
 
@@ -66,7 +66,7 @@
         </Style>
 
         <Style x:Key="AccentButtonStyle" TargetType="Button" BasedOn="{StaticResource ActionButtonStyle}">
-            <Setter Property="Background" Value="#FF6B35"/>
+            <Setter Property="Background" Value="#9C27B0"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
@@ -76,7 +76,7 @@
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="border" Property="Background" Value="#FF8555"/>
+                                <Setter TargetName="border" Property="Background" Value="#AB47BC"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -122,7 +122,7 @@
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsSelected" Value="True">
-                                <Setter TargetName="border" Property="BorderBrush" Value="#FF6B35"/>
+                                <Setter TargetName="border" Property="BorderBrush" Value="#9C27B0"/>
                                 <Setter Property="Foreground" Value="#EEEEEE"/>
                             </Trigger>
                             <Trigger Property="IsMouseOver" Value="True">

@@ -7,5 +7,6 @@ namespace Music.Player.Models
         public double CurrentPositionSeconds { get; set; }
         public bool IsShuffleEnabled { get; set; }
         public bool IsRepeatEnabled { get; set; }
+        public int VolumePercent { get; set; } = 100;
     }
 }

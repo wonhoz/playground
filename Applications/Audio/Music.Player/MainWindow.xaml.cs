@@ -27,8 +27,10 @@ namespace Music.Player
         private bool _isRepeatEnabled;
         private Point _dragStartPoint;
         private bool _isDraggingPlaylistItem;
+        private float _lastVolume = 1f;
+        private bool _isMuted;
 
-        private static readonly string[] SupportedExtensions = { ".mp3", ".wav", ".flac", ".m4a", ".wma", ".aac", ".ogg" };
+        private static readonly string[] SupportedExtensions = Services.LibraryScanner.SupportedExtensions;
 
         // 가사 관련
         private readonly ObservableCollection<LrcLine> _lyricsLines = new();
@@ -143,7 +145,13 @@ namespace Music.Player
             int nextIndex;
             if (_isShuffleEnabled)
             {
-                nextIndex = _random.Next(_playlist.Count);
+                if (_playlist.Count == 1)
+                    nextIndex = 0;
+                else
+                {
+                    do { nextIndex = _random.Next(_playlist.Count); }
+                    while (nextIndex == _currentIndex);
+                }
             }
             else
             {
@@ -402,7 +410,7 @@ namespace Music.Player
         {
             if (_playlist.Count == 0)
             {
-                MessageBox.Show("플레이리스트가 비어있습니다.", "Save Playlist", MessageBoxButton.OK, MessageBoxImage.Information);
+                Services.DarkMessageBox.Show("플레이리스트가 비어있습니다.", "저장", MessageBoxButton.OK, MessageBoxImage.Information);
                 return;
             }
 
@@ -424,7 +432,7 @@ namespace Music.Player
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show($"저장 실패: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    Services.DarkMessageBox.Show($"저장 실패: {ex.Message}", "오류", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
         }
@@ -457,13 +465,13 @@ namespace Music.Player
                         }
                         else
                         {
-                            MessageBox.Show("유효한 파일이 없습니다.", "Load Playlist", MessageBoxButton.OK, MessageBoxImage.Warning);
+                            Services.DarkMessageBox.Show("유효한 파일이 없습니다.", "불러오기", MessageBoxButton.OK, MessageBoxImage.Warning);
                         }
                     }
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show($"불러오기 실패: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    Services.DarkMessageBox.Show($"불러오기 실패: {ex.Message}", "오류", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
         }
@@ -918,7 +926,6 @@ namespace Music.Player
                         int index = _playlist.IndexOf(selectedTrack);
                         if (index >= 0)
                         {
-                            // RemoveTrackButton_Click 로직 재사용
                             var fakeButton = new Button { DataContext = selectedTrack };
                             RemoveTrackButton_Click(fakeButton, new RoutedEventArgs());
                         }
@@ -927,28 +934,52 @@ namespace Music.Player
                     break;
 
                 case Key.Up:
-                    // 선택된 항목을 위로 이동
-                    if (PlaylistBox.SelectedItem is TrackInfo trackUp)
+                    if (Keyboard.Modifiers == ModifierKeys.Control)
                     {
-                        int index = _playlist.IndexOf(trackUp);
-                        if (index > 0)
+                        // Ctrl+Up: 선택된 항목을 위로 이동
+                        if (PlaylistBox.SelectedItem is TrackInfo trackUp)
                         {
-                            MovePlaylistItem(index, index - 1);
+                            int index = _playlist.IndexOf(trackUp);
+                            if (index > 0)
+                                MovePlaylistItem(index, index - 1);
                         }
+                    }
+                    else
+                    {
+                        // Up: 볼륨 올리기
+                        VolumeSlider.Value = Math.Min(100, VolumeSlider.Value + 5);
                     }
                     e.Handled = true;
                     break;
 
                 case Key.Down:
-                    // 선택된 항목을 아래로 이동
-                    if (PlaylistBox.SelectedItem is TrackInfo trackDown)
+                    if (Keyboard.Modifiers == ModifierKeys.Control)
                     {
-                        int index = _playlist.IndexOf(trackDown);
-                        if (index >= 0 && index < _playlist.Count - 1)
+                        // Ctrl+Down: 선택된 항목을 아래로 이동
+                        if (PlaylistBox.SelectedItem is TrackInfo trackDown)
                         {
-                            MovePlaylistItem(index, index + 1);
+                            int index = _playlist.IndexOf(trackDown);
+                            if (index >= 0 && index < _playlist.Count - 1)
+                                MovePlaylistItem(index, index + 1);
                         }
                     }
+                    else
+                    {
+                        // Down: 볼륨 내리기
+                        VolumeSlider.Value = Math.Max(0, VolumeSlider.Value - 5);
+                    }
+                    e.Handled = true;
+                    break;
+
+                case Key.M:
+                    // 음소거 토글
+                    ToggleMute();
+                    e.Handled = true;
+                    break;
+
+                case Key.F1:
+                    // 도움말
+                    ShowHelpWindow();
                     e.Handled = true;
                     break;
             }
@@ -972,6 +1003,76 @@ namespace Music.Player
 
             _playlist.Move(oldIndex, newIndex);
             PlaylistBox.SelectedIndex = newIndex;
+        }
+
+        #endregion
+
+        #region Volume
+
+        private void VolumeSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            if (!IsLoaded) return;
+            float vol = (float)(e.NewValue / 100.0);
+            _player.Volume = vol;
+            _isMuted = vol == 0;
+            if (vol > 0) _lastVolume = vol;
+            UpdateVolumeIcon(vol);
+        }
+
+        private void VolumeButton_Click(object sender, RoutedEventArgs e)
+        {
+            ToggleMute();
+        }
+
+        private void ToggleMute()
+        {
+            if (_isMuted)
+            {
+                _isMuted = false;
+                VolumeSlider.Value = _lastVolume * 100;
+            }
+            else
+            {
+                _lastVolume = (float)(VolumeSlider.Value / 100.0);
+                if (_lastVolume < 0.05f) _lastVolume = 0.5f;
+                _isMuted = true;
+                VolumeSlider.Value = 0;
+            }
+        }
+
+        private void UpdateVolumeIcon(float volume)
+        {
+            var canvas = (Canvas)VolumeIcon.Child;
+            canvas.Children.Clear();
+
+            string data;
+            if (volume <= 0)
+                data = "M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z";
+            else if (volume < 0.5f)
+                data = "M7 9v6h4l5 5V4l-5 5H7z";
+            else
+                data = "M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z";
+
+            canvas.Children.Add(new System.Windows.Shapes.Path
+            {
+                Fill = (SolidColorBrush)FindResource("TextSecondaryBrush"),
+                Data = Geometry.Parse(data)
+            });
+        }
+
+        #endregion
+
+        #region Help
+
+        private void HelpButton_Click(object sender, RoutedEventArgs e)
+        {
+            ShowHelpWindow();
+        }
+
+        private void ShowHelpWindow()
+        {
+            var helpWindow = new HelpWindow { Owner = this };
+            helpWindow.ShowDialog();
         }
 
         #endregion
@@ -1039,7 +1140,8 @@ namespace Music.Player
                 CurrentTrackIndex = _currentIndex,
                 CurrentPositionSeconds = _player.CurrentPosition.TotalSeconds,
                 IsShuffleEnabled = _isShuffleEnabled,
-                IsRepeatEnabled = _isRepeatEnabled
+                IsRepeatEnabled = _isRepeatEnabled,
+                VolumePercent = (int)VolumeSlider.Value
             };
 
             PlaylistService.SaveState(state);
@@ -1051,11 +1153,12 @@ namespace Music.Player
             if (state == null || state.FilePaths.Count == 0)
                 return;
 
-            // Restore shuffle and repeat settings (UI thread)
+            // Restore shuffle, repeat, volume settings (UI thread)
             _isShuffleEnabled = state.IsShuffleEnabled;
             _isRepeatEnabled  = state.IsRepeatEnabled;
             ShuffleButton.IsChecked = _isShuffleEnabled;
             RepeatButton.IsChecked  = _isRepeatEnabled;
+            VolumeSlider.Value = state.VolumePercent;
 
             // ── UI 차단 방지: TrackInfo.FromFile()을 배경 스레드에서 수행 ──
             TitleText.Text  = "재생목록 복원 중...";
@@ -1076,9 +1179,12 @@ namespace Music.Player
                 }
             });
 
-            // UI 스레드: ObservableCollection 갱신
+            // UI 스레드: ObservableCollection 갱신 + 즐겨찾기 상태 복원
             foreach (var track in tracks)
+            {
+                HistoryService.Instance.LoadFavoriteStatus(track);
                 _playlist.Add(track);
+            }
 
             // Show playlist panel if there are tracks
             if (_playlist.Count > 0)

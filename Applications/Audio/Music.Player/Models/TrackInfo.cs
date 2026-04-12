@@ -33,7 +33,9 @@ namespace Music.Player.Models
 
         public string DisplayTitle => string.IsNullOrEmpty(Title) ? Path.GetFileNameWithoutExtension(FilePath) : Title;
         public string DisplayArtist => string.IsNullOrEmpty(Artist) ? "Unknown Artist" : Artist;
-        public string DurationText => Duration.ToString(@"mm\:ss");
+        public string DurationText => Duration.TotalHours >= 1
+            ? Duration.ToString(@"h\:mm\:ss")
+            : Duration.ToString(@"m\:ss");
 
         public static TrackInfo FromFile(string filePath)
         {

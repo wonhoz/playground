@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- icon_03: metaphor · 공간/장면 · 돋보기 안에 선명한 이미지 -->
+  <defs>
+    <radialGradient id="bg03" cx="0.5" cy="0.4" r="0.8">
+      <stop offset="0" stop-color="#FFE5B4"/>
+      <stop offset="1" stop-color="#FFAA5C"/>
+    </radialGradient>
+    <linearGradient id="photoGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FF6B9D"/>
+      <stop offset="0.5" stop-color="#FFB366"/>
+      <stop offset="1" stop-color="#9B59B6"/>
+    </linearGradient>
+  </defs>
+  <rect x="0" y="0" width="1024" height="1024" rx="200" fill="url(#bg03)"/>
+  <!-- 픽셀화된 배경 이미지 (흐릿한 힌트) -->
+  <g opacity="0.5">
+    <rect x="120" y="140" width="784" height="200" fill="#FF8FA3"/>
+    <rect x="120" y="340" width="784" height="200" fill="#FFD93D"/>
+    <rect x="120" y="540" width="784" height="200" fill="#06D6A0"/>
+    <rect x="120" y="740" width="784" height="144" fill="#4A90E2"/>
+  </g>
+  <!-- 돋보기 -->
+  <g>
+    <!-- 손잡이 -->
+    <rect x="700" y="700" width="160" height="50" rx="24" fill="#8B4513" stroke="#4A2609" stroke-width="14" transform="rotate(45 780 725)"/>
+    <!-- 렌즈 테두리 -->
+    <circle cx="450" cy="450" r="320" fill="none" stroke="#2C3E50" stroke-width="38"/>
+    <!-- 렌즈 내부 (선명한 이미지) -->
+    <circle cx="450" cy="450" r="302" fill="url(#photoGrad)"/>
+    <!-- 산 -->
+    <path d="M 180 560 Q 280 360 380 480 Q 450 380 520 460 Q 600 380 720 550 L 720 650 L 180 650 Z" fill="#2D8F47" stroke="#1A5028" stroke-width="12" stroke-linejoin="round"/>
+    <!-- 태양 -->
+    <circle cx="560" cy="310" r="50" fill="#FFD93D" stroke="#FF9500" stroke-width="8"/>
+    <!-- 렌즈 하이라이트 -->
+    <ellipse cx="340" cy="320" rx="80" ry="40" fill="#FFFFFF" opacity="0.4"/>
+  </g>
+  <!-- UPSCALE 배지 -->
+  <rect x="80" y="850" width="340" height="110" rx="40" fill="#FFFFFF" stroke="#2C3E50" stroke-width="12"/>
+  <text x="250" y="932" font-family="Arial Black, sans-serif" font-weight="900" font-size="84" fill="#2C3E50" text-anchor="middle">HD ×4</text>
+</svg>

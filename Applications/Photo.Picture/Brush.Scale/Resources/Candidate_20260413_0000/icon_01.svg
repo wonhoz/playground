@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- icon_01: literal · 중앙심볼 · 작은 픽셀 이미지 → 큰 스무스 이미지 -->
+  <defs>
+    <linearGradient id="bg01" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#FFD6E8"/>
+      <stop offset="1" stop-color="#B19CD9"/>
+    </linearGradient>
+    <linearGradient id="sky01" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#74C0FC"/>
+      <stop offset="1" stop-color="#A5D8FF"/>
+    </linearGradient>
+  </defs>
+  <rect x="0" y="0" width="1024" height="1024" rx="200" fill="url(#bg01)"/>
+  <!-- 왼쪽 픽셀화된 작은 이미지 -->
+  <g transform="translate(110 360)">
+    <rect x="0" y="0" width="240" height="240" rx="18" fill="#FFFFFF" stroke="#4A3C65" stroke-width="12"/>
+    <!-- 픽셀 그리드 (대략적인 산) -->
+    <g>
+      <rect x="20" y="130" width="50" height="50" fill="#6FC97F"/>
+      <rect x="70" y="100" width="50" height="80" fill="#5CB36B"/>
+      <rect x="120" y="70" width="50" height="110" fill="#4A9F5A"/>
+      <rect x="170" y="100" width="50" height="80" fill="#5CB36B"/>
+      <rect x="20" y="30" width="200" height="70" fill="#A5D8FF"/>
+      <rect x="150" y="40" width="40" height="30" fill="#FFD93D"/>
+      <rect x="20" y="180" width="200" height="40" fill="#8B6914"/>
+    </g>
+  </g>
+  <!-- 화살표 -->
+  <g transform="translate(370 480)">
+    <rect x="0" y="0" width="110" height="40" rx="20" fill="#FF6B9D"/>
+    <path d="M 100 -28 L 180 20 L 100 68 Z" fill="#FF6B9D" stroke="#C73E6F" stroke-width="10" stroke-linejoin="round"/>
+  </g>
+  <!-- 오른쪽 큰 스무스 이미지 -->
+  <g transform="translate(570 200)">
+    <rect x="0" y="0" width="380" height="600" rx="28" fill="#FFFFFF" stroke="#4A3C65" stroke-width="14"/>
+    <rect x="20" y="20" width="340" height="560" rx="16" fill="url(#sky01)"/>
+    <!-- 태양 -->
+    <circle cx="280" cy="140" r="56" fill="#FFD93D" stroke="#FF9500" stroke-width="8"/>
+    <!-- 산 (부드러운 곡선) -->
+    <path d="M 20 430 Q 120 280 220 380 Q 300 300 360 360 L 360 580 L 20 580 Z" fill="#4A9F5A" stroke="#1F6E32" stroke-width="10" stroke-linejoin="round"/>
+    <path d="M 20 470 Q 140 340 260 420 Q 320 380 360 430 L 360 580 L 20 580 Z" fill="#6FC97F"/>
+    <!-- 잔디 -->
+    <rect x="20" y="540" width="340" height="40" fill="#2D8F47"/>
+  </g>
+  <!-- 확대 배지 -->
+  <circle cx="340" cy="210" r="70" fill="#FFD93D" stroke="#4A3C65" stroke-width="14"/>
+  <text x="340" y="240" font-family="Arial Black, sans-serif" font-weight="900" font-size="80" fill="#4A3C65" text-anchor="middle">×4</text>
+</svg>

@@ -28,6 +28,11 @@ public partial class MainWindow : Window
         InitializeComponent();
         _scores.Load();
 
+        // 오디오 설정 복원
+        _sound.BgmVolume = _scores.Data.BgmVolume;
+        _sound.SfxVolume = _scores.Data.SfxVolume;
+        _sound.Muted     = _scores.Data.Muted;
+
         Loaded      += OnLoaded;
         KeyDown     += OnKeyDown;
         SizeChanged += OnSizeChanged;
@@ -56,15 +61,17 @@ public partial class MainWindow : Window
         var lastDiff = Enum.TryParse<Difficulty>(d.LastDifficulty, out var diff) ? diff : Difficulty.Normal;
         var lastMode = Enum.TryParse<GameMode>(d.LastMode, out var mode)         ? mode : GameMode.Classic;
 
-        UpdateBestScores();
         SelectDifficulty(lastDiff);
         SelectMode(lastMode);
+        UpdateBestScores();
+        UpdateMuteIndicator();
+        UpdateHelpAudioLabels();
     }
 
     private void OnSizeChanged(object sender, SizeChangedEventArgs e)
     {
-        // 창 크기 자동 저장 (게임 중 아닐 때만, 최소화 제외)
-        if (WindowState == WindowState.Normal && MenuLayer.Visibility == Visibility.Visible)
+        // 창 크기 자동 저장 (최소화 제외 — 게임 중에도 저장)
+        if (WindowState == WindowState.Normal && IsLoaded)
             _scores.SaveSettings(_selectedMode.ToString(), _selectedDifficulty.ToString(), ActualWidth, ActualHeight);
     }
 
@@ -77,10 +84,42 @@ public partial class MainWindow : Window
     // ── 키보드 ────────────────────────────────────────────────────────────────
     private void OnKeyDown(object sender, KeyEventArgs e)
     {
-        // F1 — 도움말 토글 (게임 화면 제외, 메뉴/게임오버/일시정지에서 모두 동작)
+        // F1 — 도움말 토글
         if (e.Key == Key.F1)
         {
             ToggleHelp();
+            return;
+        }
+
+        // M — 사운드 음소거 토글
+        if (e.Key == Key.M)
+        {
+            _sound.Muted = !_sound.Muted;
+            _scores.SaveAudioSettings(_sound.BgmVolume, _sound.SfxVolume, _sound.Muted);
+            UpdateMuteIndicator();
+            UpdateHelpAudioLabels();
+            return;
+        }
+
+        // [ / ] — BGM 볼륨 조절
+        if (e.Key == Key.OemOpenBrackets || e.Key == Key.OemCloseBrackets)
+        {
+            var delta = e.Key == Key.OemCloseBrackets ? 0.1 : -0.1;
+            _sound.BgmVolume = Math.Clamp(_sound.BgmVolume + delta, 0, 1);
+            _scores.SaveAudioSettings(_sound.BgmVolume, _sound.SfxVolume, _sound.Muted);
+            UpdateHelpAudioLabels();
+            return;
+        }
+
+        // - / + — SFX 볼륨 조절
+        if (e.Key == Key.OemMinus || e.Key == Key.Subtract ||
+            e.Key == Key.OemPlus  || e.Key == Key.Add)
+        {
+            var isUp = e.Key == Key.OemPlus || e.Key == Key.Add;
+            var delta = isUp ? 0.1 : -0.1;
+            _sound.SfxVolume = Math.Clamp(_sound.SfxVolume + delta, 0, 1);
+            _scores.SaveAudioSettings(_sound.BgmVolume, _sound.SfxVolume, _sound.Muted);
+            UpdateHelpAudioLabels();
             return;
         }
 
@@ -154,6 +193,7 @@ public partial class MainWindow : Window
         {
             SelectDifficulty(diff);
             _scores.SaveSettings(_selectedMode.ToString(), diff.ToString(), ActualWidth, ActualHeight);
+            UpdateBestScores();
         }
     }
 
@@ -203,7 +243,7 @@ public partial class MainWindow : Window
         _engine.GameOver     += OnGameOver;
         _engine.PlaySound     = _sound.Play;
 
-        UpdateBestForMode(mode);
+        UpdateBestForMode(mode, _selectedDifficulty);
         UpdateLivesDisplay(mode);
         TxtFever.Visibility = Visibility.Collapsed;
 
@@ -271,27 +311,28 @@ public partial class MainWindow : Window
         });
     }
 
-    private void UpdateBestForMode(GameMode mode)
+    private void UpdateBestForMode(GameMode mode, Difficulty diff)
     {
-        TxtBest.Text = _scores.GetBest(mode).ToString("N0");
+        TxtBest.Text = _scores.GetBest(mode, diff).ToString("N0");
     }
 
     private void UpdateBestScores()
     {
-        TxtBestClassic.Text = _scores.GetBest(GameMode.Classic).ToString("N0");
-        TxtBestTime.Text    = _scores.GetBest(GameMode.TimeAttack).ToString("N0");
-        TxtBestZen.Text     = _scores.GetBest(GameMode.Zen).ToString("N0");
+        var diff = _selectedDifficulty;
+        TxtBestClassic.Text = _scores.GetBest(GameMode.Classic,    diff).ToString("N0");
+        TxtBestTime.Text    = _scores.GetBest(GameMode.TimeAttack, diff).ToString("N0");
+        TxtBestZen.Text     = _scores.GetBest(GameMode.Zen,        diff).ToString("N0");
 
-        UpdateTop3Display(GameMode.Classic,    TxtTop2Classic, TxtTop3Classic);
-        UpdateTop3Display(GameMode.TimeAttack, TxtTop2Time,    TxtTop3Time);
-        UpdateTop3Display(GameMode.Zen,        TxtTop2Zen,     TxtTop3Zen);
+        UpdateTop3Display(GameMode.Classic,    diff, TxtTop2Classic, TxtTop3Classic);
+        UpdateTop3Display(GameMode.TimeAttack, diff, TxtTop2Time,    TxtTop3Time);
+        UpdateTop3Display(GameMode.Zen,        diff, TxtTop2Zen,     TxtTop3Zen);
     }
 
-    private void UpdateTop3Display(GameMode mode,
+    private void UpdateTop3Display(GameMode mode, Difficulty diff,
         System.Windows.Controls.TextBlock txt2, System.Windows.Controls.TextBlock txt3)
     {
-        var top3  = _scores.GetTop3(mode);
-        var dates = _scores.GetTop3Dates(mode);
+        var top3  = _scores.GetTop3(mode, diff);
+        var dates = _scores.GetTop3Dates(mode, diff);
 
         txt2.Text = top3.Count >= 2
             ? $"2  {top3[1]:N0}{(dates.Count >= 2 && !string.IsNullOrEmpty(dates[1]) ? $"  {dates[1]}" : "")}"
@@ -301,10 +342,26 @@ public partial class MainWindow : Window
             : "";
     }
 
+    // ── 뮤트 인디케이터 / 도움말 볼륨 라벨 ────────────────────────────────
+    private void UpdateMuteIndicator()
+    {
+        TxtMuteIndicator.Visibility = _sound.Muted ? Visibility.Visible : Visibility.Collapsed;
+    }
+
+    private void UpdateHelpAudioLabels()
+    {
+        TxtHelpBgmVol.Text = $"{(int)Math.Round(_sound.BgmVolume * 100)}%";
+        TxtHelpSfxVol.Text = $"{(int)Math.Round(_sound.SfxVolume * 100)}%";
+        TxtHelpMute.Text   = _sound.Muted ? "ON" : "OFF";
+        TxtHelpMute.Foreground = _sound.Muted
+            ? new SolidColorBrush(Color.FromRgb(255, 107, 0))
+            : new SolidColorBrush(Color.FromRgb(106, 112, 128));
+    }
+
     // ── 게임오버 ─────────────────────────────────────────────────────────────
     private void OnGameOver(GameResult result)
     {
-        var isNewBest = _scores.TryUpdate(result.Mode, result.Score);
+        var isNewBest = _scores.TryUpdate(result.Mode, result.Difficulty, result.Score);
 
         Dispatcher.BeginInvoke(() =>
         {
@@ -318,6 +375,9 @@ public partial class MainWindow : Window
             TxtGoAccuracy.Text = total > 0
                 ? $"{result.Sliced * 100.0 / total:F1}%"
                 : "—";
+
+            TxtGoMode.Text       = result.Mode.ToString().ToUpper();
+            TxtGoDifficulty.Text = result.Difficulty.ToString().ToUpper();
 
             TxtGoNewBest.Visibility = isNewBest ? Visibility.Visible : Visibility.Collapsed;
             TxtGameOverTitle.Text = result.Mode == GameMode.Zen ? "ZEN COMPLETE" : "GAME OVER";

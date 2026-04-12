@@ -78,10 +78,16 @@
         </StackPanel>
       </Grid>
 
-      <!-- ESC / F1 힌트 -->
-      <TextBlock Text="ESC 일시정지  ·  F1 도움말" Foreground="#2A3A4A" FontSize="11"
+      <!-- ESC / F1 / M 힌트 -->
+      <TextBlock Text="ESC 일시정지  ·  F1 도움말  ·  M 음소거"
+                 Foreground="#2A3A4A" FontSize="11"
                  FontFamily="Segoe UI" VerticalAlignment="Bottom"
                  HorizontalAlignment="Right" Margin="0,0,12,8"/>
+
+      <!-- 뮤트 인디케이터 -->
+      <TextBlock x:Name="TxtMuteIndicator" Text="🔇 MUTED" Visibility="Collapsed"
+                 Foreground="#FF6B00" FontSize="12" FontFamily="Segoe UI" FontWeight="Bold"
+                 VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="12,0,0,8"/>
     </Grid>
 
     <!-- ══════════════════════════════════════════════════════════════ -->
@@ -280,13 +286,36 @@
                      FontFamily="Segoe UI" FontWeight="Bold" Margin="0,0,0,6"/>
           <Grid Margin="0,0,0,16">
             <Grid.ColumnDefinitions><ColumnDefinition Width="140"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
-            <Grid.RowDefinitions><RowDefinition/><RowDefinition/><RowDefinition/></Grid.RowDefinitions>
+            <Grid.RowDefinitions>
+              <RowDefinition/><RowDefinition/><RowDefinition/>
+              <RowDefinition/><RowDefinition/><RowDefinition/>
+            </Grid.RowDefinitions>
             <TextBlock Grid.Row="0" Grid.Column="0" Text="마우스 드래그" Foreground="#E8EAF0" FontSize="13" FontFamily="Segoe UI" Margin="0,3"/>
             <TextBlock Grid.Row="0" Grid.Column="1" Text="도형 슬라이스" Foreground="#6A7080" FontSize="13" FontFamily="Segoe UI" Margin="0,3"/>
             <TextBlock Grid.Row="1" Grid.Column="0" Text="ESC" Foreground="#E8EAF0" FontSize="13" FontFamily="Consolas" FontWeight="Bold" Margin="0,3"/>
             <TextBlock Grid.Row="1" Grid.Column="1" Text="일시정지 / 재개" Foreground="#6A7080" FontSize="13" FontFamily="Segoe UI" Margin="0,3"/>
             <TextBlock Grid.Row="2" Grid.Column="0" Text="F1" Foreground="#E8EAF0" FontSize="13" FontFamily="Consolas" FontWeight="Bold" Margin="0,3"/>
             <TextBlock Grid.Row="2" Grid.Column="1" Text="도움말 열기 / 닫기" Foreground="#6A7080" FontSize="13" FontFamily="Segoe UI" Margin="0,3"/>
+            <TextBlock Grid.Row="3" Grid.Column="0" Text="M" Foreground="#E8EAF0" FontSize="13" FontFamily="Consolas" FontWeight="Bold" Margin="0,3"/>
+            <TextBlock Grid.Row="3" Grid.Column="1" Text="사운드 음소거 토글" Foreground="#6A7080" FontSize="13" FontFamily="Segoe UI" Margin="0,3"/>
+            <TextBlock Grid.Row="4" Grid.Column="0" Text="[ / ]" Foreground="#E8EAF0" FontSize="13" FontFamily="Consolas" FontWeight="Bold" Margin="0,3"/>
+            <TextBlock Grid.Row="4" Grid.Column="1" Text="BGM 볼륨 조절" Foreground="#6A7080" FontSize="13" FontFamily="Segoe UI" Margin="0,3"/>
+            <TextBlock Grid.Row="5" Grid.Column="0" Text="- / +" Foreground="#E8EAF0" FontSize="13" FontFamily="Consolas" FontWeight="Bold" Margin="0,3"/>
+            <TextBlock Grid.Row="5" Grid.Column="1" Text="SFX 볼륨 조절" Foreground="#6A7080" FontSize="13" FontFamily="Segoe UI" Margin="0,3"/>
+          </Grid>
+
+          <!-- 사운드 설정 -->
+          <TextBlock Text="🔊  사운드" Foreground="#4A5A6A" FontSize="11"
+                     FontFamily="Segoe UI" FontWeight="Bold" Margin="0,0,0,6"/>
+          <Grid Margin="0,0,0,16">
+            <Grid.ColumnDefinitions><ColumnDefinition Width="80"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+            <Grid.RowDefinitions><RowDefinition/><RowDefinition/><RowDefinition/></Grid.RowDefinitions>
+            <TextBlock Grid.Row="0" Grid.Column="0" Text="BGM" Foreground="#E8EAF0" FontSize="13" FontFamily="Segoe UI" Margin="0,3"/>
+            <TextBlock Grid.Row="0" Grid.Column="1" x:Name="TxtHelpBgmVol" Text="60%" Foreground="#00FFFF" FontSize="13" FontFamily="Consolas" FontWeight="Bold" Margin="0,3"/>
+            <TextBlock Grid.Row="1" Grid.Column="0" Text="SFX" Foreground="#E8EAF0" FontSize="13" FontFamily="Segoe UI" Margin="0,3"/>
+            <TextBlock Grid.Row="1" Grid.Column="1" x:Name="TxtHelpSfxVol" Text="80%" Foreground="#00FFFF" FontSize="13" FontFamily="Consolas" FontWeight="Bold" Margin="0,3"/>
+            <TextBlock Grid.Row="2" Grid.Column="0" Text="MUTE" Foreground="#E8EAF0" FontSize="13" FontFamily="Segoe UI" Margin="0,3"/>
+            <TextBlock Grid.Row="2" Grid.Column="1" x:Name="TxtHelpMute" Text="OFF" Foreground="#6A7080" FontSize="13" FontFamily="Consolas" FontWeight="Bold" Margin="0,3"/>
           </Grid>
 
           <!-- 특수 도형 -->
@@ -358,6 +387,20 @@
             <DropShadowEffect Color="#FF2D78" ShadowDepth="0" BlurRadius="22" Opacity="0.9"/>
           </TextBlock.Effect>
         </TextBlock>
+
+        <!-- 모드 + 난이도 배지 -->
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,8,0,0">
+          <Border Background="#111122" BorderBrush="#1E2A3A" BorderThickness="1"
+                  CornerRadius="4" Padding="10,3" Margin="0,0,6,0">
+            <TextBlock x:Name="TxtGoMode" Text="CLASSIC" Foreground="#00FFFF"
+                       FontSize="11" FontFamily="Consolas" FontWeight="Bold"/>
+          </Border>
+          <Border Background="#111122" BorderBrush="#1E2A3A" BorderThickness="1"
+                  CornerRadius="4" Padding="10,3">
+            <TextBlock x:Name="TxtGoDifficulty" Text="NORMAL" Foreground="#FFE600"
+                       FontSize="11" FontFamily="Consolas" FontWeight="Bold"/>
+          </Border>
+        </StackPanel>
 
         <Border Background="#111122" CornerRadius="10" Padding="28,18" Margin="0,20,0,0">
           <Grid>

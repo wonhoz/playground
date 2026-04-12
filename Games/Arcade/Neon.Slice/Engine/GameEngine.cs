@@ -64,6 +64,10 @@ public sealed class GameEngine
     private double _bombFlashRemaining; // 남은 폭탄 플래시 시간(초)
     private const double BombFlashDuration = 0.25;
 
+    // ── 콤보 이정표 플래시 ─────────────────────────────────────────────────
+    private double _comboFlashRemaining;
+    private const double ComboFlashDuration = 0.40;
+
     // ── 게임 오브젝트 ───────────────────────────────────────────────────────
     private readonly List<NeonShape>   _shapes    = [];
     private readonly List<Particle>    _particles = [];
@@ -123,6 +127,11 @@ public sealed class GameEngine
     private static readonly Dictionary<Color, Pen>                                _borderPenCache   = new();
     private static readonly Dictionary<Color, Pen>                                _lightningPenCache = new();
 
+    // DrawHalf/Particle 캐시 — PushOpacity로 페이드 처리하므로 전체 알파 기준 고정
+    private static readonly Dictionary<Color, Pen>              _halfPenCache   = new();
+    private static readonly Dictionary<Color, SolidColorBrush>  _halfFillCache  = new();
+    private static readonly Dictionary<Color, SolidColorBrush>  _particleCache  = new();
+
     private static RadialGradientBrush GetRadialGlow(Color col, byte outerAlpha)
     {
         var key = (col, outerAlpha);
@@ -162,17 +171,32 @@ public sealed class GameEngine
         p.Freeze();
         return _lightningPenCache[col] = p;
     }
+    private static Pen GetHalfPen(Color col)
+    {
+        if (_halfPenCache.TryGetValue(col, out var p)) return p;
+        p = new Pen(new SolidColorBrush(Color.FromArgb(200, col.R, col.G, col.B)), 1.5);
+        p.Freeze();
+        return _halfPenCache[col] = p;
+    }
+    private static SolidColorBrush GetHalfFill(Color col)
+    {
+        if (_halfFillCache.TryGetValue(col, out var b)) return b;
+        b = new SolidColorBrush(Color.FromArgb(120, col.R, col.G, col.B));
+        b.Freeze();
+        return _halfFillCache[col] = b;
+    }
+    private static SolidColorBrush GetParticleBrush(Color col)
+    {
+        if (_particleCache.TryGetValue(col, out var b)) return b;
+        b = new SolidColorBrush(Color.FromArgb(255, col.R, col.G, col.B));
+        b.Freeze();
+        return _particleCache[col] = b;
+    }
 
     // ─────────────────────────────────────────────────────────────────────
     public GameEngine(DrawingVisualHost host)
     {
         _host = host;
-    }
-
-    public void Resize(double w, double h)
-    {
-        _width  = w;
-        _height = h;
     }
 
     // ── 게임 시작 ─────────────────────────────────────────────────────────
@@ -200,6 +224,7 @@ public sealed class GameEngine
         _inFever        = false;
         _gameOver       = false;
         _bombFlashRemaining = 0;
+        _comboFlashRemaining = 0;
         _shapes.Clear();
         _particles.Clear();
         _halves.Clear();
@@ -288,6 +313,12 @@ public sealed class GameEngine
             if (_bombFlashRemaining < 0) _bombFlashRemaining = 0;
         }
 
+        if (_comboFlashRemaining > 0)
+        {
+            _comboFlashRemaining -= realDt;
+            if (_comboFlashRemaining < 0) _comboFlashRemaining = 0;
+        }
+
         // 모드별 업데이트
         if (Mode == GameMode.TimeAttack)
         {
@@ -361,7 +392,13 @@ public sealed class GameEngine
             type = shapes[Rng.Next(shapes.Length)];
         }
 
-        var color = NeonPalette[Rng.Next(NeonPalette.Length)];
+        // 특수 도형은 의미 전달을 위해 고정 색상 (Star=옐로, Ice=아이스블루)
+        var color = type switch
+        {
+            ShapeType.Star => Color.FromRgb(255, 230, 0),
+            ShapeType.Ice  => Color.FromRgb(120, 220, 255),
+            _              => NeonPalette[Rng.Next(NeonPalette.Length)],
+        };
         var radius = type == ShapeType.Bomb ? 22.0 : 28 + Rng.NextDouble() * 14;
 
         // 화면 하단 중간에서 솟아오름
@@ -503,6 +540,8 @@ public sealed class GameEngine
                 Sliced++;
                 Combo++;
                 if (Combo > MaxCombo) MaxCombo = Combo;
+                // 10콤보 이정표마다 화면 플래시 (5콤보는 피버가 따로 처리)
+                if (Combo >= 10 && Combo % 10 == 0) _comboFlashRemaining = ComboFlashDuration;
                 SpawnHalves(shape);
                 SpawnParticles(shape.X, shape.Y, shape.NeonColor, 10);
                 PlaySound?.Invoke(_inFever ? SoundCue.SliceFever : SoundCue.Slice);
@@ -583,11 +622,12 @@ public sealed class GameEngine
         DrawFrame(0);
         GameOver?.Invoke(new GameResult
         {
-            Mode     = Mode,
-            Score    = Score,
-            MaxCombo = MaxCombo,
-            Sliced   = Sliced,
-            Missed   = Missed,
+            Mode       = Mode,
+            Difficulty = Difficulty,
+            Score      = Score,
+            MaxCombo   = MaxCombo,
+            Sliced     = Sliced,
+            Missed     = Missed,
         });
     }
 
@@ -624,6 +664,10 @@ public sealed class GameEngine
         // 폭탄 플래시 오버레이
         if (_bombFlashRemaining > 0)
             DrawBombFlash(dc);
+
+        // 콤보 이정표 플래시
+        if (_comboFlashRemaining > 0)
+            DrawComboFlash(dc);
 
         // 커서 dot (항상 최상위)
         DrawCursor(dc);
@@ -662,9 +706,13 @@ public sealed class GameEngine
         switch (s.Type)
         {
             case ShapeType.Circle:
+                DrawGlowCircle(dc, center, r, col, false);
+                break;
             case ShapeType.Star:
+                DrawStarShape(dc, center, r, col);
+                break;
             case ShapeType.Ice:
-                DrawGlowCircle(dc, center, r, col, s.Type == ShapeType.Bomb);
+                DrawIceShape(dc, center, r, col);
                 break;
             case ShapeType.Bomb:
                 DrawBomb(dc, center, r);
@@ -686,24 +734,55 @@ public sealed class GameEngine
         dc.DrawEllipse(GetCircleBody(col), GetBorderPen(col), c, r, r);
     }
 
+    // ── 폭탄 캐시 (매 프레임 재생성 방지) ─────────────────────────────────
+    private static readonly RadialGradientBrush BombGlowBrush =
+        CreateFrozen(new RadialGradientBrush(
+            Color.FromArgb(90, 255, 0, 0),
+            Color.FromArgb(0, 255, 0, 0)));
+    private static readonly RadialGradientBrush BombBodyBrush =
+        CreateFrozen(new RadialGradientBrush(
+            Color.FromArgb(220, 200, 20, 20),
+            Color.FromArgb(180, 80, 0, 0)));
+    private static readonly Pen BombBorderPen =
+        CreateFrozen(new Pen(new SolidColorBrush(Color.FromArgb(255, 255, 60, 60)), 2));
+    private static readonly SolidColorBrush BombTextBrush =
+        CreateFrozen(new SolidColorBrush(Colors.White));
+
+    private static T CreateFrozen<T>(T f) where T : Freezable { f.Freeze(); return f; }
+
     private static void DrawBomb(DrawingContext dc, Point c, double r)
     {
-        var col = Color.FromRgb(220, 30, 30);
-        var glowBrush = new RadialGradientBrush(
-            Color.FromArgb(90, 255, 0, 0),
-            Color.FromArgb(0, 255, 0, 0));
-        dc.DrawEllipse(glowBrush, null, c, r * 2, r * 2);
-
-        var bodyBrush = new RadialGradientBrush(
-            Color.FromArgb(220, 200, 20, 20),
-            Color.FromArgb(180, 80, 0, 0));
-        var borderPen = new Pen(new SolidColorBrush(Color.FromArgb(255, 255, 60, 60)), 2);
-        dc.DrawEllipse(bodyBrush, borderPen, c, r, r);
+        dc.DrawEllipse(BombGlowBrush, null, c, r * 2, r * 2);
+        dc.DrawEllipse(BombBodyBrush, BombBorderPen, c, r, r);
 
         // "!" 텍스트
         var ft = new FormattedText("!", System.Globalization.CultureInfo.CurrentCulture,
             FlowDirection.LeftToRight, new Typeface("Segoe UI"), r * 1.1,
-            new SolidColorBrush(Colors.White), 1.0);
+            BombTextBrush, 1.0);
+        dc.DrawText(ft, new Point(c.X - ft.Width / 2, c.Y - ft.Height / 2));
+    }
+
+    // ── Star: 노란색 원 + ★ 심볼 (도움말 범례와 일치) ──────────────────────
+    private static void DrawStarShape(DrawingContext dc, Point c, double r, Color col)
+    {
+        dc.DrawEllipse(GetRadialGlow(col, 100), null, c, r * 1.9, r * 1.9);
+        dc.DrawEllipse(GetCircleBody(col), GetBorderPen(col), c, r, r);
+
+        var ft = new FormattedText("★", System.Globalization.CultureInfo.CurrentCulture,
+            FlowDirection.LeftToRight, new Typeface("Segoe UI Symbol"), r * 1.5,
+            GetBorderPen(col).Brush, 1.0);
+        dc.DrawText(ft, new Point(c.X - ft.Width / 2, c.Y - ft.Height / 2));
+    }
+
+    // ── Ice: 아이스블루 원 + ❄ 심볼 ─────────────────────────────────────
+    private static void DrawIceShape(DrawingContext dc, Point c, double r, Color col)
+    {
+        dc.DrawEllipse(GetRadialGlow(col, 100), null, c, r * 1.9, r * 1.9);
+        dc.DrawEllipse(GetCircleBody(col), GetBorderPen(col), c, r, r);
+
+        var ft = new FormattedText("❄", System.Globalization.CultureInfo.CurrentCulture,
+            FlowDirection.LeftToRight, new Typeface("Segoe UI Symbol"), r * 1.5,
+            GetBorderPen(col).Brush, 1.0);
         dc.DrawText(ft, new Point(c.X - ft.Width / 2, c.Y - ft.Height / 2));
     }
 
@@ -751,16 +830,14 @@ public sealed class GameEngine
 
     private void DrawHalf(DrawingContext dc, SlicedHalf h)
     {
-        var alpha = (byte)(h.Alpha * 200);
-        if (alpha < 5) return;
+        if (h.Alpha < 0.02) return;
 
         dc.PushTransform(new RotateTransform(h.Rotation, h.X, h.Y));
         dc.PushOpacity(h.Alpha);
 
-        var col      = Color.FromArgb(alpha, h.NeonColor.R, h.NeonColor.G, h.NeonColor.B);
-        var pen      = new Pen(new SolidColorBrush(col), 1.5);
-        var fill     = new SolidColorBrush(Color.FromArgb((byte)(alpha * 0.6), h.NeonColor.R, h.NeonColor.G, h.NeonColor.B));
-        var center   = new Point(h.X, h.Y);
+        var pen    = GetHalfPen(h.NeonColor);
+        var fill   = GetHalfFill(h.NeonColor);
+        var center = new Point(h.X, h.Y);
 
         // 클리핑: Half==0 → 우측 반, Half==1 → 좌측 반 (회전 좌표계 기준)
         var clipRect = h.Half == 0
@@ -795,10 +872,10 @@ public sealed class GameEngine
 
     private static void DrawParticle(DrawingContext dc, Particle p)
     {
-        var alpha = (byte)(p.Alpha * 255);
-        if (alpha < 5) return;
-        var col = Color.FromArgb(alpha, p.Color.R, p.Color.G, p.Color.B);
-        dc.DrawEllipse(new SolidColorBrush(col), null, new Point(p.X, p.Y), p.Radius, p.Radius);
+        if (p.Alpha < 0.02) return;
+        dc.PushOpacity(p.Alpha);
+        dc.DrawEllipse(GetParticleBrush(p.Color), null, new Point(p.X, p.Y), p.Radius, p.Radius);
+        dc.Pop();
     }
 
     private void DrawSlowMoOverlay(DrawingContext dc)
@@ -816,6 +893,15 @@ public sealed class GameEngine
         var ratio = _bombFlashRemaining / BombFlashDuration;
         var alpha = (byte)(ratio * 80);
         dc.DrawRectangle(new SolidColorBrush(Color.FromArgb(alpha, 220, 30, 30)),
+            null, new Rect(0, 0, _width, _height));
+    }
+
+    private void DrawComboFlash(DrawingContext dc)
+    {
+        // 10콤보 이정표 달성 시 시안 플래시 (0.4초 동안 페이드 아웃)
+        var ratio = _comboFlashRemaining / ComboFlashDuration;
+        var alpha = (byte)(ratio * 70);
+        dc.DrawRectangle(new SolidColorBrush(Color.FromArgb(alpha, 0, 255, 255)),
             null, new Rect(0, 0, _width, _height));
     }
 

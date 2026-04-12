@@ -24,6 +24,15 @@ public sealed class SoundService : IDisposable
     private MediaClock? _bgmClock;
     private string _bgmPath = "";
 
+    // 볼륨/뮤트
+    private double _bgmVolume = 0.6;
+    private double _sfxVolume = 0.8;
+    private bool   _muted;
+
+    public double BgmVolume { get => _bgmVolume; set { _bgmVolume = Math.Clamp(value, 0, 1); ApplyBgmVolume(); } }
+    public double SfxVolume { get => _sfxVolume; set => _sfxVolume = Math.Clamp(value, 0, 1); }
+    public bool   Muted     { get => _muted;     set { _muted = value; ApplyBgmVolume(); } }
+
     // SFX 풀 (동시 슬라이스 대응)
     private readonly MediaPlayer[] _slicePool = [new(), new(), new()];
     private readonly MediaPlayer[] _feverPool = [new(), new(), new()];
@@ -76,6 +85,12 @@ public sealed class SoundService : IDisposable
         _bgmClock = tl.CreateClock();
         _bgm.Clock = _bgmClock;
         _bgmClock.Controller.Begin();
+        ApplyBgmVolume();
+    }
+
+    private void ApplyBgmVolume()
+    {
+        _bgm.Volume = _muted ? 0 : _bgmVolume;
     }
 
     public void StopBgm()
@@ -88,17 +103,19 @@ public sealed class SoundService : IDisposable
 
     public void Play(SoundCue cue)
     {
+        if (_muted) { if (cue == SoundCue.GameOver) StopBgm(); return; }
+
         switch (cue)
         {
-            case SoundCue.Slice:      PlayPool(_slicePool, ref _sliceIdx); break;
-            case SoundCue.SliceFever: PlayPool(_feverPool, ref _feverIdx); break;
-            case SoundCue.Bomb:       PlaySfx(_bomb);      break;
-            case SoundCue.Lightning:  PlaySfx(_lightning); break;
-            case SoundCue.Ice:        PlaySfx(_ice);       break;
-            case SoundCue.Star:       PlaySfx(_star);      break;
-            case SoundCue.Miss:       PlaySfx(_miss);      break;
-            case SoundCue.Fever:      PlaySfx(_fever);     break;
-            case SoundCue.GameOver:   StopBgm(); PlaySfx(_gameOver); break;
+            case SoundCue.Slice:      PlayPool(_slicePool, ref _sliceIdx, _sfxVolume); break;
+            case SoundCue.SliceFever: PlayPool(_feverPool, ref _feverIdx, _sfxVolume); break;
+            case SoundCue.Bomb:       PlaySfx(_bomb,      _sfxVolume); break;
+            case SoundCue.Lightning:  PlaySfx(_lightning, _sfxVolume); break;
+            case SoundCue.Ice:        PlaySfx(_ice,       _sfxVolume); break;
+            case SoundCue.Star:       PlaySfx(_star,      _sfxVolume); break;
+            case SoundCue.Miss:       PlaySfx(_miss,      _sfxVolume); break;
+            case SoundCue.Fever:      PlaySfx(_fever,     _sfxVolume); break;
+            case SoundCue.GameOver:   StopBgm(); PlaySfx(_gameOver, _sfxVolume); break;
         }
     }
 
@@ -113,19 +130,21 @@ public sealed class SoundService : IDisposable
         foreach (var f in _tempFiles) try { File.Delete(f); } catch { }
     }
 
-    private static void PlayPool(MediaPlayer[] pool, ref int idx)
+    private static void PlayPool(MediaPlayer[] pool, ref int idx, double volume)
     {
         var p = pool[idx % pool.Length];
         idx = (idx + 1) % pool.Length;
         p.Stop();
         p.Position = TimeSpan.Zero;
+        p.Volume = volume;
         p.Play();
     }
 
-    private static void PlaySfx(MediaPlayer p)
+    private static void PlaySfx(MediaPlayer p, double volume)
     {
         p.Stop();
         p.Position = TimeSpan.Zero;
+        p.Volume = volume;
         p.Play();
     }
 

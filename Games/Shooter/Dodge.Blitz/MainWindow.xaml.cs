@@ -17,7 +17,7 @@ public partial class MainWindow : Window
     private const double AreaH = 550;
 
     // ── 상태 ─────────────────────────────────────────────────────────────
-    private enum GameState { Title, Playing, Paused, GameOver }
+    private enum GameState { Title, Countdown, Playing, Paused, GameOver }
     private GameState _state = GameState.Title;
 
     // ── 엔진 ──────────────────────────────────────────────────────────────
@@ -56,6 +56,23 @@ public partial class MainWindow : Window
     // ── 플레이어 trail ────────────────────────────────────────────────────
     private double _trailTimer;
 
+    // ── 화면 셰이크 ───────────────────────────────────────────────────────
+    private double _shakeTimer;
+    private double _shakeIntensity;
+
+    // ── 클로즈콜 (총알 근접 통과) ─────────────────────────────────────────
+    private const double CloseCallRadius = 22;
+    private double _closeCallFlashTimer;
+    private readonly HashSet<Bullet> _closeCallSeen = [];
+
+    // ── 카운트다운 ────────────────────────────────────────────────────────
+    private double _countdownTimer;
+    private int _countdownLast;
+
+    // ── BGM 볼륨 (3단) ────────────────────────────────────────────────────
+    private static readonly double[] BgmVolumeLevels = [0.14, 0.28, 0.42];
+    private int _bgmVolumeIndex = 1;
+
     // ── 저장 경로 ─────────────────────────────────────────────────────────
     private static readonly string SavePath = Path.Combine(
         Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
@@ -68,6 +85,10 @@ public partial class MainWindow : Window
     private static readonly string MutePath = Path.Combine(
         Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
         "DodgeBlitz", "mute.txt");
+
+    private static readonly string VolumePath = Path.Combine(
+        Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
+        "DodgeBlitz", "volume.txt");
 
     // ── 전체 기록 ─────────────────────────────────────────────────────────
     private List<double> _allTimeScores = [];
@@ -90,6 +111,8 @@ public partial class MainWindow : Window
         _bestTime = LoadBestTime();
         _allTimeScores = LoadAllTimeScores();
         if (LoadMuteState()) SoundGen.ToggleMute();
+        _bgmVolumeIndex = LoadVolumeIndex();
+        SoundGen.SetBgmVolume(BgmVolumeLevels[_bgmVolumeIndex]);
 
         // Sounds 정적 초기화를 백그라운드에서 미리 수행 (첫 StartGame 시 UI 스레드 블로킹 방지)
         Task.Run(() => _ = Sounds.Bgm);
@@ -141,6 +164,10 @@ public partial class MainWindow : Window
         _prevLevel     = "";
         _milestoneIndex = 0;
         _milestoneTimer = 0;
+        _shakeTimer = 0;
+        _closeCallSeen.Clear();
+        _closeCallFlashTimer = 0;
+        CloseCallFlash.Opacity = 0;
         MilestoneText.Visibility = Visibility.Collapsed;
 
         _player = new Player(AreaW, AreaH);
@@ -150,17 +177,27 @@ public partial class MainWindow : Window
         GameOverPanel.Visibility = Visibility.Collapsed;
         PausePanel.Visibility    = Visibility.Collapsed;
         HudPanel.Visibility      = Visibility.Visible;
+        SessionStatsText.Visibility = Visibility.Collapsed;
 
-        _state = GameState.Playing;
+        _state = GameState.Countdown;
+        _countdownTimer = 3.0;
+        _countdownLast  = 0;
+        CountdownText.Text = "3";
+        CountdownText.Visibility = Visibility.Visible;
         _input.Reset();
 
-        SoundGen.PlayBgm(Sounds.Bgm, 0.28);
+        SoundGen.PlayBgm(Sounds.Bgm, BgmVolumeLevels[_bgmVolumeIndex]);
     }
 
     // ── 게임 종료 ─────────────────────────────────────────────────────────
     private void EndGame()
     {
         _state = GameState.GameOver;
+
+        // 화면 셰이크 트리거
+        _shakeTimer     = 0.35;
+        _shakeIntensity = 12;
+        CountdownText.Visibility = Visibility.Collapsed;
 
         bool isNewBest = _survivalTime > _bestTime;
         if (isNewBest)
@@ -279,8 +316,52 @@ public partial class MainWindow : Window
                 MuteToast.Visibility = Visibility.Collapsed;
         }
 
-        if (_state == GameState.Playing)
+        // 화면 셰이크
+        if (_shakeTimer > 0)
+        {
+            _shakeTimer -= dt;
+            if (_shakeTimer <= 0)
+            {
+                ShakeTransform.X = 0;
+                ShakeTransform.Y = 0;
+            }
+            else
+            {
+                double mag = _shakeIntensity * (_shakeTimer / 0.35);
+                ShakeTransform.X = (_rng.NextDouble() * 2 - 1) * mag;
+                ShakeTransform.Y = (_rng.NextDouble() * 2 - 1) * mag;
+            }
+        }
+
+        // 클로즈콜 플래시 페이드
+        if (_closeCallFlashTimer > 0)
+        {
+            _closeCallFlashTimer -= dt;
+            CloseCallFlash.Opacity = Math.Max(0, _closeCallFlashTimer / 0.18) * 0.6;
+        }
+
+        if (_state == GameState.Countdown)
+            UpdateCountdown(dt);
+        else if (_state == GameState.Playing)
             UpdateGame(dt);
+    }
+
+    private void UpdateCountdown(double dt)
+    {
+        _countdownTimer -= dt;
+        int n = (int)Math.Ceiling(_countdownTimer);
+        if (n <= 0)
+        {
+            CountdownText.Visibility = Visibility.Collapsed;
+            _state = GameState.Playing;
+            return;
+        }
+        if (n != _countdownLast)
+        {
+            _countdownLast = n;
+            CountdownText.Text = n.ToString();
+            SoundGen.Sfx(Sounds.LevelUpSfx);
+        }
     }
 
     private void OnRender()
@@ -329,20 +410,40 @@ public partial class MainWindow : Window
             return false;
         });
 
-        // 충돌 처리
+        // 충돌 + 클로즈콜 처리
+        double pcx = _player.X + _player.Width  / 2;
+        double pcy = _player.Y + _player.Height / 2;
+        bool anyCloseCall = false;
         if (!_player.IsInvincible)
         {
             foreach (var b in _bullets)
             {
-                if (b.IsAlive && _player.CollidesWith(b))
+                if (!b.IsAlive) continue;
+                if (_player.CollidesWith(b))
                 {
                     b.IsAlive = false;
                     GameCanvas.Children.Remove(b.Visual);
                     EndGame();
                     return;
                 }
+                if (!_closeCallSeen.Contains(b))
+                {
+                    double bcx = b.X + b.Width  / 2;
+                    double bcy = b.Y + b.Height / 2;
+                    double dx  = pcx - bcx, dy = pcy - bcy;
+                    if (dx * dx + dy * dy < CloseCallRadius * CloseCallRadius)
+                    {
+                        _closeCallSeen.Add(b);
+                        anyCloseCall = true;
+                    }
+                }
             }
         }
+        if (anyCloseCall)
+            _closeCallFlashTimer = 0.18;
+        // 죽은 총알은 셋에서 제거 (메모리 누수 방지)
+        if (_closeCallSeen.Count > 64)
+            _closeCallSeen.RemoveWhere(b => !b.IsAlive);
 
         // 레벨 상승 SFX
         var lv = GetLevelName();
@@ -580,13 +681,18 @@ public partial class MainWindow : Window
             SaveMuteState(SoundGen.IsMuted);
             ShowMuteToast();
         }
+        else if (e.Key == Key.V)
+        {
+            _bgmVolumeIndex = (_bgmVolumeIndex + 1) % BgmVolumeLevels.Length;
+            SoundGen.SetBgmVolume(BgmVolumeLevels[_bgmVolumeIndex]);
+            SaveVolumeIndex(_bgmVolumeIndex);
+            ShowVolumeToast();
+        }
         else if (e.Key == Key.Escape)
         {
             if (HelpPanel.Visibility == Visibility.Visible)
                 HelpPanel.Visibility = Visibility.Collapsed;
-            else if (_state == GameState.Playing)
-                BackToTitle();
-            else if (_state == GameState.Paused)
+            else if (_state is GameState.Playing or GameState.Paused or GameState.Countdown)
                 BackToTitle();
             else
                 Close();
@@ -620,12 +726,22 @@ public partial class MainWindow : Window
         _particles.Clear();
 
         _state = GameState.Title;
+        _input.Reset();
+        _shakeTimer = 0;
+        ShakeTransform.X = 0;
+        ShakeTransform.Y = 0;
+        _closeCallSeen.Clear();
+        _closeCallFlashTimer = 0;
+        CloseCallFlash.Opacity = 0;
+        CountdownText.Visibility = Visibility.Collapsed;
+
         HudPanel.Visibility      = Visibility.Collapsed;
         GameOverPanel.Visibility = Visibility.Collapsed;
         PausePanel.Visibility    = Visibility.Collapsed;
         MilestoneText.Visibility = Visibility.Collapsed;
         TitlePanel.Visibility    = Visibility.Visible;
         UpdateTitleBest();
+        UpdateSessionStats();
     }
 
     // ── 최고 기록 영속화 ──────────────────────────────────────────────────
@@ -644,12 +760,16 @@ public partial class MainWindow : Window
 
     private static void SaveBestTime(double time)
     {
-        try
+        var text = time.ToString(System.Globalization.CultureInfo.InvariantCulture);
+        Task.Run(() =>
         {
-            Directory.CreateDirectory(Path.GetDirectoryName(SavePath)!);
-            File.WriteAllText(SavePath, time.ToString(System.Globalization.CultureInfo.InvariantCulture));
-        }
-        catch { }
+            try
+            {
+                Directory.CreateDirectory(Path.GetDirectoryName(SavePath)!);
+                File.WriteAllText(SavePath, text);
+            }
+            catch { }
+        });
     }
 
     // ── All-Time 기록 영속화 ──────────────────────────────────────────────
@@ -670,13 +790,16 @@ public partial class MainWindow : Window
 
     private static void SaveAllTimeScores(List<double> scores)
     {
-        try
+        var lines = scores.Select(s => s.ToString(System.Globalization.CultureInfo.InvariantCulture)).ToArray();
+        Task.Run(() =>
         {
-            Directory.CreateDirectory(Path.GetDirectoryName(ScoresPath)!);
-            File.WriteAllLines(ScoresPath,
-                scores.Select(s => s.ToString(System.Globalization.CultureInfo.InvariantCulture)));
-        }
-        catch { }
+            try
+            {
+                Directory.CreateDirectory(Path.GetDirectoryName(ScoresPath)!);
+                File.WriteAllLines(ScoresPath, lines);
+            }
+            catch { }
+        });
     }
 
     // ── 음소거 상태 영속화 ─────────────────────────────────────────────────
@@ -688,12 +811,16 @@ public partial class MainWindow : Window
 
     private static void SaveMuteState(bool muted)
     {
-        try
+        var text = muted ? "1" : "0";
+        Task.Run(() =>
         {
-            Directory.CreateDirectory(Path.GetDirectoryName(MutePath)!);
-            File.WriteAllText(MutePath, muted ? "1" : "0");
-        }
-        catch { }
+            try
+            {
+                Directory.CreateDirectory(Path.GetDirectoryName(MutePath)!);
+                File.WriteAllText(MutePath, text);
+            }
+            catch { }
+        });
     }
 
     // ── 뮤트 토스트 표시 ──────────────────────────────────────────────────
@@ -702,5 +829,56 @@ public partial class MainWindow : Window
         MuteToast.Text = SoundGen.IsMuted ? "[ MUTE ]" : "[ SOUND ON ]";
         MuteToast.Visibility = Visibility.Visible;
         _muteToastTimer = 1.5;
+    }
+
+    // ── 볼륨 토스트 표시 ──────────────────────────────────────────────────
+    private void ShowVolumeToast()
+    {
+        var labels = new[] { "[ VOL  LOW ]", "[ VOL  MID ]", "[ VOL HIGH ]" };
+        MuteToast.Text = labels[_bgmVolumeIndex];
+        MuteToast.Visibility = Visibility.Visible;
+        _muteToastTimer = 1.2;
+    }
+
+    // ── 세션 통계 (타이틀 화면) ───────────────────────────────────────────
+    private void UpdateSessionStats()
+    {
+        if (_sessionScores.Count == 0)
+        {
+            SessionStatsText.Visibility = Visibility.Collapsed;
+            return;
+        }
+        double avg = _sessionScores.Average();
+        double top = _sessionScores.Max();
+        SessionStatsText.Text = $"SESSION  runs {_sessionScores.Count}  ·  avg {avg:F1}s  ·  top {top:F1}s";
+        SessionStatsText.Visibility = Visibility.Visible;
+    }
+
+    // ── BGM 볼륨 영속화 ───────────────────────────────────────────────────
+    private static int LoadVolumeIndex()
+    {
+        try
+        {
+            if (File.Exists(VolumePath) &&
+                int.TryParse(File.ReadAllText(VolumePath).Trim(), out int v) &&
+                v >= 0 && v < BgmVolumeLevels.Length)
+                return v;
+        }
+        catch { }
+        return 1;
+    }
+
+    private static void SaveVolumeIndex(int index)
+    {
+        var text = index.ToString();
+        Task.Run(() =>
+        {
+            try
+            {
+                Directory.CreateDirectory(Path.GetDirectoryName(VolumePath)!);
+                File.WriteAllText(VolumePath, text);
+            }
+            catch { }
+        });
     }
 }

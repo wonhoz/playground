@@ -113,6 +113,7 @@ public static class SoundGen
 
     private static MediaPlayer? _bgm;
     private static string? _bgmFile;
+    private static byte[]? _bgmCachedWav;
     private static double _bgmVolume = 0.35;
     public  static bool   IsMuted { get; private set; }
 
@@ -120,9 +121,17 @@ public static class SoundGen
     {
         StopBgm();
         _bgmVolume = volume;
-        _bgmFile = Path.Combine(Path.GetTempPath(), $"bgm_{Guid.NewGuid():N}.wav");
-        try { File.WriteAllBytes(_bgmFile, wav); }
-        catch { _bgmFile = null; return; }
+
+        // BGM 파형이 동일하면 임시 파일 재사용 (참조 비교)
+        if (!ReferenceEquals(wav, _bgmCachedWav) || _bgmFile is null || !File.Exists(_bgmFile))
+        {
+            var path = Path.Combine(Path.GetTempPath(), $"bgm_{Guid.NewGuid():N}.wav");
+            try { File.WriteAllBytes(path, wav); }
+            catch { return; }
+            _bgmFile = path;
+            _bgmCachedWav = wav;
+        }
+
         _bgm = new MediaPlayer();
         _bgm.Open(new Uri(_bgmFile));
         _bgm.Volume = IsMuted ? 0 : _bgmVolume;
@@ -134,7 +143,6 @@ public static class SoundGen
     public static void StopBgm()
     {
         if (_bgm != null) { _bgm.Stop(); _bgm.Close(); _bgm = null; }
-        if (_bgmFile != null) { try { File.Delete(_bgmFile); } catch { } _bgmFile = null; }
     }
 
     public static void PauseBgm() => _bgm?.Pause();
@@ -145,6 +153,15 @@ public static class SoundGen
         IsMuted = !IsMuted;
         if (_bgm != null) _bgm.Volume = IsMuted ? 0 : _bgmVolume;
     }
+
+    /// <summary>BGM 볼륨을 직접 설정. 음소거 상태가 아니면 즉시 반영.</summary>
+    public static void SetBgmVolume(double volume)
+    {
+        _bgmVolume = Math.Clamp(volume, 0.0, 1.0);
+        if (_bgm != null && !IsMuted) _bgm.Volume = _bgmVolume;
+    }
+
+    public static double BgmVolume => _bgmVolume;
 
     public static void Sfx(byte[] wav)
     {

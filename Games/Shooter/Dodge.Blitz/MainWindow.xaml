@@ -11,7 +11,17 @@
         <!-- Game Canvas -->
         <Canvas x:Name="GameCanvas" Background="#05050F" ClipToBounds="True"
                 Margin="0,50,0,0" Width="500" Height="550"
-                HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                HorizontalAlignment="Left" VerticalAlignment="Top">
+            <Canvas.RenderTransform>
+                <TranslateTransform x:Name="ShakeTransform"/>
+            </Canvas.RenderTransform>
+        </Canvas>
+
+        <!-- Close-call flash overlay -->
+        <Border x:Name="CloseCallFlash" Width="500" Height="550"
+                Margin="0,50,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"
+                Background="#33FFFFFF" IsHitTestVisible="False"
+                Opacity="0"/>
 
         <!-- HUD Top Bar -->
         <Grid x:Name="HudPanel" Height="50" VerticalAlignment="Top" Background="#0D0D1A" Visibility="Collapsed">
@@ -88,15 +98,29 @@
                        Margin="0,18,0,0" FontFamily="Consolas" TextAlignment="Center">
                 <Run Text="WASD / Arrow Keys  ·  Left Stick / D-Pad  move"/>
                 <LineBreak/>
-                <Run Text="P  pause  ·  ESC  quit  ·  H  how to play"/>
+                <Run Text="P  pause  ·  M  mute  ·  V  volume  ·  H  how to play"/>
                 <LineBreak/>
                 <Run Text="Dodge all bullets — survive as long as possible"/>
             </TextBlock>
 
+            <TextBlock x:Name="SessionStatsText" Text="" FontSize="11"
+                       Foreground="#A088CC" HorizontalAlignment="Center"
+                       Margin="0,10,0,0" FontFamily="Consolas" TextAlignment="Center"
+                       Visibility="Collapsed"/>
+
             <TextBlock x:Name="JoystickStatusText" Text="" FontSize="11"
                        Foreground="#4488AA" HorizontalAlignment="Center"
-                       Margin="0,10,0,0" FontFamily="Consolas"/>
+                       Margin="0,6,0,0" FontFamily="Consolas"/>
         </StackPanel>
+
+        <!-- Countdown Overlay -->
+        <TextBlock x:Name="CountdownText" Text="" FontSize="120" FontWeight="Bold"
+                   Foreground="#00FFCC" HorizontalAlignment="Center" VerticalAlignment="Center"
+                   FontFamily="Consolas" Visibility="Collapsed">
+            <TextBlock.Effect>
+                <DropShadowEffect Color="#00FFCC" BlurRadius="36" ShadowDepth="0"/>
+            </TextBlock.Effect>
+        </TextBlock>
 
         <!-- Game Over Screen -->
         <Border x:Name="GameOverPanel" Background="#DD05050F" Visibility="Collapsed">
@@ -224,10 +248,23 @@
                     <Run Text="P" Foreground="#00FFCC"/><Run Text="  Pause" Foreground="#666666"/>
                     <LineBreak/>
                     <Run Text="M" Foreground="#00FFCC"/><Run Text="  Mute / Unmute  " Foreground="#666666"/>
-                    <Run Text="H" Foreground="#00FFCC"/><Run Text="  Help" Foreground="#666666"/>
+                    <Run Text="V" Foreground="#00FFCC"/><Run Text="  BGM Volume (3 levels)" Foreground="#666666"/>
                     <LineBreak/>
+                    <Run Text="H" Foreground="#00FFCC"/><Run Text="  Help  " Foreground="#666666"/>
                     <Run Text="ESC" Foreground="#00FFCC"/><Run Text="  Title / Quit" Foreground="#666666"/>
                 </TextBlock>
+
+                <TextBlock FontSize="11" Foreground="#3A3A4A" HorizontalAlignment="Center"
+                           Margin="0,10,0,0" FontFamily="Consolas"
+                           Text="────────────────────────────"/>
+
+                <!-- 시작 시 -->
+                <TextBlock Text="START SEQUENCE" FontSize="12" FontWeight="Bold"
+                           Foreground="#888888" HorizontalAlignment="Center"
+                           Margin="0,10,0,4" FontFamily="Consolas"/>
+                <TextBlock FontSize="11" Foreground="#AAAAAA" HorizontalAlignment="Center"
+                           FontFamily="Consolas" TextAlignment="Center"
+                           Text="3 — 2 — 1 countdown before bullets start"/>
 
                 <TextBlock Text="[ H / ESC  Close ]" FontSize="12" Foreground="#555566"
                            HorizontalAlignment="Center" Margin="0,18,0,0" FontFamily="Consolas"/>

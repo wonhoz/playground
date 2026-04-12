@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using System.Windows;
 using System.Windows.Media;
 
 namespace DodgeBlitz.Engine;
@@ -48,7 +49,7 @@ public sealed class GameEngine
         // 프레임 스파이크 방지 (최대 100ms)
         if (DeltaTime > 0.1) DeltaTime = 0.1;
 
-        try { OnUpdate?.Invoke(DeltaTime); } catch (Exception ex) { Debug.WriteLine($"[GameEngine] OnUpdate: {ex.Message}"); }
-        try { OnRender?.Invoke(); }           catch (Exception ex) { Debug.WriteLine($"[GameEngine] OnRender: {ex.Message}"); }
+        OnUpdate?.Invoke(DeltaTime);
+        OnRender?.Invoke();
     }
 }

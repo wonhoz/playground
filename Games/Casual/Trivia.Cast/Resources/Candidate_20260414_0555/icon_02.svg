@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFF3E0"/>
+      <stop offset="100%" stop-color="#BF360C"/>
+    </linearGradient>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg)"/>
+  <!-- White main card -->
+  <rect x="88" y="120" width="848" height="558" rx="48" fill="#FFFFFF" stroke="#BF360C" stroke-width="16"/>
+
+  <!-- Countdown ring: background circle -->
+  <circle cx="512" cy="382" r="210" fill="#FFCCBC" stroke="#FFCCBC" stroke-width="0"/>
+  <circle cx="512" cy="382" r="210" fill="none" stroke="#EEEEEE" stroke-width="44"/>
+  <!-- Countdown arc: ~80% (12/15 seconds remaining, red) -->
+  <!-- stroke-dasharray: circumference=2π×210≈1319; 80%=1055 remaining -->
+  <circle cx="512" cy="382" r="210" fill="none" stroke="#D32F2F" stroke-width="44"
+    stroke-dasharray="1055 264" stroke-dashoffset="330" stroke-linecap="round"/>
+
+  <!-- Inner white circle (clean background) -->
+  <circle cx="512" cy="382" r="168" fill="#FFFFFF" stroke="#FFCCBC" stroke-width="8"/>
+
+  <!-- Big "15" in center -->
+  <text x="512" y="340" font-family="Arial Black, sans-serif" font-weight="900" font-size="148" fill="#BF360C" text-anchor="middle">15</text>
+  <!-- "SEC" below -->
+  <text x="512" y="424" font-family="Arial Black, sans-serif" font-weight="900" font-size="52" fill="#FF6B35" text-anchor="middle">SEC</text>
+
+  <!-- Tick marks (12 around outer ring) -->
+  <!-- These are at the outer edge for readability — omitted for cleanliness -->
+
+  <!-- ANSWER NOW strip -->
+  <rect x="112" y="610" width="800" height="60" rx="18" fill="#D32F2F" stroke="#BF360C" stroke-width="12"/>
+  <text x="512" y="653" font-family="Arial Black, sans-serif" font-weight="900" font-size="44" fill="#FFFFFF" text-anchor="middle">ANSWER NOW!</text>
+
+  <!-- TIMER badge -->
+  <rect x="248" y="752" width="528" height="116" rx="36" fill="#BF360C" stroke="#7F0000" stroke-width="14"/>
+  <text x="512" y="838" font-family="Arial Black, sans-serif" font-weight="900" font-size="88" fill="#FFFFFF" text-anchor="middle">TIMER</text>
+</svg>

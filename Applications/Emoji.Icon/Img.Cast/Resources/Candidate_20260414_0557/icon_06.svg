@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg6" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFFDE7"/>
+      <stop offset="100%" stop-color="#FFF9C4"/>
+    </linearGradient>
+    <radialGradient id="gear1grad" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FFD93D"/>
+      <stop offset="100%" stop-color="#FFB300"/>
+    </radialGradient>
+    <radialGradient id="gear2grad" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FFEB3B"/>
+      <stop offset="100%" stop-color="#F9A825"/>
+    </radialGradient>
+  </defs>
+  <!-- Background -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg6)"/>
+
+  <!-- White card -->
+  <rect x="80" y="100" width="864" height="720" rx="32" fill="#FFFFFF" stroke="#E65100" stroke-width="16"/>
+
+  <!-- Large gear (left) -->
+  <!-- Gear teeth via polygon approximation -->
+  <g transform="translate(310, 400)">
+    <!-- Gear body -->
+    <circle r="160" fill="url(#gear1grad)" stroke="#795548" stroke-width="16"/>
+    <circle r="80" fill="#FFFFFF" stroke="#795548" stroke-width="14"/>
+    <!-- Gear teeth (8 teeth) -->
+    <rect x="-24" y="-188" width="48" height="60" rx="10" fill="url(#gear1grad)" stroke="#795548" stroke-width="12"/>
+    <rect x="-24" y="128" width="48" height="60" rx="10" fill="url(#gear1grad)" stroke="#795548" stroke-width="12"/>
+    <rect x="128" y="-24" width="60" height="48" rx="10" fill="url(#gear1grad)" stroke="#795548" stroke-width="12"/>
+    <rect x="-188" y="-24" width="60" height="48" rx="10" fill="url(#gear1grad)" stroke="#795548" stroke-width="12"/>
+    <rect x="82" y="-160" width="48" height="60" rx="10" fill="url(#gear1grad)" stroke="#795548" stroke-width="12" transform="rotate(45)"/>
+    <rect x="82" y="-160" width="48" height="60" rx="10" fill="url(#gear1grad)" stroke="#795548" stroke-width="12" transform="rotate(135)"/>
+    <rect x="82" y="-160" width="48" height="60" rx="10" fill="url(#gear1grad)" stroke="#795548" stroke-width="12" transform="rotate(225)"/>
+    <rect x="82" y="-160" width="48" height="60" rx="10" fill="url(#gear1grad)" stroke="#795548" stroke-width="12" transform="rotate(315)"/>
+    <!-- IMG label inside gear -->
+    <text x="0" y="18" font-family="Arial Black, sans-serif" font-weight="900" font-size="52" fill="#795548" text-anchor="middle">IMG</text>
+  </g>
+
+  <!-- Small gear (right) -->
+  <g transform="translate(700, 320)">
+    <circle r="110" fill="url(#gear2grad)" stroke="#795548" stroke-width="14"/>
+    <circle r="55" fill="#FFFFFF" stroke="#795548" stroke-width="12"/>
+    <!-- Teeth (6 teeth) -->
+    <rect x="-18" y="-130" width="36" height="46" rx="8" fill="url(#gear2grad)" stroke="#795548" stroke-width="10"/>
+    <rect x="-18" y="84" width="36" height="46" rx="8" fill="url(#gear2grad)" stroke="#795548" stroke-width="10"/>
+    <rect x="84" y="-18" width="46" height="36" rx="8" fill="url(#gear2grad)" stroke="#795548" stroke-width="10"/>
+    <rect x="-130" y="-18" width="46" height="36" rx="8" fill="url(#gear2grad)" stroke="#795548" stroke-width="10"/>
+    <rect x="54" y="-110" width="36" height="46" rx="8" fill="url(#gear2grad)" stroke="#795548" stroke-width="10" transform="rotate(45)"/>
+    <rect x="54" y="-110" width="36" height="46" rx="8" fill="url(#gear2grad)" stroke="#795548" stroke-width="10" transform="rotate(-45)"/>
+    <!-- OUT label -->
+    <text x="0" y="16" font-family="Arial Black, sans-serif" font-weight="900" font-size="38" fill="#795548" text-anchor="middle">OUT</text>
+  </g>
+
+  <!-- Format badges row at bottom of card -->
+  <rect x="110" y="580" width="170" height="70" rx="24" fill="#FFB300" stroke="#795548" stroke-width="12"/>
+  <text x="195" y="629" font-family="Arial Black, sans-serif" font-weight="900" font-size="44" fill="#FFFFFF" text-anchor="middle">ICO</text>
+
+  <rect x="300" y="580" width="170" height="70" rx="24" fill="#FFD93D" stroke="#795548" stroke-width="12"/>
+  <text x="385" y="629" font-family="Arial Black, sans-serif" font-weight="900" font-size="44" fill="#795548" text-anchor="middle">PNG</text>
+
+  <rect x="490" y="580" width="200" height="70" rx="24" fill="#FFB300" stroke="#795548" stroke-width="12"/>
+  <text x="590" y="629" font-family="Arial Black, sans-serif" font-weight="900" font-size="44" fill="#FFFFFF" text-anchor="middle">WEBP</text>
+
+  <rect x="710" y="580" width="200" height="70" rx="24" fill="#FFD93D" stroke="#795548" stroke-width="12"/>
+  <text x="810" y="629" font-family="Arial Black, sans-serif" font-weight="900" font-size="44" fill="#795548" text-anchor="middle">SVG</text>
+
+  <!-- CONVERT badge -->
+  <rect x="242" y="700" width="540" height="80" rx="32" fill="#FFB300" stroke="#795548" stroke-width="14"/>
+  <text x="512" y="756" font-family="Arial Black, sans-serif" font-weight="900" font-size="56" fill="#FFFFFF" text-anchor="middle">CONVERT</text>
+
+  <!-- Title -->
+  <rect x="212" y="838" width="600" height="88" rx="36" fill="#2C3E50" stroke="#1A252F" stroke-width="14"/>
+  <text x="512" y="900" font-family="Arial Black, sans-serif" font-weight="900" font-size="62" fill="#FFFFFF" text-anchor="middle">IMG.CAST</text>
+</svg>

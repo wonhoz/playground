@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg5" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFF7E0"/>
+      <stop offset="100%" stop-color="#FFE0B2"/>
+    </linearGradient>
+    <linearGradient id="funnel" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FF9800"/>
+      <stop offset="100%" stop-color="#FF5722"/>
+    </linearGradient>
+  </defs>
+  <!-- Background -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg5)"/>
+
+  <!-- White card -->
+  <rect x="80" y="110" width="864" height="700" rx="32" fill="#FFFFFF" stroke="#E65100" stroke-width="16"/>
+
+  <!-- Input badges (top) — multiple formats flowing in -->
+  <rect x="100" y="140" width="160" height="80" rx="24" fill="#FF6B35" stroke="#E65100" stroke-width="12"/>
+  <text x="180" y="193" font-family="Arial Black, sans-serif" font-weight="900" font-size="46" fill="#FFFFFF" text-anchor="middle">SVG</text>
+
+  <rect x="282" y="140" width="160" height="80" rx="24" fill="#FF9800" stroke="#E65100" stroke-width="12"/>
+  <text x="362" y="193" font-family="Arial Black, sans-serif" font-weight="900" font-size="46" fill="#FFFFFF" text-anchor="middle">PNG</text>
+
+  <rect x="464" y="140" width="160" height="80" rx="24" fill="#FF6B35" stroke="#E65100" stroke-width="12"/>
+  <text x="544" y="193" font-family="Arial Black, sans-serif" font-weight="900" font-size="46" fill="#FFFFFF" text-anchor="middle">JPG</text>
+
+  <rect x="646" y="140" width="180" height="80" rx="24" fill="#FF9800" stroke="#E65100" stroke-width="12"/>
+  <text x="736" y="193" font-family="Arial Black, sans-serif" font-weight="900" font-size="46" fill="#FFFFFF" text-anchor="middle">WEBP</text>
+
+  <!-- Converging lines to funnel -->
+  <line x1="180" y1="220" x2="512" y2="360" stroke="#FF6B35" stroke-width="14" stroke-linecap="round"/>
+  <line x1="362" y1="220" x2="512" y2="360" stroke="#FF9800" stroke-width="14" stroke-linecap="round"/>
+  <line x1="544" y1="220" x2="512" y2="360" stroke="#FF6B35" stroke-width="14" stroke-linecap="round"/>
+  <line x1="736" y1="220" x2="512" y2="360" stroke="#FF9800" stroke-width="14" stroke-linecap="round"/>
+
+  <!-- Funnel shape -->
+  <polygon points="380,360 644,360 570,480 454,480" fill="url(#funnel)" stroke="#E65100" stroke-width="16" stroke-linejoin="round"/>
+
+  <!-- CAST badge in funnel center -->
+  <rect x="400" y="385" width="224" height="72" rx="24" fill="#FFFFFF" stroke="#E65100" stroke-width="10"/>
+  <text x="512" y="437" font-family="Arial Black, sans-serif" font-weight="900" font-size="48" fill="#FF5722" text-anchor="middle">CAST</text>
+
+  <!-- Outlet pipe -->
+  <rect x="476" y="480" width="72" height="60" rx="14" fill="url(#funnel)" stroke="#E65100" stroke-width="14"/>
+
+  <!-- Diverging lines to output -->
+  <line x1="512" y1="540" x2="200" y2="660" stroke="#FF5722" stroke-width="14" stroke-linecap="round"/>
+  <line x1="512" y1="540" x2="400" y2="660" stroke="#FF6B35" stroke-width="14" stroke-linecap="round"/>
+  <line x1="512" y1="540" x2="624" y2="660" stroke="#FF5722" stroke-width="14" stroke-linecap="round"/>
+  <line x1="512" y1="540" x2="824" y2="660" stroke="#FF6B35" stroke-width="14" stroke-linecap="round"/>
+
+  <!-- Output badges -->
+  <rect x="100" y="660" width="200" height="80" rx="24" fill="#2C3E50" stroke="#1A252F" stroke-width="12"/>
+  <text x="200" y="713" font-family="Arial Black, sans-serif" font-weight="900" font-size="46" fill="#FFFFFF" text-anchor="middle">ICO</text>
+
+  <rect x="310" y="660" width="200" height="80" rx="24" fill="#2C3E50" stroke="#1A252F" stroke-width="12"/>
+  <text x="410" y="713" font-family="Arial Black, sans-serif" font-weight="900" font-size="46" fill="#FFFFFF" text-anchor="middle">PNG</text>
+
+  <rect x="520" y="660" width="200" height="80" rx="24" fill="#2C3E50" stroke="#1A252F" stroke-width="12"/>
+  <text x="620" y="713" font-family="Arial Black, sans-serif" font-weight="900" font-size="46" fill="#FFFFFF" text-anchor="middle">SVG</text>
+
+  <rect x="730" y="660" width="200" height="80" rx="24" fill="#2C3E50" stroke="#1A252F" stroke-width="12"/>
+  <text x="830" y="713" font-family="Arial Black, sans-serif" font-weight="900" font-size="46" fill="#FFFFFF" text-anchor="middle">JPG</text>
+
+  <!-- Title badge -->
+  <rect x="212" y="832" width="600" height="90" rx="36" fill="#FF5722" stroke="#E65100" stroke-width="14"/>
+  <text x="512" y="896" font-family="Arial Black, sans-serif" font-weight="900" font-size="62" fill="#FFFFFF" text-anchor="middle">IMG.CAST</text>
+</svg>

@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#B2DFDB"/>
+      <stop offset="100%" stop-color="#00796B"/>
+    </linearGradient>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg)"/>
+  <!-- White main card -->
+  <rect x="88" y="128" width="848" height="548" rx="48" fill="#FFFFFF" stroke="#004D40" stroke-width="16"/>
+  <!-- Folder tree (left side) -->
+  <!-- Root folder -->
+  <path d="M 120,188 L 120,258 Q 120,272 134,272 L 348,272 Q 362,272 362,258 L 362,208 Q 362,194 348,194 L 262,194 L 244,178 Q 238,172 230,172 L 134,172 Q 120,172 120,186 Z" fill="#06D6A0" stroke="#004D40" stroke-width="12"/>
+  <!-- Tree lines -->
+  <line x1="164" y1="272" x2="164" y2="600" stroke="#004D40" stroke-width="8" opacity="0.5"/>
+  <!-- Child folder 1 (empty — targeted) -->
+  <line x1="164" y1="340" x2="196" y2="340" stroke="#004D40" stroke-width="8" opacity="0.5"/>
+  <path d="M 196,310 L 196,370 Q 196,382 208,382 L 380,382 Q 392,382 392,370 L 392,322 Q 392,310 380,310 L 308,310 L 292,296 Q 286,290 278,290 L 208,290 Q 196,290 196,302 Z" fill="#FCE4EC" stroke="#E91E63" stroke-width="12"/>
+  <text x="290" y="352" font-family="Arial Black, sans-serif" font-weight="900" font-size="44" fill="#E91E63" text-anchor="middle">EMPTY</text>
+  <!-- Child folder 2 (has files — safe) -->
+  <line x1="164" y1="460" x2="196" y2="460" stroke="#004D40" stroke-width="8" opacity="0.5"/>
+  <path d="M 196,430 L 196,490 Q 196,502 208,502 L 380,502 Q 392,502 392,490 L 392,442 Q 392,430 380,430 L 308,430 L 292,416 Q 286,410 278,410 L 208,410 Q 196,410 196,422 Z" fill="#E8F5E9" stroke="#388E3C" stroke-width="12"/>
+  <text x="290" y="472" font-family="Arial Black, sans-serif" font-weight="900" font-size="44" fill="#388E3C" text-anchor="middle">KEEP</text>
+  <!-- Child folder 3 (bin/obj — VS artifacts) -->
+  <line x1="164" y1="570" x2="196" y2="570" stroke="#004D40" stroke-width="8" opacity="0.5"/>
+  <path d="M 196,540 L 196,600 Q 196,612 208,612 L 380,612 Q 392,612 392,600 L 392,552 Q 392,540 380,540 L 308,540 L 292,526 Q 286,520 278,520 L 208,520 Q 196,520 196,532 Z" fill="#FFF9C4" stroke="#F9A825" stroke-width="12"/>
+  <text x="290" y="582" font-family="Arial Black, sans-serif" font-weight="900" font-size="42" fill="#E65100" text-anchor="middle">bin/obj</text>
+  <!-- Scan progress bar (right side) -->
+  <rect x="450" y="185" width="460" height="60" rx="16" fill="#E0F2F1" stroke="#00796B" stroke-width="12"/>
+  <rect x="462" y="197" width="340" height="36" rx="10" fill="#06D6A0" stroke="none"/>
+  <text x="680" y="229" font-family="Arial Black, sans-serif" font-weight="900" font-size="34" fill="#FFFFFF" text-anchor="middle">74%</text>
+  <!-- Scan results count boxes -->
+  <rect x="450" y="276" width="210" height="130" rx="24" fill="#FCE4EC" stroke="#E91E63" stroke-width="14"/>
+  <text x="555" y="328" font-family="Arial Black, sans-serif" font-weight="900" font-size="52" fill="#E91E63" text-anchor="middle">47</text>
+  <text x="555" y="380" font-family="Arial Black, sans-serif" font-weight="900" font-size="38" fill="#880E4F" text-anchor="middle">empty</text>
+  <rect x="680" y="276" width="230" height="130" rx="24" fill="#FFF9C4" stroke="#F9A825" stroke-width="14"/>
+  <text x="795" y="328" font-family="Arial Black, sans-serif" font-weight="900" font-size="52" fill="#E65100" text-anchor="middle">23</text>
+  <text x="795" y="380" font-family="Arial Black, sans-serif" font-weight="900" font-size="38" fill="#F9A825" text-anchor="middle">vs art</text>
+  <!-- Delete button style -->
+  <rect x="450" y="440" width="460" height="100" rx="24" fill="#E91E63" stroke="#880E4F" stroke-width="14"/>
+  <text x="680" y="506" font-family="Arial Black, sans-serif" font-weight="900" font-size="64" fill="#FFFFFF" text-anchor="middle">DELETE 70</text>
+  <!-- SCAN badge -->
+  <rect x="236" y="754" width="552" height="114" rx="36" fill="#004D40" stroke="#002B25" stroke-width="14"/>
+  <text x="512" y="840" font-family="Arial Black, sans-serif" font-weight="900" font-size="88" fill="#06D6A0" text-anchor="middle">SCAN</text>
+</svg>

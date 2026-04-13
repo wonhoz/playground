@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFE0B2"/>
+      <stop offset="100%" stop-color="#FF6B35"/>
+    </linearGradient>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg)"/>
+  <!-- White main card -->
+  <rect x="100" y="138" width="824" height="530" rx="48" fill="#FFFFFF" stroke="#BF360C" stroke-width="16"/>
+  <!-- Disk/drive shape (central) -->
+  <rect x="280" y="210" width="464" height="320" rx="48" fill="#37474F" stroke="#263238" stroke-width="16"/>
+  <!-- Drive activity light -->
+  <circle cx="330" cy="256" r="16" fill="#76FF03" stroke="#33691E" stroke-width="8"/>
+  <!-- Drive label -->
+  <text x="512" y="318" font-family="Arial Black, sans-serif" font-weight="900" font-size="54" fill="#ECEFF1" text-anchor="middle">C: DRIVE</text>
+  <!-- Before: filled (red) capacity bar on drive -->
+  <rect x="316" y="346" width="392" height="40" rx="18" fill="#1A1A1A" stroke="#455A64" stroke-width="10"/>
+  <rect x="316" y="346" width="340" height="40" rx="18" fill="#D32F2F"/>
+  <!-- After: progress indicator (shrinking) -->
+  <rect x="316" y="396" width="392" height="28" rx="14" fill="#1A1A1A" stroke="#455A64" stroke-width="8"/>
+  <rect x="316" y="396" width="160" height="28" rx="14" fill="#06D6A0"/>
+  <!-- Size labels -->
+  <text x="340" y="476" font-family="Arial Black, sans-serif" font-weight="900" font-size="44" fill="#D32F2F">2.4GB</text>
+  <text x="612" y="476" font-family="Arial Black, sans-serif" font-weight="900" font-size="44" fill="#06D6A0">→ 200MB</text>
+  <!-- Down arrows showing cleaning -->
+  <path d="M 420,530 L 380,504 L 380,556 Z" fill="#FF6B35" transform="rotate(90 420 530)"/>
+  <path d="M 512,530 L 472,504 L 472,556 Z" fill="#FF6B35" transform="rotate(90 512 530)"/>
+  <path d="M 604,530 L 564,504 L 564,556 Z" fill="#FF6B35" transform="rotate(90 604 530)"/>
+  <!-- DISK badge -->
+  <rect x="214" y="748" width="596" height="116" rx="36" fill="#BF360C" stroke="#7F0000" stroke-width="14"/>
+  <text x="512" y="834" font-family="Arial Black, sans-serif" font-weight="900" font-size="88" fill="#FFFFFF" text-anchor="middle">DISK</text>
+</svg>

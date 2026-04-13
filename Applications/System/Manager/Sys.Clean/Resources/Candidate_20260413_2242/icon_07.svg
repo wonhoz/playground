@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#DCEDC8"/>
+      <stop offset="100%" stop-color="#558B2F"/>
+    </linearGradient>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg)"/>
+  <!-- White main card -->
+  <rect x="88" y="128" width="848" height="548" rx="48" fill="#FFFFFF" stroke="#33691E" stroke-width="16"/>
+
+  <!-- Left panel: BEFORE (slow boot) -->
+  <rect x="112" y="160" width="334" height="492" rx="24" fill="#FFEBEE" stroke="#EF9A9A" stroke-width="10"/>
+  <!-- Clock face -->
+  <circle cx="279" cy="350" r="110" fill="#FFCDD2" stroke="#D32F2F" stroke-width="14"/>
+  <circle cx="279" cy="350" r="80" fill="#FFFFFF" stroke="#D32F2F" stroke-width="10"/>
+  <!-- Hour hand (pointing to 2 = slow) -->
+  <line x1="279" y1="350" x2="335" y2="294" stroke="#D32F2F" stroke-width="14" stroke-linecap="round"/>
+  <!-- Minute hand (pointing up) -->
+  <line x1="279" y1="350" x2="279" y2="278" stroke="#D32F2F" stroke-width="12" stroke-linecap="round"/>
+  <circle cx="279" cy="350" r="12" fill="#D32F2F"/>
+  <!-- 120s text -->
+  <text x="279" y="502" font-family="Arial Black, sans-serif" font-weight="900" font-size="52" fill="#D32F2F" text-anchor="middle">120s</text>
+  <!-- SLOW badge -->
+  <rect x="130" y="524" width="298" height="104" rx="20" fill="#D32F2F" stroke="#B71C1C" stroke-width="12"/>
+  <text x="279" y="592" font-family="Arial Black, sans-serif" font-weight="900" font-size="68" fill="#FFFFFF" text-anchor="middle">SLOW</text>
+
+  <!-- Arrow (center) -->
+  <rect x="458" y="328" width="108" height="40" rx="20" fill="#33691E" stroke="#1B5E20" stroke-width="12"/>
+  <path d="M 562,300 L 636,348 L 562,396 Z" fill="#33691E" stroke="#1B5E20" stroke-width="12" stroke-linejoin="round"/>
+
+  <!-- Right panel: AFTER (fast boot) -->
+  <rect x="578" y="160" width="334" height="492" rx="24" fill="#F1F8E9" stroke="#A5D6A7" stroke-width="10"/>
+  <!-- Clock face fast -->
+  <circle cx="745" cy="350" r="110" fill="#C8E6C9" stroke="#388E3C" stroke-width="14"/>
+  <circle cx="745" cy="350" r="80" fill="#FFFFFF" stroke="#388E3C" stroke-width="10"/>
+  <!-- Hands barely moved (fast = near 12) -->
+  <line x1="745" y1="350" x2="745" y2="278" stroke="#388E3C" stroke-width="14" stroke-linecap="round"/>
+  <line x1="745" y1="350" x2="754" y2="346" stroke="#388E3C" stroke-width="12" stroke-linecap="round"/>
+  <circle cx="745" cy="350" r="12" fill="#388E3C"/>
+  <!-- 8s text -->
+  <text x="745" y="502" font-family="Arial Black, sans-serif" font-weight="900" font-size="52" fill="#388E3C" text-anchor="middle">8s</text>
+  <!-- FAST badge -->
+  <rect x="596" y="524" width="298" height="104" rx="20" fill="#388E3C" stroke="#1B5E20" stroke-width="12"/>
+  <text x="745" y="592" font-family="Arial Black, sans-serif" font-weight="900" font-size="68" fill="#FFFFFF" text-anchor="middle">FAST</text>
+
+  <!-- STARTUP badge -->
+  <rect x="172" y="752" width="680" height="116" rx="36" fill="#33691E" stroke="#1B5E20" stroke-width="14"/>
+  <text x="512" y="838" font-family="Arial Black, sans-serif" font-weight="900" font-size="84" fill="#CCFF90" text-anchor="middle">STARTUP</text>
+</svg>

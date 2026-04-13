@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="45%" r="65%">
+      <stop offset="0%" stop-color="#CE93D8"/>
+      <stop offset="100%" stop-color="#6A1B9A"/>
+    </radialGradient>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg)"/>
+  <!-- White main card -->
+  <rect x="100" y="138" width="824" height="530" rx="48" fill="#FFFFFF" stroke="#4A148C" stroke-width="16"/>
+  <!-- Health gauge (arc meter) -->
+  <!-- Background arc (grey) -->
+  <path d="M 200,530 A 312,312 0 0 1 824,530" fill="none" stroke="#E0E0E0" stroke-width="56" stroke-linecap="round"/>
+  <!-- Fill arc: DIRTY (red, 80%) -->
+  <path d="M 200,530 A 312,312 0 0 1 762,312" fill="none" stroke="#D32F2F" stroke-width="56" stroke-linecap="round"/>
+  <!-- Clean portion: small green arc at end -->
+  <path d="M 762,312 A 312,312 0 0 1 824,530" fill="none" stroke="#06D6A0" stroke-width="56" stroke-linecap="round"/>
+  <!-- Center text: percentage dirty -->
+  <text x="512" y="468" font-family="Arial Black, sans-serif" font-weight="900" font-size="120" fill="#4A148C" text-anchor="middle">80%</text>
+  <text x="512" y="542" font-family="Arial Black, sans-serif" font-weight="900" font-size="56" fill="#D32F2F" text-anchor="middle">DIRTY</text>
+  <!-- Needle pointer -->
+  <line x1="512" y1="530" x2="388" y2="300" stroke="#4A148C" stroke-width="16" stroke-linecap="round"/>
+  <circle cx="512" cy="530" r="22" fill="#4A148C" stroke="#1A1A1A" stroke-width="10"/>
+  <!-- OPTIMIZE badge -->
+  <rect x="172" y="748" width="680" height="116" rx="36" fill="#6A1B9A" stroke="#4A148C" stroke-width="14"/>
+  <text x="512" y="834" font-family="Arial Black, sans-serif" font-weight="900" font-size="84" fill="#FFD93D" text-anchor="middle">OPTIMIZE</text>
+</svg>

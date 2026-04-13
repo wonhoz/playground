@@ -1,39 +1,47 @@
-<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
   <defs>
-    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1" gradientUnits="objectBoundingBox">
-      <stop offset="0%" stop-color="#0D47A1"/>
-      <stop offset="100%" stop-color="#4FC3F7"/>
+    <linearGradient id="bg2" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#4A148C"/>
+      <stop offset="100%" stop-color="#7B1FA2"/>
     </linearGradient>
-    <clipPath id="pc">
-      <rect x="228" y="208" width="568" height="432" rx="10"/>
-    </clipPath>
+    <linearGradient id="goldGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFE57F"/>
+      <stop offset="100%" stop-color="#FFC107"/>
+    </linearGradient>
+    <filter id="glow2">
+      <feGaussianBlur stdDeviation="12" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
   </defs>
-  <!-- Layer 1: 배경 (딥 오션블루 그라데이션) -->
-  <rect width="1024" height="1024" rx="190" fill="url(#bg)"/>
+  <!-- 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg2)"/>
 
-  <!-- Layer 2: 사진 프레임 (흰색 라운드 박스) -->
-  <rect x="208" y="188" width="608" height="472" rx="22" fill="white"/>
-  <!-- Sky -->
-  <rect x="228" y="208" width="568" height="432" fill="#64B5F6" clip-path="url(#pc)"/>
-  <!-- Ground -->
-  <rect x="228" y="462" width="568" height="178" fill="#81C784" clip-path="url(#pc)"/>
-  <!-- Hills -->
-  <ellipse cx="380" cy="462" rx="188" ry="94" fill="#4CAF50" clip-path="url(#pc)"/>
-  <ellipse cx="680" cy="476" rx="206" ry="103" fill="#388E3C" clip-path="url(#pc)"/>
-  <!-- Sun -->
-  <circle cx="724" cy="268" r="62" fill="#FFD54F" clip-path="url(#pc)"/>
-  <circle cx="724" cy="268" r="84" fill="#FFF176" fill-opacity="0.38" clip-path="url(#pc)"/>
+  <!-- 장식 원들 -->
+  <circle cx="512" cy="512" r="360" fill="none" stroke="#9C4DCC" stroke-width="2" opacity="0.4"/>
+  <circle cx="512" cy="512" r="420" fill="none" stroke="#7B1FA2" stroke-width="1" opacity="0.3"/>
 
-  <!-- Layer 3: 배율 선택 배지 (2× | 4× | 8×) -->
-  <!-- "2×" 배지 (일반) -->
-  <rect x="150" y="710" width="194" height="84" rx="14" fill="#1565C0"/>
-  <text x="247" y="773" font-family="Arial Black, Impact, sans-serif" font-size="82" font-weight="900" text-anchor="middle" fill="white">2×</text>
+  <!-- 상승 화살표 배경 글로우 -->
+  <path d="M512 720 L512 340" stroke="#E040FB" stroke-width="80" stroke-linecap="round" opacity="0.2"/>
 
-  <!-- "4×" 배지 (강조 — 선택된 배율, 골드, 더 큼) -->
-  <rect x="380" y="698" width="264" height="108" rx="18" fill="#FFD600"/>
-  <text x="512" y="771" font-family="Arial Black, Impact, sans-serif" font-size="94" font-weight="900" text-anchor="middle" fill="#0D47A1">4×</text>
+  <!-- 상승 화살표 -->
+  <line x1="512" y1="700" x2="512" y2="380" stroke="white" stroke-width="36" stroke-linecap="round"/>
+  <polygon points="512,300 440,420 584,420" fill="white"/>
 
-  <!-- "8×" 배지 (일반) -->
-  <rect x="680" y="710" width="194" height="84" rx="14" fill="#1565C0"/>
-  <text x="777" y="773" font-family="Arial Black, Impact, sans-serif" font-size="82" font-weight="900" text-anchor="middle" fill="white">8×</text>
+  <!-- "4x" 메인 텍스트 -->
+  <text x="512" y="620" font-family="Arial Black, Arial" font-size="200" font-weight="900"
+        fill="url(#goldGrad)" text-anchor="middle" filter="url(#glow2)">4x</text>
+
+  <!-- 작은 배율 포인트들 -->
+  <text x="200" y="340" font-family="Arial" font-size="60" fill="#CE93D8" opacity="0.6" text-anchor="middle">2x</text>
+  <text x="824" y="340" font-family="Arial" font-size="60" fill="#CE93D8" opacity="0.6" text-anchor="middle">8x</text>
+
+  <!-- 하단 AI 텍스트 -->
+  <rect x="340" y="740" width="344" height="64" rx="32" fill="#E040FB" opacity="0.25"/>
+  <text x="512" y="783" font-family="Arial" font-size="44" font-weight="bold" fill="white" text-anchor="middle" opacity="0.9">AI UPSCALE</text>
+
+  <!-- 별 장식 -->
+  <circle cx="180" cy="500" r="10" fill="#FFE57F" opacity="0.7"/>
+  <circle cx="844" cy="450" r="8" fill="#FFE57F" opacity="0.5"/>
+  <circle cx="220" cy="700" r="6" fill="#CE93D8" opacity="0.6"/>
+  <circle cx="800" cy="680" r="12" fill="#FFE57F" opacity="0.6"/>
 </svg>

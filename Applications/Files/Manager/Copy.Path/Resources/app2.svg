@@ -1,32 +1,28 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- icon_02: literal · 레이어드 · 여러 포맷 카드 스택 -->
   <defs>
-    <clipPath id="c8"><rect width="1024" height="1024" rx="190"/></clipPath>
-    <linearGradient id="g8" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#F43F5E"/>
-      <stop offset="100%" stop-color="#BE123C"/>
+    <linearGradient id="bg02" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFE9CC"/>
+      <stop offset="1" stop-color="#FFC69C"/>
     </linearGradient>
   </defs>
-  <!-- Layer 1: Vivid coral/rose gradient background -->
-  <rect width="1024" height="1024" rx="190" fill="url(#g8)"/>
-  <g clip-path="url(#c8)">
-    <!-- Decorative accent -->
-    <circle cx="820" cy="820" r="180" fill="#9F1239" opacity="0.4"/>
-    <circle cx="200" cy="200" r="120" fill="#FB7185" opacity="0.3"/>
-    <!-- Layer 2: Back document page (translucent white) -->
-    <rect x="240" y="240" width="380" height="500" rx="24" fill="white" opacity="0.40"/>
-    <!-- Layer 2: Front document page (white, main object) -->
-    <rect x="300" y="192" width="440" height="560" rx="24" fill="white"/>
-    <!-- Folded corner on document -->
-    <polygon points="660,192 740,192 740,272 660,272" fill="#FCA5A5"/>
-    <line x1="660" y1="192" x2="740" y2="272" stroke="#E11D48" stroke-width="8"/>
-    <!-- Layer 3: Path text content inside document -->
-    <text x="328" y="314" font-family="Consolas,monospace" font-size="80" fill="#1E1B4B" font-weight="bold">C:\</text>
-    <text x="328" y="408" font-family="Consolas,monospace" font-size="80" fill="#1E1B4B" font-weight="bold">Users\</text>
-    <text x="328" y="502" font-family="Consolas,monospace" font-size="80" fill="#1E1B4B" font-weight="bold">file.txt</text>
-    <!-- Horizontal rule lines -->
-    <line x1="316" y1="526" x2="716" y2="526" stroke="#FECDD3" stroke-width="6"/>
-    <!-- "COPY" stamp text on document -->
-    <rect x="316" y="554" width="372" height="158" rx="14" fill="#FEE2E2" stroke="#F43F5E" stroke-width="10"/>
-    <text x="502" y="660" font-family="Arial,sans-serif" font-size="96" fill="#F43F5E" font-weight="bold" text-anchor="middle">COPY</text>
+  <rect x="0" y="0" width="1024" height="1024" rx="190" fill="url(#bg02)"/>
+  <!-- 뒷 카드(teal) -->
+  <g transform="rotate(-9 512 530)">
+    <rect x="160" y="290" width="704" height="150" rx="30" fill="#1ABC9C" stroke="#0E8B75" stroke-width="12"/>
+    <text x="200" y="390" font-family="Consolas, monospace" font-weight="700" font-size="88" fill="#FFFFFF">file:///C:/docs</text>
   </g>
+  <!-- 중간 카드(purple) -->
+  <g transform="rotate(-3 512 560)">
+    <rect x="150" y="450" width="724" height="150" rx="30" fill="#9B59B6" stroke="#6C3483" stroke-width="12"/>
+    <text x="190" y="550" font-family="Consolas, monospace" font-weight="700" font-size="88" fill="#FFFFFF">/c/docs/note</text>
+  </g>
+  <!-- 앞 카드(blue) -->
+  <g transform="rotate(4 512 650)">
+    <rect x="140" y="610" width="744" height="150" rx="30" fill="#3A86FF" stroke="#1E5CC9" stroke-width="12"/>
+    <text x="180" y="710" font-family="Consolas, monospace" font-weight="700" font-size="88" fill="#FFFFFF">C:\docs\note</text>
+  </g>
+  <!-- 상단 배지 -->
+  <rect x="352" y="130" width="320" height="120" rx="36" fill="#FFFFFF" stroke="#2C3E50" stroke-width="12"/>
+  <text x="512" y="218" font-family="Arial Black, sans-serif" font-weight="900" font-size="90" fill="#FF6B35" text-anchor="middle">COPY</text>
 </svg>

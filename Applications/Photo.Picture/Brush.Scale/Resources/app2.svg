@@ -1,47 +1,63 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Layer 1: 배경 — 밝은 하늘색 -->
   <defs>
-    <linearGradient id="bg2" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#4A148C"/>
-      <stop offset="100%" stop-color="#7B1FA2"/>
+    <linearGradient id="bg02" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#81D4FA"/>
+      <stop offset="100%" stop-color="#29B6F6"/>
     </linearGradient>
-    <linearGradient id="goldGrad" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#FFE57F"/>
-      <stop offset="100%" stop-color="#FFC107"/>
+    <linearGradient id="imgInner" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#E3F2FD"/>
+      <stop offset="100%" stop-color="#BBDEFB"/>
     </linearGradient>
-    <filter id="glow2">
-      <feGaussianBlur stdDeviation="12" result="blur"/>
-      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-    </filter>
   </defs>
-  <!-- 배경 -->
-  <rect width="1024" height="1024" rx="190" fill="url(#bg2)"/>
+  <rect x="80" y="80" width="864" height="864" rx="190" fill="url(#bg02)"/>
 
-  <!-- 장식 원들 -->
-  <circle cx="512" cy="512" r="360" fill="none" stroke="#9C4DCC" stroke-width="2" opacity="0.4"/>
-  <circle cx="512" cy="512" r="420" fill="none" stroke="#7B1FA2" stroke-width="1" opacity="0.3"/>
+  <!-- Layer 2: 이미지 프레임 (작은 것 → 큰 것) -->
+  <!-- 작은 이미지 (좌하단) -->
+  <rect x="130" y="570" width="230" height="180" rx="20" fill="white" opacity="0.9"/>
+  <rect x="145" y="585" width="200" height="150" rx="12" fill="#B3E5FC"/>
+  <!-- 작은 이미지 안 픽셀들 -->
+  <rect x="150" y="590" width="45" height="45" rx="4" fill="#0288D1"/>
+  <rect x="198" y="590" width="45" height="45" rx="4" fill="#26C6DA"/>
+  <rect x="246" y="590" width="45" height="45" rx="4" fill="#0288D1"/>
+  <rect x="294" y="590" width="45" height="45" rx="4" fill="#26C6DA"/>
+  <rect x="150" y="638" width="45" height="45" rx="4" fill="#26C6DA"/>
+  <rect x="198" y="638" width="45" height="45" rx="4" fill="#0288D1"/>
+  <rect x="246" y="638" width="45" height="45" rx="4" fill="#26C6DA"/>
+  <rect x="294" y="638" width="45" height="45" rx="4" fill="#0288D1"/>
+  <rect x="150" y="686" width="45" height="45" rx="4" fill="#0288D1"/>
+  <rect x="198" y="686" width="45" height="45" rx="4" fill="#26C6DA"/>
+  <rect x="246" y="686" width="45" height="45" rx="4" fill="#0288D1"/>
+  <rect x="294" y="686" width="45" height="45" rx="4" fill="#26C6DA"/>
 
-  <!-- 상승 화살표 배경 글로우 -->
-  <path d="M512 720 L512 340" stroke="#E040FB" stroke-width="80" stroke-linecap="round" opacity="0.2"/>
+  <!-- 화살표 -->
+  <path d="M380 660 Q440 580 490 530" stroke="#F57F17" stroke-width="16" fill="none" stroke-linecap="round"/>
+  <polygon points="478,510 510,540 490,558" fill="#F57F17"/>
 
-  <!-- 상승 화살표 -->
-  <line x1="512" y1="700" x2="512" y2="380" stroke="white" stroke-width="36" stroke-linecap="round"/>
-  <polygon points="512,300 440,420 584,420" fill="white"/>
+  <!-- 큰 이미지 프레임 -->
+  <rect x="470" y="140" width="390" height="480" rx="28" fill="white" opacity="0.95"/>
+  <rect x="492" y="162" width="346" height="436" rx="18" fill="url(#imgInner)"/>
+  <!-- 선명한 이미지 안 내용 — 풍경 -->
+  <rect x="492" y="452" width="346" height="146" rx="0" fill="#A5D6A7"/>
+  <!-- 하늘 -->
+  <rect x="492" y="162" width="346" height="290" rx="18" fill="#B3E5FC"/>
+  <!-- 구름 -->
+  <ellipse cx="590" cy="240" rx="55" ry="35" fill="white" opacity="0.9"/>
+  <ellipse cx="630" cy="228" rx="45" ry="30" fill="white" opacity="0.88"/>
+  <ellipse cx="680" cy="250" rx="50" ry="32" fill="white" opacity="0.85"/>
+  <!-- 산 -->
+  <polygon points="492,530 580,290 668,530" fill="#2E7D32"/>
+  <polygon points="550,530 640,320 730,530" fill="#388E3C"/>
+  <polygon points="600,530 690,350 780,530" fill="#43A047"/>
+  <polygon points="598,355 640,320 680,355" fill="white"/>
+  <!-- 태양 -->
+  <circle cx="760" cy="220" r="42" fill="#FFD54F"/>
 
-  <!-- "4x" 메인 텍스트 -->
-  <text x="512" y="620" font-family="Arial Black, Arial" font-size="200" font-weight="900"
-        fill="url(#goldGrad)" text-anchor="middle" filter="url(#glow2)">4x</text>
+  <!-- Layer 3: "4×" 핵심 텍스트 배지 -->
+  <rect x="130" y="140" width="290" height="160" rx="30" fill="#FF6F00" opacity="0.97"/>
+  <text x="275" y="258" text-anchor="middle" font-family="Arial Black, sans-serif" font-size="110" font-weight="900" fill="white">4×</text>
 
-  <!-- 작은 배율 포인트들 -->
-  <text x="200" y="340" font-family="Arial" font-size="60" fill="#CE93D8" opacity="0.6" text-anchor="middle">2x</text>
-  <text x="824" y="340" font-family="Arial" font-size="60" fill="#CE93D8" opacity="0.6" text-anchor="middle">8x</text>
-
-  <!-- 하단 AI 텍스트 -->
-  <rect x="340" y="740" width="344" height="64" rx="32" fill="#E040FB" opacity="0.25"/>
-  <text x="512" y="783" font-family="Arial" font-size="44" font-weight="bold" fill="white" text-anchor="middle" opacity="0.9">AI UPSCALE</text>
-
-  <!-- 별 장식 -->
-  <circle cx="180" cy="500" r="10" fill="#FFE57F" opacity="0.7"/>
-  <circle cx="844" cy="450" r="8" fill="#FFE57F" opacity="0.5"/>
-  <circle cx="220" cy="700" r="6" fill="#CE93D8" opacity="0.6"/>
-  <circle cx="800" cy="680" r="12" fill="#FFE57F" opacity="0.6"/>
+  <!-- 코너 뱃지 — "AI" -->
+  <circle cx="895" cy="855" r="65" fill="#7C4DFF" opacity="0.95"/>
+  <text x="895" y="875" text-anchor="middle" font-family="Arial Black, sans-serif" font-size="52" font-weight="900" fill="white">AI</text>
 </svg>

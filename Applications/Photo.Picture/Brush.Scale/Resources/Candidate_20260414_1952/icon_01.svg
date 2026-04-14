@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Layer 1: 배경 - 파랑+하늘 그라데이션 -->
+  <defs>
+    <linearGradient id="bg01" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#2196F3"/>
+      <stop offset="100%" style="stop-color:#64DFDF"/>
+    </linearGradient>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg01)"/>
+  <!-- Layer 2: Before(왼쪽 작고 픽셀깨짐) → After(오른쪽 크고 선명) -->
+  <!-- 왼쪽 Before 이미지 (픽셀 블록) -->
+  <rect x="120" y="350" width="310" height="310" rx="14" fill="white" opacity="0.95"/>
+  <!-- 픽셀 블록 패턴 (저화질) -->
+  <rect x="135" y="365" width="60" height="60" fill="#64B5F6"/>
+  <rect x="195" y="365" width="60" height="60" fill="#1565C0"/>
+  <rect x="255" y="365" width="60" height="60" fill="#42A5F5"/>
+  <rect x="315" y="365" width="60" height="60" fill="#1976D2"/>
+  <rect x="135" y="425" width="60" height="60" fill="#0D47A1"/>
+  <rect x="195" y="425" width="60" height="60" fill="#64B5F6"/>
+  <rect x="255" y="425" width="60" height="60" fill="#1976D2"/>
+  <rect x="315" y="425" width="60" height="60" fill="#42A5F5"/>
+  <rect x="135" y="485" width="60" height="60" fill="#42A5F5"/>
+  <rect x="195" y="485" width="60" height="60" fill="#1565C0"/>
+  <rect x="255" y="485" width="60" height="60" fill="#64B5F6"/>
+  <rect x="315" y="485" width="60" height="60" fill="#0D47A1"/>
+  <rect x="135" y="545" width="60" height="60" fill="#1976D2"/>
+  <rect x="195" y="545" width="60" height="60" fill="#42A5F5"/>
+  <rect x="255" y="545" width="60" height="60" fill="#0D47A1"/>
+  <rect x="315" y="545" width="60" height="60" fill="#64B5F6"/>
+  <!-- "Low" 레이블 -->
+  <text x="275" y="710" font-family="Segoe UI, sans-serif" font-size="52" fill="white" text-anchor="middle" opacity="0.8">Low</text>
+  <!-- 중간 화살표 + AI -->
+  <text x="512" y="490" font-family="Segoe UI, sans-serif" font-size="60" font-weight="bold" fill="white" text-anchor="middle">AI</text>
+  <path d="M 456 520 L 568 520" stroke="white" stroke-width="18" stroke-linecap="round"/>
+  <path d="M 548 496 L 574 520 L 548 544" stroke="white" stroke-width="18" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <!-- 오른쪽 After 이미지 (크고 선명) -->
+  <rect x="594" y="300" width="310" height="400" rx="14" fill="white" opacity="0.95"/>
+  <!-- 부드러운 그라데이션 이미지 (고화질 표현) -->
+  <defs>
+    <linearGradient id="hq01" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#64DFDF"/>
+      <stop offset="50%" style="stop-color:#1E7FFF"/>
+      <stop offset="100%" style="stop-color:#0D47A1"/>
+    </linearGradient>
+  </defs>
+  <rect x="612" y="318" width="274" height="250" rx="8" fill="url(#hq01)"/>
+  <!-- 선명한 곡선 -->
+  <path d="M 620 530 Q 660 480 700 510 Q 740 540 780 490 Q 820 440 870 470" stroke="white" stroke-width="8" fill="none" stroke-linecap="round"/>
+  <!-- "4x" 배율 표시 -->
+  <text x="749" y="620" font-family="Segoe UI, sans-serif" font-size="72" font-weight="bold" fill="#1565C0" text-anchor="middle">4x</text>
+  <!-- "HD" 레이블 -->
+  <text x="749" y="738" font-family="Segoe UI, sans-serif" font-size="52" fill="white" text-anchor="middle" opacity="0.8">HD</text>
+</svg>

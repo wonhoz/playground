@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Layer 1: 배경 - 초록+라임 -->
+  <defs>
+    <linearGradient id="bg05" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#2ECC71"/>
+      <stop offset="100%" style="stop-color:#A8FF78"/>
+    </linearGradient>
+    <linearGradient id="clip05" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#F0FFF0"/>
+      <stop offset="100%" style="stop-color:#CCFFCC"/>
+    </linearGradient>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg05)"/>
+  <!-- Layer 2: 클립보드 (크게) -->
+  <!-- 클립보드 본체 -->
+  <rect x="270" y="280" width="484" height="560" rx="28" fill="url(#clip05)" stroke="#1A9E52" stroke-width="10"/>
+  <!-- 클립보드 상단 클립 -->
+  <rect x="390" y="240" width="244" height="80" rx="18" fill="#1A9E52"/>
+  <rect x="430" y="228" width="164" height="40" rx="14" fill="white"/>
+  <!-- 체크마크 (크고 선명하게) -->
+  <circle cx="512" cy="570" r="160" fill="#2ECC71" opacity="0.3"/>
+  <path d="M 390 570 L 470 660 L 640 470" stroke="#1A9E52" stroke-width="52" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <!-- Layer 3: 텍스트 라인 (클립보드 아래 부분) -->
+  <text x="512" y="760" font-family="Consolas, monospace" font-size="68" font-weight="bold" fill="#006633" text-anchor="middle">Copied!</text>
+  <!-- 작은 경로 텍스트 힌트 -->
+  <text x="512" y="832" font-family="Consolas, monospace" font-size="44" fill="#1A9E52" text-anchor="middle">C:\path\to\file</text>
+</svg>

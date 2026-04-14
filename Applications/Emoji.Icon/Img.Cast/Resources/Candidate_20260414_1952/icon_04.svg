@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Layer 1: 배경 - 초록+민트 -->
+  <defs>
+    <linearGradient id="bg04" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#00897B"/>
+      <stop offset="100%" style="stop-color:#4CAF50"/>
+    </linearGradient>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg04)"/>
+  <!-- Layer 2: 마법봉 + 이미지 변환 이펙트 -->
+  <!-- 마법봉 (대각선) -->
+  <rect x="240" y="180" width="32" height="520" rx="16" fill="#FFF9C4" transform="rotate(-40 400 440)"/>
+  <!-- 마법봉 끝 별 -->
+  <polygon points="420,220 435,265 482,265 445,292 459,337 420,310 381,337 395,292 358,265 405,265" fill="#FFD700"/>
+  <circle cx="420" cy="280" r="30" fill="#FFD700" opacity="0.4"/>
+  <!-- 이펙트 스파클들 -->
+  <text x="280" y="340" font-family="Segoe UI, sans-serif" font-size="60" fill="#FFD700">✦</text>
+  <text x="190" y="460" font-family="Segoe UI, sans-serif" font-size="44" fill="#FFD700" opacity="0.8">✦</text>
+  <text x="340" y="500" font-family="Segoe UI, sans-serif" font-size="36" fill="#FFD700" opacity="0.7">✦</text>
+  <!-- 왼쪽 입력 이미지 (SVG) -->
+  <rect x="520" y="240" width="200" height="200" rx="18" fill="white" opacity="0.9"/>
+  <text x="620" y="360" font-family="Segoe UI, sans-serif" font-size="72" font-weight="bold" fill="#00897B" text-anchor="middle">SVG</text>
+  <!-- 오른쪽 출력 이미지 (ICO) - 아래로 변환됨 -->
+  <rect x="560" y="560" width="300" height="300" rx="28" fill="white" opacity="0.95"/>
+  <!-- ICO 멀티사이즈 표시 -->
+  <text x="710" y="660" font-family="Segoe UI, sans-serif" font-size="84" font-weight="bold" fill="#4CAF50" text-anchor="middle">ICO</text>
+  <!-- 크기들 표시 -->
+  <text x="710" y="730" font-family="Segoe UI, sans-serif" font-size="40" fill="#888" text-anchor="middle">16 32 48 256</text>
+  <!-- 작은 아이콘 미리보기 -->
+  <rect x="600" y="758" width="40" height="40" rx="6" fill="#4CAF50" opacity="0.7"/>
+  <rect x="648" y="752" width="54" height="54" rx="8" fill="#4CAF50" opacity="0.8"/>
+  <rect x="710" y="746" width="68" height="68" rx="10" fill="#4CAF50" opacity="0.9"/>
+  <rect x="786" y="742" width="76" height="76" rx="12" fill="#4CAF50"/>
+  <!-- Layer 3: 변환 방향 화살표 -->
+  <path d="M 620 444 L 620 558" stroke="white" stroke-width="18" stroke-linecap="round" stroke-dasharray="18,12"/>
+  <path d="M 596 534 L 620 566 L 644 534" stroke="white" stroke-width="18" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+</svg>

@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Layer 1: 배경 - 노랑+황금 -->
+  <defs>
+    <linearGradient id="bg03" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#F9A825"/>
+      <stop offset="100%" style="stop-color:#FF8F00"/>
+    </linearGradient>
+    <radialGradient id="glow03" cx="50%" cy="60%" r="50%">
+      <stop offset="0%" style="stop-color:#FFFFFF" stop-opacity="0.6"/>
+      <stop offset="100%" style="stop-color:#FF8F00" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg03)"/>
+  <rect width="1024" height="1024" rx="190" fill="url(#glow03)"/>
+  <!-- Layer 2: 열린 책 (지식) -->
+  <!-- 책 본체 -->
+  <path d="M 180 350 Q 180 310 220 310 L 490 310 L 490 700 L 220 700 Q 180 700 180 660 Z" fill="white" opacity="0.92"/>
+  <path d="M 844 350 Q 844 310 804 310 L 534 310 L 534 700 L 804 700 Q 844 700 844 660 Z" fill="white" opacity="0.92"/>
+  <!-- 책 중앙 홈 -->
+  <rect x="488" y="300" width="48" height="410" rx="6" fill="#CC7700"/>
+  <!-- 책 내용 텍스트 줄 -->
+  <line x1="220" y1="370" x2="468" y2="370" stroke="#FF8F00" stroke-width="8" opacity="0.5"/>
+  <line x1="220" y1="410" x2="468" y2="410" stroke="#FF8F00" stroke-width="6" opacity="0.4"/>
+  <line x1="220" y1="450" x2="468" y2="450" stroke="#FF8F00" stroke-width="6" opacity="0.4"/>
+  <line x1="220" y1="490" x2="468" y2="490" stroke="#FF8F00" stroke-width="6" opacity="0.4"/>
+  <!-- Layer 3: 빛 발산 (지식의 빛) + 물음표/정답 마크 -->
+  <!-- 왼쪽 페이지: 물음표 -->
+  <text x="344" y="580" font-family="Segoe UI, sans-serif" font-size="180" font-weight="bold" fill="#FF8F00" text-anchor="middle" opacity="0.9">?</text>
+  <!-- 오른쪽 페이지: 체크 -->
+  <text x="680" y="580" font-family="Segoe UI, sans-serif" font-size="180" font-weight="bold" fill="#4CAF50" text-anchor="middle" opacity="0.95">✓</text>
+  <!-- 빛 줄기들 -->
+  <line x1="512" y1="300" x2="512" y2="160" stroke="white" stroke-width="14" stroke-linecap="round" opacity="0.8"/>
+  <line x1="512" y1="300" x2="420" y2="180" stroke="white" stroke-width="10" stroke-linecap="round" opacity="0.5"/>
+  <line x1="512" y1="300" x2="604" y2="180" stroke="white" stroke-width="10" stroke-linecap="round" opacity="0.5"/>
+  <line x1="512" y1="300" x2="350" y2="220" stroke="white" stroke-width="7" stroke-linecap="round" opacity="0.35"/>
+  <line x1="512" y1="300" x2="674" y2="220" stroke="white" stroke-width="7" stroke-linecap="round" opacity="0.35"/>
+  <!-- 하단 레이블 -->
+  <text x="512" y="860" font-family="Segoe UI, sans-serif" font-size="72" font-weight="bold" fill="white" text-anchor="middle">Trivia.Cast</text>
+</svg>

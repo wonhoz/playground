@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Layer 1: 배경 - 산호+빨강 -->
+  <defs>
+    <linearGradient id="bg06" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#C62828"/>
+      <stop offset="100%" style="stop-color:#FF7043"/>
+    </linearGradient>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg06)"/>
+  <!-- Layer 2: EXIF 태그가 폴더로 변환되는 추상 표현 -->
+  <!-- EXIF 메타데이터 태그 (왼쪽) -->
+  <rect x="110" y="220" width="380" height="560" rx="24" fill="white" opacity="0.92"/>
+  <!-- EXIF 헤더 -->
+  <rect x="110" y="220" width="380" height="70" rx="24" fill="#C62828"/>
+  <rect x="110" y="268" width="380" height="22" fill="#C62828"/>
+  <text x="300" y="268" font-family="Consolas, monospace" font-size="44" font-weight="bold" fill="white" text-anchor="middle">EXIF</text>
+  <!-- 메타데이터 행들 -->
+  <text x="140" y="345" font-family="Consolas, monospace" font-size="32" fill="#888">Make: Canon</text>
+  <line x1="130" y1="362" x2="468" y2="362" stroke="#EEE" stroke-width="3"/>
+  <text x="140" y="400" font-family="Consolas, monospace" font-size="32" fill="#C62828" font-weight="bold">Date: 2024</text>
+  <line x1="130" y1="418" x2="468" y2="418" stroke="#EEE" stroke-width="3"/>
+  <text x="140" y="456" font-family="Consolas, monospace" font-size="32" fill="#C62828" font-weight="bold">Month: 06</text>
+  <line x1="130" y1="474" x2="468" y2="474" stroke="#EEE" stroke-width="3"/>
+  <text x="140" y="512" font-family="Consolas, monospace" font-size="32" fill="#C62828" font-weight="bold">Day: 15</text>
+  <line x1="130" y1="530" x2="468" y2="530" stroke="#EEE" stroke-width="3"/>
+  <text x="140" y="568" font-family="Consolas, monospace" font-size="32" fill="#888">Time: 14:30</text>
+  <line x1="130" y1="586" x2="468" y2="586" stroke="#EEE" stroke-width="3"/>
+  <text x="140" y="624" font-family="Consolas, monospace" font-size="32" fill="#888">GPS: 37.56...</text>
+  <line x1="130" y1="642" x2="468" y2="642" stroke="#EEE" stroke-width="3"/>
+  <text x="140" y="680" font-family="Consolas, monospace" font-size="32" fill="#888">ISO: 100</text>
+  <!-- 중앙 화살표 -->
+  <path d="M 510 500 L 600 500" stroke="white" stroke-width="22" stroke-linecap="round"/>
+  <path d="M 576 468 L 610 500 L 576 532" stroke="white" stroke-width="22" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <!-- 오른쪽: 결과 폴더 -->
+  <rect x="624" y="380" width="290" height="80" rx="16" fill="#FFD54F" opacity="0.95"/>
+  <text x="660" y="432" font-family="Segoe UI, sans-serif" font-size="48" font-weight="bold" fill="#E65100">📁 2024</text>
+  <rect x="660" y="488" width="254" height="68" rx="14" fill="#FFECB3" opacity="0.95"/>
+  <text x="690" y="533" font-family="Segoe UI, sans-serif" font-size="44" fill="#BF360C">📁 06</text>
+  <rect x="692" y="584" width="222" height="62" rx="12" fill="#FFF9C4" opacity="0.95"/>
+  <text x="716" y="625" font-family="Segoe UI, sans-serif" font-size="40" fill="#F57F17">📁 15</text>
+  <!-- Layer 3: 레이블 -->
+  <text x="512" y="880" font-family="Segoe UI, sans-serif" font-size="62" font-weight="bold" fill="white" text-anchor="middle">EXIF → Folder</text>
+</svg>

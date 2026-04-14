@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Layer 1: 배경 - 민트+하늘 -->
+  <defs>
+    <linearGradient id="bg06" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#43E6FC"/>
+      <stop offset="100%" style="stop-color:#A8F7C9"/>
+    </linearGradient>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg06)"/>
+  <!-- Layer 2: 작은 산(왼쪽) → 큰 선명한 산(오른쪽) -->
+  <!-- 왼쪽: 작은, 흐릿한 산 -->
+  <g opacity="0.6">
+    <polygon points="180,680 280,540 380,680" fill="#00897B"/>
+    <polygon points="200,680 280,540 350,680" fill="#004D40"/>
+    <!-- 흐림 효과 -->
+    <rect x="165" y="530" width="230" height="160" rx="8" fill="#00897B" opacity="0.2"/>
+  </g>
+  <text x="280" y="740" font-family="Segoe UI, sans-serif" font-size="46" fill="#005C53" text-anchor="middle">64px</text>
+  <!-- 화살표 + 배율 -->
+  <path d="M 410 600 L 570 600" stroke="white" stroke-width="20" stroke-linecap="round"/>
+  <path d="M 550 572 L 578 600 L 550 628" stroke="white" stroke-width="20" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <text x="490" y="570" font-family="Segoe UI, sans-serif" font-size="54" font-weight="bold" fill="white" text-anchor="middle">4x</text>
+  <!-- 오른쪽: 큰, 선명한 산 -->
+  <polygon points="560,780 760,380 960,780" fill="#00695C"/>
+  <polygon points="580,780 760,380 870,780" fill="#004D40"/>
+  <!-- 눈 정상 -->
+  <polygon points="760,380 730,440 790,440" fill="white"/>
+  <!-- 디테일 (나무 등) -->
+  <rect x="670" y="720" width="20" height="60" rx="4" fill="#1B5E20"/>
+  <polygon points="680,680 650,730 710,730" fill="#2E7D32"/>
+  <rect x="800" y="700" width="20" height="80" rx="4" fill="#1B5E20"/>
+  <polygon points="810,660 780,710 840,710" fill="#2E7D32"/>
+  <text x="760" y="860" font-family="Segoe UI, sans-serif" font-size="46" fill="#005C53" text-anchor="middle">256px</text>
+  <!-- Layer 3: 스파클 효과 -->
+  <text x="850" y="360" font-family="Segoe UI, sans-serif" font-size="70" fill="white">✦</text>
+  <text x="870" y="440" font-family="Segoe UI, sans-serif" font-size="48" fill="white" opacity="0.7">✦</text>
+</svg>

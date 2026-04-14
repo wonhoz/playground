@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Layer 1: 배경 - 하늘+흰색 -->
+  <defs>
+    <linearGradient id="bg07" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#56CCF2"/>
+      <stop offset="100%" style="stop-color:#A8EDEA"/>
+    </linearGradient>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg07)"/>
+  <!-- Layer 2: 탐색기 창 (파일 브라우저) -->
+  <!-- 창 틀 -->
+  <rect x="140" y="200" width="744" height="540" rx="22" fill="white" stroke="#B0D8F0" stroke-width="8"/>
+  <!-- 창 타이틀바 -->
+  <rect x="140" y="200" width="744" height="56" rx="22" fill="#E0F4FF"/>
+  <rect x="140" y="234" width="744" height="22" fill="#E0F4FF"/>
+  <!-- 주소 표시줄 (경로 하이라이트) -->
+  <rect x="170" y="222" width="520" height="36" rx="8" fill="#1A8FCC" opacity="0.2" stroke="#1A8FCC" stroke-width="2"/>
+  <text x="180" y="248" font-family="Consolas, monospace" font-size="36" fill="#006699">C:\Users\admin\file.txt</text>
+  <!-- 닫기/최소화 버튼 -->
+  <circle cx="740" cy="228" r="12" fill="#FF5F57"/>
+  <circle cx="774" cy="228" r="12" fill="#FFBD2E"/>
+  <circle cx="808" cy="228" r="12" fill="#28CA41"/>
+  <!-- 파일 목록 -->
+  <rect x="160" y="290" width="704" height="60" rx="8" fill="#B8E8FF" stroke="#56CCF2" stroke-width="3"/>
+  <!-- 선택 행 강조 (경로 하이라이트) -->
+  <text x="200" y="332" font-family="Consolas, monospace" font-size="52" font-weight="bold" fill="#003366">📄 readme.md</text>
+  <text x="200" y="400" font-family="Consolas, monospace" font-size="48" fill="#555">📁 src/</text>
+  <text x="200" y="460" font-family="Consolas, monospace" font-size="48" fill="#555">📁 docs/</text>
+  <text x="200" y="520" font-family="Consolas, monospace" font-size="48" fill="#555">📄 main.cs</text>
+  <!-- Layer 3: 경로 복사 버튼/이펙트 (우측 하단 오버레이) -->
+  <rect x="540" y="610" width="300" height="90" rx="16" fill="#1A8FCC"/>
+  <text x="690" y="668" font-family="Segoe UI, sans-serif" font-size="52" font-weight="bold" fill="white" text-anchor="middle">📋 Copy</text>
+  <!-- 화살표 커서 클릭 효과 -->
+  <circle cx="690" cy="575" r="28" fill="#FFD700" opacity="0.7"/>
+</svg>

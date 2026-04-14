@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Layer 1: 배경 - 보라+민트 -->
+  <defs>
+    <linearGradient id="bg04" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#7B1FA2"/>
+      <stop offset="100%" style="stop-color:#00BCD4"/>
+    </linearGradient>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg04)"/>
+  <!-- Layer 2: 뇌 실루엣 (크게) -->
+  <!-- 뇌 형태 (단순화된 실루엣) -->
+  <path d="M 320 500
+    Q 200 480 200 380 Q 200 280 320 280
+    Q 340 220 420 220 Q 460 200 512 200
+    Q 564 200 604 220 Q 680 220 704 280
+    Q 824 280 824 380 Q 824 480 704 500
+    Q 680 600 640 640 Q 600 680 560 700 L 512 720 L 464 700
+    Q 424 680 384 640 Q 344 600 320 500 Z"
+    fill="white" opacity="0.9"/>
+  <!-- 뇌 내부 주름 (단순화) -->
+  <path d="M 360 350 Q 400 320 440 360 Q 460 390 440 430 Q 420 460 380 440"
+    stroke="#7B1FA2" stroke-width="12" fill="none" stroke-linecap="round"/>
+  <path d="M 520 300 Q 560 280 590 320 Q 610 350 590 390"
+    stroke="#7B1FA2" stroke-width="10" fill="none" stroke-linecap="round"/>
+  <path d="M 620 440 Q 660 420 680 460 Q 690 490 670 520"
+    stroke="#7B1FA2" stroke-width="10" fill="none" stroke-linecap="round"/>
+  <!-- Layer 3: 번개/아이디어 이펙트 (정답 맞춤의 쾌감) -->
+  <!-- 번개 볼트 -->
+  <path d="M 540 140 L 490 310 L 540 310 L 480 480"
+    stroke="#FFD700" stroke-width="28" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <!-- 번개 글로우 -->
+  <path d="M 540 140 L 490 310 L 540 310 L 480 480"
+    stroke="#FFD700" stroke-width="48" stroke-linecap="round" stroke-linejoin="round" fill="none" opacity="0.3"/>
+  <!-- 스파클 -->
+  <circle cx="720" cy="200" r="20" fill="#FFD700" opacity="0.9"/>
+  <circle cx="780" cy="260" r="14" fill="#FFD700" opacity="0.7"/>
+  <circle cx="290" cy="230" r="16" fill="#FFD700" opacity="0.8"/>
+  <!-- 점수 표시 -->
+  <text x="512" y="860" font-family="Segoe UI, sans-serif" font-size="88" font-weight="bold" fill="#FFD700" text-anchor="middle">+100!</text>
+</svg>

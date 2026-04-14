@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Layer 1: 배경 - 노랑+주황 그라데이션 -->
+  <defs>
+    <linearGradient id="bg08" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFD93D"/>
+      <stop offset="100%" style="stop-color:#FF6B35"/>
+    </linearGradient>
+    <linearGradient id="scissors08" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#FFFFFF"/>
+      <stop offset="100%" style="stop-color:#FFE5CC"/>
+    </linearGradient>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg08)"/>
+  <!-- Layer 2: 파일 경로 텍스트 (가로줄처럼) + 가위로 파일명 오려내기 -->
+  <!-- 경로 줄 (점선처럼 이어진 경로) -->
+  <rect x="130" y="420" width="764" height="80" rx="12" fill="white" opacity="0.9"/>
+  <text x="150" y="479" font-family="Consolas, monospace" font-size="66" font-weight="bold" fill="#CC4400">C:\Users\admin\</text>
+  <!-- 잘린 부분 표시 (파일명) -->
+  <rect x="680" y="400" width="230" height="120" rx="12" fill="#FF6B35" stroke="white" stroke-width="6"/>
+  <text x="795" y="479" font-family="Consolas, monospace" font-size="60" font-weight="bold" fill="white" text-anchor="middle">file</text>
+  <!-- 가위 아이콘 (대각선으로 위에서 자름) -->
+  <!-- 가위 손잡이 왼쪽 -->
+  <circle cx="480" cy="280" r="52" fill="white" stroke="#CC4400" stroke-width="14"/>
+  <circle cx="480" cy="280" r="28" fill="#FFD93D" stroke="#CC4400" stroke-width="8"/>
+  <!-- 가위 손잡이 오른쪽 -->
+  <circle cx="580" cy="320" r="52" fill="white" stroke="#CC4400" stroke-width="14"/>
+  <circle cx="580" cy="320" r="28" fill="#FFD93D" stroke="#CC4400" stroke-width="8"/>
+  <!-- 가위 날 -->
+  <line x1="520" y1="296" x2="730" y2="450" stroke="white" stroke-width="20" stroke-linecap="round"/>
+  <line x1="548" y1="330" x2="730" y2="440" stroke="white" stroke-width="20" stroke-linecap="round"/>
+  <!-- Layer 3: 잘린 파일명 + 클립보드에 붙이는 효과 -->
+  <!-- 아래 텍스트 파일명 추출 화살표 -->
+  <path d="M 795 524 L 795 660" stroke="white" stroke-width="20" stroke-linecap="round" stroke-dasharray="20,16"/>
+  <path d="M 760 640 L 795 690 L 830 640" stroke="white" stroke-width="20" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <!-- 하단 클립보드 작은 아이콘 -->
+  <rect x="730" y="690" width="130" height="150" rx="14" fill="white" opacity="0.95" stroke="#CC4400" stroke-width="6"/>
+  <rect x="766" y="676" width="58" height="28" rx="8" fill="#FF6B35" stroke="#CC4400" stroke-width="5"/>
+  <text x="795" y="790" font-family="Consolas, monospace" font-size="48" font-weight="bold" fill="#CC4400" text-anchor="middle">file</text>
+</svg>

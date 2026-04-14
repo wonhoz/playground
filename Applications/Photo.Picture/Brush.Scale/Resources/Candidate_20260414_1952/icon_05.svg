@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Layer 1: 배경 - 노랑+산호 -->
+  <defs>
+    <linearGradient id="bg05" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFE03A"/>
+      <stop offset="100%" style="stop-color:#FF8C69"/>
+    </linearGradient>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg05)"/>
+  <!-- Layer 2: 사진 액자 안에 선명한 이미지 -->
+  <rect x="210" y="240" width="604" height="460" rx="20" fill="white" opacity="0.95" stroke="#CC6600" stroke-width="10"/>
+  <!-- 이미지 내용: 산 실루엣 (선명한 고화질 표현) -->
+  <defs>
+    <linearGradient id="sky05" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#87CEEB"/>
+      <stop offset="100%" style="stop-color:#E0F4FF"/>
+    </linearGradient>
+  </defs>
+  <rect x="228" y="258" width="568" height="420" rx="12" fill="url(#sky05)"/>
+  <!-- 산 실루엣 (선명) -->
+  <polygon points="228,678 350,430 440,560 520,370 620,540 680,460 796,678" fill="#2E7D32"/>
+  <polygon points="228,678 350,430 440,560 370,678" fill="#1B5E20"/>
+  <!-- 눈 정상 -->
+  <polygon points="520,370 490,440 550,440" fill="white"/>
+  <!-- Layer 3: 돋보기 오버레이 (확대 확인) -->
+  <circle cx="750" cy="350" r="130" fill="none" stroke="white" stroke-width="20"/>
+  <circle cx="750" cy="350" r="108" fill="white" opacity="0.3"/>
+  <!-- 내부 확대된 디테일 -->
+  <circle cx="750" cy="340" r="12" fill="#2E7D32"/>
+  <circle cx="782" cy="330" r="9" fill="#1B5E20"/>
+  <circle cx="726" cy="355" r="7" fill="#4CAF50"/>
+  <!-- 돋보기 손잡이 -->
+  <line x1="848" y1="448" x2="890" y2="490" stroke="white" stroke-width="28" stroke-linecap="round"/>
+  <!-- 별(스파클) 효과 - 화질 향상 -->
+  <text x="512" y="820" font-family="Segoe UI, sans-serif" font-size="76" font-weight="bold" fill="white" text-anchor="middle">✦ Sharp</text>
+</svg>

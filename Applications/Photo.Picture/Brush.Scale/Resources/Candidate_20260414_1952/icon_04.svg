@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Layer 1: 배경 - 청록+초록 -->
+  <defs>
+    <linearGradient id="bg04" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#00C9A7"/>
+      <stop offset="100%" style="stop-color:#48D58A"/>
+    </linearGradient>
+    <linearGradient id="smooth04" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#A8EDEA"/>
+      <stop offset="100%" style="stop-color:#00C9A7"/>
+    </linearGradient>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg04)"/>
+  <!-- Layer 2: 왼쪽 픽셀 → 오른쪽 부드러운 이미지 (대각선 분할) -->
+  <!-- 배경 카드 -->
+  <rect x="130" y="200" width="764" height="580" rx="28" fill="white" opacity="0.95"/>
+  <!-- 왼쪽 절반: 픽셀 블록 -->
+  <clipPath id="leftClip">
+    <polygon points="130,200 130,780 542,780 130,200"/>
+  </clipPath>
+  <g clip-path="url(#leftClip)">
+    <!-- 픽셀 격자 (4x4 블록) -->
+    <rect x="130" y="200" width="764" height="580" fill="#E0F7FA"/>
+    <rect x="150" y="220" width="80" height="80" fill="#80DEEA"/>
+    <rect x="230" y="220" width="80" height="80" fill="#00BCD4"/>
+    <rect x="310" y="220" width="80" height="80" fill="#4DD0E1"/>
+    <rect x="390" y="220" width="80" height="80" fill="#00ACC1"/>
+    <rect x="150" y="300" width="80" height="80" fill="#00838F"/>
+    <rect x="230" y="300" width="80" height="80" fill="#80DEEA"/>
+    <rect x="310" y="300" width="80" height="80" fill="#00BCD4"/>
+    <rect x="390" y="300" width="80" height="80" fill="#4DD0E1"/>
+    <rect x="150" y="380" width="80" height="80" fill="#4DD0E1"/>
+    <rect x="230" y="380" width="80" height="80" fill="#00838F"/>
+    <rect x="310" y="380" width="80" height="80" fill="#80DEEA"/>
+    <rect x="390" y="380" width="80" height="80" fill="#00BCD4"/>
+    <rect x="150" y="460" width="80" height="80" fill="#00BCD4"/>
+    <rect x="230" y="460" width="80" height="80" fill="#4DD0E1"/>
+    <rect x="310" y="460" width="80" height="80" fill="#00ACC1"/>
+    <rect x="390" y="460" width="80" height="80" fill="#80DEEA"/>
+    <rect x="150" y="540" width="80" height="80" fill="#80DEEA"/>
+    <rect x="230" y="540" width="80" height="80" fill="#00BCD4"/>
+    <rect x="310" y="540" width="80" height="80" fill="#4DD0E1"/>
+    <rect x="390" y="540" width="80" height="80" fill="#00838F"/>
+    <rect x="150" y="620" width="80" height="80" fill="#00ACC1"/>
+    <rect x="230" y="620" width="80" height="80" fill="#4DD0E1"/>
+    <rect x="310" y="620" width="80" height="80" fill="#80DEEA"/>
+    <rect x="390" y="620" width="80" height="80" fill="#00BCD4"/>
+  </g>
+  <!-- 오른쪽 절반: 부드러운 그라데이션 이미지 -->
+  <clipPath id="rightClip">
+    <polygon points="542,780 894,200 130,200 542,780"/>
+  </clipPath>
+  <g clip-path="url(#rightClip)">
+    <rect x="130" y="200" width="764" height="580" fill="url(#smooth04)"/>
+    <!-- 곡선으로 부드러운 이미지 표현 -->
+    <path d="M 400 300 Q 500 250 600 300 Q 700 350 800 310" stroke="white" stroke-width="12" fill="none" stroke-linecap="round"/>
+    <path d="M 400 420 Q 500 370 600 420 Q 700 470 800 430" stroke="white" stroke-width="8" fill="none" stroke-linecap="round"/>
+    <path d="M 400 540 Q 500 490 600 540 Q 700 590 800 550" stroke="white" stroke-width="8" fill="none" stroke-linecap="round"/>
+  </g>
+  <!-- 대각선 분할선 -->
+  <line x1="150" y1="780" x2="874" y2="200" stroke="white" stroke-width="10" opacity="0.7"/>
+  <!-- Layer 3: 레이블 -->
+  <text x="270" y="840" font-family="Segoe UI, sans-serif" font-size="62" fill="white" text-anchor="middle">Pixel</text>
+  <text x="754" y="840" font-family="Segoe UI, sans-serif" font-size="62" font-weight="bold" fill="white" text-anchor="middle">Sharp</text>
+</svg>

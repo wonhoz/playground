@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Layer 1: 배경 - 코랄+주황 -->
+  <defs>
+    <linearGradient id="bg07" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FF6B6B"/>
+      <stop offset="100%" style="stop-color:#FF9F43"/>
+    </linearGradient>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg07)"/>
+  <!-- Layer 2: 스트릭 불꽃 + 점수 -->
+  <!-- 불꽃 (큰) -->
+  <path d="M 512 800
+    Q 380 720 340 600 Q 310 510 380 440
+    Q 360 560 430 540 Q 380 460 420 360
+    Q 440 460 490 430 Q 450 360 480 280
+    Q 510 360 530 340 Q 520 420 560 410
+    Q 590 360 600 300 Q 650 400 640 480
+    Q 690 450 700 360 Q 740 460 720 560
+    Q 760 520 750 440 Q 810 520 780 620
+    Q 760 720 640 800 Z"
+    fill="#FFD700" opacity="0.95"/>
+  <!-- 불꽃 내부 (밝은 중심) -->
+  <path d="M 512 760
+    Q 420 700 400 600 Q 390 540 430 490
+    Q 450 540 490 520 Q 470 460 500 400
+    Q 520 460 540 440 Q 550 400 570 360
+    Q 610 430 600 500 Q 630 480 640 430
+    Q 670 500 650 570 Q 660 540 660 500
+    Q 700 560 680 640 Q 660 720 580 760 Z"
+    fill="#FF9F43" opacity="0.85"/>
+  <!-- 불꽃 코어 -->
+  <path d="M 512 720
+    Q 460 680 450 600 Q 460 560 490 540
+    Q 500 580 520 560 Q 530 530 540 500
+    Q 560 540 550 580 Q 570 560 580 540
+    Q 600 580 590 620 Q 580 680 550 720 Z"
+    fill="white" opacity="0.7"/>
+  <!-- Layer 3: 스트릭 카운트 + 점수 -->
+  <!-- 스트릭 표시 -->
+  <text x="512" y="450" font-family="Segoe UI, sans-serif" font-size="180" font-weight="bold" fill="white" text-anchor="middle" opacity="0.95">x7</text>
+  <!-- STREAK 레이블 -->
+  <text x="512" y="550" font-family="Segoe UI, sans-serif" font-size="64" font-weight="bold" fill="white" text-anchor="middle">STREAK!</text>
+  <!-- 하단 점수 -->
+  <rect x="282" y="840" width="460" height="80" rx="18" fill="white" opacity="0.25"/>
+  <text x="512" y="896" font-family="Segoe UI, sans-serif" font-size="58" font-weight="bold" fill="white" text-anchor="middle">Score: 1750</text>
+</svg>

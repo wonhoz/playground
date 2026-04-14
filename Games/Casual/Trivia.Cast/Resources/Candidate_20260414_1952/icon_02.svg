@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Layer 1: 배경 - 주황+빨강 -->
+  <defs>
+    <linearGradient id="bg02" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FF6F00"/>
+      <stop offset="100%" style="stop-color:#F44336"/>
+    </linearGradient>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg02)"/>
+  <!-- Layer 2: 큰 타이머 시계 -->
+  <circle cx="512" cy="460" r="300" fill="white" opacity="0.95"/>
+  <circle cx="512" cy="460" r="268" fill="#FFF3E0"/>
+  <circle cx="512" cy="460" r="24" fill="#FF6F00"/>
+  <!-- 시계 눈금 -->
+  <line x1="512" y1="168" x2="512" y2="200" stroke="#FF6F00" stroke-width="16" stroke-linecap="round"/>
+  <line x1="512" y1="720" x2="512" y2="752" stroke="#FF6F00" stroke-width="16" stroke-linecap="round"/>
+  <line x1="216" y1="460" x2="248" y2="460" stroke="#FF6F00" stroke-width="16" stroke-linecap="round"/>
+  <line x1="776" y1="460" x2="808" y2="460" stroke="#FF6F00" stroke-width="16" stroke-linecap="round"/>
+  <!-- 시계 바늘 (15초 → 5초 느낌, 빠르게 도는) -->
+  <!-- 분침 (12시 방향) -->
+  <line x1="512" y1="460" x2="512" y2="230" stroke="#F44336" stroke-width="18" stroke-linecap="round"/>
+  <!-- 초침 (빠른 속도, 2시 방향) -->
+  <line x1="512" y1="460" x2="660" y2="320" stroke="#FF6F00" stroke-width="12" stroke-linecap="round"/>
+  <!-- 15초 타이머 텍스트 -->
+  <text x="512" y="510" font-family="Segoe UI, sans-serif" font-size="100" font-weight="bold" fill="#E65100" text-anchor="middle">15</text>
+  <text x="512" y="590" font-family="Segoe UI, sans-serif" font-size="52" fill="#BF360C" text-anchor="middle">seconds</text>
+  <!-- Layer 3: 상단 퀴즈 레이블 -->
+  <text x="512" y="170" font-family="Segoe UI, sans-serif" font-size="72" font-weight="bold" fill="white" text-anchor="middle">QUIZ</text>
+  <!-- 하단 텍스트 -->
+  <text x="512" y="870" font-family="Segoe UI, sans-serif" font-size="68" font-weight="bold" fill="white" text-anchor="middle">Trivia.Cast</text>
+</svg>

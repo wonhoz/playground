@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Layer 1: 배경 - 빨강+코랄 -->
+  <defs>
+    <linearGradient id="bg07" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FF5252"/>
+      <stop offset="100%" style="stop-color:#FF8A65"/>
+    </linearGradient>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg07)"/>
+  <!-- Layer 2: 작은 이미지 사각형 → 큰 이미지 사각형 (확장 화살표) -->
+  <!-- 작은 이미지 (좌상단) -->
+  <rect x="160" y="220" width="220" height="180" rx="16" fill="white" opacity="0.95"/>
+  <defs>
+    <linearGradient id="sm07" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFCDD2"/>
+      <stop offset="100%" style="stop-color:#FF5252"/>
+    </linearGradient>
+  </defs>
+  <rect x="176" y="236" width="188" height="148" rx="8" fill="url(#sm07)"/>
+  <text x="270" y="328" font-family="Segoe UI, sans-serif" font-size="48" fill="white" text-anchor="middle" opacity="0.9">128</text>
+  <!-- 큰 이미지 (우하단) -->
+  <rect x="484" y="380" width="380" height="310" rx="20" fill="white" opacity="0.95"/>
+  <defs>
+    <linearGradient id="lg07" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FF8A65"/>
+      <stop offset="100%" style="stop-color:#FF5252"/>
+    </linearGradient>
+  </defs>
+  <rect x="502" y="398" width="344" height="272" rx="10" fill="url(#lg07)"/>
+  <text x="674" y="554" font-family="Segoe UI, sans-serif" font-size="78" font-weight="bold" fill="white" text-anchor="middle">512</text>
+  <!-- 확장 화살표 (대각선) -->
+  <path d="M 394 408 L 478 408 L 478 488" stroke="white" stroke-width="24" stroke-linecap="round" stroke-linejoin="round" fill="none" opacity="0.9"/>
+  <!-- 코너 확장 핸들들 -->
+  <!-- 우하단 핸들 -->
+  <path d="M 842 686 L 892 686 L 892 636" stroke="white" stroke-width="18" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <!-- 좌하단 핸들 -->
+  <path d="M 486 686 L 436 686 L 436 636" stroke="white" stroke-width="18" stroke-linecap="round" stroke-linejoin="round" fill="none" opacity="0.7"/>
+  <!-- 우상단 핸들 -->
+  <path d="M 842 382 L 892 382 L 892 432" stroke="white" stroke-width="18" stroke-linecap="round" stroke-linejoin="round" fill="none" opacity="0.7"/>
+  <!-- Layer 3: 배율 텍스트 -->
+  <text x="330" y="760" font-family="Segoe UI, sans-serif" font-size="100" font-weight="bold" fill="white" text-anchor="middle">4×</text>
+  <text x="330" y="840" font-family="Segoe UI, sans-serif" font-size="54" fill="white" text-anchor="middle" opacity="0.85">bigger</text>
+</svg>

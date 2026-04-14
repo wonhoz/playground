@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Layer 1: 배경 - 라임+초록 -->
+  <defs>
+    <linearGradient id="bg08" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#7EE03A"/>
+      <stop offset="100%" style="stop-color:#00C853"/>
+    </linearGradient>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg08)"/>
+  <!-- Layer 2: 붓(Brush)으로 이미지를 확대하며 선명하게 칠하는 모습 -->
+  <!-- 왼쪽: 흐릿한 이미지 영역 -->
+  <rect x="120" y="300" width="380" height="380" rx="18" fill="white" opacity="0.8"/>
+  <!-- 흐린 픽셀 표현 -->
+  <rect x="140" y="320" width="80" height="80" fill="#B2DFDB" opacity="0.6"/>
+  <rect x="220" y="320" width="80" height="80" fill="#80CBC4" opacity="0.6"/>
+  <rect x="300" y="320" width="80" height="80" fill="#4DB6AC" opacity="0.6"/>
+  <rect x="380" y="320" width="80" height="80" fill="#26A69A" opacity="0.6"/>
+  <rect x="140" y="400" width="80" height="80" fill="#80CBC4" opacity="0.5"/>
+  <rect x="220" y="400" width="80" height="80" fill="#4DB6AC" opacity="0.5"/>
+  <rect x="300" y="400" width="80" height="80" fill="#B2DFDB" opacity="0.5"/>
+  <rect x="380" y="400" width="80" height="80" fill="#80CBC4" opacity="0.5"/>
+  <rect x="140" y="480" width="80" height="80" fill="#26A69A" opacity="0.5"/>
+  <rect x="220" y="480" width="80" height="80" fill="#B2DFDB" opacity="0.5"/>
+  <rect x="300" y="480" width="80" height="80" fill="#80CBC4" opacity="0.5"/>
+  <rect x="380" y="480" width="80" height="80" fill="#4DB6AC" opacity="0.5"/>
+  <rect x="140" y="560" width="80" height="80" fill="#4DB6AC" opacity="0.5"/>
+  <rect x="220" y="560" width="80" height="80" fill="#26A69A" opacity="0.5"/>
+  <rect x="300" y="560" width="80" height="80" fill="#B2DFDB" opacity="0.5"/>
+  <rect x="380" y="560" width="80" height="80" fill="#80CBC4" opacity="0.5"/>
+  <!-- 붓 (대각선으로 칠하는 중) -->
+  <!-- 붓대 -->
+  <rect x="470" y="200" width="30" height="380" rx="10" fill="#4E342E" transform="rotate(-40 570 400)"/>
+  <!-- 붓털 -->
+  <ellipse cx="640" cy="500" rx="40" ry="70" fill="#F5F5DC" transform="rotate(-40 640 500)"/>
+  <ellipse cx="648" cy="505" rx="28" ry="55" fill="#FFF8E1" transform="rotate(-40 648 505)"/>
+  <!-- 붓이 지나간 선명한 영역 (오른쪽) -->
+  <rect x="540" y="300" width="364" height="380" rx="18" fill="white" opacity="0.95"/>
+  <defs>
+    <linearGradient id="brushed08" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#A8E063"/>
+      <stop offset="100%" style="stop-color:#00C853"/>
+    </linearGradient>
+  </defs>
+  <rect x="558" y="318" width="328" height="344" rx="10" fill="url(#brushed08)"/>
+  <!-- 선명한 이미지 곡선 -->
+  <path d="M 570 430 Q 640 380 710 430 Q 780 480 850 440" stroke="white" stroke-width="14" fill="none" stroke-linecap="round"/>
+  <path d="M 570 530 Q 640 480 710 530 Q 780 580 850 540" stroke="white" stroke-width="10" fill="none" stroke-linecap="round"/>
+  <!-- Layer 3: Brush.Scale 텍스트 -->
+  <text x="512" y="860" font-family="Segoe UI, sans-serif" font-size="68" font-weight="bold" fill="white" text-anchor="middle">Brush.Scale</text>
+</svg>

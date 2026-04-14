@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Layer 1: 배경 - 주황+노랑 -->
+  <defs>
+    <linearGradient id="bg03" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#F57C00"/>
+      <stop offset="100%" style="stop-color:#FFC107"/>
+    </linearGradient>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg03)"/>
+  <!-- Layer 2: 형식 스택 (카드들이 쌓여있다가 ICO로 변환) -->
+  <!-- 뒤쪽 카드들 (BMP, JPG) -->
+  <rect x="178" y="290" width="700" height="120" rx="16" fill="#FF9800" stroke="white" stroke-width="4" opacity="0.7" transform="rotate(-3 512 350)"/>
+  <text x="512" y="362" font-family="Segoe UI, sans-serif" font-size="62" font-weight="bold" fill="white" text-anchor="middle" transform="rotate(-3 512 350)" opacity="0.85">BMP</text>
+  <rect x="168" y="340" width="700" height="120" rx="16" fill="#FF8F00" stroke="white" stroke-width="4" opacity="0.8" transform="rotate(2 512 400)"/>
+  <text x="512" y="412" font-family="Segoe UI, sans-serif" font-size="62" font-weight="bold" fill="white" text-anchor="middle" transform="rotate(2 512 400)" opacity="0.9">JPG</text>
+  <!-- 중간 카드 (PNG) -->
+  <rect x="162" y="400" width="700" height="120" rx="16" fill="#FFA000" stroke="white" stroke-width="6" opacity="0.9"/>
+  <text x="512" y="472" font-family="Segoe UI, sans-serif" font-size="62" font-weight="bold" fill="white" text-anchor="middle" opacity="0.95">PNG</text>
+  <!-- 앞쪽 카드 (SVG) -->
+  <rect x="162" y="470" width="700" height="120" rx="16" fill="#FF8C00" stroke="white" stroke-width="8"/>
+  <text x="512" y="542" font-family="Segoe UI, sans-serif" font-size="66" font-weight="bold" fill="white" text-anchor="middle">SVG</text>
+  <!-- Layer 3: 변환 화살표 + 출력 ICO -->
+  <path d="M 512 600 L 512 680" stroke="white" stroke-width="20" stroke-linecap="round"/>
+  <path d="M 474 656 L 512 696 L 550 656" stroke="white" stroke-width="20" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <!-- ICO 결과 -->
+  <rect x="280" y="700" width="464" height="150" rx="24" fill="white" opacity="0.95"/>
+  <text x="512" y="802" font-family="Segoe UI, sans-serif" font-size="90" font-weight="bold" fill="#E65100" text-anchor="middle">ICO ✓</text>
+</svg>

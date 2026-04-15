@@ -1380,6 +1380,25 @@ public partial class MainWindow : Window
             var linkItem = new MenuItem { Header = "링크 삽입\tCtrl+K" };
             linkItem.Click += (_, _) => WrapAsLink();
             menu.Items.Add(linkItem);
+
+            menu.Items.Add(new Separator());
+
+            // 현재 줄의 북마크 상태 확인
+            var caretLine = CountNewlinesBefore(Editor.Text, Editor.CaretIndex) + 1;
+            var bkSet = GetCurrentBookmarks();
+            var bkHeader = bkSet.Contains(caretLine)
+                ? $"● 북마크 해제 ({caretLine}줄)\tCtrl+F2"
+                : $"북마크 추가 ({caretLine}줄)";
+            var bookmarkItem = new MenuItem { Header = bkHeader };
+            bookmarkItem.Click += (_, _) => ToggleBookmark(caretLine);
+            menu.Items.Add(bookmarkItem);
+
+            if (bkSet.Count > 0)
+            {
+                var nextBkItem = new MenuItem { Header = "다음 북마크로\tCtrl+F2" };
+                nextBkItem.Click += (_, _) => JumpToBookmark(true);
+                menu.Items.Add(nextBkItem);
+            }
         }
 
         menu.PlacementTarget = Editor;
@@ -1660,13 +1679,49 @@ public partial class MainWindow : Window
             dlg.InitialDirectory = _docs[_activeIndex].Directory;
         if (dlg.ShowDialog() != true) return;
 
+        var choice = MessageBox.Show(
+            "이미지 삽입 방식:\n\n[예] Base64 임베딩  — 파일 이동 시에도 이미지 유지 (파일 크기 증가)\n[아니오] 상대 경로  — 기본, 가볍고 빠름",
+            "이미지 삽입 방식", MessageBoxButton.YesNoCancel, MessageBoxImage.Question);
+        if (choice == MessageBoxResult.Cancel) return;
+
         var doc = _docs[_activeIndex];
         var docDir = doc.IsNew ? null : Path.GetDirectoryName(doc.FilePath);
-        var imgPath = docDir != null
-            ? Path.GetRelativePath(docDir, dlg.FileName).Replace('\\', '/')
-            : dlg.FileName.Replace('\\', '/');
         var altText = Path.GetFileNameWithoutExtension(dlg.FileName);
-        InsertAtNewLine($"![{altText}]({imgPath})");
+        string markdown;
+        if (choice == MessageBoxResult.Yes)
+            markdown = BuildBase64ImageMarkdown(dlg.FileName, altText);
+        else
+        {
+            var imgPath = docDir != null
+                ? Path.GetRelativePath(docDir, dlg.FileName).Replace('\\', '/')
+                : dlg.FileName.Replace('\\', '/');
+            markdown = $"![{altText}]({imgPath})";
+        }
+        InsertAtNewLine(markdown);
+    }
+
+    private static string BuildBase64ImageMarkdown(string absPath, string altText)
+    {
+        try
+        {
+            var bytes = File.ReadAllBytes(absPath);
+            var ext = Path.GetExtension(absPath).TrimStart('.').ToLowerInvariant();
+            var mime = ext switch
+            {
+                "jpg" or "jpeg" => "image/jpeg",
+                "svg"           => "image/svg+xml",
+                "gif"           => "image/gif",
+                "webp"          => "image/webp",
+                "bmp"           => "image/bmp",
+                _               => "image/png",
+            };
+            return $"![{altText}](data:{mime};base64,{Convert.ToBase64String(bytes)})";
+        }
+        catch
+        {
+            // 읽기 실패 시 절대 경로로 fallback
+            return $"![{altText}]({absPath.Replace('\\', '/')})";
+        }
     }
 
     // ── TOC ─────────────────────────────────────────────────────────────
@@ -2356,9 +2411,12 @@ public partial class MainWindow : Window
         var sizes = new[] { ("a4", "A4 (21×29.7cm)"), ("letter", "Letter (21.6×27.9cm)"), ("legal", "Legal (21.6×35.6cm)") };
         foreach (var (tag, label) in sizes)
         {
-            var item = new MenuItem { Header = (_settings.PdfPageSize == tag ? "  " : "    ") + label };
-            if (_settings.PdfPageSize == tag)
-                item.FontWeight = FontWeights.Bold;
+            var selected = _settings.PdfPageSize == tag;
+            var item = new MenuItem
+            {
+                Header = (selected ? "✓ " : "   ") + label,
+                FontWeight = selected ? FontWeights.SemiBold : FontWeights.Normal,
+            };
             var t = tag;
             item.Click += (_, _) => { _settings.PdfPageSize = t; _settings.Save(); };
             menu.Items.Add(item);
@@ -2369,9 +2427,12 @@ public partial class MainWindow : Window
         var margins = new[] { (0.5, "0.5cm"), (1.0, "1.0cm"), (1.5, "1.5cm"), (2.0, "2.0cm") };
         foreach (var (val, label) in margins)
         {
-            var item = new MenuItem { Header = (Math.Abs(_settings.PdfMarginCm - val) < 0.01 ? "  " : "    ") + $"여백: {label}" };
-            if (Math.Abs(_settings.PdfMarginCm - val) < 0.01)
-                item.FontWeight = FontWeights.Bold;
+            var selected = Math.Abs(_settings.PdfMarginCm - val) < 0.01;
+            var item = new MenuItem
+            {
+                Header = (selected ? "✓ " : "   ") + $"여백: {label}",
+                FontWeight = selected ? FontWeights.SemiBold : FontWeights.Normal,
+            };
             var v = val;
             item.Click += (_, _) => { _settings.PdfMarginCm = v; _settings.Save(); };
             menu.Items.Add(item);
@@ -2482,6 +2543,8 @@ public partial class MainWindow : Window
     private static readonly Regex _wordRegex = new(@"\S+", RegexOptions.Compiled);
     private static readonly System.Windows.Media.SolidColorBrush _lineNumFg =
         new(System.Windows.Media.Color.FromRgb(0x5A, 0x7A, 0x9A));
+    private static readonly System.Windows.Media.SolidColorBrush _lineNumBookmarkFg =
+        new(System.Windows.Media.Color.FromRgb(0xFF, 0xD7, 0x00));
     private static readonly System.Windows.Media.FontFamily _lineNumFont =
         new("Cascadia Code, Consolas, monospace");
 
@@ -2515,17 +2578,22 @@ public partial class MainWindow : Window
             int lastLine   = Math.Min(totalLines, firstLine + bufLines);
             int needed     = lastLine - firstLine + 1;
 
+            // 현재 파일의 북마크 줄 번호 집합
+            var bookmarkSet = GetCurrentBookmarks();
+
             // Canvas.Children 재사용 풀 확장
             while (LineNumCanvas.Children.Count < needed)
             {
-                LineNumCanvas.Children.Add(new TextBlock
+                var newTb = new TextBlock
                 {
                     FontFamily    = _lineNumFont,
                     FontSize      = Editor.FontSize,
                     Foreground    = _lineNumFg,
                     TextAlignment = TextAlignment.Right,
-                    Padding       = new Thickness(0, 0, 8, 0)
-                });
+                    Padding       = new Thickness(0, 0, 8, 0),
+                    Cursor        = Cursors.Hand,
+                };
+                LineNumCanvas.Children.Add(newTb);
             }
             for (int i = needed; i < LineNumCanvas.Children.Count; i++)
                 ((TextBlock)LineNumCanvas.Children[i]).Visibility = Visibility.Collapsed;
@@ -2535,9 +2603,13 @@ public partial class MainWindow : Window
             for (int i = 0; i < needed; i++)
             {
                 var tb = (TextBlock)LineNumCanvas.Children[i];
-                tb.Visibility = Visibility.Visible;
-                tb.Text  = (firstLine + i).ToString();
-                tb.Width = numW;
+                var lineNum = firstLine + i;
+                var isBookmarked = bookmarkSet.Contains(lineNum);
+                tb.Visibility  = Visibility.Visible;
+                tb.Text        = isBookmarked ? "● " + lineNum : lineNum.ToString();
+                tb.Foreground  = isBookmarked ? _lineNumBookmarkFg : _lineNumFg;
+                tb.Width       = numW;
+                tb.ToolTip     = isBookmarked ? $"{lineNum}줄 — 북마크 (클릭 해제, Ctrl+F2 이동)" : $"{lineNum}줄 — 클릭하여 북마크";
                 // 해당 줄 첫 글자의 실제 Y → 워드랩에서도 첫 행에 정확히 배치
                 Canvas.SetTop(tb,  Editor.GetRectFromCharacterIndex(charIdx).Top);
                 Canvas.SetLeft(tb, 0);
@@ -2553,6 +2625,98 @@ public partial class MainWindow : Window
     {
         var limit = Math.Min(index, text.Length);
         return System.MemoryExtensions.Count(text.AsSpan(0, limit), '\n');
+    }
+
+    // ── 북마크 ──────────────────────────────────────────────────────────
+
+    private HashSet<int> GetCurrentBookmarks()
+    {
+        if (_activeIndex < 0 || _activeIndex >= _docs.Count) return [];
+        var doc = _docs[_activeIndex];
+        if (doc.IsNew) return [];
+        if (_settings.Bookmarks.TryGetValue(doc.FilePath, out var list))
+            return new HashSet<int>(list);
+        return [];
+    }
+
+    private void ToggleBookmark(int lineNumber)
+    {
+        if (_activeIndex < 0 || _activeIndex >= _docs.Count) return;
+        var doc = _docs[_activeIndex];
+        if (doc.IsNew) { ShowStatusHint("새 문서는 저장 후 북마크를 추가할 수 있습니다", 2); return; }
+
+        if (!_settings.Bookmarks.TryGetValue(doc.FilePath, out var list))
+        {
+            list = [];
+            _settings.Bookmarks[doc.FilePath] = list;
+        }
+        if (list.Remove(lineNumber))
+        {
+            ShowStatusHint($"{lineNumber}줄 북마크 해제", 2);
+        }
+        else
+        {
+            list.Add(lineNumber);
+            list.Sort();
+            ShowStatusHint($"{lineNumber}줄 북마크 추가 (Ctrl+F2 이동)", 2);
+        }
+        if (list.Count == 0) _settings.Bookmarks.Remove(doc.FilePath);
+        _settings.Save();
+        SyncLineNumberOffset();
+    }
+
+    private void JumpToBookmark(bool forward)
+    {
+        if (_activeIndex < 0 || _activeIndex >= _docs.Count) return;
+        var bookmarks = GetCurrentBookmarks();
+        if (bookmarks.Count == 0) { ShowStatusHint("북마크 없음 — 줄 번호를 클릭하여 추가", 2); return; }
+
+        var text = Editor.Text;
+        var caret = Editor.CaretIndex;
+        var curLine = CountNewlinesBefore(text, caret) + 1;
+
+        var sorted = bookmarks.OrderBy(l => l).ToList();
+        int target;
+        if (forward)
+        {
+            target = sorted.FirstOrDefault(l => l > curLine);
+            if (target == 0) target = sorted[0]; // 처음으로 순환
+        }
+        else
+        {
+            target = sorted.LastOrDefault(l => l < curLine);
+            if (target == 0) target = sorted[^1]; // 끝으로 순환
+        }
+
+        // target 줄의 시작 CharIndex로 이동
+        var lines = text.Split('\n');
+        if (target > lines.Length) return;
+        int charIdx = lines.Take(target - 1).Sum(l => l.Length + 1);
+        Editor.CaretIndex = Math.Min(charIdx, text.Length);
+        Editor.ScrollToLine(target - 1);
+        Editor.Focus();
+        ShowStatusHint($"북마크 {target}줄로 이동 ({sorted.IndexOf(target) + 1}/{sorted.Count})", 2);
+    }
+
+    private void LineNumCanvas_Click(object sender, MouseButtonEventArgs e)
+    {
+        if (!_isEditMode) return;
+        var pos = e.GetPosition(LineNumCanvas);
+        // 클릭 위치의 TextBlock 탐색
+        foreach (TextBlock tb in LineNumCanvas.Children.OfType<TextBlock>())
+        {
+            if (tb.Visibility != Visibility.Visible) continue;
+            var top = Canvas.GetTop(tb);
+            if (pos.Y >= top && pos.Y < top + tb.ActualHeight + 4)
+            {
+                // tb.Text: "● N" 또는 "N" 형식
+                var rawText = tb.Text.TrimStart('●', ' ');
+                if (int.TryParse(rawText.Trim(), out var lineNum))
+                    ToggleBookmark(lineNum);
+                e.Handled = true;
+                return;
+            }
+        }
     }
 
     // Enter 키 → 자동 목록 계속 (unordered, ordered, blockquote)
@@ -2728,6 +2892,29 @@ public partial class MainWindow : Window
             var readMin = Math.Max(1, (int)Math.Ceiling(docWords / 200.0));
             StatusWords.Text = docWords > 0 ? $"{docWords}단어 · 약 {readMin}분" : "0단어";
         }
+
+        // Mermaid 블록 감지 — 상태바 힌트 표시
+        DetectMermaidBlock(caret, text);
+    }
+
+    private void DetectMermaidBlock(int caretIdx, string text)
+    {
+        if (!_isEditMode || string.IsNullOrEmpty(text))
+        {
+            StatusMermaid.Visibility = Visibility.Collapsed;
+            return;
+        }
+        var before = text.AsSpan(0, Math.Min(caretIdx, text.Length));
+        var beforeStr = before.ToString();
+        var lastOpen = beforeStr.LastIndexOf("```mermaid", StringComparison.Ordinal);
+        bool inMermaid = false;
+        if (lastOpen >= 0)
+        {
+            var afterOpen = beforeStr[(lastOpen + "```mermaid".Length)..];
+            // 닫히는 ``` 가 없으면 아직 블록 안
+            inMermaid = !afterOpen.Contains("```", StringComparison.Ordinal);
+        }
+        StatusMermaid.Visibility = inMermaid ? Visibility.Visible : Visibility.Collapsed;
     }
 
     private void UpdateCurrentLineHighlight(int caret)
@@ -2992,6 +3179,10 @@ public partial class MainWindow : Window
         { if (_activeIndex >= 0) CloseTab(_activeIndex); e.Handled = true; }
         else if (e.Key == Key.E && Keyboard.Modifiers == ModifierKeys.Control)
         { SetEditMode(!_isEditMode); e.Handled = true; }
+        else if (e.Key == Key.F2 && Keyboard.Modifiers == ModifierKeys.Control)
+        { JumpToBookmark(true); e.Handled = true; }
+        else if (e.Key == Key.F2 && Keyboard.Modifiers == (ModifierKeys.Control | ModifierKeys.Shift))
+        { JumpToBookmark(false); e.Handled = true; }
         else if (e.Key == Key.F5)
         { BtnReload_Click(this, new RoutedEventArgs()); e.Handled = true; }
         else if (e.Key == Key.F && Keyboard.Modifiers == ModifierKeys.Control)
@@ -3265,19 +3456,27 @@ public partial class MainWindow : Window
             var ext = Path.GetExtension(f);
             if (_isEditMode && _activeIndex >= 0 && _imageExtensions.Contains(ext))
             {
-                // 이미지 파일 → 에디터에 Markdown 이미지 문법 삽입
+                // 이미지 파일 → Alt+드롭: Base64 임베딩, 일반 드롭: 상대 경로
+                var altKey = (Keyboard.Modifiers & ModifierKeys.Alt) != 0;
                 var doc = _docs[_activeIndex];
-                var docDir = doc.IsNew ? null : Path.GetDirectoryName(doc.FilePath);
-                var imgPath = docDir != null
-                    ? Path.GetRelativePath(docDir, f).Replace('\\', '/')
-                    : f.Replace('\\', '/');
                 var altText = Path.GetFileNameWithoutExtension(f);
-                var markdown = $"![{altText}]({imgPath})";
+                string markdown;
+                if (altKey)
+                    markdown = BuildBase64ImageMarkdown(f, altText);
+                else
+                {
+                    var docDir = doc.IsNew ? null : Path.GetDirectoryName(doc.FilePath);
+                    var imgPath = docDir != null
+                        ? Path.GetRelativePath(docDir, f).Replace('\\', '/')
+                        : f.Replace('\\', '/');
+                    markdown = $"![{altText}]({imgPath})";
+                }
                 var caret = Editor.CaretIndex;
                 Editor.Select(caret, 0);
                 Editor.SelectedText = markdown;
                 Editor.CaretIndex = caret + markdown.Length;
                 Editor.Focus();
+                if (altKey) ShowStatusHint("Base64로 이미지 삽입됨 (일반 드롭: 상대 경로)", 3);
             }
             else
             {
@@ -3350,17 +3549,24 @@ public partial class MainWindow : Window
     private DispatcherTimer? _fileChangedDebounce;
     private DispatcherTimer? _breadcrumbTimer;
 
+    private string? _pendingChangedFilePath;
+
     private void OnWatchedFileChanged(object sender, FileSystemEventArgs e)
     {
         Dispatcher.InvokeAsync(() =>
         {
-            _fileChangedDebounce?.Stop();
-            _fileChangedDebounce = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(500) };
-            _fileChangedDebounce.Tick += (_, _) =>
+            _pendingChangedFilePath = e.FullPath;
+            if (_fileChangedDebounce == null)
             {
-                _fileChangedDebounce?.Stop();
-                NotifyFileChanged(e.FullPath);
-            };
+                _fileChangedDebounce = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(500) };
+                _fileChangedDebounce.Tick += (_, _) =>
+                {
+                    _fileChangedDebounce.Stop();
+                    var path = _pendingChangedFilePath;
+                    if (path != null) NotifyFileChanged(path);
+                };
+            }
+            _fileChangedDebounce.Stop();
             _fileChangedDebounce.Start();
         });
     }

@@ -33,6 +33,7 @@ public class AppSettings
     public int AutoSaveIntervalSec { get; set; } = 30; // 30, 60, 120
     public Dictionary<string, int> FileCursorPositions { get; set; } = [];
     public Dictionary<string, double> FileScrollPositions { get; set; } = [];
+    public Dictionary<string, List<int>> Bookmarks { get; set; } = [];
 
     private const int MaxRecentFiles = 20;
 

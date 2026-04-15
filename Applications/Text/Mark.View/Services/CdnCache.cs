@@ -28,8 +28,11 @@ public static class CdnCache
 
     public static bool IsReady { get; private set; }
 
+    // 캐시 파일 최대 보존 기간 (이후 재다운로드)
+    private static readonly TimeSpan CacheExpiry = TimeSpan.FromDays(30);
+
     /// <summary>
-    /// 백그라운드에서 CDN 파일을 다운로드·캐시 (이미 존재하면 스킵)
+    /// 백그라운드에서 CDN 파일을 다운로드·캐시 (없거나 만료된 경우 갱신)
     /// </summary>
     public static async Task WarmupAsync()
     {
@@ -38,13 +41,15 @@ public static class CdnCache
         foreach (var (file, url) in _files)
         {
             var localPath = Path.Combine(CacheDir, file);
-            if (File.Exists(localPath)) continue;
+            var needsUpdate = !File.Exists(localPath) ||
+                              (DateTime.UtcNow - File.GetLastWriteTimeUtc(localPath)) > CacheExpiry;
+            if (!needsUpdate) continue;
             try
             {
                 var bytes = await client.GetByteArrayAsync(url);
                 await File.WriteAllBytesAsync(localPath, bytes);
             }
-            catch { /* 실패 시 기존 CDN URL 사용 */ }
+            catch { /* 실패 시 기존 캐시 또는 CDN URL 사용 */ }
         }
         IsReady = _files.Keys.All(f => File.Exists(Path.Combine(CacheDir, f)));
     }

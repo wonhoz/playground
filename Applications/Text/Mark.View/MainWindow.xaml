@@ -542,7 +542,8 @@
               <Border Grid.Column="0" Background="#060E1A"
                       BorderBrush="{StaticResource BorderBrush}" BorderThickness="0,0,1,0"
                       ClipToBounds="True">
-                <Canvas x:Name="LineNumCanvas"/>
+                <Canvas x:Name="LineNumCanvas"
+                      MouseLeftButtonDown="LineNumCanvas_Click"/>
               </Border>
               <!-- 에디터 + 현재 줄 하이라이트 -->
               <Grid Grid.Column="1">
@@ -685,6 +686,13 @@
                      Margin="0,0,8,0"
                      Visibility="Collapsed"
                      ToolTip="실행 취소 가능 (Ctrl+Z)"/>
+          <TextBlock x:Name="StatusMermaid"
+                     Text="〈/〉" FontSize="11"
+                     Foreground="#50FA7B"
+                     VerticalAlignment="Center"
+                     Margin="0,0,8,0"
+                     Visibility="Collapsed"
+                     ToolTip="Mermaid 다이어그램 블록 편집 중 — 프리뷰에서 결과를 확인하세요"/>
           <TextBlock x:Name="StatusMode"
                      FontSize="11"
                      Foreground="{StaticResource AccentBrush}"

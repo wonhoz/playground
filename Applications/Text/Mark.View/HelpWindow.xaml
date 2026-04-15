@@ -208,7 +208,11 @@
                 <local:ShortcutEntry Key="Alt + ↑"            Desc="현재 줄을 위로 이동"/>
                 <local:ShortcutEntry Key="Alt + ↓"            Desc="현재 줄을 아래로 이동"/>
                 <local:ShortcutEntry Key="Ctrl + Shift + V"   Desc="서식 없는 붙여넣기 — 탭을 공백 4개로 변환 후 삽입"/>
-                <local:ShortcutEntry Key="이미지 파일 D&amp;D" Desc="편집 모드에서 이미지 드래그 → ![alt](path) 자동 삽입"/>
+                <local:ShortcutEntry Key="이미지 파일 D&amp;D" Desc="편집 모드에서 이미지 드래그 → 상대 경로로 삽입. Alt+드롭: Base64 임베딩 (파일 이동 시에도 이미지 유지)"/>
+                <local:ShortcutEntry Key="🖼 버튼 이미지 삽입" Desc="클릭 시 삽입 방식 선택 다이얼로그 — '상대 경로' 또는 'Base64 임베딩' 중 선택"/>
+                <local:ShortcutEntry Key="줄 번호 클릭"        Desc="줄 번호 패널을 클릭하여 북마크 추가/해제 — 북마크 줄은 황금색(●)으로 표시"/>
+                <local:ShortcutEntry Key="Ctrl + F2"           Desc="다음 북마크로 이동 (끝에서 처음으로 순환)"/>
+                <local:ShortcutEntry Key="Ctrl + Shift + F2"   Desc="이전 북마크로 이동"/>
                 <local:ShortcutEntry Key="줄 번호"            Desc="편집 모드 진입 시 에디터 왼쪽에 줄 번호 자동 표시 (스크롤 동기화)"/>
                 <local:ShortcutEntry Key="현재 줄 하이라이트"  Desc="편집 모드에서 커서가 위치한 줄을 미묘하게 강조 표시"/>
                 <local:ShortcutEntry Key="커서 툴팁"          Desc="줄:컬럼 표시에 마우스 오버 → 현재 위치의 헤딩 구조(Breadcrumb) 표시"/>
@@ -246,7 +250,7 @@
                 <local:ShortcutEntry Key="↩ 플로팅 버튼"    Desc="TOC 클릭 전 위치로 되돌아가기"/>
                 <local:ShortcutEntry Key=".md 링크 클릭"     Desc="연결된 Markdown 파일을 앱 내 새 탭으로 열기"/>
                 <local:ShortcutEntry Key="뷰어 우클릭"       Desc="텍스트 복사 · 링크 열기 · 링크 주소 복사 · 이미지 저장 · 모두 선택"/>
-                <local:ShortcutEntry Key="```mermaid 블록"   Desc="Mermaid 다이어그램 렌더링 (플로우차트·시퀀스·간트 등)"/>
+                <local:ShortcutEntry Key="```mermaid 블록"   Desc="Mermaid 다이어그램 렌더링 (플로우차트·시퀀스·간트 등) — 에디터에서 ```mermaid 블록 안에 커서가 있으면 상태바에 〈/〉 힌트 표시"/>
               </ItemsControl.Items>
             </ItemsControl>
 

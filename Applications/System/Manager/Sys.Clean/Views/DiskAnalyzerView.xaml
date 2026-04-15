@@ -13,10 +13,10 @@
         </Grid.RowDefinitions>
 
         <!-- 설명 배너 -->
-        <Border Grid.Row="0" Background="#1E1E30" Padding="16,10" Margin="16,16,16,0"
-                CornerRadius="6" BorderBrush="#2A2A4A" BorderThickness="1">
+        <Border Grid.Row="0" Background="#1E1E2E" Padding="16,10" Margin="16,16,16,0"
+                CornerRadius="6" BorderBrush="#333333" BorderThickness="1">
             <StackPanel>
-                <TextBlock Text="대용량 파일 탐색기" FontSize="14" FontWeight="SemiBold" Foreground="#7986CB"/>
+                <TextBlock Text="대용량 파일 탐색기" FontSize="14" FontWeight="SemiBold" Foreground="{StaticResource BrAccent}"/>
                 <TextBlock Text="디스크에서 지정 크기 이상의 대용량 파일을 검색합니다. 불필요한 대용량 파일을 찾아 공간을 확보하세요."
                            FontSize="12" Foreground="#888" Margin="0,4,0,0" TextWrapping="Wrap"/>
             </StackPanel>
@@ -89,7 +89,7 @@
                             <DataTemplate>
                                 <Border Background="#252525" CornerRadius="3" Padding="5,2" Margin="2">
                                     <TextBlock Text="{Binding Extension}" FontSize="11"
-                                               Foreground="#7986CB" FontFamily="Consolas"/>
+                                               Foreground="{Binding ExtensionColor}" FontFamily="Consolas"/>
                                 </Border>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
@@ -124,7 +124,7 @@
 
         <!-- 진행률 -->
         <ProgressBar x:Name="PbProgress" Grid.Row="3" Height="3"
-                     Background="#1A1A1A" Foreground="#7986CB"
+                     Background="#1A1A1A" Foreground="{StaticResource BrAccent}"
                      Margin="16,8,16,0" Visibility="Collapsed"/>
 
         <!-- 하단 -->
@@ -151,10 +151,10 @@
                 <Button Grid.Column="2" x:Name="BtnScan" Content="🔍  스캔"
                         Click="BtnScan_Click" Margin="0,0,6,0"
                         Padding="14,7" FontSize="13"
-                        Background="#1E1E3A" Foreground="#7986CB" BorderBrush="#3F51B5"/>
+                        Background="{StaticResource BrAccentDim}" Foreground="{StaticResource BrAccent}" BorderBrush="{StaticResource BrAccent}"/>
 
                 <Button Grid.Column="3" x:Name="BtnDelete" Content="🗑  선택 삭제"
-                        Click="BtnDelete_Click"
+                        Click="BtnDelete_Click" IsEnabled="False"
                         Padding="14,7" FontSize="13"
                         Background="#3A1A1A" Foreground="#EF5350" BorderBrush="#C62828"/>
             </Grid>

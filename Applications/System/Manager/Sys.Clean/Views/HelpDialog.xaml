@@ -113,6 +113,16 @@
                             </Border>
                             <TextBlock Grid.Column="1" Text="분석 결과 전체를 클립보드에 복사" Foreground="#C0C0C0" VerticalAlignment="Center"/>
                         </Grid>
+                        <Grid Margin="0,0,0,6">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="160"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Border Background="#252525" CornerRadius="4" Padding="6,3" HorizontalAlignment="Left">
+                                <TextBlock Text="그룹 헤더 클릭" FontFamily="Consolas" FontSize="12" Foreground="#FF6B35"/>
+                            </Border>
+                            <TextBlock Grid.Column="1" Text="청소 항목 그룹 헤더(예: '브라우저 캐시') 클릭 → 그룹 전체 선택/해제" Foreground="#C0C0C0" VerticalAlignment="Center"/>
+                        </Grid>
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="160"/>
@@ -173,7 +183,7 @@
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
                             <TextBlock Text="🧹  시스템 청소" FontWeight="SemiBold" Foreground="#E0E0E0"/>
-                            <TextBlock Grid.Column="1" Text="임시 파일, 브라우저 캐시, 개발자 캐시 등 불필요한 파일 삭제. 항목 우클릭으로 개별 즉시 청소 가능. 📁 폴더 추가 또는 드래그 앤 드롭으로 커스텀 폴더 포함 가능. 선택 상태는 앱 종료 시 자동 저장됩니다."
+                            <TextBlock Grid.Column="1" Text="임시 파일, 브라우저 캐시, 개발자 캐시 등 불필요한 파일 삭제. 그룹 헤더 클릭으로 해당 그룹 전체 선택/해제. 항목 우클릭으로 개별 즉시 청소 가능. 📁 폴더 추가 또는 드래그 앤 드롭으로 커스텀 폴더 포함 가능. 선택 상태는 앱 종료 시 자동 저장됩니다."
                                        Foreground="#888" TextWrapping="Wrap"/>
                         </Grid>
                         <Grid Margin="0,0,0,8">
@@ -209,7 +219,7 @@
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
                             <TextBlock Text="📊  대용량 파일" FontWeight="SemiBold" Foreground="#E0E0E0"/>
-                            <TextBlock Grid.Column="1" Text="지정 크기 이상의 대용량 파일을 검색·삭제. 경로와 최소 크기(10MB~1GB)를 설정한 뒤 스캔. 선택 후 폴더 열기 또는 직접 삭제 가능."
+                            <TextBlock Grid.Column="1" Text="지정 크기 이상의 대용량 파일을 검색·삭제. 경로와 최소 크기(10MB~1GB)를 설정한 뒤 스캔. 마지막 스캔 경로와 크기 설정이 자동 저장됩니다. 확장자별 색상 구분(.iso·.zip·.mp4 등)으로 파일 유형을 빠르게 파악 가능. 선택 후 폴더 열기 또는 직접 삭제 가능."
                                        Foreground="#888" TextWrapping="Wrap"/>
                         </Grid>
                         <Grid>

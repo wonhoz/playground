@@ -30,8 +30,22 @@
                                 <Grid>
                                     <!-- 그룹 헤더 -->
                                     <Border x:Name="GroupBorder" Visibility="Collapsed"
-                                            Background="#252525" Padding="12,8,12,6"
-                                            Margin="0,8,0,0">
+                                            Padding="12,8,12,6"
+                                            Margin="0,8,0,0"
+                                            Cursor="Hand"
+                                            Tag="{Binding Category}"
+                                            ToolTip="클릭: 그룹 전체 선택/해제"
+                                            MouseLeftButtonUp="GroupHeader_Click">
+                                        <Border.Style>
+                                            <Style TargetType="Border">
+                                                <Setter Property="Background" Value="#252525"/>
+                                                <Style.Triggers>
+                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                        <Setter Property="Background" Value="#2E2E2E"/>
+                                                    </Trigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Border.Style>
                                         <TextBlock Text="{Binding Name}"
                                                    FontWeight="SemiBold" FontSize="12"
                                                    Foreground="#888"/>

@@ -28,6 +28,11 @@ public partial class DiskAnalyzerView : UserControl
     public DiskAnalyzerView()
     {
         InitializeComponent();
+        var s = SettingsService.Load();
+        if (!string.IsNullOrEmpty(s.DiskScanPath))
+            TxtPath.Text = s.DiskScanPath;
+        if (s.DiskMinSizeIndex >= 0 && s.DiskMinSizeIndex < MinSizeValues.Length)
+            CbMinSize.SelectedIndex = s.DiskMinSizeIndex;
     }
 
     private async void BtnScan_Click(object sender, RoutedEventArgs e)
@@ -47,6 +52,8 @@ public partial class DiskAnalyzerView : UserControl
         }
 
         var minSize = MinSizeValues[CbMinSize.SelectedIndex];
+        var settings = SettingsService.Load();
+        SettingsService.Save(settings with { DiskScanPath = path, DiskMinSizeIndex = CbMinSize.SelectedIndex });
 
         FileList.ItemsSource = null;
         _files.Clear();

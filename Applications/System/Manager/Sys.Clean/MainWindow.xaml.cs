@@ -75,6 +75,7 @@ public partial class MainWindow : Window
     }
 
     // ── 디스크 상태 (전체 드라이브) ──────────────────────────────────
+
     internal void UpdateDiskInfo()
     {
         DriveInfoPanel.Children.Clear();
@@ -85,7 +86,7 @@ public partial class MainWindow : Window
             .Where(e => e.Time.Date == DateTime.Today)
             .Sum(e => e.CleanedBytes);
         TbTodaySaved.Text = todayCleaned > 0
-            ? $"오늘 해제: {FormatSize(todayCleaned)}"
+            ? $"오늘 해제: {CleanTarget.FormatSize(todayCleaned)}"
             : "";
 
         try
@@ -124,7 +125,7 @@ public partial class MainWindow : Window
 
                     var freeBlock = new TextBlock
                     {
-                        Text = $"여유 {FormatSize(free)}  /  {FormatSize(total)}",
+                        Text = $"여유 {CleanTarget.FormatSize(free)}  /  {CleanTarget.FormatSize(total)}",
                         FontSize = 10, Foreground = Hex("#444"),
                         Margin = new Thickness(0, 2, 0, 6)
                     };
@@ -137,12 +138,6 @@ public partial class MainWindow : Window
             }
         }
         catch { /* 드라이브 목록 조회 실패 무시 */ }
-    }
-
-    private static string FormatSize(long bytes)
-    {
-        if (bytes < 1024L * 1024 * 1024) return $"{bytes / (1024.0 * 1024):F0} MB";
-        return $"{bytes / (1024.0 * 1024 * 1024):F1} GB";
     }
 
     // ── 키보드 단축키 ──────────────────────────────────────────────────

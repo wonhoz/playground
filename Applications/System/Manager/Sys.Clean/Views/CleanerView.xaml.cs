@@ -237,6 +237,8 @@ public partial class CleanerView : UserControl
         }
         else
         {
+            BtnClean.IsEnabled = false;
+            BtnCopy.IsEnabled = false;
             TbResultHeader.Text = "정리할 파일이 없습니다.";
             TbResultHeader.Foreground = (Brush)Application.Current.FindResource("BrFgSec");
         }
@@ -339,9 +341,12 @@ public partial class CleanerView : UserControl
             ctx.Items.Add(menuRemove);
         }
 
+        var normalBg = new SolidColorBrush(Color.FromRgb(0x22, 0x22, 0x22));
+        var hoverBg  = new SolidColorBrush(Color.FromRgb(0x2A, 0x2A, 0x2A));
+
         var card = new Border
         {
-            Background = new SolidColorBrush(Color.FromRgb(0x22, 0x22, 0x22)),
+            Background = normalBg,
             CornerRadius = new CornerRadius(5),
             Padding = new Thickness(12, 8, 12, 8),
             Margin = new Thickness(0, 2, 0, 2),
@@ -351,6 +356,8 @@ public partial class CleanerView : UserControl
             Cursor = System.Windows.Input.Cursors.Hand
         };
 
+        card.MouseEnter += (_, _) => card.Background = hoverBg;
+        card.MouseLeave += (_, _) => card.Background = normalBg;
         card.MouseLeftButtonUp += (_, _) => ShowFilePreview(target);
         return card;
     }
@@ -613,10 +620,27 @@ public partial class CleanerView : UserControl
     // ── 전체 선택 ─────────────────────────────────────────────────────
     private void BtnSelectAll_Click(object sender, RoutedEventArgs e)
     {
-        bool allSelected = _targets.Where(t => !t.IsGroup).All(t => t.IsSelected);
-        foreach (var t in _targets.Where(t => !t.IsGroup))
+        var items = _targets.Where(t => !t.IsGroup).ToList();
+        if (items.Count == 0) return;
+        bool allSelected = items.All(t => t.IsSelected);
+        foreach (var t in items)
             t.IsSelected = !allSelected;
         if (_analyzed) UpdateResults();
+    }
+
+    // ── 그룹 헤더 클릭 → 그룹 전체 선택/해제 ────────────────────────
+    private void GroupHeader_Click(object sender, System.Windows.Input.MouseButtonEventArgs e)
+    {
+        if (sender is not FrameworkElement { Tag: string category }) return;
+        var groupItems = _targets.Where(t => !t.IsGroup && t.Category == category).ToList();
+        if (groupItems.Count == 0) return;
+        bool allSelected = groupItems.All(t => t.IsSelected);
+        foreach (var t in groupItems)
+            t.IsSelected = !allSelected;
+        if (_analyzed) UpdateResults();
+        TargetList.ItemsSource = null;
+        TargetList.ItemsSource = _targets;
+        e.Handled = true;
     }
 
     // ── 브라우저 프로세스 감지 ───────────────────────────────────────

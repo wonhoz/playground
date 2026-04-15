@@ -4,7 +4,8 @@ namespace SysClean.Services;
 
 public record AppSettings(
     double Left, double Top, double Width, double Height,
-    string LastTab, string[]? SelectedCleanerIds = null);
+    string LastTab, string[]? SelectedCleanerIds = null,
+    string? DiskScanPath = null, int DiskMinSizeIndex = 2);
 
 public static class SettingsService
 {

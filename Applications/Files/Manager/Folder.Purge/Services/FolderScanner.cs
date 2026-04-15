@@ -29,20 +29,20 @@ public class FolderScanner
 
         await Task.Run(() =>
         {
-            // 1단계: 전체 디렉토리 수 추정 (EnumerateDirectories 스트리밍으로 초기 지연 최소화)
+            // 1단계: 전체 디렉토리 수 추정 (디렉토리 단위 진행률이므로 dirs만 카운트)
             foreach (var root in rootList)
             {
                 _ct.ThrowIfCancellationRequested();
                 try
                 {
+                    prog.Total++; // root 자체
                     foreach (var _ in Directory.EnumerateDirectories(root, "*", SearchOption.AllDirectories))
                     {
                         prog.Total++;
                         if (_ct.IsCancellationRequested) break;
                     }
-                    prog.Total++; // root 자체
                 }
-                catch { prog.Total++; }
+                catch { prog.Total = Math.Max(prog.Total, 1); }
             }
             progress?.Report(prog);
 

@@ -85,13 +85,16 @@
                         <RowDefinition/>
                         <RowDefinition/>
                         <RowDefinition/>
+                        <RowDefinition/>
                     </Grid.RowDefinitions>
                     <TextBlock Grid.Row="0" Grid.Column="0" Text="F1"     Foreground="{StaticResource AccentBrush}" FontFamily="Consolas" FontSize="11"/>
-                    <TextBlock Grid.Row="0" Grid.Column="1" Text="도움말 표시" Style="{StaticResource HelpText}"/>
+                    <TextBlock Grid.Row="0" Grid.Column="1" Text="도움말 표시 / 닫기" Style="{StaticResource HelpText}"/>
                     <TextBlock Grid.Row="1" Grid.Column="0" Text="Enter"  Foreground="{StaticResource AccentBrush}" FontFamily="Consolas" FontSize="11"/>
                     <TextBlock Grid.Row="1" Grid.Column="1" Text="스캔 시작 (폴더 목록에 항목이 있을 때)" Style="{StaticResource HelpText}"/>
                     <TextBlock Grid.Row="2" Grid.Column="0" Text="Delete" Foreground="{StaticResource AccentBrush}" FontFamily="Consolas" FontSize="11"/>
                     <TextBlock Grid.Row="2" Grid.Column="1" Text="선택된 항목 삭제 확인" Style="{StaticResource HelpText}"/>
+                    <TextBlock Grid.Row="3" Grid.Column="0" Text="Esc"    Foreground="{StaticResource AccentBrush}" FontFamily="Consolas" FontSize="11"/>
+                    <TextBlock Grid.Row="3" Grid.Column="1" Text="도움말 닫기" Style="{StaticResource HelpText}"/>
                 </Grid>
 
                 <!-- 사용 방법 -->
@@ -137,6 +140,10 @@
                     <LineBreak/>
                     <Run>   · 미리보기 모드: 실제 삭제 없이 대상 확인</Run>
                     <LineBreak/>
+                    <Run>   · 삭제 후 자동 재스캔: 삭제 완료 후 동일 폴더를 자동으로 재스캔</Run>
+                    <LineBreak/>
+                    <Run>     (부모 폴더가 새로 비게 되는 연쇄 빈 폴더 처리에 유용)</Run>
+                    <LineBreak/>
                     <Run>   · 휴지통 삭제 후 [휴지통 열기] 버튼으로 복원 가능</Run>
                 </TextBlock>
 
@@ -149,7 +156,7 @@
                     <LineBreak/>
                     <Run>· 우클릭 → 결과에서 제거: 오탐 항목을 삭제 없이 목록에서만 제거</Run>
                     <LineBreak/>
-                    <Run>· 우클릭 → 제외 폴더에 추가: 다음 스캔부터 해당 폴더명 제외</Run>
+                    <Run>· 우클릭 → 제외 폴더에 추가: 다음 스캔부터 해당 폴더명 제외 (다중 선택 지원)</Run>
                     <LineBreak/>
                     <Run>· 컬럼 헤더 클릭 → 정렬 ▲/▼ (오름/내림차순, 상태 저장됨)</Run>
                     <LineBreak/>

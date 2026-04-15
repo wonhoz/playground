@@ -29,6 +29,7 @@ public class AppSettings
     public List<string> VsArtifactFileExtensions { get; set; } = [".user"];
     public string SortColumn { get; set; } = "크기";
     public bool SortDescending { get; set; } = true;
+    public bool AutoScanAfterDelete { get; set; } = false;
     public DateTime? LastScanTime { get; set; } = null;
     public List<ScanHistoryEntry> ScanHistory { get; set; } = [];
 

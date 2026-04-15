@@ -80,6 +80,7 @@ public partial class MainWindow : Window
         ChkEmptyFile.IsChecked     = _settings.ScanEmptyFiles;
         ChkRecycleBin.IsChecked    = _settings.UseRecycleBin;
         ChkPreview.IsChecked       = _settings.PreviewOnly;
+        ChkAutoRescan.IsChecked    = _settings.AutoScanAfterDelete;
         ChkExcludeRecent.IsChecked = _settings.ExcludeRecentFolders;
         MinAgeDaysInput.Text       = _settings.MinAgeDays.ToString();
         UpdateMinAgeDaysPanel();
@@ -113,6 +114,7 @@ public partial class MainWindow : Window
         _settings.ScanEmptyFiles         = ChkEmptyFile.IsChecked == true;
         _settings.UseRecycleBin          = ChkRecycleBin.IsChecked == true;
         _settings.PreviewOnly            = ChkPreview.IsChecked == true;
+        _settings.AutoScanAfterDelete    = ChkAutoRescan.IsChecked == true;
         _settings.ExcludeRecentFolders   = ChkExcludeRecent.IsChecked == true;
         _settings.MinAgeDays             = int.TryParse(MinAgeDaysInput.Text.Trim(), out int ageDays) && ageDays > 0 ? ageDays : 7;
         _settings.SortColumn             = _sortColumn ?? string.Empty;
@@ -590,6 +592,8 @@ public partial class MainWindow : Window
                 if (!Directory.Exists(item.Path) && !File.Exists(item.Path))
                 {
                     log.AppendLine($"  [건너뜀] {item.Path}  (이미 삭제됨)");
+                    successCount++;
+                    freedBytes += item.SizeBytes;
                     continue;
                 }
 
@@ -657,6 +661,13 @@ public partial class MainWindow : Window
             : Visibility.Collapsed;
 
         StatusText.Text = summary;
+
+        // 삭제 후 자동 재스캔
+        if (!previewOnly && successCount > 0 && ChkAutoRescan.IsChecked == true && _targetFolders.Count > 0)
+        {
+            await Task.Delay(300); // 삭제 완료 시각적 피드백 후
+            Scan_Click(sender, e);
+        }
     }
 
     private void CloseResult_Click(object sender, RoutedEventArgs e)
@@ -734,18 +745,27 @@ public partial class MainWindow : Window
 
     private void AddToExclude_Click(object sender, RoutedEventArgs e)
     {
-        if (ResultListView.SelectedItem is not FolderEntry entry) return;
-        string name = entry.Kind == FolderKind.EmptyFile
-            ? Path.GetFileName(Path.GetDirectoryName(entry.Path) ?? entry.Path)
-            : Path.GetFileName(entry.Path);
-        if (string.IsNullOrEmpty(name))  return;
-        if (_excludedFolders.Contains(name, StringComparer.OrdinalIgnoreCase))
+        var entries = ResultListView.SelectedItems.Cast<FolderEntry>().ToList();
+        if (entries.Count == 0) return;
+
+        var added = new List<string>();
+        foreach (var entry in entries)
         {
-            StatusText.Text = $"이미 제외 목록에 있습니다: {name}";
-            return;
+            string name = entry.Kind == FolderKind.EmptyFile
+                ? Path.GetFileName(Path.GetDirectoryName(entry.Path) ?? entry.Path)
+                : Path.GetFileName(entry.Path);
+            if (string.IsNullOrEmpty(name)) continue;
+            if (_excludedFolders.Contains(name, StringComparer.OrdinalIgnoreCase)) continue;
+            _excludedFolders.Add(name);
+            added.Add(name);
         }
-        _excludedFolders.Add(name);
-        StatusText.Text = $"제외 폴더에 추가됨: {name}  (다음 스캔부터 적용)";
+
+        StatusText.Text = added.Count switch
+        {
+            0 => "선택한 항목이 이미 모두 제외 목록에 있습니다.",
+            1 => $"제외 폴더에 추가됨: {added[0]}  (다음 스캔부터 적용)",
+            _ => $"제외 폴더에 {added.Count}개 추가됨  (다음 스캔부터 적용)"
+        };
     }
 
     private void OpenSelectedInExplorer()

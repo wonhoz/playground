@@ -22,10 +22,6 @@ public partial class MainWindow : Window
     const uint MOD_SHIFT = 0x0004;
     const uint VK_P     = 0x50;
 
-    static readonly string SettingsPath = Path.Combine(
-        Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-        "Prompt.Forge", "settings.txt");
-
     readonly MainViewModel _vm;
     readonly Database      _db;
     readonly AppSettings   _appSettings;
@@ -35,6 +31,9 @@ public partial class MainWindow : Window
 
     // FillVarsDialog에서 프롬프트별 마지막 입력값 기억: [promptId → [varName → value]]
     readonly Dictionary<int, Dictionary<string, string>> _varHistory = [];
+
+    // 클립보드 히스토리 (최근 복사 5개: (제목, 내용))
+    readonly List<(string Title, string Content)> _clipboardHistory = [];
 
     public MainWindow()
     {
@@ -133,24 +132,18 @@ public partial class MainWindow : Window
     void SaveLastSelection()
     {
         if (_vm.Selected == null) return;
-        try { File.WriteAllText(SettingsPath, _vm.Selected.Id.ToString()); }
-        catch { }
+        _appSettings.LastSelectedId = _vm.Selected.Id;
     }
 
     void RestoreLastSelection()
     {
-        try
+        if (_appSettings.LastSelectedId < 0) return;
+        var item = _vm.Items.FirstOrDefault(x => x.Id == _appSettings.LastSelectedId);
+        if (item != null)
         {
-            if (!File.Exists(SettingsPath)) return;
-            if (!int.TryParse(File.ReadAllText(SettingsPath).Trim(), out var lastId)) return;
-            var item = _vm.Items.FirstOrDefault(x => x.Id == lastId);
-            if (item != null)
-            {
-                _vm.Selected = item;
-                LoadSelected();
-            }
+            _vm.Selected = item;
+            LoadSelected();
         }
-        catch { }
     }
 
     // ── 키보드 단축키 (B1) ────────────────────────────────────────────────────
@@ -182,6 +175,15 @@ public partial class MainWindow : Window
             return;
         }
 
+        // Ctrl+Shift+F: 즐겨찾기 토글
+        if (Keyboard.Modifiers == (ModifierKeys.Control | ModifierKeys.Shift)
+            && e.Key == Key.F && _vm.HasSelection)
+        {
+            Fav_Click(this, new RoutedEventArgs());
+            e.Handled = true;
+            return;
+        }
+
         if (Keyboard.Modifiers == ModifierKeys.Control)
         {
             if (e.Key == Key.N)
@@ -191,7 +193,7 @@ public partial class MainWindow : Window
                 return;
             }
 
-            // Ctrl+F: 검���창 포커스 + 전체 선택
+            // Ctrl+F: 검색창 포커스 + 전체 선택
             if (e.Key == Key.F)
             {
                 TxtSearch.Focus();
@@ -439,6 +441,10 @@ public partial class MainWindow : Window
         var charCount = TxtContent.Text.Length;
         _vm.StatusText = $"{charCount:N0}자";  // 즉시 글자 수 업데이트
 
+        // Find bar 열린 상태에서 내용이 변경되면 검색 위치 재계산 (stale 인덱스 방어)
+        if (FindBar.Visibility == Visibility.Visible && !string.IsNullOrEmpty(TxtFind.Text))
+            UpdateFindPositions();
+
         // 변수 수는 200ms 디바운싱으로 Regex 실행 부하 감소
         if (_contentDebounce == null)
         {
@@ -521,6 +527,14 @@ public partial class MainWindow : Window
             bool dirty = _vm.Selected != null && IsDirty(_vm.Selected);
             _vm.StatusText = dirty ? "클립보드에 복사됨 ⚠ 미저장 내용 포함" : "클립보드에 복사됨";
 
+            // 클립보드 히스토리 갱신 (최근 5개)
+            var title   = _vm.Selected?.Title ?? "(무제)";
+            var content = TxtContent.Text;
+            _clipboardHistory.RemoveAll(h => h.Title == title && h.Content == content);
+            _clipboardHistory.Insert(0, (title, content));
+            if (_clipboardHistory.Count > 5) _clipboardHistory.RemoveAt(5);
+            RefreshClipboardHistoryMenu();
+
             // 복사 버튼 일시 피드백
             if (sender is Button btn)
             {
@@ -539,6 +553,44 @@ public partial class MainWindow : Window
             }
         }
         catch { _vm.StatusText = "클립보드 복사 실패"; }
+    }
+
+    void RefreshClipboardHistoryMenu()
+    {
+        ClipHistoryPanel.Children.Clear();
+        if (_clipboardHistory.Count == 0)
+        {
+            ClipHistoryPanel.Children.Add(new System.Windows.Controls.TextBlock
+            {
+                Text = "최근 복사 내역 없음",
+                Foreground = System.Windows.Media.Brushes.Gray,
+                FontSize = 11,
+                Margin = new Thickness(0, 4, 0, 4)
+            });
+            return;
+        }
+        foreach (var (title, histContent) in _clipboardHistory)
+        {
+            var btn = new Button
+            {
+                Content = title.Length > 30 ? title[..30] + "…" : title,
+                ToolTip = histContent.Length > 100 ? histContent[..100] + "…" : histContent,
+                HorizontalContentAlignment = System.Windows.HorizontalAlignment.Left,
+                Margin = new Thickness(0, 2, 0, 2),
+                Tag = histContent
+            };
+            btn.Click += (_, _) =>
+            {
+                try
+                {
+                    Clipboard.SetText((string)btn.Tag);
+                    _vm.StatusText = $"히스토리 복사: {title}";
+                    ClipHistoryPopup.IsOpen = false;
+                }
+                catch { }
+            };
+            ClipHistoryPanel.Children.Add(btn);
+        }
     }
 
     void FillVars_Click(object sender, RoutedEventArgs e)
@@ -562,6 +614,13 @@ public partial class MainWindow : Window
         {
             if (_vm.Selected != null) _vm.IncrementUseCount(_vm.Selected.Id);
             _varHistory[promptId] = dlg.LastInputValues;
+
+            // 변수 채운 결과도 클립보드 히스토리에 추가
+            var title = _vm.Selected?.Title ?? "(무제)";
+            _clipboardHistory.RemoveAll(h => h.Title == title);
+            _clipboardHistory.Insert(0, (title, dlg.FilledContent));
+            if (_clipboardHistory.Count > 5) _clipboardHistory.RemoveAt(5);
+
             _vm.StatusText = "변수 채우기 완료 — 클립보드에 복사됨";
         }
     }
@@ -668,6 +727,12 @@ public partial class MainWindow : Window
     }
 
     void Help_Click(object sender, RoutedEventArgs e) => HelpPopup.IsOpen = !HelpPopup.IsOpen;
+
+    void ClipHistory_Click(object sender, RoutedEventArgs e)
+    {
+        RefreshClipboardHistoryMenu();
+        ClipHistoryPopup.IsOpen = !ClipHistoryPopup.IsOpen;
+    }
 
     // ── 동기화 설정 ───────────────────────────────────────────────────────────
 
@@ -789,6 +854,7 @@ public partial class MainWindow : Window
                         existing.Service    = item.Service ?? "";
                         existing.Notes      = item.Notes   ?? "";
                         existing.IsFavorite = item.IsFavorite;
+                        existing.IsPinned   = item.IsPinned;
                         existing.Version    = item.Version > 0 ? item.Version : existing.Version;
                         _db.Update(existing);
                         updated++;
@@ -814,6 +880,7 @@ public partial class MainWindow : Window
                 imported++;
             }
             _vm.Refresh();
+            RefreshFilterCombos();
             var parts = new List<string>();
             if (imported > 0) parts.Add($"{imported}개 추가");
             if (updated  > 0) parts.Add($"{updated}개 업데이트");
@@ -900,17 +967,26 @@ public partial class MainWindow : Window
         var dlg = new Microsoft.Win32.OpenFileDialog
         {
             Title  = "프롬프트 가져오기",
-            Filter = "JSON 파일 (*.json)|*.json"
+            Filter = "JSON 파일 (*.json)|*.json|CSV 파일 (*.csv)|*.csv"
         };
         if (dlg.ShowDialog() != true) return;
 
+        bool isCsv = dlg.FilterIndex == 2 ||
+                     dlg.FileName.EndsWith(".csv", StringComparison.OrdinalIgnoreCase);
         try
         {
-            var json = File.ReadAllText(dlg.FileName, System.Text.Encoding.UTF8);
-            var opts = new System.Text.Json.JsonSerializerOptions
-                { PropertyNameCaseInsensitive = true };
-            var items = System.Text.Json.JsonSerializer
-                .Deserialize<List<ImportDto>>(json, opts);
+            List<ImportDto>? items;
+            if (isCsv)
+            {
+                items = ImportFromCsv(dlg.FileName);
+            }
+            else
+            {
+                var json = File.ReadAllText(dlg.FileName, System.Text.Encoding.UTF8);
+                var opts = new System.Text.Json.JsonSerializerOptions
+                    { PropertyNameCaseInsensitive = true };
+                items = System.Text.Json.JsonSerializer.Deserialize<List<ImportDto>>(json, opts);
+            }
 
             if (items == null || items.Count == 0)
             {
@@ -938,15 +1014,74 @@ public partial class MainWindow : Window
                 imported++;
             }
             _vm.Refresh();
+            RefreshFilterCombos();
+            var fmt = isCsv ? "CSV" : "JSON";
             _vm.StatusText = skipped > 0
-                ? $"가져오기 완료 — {imported}개 추가, {skipped}개 중복 스킵"
-                : $"가져오기 완료 — {imported}개";
+                ? $"가져오기 완료 — {imported}개 추가, {skipped}개 중복 스킵 ({fmt})"
+                : $"가져오기 완료 — {imported}개 ({fmt})";
         }
         catch (Exception ex)
         {
             _vm.StatusText = $"가져오기 실패: {ex.Message}";
             MessageBox.Show($"가져오기 실패:\n{ex.Message}", "오류", MessageBoxButton.OK, MessageBoxImage.Error);
         }
+    }
+
+    static List<ImportDto> ImportFromCsv(string filePath)
+    {
+        var lines = File.ReadAllLines(filePath, System.Text.Encoding.UTF8);
+        var result = new List<ImportDto>();
+        if (lines.Length < 2) return result;
+
+        // 헤더: 제목,내용,태그,서비스,메모,즐겨찾기,사용횟수,버전
+        for (int i = 1; i < lines.Length; i++)
+        {
+            var cols = CsvParseLine(lines[i]);
+            if (cols.Count < 2) continue;
+            result.Add(new ImportDto(
+                Title:      cols.ElementAtOrDefault(0) ?? "",
+                Content:    cols.ElementAtOrDefault(1) ?? "",
+                Tags:       cols.ElementAtOrDefault(2) ?? "",
+                Service:    cols.ElementAtOrDefault(3) ?? "",
+                Notes:      cols.ElementAtOrDefault(4) ?? "",
+                IsFavorite: cols.ElementAtOrDefault(5) == "1",
+                UseCount:   int.TryParse(cols.ElementAtOrDefault(6), out var uc)  ? uc  : 0,
+                Version:    int.TryParse(cols.ElementAtOrDefault(7), out var ver) ? ver : 1
+            ));
+        }
+        return result;
+    }
+
+    // RFC 4180 기본 CSV 파서 (큰따옴표 이스케이프 지원)
+    static List<string> CsvParseLine(string line)
+    {
+        var fields = new List<string>();
+        int pos = 0;
+        while (pos <= line.Length)
+        {
+            if (pos < line.Length && line[pos] == '"')
+            {
+                pos++;
+                var sb = new System.Text.StringBuilder();
+                while (pos < line.Length)
+                {
+                    if (line[pos] == '"' && pos + 1 < line.Length && line[pos + 1] == '"')
+                    { sb.Append('"'); pos += 2; }
+                    else if (line[pos] == '"') { pos++; break; }
+                    else { sb.Append(line[pos++]); }
+                }
+                fields.Add(sb.ToString());
+                if (pos < line.Length && line[pos] == ',') pos++;
+            }
+            else
+            {
+                var end = line.IndexOf(',', pos);
+                if (end < 0) { fields.Add(line[pos..]); break; }
+                fields.Add(line[pos..end]);
+                pos = end + 1;
+            }
+        }
+        return fields;
     }
 
     // ── 헬퍼 ─────────────────────────────────────────────────────────────────

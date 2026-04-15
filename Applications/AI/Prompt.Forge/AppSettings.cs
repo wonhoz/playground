@@ -12,6 +12,7 @@ public sealed class AppSettings
     public string GithubPatEnc   { get; set; } = "";  // DPAPI 암호화된 PAT (Base64)
     public string GistId         { get; set; } = "";
     public string LastSortOrder  { get; set; } = "updated";  // updated / use_count / custom
+    public int    LastSelectedId { get; set; } = -1;         // 마지막 선택 프롬프트 ID
     public List<string> RecentSearches { get; set; } = [];
 
     // 창 위치/크기 — double.NaN은 저장 없음 (CenterScreen 사용)

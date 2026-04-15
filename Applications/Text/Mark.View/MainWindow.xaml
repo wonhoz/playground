@@ -635,6 +635,86 @@
       </Border>
     </Popup>
 
+    <!-- ══ 문서 분석 팝업 ════════════════════════════════ -->
+    <Popup x:Name="DocStatsPopup"
+           Grid.Row="0" Grid.RowSpan="3"
+           AllowsTransparency="True"
+           StaysOpen="False"
+           HorizontalAlignment="Right" VerticalAlignment="Bottom"
+           HorizontalOffset="-12" VerticalOffset="-8">
+      <Border Background="{StaticResource SurfaceBrush}"
+              BorderBrush="{StaticResource AccentBrush}" BorderThickness="1"
+              CornerRadius="8" Padding="16,12" MinWidth="260">
+        <StackPanel>
+          <TextBlock x:Name="DocStatsTitle"
+                     FontSize="13" FontWeight="SemiBold"
+                     Foreground="{StaticResource TextBrush}"
+                     Margin="0,0,0,10"
+                     TextTrimming="CharacterEllipsis" MaxWidth="240"/>
+          <Grid>
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="*"/>
+              <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+              <RowDefinition Height="Auto"/>
+              <RowDefinition Height="Auto"/>
+              <RowDefinition Height="Auto"/>
+              <RowDefinition Height="Auto"/>
+              <RowDefinition Height="Auto"/>
+              <RowDefinition Height="Auto"/>
+              <RowDefinition Height="Auto"/>
+              <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <!-- 단어 수 -->
+            <TextBlock Grid.Row="0" Grid.Column="0" Text="단어 수"
+                       FontSize="11" Foreground="{StaticResource TextDimBrush}" Margin="0,2"/>
+            <TextBlock x:Name="StatsWords" Grid.Row="0" Grid.Column="1"
+                       FontSize="11" Foreground="{StaticResource TextBrush}"
+                       HorizontalAlignment="Right" Margin="0,2"/>
+            <!-- 문자 수 -->
+            <TextBlock Grid.Row="1" Grid.Column="0" Text="문자 수"
+                       FontSize="11" Foreground="{StaticResource TextDimBrush}" Margin="0,2"/>
+            <TextBlock x:Name="StatsChars" Grid.Row="1" Grid.Column="1"
+                       FontSize="11" Foreground="{StaticResource TextBrush}"
+                       HorizontalAlignment="Right" Margin="0,2"/>
+            <!-- 줄 수 -->
+            <TextBlock Grid.Row="2" Grid.Column="0" Text="줄 수"
+                       FontSize="11" Foreground="{StaticResource TextDimBrush}" Margin="0,2"/>
+            <TextBlock x:Name="StatsLines" Grid.Row="2" Grid.Column="1"
+                       FontSize="11" Foreground="{StaticResource TextBrush}"
+                       HorizontalAlignment="Right" Margin="0,2"/>
+            <!-- 읽기 시간 -->
+            <TextBlock Grid.Row="3" Grid.Column="0" Text="예상 읽기 시간"
+                       FontSize="11" Foreground="{StaticResource TextDimBrush}" Margin="0,2"/>
+            <TextBlock x:Name="StatsReadTime" Grid.Row="3" Grid.Column="1"
+                       FontSize="11" Foreground="{StaticResource AccentBrush}"
+                       HorizontalAlignment="Right" Margin="0,2" FontWeight="SemiBold"/>
+            <!-- 구분선 -->
+            <Separator Grid.Row="4" Grid.ColumnSpan="2" Margin="0,6,0,4"/>
+            <!-- 헤딩 -->
+            <TextBlock Grid.Row="5" Grid.Column="0" Text="헤딩"
+                       FontSize="11" Foreground="{StaticResource TextDimBrush}" Margin="0,2"/>
+            <TextBlock x:Name="StatsHeadings" Grid.Row="5" Grid.Column="1"
+                       FontSize="11" Foreground="{StaticResource TextBrush}"
+                       HorizontalAlignment="Right" Margin="0,2"/>
+            <!-- 이미지 -->
+            <TextBlock Grid.Row="6" Grid.Column="0" Text="이미지"
+                       FontSize="11" Foreground="{StaticResource TextDimBrush}" Margin="0,2"/>
+            <TextBlock x:Name="StatsImages" Grid.Row="6" Grid.Column="1"
+                       FontSize="11" Foreground="{StaticResource TextBrush}"
+                       HorizontalAlignment="Right" Margin="0,2"/>
+            <!-- 링크 -->
+            <TextBlock Grid.Row="7" Grid.Column="0" Text="링크"
+                       FontSize="11" Foreground="{StaticResource TextDimBrush}" Margin="0,2"/>
+            <TextBlock x:Name="StatsLinks" Grid.Row="7" Grid.Column="1"
+                       FontSize="11" Foreground="{StaticResource TextBrush}"
+                       HorizontalAlignment="Right" Margin="0,2"/>
+          </Grid>
+        </StackPanel>
+      </Border>
+    </Popup>
+
     <!-- ══ 상태바 ═════════════════════════════════════════ -->
     <Border x:Name="StatusBarBorder" Grid.Row="2"
             Background="{StaticResource SurfaceBrush}"
@@ -667,7 +747,10 @@
                      FontSize="11"
                      Foreground="{StaticResource TextDimBrush}"
                      VerticalAlignment="Center"
-                     Margin="0,0,12,0"/>
+                     Margin="0,0,12,0"
+                     Cursor="Hand"
+                     ToolTip="클릭: 문서 분석"
+                     MouseLeftButtonDown="StatusWords_Click"/>
           <TextBlock x:Name="StatusLines"
                      FontSize="11"
                      Foreground="{StaticResource TextDimBrush}"
@@ -692,7 +775,9 @@
                      VerticalAlignment="Center"
                      Margin="0,0,8,0"
                      Visibility="Collapsed"
-                     ToolTip="Mermaid 다이어그램 블록 편집 중 — 프리뷰에서 결과를 확인하세요"/>
+                     Cursor="Hand"
+                     ToolTip="Mermaid 다이어그램 블록 편집 중 — 클릭: PNG 내보내기"
+                     MouseLeftButtonDown="StatusMermaid_Click"/>
           <TextBlock x:Name="StatusMode"
                      FontSize="11"
                      Foreground="{StaticResource AccentBrush}"

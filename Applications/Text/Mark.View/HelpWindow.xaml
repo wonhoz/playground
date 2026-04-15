@@ -169,9 +169,11 @@
             <ItemsControl ItemTemplate="{StaticResource RowTpl}">
               <ItemsControl.Items>
                 <local:ShortcutEntry Key="줄:컬럼"              Desc="에디터 커서 위치 (편집 모드에서 표시)"/>
-                <local:ShortcutEntry Key="N줄 · N단어 · 약 Nm" Desc="줄 수 / 단어 수 / 예상 읽기 시간 — 단어 수에 마우스 오버 시 헤딩·이미지·링크 수 툴팁 표시"/>
+                <local:ShortcutEntry Key="N줄 · N단어 · 약 Nm" Desc="줄 수 / 단어 수 / 예상 읽기 시간 — 클릭 시 문서 분석 팝업 (단어·문자·줄 수·읽기 시간·헤딩·이미지·링크 수)"/>
                 <local:ShortcutEntry Key="선택: Nchar · N단어" Desc="텍스트 선택 시 상태바에 선택 글자 수 및 단어 수 표시"/>
                 <local:ShortcutEntry Key="상태바 경로"          Desc="클릭 시 파일 탐색기에서 위치 열기"/>
+                <local:ShortcutEntry Key="〈/〉 Mermaid 표시"   Desc="편집 모드에서 ```mermaid 블록 안에 커서가 있을 때 표시 — 클릭 시 프리뷰의 첫 번째 다이어그램을 PNG로 내보내기"/>
+                <local:ShortcutEntry Key="상태바 우클릭"        Desc="자동 저장 주기 변경 (30초 / 1분 / 2분 / 5분)"/>
               </ItemsControl.Items>
             </ItemsControl>
 
@@ -250,7 +252,7 @@
                 <local:ShortcutEntry Key="↩ 플로팅 버튼"    Desc="TOC 클릭 전 위치로 되돌아가기"/>
                 <local:ShortcutEntry Key=".md 링크 클릭"     Desc="연결된 Markdown 파일을 앱 내 새 탭으로 열기"/>
                 <local:ShortcutEntry Key="뷰어 우클릭"       Desc="텍스트 복사 · 링크 열기 · 링크 주소 복사 · 이미지 저장 · 모두 선택"/>
-                <local:ShortcutEntry Key="```mermaid 블록"   Desc="Mermaid 다이어그램 렌더링 (플로우차트·시퀀스·간트 등) — 에디터에서 ```mermaid 블록 안에 커서가 있으면 상태바에 〈/〉 힌트 표시"/>
+                <local:ShortcutEntry Key="```mermaid 블록"   Desc="Mermaid 다이어그램 렌더링 (플로우차트·시퀀스·간트 등) — 상태바 〈/〉 클릭으로 렌더링된 다이어그램을 PNG 파일로 내보내기 가능"/>
               </ItemsControl.Items>
             </ItemsControl>
 

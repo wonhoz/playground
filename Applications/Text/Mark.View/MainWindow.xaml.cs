@@ -740,6 +740,22 @@ public partial class MainWindow : Window
             // 프리뷰→에디터 역방향 점프: 더블클릭된 텍스트 컨텍스트로 에디터에서 위치 찾기
             JumpToEditorFromPreview(msg[9..]);
         }
+        else if (msg?.StartsWith("mermaid-png:") == true)
+        {
+            var payload = msg[12..];
+            if (payload == "none")
+            {
+                ShowStatusHint("Mermaid 다이어그램을 찾을 수 없습니다", 3);
+            }
+            else if (payload == "error")
+            {
+                ShowStatusHint("Mermaid PNG 변환 오류", 3);
+            }
+            else if (payload.StartsWith("data:image/png;base64,"))
+            {
+                _ = SaveMermaidPngAsync(payload[22..]);
+            }
+        }
         else if (msg?.StartsWith("anchor:") == true)
         {
             var id = msg[7..];
@@ -1866,6 +1882,27 @@ public partial class MainWindow : Window
         catch { }
     }
 
+    private void StatusWords_Click(object sender, System.Windows.Input.MouseButtonEventArgs e)
+    {
+        if (_activeIndex < 0 || _activeIndex >= _docs.Count) return;
+        var doc = _docs[_activeIndex];
+
+        DocStatsTitle.Text = doc.IsNew ? "새 문서" : doc.FileName;
+        StatsWords.Text = $"{doc.CachedWordCount:N0}개";
+        StatsChars.Text = $"{doc.Content.Length:N0}자";
+        StatsLines.Text = $"{doc.CachedLineCount:N0}줄";
+        var readMin = doc.CachedWordCount > 0 ? Math.Max(1, (int)Math.Ceiling(doc.CachedWordCount / 200.0)) : 0;
+        var readSec = doc.CachedWordCount > 0 ? (int)Math.Ceiling(doc.CachedWordCount / 200.0 * 60) % 60 : 0;
+        StatsReadTime.Text = readMin >= 1 ? $"약 {readMin}분 {readSec}초" : "< 1분";
+        StatsHeadings.Text = $"{doc.CachedHeadingCount}개";
+        StatsImages.Text = $"{doc.CachedImageCount}개";
+        StatsLinks.Text = $"{doc.CachedLinkCount}개";
+
+        DocStatsPopup.PlacementTarget = StatusWords;
+        DocStatsPopup.Placement = System.Windows.Controls.Primitives.PlacementMode.Top;
+        DocStatsPopup.IsOpen = true;
+    }
+
     private void StatusMode_RightClick(object sender, MouseButtonEventArgs e)
     {
         e.Handled = true;
@@ -1934,9 +1971,6 @@ public partial class MainWindow : Window
     private DispatcherTimer? _statusHintTimer;
     private void ShowStatusHint(string message, int seconds = 3, string? clickPath = null)
     {
-        var prev = _activeIndex >= 0 && _activeIndex < _docs.Count
-            ? (_docs[_activeIndex].IsNew ? "새 문서 (저장되지 않음)" : _docs[_activeIndex].FilePath)
-            : "파일을 열어주세요";
         StatusPath.Text = message;
 
         // 내보낸 파일 경로 클릭으로 탐색기 열기
@@ -1952,12 +1986,15 @@ public partial class MainWindow : Window
         _statusHintTimer.Tick += (_, _) =>
         {
             _statusHintTimer?.Stop();
-            StatusPath.Text = prev;
+            // 타이머 만료 시점의 최신 활성 탭 경로로 복원 (race condition 방지)
+            StatusPath.Text = _activeIndex >= 0 && _activeIndex < _docs.Count
+                ? (_docs[_activeIndex].IsNew ? "새 문서 (저장되지 않음)" : _docs[_activeIndex].FilePath)
+                : "파일을 열어주세요";
             if (clickPath != null)
             {
                 StatusPath.Tag = null;
                 StatusPath.ToolTip = "클릭하여 파일 위치 열기";
-                StatusPath.Cursor = Cursors.Arrow;
+                StatusPath.Cursor = Cursors.Hand;
             }
         };
         _statusHintTimer.Start();
@@ -2895,6 +2932,82 @@ public partial class MainWindow : Window
 
         // Mermaid 블록 감지 — 상태바 힌트 표시
         DetectMermaidBlock(caret, text);
+    }
+
+    private async Task SaveMermaidPngAsync(string base64Data)
+    {
+        try
+        {
+            var doc = _activeIndex >= 0 && _activeIndex < _docs.Count ? _docs[_activeIndex] : null;
+            var defaultName = doc != null && !doc.IsNew
+                ? Path.GetFileNameWithoutExtension(doc.FilePath) + "_mermaid.png"
+                : "mermaid_diagram.png";
+
+            var dlg = new Microsoft.Win32.SaveFileDialog
+            {
+                Filter = "PNG 이미지 (*.png)|*.png",
+                DefaultExt = ".png",
+                FileName = defaultName,
+            };
+            var initDir = !string.IsNullOrEmpty(_settings.ExportDir) && Directory.Exists(_settings.ExportDir)
+                ? _settings.ExportDir
+                : doc?.Directory;
+            if (initDir != null) dlg.InitialDirectory = initDir;
+            if (dlg.ShowDialog() != true) return;
+
+            _settings.ExportDir = Path.GetDirectoryName(dlg.FileName) ?? "";
+            _settings.Save();
+
+            var bytes = Convert.FromBase64String(base64Data);
+            await File.WriteAllBytesAsync(dlg.FileName, bytes);
+            ShowStatusHint($"Mermaid PNG 저장 완료 — {Path.GetFileName(dlg.FileName)}", 5, dlg.FileName);
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show($"PNG 저장 실패:\n{ex.Message}", "오류",
+                MessageBoxButton.OK, MessageBoxImage.Error);
+        }
+    }
+
+    private async void StatusMermaid_Click(object sender, System.Windows.Input.MouseButtonEventArgs e)
+    {
+        if (!_webViewReady) return;
+        try
+        {
+            await Viewer.ExecuteScriptAsync(@"
+(function() {
+    var svgs = document.querySelectorAll('.mermaid svg, pre.mermaid svg, [class*=""mermaid""] svg');
+    if (svgs.length === 0) {
+        window.chrome.webview.postMessage('mermaid-png:none');
+        return;
+    }
+    var svg = svgs[0];
+    var rect = svg.getBoundingClientRect();
+    var w = Math.max(rect.width, 100);
+    var h = Math.max(rect.height, 100);
+    var data = new XMLSerializer().serializeToString(svg);
+    var blob = new Blob([data], {type: 'image/svg+xml;charset=utf-8'});
+    var url = URL.createObjectURL(blob);
+    var img = new Image();
+    img.onload = function() {
+        var canvas = document.createElement('canvas');
+        canvas.width = w; canvas.height = h;
+        var ctx = canvas.getContext('2d');
+        ctx.fillStyle = '#ffffff';
+        ctx.fillRect(0, 0, w, h);
+        ctx.drawImage(img, 0, 0, w, h);
+        URL.revokeObjectURL(url);
+        var pngData = canvas.toDataURL('image/png');
+        window.chrome.webview.postMessage('mermaid-png:' + pngData);
+    };
+    img.onerror = function() {
+        URL.revokeObjectURL(url);
+        window.chrome.webview.postMessage('mermaid-png:error');
+    };
+    img.src = url;
+})()");
+        }
+        catch { }
     }
 
     private void DetectMermaidBlock(int caretIdx, string text)

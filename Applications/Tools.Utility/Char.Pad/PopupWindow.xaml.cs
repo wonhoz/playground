@@ -25,12 +25,18 @@ public partial class PopupWindow : System.Windows.Window
 
     // 검색 히스토리 (세션 내 메모리, 최대 10개)
     private readonly List<string> _searchHistory = new();
-    private int                   _searchHistoryIdx = -1;
+    // 드롭다운 키보드 탐색 — 항목 참조 + 현재 하이라이트 인덱스 + 탐색 전 원문
+    private readonly List<Border> _historyDropdownItems = new();
+    private int                   _historyDropdownIdx = -1;
+    private string                _historyPreNavText  = "";
 
     // 다중 문자 선택 (Ctrl+클릭)
     private readonly List<CharEntry> _multiSelected = new();
-    // 핀 고정 모드 누적 삽입 카운터
-    private int _pinnedInsertCount = 0;
+    // 핀 고정 모드 누적 삽입 카운터 + 마지막 삽입 시각
+    private int      _pinnedInsertCount = 0;
+    private DateTime _lastPinnedInsertTime;
+    // 마지막 삽입 문자 (클립보드 힌트 폴백용)
+    private CharEntry? _lastInsertedEntry;
 
     // ItemSize = 문자 버튼 1칸 크기 (폰트 크기 기반으로 자동 계산)
     private double ItemSize => _charFontSize + 28;
@@ -115,8 +121,7 @@ public partial class PopupWindow : System.Windows.Window
         var current = _storage.GetSetting("hotkey_label") ?? "Win+Shift+;";
 
         var menu = new System.Windows.Controls.ContextMenu();
-        string[] options = ["Win+Shift+;", "Win+Shift+Space", "Alt+Shift+C", "Ctrl+Alt+C", "Ctrl+Alt+Shift+C"];
-        foreach (var opt in options)
+        foreach (var (opt, _, _) in App.HotkeyOptions)
         {
             var item = new System.Windows.Controls.MenuItem
             {
@@ -190,24 +195,32 @@ public partial class PopupWindow : System.Windows.Window
     }
 
     // ── 클립보드 단일 문자 인식 → 상태바 힌트 ──────────────────────────
+    // 클립보드에 인식된 특수문자가 없으면 마지막 삽입 문자를 폴백으로 표시
     private void ShowClipboardHint()
     {
         try
         {
             var cb = System.Windows.Clipboard.GetText();
-            if (string.IsNullOrEmpty(cb) || cb.Length > 2) return;
-            var entry = CharDatabase.AllByChar.GetValueOrDefault(cb);
-            if (entry == null) return;
-
-            var cp = new System.Text.StringBuilder();
-            for (int i = 0; i < cb.Length; )
+            if (!string.IsNullOrEmpty(cb) && cb.Length <= 2)
             {
-                int code = char.ConvertToUtf32(cb, i);
-                if (cp.Length > 0) cp.Append(' ');
-                cp.Append($"U+{code:X4}");
-                i += char.IsSurrogatePair(cb, i) ? 2 : 1;
+                var entry = CharDatabase.AllByChar.GetValueOrDefault(cb);
+                if (entry != null)
+                {
+                    var cp = new System.Text.StringBuilder();
+                    for (int i = 0; i < cb.Length; )
+                    {
+                        int code = char.ConvertToUtf32(cb, i);
+                        if (cp.Length > 0) cp.Append(' ');
+                        cp.Append($"U+{code:X4}");
+                        i += char.IsSurrogatePair(cb, i) ? 2 : 1;
+                    }
+                    StatusText.Text = $"클립보드: {cb}  {entry.Name}  {cp}";
+                    return;
+                }
             }
-            StatusText.Text = $"클립보드: {cb}  {entry.Name}  {cp}";
+            // 클립보드에 인식 가능한 특수문자 없음 → 마지막 삽입 문자 표시
+            if (_lastInsertedEntry != null)
+                StatusText.Text = $"마지막 삽입: {_lastInsertedEntry.Char}  {_lastInsertedEntry.Name}";
         }
         catch { }
     }
@@ -461,7 +474,7 @@ public partial class PopupWindow : System.Windows.Window
             _searchHistory.Remove(query);
             _searchHistory.Insert(0, query);
             if (_searchHistory.Count > 10) _searchHistory.RemoveAt(_searchHistory.Count - 1);
-            _searchHistoryIdx = -1;
+            _historyDropdownIdx = -1;
             _storage.AddSearchHistory(query);
         }
 
@@ -615,8 +628,8 @@ public partial class PopupWindow : System.Windows.Window
         {
             border.Background = (SolidColorBrush)FindResource("CharHover");
             StatusText.Text = GetUnicodeTooltip(entry, useCount);
-            // 즐겨찾기 아닌 경우 별 버튼 희미하게 표시 (호버 힌트)
-            if (!isFav) star.Visibility = Visibility.Visible;
+            // 현재 즐겨찾기 상태를 DB에서 재조회 (생성 시점 캡처값 isFav 대신 사용)
+            if (!_storage.IsFavorite(entry.Char)) star.Visibility = Visibility.Visible;
         };
         border.MouseLeave += (_, _) =>
         {
@@ -624,7 +637,7 @@ public partial class PopupWindow : System.Windows.Window
                 border.Background = (SolidColorBrush)FindResource("TabInactive");
             StatusText.Text = _lastStatusText;
             // 즐겨찾기 아닌 상태에서 호버 벗어나면 별 다시 숨김
-            if (!isFav && !_storage.IsFavorite(entry.Char))
+            if (!_storage.IsFavorite(entry.Char))
                 star.Visibility = Visibility.Collapsed;
         };
         border.GotKeyboardFocus  += (_, _) => border.Background = (SolidColorBrush)FindResource("CharHover");
@@ -784,47 +797,52 @@ public partial class PopupWindow : System.Windows.Window
     {
         try
         {
-            // 클립보드 유지 모드: 삽입 전 원본 클립보드 내용 백업
             string? prevClip = _preserveClipboard ? TryGetClipboardText() : null;
-
             System.Windows.Clipboard.SetText(entry.Char);
             _storage.AddRecent(entry.Char);
+            _lastInsertedEntry = entry;
+            var label = $"삽입됨: {entry.Char}  {entry.Name}";
+            await ExecutePasteAsync(label, prevClip);
+        }
+        catch (Exception ex)
+        {
+            StatusText.Text = $"삽입 실패: {ex.Message}";
+        }
+    }
 
-            if (_pinned)
+    // ── 공통 paste 흐름: 핀 고정/일반 모드 분기 + 클립보드 복원 ────────────
+    // prevClip: SetText 이전에 백업한 원본 클립보드 (클립보드 유지 모드용)
+    private async Task ExecutePasteAsync(string statusLabel, string? prevClip = null)
+    {
+        if (_pinned)
+        {
+            _pinnedInsertCount++;
+            _lastPinnedInsertTime = DateTime.Now;
+            var timeStr = _lastPinnedInsertTime.ToString("HH:mm:ss");
+            StatusText.Text = statusLabel +
+                (_pinnedInsertCount > 1 ? $"  (총 {_pinnedInsertCount}회  {timeStr})" : $"  ({timeStr})");
+            if (_targetHwnd != IntPtr.Zero)
             {
-                // 핀 고정 모드: 팝업 유지 + 이전 창에 붙여넣기 후 팝업 다시 활성화
-                _pinnedInsertCount++;
-                StatusText.Text = $"삽입됨: {entry.Char}  {entry.Name}" +
-                    (_pinnedInsertCount > 1 ? $"  (총 {_pinnedInsertCount}회)" : "");
-                if (_targetHwnd != IntPtr.Zero)
-                {
-                    await Task.Delay(50);
-                    await InputHelper.PasteToWindowAsync(_targetHwnd);
-                    await Task.Delay(100);
-                    if (!string.IsNullOrEmpty(prevClip)) TrySetClipboardText(prevClip);
-                    // 팝업을 다시 최상위로 가져옴
-                    SetForegroundWindow(new WindowInteropHelper(this).Handle);
-                }
-                return;
+                await Task.Delay(50);
+                await InputHelper.PasteToWindowAsync(_targetHwnd);
+                await Task.Delay(100);
+                if (!string.IsNullOrEmpty(prevClip)) TrySetClipboardText(prevClip);
+                SetForegroundWindow(new WindowInteropHelper(this).Handle);
             }
-
+        }
+        else
+        {
             Hide();
-
-            // 이전 창에 Ctrl+V (Hide 후 80ms 대기 → 포커스 전환 완료 보장)
             if (_targetHwnd != IntPtr.Zero)
             {
                 await Task.Delay(80);
                 await InputHelper.PasteToWindowAsync(_targetHwnd);
                 if (!string.IsNullOrEmpty(prevClip))
                 {
-                    await Task.Delay(100); // 붙여넣기 완료 후 복원
+                    await Task.Delay(100);
                     TrySetClipboardText(prevClip);
                 }
             }
-        }
-        catch (Exception ex)
-        {
-            StatusText.Text = $"삽입 실패: {ex.Message}";
         }
     }
 
@@ -897,7 +915,10 @@ public partial class PopupWindow : System.Windows.Window
             StatusText.Text = $"즐겨찾기 추가: {entry.Char}  {entry.Name}";
         }
 
-        if (_activeTab == "favorite") RefreshGrid();
+        if (_activeTab == "favorite")
+            RefreshGrid();
+        else
+            UpdateTabBadge("favorite", _storage.GetFavorites().Count);
     }
 
     // ── 검색 히스토리 드롭다운 ─────────────────────────────────────────────
@@ -914,6 +935,9 @@ public partial class PopupWindow : System.Windows.Window
         if (_searchHistory.Count == 0) { HistoryPopup.IsOpen = false; return; }
 
         HistoryList.Children.Clear();
+        _historyDropdownItems.Clear();
+        _historyDropdownIdx = -1;
+
         foreach (var hist in _searchHistory)
         {
             var row = new Grid();
@@ -964,29 +988,53 @@ public partial class PopupWindow : System.Windows.Window
             };
             outerBorder.MouseLeave += (_, _) =>
             {
-                outerBorder.Background = System.Windows.Media.Brushes.Transparent;
+                // 키보드 하이라이트 상태가 아닌 경우에만 배경 초기화
+                int myIdx = _historyDropdownItems.IndexOf(outerBorder);
+                if (myIdx != _historyDropdownIdx)
+                    outerBorder.Background = System.Windows.Media.Brushes.Transparent;
                 delBtn.Visibility = Visibility.Collapsed;
             };
             item.MouseLeftButtonUp += (_, _) =>
             {
-                HistoryPopup.IsOpen = false;
-                SearchBox.Text = captured;
-                SearchBox.CaretIndex = SearchBox.Text.Length;
-                SearchBox.Focus();
+                ApplyHistoryItem(captured);
             };
             delBtn.MouseLeftButtonUp += (_, ev) =>
             {
                 ev.Handled = true;
                 _searchHistory.Remove(captured);
                 _storage.RemoveSearchHistory(captured);
+                _historyPreNavText = SearchBox.Text;  // 텍스트 초기화 방지
                 ShowHistoryPopup();
             };
             HistoryList.Children.Add(outerBorder);
+            _historyDropdownItems.Add(outerBorder);
         }
 
         // Popup 너비를 SearchBox에 맞춤
         HistoryList.MinWidth = SearchBox.ActualWidth > 0 ? SearchBox.ActualWidth - 12 : 200;
         HistoryPopup.IsOpen = true;
+    }
+
+    // 드롭다운 idx번 항목 하이라이트 (시각 강조만, SearchBox.Text 미변경)
+    private void HighlightHistoryDropdownItem(int idx)
+    {
+        for (int i = 0; i < _historyDropdownItems.Count; i++)
+        {
+            _historyDropdownItems[i].Background = i == idx
+                ? (SolidColorBrush)FindResource("AccentBrush")
+                : System.Windows.Media.Brushes.Transparent;
+        }
+        _historyDropdownIdx = idx;
+    }
+
+    // 히스토리 항목 적용 후 드롭다운 닫기
+    private void ApplyHistoryItem(string text)
+    {
+        HistoryPopup.IsOpen = false;
+        _historyDropdownIdx = -1;
+        SearchBox.Text = text;
+        SearchBox.CaretIndex = SearchBox.Text.Length;
+        SearchBox.Focus();
     }
 
     // ── 이벤트 핸들러 ────────────────────────────────────────────────────
@@ -995,7 +1043,7 @@ public partial class PopupWindow : System.Windows.Window
         if (!_initialized) return;
         SearchPlaceholder.Visibility = string.IsNullOrEmpty(SearchBox.Text)
             ? Visibility.Visible : Visibility.Collapsed;
-        _searchHistoryIdx = -1;  // 직접 편집 시 히스토리 탐색 인덱스 초기화
+        _historyDropdownIdx = -1;  // 직접 편집 시 히스토리 탐색 인덱스 초기화
         _searchTimer?.Stop();
         // 검색창 비어있을 때 포커스 중이면 히스토리 팝업 다시 표시
         if (string.IsNullOrEmpty(SearchBox.Text) && SearchBox.IsFocused) ShowHistoryPopup();
@@ -1010,6 +1058,16 @@ public partial class PopupWindow : System.Windows.Window
     {
         if (e.Key == Key.Escape)
         {
+            // 드롭다운 하이라이트 탐색 중: 원문 복원 + 드롭다운 닫기
+            if (HistoryPopup.IsOpen && _historyDropdownIdx >= 0)
+            {
+                HistoryPopup.IsOpen = false;
+                _historyDropdownIdx = -1;
+                SearchBox.Text = _historyPreNavText;
+                SearchBox.CaretIndex = SearchBox.Text.Length;
+                e.Handled = true;
+                return;
+            }
             // 우선순위: 다중 선택 해제 → 검색어 지우기 → 창 닫기
             if (_multiSelected.Count > 0)
                 ClearMultiSelection();
@@ -1021,27 +1079,45 @@ public partial class PopupWindow : System.Windows.Window
         }
         else if (e.Key == Key.Up)
         {
-            // 이전 검색어 히스토리 순환 (↑ 키)
-            if (_searchHistory.Count > 0)
+            if (HistoryPopup.IsOpen && _historyDropdownItems.Count > 0)
             {
-                _searchHistoryIdx = Math.Min(_searchHistoryIdx + 1, _searchHistory.Count - 1);
-                SearchBox.Text = _searchHistory[_searchHistoryIdx];
-                SearchBox.CaretIndex = SearchBox.Text.Length;
+                // 드롭다운 표시 중: 첫 탐색 시 원문 저장 후 위 항목 하이라이트
+                if (_historyDropdownIdx < 0) _historyPreNavText = SearchBox.Text;
+                int next = _historyDropdownIdx <= 0 ? 0 : _historyDropdownIdx - 1;
+                HighlightHistoryDropdownItem(next);
                 e.Handled = true;
             }
         }
-        else if (e.Key == Key.Down &&
-                 e.KeyboardDevice.Modifiers == ModifierKeys.None &&
-                 _searchHistoryIdx >= 0 && _searchHistory.Count > 0)
+        else if (e.Key == Key.Down && e.KeyboardDevice.Modifiers == ModifierKeys.None)
         {
-            // 검색어 히스토리 역방향 순환 (↓ 키 — 히스토리 탐색 중일 때만)
-            _searchHistoryIdx = Math.Max(_searchHistoryIdx - 1, -1);
-            SearchBox.Text = _searchHistoryIdx >= 0 ? _searchHistory[_searchHistoryIdx] : "";
-            SearchBox.CaretIndex = SearchBox.Text.Length;
-            e.Handled = true;
+            if (HistoryPopup.IsOpen && _historyDropdownItems.Count > 0 && _historyDropdownIdx >= 0)
+            {
+                // 드롭다운 탐색 중: 아래 항목 하이라이트 또는 탐색 종료
+                int next = _historyDropdownIdx + 1;
+                if (next < _historyDropdownItems.Count)
+                {
+                    HighlightHistoryDropdownItem(next);
+                }
+                else
+                {
+                    // 마지막 항목에서 ↓: 하이라이트 해제 + 원문 복원
+                    HighlightHistoryDropdownItem(-1);
+                    SearchBox.Text = _historyPreNavText;
+                    SearchBox.CaretIndex = SearchBox.Text.Length;
+                }
+                e.Handled = true;
+            }
         }
         else if (e.Key == Key.Enter)
         {
+            // 드롭다운 하이라이트 항목 적용 우선
+            if (HistoryPopup.IsOpen && _historyDropdownIdx >= 0 &&
+                _historyDropdownIdx < _searchHistory.Count)
+            {
+                ApplyHistoryItem(_searchHistory[_historyDropdownIdx]);
+                e.Handled = true;
+                return;
+            }
             // 다중 선택 삽입 우선, 없으면 첫 번째 문자 삽입
             if (_multiSelected.Count > 0)
             {
@@ -1058,9 +1134,12 @@ public partial class PopupWindow : System.Windows.Window
         else if (e.Key == Key.Down ||
                  (e.Key == Key.Tab && !e.KeyboardDevice.Modifiers.HasFlag(ModifierKeys.Shift)))
         {
-            // 검색창 → 그리드 첫 번째 문자로 포커스 이동
-            FocusFirstCharButton();
-            e.Handled = true;
+            // 검색창 → 그리드 첫 번째 문자로 포커스 이동 (드롭다운 탐색 중 아닐 때)
+            if (!HistoryPopup.IsOpen || _historyDropdownIdx < 0)
+            {
+                FocusFirstCharButton();
+                e.Handled = true;
+            }
         }
     }
 
@@ -1422,35 +1501,8 @@ public partial class PopupWindow : System.Windows.Window
             string? prevClip = _preserveClipboard ? TryGetClipboardText() : null;
             System.Windows.Clipboard.SetText(combined);
             foreach (var entry in _multiSelected) _storage.AddRecent(entry.Char);
-
-            if (_pinned)
-            {
-                _pinnedInsertCount++;
-                StatusText.Text = $"삽입됨: {combined}" +
-                    (_pinnedInsertCount > 1 ? $"  (총 {_pinnedInsertCount}회)" : "");
-                if (_targetHwnd != IntPtr.Zero)
-                {
-                    await Task.Delay(50);
-                    await InputHelper.PasteToWindowAsync(_targetHwnd);
-                    await Task.Delay(100);
-                    if (!string.IsNullOrEmpty(prevClip)) TrySetClipboardText(prevClip);
-                    SetForegroundWindow(new WindowInteropHelper(this).Handle);
-                }
-            }
-            else
-            {
-                Hide();
-                if (_targetHwnd != IntPtr.Zero)
-                {
-                    await Task.Delay(80);
-                    await InputHelper.PasteToWindowAsync(_targetHwnd);
-                    if (!string.IsNullOrEmpty(prevClip))
-                    {
-                        await Task.Delay(100);
-                        TrySetClipboardText(prevClip);
-                    }
-                }
-            }
+            var label = $"삽입됨: {combined}";
+            await ExecutePasteAsync(label, prevClip);
             _multiSelected.Clear();
             // 핀 고정 모드에서 팝업이 유지되므로 배지/테두리 즉시 초기화
             if (_pinned) RefreshGrid();

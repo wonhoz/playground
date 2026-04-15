@@ -24,7 +24,7 @@ public partial class App : System.Windows.Application
     private const int WM_HOTKEY  = 0x0312;
 
     // 미리 정의된 단축키 옵션 (표시명, modifier, vk)
-    private static readonly (string Label, uint Mod, uint Vk)[] HotkeyOptions =
+    internal static readonly (string Label, uint Mod, uint Vk)[] HotkeyOptions =
     {
         ("Win+Shift+;",      MOD_WIN | MOD_SHIFT,              VK_OEM_1),
         ("Win+Shift+Space",  MOD_WIN | MOD_SHIFT,              VK_SPACE),

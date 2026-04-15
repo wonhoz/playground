@@ -93,6 +93,14 @@ public class StorageService : IDisposable
         cmd.ExecuteNonQuery();
     }
 
+    public void RemoveRecent(string ch)
+    {
+        using var cmd = _db.CreateCommand();
+        cmd.CommandText = "DELETE FROM recents WHERE char = $ch";
+        cmd.Parameters.AddWithValue("$ch", ch);
+        cmd.ExecuteNonQuery();
+    }
+
     public List<string> GetRecents()
     {
         using var cmd = _db.CreateCommand();

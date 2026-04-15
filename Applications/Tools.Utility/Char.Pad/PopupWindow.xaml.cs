@@ -21,6 +21,7 @@ public partial class PopupWindow : System.Windows.Window
     private bool      _customSortByName = false;
     private bool      _favSortByName    = false;
     private bool      _preserveClipboard = false;
+    private bool      _keepSearch       = false;   // 팝업 열릴 때 마지막 검색어 유지
 
     // 검색 히스토리 (세션 내 메모리, 최대 10개)
     private readonly List<string> _searchHistory = new();
@@ -85,12 +86,14 @@ public partial class PopupWindow : System.Windows.Window
         _customSortByName  = _storage.GetSetting("custom_sort_by_name")  == "1";
         _favSortByName     = _storage.GetSetting("fav_sort_by_name")    == "1";
         _preserveClipboard = _storage.GetSetting("preserve_clipboard")  == "1";
+        _keepSearch        = _storage.GetSetting("keep_search")         == "1";
 
         // 검색 히스토리 DB에서 복원
         _searchHistory.AddRange(_storage.GetSearchHistory());
         BuildTabs();
         UpdatePinBtn();
         UpdateClipboardPreserveBtn();
+        UpdateKeepSearchBtn();
         _initialized = true;
         var lastTab = _storage.GetSetting("last_tab") ?? "recent";
         SwitchTab(lastTab);
@@ -178,8 +181,10 @@ public partial class PopupWindow : System.Windows.Window
         {
             HelpOverlay.Visibility = Visibility.Collapsed;
             if (_initialized) RefreshGrid();
-            SearchBox.Clear();
+            // 검색어 유지 모드: 마지막 검색어 복원 / 일반 모드: 초기화
+            if (!_keepSearch) SearchBox.Clear();
             SearchBox.Focus();
+            SearchBox.CaretIndex = SearchBox.Text.Length;
             ShowClipboardHint();
         }, DispatcherPriority.Loaded);
     }
@@ -227,6 +232,24 @@ public partial class PopupWindow : System.Windows.Window
             ? (SolidColorBrush)FindResource("AccentBrush")
             : (SolidColorBrush)FindResource("BorderBrush");
         RootBorder.BorderThickness = new Thickness(_pinned ? 2 : 1);
+    }
+
+    // ── 검색어 유지 토글 ─────────────────────────────────────────────────
+    private void KeepSearchBtn_Click(object sender, RoutedEventArgs e)
+    {
+        _keepSearch = !_keepSearch;
+        _storage.SetSetting("keep_search", _keepSearch ? "1" : "0");
+        UpdateKeepSearchBtn();
+    }
+
+    private void UpdateKeepSearchBtn()
+    {
+        KeepSearchBtn.Foreground = _keepSearch
+            ? (SolidColorBrush)FindResource("AccentBrush")
+            : (SolidColorBrush)FindResource("TextSecondary");
+        KeepSearchBtn.ToolTip = _keepSearch
+            ? "검색어 유지 ON — 팝업 열릴 때 마지막 검색어 복원"
+            : "검색어 유지 — 팝업 열릴 때 마지막 검색어 복원";
     }
 
     // ── 탭 버튼 생성 ────────────────────────────────────────────────────
@@ -523,7 +546,7 @@ public partial class PopupWindow : System.Windows.Window
         };
         border.Child = tb;
 
-        // 즐겨찾기 별표
+        // 즐겨찾기 별표 — 즐겨찾기 시 항상 표시, 비즐겨찾기 시 호버에서만 희미하게 표시(클릭으로 추가)
         var star = new TextBlock
         {
             Text                = "★",
@@ -533,6 +556,17 @@ public partial class PopupWindow : System.Windows.Window
             VerticalAlignment   = VerticalAlignment.Top,
             Margin              = new Thickness(0, 2, 3, 0),
             Visibility          = isFav ? Visibility.Visible : Visibility.Collapsed,
+            Opacity             = isFav ? 1.0 : 0.4,
+            Cursor              = System.Windows.Input.Cursors.Hand,
+            ToolTip             = isFav ? "즐겨찾기 제거" : "즐겨찾기 추가",
+        };
+        // 별 클릭 → 즐겨찾기 토글 (우클릭 메뉴 없이 빠르게)
+        star.MouseLeftButtonUp += (_, ev) =>
+        {
+            ev.Handled = true;
+            ToggleFavorite(entry, star);
+            star.Opacity = star.Visibility == Visibility.Visible ? 1.0 : 0.4;
+            star.ToolTip = _storage.IsFavorite(entry.Char) ? "즐겨찾기 제거" : "즐겨찾기 추가";
         };
 
         // 검색 결과 카테고리 배지 (하단 좌측 소형 레이블)
@@ -581,12 +615,17 @@ public partial class PopupWindow : System.Windows.Window
         {
             border.Background = (SolidColorBrush)FindResource("CharHover");
             StatusText.Text = GetUnicodeTooltip(entry, useCount);
+            // 즐겨찾기 아닌 경우 별 버튼 희미하게 표시 (호버 힌트)
+            if (!isFav) star.Visibility = Visibility.Visible;
         };
         border.MouseLeave += (_, _) =>
         {
             if (!border.IsKeyboardFocused)
                 border.Background = (SolidColorBrush)FindResource("TabInactive");
             StatusText.Text = _lastStatusText;
+            // 즐겨찾기 아닌 상태에서 호버 벗어나면 별 다시 숨김
+            if (!isFav && !_storage.IsFavorite(entry.Char))
+                star.Visibility = Visibility.Collapsed;
         };
         border.GotKeyboardFocus  += (_, _) => border.Background = (SolidColorBrush)FindResource("CharHover");
         border.LostKeyboardFocus += (_, _) => border.Background = (SolidColorBrush)FindResource("TabInactive");
@@ -599,7 +638,7 @@ public partial class PopupWindow : System.Windows.Window
         }
 
         // 좌클릭: Ctrl+Shift → 코드포인트 복사 / Ctrl → 다중 선택 / Shift → 문자 복사만 / 기본 → 삽입
-        border.MouseLeftButtonUp += (_, _) =>
+        border.MouseLeftButtonUp += async (_, _) =>
         {
             bool ctrl  = Keyboard.IsKeyDown(Key.LeftCtrl)  || Keyboard.IsKeyDown(Key.RightCtrl);
             bool shift = Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightShift);
@@ -621,7 +660,7 @@ public partial class PopupWindow : System.Windows.Window
                 // 다중 선택 중 일반 클릭 → 해당 문자 추가 후 즉시 연속 삽입
                 if (!_multiSelected.Any(e => e.Char == entry.Char))
                     _multiSelected.Add(entry);
-                _ = InsertMultipleCharsAsync();
+                await InsertMultipleCharsAsync();
             }
             else
             {
@@ -719,8 +758,9 @@ public partial class PopupWindow : System.Windows.Window
 
     private int GetItemsPerRow()
     {
-        // ActualWidth가 0이면 렌더링 전 — ScrollViewer 마진(24) + 스크롤바(6) 제외 추정값 사용
-        double w = CharGrid.ActualWidth > 0 ? CharGrid.ActualWidth : Math.Max(0, Width - 36);
+        // CharGrid.ActualWidth 우선 — 렌더링 전(0)이면 창 너비에서 마진·스크롤바 차감
+        // 마진: 좌우 각 12 = 24 / ScrollBar Width = 6 / 총 30
+        double w = CharGrid.ActualWidth > 0 ? CharGrid.ActualWidth : Math.Max(0, Width - 30);
         return Math.Max(1, (int)(w / ItemSize));
     }
 
@@ -818,10 +858,10 @@ public partial class PopupWindow : System.Windows.Window
 
     // ── 복사 전용 (Shift+클릭) ──────────────────────────────────────────
     // 클립보드에 넣는 것 자체가 목적이므로 _preserveClipboard 적용 대상 아님
+    // 삽입이 아닌 복사이므로 최근 사용(AddRecent) 집계 대상 제외
     private void CopyCharOnly(CharEntry entry)
     {
         System.Windows.Clipboard.SetText(entry.Char);
-        _storage.AddRecent(entry.Char);
         StatusText.Text = $"복사됨: {entry.Char}  {entry.Name}";
     }
 
@@ -966,7 +1006,7 @@ public partial class PopupWindow : System.Windows.Window
             _searchTimer?.Start();
     }
 
-    private void SearchBox_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+    private async void SearchBox_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
     {
         if (e.Key == Key.Escape)
         {
@@ -1005,7 +1045,7 @@ public partial class PopupWindow : System.Windows.Window
             // 다중 선택 삽입 우선, 없으면 첫 번째 문자 삽입
             if (_multiSelected.Count > 0)
             {
-                _ = InsertMultipleCharsAsync();
+                await InsertMultipleCharsAsync();
             }
             else if (CharGrid.Children.Count > 0 &&
                 CharGrid.Children[0] is Grid g && g.Children.Count > 0 &&
@@ -1024,7 +1064,7 @@ public partial class PopupWindow : System.Windows.Window
         }
     }
 
-    private void Window_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+    private async void Window_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
     {
         if (e.Key == Key.Escape)
         {
@@ -1156,6 +1196,26 @@ public partial class PopupWindow : System.Windows.Window
         menu.Items.Add(favItem);
         menu.Items.Add(new System.Windows.Controls.Separator());
         menu.Items.Add(cpItem);
+
+        // 최근 탭에서만 개별 삭제 항목 표시
+        if (_activeTab == "recent")
+        {
+            menu.Items.Add(new System.Windows.Controls.Separator());
+            var removeItem = new System.Windows.Controls.MenuItem
+            {
+                Header     = $"🗑  최근 목록에서 제거  ({entry.Char})",
+                Foreground = (SolidColorBrush)FindResource("TextSecondary"),
+                Background = System.Windows.Media.Brushes.Transparent,
+            };
+            removeItem.Click += (_, _) =>
+            {
+                _storage.RemoveRecent(entry.Char);
+                StatusText.Text = $"최근 목록에서 제거됨: {entry.Char}  {entry.Name}";
+                RefreshGrid();
+            };
+            menu.Items.Add(removeItem);
+        }
+
         menu.PlacementTarget = anchor;
         menu.IsOpen = true;
     }
@@ -1345,6 +1405,16 @@ public partial class PopupWindow : System.Windows.Window
     private async Task InsertMultipleCharsAsync()
     {
         if (_multiSelected.Count == 0) return;
+
+        // 30개 초과 선택 시 실수 방지 확인
+        if (_multiSelected.Count > 30)
+        {
+            var confirm = DarkMessageBox.Show(
+                $"{_multiSelected.Count}개 문자를 한꺼번에 삽입하시겠습니까?",
+                "대량 삽입 확인", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (confirm != MessageBoxResult.Yes) return;
+        }
+
         var combined = string.Concat(_multiSelected.Select(e => e.Char));
 
         try

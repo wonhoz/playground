@@ -52,30 +52,40 @@ namespace StayAwake
         public Task<SlackUiResult> SetActiveAsync() => SetPresenceAsync("active");
         public Task<SlackUiResult> SetAwayAsync() => SetPresenceAsync("away");
 
+        /// <summary>방해 금지(DND) 설정. minutes=0이면 해제.</summary>
+        public Task<SlackUiResult> SetDndAsync(int minutes)
+        {
+            var slashCommand = minutes == 0 ? "/dnd end" : $"/dnd {minutes}";
+            var statusKey    = minutes == 0 ? "dnd-end" : $"dnd-{minutes}";
+            return SendCommandAsync(slashCommand, statusKey);
+        }
+
         /// <summary>
         /// PowerShell을 통해 Slack 앱에 슬래시 커맨드 전송
         /// </summary>
         public async Task<SlackUiResult> SetPresenceAsync(string status)
         {
-            // SendKeys: {ENTER}처럼 특수키는 중괄호 표기
-            // /away, /active 는 일반 문자열이므로 그대로 사용 가능
             var slashCommand = status == "away" ? "/away" : "/active";
+            return await SendCommandAsync(slashCommand, status);
+        }
 
+        private async Task<SlackUiResult> SendCommandAsync(string slashCommand, string statusKey)
+        {
             try
             {
                 var output = await RunPowerShellScriptAsync(slashCommand);
 
                 if (output.Contains("SLACK_NOT_RUNNING"))
-                    return new SlackUiResult(status, false, "Slack이 실행 중이 아닙니다.");
+                    return new SlackUiResult(statusKey, false, "Slack이 실행 중이 아닙니다.");
 
                 if (output.Contains("SUCCESS"))
-                    return new SlackUiResult(status, true, null);
+                    return new SlackUiResult(statusKey, true, null);
 
-                return new SlackUiResult(status, false, $"알 수 없는 오류: {output.Trim()}");
+                return new SlackUiResult(statusKey, false, $"알 수 없는 오류: {output.Trim()}");
             }
             catch (Exception ex)
             {
-                return new SlackUiResult(status, false, ex.Message);
+                return new SlackUiResult(statusKey, false, ex.Message);
             }
         }
 

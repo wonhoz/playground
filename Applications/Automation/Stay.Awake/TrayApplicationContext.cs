@@ -267,7 +267,21 @@ namespace StayAwake
             slackItem.DropDownItems.Add(new ToolStripSeparator());
             slackItem.DropDownItems.Add(new ToolStripMenuItem("지금 활성으로 변경", null, async (s, e) => await SetSlackActiveNowAsync()));
             slackItem.DropDownItems.Add(new ToolStripMenuItem("지금 자리비움으로 변경", null, async (s, e) => await SetSlackAwayNowAsync()));
+            slackItem.DropDownItems.Add(new ToolStripSeparator());
+
+            // 방해 금지 (DND) 프리셋
+            var dndItem = new ToolStripMenuItem("방해 금지 (DND)");
+            dndItem.DropDownItems.Add(new ToolStripMenuItem("30분", null, async (s, e) => await SetSlackDndAsync(30)));
+            dndItem.DropDownItems.Add(new ToolStripMenuItem("1시간", null, async (s, e) => await SetSlackDndAsync(60)));
+            dndItem.DropDownItems.Add(new ToolStripMenuItem("2시간", null, async (s, e) => await SetSlackDndAsync(120)));
+            dndItem.DropDownItems.Add(new ToolStripSeparator());
+            dndItem.DropDownItems.Add(new ToolStripMenuItem("해제", null, async (s, e) => await SetSlackDndAsync(0)));
+            slackItem.DropDownItems.Add(dndItem);
+
             menu.Items.Add(slackItem);
+
+            // 메뉴 열 때 상태 아이템 즉시 갱신
+            menu.Opening += OnMenuOpening;
 
             menu.Items.Add(new ToolStripSeparator());
 
@@ -663,7 +677,7 @@ namespace StayAwake
             var message = @"[트레이 아이콘 조작]
 • 좌클릭              시작 / 정지 토글
 • 더블클릭            오늘 통계 바로 보기
-• 우클릭              메뉴 열기
+• 우클릭              컨텍스트 메뉴 열기
 • 마우스 호버         다음 활동 카운트다운 + 오늘 활성 시간 + 세션 경과 시간
                       (정지 시: 오늘 누적 활성 시간)
 
@@ -682,14 +696,20 @@ namespace StayAwake
 • 자동 변경 활성화     출퇴근 시각에 Active/Away 자동 전환
 • 시간 설정            출퇴근 시각 변경 (기본 08:55 / 18:55)
 • 지금 활성/자리비움   즉시 수동 전환 (진행 상태 풍선 알림 표시)
+• 방해 금지 (DND)      30분 / 1시간 / 2시간 설정 또는 해제
+                       → /dnd 슬래시 커맨드를 Slack 앱에 자동 전송
 
 [메뉴 — 통계]
 • 오늘 통계            시뮬레이션·스킵·활성 시간·히스토리·차트
 • 통계 CSV 내보내기    오늘 + 최근 30일 히스토리를 CSV 저장
 
+[상태 표시 읽는 법]
+  메뉴 열기 → '상태: 실행 중 (N회 · 다음 X분 XX초 후)' 즉시 확인
+  트레이 호버 → '다음: X분 XX초 후 | 오늘 HH:MM:SS / N회 | 세션 HH:MM:SS'
+
 [참고]
 • 앱 실행 시 자동으로 시뮬레이션이 시작됩니다
-• Slack 자동 전환은 Slack 데스크탑 앱이 실행 중이어야 합니다
+• Slack 기능은 Slack 데스크탑 앱이 실행 중이어야 합니다
 • 설정은 자동 저장되며 앱 재시작 후에도 유지됩니다";
 
             DarkInfoDialog.Show("도움말", message, 720, 780);
@@ -817,6 +837,30 @@ Slack 자리 비움 상태 방지 도구
             SaveDailyStats();
             _trayIcon.ShowBalloonTip(1500, "StayAwake",
                 result.Success ? "Slack 상태를 '자리비움'으로 변경했습니다." : $"실패: {result.ErrorMessage}",
+                result.Success ? ToolTipIcon.Info : ToolTipIcon.Warning);
+        }
+
+        private void OnMenuOpening(object? sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (_isRunning)
+            {
+                var nextActivity = _lastActivityTime.AddMinutes(_intervalMinutes) - DateTime.Now;
+                if (nextActivity < TimeSpan.Zero) nextActivity = TimeSpan.Zero;
+                _statusItem.Text = $"상태: 실행 중 ({_activityCount}회 · 다음 {(int)nextActivity.TotalMinutes}분 {nextActivity.Seconds:D2}초 후)";
+            }
+        }
+
+        private async Task SetSlackDndAsync(int minutes)
+        {
+            var label = minutes == 0 ? "방해 금지 해제"
+                : minutes < 60 ? $"방해 금지 {minutes}분"
+                : $"방해 금지 {minutes / 60}시간";
+            _trayIcon.ShowBalloonTip(1000, "StayAwake", $"Slack {label} 설정 중...", ToolTipIcon.None);
+            var result = await _slackAutomation.SetDndAsync(minutes);
+            if (result.Success) _dailySlackSuccessCount++; else _dailySlackFailCount++;
+            SaveDailyStats();
+            _trayIcon.ShowBalloonTip(1500, "StayAwake",
+                result.Success ? $"Slack {label} 완료" : $"실패: {result.ErrorMessage}",
                 result.Success ? ToolTipIcon.Info : ToolTipIcon.Warning);
         }
 

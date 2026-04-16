@@ -55,7 +55,7 @@ namespace StayAwake
         /// <summary>방해 금지(DND) 설정. minutes=0이면 해제.</summary>
         public Task<SlackUiResult> SetDndAsync(int minutes)
         {
-            var slashCommand = minutes == 0 ? "/dnd end" : $"/dnd {minutes}";
+            var slashCommand = minutes == 0 ? "/dnd off" : $"/dnd {minutes}";
             var statusKey    = minutes == 0 ? "dnd-end" : $"dnd-{minutes}";
             return SendCommandAsync(slashCommand, statusKey);
         }
@@ -135,7 +135,7 @@ Start-Sleep -Milliseconds 400
 Write-Output 'SUCCESS'
 ";
 
-            var tempFile = Path.Combine(Path.GetTempPath(), "StayAwake_slack.ps1");
+            var tempFile = Path.Combine(Path.GetTempPath(), $"StayAwake_slack_{Guid.NewGuid():N}.ps1");
             await File.WriteAllTextAsync(tempFile, script, System.Text.Encoding.UTF8);
 
             try

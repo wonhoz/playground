@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg6" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FFF8E1"/>
+      <stop offset="100%" stop-color="#FFECB3"/>
+    </linearGradient>
+    <linearGradient id="funnel6" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FF8F00"/>
+      <stop offset="100%" stop-color="#E65100"/>
+    </linearGradient>
+  </defs>
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg6)"/>
+
+  <!-- Layer 2: Input photos (top — scattered) -->
+  <!-- Photo A -->
+  <rect x="148" y="120" width="148" height="118" rx="12" fill="white" stroke="#FF8F00" stroke-width="8" transform="rotate(-10, 222, 179)"/>
+  <rect x="156" y="128" width="132" height="74" fill="#81D4FA" transform="rotate(-10, 222, 179)"/>
+  <!-- Photo B -->
+  <rect x="340" y="100" width="148" height="118" rx="12" fill="white" stroke="#FF8F00" stroke-width="8" transform="rotate(5, 414, 159)"/>
+  <rect x="348" y="108" width="132" height="74" fill="#FFCC80" transform="rotate(5, 414, 159)"/>
+  <!-- Photo C -->
+  <rect x="540" y="120" width="148" height="118" rx="12" fill="white" stroke="#FF9800" stroke-width="8" transform="rotate(-5, 614, 179)"/>
+  <rect x="548" y="128" width="132" height="74" fill="#F48FB1" transform="rotate(-5, 614, 179)"/>
+  <!-- Video file -->
+  <rect x="740" y="108" width="136" height="118" rx="12" fill="#F3E5F5" stroke="#CE93D8" stroke-width="8" transform="rotate(8, 808, 167)"/>
+  <polygon points="790,142 790,186 832,164" fill="#AB47BC" transform="rotate(8, 808, 167)"/>
+
+  <!-- Funnel shape (middle) -->
+  <polygon points="148,296 876,296 640,560 384,560" fill="url(#funnel6)" opacity="0.95"/>
+  <!-- Funnel neck -->
+  <rect x="384" y="558" width="256" height="100" rx="12" fill="#E65100"/>
+  <!-- Funnel label -->
+  <text x="512" y="448" font-family="Arial Black, sans-serif" font-size="68" font-weight="900" fill="white" text-anchor="middle" opacity="0.9">SORT</text>
+  <text x="512" y="532" font-family="Arial Black, sans-serif" font-size="52" font-weight="900" fill="#FFF3E0" text-anchor="middle" opacity="0.9">by DATE</text>
+
+  <!-- Output: three date folders (bottom) -->
+  <!-- Folder 01 -->
+  <g transform="translate(148, 680)">
+    <path d="M0,0 L0,230 L226,230 L226,44 L144,44 L126,0 Z" fill="#2E7D32"/>
+    <rect x="0" y="44" width="226" height="186" rx="8" fill="#388E3C"/>
+    <text x="113" y="130" font-family="Arial Black, sans-serif" font-size="52" font-weight="900" fill="white" text-anchor="middle">2024</text>
+    <text x="113" y="198" font-family="Arial Black, sans-serif" font-size="56" font-weight="900" fill="#C8E6C9" text-anchor="middle">/01</text>
+  </g>
+  <!-- Folder 02 -->
+  <g transform="translate(404, 680)" opacity="0.9">
+    <path d="M0,0 L0,230 L226,230 L226,44 L144,44 L126,0 Z" fill="#1B5E20"/>
+    <rect x="0" y="44" width="226" height="186" rx="8" fill="#2E7D32"/>
+    <text x="113" y="130" font-family="Arial Black, sans-serif" font-size="52" font-weight="900" fill="white" text-anchor="middle">2024</text>
+    <text x="113" y="198" font-family="Arial Black, sans-serif" font-size="56" font-weight="900" fill="#A5D6A7" text-anchor="middle">/02</text>
+  </g>
+  <!-- Folder 03 -->
+  <g transform="translate(660, 680)" opacity="0.8">
+    <path d="M0,0 L0,230 L226,230 L226,44 L144,44 L126,0 Z" fill="#1B5E20"/>
+    <rect x="0" y="44" width="226" height="186" rx="8" fill="#388E3C"/>
+    <text x="113" y="130" font-family="Arial Black, sans-serif" font-size="52" font-weight="900" fill="white" text-anchor="middle">2024</text>
+    <text x="113" y="198" font-family="Arial Black, sans-serif" font-size="56" font-weight="900" fill="#C8E6C9" text-anchor="middle">/03</text>
+  </g>
+
+  <!-- Layer 3: Arrow from funnel to folders -->
+  <polygon points="512,660 474,626 550,626" fill="#E65100"/>
+</svg>

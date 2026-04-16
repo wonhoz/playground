@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg2" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#E0F7FA"/>
+      <stop offset="100%" stop-color="#B2EBF2"/>
+    </linearGradient>
+    <linearGradient id="stream2" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#00BCD4"/>
+      <stop offset="100%" stop-color="#0097A7"/>
+    </linearGradient>
+    <linearGradient id="folder2" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FF9800"/>
+      <stop offset="100%" stop-color="#E65100"/>
+    </linearGradient>
+  </defs>
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg2)"/>
+
+  <!-- Layer 2: Input photos (top-left, scattered) -->
+  <!-- Photo 1 -->
+  <rect x="100" y="120" width="180" height="140" rx="14" fill="white" stroke="#00BCD4" stroke-width="8" transform="rotate(-12, 190, 190)"/>
+  <rect x="108" y="128" width="164" height="86" rx="8" fill="#81D4FA" transform="rotate(-12, 190, 190)"/>
+  <circle cx="148" cy="164" r="22" fill="#FFD600" transform="rotate(-12, 190, 190)"/>
+
+  <!-- Photo 2 -->
+  <rect x="240" y="100" width="180" height="140" rx="14" fill="white" stroke="#00BCD4" stroke-width="8" transform="rotate(6, 330, 170)"/>
+  <rect x="248" y="108" width="164" height="86" rx="8" fill="#B3E5FC" transform="rotate(6, 330, 170)"/>
+
+  <!-- Photo 3 -->
+  <rect x="120" y="280" width="180" height="140" rx="14" fill="white" stroke="#26C6DA" stroke-width="8" transform="rotate(-6, 210, 350)"/>
+  <rect x="128" y="288" width="164" height="86" rx="8" fill="#E1F5FE" transform="rotate(-6, 210, 350)"/>
+
+  <!-- Flow arrow (diagonal) -->
+  <path d="M350,350 Q512,450 600,500" fill="none" stroke="url(#stream2)" stroke-width="48" stroke-linecap="round"/>
+  <path d="M560,470 Q580,490 600,500 Q590,472 608,462" fill="none" stroke="url(#stream2)" stroke-width="48" stroke-linecap="round"/>
+  <!-- Arrowhead -->
+  <polygon points="600,500 554,466 570,524" fill="#0097A7"/>
+
+  <!-- Date labels flowing on stream -->
+  <rect x="400" y="380" width="160" height="56" rx="28" fill="#00BCD4" opacity="0.85"/>
+  <text x="480" y="419" font-family="Arial Black, sans-serif" font-size="36" font-weight="900" fill="white" text-anchor="middle">2024-01</text>
+
+  <!-- Layer 2b: Output folders (bottom-right) -->
+  <!-- Folder Jan -->
+  <g transform="translate(610, 490)">
+    <path d="M0,0 L0,200 L310,200 L310,40 L160,40 L140,0 Z" fill="url(#folder2)"/>
+    <rect x="0" y="40" width="310" height="160" rx="8" fill="#FF9800"/>
+    <text x="155" y="135" font-family="Arial Black, sans-serif" font-size="64" font-weight="900" fill="white" text-anchor="middle">2024</text>
+    <text x="155" y="195" font-family="Arial Black, sans-serif" font-size="50" font-weight="900" fill="#FFF3E0" text-anchor="middle">/01</text>
+  </g>
+
+  <!-- Small folder Feb (behind/below) -->
+  <g transform="translate(640, 700)" opacity="0.8">
+    <path d="M0,0 L0,140 L260,140 L260,28 L130,28 L114,0 Z" fill="#F57C00"/>
+    <rect x="0" y="28" width="260" height="112" rx="6" fill="#FB8C00"/>
+    <text x="130" y="108" font-family="Arial Black, sans-serif" font-size="56" font-weight="900" fill="white" text-anchor="middle">/02</text>
+  </g>
+
+  <!-- Layer 3: Small check mark badge -->
+  <circle cx="240" cy="820" r="72" fill="#00BCD4"/>
+  <path d="M204,820 L228,844 L276,796" fill="none" stroke="white" stroke-width="24" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

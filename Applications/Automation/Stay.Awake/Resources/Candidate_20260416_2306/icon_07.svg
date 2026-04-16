@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Layer 1: 배경 — 다크그린→에메랄드 그라데이션 -->
+  <defs>
+    <linearGradient id="bg7" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0A3D2E"/>
+      <stop offset="100%" stop-color="#1A6B48"/>
+    </linearGradient>
+    <linearGradient id="waveGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#39FF14" stop-opacity="0.3"/>
+      <stop offset="40%" stop-color="#39FF14"/>
+      <stop offset="60%" stop-color="#00FF88"/>
+      <stop offset="100%" stop-color="#00FF88" stop-opacity="0.3"/>
+    </linearGradient>
+    <filter id="glow7">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="8" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg7)"/>
+
+  <!-- 그리드 라인 (의료 모니터 느낌) -->
+  <line x1="130" y1="256" x2="894" y2="256" stroke="#1E5E40" stroke-width="2" opacity="0.6"/>
+  <line x1="130" y1="384" x2="894" y2="384" stroke="#1E5E40" stroke-width="2" opacity="0.6"/>
+  <line x1="130" y1="512" x2="894" y2="512" stroke="#1E5E40" stroke-width="2" opacity="0.8"/>
+  <line x1="130" y1="640" x2="894" y2="640" stroke="#1E5E40" stroke-width="2" opacity="0.6"/>
+  <line x1="130" y1="768" x2="894" y2="768" stroke="#1E5E40" stroke-width="2" opacity="0.6"/>
+  <line x1="256" y1="200" x2="256" y2="820" stroke="#1E5E40" stroke-width="2" opacity="0.5"/>
+  <line x1="512" y1="200" x2="512" y2="820" stroke="#1E5E40" stroke-width="2" opacity="0.5"/>
+  <line x1="768" y1="200" x2="768" y2="820" stroke="#1E5E40" stroke-width="2" opacity="0.5"/>
+
+  <!-- Layer 2: 심박수 파형 메인 -->
+  <polyline points="
+    130,512
+    230,512
+    270,512
+    310,480
+    330,280
+    370,740
+    400,512
+    440,512
+    480,512
+    520,470
+    540,260
+    580,760
+    610,512
+    650,512
+    690,512
+    730,480
+    750,280
+    790,740
+    820,512
+    894,512"
+    fill="none" stroke="url(#waveGrad)" stroke-width="52" stroke-linecap="round" stroke-linejoin="round" filter="url(#glow7)"/>
+
+  <!-- Layer 3: 활성 점 (끝점 펄스) -->
+  <circle cx="820" cy="512" r="40" fill="#39FF14" opacity="0.9" filter="url(#glow7)"/>
+  <circle cx="820" cy="512" r="22" fill="#CCFF88"/>
+  <!-- ACTIVE 레이블 -->
+  <text x="512" y="940" font-family="Arial, sans-serif" font-size="88" font-weight="700" fill="#39FF14" text-anchor="middle" opacity="0.9">ACTIVE</text>
+</svg>

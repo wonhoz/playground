@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Layer 1: 배경 — 민트/아쿠아 그라데이션 -->
+  <defs>
+    <linearGradient id="bg1" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#A8EDEA"/>
+      <stop offset="100%" stop-color="#47C9C5"/>
+    </linearGradient>
+    <linearGradient id="screenGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="100%" stop-color="#E8F8F7"/>
+    </linearGradient>
+    <radialGradient id="pupilGrad" cx="50%" cy="45%" r="50%">
+      <stop offset="0%" stop-color="#00C896"/>
+      <stop offset="100%" stop-color="#007A5E"/>
+    </radialGradient>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg1)"/>
+
+  <!-- Layer 2: 모니터 프레임 -->
+  <rect x="160" y="200" width="704" height="480" rx="32" fill="url(#screenGrad)" stroke="#2BBFBB" stroke-width="18"/>
+  <!-- 모니터 스탠드 -->
+  <rect x="432" y="680" width="160" height="60" rx="8" fill="#FFFFFF" stroke="#2BBFBB" stroke-width="14"/>
+  <rect x="340" y="738" width="344" height="36" rx="18" fill="#FFFFFF" stroke="#2BBFBB" stroke-width="14"/>
+
+  <!-- Layer 3: 화면 안 거대한 눈 -->
+  <!-- 눈꺼풀 위 -->
+  <path d="M 270 440 Q 512 260 754 440" fill="none" stroke="#1A7A77" stroke-width="52" stroke-linecap="round"/>
+  <!-- 눈꺼풀 아래 -->
+  <path d="M 270 440 Q 512 620 754 440" fill="none" stroke="#1A7A77" stroke-width="52" stroke-linecap="round"/>
+  <!-- 눈 흰자 -->
+  <ellipse cx="512" cy="440" rx="220" ry="160" fill="white"/>
+  <!-- 홍채 -->
+  <circle cx="512" cy="440" r="110" fill="url(#pupilGrad)"/>
+  <!-- 동공 -->
+  <circle cx="512" cy="440" r="60" fill="#004D3D"/>
+  <!-- 하이라이트 -->
+  <circle cx="548" cy="405" r="28" fill="white" opacity="0.9"/>
+  <circle cx="480" cy="460" r="14" fill="white" opacity="0.6"/>
+</svg>

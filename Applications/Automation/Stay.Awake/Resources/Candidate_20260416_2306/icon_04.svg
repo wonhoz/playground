@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Layer 1: 배경 — 라벤더/퍼플 -->
+  <defs>
+    <linearGradient id="bg4" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#E8D5FF"/>
+      <stop offset="100%" stop-color="#B888F8"/>
+    </linearGradient>
+    <linearGradient id="cursorGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="100%" stop-color="#E0D0FF"/>
+    </linearGradient>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg4)"/>
+
+  <!-- Layer 2: 원형 카운트다운 타이머 링 -->
+  <!-- 배경 링 -->
+  <circle cx="512" cy="512" r="340" fill="none" stroke="#D0A0FF" stroke-width="60" opacity="0.5"/>
+  <!-- 진행 링 (약 75% 채워진 상태) -->
+  <circle cx="512" cy="512" r="340" fill="none" stroke="#7B2FFF" stroke-width="60"
+    stroke-dasharray="1600 534" stroke-dashoffset="534"
+    stroke-linecap="round" transform="rotate(-90 512 512)"/>
+  <!-- 타이머 중앙 텍스트 -->
+  <text x="512" y="480" font-family="Arial, sans-serif" font-size="130" font-weight="700" fill="#5C1FCC" text-anchor="middle">3min</text>
+  <text x="512" y="600" font-family="Arial, sans-serif" font-size="80" fill="#8855DD" text-anchor="middle" opacity="0.85">NEXT</text>
+
+  <!-- Layer 3: 마우스 커서 (우측 하단) -->
+  <g transform="translate(600, 600) rotate(0)">
+    <!-- 커서 화살표 -->
+    <path d="M 0 0 L 0 200 L 55 155 L 90 240 L 130 222 L 95 135 L 165 135 Z"
+          fill="url(#cursorGrad)" stroke="#7B2FFF" stroke-width="16" stroke-linejoin="round"/>
+  </g>
+</svg>

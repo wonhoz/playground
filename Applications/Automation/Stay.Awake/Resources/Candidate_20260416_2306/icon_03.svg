@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Layer 1: 배경 — 따뜻한 크림/살구 -->
+  <defs>
+    <linearGradient id="bg3" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FFF4E0"/>
+      <stop offset="100%" stop-color="#FFD9A0"/>
+    </linearGradient>
+    <linearGradient id="coffeeGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#C47B3A"/>
+      <stop offset="100%" stop-color="#7B3F10"/>
+    </linearGradient>
+    <linearGradient id="cupGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="100%" stop-color="#F0E8D8"/>
+    </linearGradient>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg3)"/>
+
+  <!-- Layer 2: 커피컵 본체 -->
+  <!-- 컵 몸체 -->
+  <path d="M 240 370 L 280 750 Q 282 790 330 792 L 694 792 Q 742 790 744 750 L 784 370 Z" fill="url(#cupGrad)" stroke="#C47B3A" stroke-width="18"/>
+  <!-- 컵 손잡이 -->
+  <path d="M 784 450 Q 870 450 870 555 Q 870 660 784 660" fill="none" stroke="#C47B3A" stroke-width="42" stroke-linecap="round"/>
+  <!-- 커피 액체 -->
+  <ellipse cx="512" cy="430" rx="250" ry="70" fill="url(#coffeeGrad)"/>
+  <!-- 크레마 거품 -->
+  <ellipse cx="480" cy="415" rx="60" ry="20" fill="#E8B870" opacity="0.7"/>
+  <ellipse cx="560" cy="425" rx="40" ry="16" fill="#E8C080" opacity="0.6"/>
+  <!-- 컵 받침 -->
+  <ellipse cx="512" cy="810" rx="290" ry="40" fill="#E8D4B8" stroke="#C47B3A" stroke-width="14"/>
+
+  <!-- 김 (증기) -->
+  <path d="M 400 340 Q 380 280 410 220 Q 440 160 420 100" fill="none" stroke="#BBAAAA" stroke-width="22" stroke-linecap="round" opacity="0.7"/>
+  <path d="M 512 330 Q 492 260 522 190" fill="none" stroke="#BBAAAA" stroke-width="22" stroke-linecap="round" opacity="0.6"/>
+  <path d="M 624 340 Q 644 270 614 200 Q 584 130 614 70" fill="none" stroke="#BBAAAA" stroke-width="22" stroke-linecap="round" opacity="0.5"/>
+
+  <!-- Layer 3: Slack 활성 초록 점 (온라인 표시) -->
+  <circle cx="760" cy="240" r="90" fill="#2ECC71"/>
+  <circle cx="760" cy="240" r="60" fill="#27AE60"/>
+  <!-- 내부 하이라이트 -->
+  <circle cx="740" cy="218" r="22" fill="white" opacity="0.5"/>
+</svg>

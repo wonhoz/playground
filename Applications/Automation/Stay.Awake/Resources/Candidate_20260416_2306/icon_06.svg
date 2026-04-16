@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Layer 1: 배경 — 미드나잇 블루 -->
+  <defs>
+    <linearGradient id="bg6" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1E3A6E"/>
+      <stop offset="100%" stop-color="#0D1F3C"/>
+    </linearGradient>
+    <linearGradient id="moonGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FFE566"/>
+      <stop offset="100%" stop-color="#FFCC00"/>
+    </linearGradient>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg6)"/>
+
+  <!-- 별빛 -->
+  <circle cx="200" cy="200" r="10" fill="#A0C0FF" opacity="0.7"/>
+  <circle cx="820" cy="180" r="8" fill="#A0C0FF" opacity="0.6"/>
+  <circle cx="880" cy="400" r="6" fill="#A0C0FF" opacity="0.5"/>
+  <circle cx="150" cy="650" r="9" fill="#A0C0FF" opacity="0.6"/>
+  <circle cx="750" cy="820" r="7" fill="#A0C0FF" opacity="0.5"/>
+
+  <!-- Layer 2: 달 크레센트 -->
+  <circle cx="512" cy="512" r="280" fill="url(#moonGrad)"/>
+  <!-- 달 그림자로 초승달 모양 만들기 -->
+  <circle cx="630" cy="450" r="240" fill="#1E3A6E"/>
+  <!-- 달 표면 크레이터 -->
+  <circle cx="390" cy="560" r="28" fill="none" stroke="#CCB000" stroke-width="10" opacity="0.5"/>
+  <circle cx="340" cy="470" r="18" fill="none" stroke="#CCB000" stroke-width="8" opacity="0.4"/>
+  <circle cx="420" cy="430" r="14" fill="none" stroke="#CCB000" stroke-width="6" opacity="0.35"/>
+
+  <!-- Layer 3: 금지 X (빨간색) -->
+  <!-- 큰 원 -->
+  <circle cx="512" cy="512" r="400" fill="none" stroke="#FF3344" stroke-width="70"/>
+  <!-- X 대각선 1 -->
+  <line x1="300" y1="300" x2="724" y2="724" stroke="#FF3344" stroke-width="70" stroke-linecap="round"/>
+  <!-- X 대각선 2 -->
+  <line x1="724" y1="300" x2="300" y2="724" stroke="#FF3344" stroke-width="70" stroke-linecap="round"/>
+</svg>

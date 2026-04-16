@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Layer 1: 배경 — 딥 인디고/네이비 야간 -->
+  <defs>
+    <linearGradient id="bg5" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1A1240"/>
+      <stop offset="100%" stop-color="#2D1B69"/>
+    </linearGradient>
+    <radialGradient id="eyeGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FFE066"/>
+      <stop offset="60%" stop-color="#FF9900"/>
+      <stop offset="100%" stop-color="#CC6600"/>
+    </radialGradient>
+    <radialGradient id="bgGlow" cx="50%" cy="45%" r="55%">
+      <stop offset="0%" stop-color="#3A2880" stop-opacity="1"/>
+      <stop offset="100%" stop-color="#1A1240" stop-opacity="1"/>
+    </radialGradient>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg5)"/>
+  <!-- 배경 은은한 글로우 -->
+  <circle cx="512" cy="480" r="380" fill="url(#bgGlow)"/>
+
+  <!-- 별 -->
+  <circle cx="180" cy="200" r="12" fill="#FFE8A0" opacity="0.8"/>
+  <circle cx="820" cy="160" r="9" fill="#FFE8A0" opacity="0.7"/>
+  <circle cx="750" cy="280" r="6" fill="#FFE8A0" opacity="0.6"/>
+  <circle cx="220" cy="340" r="7" fill="#FFE8A0" opacity="0.5"/>
+  <circle cx="870" cy="380" r="10" fill="#FFE8A0" opacity="0.6"/>
+
+  <!-- Layer 2: 올빼미 몸체 -->
+  <!-- 몸통 -->
+  <ellipse cx="512" cy="600" rx="230" ry="280" fill="#F5A623"/>
+  <!-- 배 -->
+  <ellipse cx="512" cy="650" rx="150" ry="200" fill="#FFF0C0"/>
+  <!-- 날개 왼쪽 -->
+  <path d="M 282 520 Q 200 600 230 750 Q 310 700 360 620 Z" fill="#E89010"/>
+  <!-- 날개 오른쪽 -->
+  <path d="M 742 520 Q 824 600 794 750 Q 714 700 664 620 Z" fill="#E89010"/>
+  <!-- 귀 뿔 왼쪽 -->
+  <path d="M 360 320 L 330 180 L 440 270 Z" fill="#E89010"/>
+  <!-- 귀 뿔 오른쪽 -->
+  <path d="M 664 320 L 694 180 L 584 270 Z" fill="#E89010"/>
+
+  <!-- Layer 3: 얼굴 디테일 -->
+  <!-- 얼굴 원 -->
+  <ellipse cx="512" cy="430" rx="230" ry="220" fill="#FDDFA0"/>
+  <!-- 눈 왼쪽 -->
+  <circle cx="410" cy="400" r="80" fill="url(#eyeGlow)"/>
+  <circle cx="410" cy="400" r="50" fill="#222244"/>
+  <circle cx="410" cy="400" r="28" fill="#111133"/>
+  <circle cx="425" cy="382" r="14" fill="white" opacity="0.9"/>
+  <!-- 눈 오른쪽 -->
+  <circle cx="614" cy="400" r="80" fill="url(#eyeGlow)"/>
+  <circle cx="614" cy="400" r="50" fill="#222244"/>
+  <circle cx="614" cy="400" r="28" fill="#111133"/>
+  <circle cx="629" cy="382" r="14" fill="white" opacity="0.9"/>
+  <!-- 부리 -->
+  <path d="M 480 475 L 512 530 L 544 475 Z" fill="#FF8800"/>
+  <!-- 발 -->
+  <path d="M 420 860 L 380 920 M 420 860 L 420 930 M 420 860 L 460 920" stroke="#CC6600" stroke-width="20" stroke-linecap="round"/>
+  <path d="M 604 860 L 564 920 M 604 860 L 604 930 M 604 860 L 644 920" stroke="#CC6600" stroke-width="20" stroke-linecap="round"/>
+</svg>

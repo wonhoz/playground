@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Layer 1: 배경 — 비비드 핫핑크/코랄 그라데이션 -->
+  <defs>
+    <linearGradient id="bg8" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FF6EB4"/>
+      <stop offset="100%" stop-color="#FF2266"/>
+    </linearGradient>
+    <linearGradient id="monitorGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="100%" stop-color="#F5F0FF"/>
+    </linearGradient>
+    <linearGradient id="screenOnGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#E8FFF0"/>
+      <stop offset="100%" stop-color="#C0FFD8"/>
+    </linearGradient>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg8)"/>
+
+  <!-- Layer 2: 모니터 -->
+  <!-- 외부 프레임 -->
+  <rect x="140" y="180" width="744" height="520" rx="36" fill="url(#monitorGrad)" stroke="white" stroke-width="20"/>
+  <!-- 화면 -->
+  <rect x="170" y="210" width="684" height="460" rx="20" fill="url(#screenOnGrad)"/>
+  <!-- 스탠드 -->
+  <rect x="432" y="700" width="160" height="56" rx="8" fill="white" opacity="0.9"/>
+  <rect x="330" y="754" width="364" height="34" rx="17" fill="white" opacity="0.9"/>
+
+  <!-- Layer 3: 화면 안 디테일 — 전원 ON 표시 -->
+  <!-- 전원 버튼 심볼 (화면 내부) -->
+  <circle cx="512" cy="420" r="160" fill="none" stroke="#00CC66" stroke-width="52" stroke-dasharray="820 180" stroke-dashoffset="-90" stroke-linecap="round"/>
+  <line x1="512" y1="250" x2="512" y2="420" stroke="#00CC66" stroke-width="52" stroke-linecap="round"/>
+  <!-- 전원 아이콘 배경 하이라이트 -->
+  <circle cx="512" cy="420" r="180" fill="#00FF88" opacity="0.12"/>
+
+  <!-- ON 텍스트 -->
+  <text x="512" y="660" font-family="Arial Black, sans-serif" font-size="100" font-weight="900" fill="#00AA55" text-anchor="middle">ON</text>
+
+  <!-- 모니터 하단 전원 LED 점 -->
+  <circle cx="512" cy="738" r="16" fill="#00EE66"/>
+</svg>

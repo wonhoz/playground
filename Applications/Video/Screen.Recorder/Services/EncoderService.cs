@@ -11,7 +11,8 @@ public static class EncoderService
     public static bool IsFfmpegAvailable() => FindFfmpeg() is not null;
 
     /// <summary>프레임 시퀀스를 FFmpeg로 MP4 인코딩</summary>
-    public static async Task EncodeToMp4Async(List<string> framePaths, int fps, string outputPath)
+    public static async Task EncodeToMp4Async(List<string> framePaths, int fps, string outputPath,
+        bool recordAudio = false, string audioDevice = "")
     {
         if (framePaths.Count == 0) return;
 
@@ -28,9 +29,22 @@ public static class EncoderService
         var inputDir = Path.GetDirectoryName(framePaths[0])!;
         var inputPattern = Path.Combine(inputDir, "frame_%06d.png");
 
+        // 오디오 입력 옵션 (wasapi로 시스템 오디오 캡처)
+        var audioInput = "";
+        var audioOutput = "";
+        if (recordAudio)
+        {
+            var device = string.IsNullOrWhiteSpace(audioDevice)
+                ? "audio=virtual-audio-capturer"   // VB-Audio 등 가상장치 fallback
+                : $"audio={audioDevice}";
+            // wasapi loopback: 시스템 오디오 캡처 (재생 중인 오디오)
+            audioInput = $"-f dshow -i \"{device}\" ";
+            audioOutput = "-c:a aac -b:a 128k ";
+        }
+
         // FFmpeg 인코딩: H.264, yuv420p (호환성), CRF 23 (적정 품질)
-        var args = $"-framerate {fps} -i \"{inputPattern}\" " +
-                   $"-c:v libx264 -pix_fmt yuv420p -crf 23 -preset fast " +
+        var args = $"-framerate {fps} -i \"{inputPattern}\" {audioInput}" +
+                   $"-c:v libx264 -pix_fmt yuv420p -crf 23 -preset fast {audioOutput}" +
                    $"-movflags +faststart -y \"{outputPath}\"";
 
         var psi = new ProcessStartInfo
@@ -118,17 +132,13 @@ public static class EncoderService
         var delay = (int)Math.Round(100.0 / fps);
 
         using var firstFrame = Image.FromFile(framePaths[0]);
-        var dimension = new FrameDimension(firstFrame.FrameDimensionsList[0]);
-
-        // GIF 인코더 파라미터 설정
-        var encoderParams = new EncoderParameters(1);
 
         // 첫 프레임 저장 (GIF 헤더 포함)
         var gifEncoder = GetGifEncoder();
 
-        // 멀티프레임 GIF 저장을 위한 바이너리 수동 조립
-        using var ms = new MemoryStream();
-        using var bw = new BinaryWriter(ms);
+        // FileStream 직접 쓰기 — MemoryStream 전체 누적 방지
+        using var fs = new FileStream(outputPath, FileMode.Create, FileAccess.Write, FileShare.None, 65536);
+        using var bw = new BinaryWriter(fs);
 
         // GIF89a 헤더
         bw.Write(new byte[] { 0x47, 0x49, 0x46, 0x38, 0x39, 0x61 }); // "GIF89a"
@@ -197,7 +207,6 @@ public static class EncoderService
         bw.Write((byte)0x3B);
 
         bw.Flush();
-        File.WriteAllBytes(outputPath, ms.ToArray());
     }
 
     private static int FindImageDescriptor(byte[] data)

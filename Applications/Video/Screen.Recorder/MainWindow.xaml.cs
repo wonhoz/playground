@@ -41,8 +41,8 @@ public partial class MainWindow : Window
     private enum RecordState { Idle, Countdown, Recording, Paused }
     private RecordState _state = RecordState.Idle;
     private CancellationTokenSource? _countdownCts;
-    private DispatcherTimer? _maxTimeTimer;
     private HwndSource? _hwndSource;
+    private HudOverlay? _hud;
 
     private static SolidColorBrush ColorBrush(string hex) =>
         new((System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString(hex)!);
@@ -82,6 +82,9 @@ public partial class MainWindow : Window
         // 저장된 커서 설정 복원
         CursorCheckBox.IsChecked = _settings.ShowCursor;
 
+        // 저장된 오디오 설정 복원
+        AudioCheckBox.IsChecked = _settings.RecordAudio;
+
         // 저장된 영역 복원
         if (_settings.LastRegionWidth > 0 && _settings.LastRegionHeight > 0)
         {
@@ -92,11 +95,24 @@ public partial class MainWindow : Window
         }
 
         _timer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(100) };
-        _timer.Tick += (_, _) =>
+        _timer.Tick += async (_, _) =>
         {
-            TimerText.Text = _stopwatch.Elapsed.TotalHours >= 1
-                ? _stopwatch.Elapsed.ToString(@"h\:mm\:ss")
-                : _stopwatch.Elapsed.ToString(@"mm\:ss");
+            var elapsed = _stopwatch.Elapsed;
+            var timeText = elapsed.TotalHours >= 1
+                ? elapsed.ToString(@"h\:mm\:ss")
+                : elapsed.ToString(@"mm\:ss");
+            TimerText.Text = timeText;
+
+            // HUD 시간 갱신
+            _hud?.UpdateState(isRecording: _state == RecordState.Recording, timeText);
+
+            // 최대 녹화 시간 체크 — _stopwatch 기준이므로 일시정지 시간 제외
+            if (_settings.MaxRecordingSeconds > 0 &&
+                elapsed.TotalSeconds >= _settings.MaxRecordingSeconds &&
+                _state == RecordState.Recording)
+            {
+                await StopRecordingAsync();
+            }
         };
     }
 
@@ -390,6 +406,15 @@ public partial class MainWindow : Window
 
         _settings.OutputFormat = IsGifFormat() ? "gif" : "mp4";
         _settings.Save();
+
+        // GIF 선택 시 오디오 체크박스 비활성화
+        if (IsGifFormat() && AudioCheckBox.IsChecked == true)
+        {
+            AudioCheckBox.IsChecked = false;
+            _settings.RecordAudio = false;
+            _settings.Save();
+        }
+        AudioCheckBox.IsEnabled = !IsGifFormat();
     }
 
     private void BrowseFolder_Click(object sender, RoutedEventArgs e)
@@ -447,16 +472,22 @@ public partial class MainWindow : Window
         msg.AppendLine("【 설정 】");
         msg.AppendLine("  출력 형식: MP4 (FFmpeg 필요) / GIF");
         msg.AppendLine("  FPS: 10 / 15 / 24 / 30");
-        msg.AppendLine("  최대 시간: 지정 시간 도달 시 자동 정지");
+        msg.AppendLine("  최대 시간: 실제 녹화 시간 기준 (일시정지 제외) 자동 정지");
         msg.AppendLine("  마우스 포인터 포함 여부 선택 가능");
+        msg.AppendLine("  시스템 오디오 녹음: MP4 + FFmpeg 필요 (dshow 가상 장치)");
         msg.AppendLine("  파일명: 접두사 지정 (기본: recording)");
         msg.AppendLine();
         msg.AppendLine("【 녹화 완료 】");
-        msg.AppendLine("  [예] 파일 열기  |  [아니요] 폴더 열기");
+        msg.AppendLine("  완료 시 파일 경로가 클립보드에 자동 복사됩니다.");
+        msg.AppendLine("  [예] 파일 열기  |  [아니요] 폴더 열기  |  [취소] 닫기");
         msg.AppendLine("  파일 크기가 함께 표시됩니다.");
         msg.AppendLine();
+        msg.AppendLine("【 미니 HUD 】");
+        msg.AppendLine("  녹화 시작 시 화면 우하단에 플로팅 HUD가 표시됩니다.");
+        msg.AppendLine("  HUD에서 일시정지/정지 가능, 드래그로 위치 이동 가능합니다.");
+        msg.AppendLine();
         msg.AppendLine("【 FFmpeg 】");
-        msg.AppendLine("  MP4 녹화에 FFmpeg가 필요합니다.");
+        msg.AppendLine("  MP4/오디오 녹화에 FFmpeg가 필요합니다.");
         msg.AppendLine("  '설치' 버튼으로 winget/choco 자동 설치,");
         msg.AppendLine("  '↻' 버튼으로 설치 후 재검색 가능합니다.");
         msg.AppendLine("  GIF는 FFmpeg 없이도 녹화 가능합니다.");
@@ -478,13 +509,56 @@ public partial class MainWindow : Window
         _settings.Save();
     }
 
+    private void AudioCheckBox_Click(object sender, RoutedEventArgs e)
+    {
+        if (!IsLoaded) return;
+        var wantAudio = AudioCheckBox.IsChecked == true;
+        // 오디오는 MP4 + FFmpeg 조합에서만 지원
+        if (wantAudio && (IsGifFormat() || !_ffmpegAvailable))
+        {
+            AudioCheckBox.IsChecked = false;
+            System.Windows.MessageBox.Show(
+                "오디오 녹음은 MP4 형식과 FFmpeg가 모두 필요합니다.",
+                "Screen.Recorder", MessageBoxButton.OK, MessageBoxImage.Warning);
+            return;
+        }
+        _settings.RecordAudio = wantAudio;
+        _settings.Save();
+    }
+
     private void FileNamePrefixBox_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
     {
         if (!IsLoaded) return;
-        var prefix = FileNamePrefixBox.Text.Trim();
-        if (string.IsNullOrEmpty(prefix)) prefix = "recording";
-        _settings.FileNamePrefix = prefix;
+
+        // 파일명 불법 문자 제거
+        var invalidChars = Path.GetInvalidFileNameChars();
+        var raw = FileNamePrefixBox.Text;
+        var cleaned = new string(raw.Where(c => !invalidChars.Contains(c)).ToArray());
+
+        if (cleaned != raw)
+        {
+            // 커서 위치 보정 후 텍스트 교체
+            var caretIndex = Math.Max(0, FileNamePrefixBox.CaretIndex - (raw.Length - cleaned.Length));
+            FileNamePrefixBox.Text = cleaned;
+            FileNamePrefixBox.CaretIndex = Math.Min(caretIndex, cleaned.Length);
+        }
+
+        var prefix = cleaned.Trim();
+        if (string.IsNullOrEmpty(prefix))
+        {
+            _settings.FileNamePrefix = "recording";
+        }
+        else
+        {
+            _settings.FileNamePrefix = prefix;
+        }
         _settings.Save();
+    }
+
+    private void FileNamePrefixBox_LostFocus(object sender, RoutedEventArgs e)
+    {
+        if (string.IsNullOrWhiteSpace(FileNamePrefixBox.Text))
+            FileNamePrefixBox.Text = "recording";
     }
 
     private int GetSelectedFps()
@@ -554,26 +628,11 @@ public partial class MainWindow : Window
         Directory.CreateDirectory(_settings.OutputFolder);
 
         var captureMouse = CursorCheckBox.IsChecked == true;
+        var recordAudio  = !isGif && _ffmpegAvailable && (AudioCheckBox.IsChecked == true);
         _captureService = new ScreenCaptureService(
-            _selectedRegion, fps, outputPath, isGif, captureMouse);
+            _selectedRegion, fps, outputPath, isGif, captureMouse, recordAudio, _settings.AudioDevice);
 
         SetState(RecordState.Recording);
-
-        // 최대 녹화 시간 타이머
-        if (_settings.MaxRecordingSeconds > 0)
-        {
-            _maxTimeTimer = new DispatcherTimer
-            {
-                Interval = TimeSpan.FromSeconds(_settings.MaxRecordingSeconds)
-            };
-            _maxTimeTimer.Tick += async (_, _) =>
-            {
-                _maxTimeTimer.Stop();
-                if (_state is RecordState.Recording or RecordState.Paused)
-                    await StopRecordingAsync();
-            };
-            _maxTimeTimer.Start();
-        }
 
         try
         {
@@ -588,9 +647,6 @@ public partial class MainWindow : Window
 
     private async Task StopRecordingAsync()
     {
-        _maxTimeTimer?.Stop();
-        _maxTimeTimer = null;
-
         StatusText.Text = "인코딩 중...";
         StatusDot.Fill = ColorBrush("#F39C12");
 
@@ -621,8 +677,11 @@ public partial class MainWindow : Window
                 _              => $"{fileSize} B"
             };
 
+            // 경로를 클립보드에 자동 복사
+            try { System.Windows.Clipboard.SetText(completedPath); } catch { }
+
             var result = System.Windows.MessageBox.Show(
-                $"녹화 완료!\n{completedPath}\n파일 크기: {sizeText}\n\n[예] 파일 열기  |  [아니요] 폴더 열기  |  [취소] 닫기",
+                $"녹화 완료!\n{completedPath}\n파일 크기: {sizeText}\n\n경로가 클립보드에 복사되었습니다.\n\n[예] 파일 열기  |  [아니요] 폴더 열기  |  [취소] 닫기",
                 "Screen.Recorder", MessageBoxButton.YesNoCancel, MessageBoxImage.Information);
 
             if (result == MessageBoxResult.Yes)
@@ -674,6 +733,8 @@ public partial class MainWindow : Window
                 _stopwatch.Reset();
                 _timer.Stop();
                 TimerText.Text = "00:00";
+                _hud?.Close();
+                _hud = null;
                 break;
 
             case RecordState.Countdown:
@@ -704,12 +765,26 @@ public partial class MainWindow : Window
                 StatusDot.Fill = ColorBrush("#E74C3C");
                 _stopwatch.Start();
                 _timer.Start();
+                // HUD 없으면 생성
+                if (_hud is null)
+                {
+                    _hud = new HudOverlay();
+                    _hud.PauseRequested += () => Pause_Click(this, new RoutedEventArgs());
+                    _hud.StopRequested  += async () => await Dispatcher.InvokeAsync(async () =>
+                    {
+                        if (_state is RecordState.Recording or RecordState.Paused)
+                            await StopRecordingAsync();
+                    });
+                    _hud.Show();
+                }
+                _hud.UpdateState(isRecording: true, "00:00");
                 break;
 
             case RecordState.Paused:
                 PauseBtn.Content = "▶";
                 StatusText.Text = "일시정지";
                 StatusDot.Fill = ColorBrush("#F39C12");
+                _hud?.UpdateState(isRecording: false, TimerText.Text);
                 _stopwatch.Stop();
                 break;
         }
@@ -740,8 +815,8 @@ public partial class MainWindow : Window
             UnregisterHotKey(_hwndSource.Handle, HotkeyPause);
             UnregisterHotKey(_hwndSource.Handle, HotkeyStop);
         }
-        _maxTimeTimer?.Stop();
         _captureService?.Dispose();
+        _hud?.Close();
         _timer.Stop();
         base.OnClosed(e);
     }

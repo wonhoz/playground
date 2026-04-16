@@ -230,6 +230,7 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="100"/>
@@ -258,12 +259,17 @@
                     <ComboBoxItem Content="30 fps"/>
                 </ComboBox>
 
-                        <!-- 마우스 포인터 -->
+                        <!-- 옵션 (마우스 포인터 + 오디오) -->
                 <TextBlock Grid.Row="2" Grid.Column="0" Text="옵션"
-                           FontSize="13" Foreground="{StaticResource TextSec}" VerticalAlignment="Center"/>
-                <CheckBox Grid.Row="2" Grid.Column="1" x:Name="CursorCheckBox"
-                          Content="마우스 포인터 포함" IsChecked="True" Margin="0,0,0,8"
-                          Click="CursorCheckBox_Click"/>
+                           FontSize="13" Foreground="{StaticResource TextSec}" VerticalAlignment="Top" Margin="0,4,0,0"/>
+                <StackPanel Grid.Row="2" Grid.Column="1" Margin="0,0,0,8">
+                    <CheckBox x:Name="CursorCheckBox"
+                              Content="마우스 포인터 포함" IsChecked="True" Margin="0,0,0,6"
+                              Click="CursorCheckBox_Click"/>
+                    <CheckBox x:Name="AudioCheckBox"
+                              Content="시스템 오디오 녹음 (MP4 전용, FFmpeg 필요)" Margin="0,0,0,0"
+                              Click="AudioCheckBox_Click"/>
+                </StackPanel>
 
                 <!-- 최대 녹화 시간 -->
                 <TextBlock Grid.Row="3" Grid.Column="0" Text="최대 시간"
@@ -287,6 +293,7 @@
                          BorderBrush="#444444" BorderThickness="1" Padding="8,4"
                          Margin="0,0,0,8" MaxLength="50"
                          TextChanged="FileNamePrefixBox_TextChanged"
+                         LostFocus="FileNamePrefixBox_LostFocus"
                          ToolTip="파일명 접두사 (예: recording → recording_20260412_120000.mp4)"/>
 
                 <!-- 저장 폴더 -->

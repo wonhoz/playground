@@ -1,12 +1,17 @@
-﻿using System.Windows;
+﻿using System.Runtime.InteropServices;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Interop;
 using System.Windows.Media;
 
 namespace ScreenRecorder;
 
 public partial class RegionSelectWindow : Window
 {
+    [DllImport("dwmapi.dll", PreserveSig = true)]
+    private static extern int DwmSetWindowAttribute(nint hwnd, int attr, ref int value, int size);
+
     private System.Windows.Point _startPoint;
     private bool _isDragging;
 
@@ -24,11 +29,30 @@ public partial class RegionSelectWindow : Window
 
     private void OnLoaded(object sender, RoutedEventArgs e)
     {
+        if (PresentationSource.FromVisual(this) is HwndSource src)
+        {
+            int v = 1;
+            DwmSetWindowAttribute(src.Handle, 20, ref v, sizeof(int));
+        }
+
         // 전체 가상 스크린(다중 모니터 포함) 덮기
         Left = SystemParameters.VirtualScreenLeft;
         Top = SystemParameters.VirtualScreenTop;
         Width = SystemParameters.VirtualScreenWidth;
         Height = SystemParameters.VirtualScreenHeight;
+
+        // HintLabel 화면 중앙 배치 (SizeChanged 시 재계산)
+        OverlayCanvas.SizeChanged += (_, _) => CenterHintLabel();
+        CenterHintLabel();
+    }
+
+    private void CenterHintLabel()
+    {
+        HintLabel.Measure(new System.Windows.Size(double.PositiveInfinity, double.PositiveInfinity));
+        var w = HintLabel.DesiredSize.Width;
+        var h = HintLabel.DesiredSize.Height;
+        Canvas.SetLeft(HintLabel, (OverlayCanvas.ActualWidth - w) / 2);
+        Canvas.SetTop(HintLabel,  (OverlayCanvas.ActualHeight - h) / 2);
     }
 
     private void OnMouseDown(object sender, MouseButtonEventArgs e)

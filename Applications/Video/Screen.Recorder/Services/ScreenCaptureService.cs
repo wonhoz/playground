@@ -48,19 +48,24 @@ public sealed class ScreenCaptureService : IDisposable
     private readonly string _outputPath;
     private readonly bool _isGif;
     private readonly bool _captureMouse;
+    private readonly bool _recordAudio;
+    private readonly string _audioDevice;
     private readonly List<string> _framePaths = [];
     private CancellationTokenSource? _cts;
     private Task? _captureTask;
     private volatile bool _paused;
     private string? _tempDir;
 
-    public ScreenCaptureService(Int32Rect region, int fps, string outputPath, bool isGif, bool captureMouse = true)
+    public ScreenCaptureService(Int32Rect region, int fps, string outputPath, bool isGif,
+        bool captureMouse = true, bool recordAudio = false, string audioDevice = "")
     {
         _region       = region;
         _fps          = fps;
         _outputPath   = outputPath;
         _isGif        = isGif;
         _captureMouse = captureMouse;
+        _recordAudio  = recordAudio;
+        _audioDevice  = audioDevice;
     }
 
     public Task StartAsync()
@@ -163,7 +168,7 @@ public sealed class ScreenCaptureService : IDisposable
 
     private async Task EncodeMp4Async()
     {
-        await EncoderService.EncodeToMp4Async(_framePaths, _fps, _outputPath);
+        await EncoderService.EncodeToMp4Async(_framePaths, _fps, _outputPath, _recordAudio, _audioDevice);
     }
 
     private async Task EncodeGifAsync()

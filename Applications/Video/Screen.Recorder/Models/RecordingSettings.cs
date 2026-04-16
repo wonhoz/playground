@@ -15,6 +15,8 @@ public class RecordingSettings
     public int LastRegionHeight { get; set; } = 0;
     public int MaxRecordingSeconds { get; set; } = 0;  // 0 = 무제한
     public string FileNamePrefix { get; set; } = "recording";
+    public bool RecordAudio { get; set; } = false;
+    public string AudioDevice { get; set; } = "";  // 빈 문자열 = 기본 장치
 
     private static readonly string SettingsPath = Path.Combine(
         Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),

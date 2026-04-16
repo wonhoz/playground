@@ -26,9 +26,8 @@
             <TextBlock x:Name="SizeText" Foreground="#E0E0E0" FontSize="13" FontFamily="Consolas"/>
         </Border>
 
-        <!-- 안내 텍스트 -->
-        <Border x:Name="HintLabel" Background="#CC1A1A2E" CornerRadius="6" Padding="16,10"
-                Canvas.Left="50" Canvas.Top="50">
+        <!-- 안내 텍스트 (Canvas 내 중앙 배치는 Loaded 시 코드에서 설정) -->
+        <Border x:Name="HintLabel" Background="#CC1A1A2E" CornerRadius="6" Padding="16,10">
             <StackPanel>
                 <TextBlock Text="녹화할 영역을 드래그하세요" Foreground="#E0E0E0" FontSize="16" FontWeight="Bold"/>
                 <TextBlock Text="ESC: 취소  |  드래그 후 놓기: 영역 확정" Foreground="#888888" FontSize="12" Margin="0,4,0,0"/>

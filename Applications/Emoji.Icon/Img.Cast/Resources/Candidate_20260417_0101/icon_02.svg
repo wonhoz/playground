@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg2" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#E8D5FF"/>
+      <stop offset="100%" stop-color="#C8B3FF"/>
+    </linearGradient>
+    <linearGradient id="orbit2" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FF6B9D"/>
+      <stop offset="100%" stop-color="#FF4081"/>
+    </linearGradient>
+  </defs>
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg2)"/>
+
+  <!-- Layer 2: Orbital format rings -->
+  <!-- Outer ring -->
+  <circle cx="512" cy="512" r="320" fill="none" stroke="#B980FF" stroke-width="18" stroke-dasharray="40 22" opacity="0.6"/>
+  <!-- Middle ring -->
+  <circle cx="512" cy="512" r="220" fill="none" stroke="#FF6B9D" stroke-width="16" stroke-dasharray="32 18" opacity="0.7"/>
+  <!-- Inner ring -->
+  <circle cx="512" cy="512" r="120" fill="none" stroke="#26C6DA" stroke-width="14" stroke-dasharray="24 14" opacity="0.8"/>
+
+  <!-- Format bubbles on orbit -->
+  <!-- SVG bubble -->
+  <circle cx="512" cy="192" r="72" fill="#FF6B9D"/>
+  <text x="512" y="205" font-family="Arial Black, sans-serif" font-size="52" font-weight="900" fill="white" text-anchor="middle">SVG</text>
+
+  <!-- PNG bubble -->
+  <circle cx="832" cy="512" r="72" fill="#26C6DA"/>
+  <text x="832" y="525" font-family="Arial Black, sans-serif" font-size="52" font-weight="900" fill="white" text-anchor="middle">PNG</text>
+
+  <!-- ICO bubble -->
+  <circle cx="512" cy="832" r="72" fill="#AB47BC"/>
+  <text x="512" y="845" font-family="Arial Black, sans-serif" font-size="52" font-weight="900" fill="white" text-anchor="middle">ICO</text>
+
+  <!-- JPG bubble -->
+  <circle cx="192" cy="512" r="72" fill="#FF7043"/>
+  <text x="192" y="525" font-family="Arial Black, sans-serif" font-size="52" font-weight="900" fill="white" text-anchor="middle">JPG</text>
+
+  <!-- Layer 3: Center converge point -->
+  <circle cx="512" cy="512" r="88" fill="white"/>
+  <circle cx="512" cy="512" r="64" fill="url(#orbit2)"/>
+  <path d="M488,496 L488,528 L536,512 Z" fill="white"/>
+</svg>

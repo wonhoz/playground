@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg7" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#7B1FA2"/>
+      <stop offset="100%" stop-color="#4A148C"/>
+    </linearGradient>
+    <linearGradient id="funnel7" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFD600"/>
+      <stop offset="100%" stop-color="#FF9800"/>
+    </linearGradient>
+  </defs>
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg7)"/>
+
+  <!-- Layer 2: Funnel/converter shape -->
+  <!-- Input images flying in (top left) -->
+  <rect x="90" y="90" width="160" height="130" rx="14" fill="white" opacity="0.85" transform="rotate(-15, 170, 155)"/>
+  <text x="170" y="163" font-family="Arial Black, sans-serif" font-size="56" font-weight="900" fill="#7B1FA2" text-anchor="middle" transform="rotate(-15, 170, 155)">PNG</text>
+
+  <rect x="160" y="220" width="160" height="130" rx="14" fill="white" opacity="0.7" transform="rotate(-8, 240, 285)"/>
+  <text x="240" y="293" font-family="Arial Black, sans-serif" font-size="56" font-weight="900" fill="#4A148C" text-anchor="middle" transform="rotate(-8, 240, 285)">SVG</text>
+
+  <rect x="80" y="330" width="160" height="130" rx="14" fill="white" opacity="0.55" transform="rotate(-20, 160, 395)"/>
+  <text x="160" y="403" font-family="Arial Black, sans-serif" font-size="56" font-weight="900" fill="#6A1B9A" text-anchor="middle" transform="rotate(-20, 160, 395)">JPG</text>
+
+  <!-- Funnel / converter body -->
+  <polygon points="380,220 740,220 660,560 460,560" fill="url(#funnel7)"/>
+  <!-- Funnel neck -->
+  <rect x="460" y="558" width="200" height="220" rx="20" fill="#FF9800"/>
+  <!-- Output arrow at bottom of funnel -->
+  <polygon points="512,778 460,730 564,730" fill="#FFD600"/>
+
+  <!-- Funnel label -->
+  <text x="560" y="420" font-family="Arial Black, sans-serif" font-size="64" font-weight="900" fill="#4A148C" text-anchor="middle">CAST</text>
+
+  <!-- Layer 3: Output ICO (bottom right) -->
+  <rect x="680" y="680" width="230" height="180" rx="18" fill="white" opacity="0.95"/>
+  <text x="795" y="790" font-family="Arial Black, sans-serif" font-size="86" font-weight="900" fill="#7B1FA2" text-anchor="middle">ICO</text>
+
+  <!-- Glow dots -->
+  <circle cx="830" cy="240" r="18" fill="#FFD600" opacity="0.7"/>
+  <circle cx="880" cy="320" r="12" fill="#FF9800" opacity="0.5"/>
+  <circle cx="860" cy="180" r="10" fill="white" opacity="0.5"/>
+</svg>

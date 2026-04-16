@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg8" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FF8F00"/>
+      <stop offset="100%" stop-color="#F57C00"/>
+    </linearGradient>
+    <linearGradient id="img8" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ECEFF1"/>
+      <stop offset="100%" stop-color="#CFD8DC"/>
+    </linearGradient>
+  </defs>
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg8)"/>
+
+  <!-- Layer 2: Large image silhouette (landscape photo shape) -->
+  <rect x="130" y="200" width="580" height="440" rx="28" fill="url(#img8)"/>
+  <!-- Landscape scene inside silhouette -->
+  <rect x="130" y="200" width="580" height="440" rx="28" fill="#B2DFDB" opacity="0.5"/>
+  <circle cx="280" cy="310" r="76" fill="#FFD600"/>
+  <path d="M130,500 L240,390 L330,440 L440,360 L580,470 L710,390 L710,640 L130,640 Z" fill="#1B5E20" opacity="0.75"/>
+  <!-- Clouds -->
+  <ellipse cx="480" cy="280" rx="70" ry="36" fill="white" opacity="0.7"/>
+  <ellipse cx="560" cy="268" rx="52" ry="28" fill="white" opacity="0.7"/>
+  <ellipse cx="420" cy="275" rx="46" ry="26" fill="white" opacity="0.7"/>
+
+  <!-- Conversion arrow overlaid -->
+  <rect x="648" y="340" width="240" height="100" rx="24" fill="#1A237E"/>
+  <path d="M678,390 L828,390 M828,390 L790,360 M828,390 L790,420" fill="none" stroke="white" stroke-width="22" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Output format tag -->
+  <rect x="648" y="466" width="240" height="100" rx="24" fill="white"/>
+  <text x="768" y="534" font-family="Arial Black, sans-serif" font-size="66" font-weight="900" fill="#1A237E" text-anchor="middle">ICO</text>
+
+  <!-- Layer 3: Input format tag on image -->
+  <rect x="148" y="218" width="160" height="68" rx="14" fill="#FF6F00"/>
+  <text x="228" y="267" font-family="Arial Black, sans-serif" font-size="52" font-weight="900" fill="white" text-anchor="middle">PNG</text>
+
+  <!-- App name at bottom -->
+  <text x="512" y="850" font-family="Arial Black, sans-serif" font-size="84" font-weight="900" fill="white" text-anchor="middle">Img.Cast</text>
+</svg>

@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg5" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FF8A65"/>
+      <stop offset="100%" stop-color="#FF5722"/>
+    </linearGradient>
+    <linearGradient id="frame5" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFFDE7"/>
+      <stop offset="100%" stop-color="#FFF9C4"/>
+    </linearGradient>
+  </defs>
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg5)"/>
+
+  <!-- Background sparkles -->
+  <circle cx="160" cy="200" r="22" fill="#FFD600" opacity="0.6"/>
+  <circle cx="864" cy="160" r="16" fill="#FFD600" opacity="0.5"/>
+  <circle cx="900" cy="800" r="20" fill="#FFD600" opacity="0.4"/>
+  <circle cx="130" cy="820" r="14" fill="#FFD600" opacity="0.5"/>
+
+  <!-- Layer 2: Transform scene — before frame -->
+  <rect x="100" y="280" width="340" height="420" rx="20" fill="white" opacity="0.25" stroke="white" stroke-width="8"/>
+  <!-- Landscape in before frame -->
+  <rect x="110" y="290" width="320" height="410" rx="16" fill="#B2EBF2" opacity="0.6"/>
+  <circle cx="220" cy="380" r="60" fill="#FFD600" opacity="0.8"/>
+  <path d="M110,560 L180,460 L250,510 L320,440 L430,540 L430,700 L110,700 Z" fill="#66BB6A" opacity="0.7"/>
+  <text x="270" y="760" font-family="Arial Black, sans-serif" font-size="60" font-weight="900" fill="white" text-anchor="middle" opacity="0.9">PNG</text>
+
+  <!-- Magic wand / transformation beam -->
+  <line x1="450" y1="490" x2="574" y2="490" stroke="#FFD600" stroke-width="28" stroke-linecap="round"/>
+  <polygon points="574,490 540,462 540,518" fill="#FFD600"/>
+  <!-- Sparkle on wand -->
+  <line x1="512" y1="440" x2="512" y2="420" stroke="#FFD600" stroke-width="12" stroke-linecap="round"/>
+  <line x1="530" y1="455" x2="545" y2="440" stroke="#FFD600" stroke-width="12" stroke-linecap="round"/>
+  <line x1="494" y1="455" x2="479" y2="440" stroke="#FFD600" stroke-width="12" stroke-linecap="round"/>
+
+  <!-- After frame (ICO grid) -->
+  <rect x="580" y="280" width="340" height="420" rx="20" fill="url(#frame5)" stroke="#FFD600" stroke-width="8"/>
+  <!-- ICO multi-size grid -->
+  <g>
+    <rect x="610" y="310" width="120" height="120" rx="12" fill="#FF7043"/>
+    <rect x="750" y="310" width="120" height="120" rx="12" fill="#FF7043"/>
+    <rect x="610" y="450" width="120" height="120" rx="12" fill="#FF8A65"/>
+    <rect x="750" y="450" width="120" height="120" rx="12" fill="#FF8A65"/>
+    <rect x="640" y="590" width="60" height="60" rx="8" fill="#FFAB91"/>
+    <rect x="720" y="590" width="60" height="60" rx="8" fill="#FFAB91"/>
+    <rect x="800" y="590" width="60" height="60" rx="8" fill="#FFAB91"/>
+  </g>
+  <text x="750" y="760" font-family="Arial Black, sans-serif" font-size="60" font-weight="900" fill="#FF5722" text-anchor="middle" opacity="0.9">ICO</text>
+
+  <!-- Layer 3: Badge label -->
+  <rect x="330" y="840" width="364" height="88" rx="44" fill="#FFD600"/>
+  <text x="512" y="900" font-family="Arial Black, sans-serif" font-size="60" font-weight="900" fill="#FF5722" text-anchor="middle">Img Cast</text>
+</svg>

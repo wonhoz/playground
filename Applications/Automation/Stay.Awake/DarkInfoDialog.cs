@@ -59,7 +59,7 @@ namespace StayAwake
             };
             textBox.LinkClicked += (s, e) =>
             {
-                try { System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo(e.LinkText) { UseShellExecute = true }); }
+                try { if (!string.IsNullOrEmpty(e.LinkText)) System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo(e.LinkText) { UseShellExecute = true }); }
                 catch { }
             };
 

@@ -10,7 +10,7 @@ namespace Music.Player
 {
     public partial class LibraryWindow : Window
     {
-        private readonly Action<IEnumerable<string>> _addToPlaylist;
+        private readonly Func<IEnumerable<string>, Task> _addToPlaylist;
         private List<TrackInfo> _allTracks = new();
         private string? _selectedFolder;
         private CancellationTokenSource? _scanCts;
@@ -18,7 +18,7 @@ namespace Music.Player
         // 아티스트 목록 (전체 포함)
         private readonly ObservableCollection<string> _artists = new();
 
-        public LibraryWindow(Action<IEnumerable<string>> addToPlaylist)
+        public LibraryWindow(Func<IEnumerable<string>, Task> addToPlaylist)
         {
             _addToPlaylist = addToPlaylist;
             InitializeComponent();
@@ -151,11 +151,11 @@ namespace Music.Player
             StatusText.Text = $"{filtered.Count}곡";
         }
 
-        private void TrackListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        private async void TrackListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             if (TrackListView.SelectedItem is TrackInfo track && File.Exists(track.FilePath))
             {
-                _addToPlaylist(new[] { track.FilePath });
+                await _addToPlaylist(new[] { track.FilePath });
                 StatusText.Text = $"추가됨: {track.DisplayTitle}";
             }
         }
@@ -167,7 +167,7 @@ namespace Music.Player
                 StatusText.Text = $"{TrackListView.SelectedItems.Count}곡 선택됨";
         }
 
-        private void AddSelected_Click(object sender, RoutedEventArgs e)
+        private async void AddSelected_Click(object sender, RoutedEventArgs e)
         {
             var paths = TrackListView.SelectedItems
                 .Cast<TrackInfo>()
@@ -176,16 +176,16 @@ namespace Music.Player
                 .ToList();
 
             if (paths.Count == 0) return;
-            _addToPlaylist(paths);
+            await _addToPlaylist(paths);
             StatusText.Text = $"{paths.Count}곡 추가됨";
         }
 
-        private void AddAll_Click(object sender, RoutedEventArgs e)
+        private async void AddAll_Click(object sender, RoutedEventArgs e)
         {
             var source = TrackListView.ItemsSource as List<TrackInfo> ?? _allTracks;
             var paths = source.Select(t => t.FilePath).Where(File.Exists).ToList();
             if (paths.Count == 0) return;
-            _addToPlaylist(paths);
+            await _addToPlaylist(paths);
             StatusText.Text = $"{paths.Count}곡 모두 추가됨";
         }
     }

@@ -166,7 +166,7 @@
                                     Background="#1A1A2E" BorderBrush="#505068" BorderThickness="1.5"
                                     VerticalAlignment="Center" Margin="0,0,6,0">
                                 <Path x:Name="Mark" Data="M 2 7 L 6 11 L 13 3"
-                                      Stroke="#64C87A" StrokeThickness="2"
+                                      Stroke="#E91E63" StrokeThickness="2"
                                       StrokeStartLineCap="Round" StrokeEndLineCap="Round"
                                       Visibility="Collapsed"/>
                             </Border>
@@ -175,8 +175,8 @@
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsChecked" Value="True">
                                 <Setter TargetName="Mark" Property="Visibility" Value="Visible"/>
-                                <Setter TargetName="Bd" Property="Background" Value="#1E3028"/>
-                                <Setter TargetName="Bd" Property="BorderBrush" Value="#64C87A"/>
+                                <Setter TargetName="Bd" Property="Background" Value="#2A1020"/>
+                                <Setter TargetName="Bd" Property="BorderBrush" Value="#E91E63"/>
                             </Trigger>
                             <Trigger Property="IsMouseOver" Value="True">
                                 <Setter TargetName="Bd" Property="BorderBrush" Value="#7070A8"/>
@@ -198,14 +198,14 @@
                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                             <Grid Width="16" Height="16" VerticalAlignment="Center" Margin="0,0,6,0">
                                 <Ellipse x:Name="Outer" Stroke="#505068" StrokeThickness="1.5" Fill="#1A1A2E"/>
-                                <Ellipse x:Name="Inner" Width="8" Height="8" Fill="#64C87A" Visibility="Collapsed"/>
+                                <Ellipse x:Name="Inner" Width="8" Height="8" Fill="#E91E63" Visibility="Collapsed"/>
                             </Grid>
                             <ContentPresenter VerticalAlignment="Center"/>
                         </StackPanel>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsChecked" Value="True">
                                 <Setter TargetName="Inner" Property="Visibility" Value="Visible"/>
-                                <Setter TargetName="Outer" Property="Stroke" Value="#64C87A"/>
+                                <Setter TargetName="Outer" Property="Stroke" Value="#E91E63"/>
                                 <Setter TargetName="Outer" Property="Fill" Value="#1E3028"/>
                             </Trigger>
                             <Trigger Property="IsMouseOver" Value="True">

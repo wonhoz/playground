@@ -6,7 +6,9 @@ namespace Music.Player.Services
     {
         private IWavePlayer? _wavePlayer;
         private AudioFileReader? _audioFile;
+        private VarispeedSampleProvider? _speedProvider;
         private bool _disposed;
+        private float _currentSpeed = 1.0f;
 
         public event EventHandler? PlaybackStopped;
         public event EventHandler<TimeSpan>? PositionChanged;
@@ -27,6 +29,18 @@ namespace Music.Player.Services
             }
         }
 
+        /// <summary>재생 속도 (0.5x ~ 2.0x). 트랙 전환 시에도 유지된다.</summary>
+        public float Speed
+        {
+            get => _currentSpeed;
+            set
+            {
+                _currentSpeed = Math.Clamp(value, 0.5f, 2.0f);
+                if (_speedProvider != null)
+                    _speedProvider.Speed = _currentSpeed;
+            }
+        }
+
         public void Load(string filePath)
         {
             // Unsubscribe from old PlaybackStopped event before stopping
@@ -40,8 +54,9 @@ namespace Music.Player.Services
             DisposeAudio();
 
             _audioFile = new AudioFileReader(filePath);
+            _speedProvider = new VarispeedSampleProvider(_audioFile, _currentSpeed);
             _wavePlayer = new WaveOutEvent();
-            _wavePlayer.Init(_audioFile);
+            _wavePlayer.Init(_speedProvider);
             _wavePlayer.PlaybackStopped += OnPlaybackStopped;
 
             _positionTimer = new System.Timers.Timer(100);
@@ -76,6 +91,7 @@ namespace Music.Player.Services
             if (_audioFile != null)
             {
                 _audioFile.CurrentTime = position;
+                _speedProvider?.Reset();
                 PositionChanged?.Invoke(this, position);
             }
         }
@@ -97,6 +113,7 @@ namespace Music.Player.Services
 
             _audioFile?.Dispose();
             _audioFile = null;
+            _speedProvider = null; // VarispeedSampleProvider는 Dispose 불필요
 
             _positionTimer?.Dispose();
             _positionTimer = null;

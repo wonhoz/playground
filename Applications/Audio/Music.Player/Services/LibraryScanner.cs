@@ -19,17 +19,19 @@ namespace Music.Player.Services
 
             var tracks = new List<TrackInfo>(files.Count);
 
-            for (int i = 0; i < files.Count; i++)
+            // 파일별 Task.Run 대신 단일 Task.Run으로 배치 처리 (스케줄링 오버헤드 감소)
+            await Task.Run(() =>
             {
-                cancellationToken.ThrowIfCancellationRequested();
-
-                var file = files[i];
-                var track = await Task.Run(() => TrackInfo.FromFile(file), cancellationToken);
-                HistoryService.Instance.LoadFavoriteStatus(track);
-                tracks.Add(track);
-
-                progress?.Report((i + 1, files.Count, Path.GetFileName(file)));
-            }
+                for (int i = 0; i < files.Count; i++)
+                {
+                    cancellationToken.ThrowIfCancellationRequested();
+                    var file = files[i];
+                    var track = TrackInfo.FromFile(file);
+                    HistoryService.Instance.LoadFavoriteStatus(track);
+                    tracks.Add(track);
+                    progress?.Report((i + 1, files.Count, Path.GetFileName(file)));
+                }
+            }, cancellationToken);
 
             return tracks
                 .OrderBy(t => t.DisplayArtist)

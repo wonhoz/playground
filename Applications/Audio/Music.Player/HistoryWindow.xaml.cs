@@ -9,9 +9,9 @@ namespace Music.Player
 {
     public partial class HistoryWindow : Window
     {
-        private readonly Action<IEnumerable<string>> _addToPlaylist;
+        private readonly Func<IEnumerable<string>, Task> _addToPlaylist;
 
-        public HistoryWindow(Action<IEnumerable<string>> addToPlaylist)
+        public HistoryWindow(Func<IEnumerable<string>, Task> addToPlaylist)
         {
             _addToPlaylist = addToPlaylist;
             InitializeComponent();
@@ -37,13 +37,13 @@ namespace Music.Player
         private void RefreshButton_Click(object sender, RoutedEventArgs e)
             => LoadHistory();
 
-        private void ListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        private async void ListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             if (sender is ListView lv && lv.SelectedItem is PlayHistoryEntry entry)
             {
                 if (File.Exists(entry.FilePath))
                 {
-                    _addToPlaylist(new[] { entry.FilePath });
+                    await _addToPlaylist(new[] { entry.FilePath });
                     StatusText.Text = $"추가됨: {entry.Title}";
                 }
                 else
@@ -54,7 +54,7 @@ namespace Music.Player
             }
         }
 
-        private void AddToPlaylist_Click(object sender, RoutedEventArgs e)
+        private async void AddToPlaylist_Click(object sender, RoutedEventArgs e)
         {
             var paths = GetSelectedPaths().ToList();
             if (paths.Count == 0)
@@ -62,7 +62,7 @@ namespace Music.Player
                 StatusText.Text = "선택된 항목이 없습니다.";
                 return;
             }
-            _addToPlaylist(paths);
+            await _addToPlaylist(paths);
             StatusText.Text = $"{paths.Count}곡 추가됨";
         }
 

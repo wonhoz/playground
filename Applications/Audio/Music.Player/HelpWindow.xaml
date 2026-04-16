@@ -63,7 +63,7 @@
                     <!-- App Info -->
                     <TextBlock Text="Music Player" FontSize="18" FontWeight="SemiBold"
                                Foreground="{StaticResource AccentBrush}" Margin="0,0,0,4"/>
-                    <TextBlock x:Name="VersionText" Text="v1.0.0" FontSize="11"
+                    <TextBlock x:Name="VersionText" Text="v1.1.0" FontSize="11"
                                Foreground="{StaticResource TextSecondaryBrush}" Margin="0,0,0,16"/>
 
                     <!-- Keyboard Shortcuts -->
@@ -144,6 +144,16 @@
                         <TextBlock Grid.Column="1" Text="플레이리스트 패널 토글" Foreground="{StaticResource TextSecondaryBrush}" FontSize="12"/>
                     </Grid>
 
+                    <!-- Playback Speed -->
+                    <TextBlock Text="재생 속도" FontSize="11" FontWeight="Medium"
+                               Foreground="{StaticResource AccentBrush}" Margin="0,12,0,6"/>
+
+                    <TextBlock TextWrapping="Wrap" FontSize="12" LineHeight="20"
+                               Foreground="{StaticResource TextSecondaryBrush}" Margin="0,0,0,4">
+                        하단 속도 버튼(0.5× ~ 2×)으로 재생 속도를 변경합니다.
+                        속도는 트랙 전환 시에도 유지되며, 1×를 클릭하면 원래 속도로 돌아옵니다.
+                    </TextBlock>
+
                     <!-- Separator -->
                     <Border Height="1" Background="#333333" Margin="0,16,0,12"/>
 
@@ -158,6 +168,15 @@
                         음악 파일 또는 폴더를 창에 드래그 앤 드롭하거나,
                         플레이리스트 패널의 + 버튼으로 추가할 수 있습니다.
                         <LineBreak/><LineBreak/>
+                        <Run FontWeight="Medium" Foreground="#BBBBBB">플레이리스트 검색</Run>
+                        <LineBreak/>
+                        플레이리스트 패널 상단 검색창에 곡명 또는 아티스트를
+                        입력하면 실시간으로 필터링됩니다.
+                        <LineBreak/><LineBreak/>
+                        <Run FontWeight="Medium" Foreground="#BBBBBB">현재 재생 표시</Run>
+                        <LineBreak/>
+                        플레이리스트에서 재생 중인 곡은 ▶ 아이콘과 보라색으로 강조 표시됩니다.
+                        <LineBreak/><LineBreak/>
                         <Run FontWeight="Medium" Foreground="#BBBBBB">가사 표시</Run>
                         <LineBreak/>
                         음악 파일과 같은 이름의 .lrc 파일이 있으면
@@ -165,7 +184,7 @@
                         <LineBreak/><LineBreak/>
                         <Run FontWeight="Medium" Foreground="#BBBBBB">재생목록 영속성</Run>
                         <LineBreak/>
-                        앱 종료 시 재생목록·재생 위치·볼륨·셔플/반복 상태가
+                        앱 종료 시 재생목록·재생 위치·볼륨·셔플/반복·재생속도 상태가
                         자동 저장되어 다음 실행 시 복원됩니다.
                     </TextBlock>
 

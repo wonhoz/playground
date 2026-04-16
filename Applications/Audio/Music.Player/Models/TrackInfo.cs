@@ -8,6 +8,7 @@ namespace Music.Player.Models
     public class TrackInfo : INotifyPropertyChanged
     {
         private bool _isFavorite;
+        private bool _isPlaying;
 
         public string FilePath { get; set; } = "";
         public string Title { get; set; } = "";
@@ -25,6 +26,19 @@ namespace Music.Player.Models
                 {
                     _isFavorite = value;
                     PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IsFavorite)));
+                }
+            }
+        }
+
+        public bool IsPlaying
+        {
+            get => _isPlaying;
+            set
+            {
+                if (_isPlaying != value)
+                {
+                    _isPlaying = value;
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IsPlaying)));
                 }
             }
         }

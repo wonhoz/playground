@@ -6,8 +6,8 @@
         mc:Ignorable="d"
         Title="Music Player"
         Icon="pack://application:,,,/Resources/app.ico"
-        Height="420" Width="380"
-        MinHeight="380" MinWidth="320"
+        Height="450" Width="380"
+        MinHeight="408" MinWidth="320"
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
         AllowsTransparency="True"
@@ -198,6 +198,33 @@
             </Setter>
         </Style>
 
+        <!-- Speed Button Style -->
+        <Style x:Key="SpeedButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="#888888"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="FontSize" Value="10"/>
+            <Setter Property="Padding" Value="5,2"/>
+            <Setter Property="Height" Value="20"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="Bd" Background="{TemplateBinding Background}" CornerRadius="3"
+                                Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Bd" Property="Background" Value="#383838"/>
+                                <Setter Property="Foreground" Value="#CCCCCC"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
         <!-- Dark ScrollBar Thumb -->
         <Style x:Key="ScrollBarThumbStyle" TargetType="Thumb">
             <Setter Property="OverridesDefaultStyle" Value="True"/>
@@ -320,6 +347,7 @@
                 <Grid Grid.Column="0" Margin="16" Background="Transparent" MouseLeftButtonDown="ContentArea_MouseLeftButtonDown">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
@@ -539,6 +567,25 @@
                             </Viewbox>
                         </Button>
                     </Grid>
+
+                    <!-- Speed Control -->
+                    <Grid Grid.Row="5" Margin="20,2,20,6">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="속도" FontSize="10" Foreground="#9E9E9E"
+                                   VerticalAlignment="Center" Margin="0,0,8,0"/>
+                        <StackPanel x:Name="SpeedButtonPanel" Grid.Column="1"
+                                    Orientation="Horizontal" HorizontalAlignment="Center">
+                            <Button Tag="0.5"  Content="0.5×"  Click="SpeedButton_Click" Style="{StaticResource SpeedButtonStyle}"/>
+                            <Button Tag="0.75" Content="0.75×" Click="SpeedButton_Click" Style="{StaticResource SpeedButtonStyle}"/>
+                            <Button Tag="1.0"  Content="1×"    Click="SpeedButton_Click" Style="{StaticResource SpeedButtonStyle}"/>
+                            <Button Tag="1.25" Content="1.25×" Click="SpeedButton_Click" Style="{StaticResource SpeedButtonStyle}"/>
+                            <Button Tag="1.5"  Content="1.5×"  Click="SpeedButton_Click" Style="{StaticResource SpeedButtonStyle}"/>
+                            <Button Tag="2.0"  Content="2×"    Click="SpeedButton_Click" Style="{StaticResource SpeedButtonStyle}"/>
+                        </StackPanel>
+                    </Grid>
                 </Grid>
 
                 <!-- Playlist Panel -->
@@ -546,6 +593,7 @@
                         BorderBrush="#404040" BorderThickness="1,0,0,0" Visibility="Collapsed">
                     <Grid Margin="8">
                         <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="*"/>
@@ -603,7 +651,21 @@
                                     ToolTip="Load playlist from file" FontSize="11" Margin="4,0,0,0"/>
                         </StackPanel>
 
-                        <ListBox x:Name="PlaylistBox" Grid.Row="2"
+                        <!-- Search Box -->
+                        <Border Grid.Row="2" Margin="8,0,8,6" Background="#2A2A2A"
+                                BorderBrush="#484848" BorderThickness="1" CornerRadius="4" Height="26">
+                            <Grid>
+                                <TextBlock x:Name="SearchPlaceholder" Text="곡명 / 아티스트 검색..."
+                                           Foreground="#555555" FontSize="11" VerticalAlignment="Center"
+                                           Margin="7,0,0,0" IsHitTestVisible="False"/>
+                                <TextBox x:Name="PlaylistSearchBox" Background="Transparent"
+                                         BorderThickness="0" Foreground="#E0E0E0" CaretBrush="#E0E0E0"
+                                         FontSize="11" VerticalAlignment="Center" Padding="6,0,6,0"
+                                         TextChanged="PlaylistSearchBox_TextChanged"/>
+                            </Grid>
+                        </Border>
+
+                        <ListBox x:Name="PlaylistBox" Grid.Row="3"
                                  Style="{StaticResource DarkListBoxStyle}"
                                  ItemContainerStyle="{StaticResource PlaylistItemStyle}"
                                  MouseDoubleClick="PlaylistBox_MouseDoubleClick"
@@ -619,9 +681,34 @@
                                             <ColumnDefinition Width="Auto"/>
                                         </Grid.ColumnDefinitions>
                                         <StackPanel>
-                                            <TextBlock Text="{Binding DisplayTitle}" FontSize="12"
-                                                       Foreground="{StaticResource TextPrimaryBrush}"
-                                                       TextTrimming="CharacterEllipsis"/>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="▶ " FontSize="9" Foreground="#9C27B0"
+                                                           VerticalAlignment="Center">
+                                                    <TextBlock.Style>
+                                                        <Style TargetType="TextBlock">
+                                                            <Setter Property="Visibility" Value="Collapsed"/>
+                                                            <Style.Triggers>
+                                                                <DataTrigger Binding="{Binding IsPlaying}" Value="True">
+                                                                    <Setter Property="Visibility" Value="Visible"/>
+                                                                </DataTrigger>
+                                                            </Style.Triggers>
+                                                        </Style>
+                                                    </TextBlock.Style>
+                                                </TextBlock>
+                                                <TextBlock Text="{Binding DisplayTitle}" FontSize="12"
+                                                           TextTrimming="CharacterEllipsis">
+                                                    <TextBlock.Style>
+                                                        <Style TargetType="TextBlock">
+                                                            <Setter Property="Foreground" Value="#EEEEEE"/>
+                                                            <Style.Triggers>
+                                                                <DataTrigger Binding="{Binding IsPlaying}" Value="True">
+                                                                    <Setter Property="Foreground" Value="#9C27B0"/>
+                                                                </DataTrigger>
+                                                            </Style.Triggers>
+                                                        </Style>
+                                                    </TextBlock.Style>
+                                                </TextBlock>
+                                            </StackPanel>
                                             <TextBlock Text="{Binding DisplayArtist}" FontSize="10"
                                                        Foreground="{StaticResource TextSecondaryBrush}"
                                                        TextTrimming="CharacterEllipsis"/>

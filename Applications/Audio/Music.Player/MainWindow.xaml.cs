@@ -1,8 +1,10 @@
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
+using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -36,12 +38,19 @@ namespace Music.Player
         private readonly ObservableCollection<LrcLine> _lyricsLines = new();
         private int _currentLyricsIndex = -1;
 
+        // 플레이리스트 필터 뷰
+        private ICollectionView? _playlistView;
+
         public MainWindow()
         {
             InitializeComponent();
             _snap = new WindowSnapService(this);
 
-            PlaylistBox.ItemsSource = _playlist;
+            // 검색 필터를 적용한 CollectionView로 ListBox 연결
+            _playlistView = CollectionViewSource.GetDefaultView(_playlist);
+            _playlistView.Filter = PlaylistFilter;
+            PlaylistBox.ItemsSource = _playlistView;
+
             LyricsBox.ItemsSource = _lyricsLines;
             _player.PositionChanged += Player_PositionChanged;
             _player.PlaybackStopped += Player_PlaybackStopped;
@@ -51,8 +60,12 @@ namespace Music.Player
             Drop += MainWindow_Drop;
             DragEnter += MainWindow_DragEnter;
 
-            // Restore saved playlist state after window is loaded
-            Loaded += async (s, e) => await RestorePlaylistStateAsync();
+            // Restore saved playlist state after window is loaded; 1× 기본 속도 버튼 활성화
+            Loaded += async (s, e) =>
+            {
+                UpdateSpeedButtons(1.0f);
+                await RestorePlaylistStateAsync();
+            };
         }
 
         #region Title Bar
@@ -186,8 +199,13 @@ namespace Music.Player
         {
             if (index < 0 || index >= _playlist.Count) return;
 
+            // 이전 재생 트랙 인디케이터 해제
+            if (_currentIndex >= 0 && _currentIndex < _playlist.Count)
+                _playlist[_currentIndex].IsPlaying = false;
+
             _currentIndex = index;
             var track = _playlist[index];
+            track.IsPlaying = true;
 
             try
             {
@@ -391,6 +409,7 @@ namespace Music.Player
 
         private void ClearPlaylistButton_Click(object sender, RoutedEventArgs e)
         {
+            foreach (var t in _playlist) t.IsPlaying = false;
             _player.Stop();
             _playlist.Clear();
             _currentIndex = -1;
@@ -576,7 +595,7 @@ namespace Music.Player
 
         private void HistoryButton_Click(object sender, RoutedEventArgs e)
         {
-            var historyWindow = new HistoryWindow(async paths =>
+            Func<IEnumerable<string>, Task> callback = async paths =>
             {
                 await AddFilesAsync(paths);
                 if (PlaylistToggle.IsChecked != true)
@@ -584,16 +603,14 @@ namespace Music.Player
                     PlaylistToggle.IsChecked = true;
                     TogglePlaylistPanel();
                 }
-            })
-            {
-                Owner = this
             };
+            var historyWindow = new HistoryWindow(callback) { Owner = this };
             historyWindow.Show();
         }
 
         private void LibraryButton_Click(object sender, RoutedEventArgs e)
         {
-            var libraryWindow = new LibraryWindow(async paths =>
+            Func<IEnumerable<string>, Task> callback = async paths =>
             {
                 await AddFilesAsync(paths);
                 if (PlaylistToggle.IsChecked != true)
@@ -601,10 +618,8 @@ namespace Music.Player
                     PlaylistToggle.IsChecked = true;
                     TogglePlaylistPanel();
                 }
-            })
-            {
-                Owner = this
             };
+            var libraryWindow = new LibraryWindow(callback) { Owner = this };
             libraryWindow.Show();
         }
 
@@ -1087,44 +1102,25 @@ namespace Music.Player
 
         #region Command Line Arguments
 
-        public void LoadFilesFromArgs(string[] args)
+        public async void LoadFilesFromArgs(string[] args)
         {
             if (args.Length == 0) return;
 
             // 기존 플레이리스트 클리어
+            foreach (var t in _playlist) t.IsPlaying = false;
             _player.Stop();
             _playlist.Clear();
             _currentIndex = -1;
+            UpdatePlayPauseIcon(false);
 
-            // 파일 추가 (디렉토리 포함)
-            foreach (var arg in args)
+            // AddFilesAsync 로 비동기 처리 (UI 스레드 블로킹 방지)
+            await AddFilesAsync(args);
+
+            // 플레이리스트 패널 표시 (AddFilesAsync는 패널을 열지 않음)
+            if (_playlist.Count > 0 && PlaylistToggle.IsChecked != true)
             {
-                if (Directory.Exists(arg))
-                {
-                    var files = Directory.GetFiles(arg, "*.*", SearchOption.AllDirectories)
-                        .Where(f => SupportedExtensions.Contains(System.IO.Path.GetExtension(f).ToLower()))
-                        .OrderBy(f => f);
-                    foreach (var file in files)
-                        AddTrack(file);
-                }
-                else if (File.Exists(arg) && SupportedExtensions.Contains(System.IO.Path.GetExtension(arg).ToLower()))
-                {
-                    AddTrack(arg);
-                }
-            }
-
-            // 플레이리스트 표시
-            if (_playlist.Count > 0)
-            {
-                // 이미 열려있지 않은 경우에만 열기 (너비 증가 방지)
-                if (PlaylistToggle.IsChecked != true)
-                {
-                    PlaylistToggle.IsChecked = true;
-                    TogglePlaylistPanel();
-                }
-
-                // 첫 번째 트랙 자동 재생
-                PlayTrack(0);
+                PlaylistToggle.IsChecked = true;
+                TogglePlaylistPanel();
             }
         }
 
@@ -1200,10 +1196,12 @@ namespace Music.Player
                 var track = _playlist[_currentIndex];
 
                 // Load track and seek to saved position, then auto-play
-                HistoryService.Instance.RecordPlay(track);
+                // (RecordPlay 미호출 — 복원은 실제 재생이 아니므로 play count 증가 없음)
                 LoadLyrics(track.FilePath);
 
                 _player.Load(track.FilePath);
+                // 볼륨을 Load() 이후에 명시적으로 재적용 (Load 이전엔 _audioFile이 null)
+                _player.Volume = (float)(VolumeSlider.Value / 100.0);
                 if (state.CurrentPositionSeconds > 0 && state.CurrentPositionSeconds < track.Duration.TotalSeconds)
                 {
                     _player.Seek(TimeSpan.FromSeconds(state.CurrentPositionSeconds));
@@ -1227,6 +1225,61 @@ namespace Music.Player
             {
                 TitleText.Text  = "No track selected";
                 ArtistText.Text = "";
+            }
+        }
+
+        #endregion
+
+        #region Playlist Search
+
+        private bool PlaylistFilter(object item)
+        {
+            if (item is not TrackInfo track) return true;
+            var query = PlaylistSearchBox?.Text ?? "";
+            if (string.IsNullOrEmpty(query)) return true;
+            return track.DisplayTitle.Contains(query, StringComparison.OrdinalIgnoreCase) ||
+                   track.DisplayArtist.Contains(query, StringComparison.OrdinalIgnoreCase);
+        }
+
+        private void PlaylistSearchBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            var hasText = !string.IsNullOrEmpty(PlaylistSearchBox.Text);
+            SearchPlaceholder.Visibility = hasText ? Visibility.Collapsed : Visibility.Visible;
+            _playlistView?.Refresh();
+        }
+
+        #endregion
+
+        #region Speed Control
+
+        private void SpeedButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (sender is not Button btn) return;
+            if (!float.TryParse(btn.Tag?.ToString(),
+                    System.Globalization.NumberStyles.Float,
+                    System.Globalization.CultureInfo.InvariantCulture,
+                    out float speed)) return;
+
+            _player.Speed = speed;
+            UpdateSpeedButtons(speed);
+        }
+
+        private void UpdateSpeedButtons(float speed)
+        {
+            foreach (var child in SpeedButtonPanel.Children.OfType<Button>())
+            {
+                bool isActive = float.TryParse(
+                    child.Tag?.ToString(),
+                    System.Globalization.NumberStyles.Float,
+                    System.Globalization.CultureInfo.InvariantCulture,
+                    out float btnSpeed) && Math.Abs(btnSpeed - speed) < 0.001f;
+
+                child.Background = isActive
+                    ? (SolidColorBrush)FindResource("AccentBrush")
+                    : Brushes.Transparent;
+                child.Foreground = isActive
+                    ? (SolidColorBrush)FindResource("TextPrimaryBrush")
+                    : new SolidColorBrush(Color.FromRgb(0x88, 0x88, 0x88));
             }
         }
 

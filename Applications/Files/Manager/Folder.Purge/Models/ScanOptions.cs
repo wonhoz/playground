@@ -20,4 +20,13 @@ public class ScanOptions
 
     // VS 아티팩트로 간주할 파일 확장자 — BuildOptions()에서 AppSettings 값으로 채워짐
     public HashSet<string> VsArtifactFileExtensions { get; set; } = new(StringComparer.OrdinalIgnoreCase);
+
+    // 와일드카드 패턴 기반 제외 폴더 (예: "*.cache", "~*") — B1
+    public List<string> ExcludePatterns { get; set; } = [];
+
+    // 스캔 최대 깊이 (0 = 무제한) — B3
+    public int MaxDepth { get; set; } = 0;
+
+    // 파일 탐지 패턴 (예: "*.log", "*.tmp") — B5
+    public List<string> FileDetectPatterns { get; set; } = [];
 }

@@ -7,6 +7,7 @@ public enum FolderKind
     Empty,          // 완전히 비어있는 폴더
     VsArtifact,     // bin/obj만 남은 VS 빌드 아티팩트 폴더
     EmptyFile,      // 0바이트 파일
+    PatternFile,    // 탐지 패턴과 일치하는 파일
 }
 
 public class FolderEntry : INotifyPropertyChanged
@@ -26,10 +27,11 @@ public class FolderEntry : INotifyPropertyChanged
 
     public string KindBadge => Kind switch
     {
-        FolderKind.Empty      => "빈 폴더",
-        FolderKind.VsArtifact => "VS 아티팩트",
-        FolderKind.EmptyFile  => "빈 파일",
-        _                     => string.Empty
+        FolderKind.Empty       => "빈 폴더",
+        FolderKind.VsArtifact  => "VS 아티팩트",
+        FolderKind.EmptyFile   => "빈 파일",
+        FolderKind.PatternFile => "패턴 파일",
+        _                      => string.Empty
     };
 
     public string SizeText => Helpers.SizeFormatter.Format(SizeBytes);

@@ -22,9 +22,10 @@
         <SolidColorBrush x:Key="TextSecondary"     Color="#888888"/>
         <SolidColorBrush x:Key="DangerBrush"       Color="#C0392B"/>
         <SolidColorBrush x:Key="DangerHoverBrush"  Color="#E74C3C"/>
-        <SolidColorBrush x:Key="EmptyBadgeBrush"   Color="#2D5A8E"/>
+        <SolidColorBrush x:Key="EmptyBadgeBrush"    Color="#2D5A8E"/>
         <SolidColorBrush x:Key="VsBadgeBrush"      Color="#5A3D8A"/>
         <SolidColorBrush x:Key="FileBadgeBrush"    Color="#5A6B2D"/>
+        <SolidColorBrush x:Key="PatternBadgeBrush" Color="#7A4A1A"/>
 
         <!-- 버튼 스타일 -->
         <Style x:Key="ActionButton" TargetType="Button">
@@ -373,6 +374,24 @@
                                 <TextBlock Text="일 이내 수정 제외" FontSize="10" Foreground="{StaticResource TextSecondary}"
                                            VerticalAlignment="Center" Margin="4,0,0,0"/>
                             </StackPanel>
+
+                            <!-- B3: 스캔 깊이 제한 -->
+                            <TextBlock Text="스캔 깊이" FontSize="11" FontWeight="SemiBold"
+                                       Foreground="{StaticResource TextSecondary}" Margin="0,10,0,6"/>
+                            <CheckBox x:Name="ChkMaxDepth" Content="최대 깊이 제한" Margin="0,3"
+                                      Checked="MaxDepth_Changed" Unchecked="MaxDepth_Changed"
+                                      ToolTip="루트 기준 최대 탐색 단계를 제한합니다. 깊은 트리에서 성능을 개선합니다."/>
+                            <StackPanel x:Name="MaxDepthPanel" Orientation="Horizontal" Margin="18,3,0,0"
+                                        IsEnabled="False" Opacity="0.4">
+                                <TextBlock Text="최대" FontSize="10" Foreground="{StaticResource TextSecondary}"
+                                           VerticalAlignment="Center" Margin="0,0,4,0"/>
+                                <TextBox x:Name="MaxDepthInput" Width="36" Height="20" FontSize="10"
+                                         Background="#252530" Foreground="{StaticResource TextPrimary}"
+                                         BorderBrush="#333344" BorderThickness="1"
+                                         Padding="4,1" CaretBrush="#E0E0E0" VerticalContentAlignment="Center"/>
+                                <TextBlock Text="단계" FontSize="10" Foreground="{StaticResource TextSecondary}"
+                                           VerticalAlignment="Center" Margin="4,0,0,0"/>
+                            </StackPanel>
                         </StackPanel>
 
                         <!-- 제외 폴더 편집 -->
@@ -409,7 +428,7 @@
                                          Background="#252530" Foreground="{StaticResource TextPrimary}"
                                          BorderBrush="#333344" BorderThickness="1"
                                          Padding="4,3" FontSize="10" CaretBrush="#E0E0E0"
-                                         ToolTip="제외할 폴더명 입력 (예: .cache)"
+                                         ToolTip="폴더명 또는 패턴 입력 (예: .cache, *.tmp — 와일드카드 * ? 지원)"
                                          KeyDown="ExcludeInput_KeyDown"/>
                                 <Button Grid.Column="2" Content="추가"
                                         Style="{StaticResource GhostButton}" Padding="6,3" FontSize="10"
@@ -417,6 +436,52 @@
                                 <Button Grid.Column="4" Content="제거"
                                         Style="{StaticResource GhostButton}" Padding="6,3" FontSize="10"
                                         Click="RemoveExclude_Click"/>
+                            </Grid>
+                        </StackPanel>
+
+                        <!-- B5: 파일 탐지 패턴 -->
+                        <StackPanel Margin="0,0,0,10">
+                            <TextBlock Text="파일 탐지 패턴" FontSize="11" FontWeight="SemiBold"
+                                       Foreground="{StaticResource TextSecondary}" Margin="0,0,0,4"
+                                       ToolTip="탐지할 파일 패턴 목록 (예: *.log, *.tmp, ~$*)&#x0a;와일드카드: * (여러 문자), ? (한 문자)"/>
+                            <Border Background="#1E1E28" BorderBrush="#333344" BorderThickness="1" CornerRadius="4"
+                                    MaxHeight="55" Margin="0,0,0,4">
+                                <ListBox x:Name="FilePatternListBox"
+                                         Background="Transparent" BorderThickness="0"
+                                         Foreground="{StaticResource TextPrimary}" FontSize="10"
+                                         ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                                    <ListBox.ItemContainerStyle>
+                                        <Style TargetType="ListBoxItem">
+                                            <Setter Property="Padding" Value="4,2"/>
+                                            <Style.Triggers>
+                                                <Trigger Property="IsSelected" Value="True">
+                                                    <Setter Property="Background" Value="#2A2A40"/>
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </ListBox.ItemContainerStyle>
+                                </ListBox>
+                            </Border>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="4"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="4"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBox x:Name="FilePatternInput" Grid.Column="0"
+                                         Background="#252530" Foreground="{StaticResource TextPrimary}"
+                                         BorderBrush="#333344" BorderThickness="1"
+                                         Padding="4,3" FontSize="10" CaretBrush="#E0E0E0"
+                                         ToolTip="패턴 입력 (예: *.log, *.tmp)"
+                                         KeyDown="FilePatternInput_KeyDown"/>
+                                <Button Grid.Column="2" Content="추가"
+                                        Style="{StaticResource GhostButton}" Padding="6,3" FontSize="10"
+                                        Click="AddFilePattern_Click"/>
+                                <Button Grid.Column="4" Content="제거"
+                                        Style="{StaticResource GhostButton}" Padding="6,3" FontSize="10"
+                                        Click="RemoveFilePattern_Click"/>
                             </Grid>
                         </StackPanel>
 
@@ -579,7 +644,9 @@
                                      Checked="Filter_Changed" Margin="0,0,6,0"/>
                         <RadioButton x:Name="FilterVs"    Content="VS 아티팩트"  GroupName="Filter"
                                      Checked="Filter_Changed" Margin="0,0,6,0"/>
-                        <RadioButton x:Name="FilterFile"  Content="빈 파일"      GroupName="Filter"
+                        <RadioButton x:Name="FilterFile"    Content="빈 파일"    GroupName="Filter"
+                                     Checked="Filter_Changed" Margin="0,0,6,0"/>
+                        <RadioButton x:Name="FilterPattern" Content="패턴 파일"   GroupName="Filter"
                                      Checked="Filter_Changed"/>
                     </StackPanel>
                     <!-- 검색 + 최소 크기 필터 -->
@@ -688,6 +755,9 @@
                                                         </DataTrigger>
                                                         <DataTrigger Binding="{Binding Kind}" Value="EmptyFile">
                                                             <Setter Property="Background" Value="{StaticResource FileBadgeBrush}"/>
+                                                        </DataTrigger>
+                                                        <DataTrigger Binding="{Binding Kind}" Value="PatternFile">
+                                                            <Setter Property="Background" Value="{StaticResource PatternBadgeBrush}"/>
                                                         </DataTrigger>
                                                     </Style.Triggers>
                                                 </Style>

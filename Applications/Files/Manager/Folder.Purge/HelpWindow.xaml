@@ -92,7 +92,7 @@
                     <TextBlock Grid.Row="1" Grid.Column="0" Text="Enter"  Foreground="{StaticResource AccentBrush}" FontFamily="Consolas" FontSize="11"/>
                     <TextBlock Grid.Row="1" Grid.Column="1" Text="스캔 시작 (폴더 목록에 항목이 있을 때)" Style="{StaticResource HelpText}"/>
                     <TextBlock Grid.Row="2" Grid.Column="0" Text="Delete" Foreground="{StaticResource AccentBrush}" FontFamily="Consolas" FontSize="11"/>
-                    <TextBlock Grid.Row="2" Grid.Column="1" Text="선택된 항목 삭제 확인" Style="{StaticResource HelpText}"/>
+                    <TextBlock Grid.Row="2" Grid.Column="1" Text="선택된 항목 삭제 (스캔·삭제 중에는 취소 버튼으로 중단)" Style="{StaticResource HelpText}"/>
                     <TextBlock Grid.Row="3" Grid.Column="0" Text="Esc"    Foreground="{StaticResource AccentBrush}" FontFamily="Consolas" FontSize="11"/>
                     <TextBlock Grid.Row="3" Grid.Column="1" Text="도움말 닫기" Style="{StaticResource HelpText}"/>
                 </Grid>
@@ -111,6 +111,10 @@
                     <Run>   · VS 아티팩트: bin, obj 폴더와 .user 파일만 남은 폴더 탐지</Run>
                     <LineBreak/>
                     <Run>   · 나이 필터: 최근 N일 이내 수정된 폴더를 탐지 대상에서 제외</Run>
+                    <LineBreak/>
+                    <Run>   · 스캔 깊이: 최대 N단계 이내 폴더만 탐색 (깊은 트리 성능 개선)</Run>
+                    <LineBreak/>
+                    <Run>   · 파일 탐지 패턴: *.log, *.tmp 등 패턴 파일도 탐지 대상에 추가</Run>
                     <LineBreak/><LineBreak/>
                     <Run FontWeight="SemiBold" Foreground="{StaticResource AccentBrush}">3. [스캔 시작] 또는 Enter</Run>
                     <LineBreak/>
@@ -122,7 +126,7 @@
                     <LineBreak/><LineBreak/>
                     <Run FontWeight="SemiBold" Foreground="{StaticResource AccentBrush}">4. 결과 필터링 (필터 바)</Run>
                     <LineBreak/>
-                    <Run>   · 종류별 필터: 전체 / 빈 폴더 / VS 아티팩트 / 빈 파일</Run>
+                    <Run>   · 종류별 필터: 전체 / 빈 폴더 / VS 아티팩트 / 빈 파일 / 패턴 파일</Run>
                     <LineBreak/>
                     <Run>   · 최소 크기: 지정 KB 이상 항목만 표시</Run>
                     <LineBreak/>
@@ -143,6 +147,8 @@
                     <Run>   · 삭제 후 자동 재스캔: 삭제 완료 후 동일 폴더를 자동으로 재스캔</Run>
                     <LineBreak/>
                     <Run>     (부모 폴더가 새로 비게 되는 연쇄 빈 폴더 처리에 유용)</Run>
+                    <LineBreak/>
+                    <Run>   · 삭제 중 [취소] 버튼: 진행 중인 삭제 작업을 즉시 중단</Run>
                     <LineBreak/>
                     <Run>   · 휴지통 삭제 후 [휴지통 열기] 버튼으로 복원 가능</Run>
                 </TextBlock>
@@ -165,6 +171,14 @@
                     <Run>· 통계 패널에서 전체 용량 / 선택 용량을 분리 확인 가능</Run>
                     <LineBreak/>
                     <Run>· 검색·크기 필터 입력 시 300ms 디바운스 적용 (대량 결과 시 부드러운 입력)</Run>
+                    <LineBreak/>
+                    <Run>· 제외 폴더에 와일드카드 패턴 입력 가능 (예: *.cache, .git_*)</Run>
+                    <LineBreak/>
+                    <Run>· 파일 탐지 패턴으로 *.log, *.tmp, ~$* 등 불필요 파일 탐지 가능</Run>
+                    <LineBreak/>
+                    <Run>· 심볼릭 링크·정션 포인트는 자동으로 건너뜀 (무한 루프 방지)</Run>
+                    <LineBreak/>
+                    <Run>· 내보내기 경로는 마지막 저장 위치가 자동으로 기억됨</Run>
                 </TextBlock>
 
                 <!-- 최근 삭제 이력 -->

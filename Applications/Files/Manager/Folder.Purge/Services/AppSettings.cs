@@ -32,6 +32,10 @@ public class AppSettings
     public bool AutoScanAfterDelete { get; set; } = false;
     public DateTime? LastScanTime { get; set; } = null;
     public List<ScanHistoryEntry> ScanHistory { get; set; } = [];
+    public int MaxScanHistory { get; set; } = 10;       // LOW2
+    public string LastExportDirectory { get; set; } = "";  // B4
+    public int MaxDepth { get; set; } = 0;              // B3: 0 = 무제한
+    public List<string> FileDetectPatterns { get; set; } = [];  // B5
 
     private static readonly string _path = Path.Combine(
         Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
@@ -68,9 +72,10 @@ public class AppSettings
         }
     }
 
-    public void AddHistory(ScanHistoryEntry entry, int max = 5)
+    public void AddHistory(ScanHistoryEntry entry)
     {
         ScanHistory.Insert(0, entry);
+        int max = Math.Max(1, MaxScanHistory);
         if (ScanHistory.Count > max)
             ScanHistory.RemoveRange(max, ScanHistory.Count - max);
     }

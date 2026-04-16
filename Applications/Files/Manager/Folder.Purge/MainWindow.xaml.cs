@@ -18,6 +18,7 @@ public partial class MainWindow : Window
     private readonly ObservableCollection<string> _targetFolders = [];
     private readonly ObservableCollection<string> _excludedFolders = [];
     private readonly ObservableCollection<string> _artifactFolderNames = [];
+    private readonly ObservableCollection<string> _filePatterns = [];  // B5
     private List<FolderEntry> _scanResults = [];
     private CancellationTokenSource? _cts;
     private bool _isScanning;
@@ -31,9 +32,10 @@ public partial class MainWindow : Window
     public MainWindow()
     {
         InitializeComponent();
-        FolderListBox.ItemsSource   = _targetFolders;
-        ExcludeListBox.ItemsSource  = _excludedFolders;
-        ArtifactListBox.ItemsSource = _artifactFolderNames;
+        FolderListBox.ItemsSource       = _targetFolders;
+        ExcludeListBox.ItemsSource      = _excludedFolders;
+        ArtifactListBox.ItemsSource     = _artifactFolderNames;
+        FilePatternListBox.ItemsSource  = _filePatterns;
         _filterDebounce = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(300) };
         _filterDebounce.Tick += (_, _) => { _filterDebounce.Stop(); ApplyFilter(); };
         Loaded  += OnLoaded;
@@ -74,6 +76,8 @@ public partial class MainWindow : Window
             _excludedFolders.Add(ex);
         foreach (var a in _settings.VsArtifactFolderNames)
             _artifactFolderNames.Add(a);
+        foreach (var p in _settings.FileDetectPatterns)
+            _filePatterns.Add(p);
 
         ChkEmpty.IsChecked         = _settings.ScanEmptyFolders;
         ChkVsArtifact.IsChecked    = _settings.ScanVsArtifacts;
@@ -84,6 +88,11 @@ public partial class MainWindow : Window
         ChkExcludeRecent.IsChecked = _settings.ExcludeRecentFolders;
         MinAgeDaysInput.Text       = _settings.MinAgeDays.ToString();
         UpdateMinAgeDaysPanel();
+
+        // B3: MaxDepth 복원
+        ChkMaxDepth.IsChecked = _settings.MaxDepth > 0;
+        MaxDepthInput.Text    = _settings.MaxDepth > 0 ? _settings.MaxDepth.ToString() : "10";
+        UpdateMaxDepthPanel();
 
         // 정렬 상태 복원
         if (!string.IsNullOrEmpty(_settings.SortColumn))
@@ -109,6 +118,9 @@ public partial class MainWindow : Window
         _settings.TargetFolders          = [.. _targetFolders];
         _settings.ExcludedFolders        = [.. _excludedFolders];
         _settings.VsArtifactFolderNames  = [.. _artifactFolderNames];
+        _settings.FileDetectPatterns     = [.. _filePatterns];
+        _settings.MaxDepth               = ChkMaxDepth?.IsChecked == true
+            ? (int.TryParse(MaxDepthInput?.Text?.Trim(), out int maxD) && maxD > 0 ? maxD : 10) : 0;
         _settings.ScanEmptyFolders       = ChkEmpty.IsChecked == true;
         _settings.ScanVsArtifacts        = ChkVsArtifact.IsChecked == true;
         _settings.ScanEmptyFiles         = ChkEmptyFile.IsChecked == true;
@@ -149,12 +161,24 @@ public partial class MainWindow : Window
         if (!e.Data.GetDataPresent(System.Windows.DataFormats.FileDrop)) return;
 
         var paths = (string[])e.Data.GetData(System.Windows.DataFormats.FileDrop);
+        int added = 0, skipped = 0;
         foreach (var path in paths)
         {
-            if (Directory.Exists(path) && !_targetFolders.Contains(path))
-                _targetFolders.Add(path);
+            if (Directory.Exists(path))
+            {
+                if (!_targetFolders.Contains(path)) { _targetFolders.Add(path); added++; }
+            }
+            else
+            {
+                skipped++;
+            }
         }
         UpdateDropHint();
+
+        if (skipped > 0 && added == 0)
+            StatusText.Text = "파일은 추가할 수 없습니다. 폴더를 드래그 앤 드롭하세요.";
+        else if (skipped > 0)
+            StatusText.Text = $"폴더 {added}개 추가됨  (파일 {skipped}개 건너뜀 — 폴더만 지원)";
     }
 
     // ── 폴더 추가/제거 ──────────────────────────────────────────────────
@@ -280,9 +304,10 @@ public partial class MainWindow : Window
 
     private FolderKind? ActiveFilterKind()
     {
-        if (FilterEmpty.IsChecked == true) return FolderKind.Empty;
-        if (FilterVs.IsChecked    == true) return FolderKind.VsArtifact;
-        if (FilterFile.IsChecked  == true) return FolderKind.EmptyFile;
+        if (FilterEmpty.IsChecked   == true) return FolderKind.Empty;
+        if (FilterVs.IsChecked      == true) return FolderKind.VsArtifact;
+        if (FilterFile.IsChecked    == true) return FolderKind.EmptyFile;
+        if (FilterPattern?.IsChecked == true) return FolderKind.PatternFile;
         return null; // 전체
     }
 
@@ -339,9 +364,13 @@ public partial class MainWindow : Window
 
         try
         {
+            ScanProgress? finalProg = null;
             var prog = new Progress<ScanProgress>(p =>
             {
-                ProgressText.Text = $"스캔 중... {p.Scanned:N0}개 처리  |  {TrimPath(p.CurrentPath, 60)}";
+                finalProg = p;
+                string reparseInfo = p.SkippedReparsePoints > 0
+                    ? $"  (정션 {p.SkippedReparsePoints}개 건너뜀)" : "";
+                ProgressText.Text = $"스캔 중... {p.Scanned:N0}개 처리  |  {TrimPath(p.CurrentPath, 60)}{reparseInfo}";
                 if (p.Total > 0)
                 {
                     ScanProgressBar.IsIndeterminate = false;
@@ -350,7 +379,7 @@ public partial class MainWindow : Window
             });
 
             _scanResults = await scanner.ScanAsync([.. _targetFolders], prog);
-            ShowResults(_scanResults);
+            ShowResults(_scanResults, finalProg?.SkippedReparsePoints ?? 0);
 
             // 스캔 완료 토스트 알림 (창이 비활성 상태일 때)
             if (!IsActive && _scanResults.Count > 0)
@@ -370,22 +399,37 @@ public partial class MainWindow : Window
         }
     }
 
-    private ScanOptions BuildOptions() => new()
+    private ScanOptions BuildOptions()
     {
-        ScanEmptyFolders     = ChkEmpty.IsChecked == true,
-        ScanVsArtifacts      = ChkVsArtifact.IsChecked == true,
-        ScanEmptyFiles       = ChkEmptyFile.IsChecked == true,
-        UseRecycleBin        = ChkRecycleBin.IsChecked == true,
-        PreviewOnly          = ChkPreview.IsChecked == true,
-        ExcludeRecentFolders = ChkExcludeRecent.IsChecked == true,
-        MinAgeDays           = int.TryParse(MinAgeDaysInput.Text.Trim(), out int d) && d > 0 ? d : 7,
-        ExcludedFolderNames  = new HashSet<string>(
-            _excludedFolders, StringComparer.OrdinalIgnoreCase),
-        VsArtifactNames      = new HashSet<string>(
-            _artifactFolderNames, StringComparer.OrdinalIgnoreCase),
-        VsArtifactFileExtensions = new HashSet<string>(
-            _settings.VsArtifactFileExtensions, StringComparer.OrdinalIgnoreCase),
-    };
+        // B1: 정확한 폴더명과 와일드카드 패턴 분리
+        var exactExcludes   = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+        var patternExcludes = new List<string>();
+        foreach (var ex in _excludedFolders)
+        {
+            if (ex.Contains('*') || ex.Contains('?'))
+                patternExcludes.Add(ex);
+            else
+                exactExcludes.Add(ex);
+        }
+
+        return new()
+        {
+            ScanEmptyFolders     = ChkEmpty.IsChecked == true,
+            ScanVsArtifacts      = ChkVsArtifact.IsChecked == true,
+            ScanEmptyFiles       = ChkEmptyFile.IsChecked == true,
+            UseRecycleBin        = ChkRecycleBin.IsChecked == true,
+            PreviewOnly          = ChkPreview.IsChecked == true,
+            ExcludeRecentFolders = ChkExcludeRecent.IsChecked == true,
+            MinAgeDays           = int.TryParse(MinAgeDaysInput.Text.Trim(), out int d) && d > 0 ? d : 7,
+            ExcludedFolderNames  = exactExcludes,
+            ExcludePatterns      = patternExcludes,
+            VsArtifactNames      = new HashSet<string>(_artifactFolderNames, StringComparer.OrdinalIgnoreCase),
+            VsArtifactFileExtensions = new HashSet<string>(_settings.VsArtifactFileExtensions, StringComparer.OrdinalIgnoreCase),
+            MaxDepth             = ChkMaxDepth?.IsChecked == true
+                ? (int.TryParse(MaxDepthInput?.Text?.Trim(), out int maxD) && maxD > 0 ? maxD : 10) : 0,
+            FileDetectPatterns   = [.. _filePatterns],
+        };
+    }
 
     private List<FolderEntry> ApplySort(List<FolderEntry> list) =>
         (_sortColumn, _sortDirection) switch
@@ -401,7 +445,7 @@ public partial class MainWindow : Window
             _ => list
         };
 
-    private void ShowResults(List<FolderEntry> results)
+    private void ShowResults(List<FolderEntry> results, int skippedReparsePoints = 0)
     {
         _scanResults = ApplySort(results);
 
@@ -415,13 +459,18 @@ public partial class MainWindow : Window
 
         if (hasItems)
         {
-            var empty = results.Count(r => r.Kind == FolderKind.Empty);
-            var vs    = results.Count(r => r.Kind == FolderKind.VsArtifact);
-            var files = results.Count(r => r.Kind == FolderKind.EmptyFile);
-            var parts = new List<string>();
-            if (empty > 0) parts.Add($"빈 폴더 {empty:N0}");
-            if (vs    > 0) parts.Add($"VS 아티팩트 {vs:N0}");
-            if (files > 0) parts.Add($"빈 파일 {files:N0}");
+            var empty   = results.Count(r => r.Kind == FolderKind.Empty);
+            var vs      = results.Count(r => r.Kind == FolderKind.VsArtifact);
+            var files   = results.Count(r => r.Kind == FolderKind.EmptyFile);
+            var pattern = results.Count(r => r.Kind == FolderKind.PatternFile);
+            var parts   = new List<string>();
+            if (empty   > 0) parts.Add($"빈 폴더 {empty:N0}");
+            if (vs      > 0) parts.Add($"VS 아티팩트 {vs:N0}");
+            if (files   > 0) parts.Add($"빈 파일 {files:N0}");
+            if (pattern > 0) parts.Add($"패턴 파일 {pattern:N0}");
+
+            string reparseNote = skippedReparsePoints > 0
+                ? $"  (정션·링크 {skippedReparsePoints}개 건너뜀)" : "";
 
             // 루트별 요약 (2개 이상 루트일 때만)
             if (_targetFolders.Count > 1)
@@ -433,11 +482,11 @@ public partial class MainWindow : Window
                     .Select(x => $"{x.Name}({x.Count:N0})");
                 StatusText.Text = string.Join("  /  ", parts)
                     + "  [" + string.Join(", ", rootSummary) + "]"
-                    + "  —  삭제할 항목을 선택하세요.";
+                    + reparseNote + "  —  삭제할 항목을 선택하세요.";
             }
             else
             {
-                StatusText.Text = string.Join("  /  ", parts) + "  —  삭제할 항목을 선택하세요.";
+                StatusText.Text = string.Join("  /  ", parts) + reparseNote + "  —  삭제할 항목을 선택하세요.";
             }
         }
         else
@@ -520,10 +569,12 @@ public partial class MainWindow : Window
 
         var dlg = new Microsoft.Win32.SaveFileDialog
         {
-            Title      = "결과 내보내기",
-            Filter     = "텍스트 파일 (*.txt)|*.txt|CSV 파일 (*.csv)|*.csv",
-            FileName   = $"FolderPurge_{DateTime.Now:yyyyMMdd_HHmmss}",
-            DefaultExt = ".txt"
+            Title            = "결과 내보내기",
+            Filter           = "텍스트 파일 (*.txt)|*.txt|CSV 파일 (*.csv)|*.csv",
+            FileName         = $"FolderPurge_{DateTime.Now:yyyyMMdd_HHmmss}",
+            DefaultExt       = ".txt",
+            InitialDirectory = Directory.Exists(_settings.LastExportDirectory)
+                ? _settings.LastExportDirectory : string.Empty
         };
         if (dlg.ShowDialog() != true) return;
 
@@ -548,6 +599,9 @@ public partial class MainWindow : Window
 
         var fileName = dlg.FileName;
         await File.WriteAllTextAsync(fileName, sb.ToString(), Encoding.UTF8);
+        // B4: 마지막 내보내기 경로 저장
+        _settings.LastExportDirectory = Path.GetDirectoryName(fileName) ?? string.Empty;
+        _settings.Save();
         StatusText.Text = $"결과가 저장되었습니다: {Path.GetFileName(fileName)}";
     }
 
@@ -582,6 +636,12 @@ public partial class MainWindow : Window
         int  successCount = 0;
         int  failCount    = 0;
         long freedBytes   = 0;
+        bool wasCancelled = false;
+
+        // LOW1: 삭제 작업에도 취소 토큰 적용
+        _cts?.Dispose();
+        _cts = new CancellationTokenSource();
+        var deleteCt = _cts.Token;
 
         SetScanningState(true);
 
@@ -589,6 +649,8 @@ public partial class MainWindow : Window
         {
             foreach (var item in toDelete)
             {
+                if (deleteCt.IsCancellationRequested) { wasCancelled = true; break; }
+
                 if (!Directory.Exists(item.Path) && !File.Exists(item.Path))
                 {
                     log.AppendLine($"  [건너뜀] {item.Path}  (이미 삭제됨)");
@@ -649,8 +711,10 @@ public partial class MainWindow : Window
         // 결과 표시
         string summary = previewOnly
             ? $"미리보기: {successCount:N0}개 항목이 삭제 대상입니다."
-            : $"완료: {successCount:N0}개 삭제{(failCount > 0 ? $"  /  {failCount:N0}개 실패" : "")}"
-              + $"  |  확보 용량: {FormatSize(freedBytes)}";
+            : wasCancelled
+                ? $"취소됨: {successCount:N0}개 삭제{(failCount > 0 ? $"  /  {failCount:N0}개 실패" : "")}  |  확보 용량: {FormatSize(freedBytes)}"
+                : $"완료: {successCount:N0}개 삭제{(failCount > 0 ? $"  /  {failCount:N0}개 실패" : "")}"
+                  + $"  |  확보 용량: {FormatSize(freedBytes)}";
 
         DeleteResultText.Text = summary + "\n" + log.ToString();
         DeleteResultPanel.Visibility = Visibility.Visible;
@@ -822,6 +886,45 @@ public partial class MainWindow : Window
 
         ApplyFilter();
         UpdateSortIndicator();
+    }
+
+    // ── 스캔 깊이 (B3) ──────────────────────────────────────────────────────
+
+    private void MaxDepth_Changed(object sender, RoutedEventArgs e)
+    {
+        if (!IsLoaded) return;
+        UpdateMaxDepthPanel();
+    }
+
+    private void UpdateMaxDepthPanel()
+    {
+        bool enabled = ChkMaxDepth.IsChecked == true;
+        MaxDepthPanel.IsEnabled = enabled;
+        MaxDepthPanel.Opacity   = enabled ? 1.0 : 0.4;
+    }
+
+    // ── 파일 탐지 패턴 (B5) ─────────────────────────────────────────────────
+
+    private void AddFilePattern_Click(object sender, RoutedEventArgs e) => AddFilePatternEntry();
+
+    private void FilePatternInput_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+    {
+        if (e.Key == System.Windows.Input.Key.Enter) AddFilePatternEntry();
+    }
+
+    private void AddFilePatternEntry()
+    {
+        var name = FilePatternInput.Text.Trim();
+        if (string.IsNullOrEmpty(name) || _filePatterns.Contains(name, StringComparer.OrdinalIgnoreCase))
+            return;
+        _filePatterns.Add(name);
+        FilePatternInput.Clear();
+    }
+
+    private void RemoveFilePattern_Click(object sender, RoutedEventArgs e)
+    {
+        if (FilePatternListBox.SelectedItem is string selected)
+            _filePatterns.Remove(selected);
     }
 
     // ── 도움말 ──────────────────────────────────────────────────────────

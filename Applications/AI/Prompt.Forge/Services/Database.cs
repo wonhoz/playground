@@ -288,6 +288,16 @@ sealed class Database : IDisposable
         cmd.ExecuteNonQuery();
     }
 
+    /// 동일 content를 가진 다른 프롬프트 조회 (중복 감지용 — GetAll 없이 DB에서 직접 필터)
+    public PromptItem? FindDuplicateContent(string content, int excludeId)
+    {
+        var cmd = _conn.CreateCommand();
+        cmd.CommandText = "SELECT * FROM prompts WHERE parent_id IS NULL AND id != $id AND content = $content LIMIT 1";
+        cmd.Parameters.AddWithValue("$id",      excludeId);
+        cmd.Parameters.AddWithValue("$content", content);
+        return ReadItems(cmd).FirstOrDefault();
+    }
+
     public List<PromptItem> GetAll()
     {
         var cmd = _conn.CreateCommand();

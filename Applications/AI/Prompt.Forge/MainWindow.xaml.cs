@@ -499,12 +499,43 @@ public partial class MainWindow : Window
     void TagLabel_Click(object sender, System.Windows.Input.MouseButtonEventArgs e)
     {
         if (sender is not TextBlock tb || string.IsNullOrWhiteSpace(tb.Text)) return;
-        var firstTag = tb.Text.Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries)
-                              .FirstOrDefault();
-        if (firstTag == null) return;
+        var allTags = tb.Text.Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries)
+                             .Where(t => _vm.Tags.Contains(t))
+                             .ToList();
+        if (allTags.Count == 0) return;
         e.Handled = true;
-        var idx = _vm.Tags.IndexOf(firstTag);
-        if (idx >= 0) CbTag.SelectedIndex = idx;
+
+        if (allTags.Count == 1)
+        {
+            var idx = _vm.Tags.IndexOf(allTags[0]);
+            if (idx >= 0) CbTag.SelectedIndex = idx;
+            return;
+        }
+
+        // 여러 태그 — ContextMenu로 선택
+        var menu = new ContextMenu { Background = new System.Windows.Media.SolidColorBrush(
+            (System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString("#0F1E2E")) };
+        menu.BorderBrush = new System.Windows.Media.SolidColorBrush(
+            (System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString("#1E3555"));
+
+        foreach (var tag in allTags)
+        {
+            var mi = new MenuItem
+            {
+                Header = tag,
+                Foreground = new System.Windows.Media.SolidColorBrush(
+                    (System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString("#B0C8E0"))
+            };
+            mi.Click += (_, _) =>
+            {
+                var i = _vm.Tags.IndexOf(tag);
+                if (i >= 0) CbTag.SelectedIndex = i;
+            };
+            menu.Items.Add(mi);
+        }
+        tb.ContextMenu = menu;
+        menu.PlacementTarget = tb;
+        menu.IsOpen = true;
     }
 
     void TxtContent_TextChanged(object sender, TextChangedEventArgs e)
@@ -557,9 +588,7 @@ public partial class MainWindow : Window
         var currentContent = _vm.Selected.Content.Trim();
         if (!string.IsNullOrEmpty(currentContent))
         {
-            var duplicate = _db.GetAll()
-                .FirstOrDefault(p => p.Id != _vm.Selected.Id
-                                  && p.Content.Trim() == currentContent);
+            var duplicate = _db.FindDuplicateContent(currentContent, _vm.Selected.Id);
             if (duplicate != null)
             {
                 var r = MessageBox.Show(
@@ -816,6 +845,16 @@ public partial class MainWindow : Window
         return null;
     }
 
+    // ── 더블클릭 즉시 복사 ────────────────────────────────────────────────────
+
+    void LstItems_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+    {
+        if (_vm.Selected == null || string.IsNullOrEmpty(TxtContent.Text)) return;
+        // 드래그 시작 직후 더블클릭 오발동 방지: ListBoxItem 위에서 발생한 경우만 처리
+        if (FindAncestor<ListBoxItem>((DependencyObject)e.OriginalSource) == null) return;
+        Copy_Click(sender, e);
+    }
+
     void Help_Click(object sender, RoutedEventArgs e) => HelpPopup.IsOpen = !HelpPopup.IsOpen;
 
     void ClipHistory_Click(object sender, RoutedEventArgs e)
@@ -933,7 +972,8 @@ public partial class MainWindow : Window
                 doMerge = mergeResult == MessageBoxResult.Yes;
             }
 
-            foreach (var item in items)
+            // 신규 삽입 시 Gist의 SortOrder 순서대로 삽입 → DB auto-assign이 상대 순서를 보존
+            foreach (var item in items.OrderBy(x => x.SortOrder))
             {
                 if (existingMap.TryGetValue(item.Title ?? "", out var existing))
                 {
@@ -1012,10 +1052,12 @@ public partial class MainWindow : Window
 
         var dlg = new Microsoft.Win32.SaveFileDialog
         {
-            Title      = "프롬프트 내보내기",
-            Filter     = "JSON 파일 (*.json)|*.json|CSV 파일 (*.csv)|*.csv",
-            DefaultExt = ".json",
-            FileName   = $"prompts_{DateTime.Now:yyyyMMdd}"
+            Title          = "프롬프트 내보내기",
+            Filter         = "JSON 파일 (*.json)|*.json|CSV 파일 (*.csv)|*.csv",
+            DefaultExt     = ".json",
+            FileName       = $"prompts_{DateTime.Now:yyyyMMdd}",
+            InitialDirectory = string.IsNullOrEmpty(_appSettings.LastExportPath)
+                ? "" : _appSettings.LastExportPath
         };
         if (dlg.ShowDialog() != true) return;
 
@@ -1050,6 +1092,8 @@ public partial class MainWindow : Window
                 new System.Text.Json.JsonSerializerOptions { WriteIndented = true });
             File.WriteAllText(dlg.FileName, json, System.Text.Encoding.UTF8);
         }
+        _appSettings.LastExportPath = Path.GetDirectoryName(dlg.FileName) ?? "";
+        _appSettings.Save();
         _vm.StatusText = $"내보내기 완료 — {source.Count}개 ({(useCsv ? "CSV" : "JSON")})";
     }
 
@@ -1057,8 +1101,10 @@ public partial class MainWindow : Window
     {
         var dlg = new Microsoft.Win32.OpenFileDialog
         {
-            Title  = "프롬프트 가져오기",
-            Filter = "JSON 파일 (*.json)|*.json|CSV 파일 (*.csv)|*.csv"
+            Title            = "프롬프트 가져오기",
+            Filter           = "JSON 파일 (*.json)|*.json|CSV 파일 (*.csv)|*.csv",
+            InitialDirectory = string.IsNullOrEmpty(_appSettings.LastImportPath)
+                ? "" : _appSettings.LastImportPath
         };
         if (dlg.ShowDialog() != true) return;
 
@@ -1106,6 +1152,8 @@ public partial class MainWindow : Window
             }
             _vm.Refresh();
             RefreshFilterCombos();
+            _appSettings.LastImportPath = Path.GetDirectoryName(dlg.FileName) ?? "";
+            _appSettings.Save();
             var fmt = isCsv ? "CSV" : "JSON";
             _vm.StatusText = skipped > 0
                 ? $"가져오기 완료 — {imported}개 추가, {skipped}개 중복 스킵 ({fmt})"
@@ -1424,6 +1472,14 @@ public partial class MainWindow : Window
         try
         {
             Clipboard.SetText(merged);
+            foreach (var p in selected) _vm.IncrementUseCount(p.Id);
+
+            var mergedTitle = string.Join(" + ", selected.Select(p =>
+                p.Title.Length > 12 ? p.Title[..12] + "…" : p.Title));
+            _clipboardHistory.RemoveAll(h => h.Title == mergedTitle);
+            _clipboardHistory.Insert(0, (mergedTitle, merged));
+            if (_clipboardHistory.Count > 5) _clipboardHistory.RemoveAt(5);
+
             _vm.StatusText = $"{selected.Count}개 항목 합쳐서 복사됨";
         }
         catch { _vm.StatusText = "클립보드 복사 실패"; }

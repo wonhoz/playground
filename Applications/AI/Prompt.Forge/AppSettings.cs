@@ -16,6 +16,10 @@ public sealed class AppSettings
     public List<string> RecentSearches { get; set; } = [];
     public List<FilterPreset> FilterPresets { get; set; } = [];
 
+    // 내보내기/가져오기 마지막 경로
+    public string LastExportPath { get; set; } = "";
+    public string LastImportPath { get; set; } = "";
+
     // 창 위치/크기 — double.NaN은 저장 없음 (CenterScreen 사용)
     public double WindowLeft   { get; set; } = double.NaN;
     public double WindowTop    { get; set; } = double.NaN;

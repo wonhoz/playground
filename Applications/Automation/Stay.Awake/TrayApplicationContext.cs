@@ -191,7 +191,7 @@ namespace StayAwake
 
             // 간격 설정
             _intervalItem = new ToolStripMenuItem($"간격: {_intervalMinutes}분");
-            var intervals = new[] { 1, 2, 3, 5, 7 };
+            var intervals = new[] { 1, 2, 3, 5, 10 };
             foreach (var min in intervals)
             {
                 var item = new ToolStripMenuItem($"{min}분", null, (s, e) => SetInterval(min))
@@ -693,7 +693,7 @@ namespace StayAwake
                        (정지 상태에서도 1회 실행 가능)
 
 [메뉴 — 설정]
-• 간격                 1 / 2 / 3 / 5 / 7분 선택 (권장: 3~5분)
+• 간격                 1 / 2 / 3 / 5 / 10분 선택 (권장: 3~5분)
                        변경 즉시 타이머 리셋 — 새 간격이 바로 적용됨
 • 이동 거리            10 / 30 / 50 / 100 / 200px 선택
 • 활동 유형            마우스 이동 — 커서를 잠깐 이동 후 원위치

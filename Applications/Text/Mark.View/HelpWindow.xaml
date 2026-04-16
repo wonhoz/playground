@@ -86,8 +86,10 @@
             <TextBlock Text="파일" Style="{StaticResource Cat}"/>
             <ItemsControl ItemTemplate="{StaticResource RowTpl}">
               <ItemsControl.Items>
-                <local:ShortcutEntry Key="Ctrl + O"         Desc="파일 열기"/>
-                <local:ShortcutEntry Key="Ctrl + N"         Desc="새 파일 (새 탭)"/>
+                <local:ShortcutEntry Key="Ctrl + O"         Desc="파일 열기 (다중 선택 가능)"/>
+                <local:ShortcutEntry Key="열기 버튼 우클릭" Desc="폴더의 모든 Markdown 파일을 탭으로 한 번에 열기 (최대 20개)"/>
+                <local:ShortcutEntry Key="Ctrl + N"         Desc="새 빈 파일 (새 탭)"/>
+                <local:ShortcutEntry Key="새 파일 버튼 우클릭" Desc="템플릿으로 파일 만들기 — 회의록 · README · 블로그 포스트 · API 문서"/>
                 <local:ShortcutEntry Key="Ctrl + S"         Desc="저장"/>
                 <local:ShortcutEntry Key="Ctrl + Shift + S" Desc="다른 이름으로 저장"/>
                 <local:ShortcutEntry Key="Ctrl + W"         Desc="현재 탭 닫기"/>
@@ -99,6 +101,7 @@
             <ItemsControl ItemTemplate="{StaticResource RowTpl}">
               <ItemsControl.Items>
                 <local:ShortcutEntry Key="Ctrl + P"           Desc="Quick Open — 열린 탭(⬤) + 최근 파일(📄) 통합 검색 (↑↓ 탐색, Enter 열기)"/>
+                <local:ShortcutEntry Key="Ctrl + Shift + F"   Desc="전체 탭 검색 — 열린 모든 탭의 내용에서 키워드 검색 (결과 클릭으로 해당 탭·줄 이동)"/>
                 <local:ShortcutEntry Key="Ctrl + Tab"         Desc="다음 탭"/>
                 <local:ShortcutEntry Key="Ctrl + Shift + Tab" Desc="이전 탭"/>
                 <local:ShortcutEntry Key="Ctrl + T"           Desc="목차 (TOC) 패널 토글"/>
@@ -111,8 +114,8 @@
             <TextBlock Text="내보내기" Style="{StaticResource Cat}"/>
             <ItemsControl ItemTemplate="{StaticResource RowTpl}">
               <ItemsControl.Items>
-                <local:ShortcutEntry Key="Ctrl + Shift + E" Desc="HTML로 내보내기 (마지막 경로 기억)"/>
-                <local:ShortcutEntry Key="Ctrl + Shift + P"  Desc="PDF로 내보내기 (마지막 경로 기억)"/>
+                <local:ShortcutEntry Key="Ctrl + Shift + E" Desc="HTML로 내보내기 (마지막 경로·파일명 기억)"/>
+                <local:ShortcutEntry Key="Ctrl + Shift + P"  Desc="PDF로 내보내기 (마지막 경로·파일명 기억)"/>
                 <local:ShortcutEntry Key="PDF 버튼 우클릭" Desc="PDF 용지 크기(A4/Letter/Legal) 및 여백 설정"/>
                 <local:ShortcutEntry Key="Ctrl + Shift + C" Desc="현재 문서 HTML을 클립보드에 복사"/>
                 <local:ShortcutEntry Key="Ctrl + Shift + M" Desc="현재 문서 Markdown 원문을 클립보드에 복사"/>
@@ -136,7 +139,7 @@
                 <local:ShortcutEntry Key="커서·스크롤 기억" Desc="파일별 마지막 커서 위치 및 에디터 스크롤 위치 저장 — 앱 재시작 후 해당 파일을 열면 마지막 위치로 자동 이동"/>
                 <local:ShortcutEntry Key="내보내기 경로"    Desc="HTML/PDF 저장 완료 후 상태바에 파일명 표시 — 클릭 시 탐색기에서 파일 위치 열기 (5초간 유지)"/>
                 <local:ShortcutEntry Key="탭 더블클릭"     Desc="탭 이름 인라인 편집 — Enter 확정, Esc 취소"/>
-                <local:ShortcutEntry Key="탭 우클릭"       Desc="경로 복사 · 탐색기에서 열기 · 탭 복제 · 오른쪽 탭 모두 닫기 · 다른 탭 모두 닫기"/>
+                <local:ShortcutEntry Key="탭 우클릭"       Desc="경로 복사 · 탐색기에서 열기 · 탭 복제 · 왼쪽 탭 모두 닫기 · 오른쪽 탭 모두 닫기 · 다른 탭 모두 닫기"/>
               </ItemsControl.Items>
             </ItemsControl>
 
@@ -191,6 +194,7 @@
             <ItemsControl ItemTemplate="{StaticResource RowTpl}">
               <ItemsControl.Items>
                 <local:ShortcutEntry Key="Ctrl + E"           Desc="편집 모드 전환 (서식 도구모음 + 줄 번호 표시)"/>
+                <local:ShortcutEntry Key="Ctrl + J"           Desc="스닛펫 삽입 — 코드블록·표·작업목록·Mermaid·수식·YAML 등 자주 쓰는 구조 선택 삽입 (편집 모드)"/>
                 <local:ShortcutEntry Key="Ctrl + G"           Desc="줄 이동 — 번호 입력 후 Enter, 해당 줄로 커서 이동 (편집 모드)"/>
                 <local:ShortcutEntry Key="Ctrl + B"           Desc="굵게 (선택 텍스트를 **bold** 처리)"/>
                 <local:ShortcutEntry Key="Ctrl + I"           Desc="기울임 (선택 텍스트를 *italic* 처리)"/>
@@ -238,6 +242,7 @@
                 <local:ShortcutEntry Key="── 버튼"         Desc="가로 구분선 삽입"/>
                 <local:ShortcutEntry Key="표 버튼"         Desc="3×2 Markdown 표 템플릿 삽입 (제목행 + 구분행 + 내용행)"/>
                 <local:ShortcutEntry Key="🖼 버튼"         Desc="이미지 파일 선택 다이얼로그 → ![alt](상대경로) 자동 삽입"/>
+                <local:ShortcutEntry Key="⚡ 버튼 (Ctrl+J)" Desc="스닛펫 메뉴 — 코드블록·표·작업목록·인용문·YAML front matter·Mermaid·수식·각주·콜아웃 삽입"/>
               </ItemsControl.Items>
             </ItemsControl>
 

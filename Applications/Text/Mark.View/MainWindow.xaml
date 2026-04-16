@@ -104,6 +104,11 @@
                     Click="FmtBtn_Click" ToolTip="이미지 삽입" Padding="6,3" Margin="4,0,1,0">
               <TextBlock Text="&#x1F5BC;" FontSize="12"/>
             </Button>
+            <Separator Width="1" Height="16" Margin="2,0" Background="{StaticResource BorderBrush}"/>
+            <Button x:Name="BtnFmtSnippet" Style="{StaticResource IconButton}" Tag="snippet"
+                    Click="FmtBtn_Click" ToolTip="스닛펫 삽입 (Ctrl+J)" Padding="6,3" Margin="4,0,1,0">
+              <TextBlock Text="&#x26A1;" FontSize="12" Foreground="{StaticResource Accent2Brush}"/>
+            </Button>
           </StackPanel>
         </Border>
 
@@ -193,12 +198,14 @@
         <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center"
                     HorizontalAlignment="Left">
           <Button Style="{StaticResource IconButton}" Click="BtnNew_Click"
-                  ToolTip="새 파일 (Ctrl+N)" Margin="0,0,2,0" Padding="8,5">
+                  MouseRightButtonUp="BtnNew_RightClick"
+                  ToolTip="새 파일 (Ctrl+N) — 우클릭: 템플릿으로 만들기" Margin="0,0,2,0" Padding="8,5">
             <TextBlock Text="+" FontSize="16" FontWeight="Bold"
                        Foreground="{StaticResource AccentBrush}"/>
           </Button>
           <Button Style="{StaticResource IconButton}" Click="BtnOpen_Click"
-                  ToolTip="열기 (Ctrl+O)" Margin="0,0,2,0" Padding="8,5">
+                  MouseRightButtonUp="BtnOpen_RightClick"
+                  ToolTip="열기 (Ctrl+O) — 우클릭: 폴더의 모든 MD 파일 열기" Margin="0,0,2,0" Padding="8,5">
             <TextBlock Text="&#x1F4C2;" FontSize="14"/>
           </Button>
           <Button Style="{StaticResource IconButton}" Click="BtnSave_Click"
@@ -711,6 +718,51 @@
                        FontSize="11" Foreground="{StaticResource TextBrush}"
                        HorizontalAlignment="Right" Margin="0,2"/>
           </Grid>
+        </StackPanel>
+      </Border>
+    </Popup>
+
+    <!-- ══ 전체 탭 검색 팝업 (Ctrl+Shift+F) ══════════════ -->
+    <Popup x:Name="AllTabsSearchPopup"
+           Grid.Row="0" Grid.RowSpan="3"
+           AllowsTransparency="True"
+           StaysOpen="False"
+           HorizontalAlignment="Center" VerticalAlignment="Top"
+           HorizontalOffset="-220" VerticalOffset="48">
+      <Border Background="{StaticResource SurfaceBrush}"
+              BorderBrush="{StaticResource AccentBrush}" BorderThickness="1"
+              CornerRadius="8" Padding="0">
+        <StackPanel Width="480">
+          <Grid Margin="10,10,10,4">
+            <TextBox x:Name="TxtAllTabsSearch"
+                     FontSize="13"
+                     KeyDown="TxtAllTabsSearch_KeyDown"
+                     TextChanged="TxtAllTabsSearch_TextChanged"/>
+            <TextBlock Text="&#x1F50D; 모든 탭에서 검색..." Foreground="#6888AA"
+                       FontSize="12" VerticalAlignment="Center" Margin="8,0,0,0"
+                       IsHitTestVisible="False" IsEnabled="False">
+              <TextBlock.Style>
+                <Style TargetType="TextBlock">
+                  <Setter Property="Visibility" Value="Collapsed"/>
+                  <Style.Triggers>
+                    <DataTrigger Binding="{Binding Text, ElementName=TxtAllTabsSearch}" Value="">
+                      <Setter Property="Visibility" Value="Visible"/>
+                    </DataTrigger>
+                  </Style.Triggers>
+                </Style>
+              </TextBlock.Style>
+            </TextBlock>
+          </Grid>
+          <TextBlock x:Name="AllTabsSearchStatus" FontSize="11"
+                     Foreground="{StaticResource TextDimBrush}"
+                     Margin="12,0,10,4" Visibility="Collapsed"/>
+          <ListBox x:Name="AllTabsSearchList"
+                   MaxHeight="320"
+                   BorderThickness="0"
+                   Background="Transparent"
+                   FocusVisualStyle="{x:Null}"
+                   MouseDoubleClick="AllTabsSearchList_DoubleClick"
+                   KeyDown="AllTabsSearchList_KeyDown"/>
         </StackPanel>
       </Border>
     </Popup>

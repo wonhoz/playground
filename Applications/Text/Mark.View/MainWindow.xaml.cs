@@ -36,6 +36,9 @@ public partial class MainWindow : Window
     private DispatcherTimer? _autoSaveTimer;
     private string _currentTheme = "dark";
     private double _pendingScrollY = 0;
+    // 헤딩 줄 캐시 — TextChanged 시에만 갱신, ScrollChanged에서는 캐시 사용
+    private List<int>? _cachedHeadingLines;
+    private string? _cachedHeadingText;
     private bool _webViewReady = false;
     private readonly TaskCompletionSource _webViewReadyTcs = new();
     private readonly Dictionary<string, FileSystemWatcher> _fileWatchers = new(StringComparer.OrdinalIgnoreCase);
@@ -857,6 +860,10 @@ public partial class MainWindow : Window
             if (string.IsNullOrEmpty(inner)) return;
             var entries = System.Text.Json.JsonSerializer.Deserialize<List<TocEntry>>(inner, _jsonOpts);
             if (entries == null) return;
+            // FindResource 반복 호출 방지 — 브러시를 한 번만 가져와서 재사용
+            var accentBrush  = (SolidColorBrush)FindResource("AccentBrush");
+            var textBrush    = (SolidColorBrush)FindResource("TextBrush");
+            var textDimBrush = (SolidColorBrush)FindResource("TextDimBrush");
             foreach (var entry in entries)
             {
                 var item = new ListBoxItem
@@ -866,11 +873,9 @@ public partial class MainWindow : Window
                     Padding = new Thickness(12 + (entry.Level - 1) * 10, 4, 8, 4),
                     FontSize = entry.Level == 1 ? 13 : entry.Level == 2 ? 12 : 11,
                     FontWeight = entry.Level == 1 ? FontWeights.Bold : entry.Level == 2 ? FontWeights.SemiBold : FontWeights.Normal,
-                    Foreground = entry.Level == 1
-                        ? (SolidColorBrush)FindResource("AccentBrush")
-                        : entry.Level == 2
-                            ? (SolidColorBrush)FindResource("TextBrush")
-                            : (SolidColorBrush)FindResource("TextDimBrush"),
+                    Foreground = entry.Level == 1 ? accentBrush
+                               : entry.Level == 2 ? textBrush
+                               : textDimBrush,
                     Opacity = entry.Level >= 4 ? 0.8 : 1.0,
                 };
                 TocList.Items.Add(item);
@@ -943,19 +948,32 @@ public partial class MainWindow : Window
         int topCharIdx = Editor.GetCharacterIndexFromPoint(new Point(Editor.Padding.Left + 1, 1), snapToText: true);
         int topLine = CountNewlinesBefore(text, topCharIdx);
 
-        // 에디터 텍스트에서 헤딩 줄 목록 추출 (0-based)
-        var headingLines = new List<int>();
-        var lines = text.Split('\n');
-        for (int i = 0; i < lines.Length; i++)
+        // 헤딩 줄 목록: 텍스트가 바뀌지 않았으면 캐시 재사용
+        List<int> headingLines;
+        int totalLineCount;
+        if (_cachedHeadingText != null && ReferenceEquals(_cachedHeadingText, text) && _cachedHeadingLines != null)
         {
-            var line = lines[i].AsSpan().TrimStart();
-            if (line.StartsWith("#") && line.Length > 1)
+            headingLines = _cachedHeadingLines;
+            totalLineCount = text.AsSpan().Count('\n') + 1;
+        }
+        else
+        {
+            headingLines = [];
+            var lines = text.Split('\n');
+            totalLineCount = lines.Length;
+            for (int i = 0; i < lines.Length; i++)
             {
-                int level = 0;
-                while (level < line.Length && line[level] == '#') level++;
-                if (level <= 6 && level < line.Length && line[level] == ' ')
-                    headingLines.Add(i);
+                var line = lines[i].AsSpan().TrimStart();
+                if (line.StartsWith("#") && line.Length > 1)
+                {
+                    int level = 0;
+                    while (level < line.Length && line[level] == '#') level++;
+                    if (level <= 6 && level < line.Length && line[level] == ' ')
+                        headingLines.Add(i);
+                }
             }
+            _cachedHeadingLines = headingLines;
+            _cachedHeadingText = text;
         }
 
         // 현재 뷰포트 상단에 가장 가까운 이전 헤딩 찾기
@@ -987,7 +1005,7 @@ public partial class MainWindow : Window
         int curHeadingLine = headingLines[prevHeadingIdx];
         int nextHeadingLine = prevHeadingIdx + 1 < headingLines.Count
             ? headingLines[prevHeadingIdx + 1]
-            : lines.Length;
+            : totalLineCount;
         double interRatio = nextHeadingLine > curHeadingLine
             ? Math.Clamp((double)(topLine - curHeadingLine) / (nextHeadingLine - curHeadingLine), 0, 1)
             : 0;
@@ -1048,17 +1066,21 @@ public partial class MainWindow : Window
             "MarkView", "autosave");
         Directory.CreateDirectory(autoSaveDir);
 
-        await Task.Run(() =>
+        try
         {
-            foreach (var doc in modified)
+            await Task.Run(() =>
             {
-                var baseName = doc.IsNew
-                    ? "unsaved_" + doc.Id.ToString("N")[..8]
-                    : Path.GetFileNameWithoutExtension(doc.FilePath);
-                var path = Path.Combine(autoSaveDir, baseName + ".autosave.md");
-                File.WriteAllText(path, doc.Content, new UTF8Encoding(true));
-            }
-        });
+                foreach (var doc in modified)
+                {
+                    var baseName = doc.IsNew
+                        ? "unsaved_" + doc.Id.ToString("N")[..8]
+                        : Path.GetFileNameWithoutExtension(doc.FilePath);
+                    var path = Path.Combine(autoSaveDir, baseName + ".autosave.md");
+                    File.WriteAllText(path, doc.Content, new UTF8Encoding(true));
+                }
+            });
+        }
+        catch { return; }
 
         var savedPath = StatusPath.Text;
         var savedTip = StatusPath.ToolTip;
@@ -1329,6 +1351,15 @@ public partial class MainWindow : Window
             OpenDocument(clone);
         };
         menu.Items.Add(duplicateItem);
+
+        var closeLeftItem = new MenuItem { Header = "왼쪽 탭 모두 닫기" };
+        closeLeftItem.IsEnabled = tabIdx > 0;
+        closeLeftItem.Click += (_, _) =>
+        {
+            for (int i = _activeIndex - 1; i >= 0; i--)
+                CloseTab(i);
+        };
+        menu.Items.Add(closeLeftItem);
 
         var closeRightItem = new MenuItem { Header = "오른쪽 탭 모두 닫기" };
         closeRightItem.IsEnabled = tabIdx < _docs.Count - 1;
@@ -1660,6 +1691,7 @@ public partial class MainWindow : Window
             case "hr":       InsertAtNewLine("---"); break;
             case "table":    InsertAtNewLine("| 제목1 | 제목2 | 제목3 |\n|-------|-------|-------|\n|       |       |       |"); break;
             case "image":    InsertImage(); break;
+            case "snippet":  ShowSnippetMenu(); break;
         }
     }
 
@@ -1738,6 +1770,175 @@ public partial class MainWindow : Window
             // 읽기 실패 시 절대 경로로 fallback
             return $"![{altText}]({absPath.Replace('\\', '/')})";
         }
+    }
+
+    // ── 스닛펫 ──────────────────────────────────────────────────────────
+
+    private void ShowSnippetMenu()
+    {
+        if (_activeIndex < 0 || !_isEditMode) return;
+        var menu = new ContextMenu();
+        var snippets = new[]
+        {
+            ("코드 블록",       "```\n\n```"),
+            ("인라인 코드",     "`코드`"),
+            ("표 (3열)",        "| 제목1 | 제목2 | 제목3 |\n|-------|-------|-------|\n| 내용1 | 내용2 | 내용3 |"),
+            ("작업 목록",       "- [ ] 할 일 1\n- [ ] 할 일 2\n- [x] 완료된 항목"),
+            ("경고 인용문",     "> ⚠️ **주의**: "),
+            ("YAML front matter","---\ntitle: \ndate: \ntags: []\n---"),
+            ("Mermaid 플로우",  "```mermaid\nflowchart TD\n  A[시작] --> B[처리]\n  B --> C[끝]\n```"),
+            ("수식 블록",       "$$\n\n$$"),
+            ("각주",            "[^1]: 각주 내용\n\n본문에서 [^1] 사용"),
+            ("콜아웃 정보",     "> 💡 **참고**: "),
+        };
+        foreach (var (name, content) in snippets)
+        {
+            var c = content;
+            var item = new MenuItem { Header = name };
+            item.Click += (_, _) => { Editor.Focus(); InsertAtNewLine(c); };
+            menu.Items.Add(item);
+        }
+        menu.PlacementTarget = BtnFmtSnippet;
+        menu.Placement = PlacementMode.Bottom;
+        menu.IsOpen = true;
+    }
+
+    // ── 전체 탭 검색 ─────────────────────────────────────────────────────
+
+    private record AllTabsSearchResult(int TabIndex, string TabName, int LineNumber, string LineText);
+    private List<AllTabsSearchResult> _allTabsSearchResults = [];
+
+    private void OpenAllTabsSearch()
+    {
+        AllTabsSearchPopup.IsOpen = true;
+        Dispatcher.InvokeAsync(() => TxtAllTabsSearch.Focus(), System.Windows.Threading.DispatcherPriority.Input);
+    }
+
+    private void TxtAllTabsSearch_TextChanged(object sender, TextChangedEventArgs e)
+    {
+        if (!IsLoaded) return;
+        var keyword = TxtAllTabsSearch.Text;
+        AllTabsSearchList.Items.Clear();
+        _allTabsSearchResults.Clear();
+
+        if (string.IsNullOrWhiteSpace(keyword) || keyword.Length < 2)
+        {
+            AllTabsSearchStatus.Visibility = Visibility.Collapsed;
+            return;
+        }
+
+        foreach (var (doc, tabIdx) in _docs.Select((d, i) => (d, i)))
+        {
+            if (string.IsNullOrEmpty(doc.Content)) continue;
+            var lines = doc.Content.Split('\n');
+            for (int i = 0; i < lines.Length; i++)
+            {
+                if (lines[i].Contains(keyword, StringComparison.OrdinalIgnoreCase))
+                {
+                    _allTabsSearchResults.Add(new AllTabsSearchResult(tabIdx, doc.TabTitle, i + 1, lines[i].Trim()));
+                    if (_allTabsSearchResults.Count >= 200) break;
+                }
+            }
+            if (_allTabsSearchResults.Count >= 200) break;
+        }
+
+        AllTabsSearchStatus.Text = _allTabsSearchResults.Count == 0
+            ? "결과 없음"
+            : $"{_allTabsSearchResults.Count}개 결과{(_allTabsSearchResults.Count >= 200 ? " (200개 제한)" : "")}";
+        AllTabsSearchStatus.Visibility = Visibility.Visible;
+
+        foreach (var result in _allTabsSearchResults)
+        {
+            var lineText = result.LineText.Length > 80 ? result.LineText[..80] + "…" : result.LineText;
+            var item = new ListBoxItem
+            {
+                Padding = new Thickness(10, 4, 10, 4),
+                Tag = result,
+            };
+            var grid = new System.Windows.Controls.Grid();
+            grid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
+            grid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
+
+            var left = new StackPanel();
+            var tabLabel = new TextBlock
+            {
+                Text = result.TabName.TrimEnd('•').Trim(),
+                FontSize = 10,
+                Foreground = (SolidColorBrush)FindResource("AccentBrush"),
+                FontWeight = FontWeights.SemiBold,
+            };
+            var lineLabel = new TextBlock
+            {
+                Text = lineText,
+                FontSize = 11.5,
+                Foreground = (SolidColorBrush)FindResource("TextBrush"),
+                TextTrimming = TextTrimming.CharacterEllipsis,
+            };
+            left.Children.Add(tabLabel);
+            left.Children.Add(lineLabel);
+
+            var lineNum = new TextBlock
+            {
+                Text = $":{result.LineNumber}",
+                FontSize = 10,
+                Foreground = (SolidColorBrush)FindResource("TextDimBrush"),
+                VerticalAlignment = VerticalAlignment.Center,
+                Margin = new Thickness(8, 0, 0, 0),
+                FontFamily = new System.Windows.Media.FontFamily("Cascadia Code, Consolas, monospace"),
+            };
+            System.Windows.Controls.Grid.SetColumn(lineNum, 1);
+
+            grid.Children.Add(left);
+            grid.Children.Add(lineNum);
+            item.Content = grid;
+            AllTabsSearchList.Items.Add(item);
+        }
+    }
+
+    private void AllTabsSearchList_DoubleClick(object sender, MouseButtonEventArgs e)
+    {
+        JumpToAllTabsSearchResult();
+    }
+
+    private void AllTabsSearchList_KeyDown(object sender, KeyEventArgs e)
+    {
+        if (e.Key == Key.Enter) { JumpToAllTabsSearchResult(); e.Handled = true; }
+        else if (e.Key == Key.Escape) { AllTabsSearchPopup.IsOpen = false; e.Handled = true; }
+    }
+
+    private void TxtAllTabsSearch_KeyDown(object sender, KeyEventArgs e)
+    {
+        if (e.Key == Key.Down && AllTabsSearchList.Items.Count > 0)
+        {
+            AllTabsSearchList.Focus();
+            AllTabsSearchList.SelectedIndex = 0;
+            e.Handled = true;
+        }
+        else if (e.Key == Key.Enter && AllTabsSearchList.Items.Count > 0)
+        {
+            AllTabsSearchList.SelectedIndex = 0;
+            JumpToAllTabsSearchResult();
+            e.Handled = true;
+        }
+        else if (e.Key == Key.Escape)
+        {
+            AllTabsSearchPopup.IsOpen = false;
+            e.Handled = true;
+        }
+    }
+
+    private void JumpToAllTabsSearchResult()
+    {
+        if (AllTabsSearchList.SelectedItem is not ListBoxItem item || item.Tag is not AllTabsSearchResult result) return;
+        AllTabsSearchPopup.IsOpen = false;
+        SwitchTo(result.TabIndex);
+        // 해당 줄로 이동 및 찾기 포커스
+        if (_isEditMode)
+        {
+            try { Editor.ScrollToLine(result.LineNumber - 1); } catch { }
+        }
+        TxtFind.Text = TxtAllTabsSearch.Text;
+        TxtAllTabsSearch.Text = "";
     }
 
     // ── TOC ─────────────────────────────────────────────────────────────
@@ -2291,6 +2492,46 @@ public partial class MainWindow : Window
         if (!_isEditMode) SetEditMode(true);
     }
 
+    private void BtnNew_RightClick(object sender, MouseButtonEventArgs e)
+    {
+        e.Handled = true;
+        var menu = new ContextMenu();
+
+        var blankItem = new MenuItem { Header = "빈 문서 (기본)" };
+        blankItem.Click += (_, _) => { OpenDocument(new MarkDocument()); if (!_isEditMode) SetEditMode(true); };
+        menu.Items.Add(blankItem);
+        menu.Items.Add(new Separator());
+
+        var templates = new[]
+        {
+            ("회의록",
+             "# 회의록\n\n**날짜**: \n**장소**: \n**참석자**: \n\n## 안건\n\n1. \n\n## 논의 내용\n\n## 결론 및 Action Items\n\n| 담당자 | 항목 | 기한 |\n|--------|------|------|\n|        |      |      |\n"),
+            ("README",
+             "# 프로젝트 이름\n\n> 간략한 프로젝트 설명\n\n## 주요 기능\n\n- \n\n## 시작하기\n\n### 설치\n\n```bash\n\n```\n\n### 사용 방법\n\n```bash\n\n```\n\n## 라이선스\n\nMIT\n"),
+            ("블로그 포스트",
+             "# 제목\n\n> 한 줄 요약\n\n**작성일**: \n**태그**: \n\n---\n\n## 들어가며\n\n## 본문\n\n## 마치며\n"),
+            ("API 문서",
+             "# API 이름\n\n## 개요\n\n**Base URL**: `https://api.example.com`\n\n## 인증\n\n## 엔드포인트\n\n### `GET /path`\n\n**파라미터**\n\n| 이름 | 타입 | 필수 | 설명 |\n|------|------|------|------|\n\n**응답 예시**\n\n```json\n{\n}\n```\n"),
+        };
+
+        foreach (var (name, content) in templates)
+        {
+            var c = content;
+            var item = new MenuItem { Header = $"{name} 템플릿" };
+            item.Click += (_, _) =>
+            {
+                var doc = new MarkDocument { Content = c };
+                OpenDocument(doc);
+                if (!_isEditMode) SetEditMode(true);
+            };
+            menu.Items.Add(item);
+        }
+
+        menu.PlacementTarget = (UIElement)sender;
+        menu.Placement = PlacementMode.Bottom;
+        menu.IsOpen = true;
+    }
+
     private void BtnOpen_Click(object sender, RoutedEventArgs e)
     {
         var dlg = new OpenFileDialog
@@ -2300,6 +2541,36 @@ public partial class MainWindow : Window
         };
         if (dlg.ShowDialog() != true) return;
         foreach (var f in dlg.FileNames) OpenFile(f);
+    }
+
+    private void BtnOpen_RightClick(object sender, MouseButtonEventArgs e)
+    {
+        e.Handled = true;
+        // 폴더 선택 → 하위 .md/.markdown 파일 모두 열기
+        var initDir = _activeIndex >= 0 && !_docs[_activeIndex].IsNew
+            ? _docs[_activeIndex].Directory : null;
+        var dir = FolderPicker.Show(initDir);
+        if (dir == null) return;
+
+        var files = Directory.GetFiles(dir, "*.md", SearchOption.TopDirectoryOnly)
+            .Concat(Directory.GetFiles(dir, "*.markdown", SearchOption.TopDirectoryOnly))
+            .OrderBy(f => f)
+            .ToList();
+
+        if (files.Count == 0)
+        {
+            ShowStatusHint($"'{Path.GetFileName(dir)}' 폴더에 Markdown 파일이 없습니다", 3);
+            return;
+        }
+        if (files.Count > 20)
+        {
+            var res = MessageBox.Show($"{files.Count}개 파일을 모두 열겠습니까?\n(20개 초과 — 처음 20개만 열립니다)",
+                "많은 파일", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (res != MessageBoxResult.Yes) return;
+            files = files.Take(20).ToList();
+        }
+        foreach (var f in files) OpenFile(f);
+        ShowStatusHint($"{files.Count}개 파일 열림 — {Path.GetFileName(dir)}", 3);
     }
 
     private void BtnSave_Click(object sender, RoutedEventArgs e)
@@ -2396,11 +2667,16 @@ public partial class MainWindow : Window
     {
         if (_activeIndex < 0 || !_webViewReady) return;
         var doc = _docs[_activeIndex];
+        // 이전에 내보낸 경로가 있으면 그 파일명을 기본값으로 사용
+        var lastExportKey = doc.IsNew ? "" : doc.FilePath + "|pdf";
+        var defaultName = !string.IsNullOrEmpty(lastExportKey) && _settings.LastExportPaths.TryGetValue(lastExportKey, out var lastPdf) && File.Exists(lastPdf)
+            ? Path.GetFileName(lastPdf)
+            : Path.GetFileNameWithoutExtension(doc.FileName) + ".pdf";
         var dlg = new SaveFileDialog
         {
             Filter = "PDF 파일 (*.pdf)|*.pdf",
             DefaultExt = ".pdf",
-            FileName = System.IO.Path.GetFileNameWithoutExtension(doc.FileName) + ".pdf",
+            FileName = defaultName,
         };
         var initDir = !string.IsNullOrEmpty(_settings.ExportDir) && Directory.Exists(_settings.ExportDir)
             ? _settings.ExportDir
@@ -2408,6 +2684,7 @@ public partial class MainWindow : Window
         if (initDir != null) dlg.InitialDirectory = initDir;
         if (dlg.ShowDialog() != true) return;
         _settings.ExportDir = System.IO.Path.GetDirectoryName(dlg.FileName) ?? "";
+        if (!string.IsNullOrEmpty(lastExportKey)) _settings.LastExportPaths[lastExportKey] = dlg.FileName;
         _settings.Save();
 
         await ShowLoadingAsync("PDF 내보내기 중...");
@@ -2484,11 +2761,15 @@ public partial class MainWindow : Window
     {
         if (_activeIndex < 0) return;
         var doc = _docs[_activeIndex];
+        var lastExportKeyHtml = doc.IsNew ? "" : doc.FilePath + "|html";
+        var defaultNameHtml = !string.IsNullOrEmpty(lastExportKeyHtml) && _settings.LastExportPaths.TryGetValue(lastExportKeyHtml, out var lastHtml) && File.Exists(lastHtml)
+            ? Path.GetFileName(lastHtml)
+            : Path.GetFileNameWithoutExtension(doc.FileName) + ".html";
         var dlg = new SaveFileDialog
         {
             Filter = "HTML 파일 (*.html)|*.html",
             DefaultExt = ".html",
-            FileName = System.IO.Path.GetFileNameWithoutExtension(doc.FileName) + ".html",
+            FileName = defaultNameHtml,
         };
         var initDir = !string.IsNullOrEmpty(_settings.ExportDir) && Directory.Exists(_settings.ExportDir)
             ? _settings.ExportDir
@@ -2497,6 +2778,7 @@ public partial class MainWindow : Window
         if (dlg.ShowDialog() != true) return;
 
         _settings.ExportDir = System.IO.Path.GetDirectoryName(dlg.FileName) ?? "";
+        if (!string.IsNullOrEmpty(lastExportKeyHtml)) _settings.LastExportPaths[lastExportKeyHtml] = dlg.FileName;
         _settings.Save();
 
         await ShowLoadingAsync("HTML 내보내기 중...");
@@ -3300,6 +3582,10 @@ public partial class MainWindow : Window
         { BtnReload_Click(this, new RoutedEventArgs()); e.Handled = true; }
         else if (e.Key == Key.F && Keyboard.Modifiers == ModifierKeys.Control)
         { TxtFind.Focus(); e.Handled = true; }
+        else if (e.Key == Key.F && Keyboard.Modifiers == (ModifierKeys.Control | ModifierKeys.Shift) && _docs.Count > 0)
+        { OpenAllTabsSearch(); e.Handled = true; }
+        else if (e.Key == Key.J && Keyboard.Modifiers == ModifierKeys.Control && _isEditMode)
+        { ShowSnippetMenu(); e.Handled = true; }
         else if (e.Key == Key.E && Keyboard.Modifiers == (ModifierKeys.Control | ModifierKeys.Shift))
         { BtnExportHtml_Click(this, new RoutedEventArgs()); e.Handled = true; }
         else if (e.Key == Key.T && Keyboard.Modifiers == ModifierKeys.Control)
@@ -3348,6 +3634,8 @@ public partial class MainWindow : Window
         { MoveLineUp(); e.Handled = true; }
         else if (e.Key == Key.Down && Keyboard.Modifiers == ModifierKeys.Alt && _isEditMode)
         { MoveLineDown(); e.Handled = true; }
+        else if (e.Key == Key.Escape && AllTabsSearchPopup.IsOpen)
+        { AllTabsSearchPopup.IsOpen = false; e.Handled = true; }
         else if (e.Key == Key.Escape && !string.IsNullOrEmpty(TxtFind.Text))
         { TxtFind.Text = ""; e.Handled = true; }
         else if (e.Key == Key.Escape && GotoLinePopup.IsOpen)

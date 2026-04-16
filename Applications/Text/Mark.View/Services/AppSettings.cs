@@ -34,6 +34,8 @@ public class AppSettings
     public Dictionary<string, int> FileCursorPositions { get; set; } = [];
     public Dictionary<string, double> FileScrollPositions { get; set; } = [];
     public Dictionary<string, List<int>> Bookmarks { get; set; } = [];
+    // 문서별 마지막 내보내기 경로 (doc.FilePath → last export full path)
+    public Dictionary<string, string> LastExportPaths { get; set; } = [];
 
     private const int MaxRecentFiles = 20;
 

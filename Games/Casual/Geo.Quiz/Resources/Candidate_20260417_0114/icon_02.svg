@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <clipPath id="roundClip2"><rect width="1024" height="1024" rx="190"/></clipPath>
+  </defs>
+  <!-- Layer 1: 4-quadrant flag-color background -->
+  <g clip-path="url(#roundClip2)">
+    <!-- Top-left: France-style (blue) -->
+    <rect x="0" y="0" width="512" height="512" fill="#1565C0"/>
+    <!-- Top-right: Japan-style (white+red) -->
+    <rect x="512" y="0" width="512" height="512" fill="#FAFAFA"/>
+    <circle cx="768" cy="256" r="130" fill="#D32F2F"/>
+    <!-- Bottom-left: Germany-style -->
+    <rect x="0" y="512" width="512" height="171" fill="#212121"/>
+    <rect x="0" y="683" width="512" height="171" fill="#D32F2F"/>
+    <rect x="0" y="854" width="512" height="170" fill="#FFD600"/>
+    <!-- Bottom-right: UK-style cross -->
+    <rect x="512" y="512" width="512" height="512" fill="#D32F2F"/>
+    <rect x="472" y="512" width="80" height="512" fill="white"/>
+    <rect x="512" y="472" width="512" height="80" fill="white"/>
+    <rect x="472" y="512" width="80" height="512" fill="#1565C0" opacity="0.0"/>
+    <!-- Cross lines -->
+    <line x1="512" y1="512" x2="1024" y2="1024" stroke="white" stroke-width="54" opacity="0.6"/>
+    <line x1="1024" y1="512" x2="512" y2="1024" stroke="white" stroke-width="54" opacity="0.6"/>
+    <rect x="472" y="512" width="80" height="512" fill="white"/>
+    <rect x="512" y="472" width="512" height="80" fill="white"/>
+  </g>
+  <!-- Divider cross lines -->
+  <line x1="512" y1="0" x2="512" y2="1024" stroke="white" stroke-width="16"/>
+  <line x1="0" y1="512" x2="1024" y2="512" stroke="white" stroke-width="16"/>
+
+  <!-- Layer 2: Central quiz badge -->
+  <circle cx="512" cy="512" r="150" fill="white" stroke="#FFD600" stroke-width="16"/>
+  <text x="512" y="476" font-family="Arial Black, sans-serif" font-size="100" font-weight="900" fill="#1565C0" text-anchor="middle">GEO</text>
+  <text x="512" y="580" font-family="Arial Black, sans-serif" font-size="80" font-weight="900" fill="#D32F2F" text-anchor="middle">QUIZ</text>
+
+  <!-- Layer 3: Corner "?" dots -->
+  <circle cx="256" cy="256" r="56" fill="#FFD600" opacity="0.9"/>
+  <text x="256" y="278" font-family="Arial Black, sans-serif" font-size="72" font-weight="900" fill="#1565C0" text-anchor="middle">?</text>
+
+  <circle cx="768" cy="768" r="56" fill="#FFD600" opacity="0.9"/>
+  <text x="768" y="790" font-family="Arial Black, sans-serif" font-size="72" font-weight="900" fill="#D32F2F" text-anchor="middle">?</text>
+</svg>

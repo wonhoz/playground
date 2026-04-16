@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg1" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#E3F2FD"/>
+      <stop offset="100%" stop-color="#BBDEFB"/>
+    </linearGradient>
+    <linearGradient id="globe1" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1565C0"/>
+      <stop offset="100%" stop-color="#0D47A1"/>
+    </linearGradient>
+  </defs>
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg1)"/>
+
+  <!-- Layer 2: Globe -->
+  <circle cx="512" cy="512" r="340" fill="url(#globe1)"/>
+  <!-- Latitude lines -->
+  <ellipse cx="512" cy="512" rx="340" ry="120" fill="none" stroke="#42A5F5" stroke-width="12" opacity="0.6"/>
+  <ellipse cx="512" cy="512" rx="340" ry="220" fill="none" stroke="#42A5F5" stroke-width="10" opacity="0.4"/>
+  <!-- Equator -->
+  <line x1="172" y1="512" x2="852" y2="512" stroke="#64B5F6" stroke-width="14" opacity="0.7"/>
+  <!-- Meridian -->
+  <ellipse cx="512" cy="512" rx="140" ry="340" fill="none" stroke="#64B5F6" stroke-width="14" opacity="0.5"/>
+  <!-- Continents (simplified blobs) -->
+  <!-- Europe/Asia -->
+  <ellipse cx="560" cy="440" rx="120" ry="70" fill="#4CAF50" opacity="0.85"/>
+  <!-- Africa -->
+  <ellipse cx="530" cy="560" rx="70" ry="90" fill="#4CAF50" opacity="0.8"/>
+  <!-- Americas -->
+  <ellipse cx="360" cy="490" rx="60" ry="110" fill="#4CAF50" opacity="0.8"/>
+  <!-- Oceania -->
+  <ellipse cx="700" cy="600" rx="55" ry="38" fill="#4CAF50" opacity="0.75"/>
+  <!-- Globe outline -->
+  <circle cx="512" cy="512" r="340" fill="none" stroke="#1565C0" stroke-width="20"/>
+
+  <!-- Layer 3: "?" badge (top right) -->
+  <circle cx="800" cy="224" r="130" fill="#FFD600" stroke="white" stroke-width="12"/>
+  <text x="800" y="268" font-family="Arial Black, sans-serif" font-size="160" font-weight="900" fill="#1565C0" text-anchor="middle">?</text>
+
+  <!-- Quiz label -->
+  <rect x="290" y="820" width="444" height="90" rx="45" fill="#1565C0"/>
+  <text x="512" y="879" font-family="Arial Black, sans-serif" font-size="64" font-weight="900" fill="white" text-anchor="middle">GEO QUIZ</text>
+</svg>

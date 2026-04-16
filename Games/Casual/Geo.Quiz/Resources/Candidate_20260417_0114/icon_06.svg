@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg6" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#EDE7F6"/>
+      <stop offset="100%" stop-color="#D1C4E9"/>
+    </linearGradient>
+    <linearGradient id="card6" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#7E57C2"/>
+      <stop offset="100%" stop-color="#512DA8"/>
+    </linearGradient>
+  </defs>
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg6)"/>
+
+  <!-- Layer 2: Back card -->
+  <rect x="200" y="180" width="600" height="660" rx="28" fill="#9575CD" opacity="0.6" transform="rotate(-6, 500, 510)"/>
+  <!-- Middle card -->
+  <rect x="190" y="195" width="600" height="660" rx="28" fill="#AB47BC" opacity="0.7" transform="rotate(-3, 490, 525)"/>
+  <!-- Front card (main) -->
+  <rect x="182" y="210" width="650" height="660" rx="28" fill="white" stroke="#CE93D8" stroke-width="10"/>
+
+  <!-- Card header -->
+  <rect x="182" y="210" width="650" height="120" rx="28" fill="url(#card6)"/>
+  <rect x="182" y="290" width="650" height="40" fill="url(#card6)"/>
+  <text x="507" y="288" font-family="Arial Black, sans-serif" font-size="60" font-weight="900" fill="white" text-anchor="middle">Capital Quiz</text>
+
+  <!-- Question -->
+  <text x="507" y="390" font-family="Arial Black, sans-serif" font-size="46" font-weight="700" fill="#512DA8" text-anchor="middle">France의 수도는?</text>
+
+  <!-- Choices -->
+  <rect x="218" y="418" width="280" height="80" rx="14" fill="#EDE7F6" stroke="#9575CD" stroke-width="6"/>
+  <text x="358" y="468" font-family="Arial Black, sans-serif" font-size="46" font-weight="900" fill="#512DA8" text-anchor="middle">A. Paris</text>
+
+  <rect x="518" y="418" width="280" height="80" rx="14" fill="#EDE7F6" stroke="#9575CD" stroke-width="6"/>
+  <text x="658" y="468" font-family="Arial Black, sans-serif" font-size="46" font-weight="900" fill="#512DA8" text-anchor="middle">B. Lyon</text>
+
+  <rect x="218" y="516" width="280" height="80" rx="14" fill="#EDE7F6" stroke="#9575CD" stroke-width="6"/>
+  <text x="358" y="566" font-family="Arial Black, sans-serif" font-size="46" font-weight="900" fill="#512DA8" text-anchor="middle">C. Nice</text>
+
+  <rect x="518" y="516" width="280" height="80" rx="14" fill="#EDE7F6" stroke="#9575CD" stroke-width="6"/>
+  <text x="658" y="566" font-family="Arial Black, sans-serif" font-size="46" font-weight="900" fill="#512DA8" text-anchor="middle">D. Lille</text>
+
+  <!-- Divider -->
+  <line x1="218" y1="626" x2="796" y2="626" stroke="#D1C4E9" stroke-width="6"/>
+
+  <!-- Score progress bar -->
+  <text x="507" y="680" font-family="Arial Black, sans-serif" font-size="44" font-weight="700" fill="#7E57C2" text-anchor="middle">9 / 10 정답</text>
+  <rect x="218" y="694" width="578" height="36" rx="18" fill="#EDE7F6"/>
+  <rect x="218" y="694" width="520" height="36" rx="18" fill="#7E57C2"/>
+
+  <!-- Layer 3: Grade A badge -->
+  <circle cx="820" cy="820" r="120" fill="#FFD600" stroke="white" stroke-width="14"/>
+  <text x="820" y="868" font-family="Arial Black, sans-serif" font-size="148" font-weight="900" fill="#512DA8" text-anchor="middle">A</text>
+</svg>

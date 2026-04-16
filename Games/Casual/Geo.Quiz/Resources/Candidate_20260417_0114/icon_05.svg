@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg5" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#E0F7FA"/>
+      <stop offset="100%" stop-color="#B2EBF2"/>
+    </linearGradient>
+    <linearGradient id="globe5" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#00ACC1"/>
+      <stop offset="100%" stop-color="#006064"/>
+    </linearGradient>
+  </defs>
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg5)"/>
+
+  <!-- Layer 2: Globe (bottom-left) -->
+  <circle cx="320" cy="700" r="280" fill="url(#globe5)" opacity="0.9"/>
+  <!-- Latitude lines on globe -->
+  <ellipse cx="320" cy="700" rx="280" ry="100" fill="none" stroke="#4DD0E1" stroke-width="10" opacity="0.5"/>
+  <line x1="40" y1="700" x2="600" y2="700" stroke="#4DD0E1" stroke-width="12" opacity="0.4"/>
+  <!-- Continent blob -->
+  <ellipse cx="360" cy="640" rx="130" ry="80" fill="#4CAF50" opacity="0.8"/>
+  <ellipse cx="290" cy="730" rx="80" ry="100" fill="#4CAF50" opacity="0.75"/>
+  <ellipse cx="430" cy="750" rx="60" ry="80" fill="#4CAF50" opacity="0.7"/>
+  <circle cx="320" cy="700" r="280" fill="none" stroke="#00838F" stroke-width="16"/>
+
+  <!-- Question speech bubble (top-right) -->
+  <rect x="450" y="148" width="470" height="340" rx="36" fill="#F06292"/>
+  <polygon points="510,488 450,500 510,448" fill="#F06292"/>
+  <!-- Bubble content -->
+  <text x="685" y="234" font-family="Arial Black, sans-serif" font-size="52" font-weight="900" fill="white" text-anchor="middle">수도는?</text>
+  <text x="685" y="300" font-family="Arial Black, sans-serif" font-size="40" font-weight="700" fill="#FCE4EC" text-anchor="middle">What is the</text>
+  <text x="685" y="356" font-family="Arial Black, sans-serif" font-size="40" font-weight="700" fill="#FCE4EC" text-anchor="middle">capital of?</text>
+  <!-- Big "?" -->
+  <text x="685" y="450" font-family="Arial Black, sans-serif" font-size="120" font-weight="900" fill="white" text-anchor="middle">?</text>
+
+  <!-- Layer 3: Answer cards floating -->
+  <rect x="540" y="590" width="350" height="80" rx="16" fill="white" stroke="#F06292" stroke-width="6"/>
+  <text x="715" y="642" font-family="Arial Black, sans-serif" font-size="52" font-weight="900" fill="#00838F" text-anchor="middle">Seoul ✓</text>
+
+  <rect x="540" y="690" width="350" height="80" rx="16" fill="#E0F7FA" stroke="#26C6DA" stroke-width="6"/>
+  <text x="715" y="742" font-family="Arial Black, sans-serif" font-size="52" font-weight="900" fill="#006064" text-anchor="middle">Tokyo</text>
+
+  <rect x="540" y="790" width="350" height="80" rx="16" fill="#E0F7FA" stroke="#26C6DA" stroke-width="6"/>
+  <text x="715" y="842" font-family="Arial Black, sans-serif" font-size="52" font-weight="900" fill="#006064" text-anchor="middle">Beijing</text>
+</svg>

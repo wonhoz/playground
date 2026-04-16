@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg7" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FFF8E1"/>
+      <stop offset="100%" stop-color="#FFECB3"/>
+    </linearGradient>
+    <linearGradient id="globe7" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1565C0"/>
+      <stop offset="100%" stop-color="#0D47A1"/>
+    </linearGradient>
+  </defs>
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg7)"/>
+
+  <!-- Layer 2: Explorer character silhouette -->
+  <!-- Hat -->
+  <ellipse cx="512" cy="168" rx="130" ry="30" fill="#E65100"/>
+  <rect x="392" y="120" width="240" height="68" rx="12" fill="#FF8F00"/>
+  <!-- Head -->
+  <circle cx="512" cy="240" r="86" fill="#FF8F00"/>
+  <!-- Eyes -->
+  <circle cx="486" cy="232" r="16" fill="white"/>
+  <circle cx="538" cy="232" r="16" fill="white"/>
+  <circle cx="490" cy="234" r="9" fill="#1A237E"/>
+  <circle cx="542" cy="234" r="9" fill="#1A237E"/>
+  <!-- Smile -->
+  <path d="M478,272 Q512,296 546,272" fill="none" stroke="#E65100" stroke-width="10" stroke-linecap="round"/>
+
+  <!-- Body -->
+  <rect x="426" y="318" width="172" height="220" rx="28" fill="#FF8F00"/>
+  <!-- Arms -->
+  <!-- Left arm (raising globe) -->
+  <rect x="300" y="318" width="136" height="60" rx="30" fill="#FF8F00" transform="rotate(-30, 368, 348)"/>
+  <rect x="226" y="252" width="136" height="60" rx="30" fill="#FF8F00" transform="rotate(-60, 294, 282)"/>
+  <!-- Right arm -->
+  <rect x="588" y="318" width="136" height="60" rx="30" fill="#FF8F00" transform="rotate(20, 656, 348)"/>
+
+  <!-- Legs -->
+  <rect x="432" y="528" width="72" height="180" rx="36" fill="#E65100" transform="rotate(-5, 468, 618)"/>
+  <rect x="520" y="528" width="72" height="180" rx="36" fill="#E65100" transform="rotate(5, 556, 618)"/>
+  <!-- Feet -->
+  <ellipse cx="456" cy="706" rx="52" ry="24" fill="#1A237E" transform="rotate(-5, 456, 706)"/>
+  <ellipse cx="572" cy="706" rx="52" ry="24" fill="#1A237E" transform="rotate(5, 572, 706)"/>
+
+  <!-- Globe held aloft (top-left) -->
+  <circle cx="300" cy="210" r="150" fill="url(#globe7)"/>
+  <!-- Globe lines -->
+  <ellipse cx="300" cy="210" rx="150" ry="54" fill="none" stroke="#42A5F5" stroke-width="8" opacity="0.6"/>
+  <line x1="150" y1="210" x2="450" y2="210" stroke="#64B5F6" stroke-width="10" opacity="0.5"/>
+  <ellipse cx="300" cy="210" rx="60" ry="150" fill="none" stroke="#64B5F6" stroke-width="8" opacity="0.5"/>
+  <!-- Continent on globe -->
+  <ellipse cx="320" cy="190" rx="60" ry="38" fill="#4CAF50" opacity="0.8"/>
+  <ellipse cx="280" cy="240" rx="40" ry="54" fill="#4CAF50" opacity="0.75"/>
+  <circle cx="300" cy="210" r="150" fill="none" stroke="#0D47A1" stroke-width="12"/>
+
+  <!-- Layer 3: "?" sparkles around globe -->
+  <text x="196" y="110" font-family="Arial Black, sans-serif" font-size="64" font-weight="900" fill="#FF8F00">?</text>
+  <text x="414" y="100" font-family="Arial Black, sans-serif" font-size="64" font-weight="900" fill="#1565C0">?</text>
+  <text x="148" y="290" font-family="Arial Black, sans-serif" font-size="56" font-weight="900" fill="#FFD600">?</text>
+
+  <!-- Bottom name label -->
+  <rect x="280" y="800" width="464" height="88" rx="44" fill="#FF8F00"/>
+  <text x="512" y="858" font-family="Arial Black, sans-serif" font-size="60" font-weight="900" fill="white" text-anchor="middle">Geo.Quiz</text>
+</svg>

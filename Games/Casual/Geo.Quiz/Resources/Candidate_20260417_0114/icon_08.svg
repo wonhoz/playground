@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg8" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FFFDE7"/>
+      <stop offset="100%" stop-color="#FFF9C4"/>
+    </linearGradient>
+    <linearGradient id="globe8" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#4527A0"/>
+      <stop offset="100%" stop-color="#311B92"/>
+    </linearGradient>
+  </defs>
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg8)"/>
+
+  <!-- Layer 2: Large globe (center-left) -->
+  <circle cx="420" cy="480" r="300" fill="url(#globe8)"/>
+  <!-- Globe grid lines -->
+  <ellipse cx="420" cy="480" rx="300" ry="108" fill="none" stroke="#7E57C2" stroke-width="14" opacity="0.6"/>
+  <ellipse cx="420" cy="480" rx="300" ry="220" fill="none" stroke="#7E57C2" stroke-width="10" opacity="0.4"/>
+  <line x1="120" y1="480" x2="720" y2="480" stroke="#9575CD" stroke-width="14" opacity="0.5"/>
+  <ellipse cx="420" cy="480" rx="120" ry="300" fill="none" stroke="#9575CD" stroke-width="12" opacity="0.4"/>
+  <!-- Continents -->
+  <ellipse cx="460" cy="400" rx="120" ry="72" fill="#43A047" opacity="0.85"/>
+  <ellipse cx="430" cy="500" rx="80" ry="100" fill="#43A047" opacity="0.8"/>
+  <ellipse cx="280" cy="450" rx="68" ry="120" fill="#43A047" opacity="0.75"/>
+  <ellipse cx="610" cy="540" rx="52" ry="36" fill="#43A047" opacity="0.7"/>
+  <circle cx="420" cy="480" r="300" fill="none" stroke="#4527A0" stroke-width="20"/>
+
+  <!-- Right side: 3 mode labels -->
+  <!-- Capital mode -->
+  <rect x="720" y="180" width="278" height="130" rx="20" fill="#FFD600"/>
+  <text x="859" y="248" font-family="Arial Black, sans-serif" font-size="42" font-weight="900" fill="#311B92" text-anchor="middle">🏛 Capital</text>
+  <text x="859" y="294" font-family="Arial Black, sans-serif" font-size="34" font-weight="700" fill="#4527A0" text-anchor="middle">수도 맞추기</text>
+
+  <!-- Flag mode -->
+  <rect x="720" y="345" width="278" height="130" rx="20" fill="#FF8F00"/>
+  <text x="859" y="413" font-family="Arial Black, sans-serif" font-size="42" font-weight="900" fill="white" text-anchor="middle">🚩 Flag</text>
+  <text x="859" y="459" font-family="Arial Black, sans-serif" font-size="34" font-weight="700" fill="#FFF3E0" text-anchor="middle">국기 맞추기</text>
+
+  <!-- Continent mode -->
+  <rect x="720" y="510" width="278" height="130" rx="20" fill="#43A047"/>
+  <text x="859" y="578" font-family="Arial Black, sans-serif" font-size="40" font-weight="900" fill="white" text-anchor="middle">🌍 Continent</text>
+  <text x="859" y="624" font-family="Arial Black, sans-serif" font-size="34" font-weight="700" fill="#E8F5E9" text-anchor="middle">대륙 맞추기</text>
+
+  <!-- Layer 3: Title at bottom -->
+  <rect x="148" y="836" width="728" height="102" rx="51" fill="url(#globe8)"/>
+  <text x="512" y="903" font-family="Arial Black, sans-serif" font-size="76" font-weight="900" fill="#FFD600" text-anchor="middle">GEO QUIZ</text>
+</svg>

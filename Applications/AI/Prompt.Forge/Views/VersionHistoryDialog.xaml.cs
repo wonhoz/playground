@@ -1,14 +1,9 @@
-using System.Runtime.InteropServices;
-using System.Windows.Interop;
 using Prompt.Forge.Services;
 
 namespace Prompt.Forge.Views;
 
 public partial class VersionHistoryDialog : Window
 {
-    [DllImport("dwmapi.dll")]
-    static extern int DwmSetWindowAttribute(IntPtr hwnd, int attr, ref int val, int size);
-
     public string? RestoredContent { get; private set; }
 
     record VersionEntry(int Id, string VersionLabel, string DateLabel, string Content);
@@ -21,12 +16,7 @@ public partial class VersionHistoryDialog : Window
         InitializeComponent();
         _db = db;
 
-        Loaded += (_, _) =>
-        {
-            var handle = new WindowInteropHelper(this).Handle;
-            int v = 1;
-            DwmSetWindowAttribute(handle, 20, ref v, sizeof(int));
-        };
+        Loaded += (_, _) => App.ApplyDarkTitleBar(this);
 
         TxtTitle.Text = $"히스토리: {current.Title}";
 

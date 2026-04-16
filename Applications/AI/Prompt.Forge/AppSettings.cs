@@ -14,6 +14,7 @@ public sealed class AppSettings
     public string LastSortOrder  { get; set; } = "updated";  // updated / use_count / custom
     public int    LastSelectedId { get; set; } = -1;         // 마지막 선택 프롬프트 ID
     public List<string> RecentSearches { get; set; } = [];
+    public List<FilterPreset> FilterPresets { get; set; } = [];
 
     // 창 위치/크기 — double.NaN은 저장 없음 (CenterScreen 사용)
     public double WindowLeft   { get; set; } = double.NaN;
@@ -104,3 +105,10 @@ public sealed class AppSettings
         catch { return ""; }
     }
 }
+
+public sealed record FilterPreset(
+    string Name,
+    string? Tag,
+    string? Service,
+    bool FavOnly,
+    string? Search = null);

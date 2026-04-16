@@ -8,8 +8,6 @@ namespace Prompt.Forge;
 
 public partial class MainWindow : Window
 {
-    [DllImport("dwmapi.dll")]
-    static extern int DwmSetWindowAttribute(IntPtr hwnd, int attr, ref int val, int size);
 
     [DllImport("user32.dll")]
     static extern bool RegisterHotKey(IntPtr hWnd, int id, uint fsModifiers, uint vk);
@@ -56,8 +54,7 @@ public partial class MainWindow : Window
     void OnLoaded(object s, RoutedEventArgs e)
     {
         var handle = new WindowInteropHelper(this).Handle;
-        int v = 1;
-        DwmSetWindowAttribute(handle, 20, ref v, sizeof(int));
+        App.ApplyDarkTitleBar(this);
 
         // 창 위치/크기 복원
         if (!double.IsNaN(_appSettings.WindowLeft) && _appSettings.WindowLeft >= 0)
@@ -74,6 +71,9 @@ public partial class MainWindow : Window
         RegisterHotKey(handle, HotkeyId, MOD_WIN | MOD_SHIFT, VK_P);
 
         HwndSource.FromHwnd(handle)?.AddHook(WndProc);
+
+        // 프리셋 콤보 초기화
+        RefreshPresetCombo();
 
         // 필터 콤보 초기화
         RefreshFilterCombos();
@@ -326,6 +326,78 @@ public partial class MainWindow : Window
         }
     }
 
+    // ── 필터 프리셋 ───────────────────────────────────────────────────────────
+
+    void RefreshPresetCombo()
+    {
+        bool prev = _refreshing;
+        _refreshing = true;
+        try
+        {
+            CbPreset.ItemsSource = null;
+            var items = new List<string> { "— 프리셋 선택 —" };
+            items.AddRange(_appSettings.FilterPresets.Select(p => p.Name));
+            CbPreset.ItemsSource = items;
+            CbPreset.SelectedIndex = 0;
+        }
+        finally { _refreshing = prev; }
+    }
+
+    void Preset_Changed(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+    {
+        if (!IsLoaded || _refreshing) return;
+        if (CbPreset.SelectedIndex <= 0) return;
+        var preset = _appSettings.FilterPresets[CbPreset.SelectedIndex - 1];
+
+        _refreshing = true;
+        try
+        {
+            if (!string.IsNullOrEmpty(preset.Search)) _vm.Search = preset.Search;
+            _vm.FilterTag     = preset.Tag;
+            _vm.FilterService = preset.Service;
+            _vm.FavOnly       = preset.FavOnly;
+            RefreshFilterCombos();
+        }
+        finally { _refreshing = false; }
+    }
+
+    void SavePreset_Click(object sender, RoutedEventArgs e)
+    {
+        var hasFilter = _vm.FilterTag != null || _vm.FilterService != null
+                     || _vm.FavOnly || !string.IsNullOrWhiteSpace(_vm.Search);
+        if (!hasFilter)
+        {
+            MessageBox.Show("저장할 필터가 없습니다.\n태그·서비스·즐겨찾기·검색어 중 하나 이상 설정 후 저장하세요.",
+                "프리셋 저장", MessageBoxButton.OK, MessageBoxImage.Information);
+            return;
+        }
+
+        var name = ShowInputDialog("프리셋 이름을 입력하세요:", "프리셋 저장");
+        if (string.IsNullOrWhiteSpace(name)) return;
+
+        _appSettings.FilterPresets.RemoveAll(p =>
+            string.Equals(p.Name, name, StringComparison.OrdinalIgnoreCase));
+        _appSettings.FilterPresets.Add(new FilterPreset(
+            name.Trim(), _vm.FilterTag, _vm.FilterService, _vm.FavOnly,
+            string.IsNullOrWhiteSpace(_vm.Search) ? null : _vm.Search));
+        _appSettings.Save();
+        RefreshPresetCombo();
+        _vm.StatusText = $"프리셋 '{name}' 저장됨";
+    }
+
+    void DeletePreset_Click(object sender, RoutedEventArgs e)
+    {
+        if (CbPreset.SelectedIndex <= 0) return;
+        var preset = _appSettings.FilterPresets[CbPreset.SelectedIndex - 1];
+        var r = MessageBox.Show($"프리셋 '{preset.Name}'을 삭제하시겠습니까?",
+            "프리셋 삭제", MessageBoxButton.YesNo, MessageBoxImage.Question);
+        if (r != MessageBoxResult.Yes) return;
+        _appSettings.FilterPresets.RemoveAt(CbPreset.SelectedIndex - 1);
+        _appSettings.Save();
+        RefreshPresetCombo();
+        _vm.StatusText = $"프리셋 '{preset.Name}' 삭제됨";
+    }
+
     void Filter_Changed(object sender, RoutedEventArgs e)
     {
         if (!IsLoaded || _refreshing) return;
@@ -439,7 +511,8 @@ public partial class MainWindow : Window
     {
         if (!IsLoaded || _vm.Selected == null) return;
         var charCount = TxtContent.Text.Length;
-        _vm.StatusText = $"{charCount:N0}자";  // 즉시 글자 수 업데이트
+        var estTokens = (int)Math.Ceiling(charCount / 4.0);
+        _vm.StatusText = $"{charCount:N0}자 · ~{estTokens:N0} tokens";  // 즉시 글자수+토큰 업데이트
 
         // Find bar 열린 상태에서 내용이 변경되면 검색 위치 재계산 (stale 인덱스 방어)
         if (FindBar.Visibility == Visibility.Visible && !string.IsNullOrEmpty(TxtFind.Text))
@@ -454,11 +527,11 @@ public partial class MainWindow : Window
             {
                 _contentDebounce.Stop();
                 if (_vm.Selected == null) return;
-                var vars = new PromptItem { Content = TxtContent.Text }.ExtractVariables();
+                var vars  = new PromptItem { Content = TxtContent.Text }.ExtractVariables();
                 var count = TxtContent.Text.Length;
-                _vm.StatusText = vars.Count == 0
-                    ? $"{count:N0}자"
-                    : $"{count:N0}자 · 변수 {vars.Count}개";
+                var tokens = (int)Math.Ceiling(count / 4.0);
+                var base_ = $"{count:N0}자 · ~{tokens:N0} tokens";
+                _vm.StatusText = vars.Count == 0 ? base_ : $"{base_} · 변수 {vars.Count}개";
             };
         }
         _contentDebounce.Stop();
@@ -479,6 +552,23 @@ public partial class MainWindow : Window
     {
         if (_vm.Selected == null) return;
         ApplyEditToModel(_vm.Selected);
+
+        // 내용 중복 감지: 동일 content를 가진 다른 프롬프트 존재 시 경고
+        var currentContent = _vm.Selected.Content.Trim();
+        if (!string.IsNullOrEmpty(currentContent))
+        {
+            var duplicate = _db.GetAll()
+                .FirstOrDefault(p => p.Id != _vm.Selected.Id
+                                  && p.Content.Trim() == currentContent);
+            if (duplicate != null)
+            {
+                var r = MessageBox.Show(
+                    $"내용이 동일한 프롬프트가 이미 있습니다:\n  \"{duplicate.Title}\"\n\n그래도 저장하시겠습니까?",
+                    "중복 내용 감지", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+                if (r != MessageBoxResult.Yes) return;
+            }
+        }
+
         _vm.Save(_vm.Selected);
         RefreshFilterCombos();
     }
@@ -953,7 +1043,8 @@ public partial class MainWindow : Window
                 version    = p.Version,
                 notes      = p.Notes,
                 useCount   = p.UseCount,
-                sortOrder  = p.SortOrder
+                sortOrder  = p.SortOrder,
+                isPinned   = p.IsPinned
             });
             var json = System.Text.Json.JsonSerializer.Serialize(data,
                 new System.Text.Json.JsonSerializerOptions { WriteIndented = true });
@@ -1029,14 +1120,15 @@ public partial class MainWindow : Window
 
     static List<ImportDto> ImportFromCsv(string filePath)
     {
-        var lines = File.ReadAllLines(filePath, System.Text.Encoding.UTF8);
+        var text   = File.ReadAllText(filePath, System.Text.Encoding.UTF8);
+        var rows   = CsvParseAll(text);
         var result = new List<ImportDto>();
-        if (lines.Length < 2) return result;
+        if (rows.Count < 2) return result;
 
         // 헤더: 제목,내용,태그,서비스,메모,즐겨찾기,사용횟수,버전
-        for (int i = 1; i < lines.Length; i++)
+        for (int i = 1; i < rows.Count; i++)
         {
-            var cols = CsvParseLine(lines[i]);
+            var cols = rows[i];
             if (cols.Count < 2) continue;
             result.Add(new ImportDto(
                 Title:      cols.ElementAtOrDefault(0) ?? "",
@@ -1052,36 +1144,59 @@ public partial class MainWindow : Window
         return result;
     }
 
-    // RFC 4180 기본 CSV 파서 (큰따옴표 이스케이프 지원)
-    static List<string> CsvParseLine(string line)
+    // RFC 4180 전체 문자열 CSV 파서 — 멀티라인 셀(개행 포함) 지원
+    static List<List<string>> CsvParseAll(string text)
     {
-        var fields = new List<string>();
-        int pos = 0;
-        while (pos <= line.Length)
+        var rows = new List<List<string>>();
+        var row  = new List<string>();
+        var sb   = new System.Text.StringBuilder();
+        int pos  = 0;
+
+        while (pos < text.Length)
         {
-            if (pos < line.Length && line[pos] == '"')
+            if (text[pos] == '"')
             {
                 pos++;
-                var sb = new System.Text.StringBuilder();
-                while (pos < line.Length)
+                while (pos < text.Length)
                 {
-                    if (line[pos] == '"' && pos + 1 < line.Length && line[pos + 1] == '"')
+                    if (text[pos] == '"' && pos + 1 < text.Length && text[pos + 1] == '"')
                     { sb.Append('"'); pos += 2; }
-                    else if (line[pos] == '"') { pos++; break; }
-                    else { sb.Append(line[pos++]); }
+                    else if (text[pos] == '"') { pos++; break; }
+                    else { sb.Append(text[pos++]); }
                 }
-                fields.Add(sb.ToString());
-                if (pos < line.Length && line[pos] == ',') pos++;
+                row.Add(sb.ToString());
+                sb.Clear();
+                if (pos < text.Length && text[pos] == ',') pos++;
+                else if (pos < text.Length)
+                {
+                    // 행 끝 (CRLF or LF)
+                    if (text[pos] == '\r') pos++;
+                    if (pos < text.Length && text[pos] == '\n') pos++;
+                    rows.Add(row);
+                    row = [];
+                }
+            }
+            else if (text[pos] == ',')
+            {
+                row.Add(sb.ToString());
+                sb.Clear();
+                pos++;
+            }
+            else if (text[pos] == '\r' || text[pos] == '\n')
+            {
+                row.Add(sb.ToString());
+                sb.Clear();
+                if (text[pos] == '\r') pos++;
+                if (pos < text.Length && text[pos] == '\n') pos++;
+                if (row.Count > 0) { rows.Add(row); row = []; }
             }
             else
             {
-                var end = line.IndexOf(',', pos);
-                if (end < 0) { fields.Add(line[pos..]); break; }
-                fields.Add(line[pos..end]);
-                pos = end + 1;
+                sb.Append(text[pos++]);
             }
         }
-        return fields;
+        if (sb.Length > 0 || row.Count > 0) { row.Add(sb.ToString()); rows.Add(row); }
+        return rows;
     }
 
     // ── 헬퍼 ─────────────────────────────────────────────────────────────────
@@ -1296,6 +1411,24 @@ public partial class MainWindow : Window
         catch { _vm.StatusText = "클립보드 복사 실패"; }
     }
 
+    void MergeCopy_Click(object sender, RoutedEventArgs e)
+    {
+        var selected = LstItems.SelectedItems.Cast<PromptItem>().ToList();
+        if (selected.Count == 0) return;
+        if (selected.Count == 1)
+        {
+            CopyFromMenu_Click(sender, e);
+            return;
+        }
+        var merged = string.Join("\n\n---\n\n", selected.Select(p => $"[{p.Title}]\n{p.Content}"));
+        try
+        {
+            Clipboard.SetText(merged);
+            _vm.StatusText = $"{selected.Count}개 항목 합쳐서 복사됨";
+        }
+        catch { _vm.StatusText = "클립보드 복사 실패"; }
+    }
+
     // ── 복수 선택 일괄 태그 편집 ─────────────────────────────────────────────
 
     void BulkTagEdit_Click(object sender, RoutedEventArgs e)
@@ -1375,8 +1508,116 @@ public partial class MainWindow : Window
         foreach (var p in recentlyUpdated)
             sb.AppendLine($"  {p.UpdatedAt:yyyy-MM-dd HH:mm}  {p.Title}");
 
-        MessageBox.Show(sb.ToString(), "프롬프트 사용 통계",
-            MessageBoxButton.OK, MessageBoxImage.Information);
+        ShowStatsWindow(sb.ToString());
+    }
+
+    string? ShowInputDialog(string prompt, string title)
+    {
+        string? result = null;
+        var win = new Window
+        {
+            Title = title, Owner = this,
+            Width = 360, Height = 140,
+            WindowStartupLocation = WindowStartupLocation.CenterOwner,
+            Background = new System.Windows.Media.SolidColorBrush(
+                (System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString("#0E1A28")),
+            ResizeMode = ResizeMode.NoResize
+        };
+        win.Loaded += (_, _) => App.ApplyDarkTitleBar(win);
+
+        var tb = new TextBox
+        {
+            Margin = new Thickness(20, 16, 20, 8),
+            VerticalAlignment = VerticalAlignment.Top
+        };
+        var okBtn = new Button
+        {
+            Content = "확인", HorizontalAlignment = HorizontalAlignment.Right,
+            VerticalAlignment = VerticalAlignment.Bottom,
+            Margin = new Thickness(0, 0, 20, 14),
+            Padding = new Thickness(16, 6, 16, 6),
+            IsDefault = true
+        };
+        okBtn.Click += (_, _) => { result = tb.Text; win.Close(); };
+
+        var lbl = new TextBlock
+        {
+            Text = prompt, Foreground = new System.Windows.Media.SolidColorBrush(
+                (System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString("#8AAAC8")),
+            Margin = new Thickness(20, 16, 20, 4),
+            VerticalAlignment = VerticalAlignment.Top, FontSize = 12
+        };
+
+        var grid = new Grid();
+        grid.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
+        grid.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
+        grid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
+        Grid.SetRow(lbl, 0);
+        Grid.SetRow(tb, 1);
+        Grid.SetRow(okBtn, 2);
+        grid.Children.Add(lbl);
+        grid.Children.Add(tb);
+        grid.Children.Add(okBtn);
+        win.Content = grid;
+        win.Loaded += (_, _) => tb.Focus();
+        win.ShowDialog();
+        return result;
+    }
+
+    void ShowStatsWindow(string content)
+    {
+        var win = new Window
+        {
+            Title  = "프롬프트 사용 통계",
+            Owner  = this,
+            Width  = 420,
+            Height = 380,
+            WindowStartupLocation = WindowStartupLocation.CenterOwner,
+            Background = new System.Windows.Media.SolidColorBrush(
+                (System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString("#0E1A28")),
+            ResizeMode = ResizeMode.NoResize
+        };
+        win.Loaded += (_, _) => App.ApplyDarkTitleBar(win);
+
+        var tb = new TextBox
+        {
+            Text = content,
+            IsReadOnly = true,
+            Background = System.Windows.Media.Brushes.Transparent,
+            Foreground = new System.Windows.Media.SolidColorBrush(
+                (System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString("#B0C8E0")),
+            BorderThickness = new Thickness(0),
+            FontFamily = new System.Windows.Media.FontFamily("Consolas"),
+            FontSize = 12,
+            TextWrapping = TextWrapping.NoWrap,
+            VerticalScrollBarVisibility = ScrollBarVisibility.Auto,
+            HorizontalScrollBarVisibility = ScrollBarVisibility.Auto,
+            Margin = new Thickness(20, 16, 20, 60),
+            Padding = new Thickness(0)
+        };
+        var copyBtn = new Button
+        {
+            Content = "클립보드에 복사",
+            HorizontalAlignment = HorizontalAlignment.Right,
+            VerticalAlignment = VerticalAlignment.Bottom,
+            Margin = new Thickness(0, 0, 20, 16),
+            Padding = new Thickness(16, 8, 16, 8),
+            Background = new System.Windows.Media.SolidColorBrush(
+                (System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString("#1976D2")),
+            Foreground = System.Windows.Media.Brushes.White,
+            BorderThickness = new Thickness(0),
+            Cursor = System.Windows.Input.Cursors.Hand
+        };
+        copyBtn.Click += (_, _) =>
+        {
+            try { Clipboard.SetText(content); copyBtn.Content = "✓ 복사됨"; }
+            catch { }
+        };
+        var grid = new Grid();
+        grid.Children.Add(tb);
+        grid.Children.Add(copyBtn);
+        win.Content = grid;
+        win.ShowDialog();
     }
 
     static string CsvEscape(string s) => $"\"{s.Replace("\"", "\"\"")}\"";

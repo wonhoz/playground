@@ -1,14 +1,9 @@
-using System.Runtime.InteropServices;
 using System.Windows.Controls;
-using System.Windows.Interop;
 
 namespace Prompt.Forge.Views;
 
 public partial class FillVarsDialog : Window
 {
-    [DllImport("dwmapi.dll")]
-    static extern int DwmSetWindowAttribute(IntPtr hwnd, int attr, ref int val, int size);
-
     readonly List<string>              _varNames;
     readonly Dictionary<string, TextBox> _inputs = [];
     readonly string                    _templateContent;
@@ -23,12 +18,7 @@ public partial class FillVarsDialog : Window
         _varNames        = varNames;
         _templateContent = templateContent;
 
-        Loaded += (_, _) =>
-        {
-            var handle = new WindowInteropHelper(this).Handle;
-            int v = 1;
-            DwmSetWindowAttribute(handle, 20, ref v, sizeof(int));
-        };
+        Loaded += (_, _) => App.ApplyDarkTitleBar(this);
 
         BuildInputs(varNames, prevValues);
     }
@@ -42,6 +32,17 @@ public partial class FillVarsDialog : Window
             if (prevValues != null && prevValues.TryGetValue(name, out var prev))
                 tb.Text = prev;
             tb.TextChanged += (_, _) => UpdatePreview();
+            // Enter: 다음 변수 필드로 이동, 마지막이면 OK 실행
+            tb.KeyDown += (_, e) =>
+            {
+                if (e.Key != System.Windows.Input.Key.Enter) return;
+                var idx = _varNames.IndexOf(name);
+                if (idx >= 0 && idx < _varNames.Count - 1)
+                    _inputs[_varNames[idx + 1]].Focus();
+                else
+                    Ok_Click(this, new RoutedEventArgs());
+                e.Handled = true;
+            };
             _inputs[name] = tb;
             VarPanel.Children.Add(tb);
         }

@@ -60,11 +60,8 @@ sealed class Database : IDisposable
     /// 기존 DB 호환성을 위한 컬럼 추가 마이그레이션 (실패 시 이미 존재하는 것으로 간주)
     void EnsureMigrations()
     {
-        try { Execute("ALTER TABLE prompts ADD COLUMN use_count INTEGER NOT NULL DEFAULT 0;"); }
-        catch { }
-
-        try { Execute("ALTER TABLE prompts ADD COLUMN is_pinned INTEGER NOT NULL DEFAULT 0;"); }
-        catch { }
+        TryAddColumn("use_count INTEGER NOT NULL DEFAULT 0");
+        TryAddColumn("is_pinned INTEGER NOT NULL DEFAULT 0");
 
         bool sortOrderAdded = false;
         try
@@ -72,7 +69,7 @@ sealed class Database : IDisposable
             Execute("ALTER TABLE prompts ADD COLUMN sort_order INTEGER NOT NULL DEFAULT 0;");
             sortOrderAdded = true;
         }
-        catch { }
+        catch (Microsoft.Data.Sqlite.SqliteException ex) when (ex.Message.Contains("duplicate column")) { }
 
         if (sortOrderAdded)
             InitializeSortOrders();
@@ -361,6 +358,12 @@ sealed class Database : IDisposable
             });
         }
         return list;
+    }
+
+    void TryAddColumn(string columnDef)
+    {
+        try { Execute($"ALTER TABLE prompts ADD COLUMN {columnDef};"); }
+        catch (Microsoft.Data.Sqlite.SqliteException ex) when (ex.Message.Contains("duplicate column")) { }
     }
 
     void Execute(string sql)

@@ -1,13 +1,7 @@
-using System.Runtime.InteropServices;
-using System.Windows.Interop;
-
 namespace Prompt.Forge.Views;
 
 public partial class SettingsDialog : Window
 {
-    [DllImport("dwmapi.dll")]
-    static extern int DwmSetWindowAttribute(IntPtr hwnd, int attr, ref int val, int size);
-
     readonly AppSettings _settings;
     public bool RestartRequired { get; private set; }
 
@@ -20,9 +14,7 @@ public partial class SettingsDialog : Window
 
     void OnLoaded(object s, RoutedEventArgs e)
     {
-        var handle = new WindowInteropHelper(this).Handle;
-        int v = 1;
-        DwmSetWindowAttribute(handle, 20, ref v, sizeof(int));
+        App.ApplyDarkTitleBar(this);
 
         TxtDbPath.Text  = _settings.DbPath;
         TxtPat.Text     = _settings.GithubPat;

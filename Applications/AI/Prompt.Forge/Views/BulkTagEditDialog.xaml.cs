@@ -1,13 +1,7 @@
-using System.Runtime.InteropServices;
-using System.Windows.Interop;
-
 namespace Prompt.Forge.Views;
 
 public partial class BulkTagEditDialog : Window
 {
-    [DllImport("dwmapi.dll")]
-    static extern int DwmSetWindowAttribute(IntPtr hwnd, int attr, ref int val, int size);
-
     public List<string> TagsToAdd    { get; private set; } = [];
     public List<string> TagsToRemove { get; private set; } = [];
 
@@ -16,9 +10,7 @@ public partial class BulkTagEditDialog : Window
         InitializeComponent();
         Loaded += (_, _) =>
         {
-            var handle = new WindowInteropHelper(this).Handle;
-            int v = 1;
-            DwmSetWindowAttribute(handle, 20, ref v, sizeof(int));
+            App.ApplyDarkTitleBar(this);
             TxtInfo.Text = $"{selectedCount}개 항목에 태그를 일괄 적용합니다.";
         };
     }

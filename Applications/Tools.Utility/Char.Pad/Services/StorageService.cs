@@ -57,6 +57,19 @@ public class StorageService : IDisposable
             alt.ExecuteNonQuery();
         }
         catch (Microsoft.Data.Sqlite.SqliteException) { /* 이미 존재하면 무시 */ }
+
+        // 기존 DB 마이그레이션: custom_chars sort_order 컬럼 없는 경우 추가
+        try
+        {
+            using var alt = _db.CreateCommand();
+            alt.CommandText = "ALTER TABLE custom_chars ADD COLUMN sort_order INTEGER NOT NULL DEFAULT 0";
+            alt.ExecuteNonQuery();
+            // 신규 추가된 컬럼 — 기존 행에 rowid 기반 고유 순서 부여
+            using var init = _db.CreateCommand();
+            init.CommandText = "UPDATE custom_chars SET sort_order = rowid";
+            init.ExecuteNonQuery();
+        }
+        catch (Microsoft.Data.Sqlite.SqliteException) { /* 이미 존재하면 무시 */ }
     }
 
     // ── Recents ──────────────────────────────────────────────────────
@@ -227,7 +240,8 @@ public class StorageService : IDisposable
     {
         using var cmd = _db.CreateCommand();
         cmd.CommandText = """
-            INSERT INTO custom_chars (char, display_name, created_at) VALUES ($ch, $name, $now)
+            INSERT INTO custom_chars (char, display_name, created_at, sort_order)
+            VALUES ($ch, $name, $now, (SELECT COALESCE(MAX(sort_order), -1) + 1 FROM custom_chars))
             ON CONFLICT(char) DO UPDATE SET display_name = $name;
             """;
         cmd.Parameters.AddWithValue("$ch", ch);
@@ -264,10 +278,45 @@ public class StorageService : IDisposable
     public List<(string Char, string Name)> GetCustomChars()
     {
         using var cmd = _db.CreateCommand();
-        cmd.CommandText = "SELECT char, display_name FROM custom_chars ORDER BY created_at DESC";
+        cmd.CommandText = "SELECT char, display_name FROM custom_chars ORDER BY sort_order";
         var result = new List<(string, string)>();
         using var reader = cmd.ExecuteReader();
         while (reader.Read()) result.Add((reader.GetString(0), reader.GetString(1)));
+        return result;
+    }
+
+    /// <summary>커스텀 문자 순서를 한 칸 위(음수 delta) 또는 아래(양수 delta)로 이동</summary>
+    public void MoveCustomChar(string ch, int delta)
+    {
+        var list = GetCustomCharsWithOrder();
+        int idx = list.FindIndex(x => x.Char == ch);
+        int newIdx = Math.Clamp(idx + delta, 0, list.Count - 1);
+        if (idx == newIdx) return;
+
+        var item = list[idx];
+        list.RemoveAt(idx);
+        list.Insert(newIdx, item);
+
+        using var tx = _db.BeginTransaction();
+        for (int i = 0; i < list.Count; i++)
+        {
+            using var cmd = _db.CreateCommand();
+            cmd.Transaction = tx;
+            cmd.CommandText = "UPDATE custom_chars SET sort_order = $order WHERE char = $ch";
+            cmd.Parameters.AddWithValue("$order", i);
+            cmd.Parameters.AddWithValue("$ch", list[i].Char);
+            cmd.ExecuteNonQuery();
+        }
+        tx.Commit();
+    }
+
+    private List<(string Char, int Order)> GetCustomCharsWithOrder()
+    {
+        using var cmd = _db.CreateCommand();
+        cmd.CommandText = "SELECT char, sort_order FROM custom_chars ORDER BY sort_order";
+        var result = new List<(string, int)>();
+        using var reader = cmd.ExecuteReader();
+        while (reader.Read()) result.Add((reader.GetString(0), reader.GetInt32(1)));
         return result;
     }
 

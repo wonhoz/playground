@@ -39,6 +39,7 @@ public partial class App : System.Windows.Application
     private HwndSource?    _hwndSource;
     private System.Windows.Window? _hotkeyWindow; // GC 방지 — HWND 수명 보장
     private IntPtr         _prevHwnd;
+    private IntPtr         _trayPrevHwnd;  // 트레이 메뉴 즐겨찾기 삽입용 이전 창
     private System.Threading.Mutex? _mutex;
 
     protected override void OnStartup(StartupEventArgs e)
@@ -126,7 +127,18 @@ public partial class App : System.Windows.Application
         menu.Items.Add(new ToolStripSeparator());
         menu.Items.Add("✕  종료",            null, (_, _) => Shutdown());
 
+        // 즐겨찾기 서브메뉴 (DropDownOpening 시 동적 갱신)
+        var favMenu = new ToolStripMenuItem("⭐  즐겨찾기 빠른 삽입")
+        {
+            ForeColor = ColorTranslator.FromHtml("#E0E0E0"),
+        };
+        favMenu.DropDownOpening += (_, _) => RebuildFavMenuItems(favMenu);
+        menu.Items.Insert(0, favMenu);
+        menu.Items.Insert(1, new ToolStripSeparator());
+
         _tray.ContextMenuStrip = menu;
+        // 트레이 클릭 전 이전 포그라운드 창 캡처 (즐겨찾기 빠른 삽입용)
+        _tray.MouseDown += (_, _) => _trayPrevHwnd = GetForegroundWindow();
         _tray.MouseClick += (_, ev) =>
         {
             if (ev.Button == MouseButtons.Left) ShowPopup();
@@ -298,6 +310,49 @@ public partial class App : System.Windows.Application
         {
             DarkMessageBox.Show($"가져오기 실패: {ex.Message}", "오류", MessageBoxButton.OK, MessageBoxImage.Error);
         }
+    }
+
+    // ── 트레이 즐겨찾기 서브메뉴 동적 갱신 ─────────────────────────────
+    private void RebuildFavMenuItems(ToolStripMenuItem favMenu)
+    {
+        favMenu.DropDownItems.Clear();
+        var favorites = _storage.GetFavorites().Take(8).ToList();
+        if (favorites.Count == 0)
+        {
+            favMenu.DropDownItems.Add(new ToolStripMenuItem("(즐겨찾기 없음)")
+            {
+                Enabled   = false,
+                ForeColor = ColorTranslator.FromHtml("#888888"),
+            });
+            return;
+        }
+        foreach (var ch in favorites)
+        {
+            var name        = CharDatabase.AllByChar.TryGetValue(ch, out var ent) ? ent.Name : ch;
+            var displayName = name.Length > 20 ? name[..20] + "…" : name;
+            var item        = new ToolStripMenuItem($"{ch}  {displayName}")
+            {
+                ForeColor = ColorTranslator.FromHtml("#E0E0E0"),
+            };
+            var captured = ch;
+            item.Click += (_, _) => _ = InsertFavoriteFromTrayAsync(captured);
+            favMenu.DropDownItems.Add(item);
+        }
+    }
+
+    private async Task InsertFavoriteFromTrayAsync(string ch)
+    {
+        var target = _trayPrevHwnd;
+        if (target == IntPtr.Zero) return;
+        try
+        {
+            await System.Windows.Application.Current.Dispatcher.InvokeAsync(
+                () => System.Windows.Clipboard.SetText(ch));
+            _storage.AddRecent(ch);
+            await Task.Delay(80);
+            await InputHelper.PasteToWindowAsync(target);
+        }
+        catch { }
     }
 
     private void ShowHelp()

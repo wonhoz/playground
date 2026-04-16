@@ -106,6 +106,26 @@
                         Visibility="Collapsed"
                         Click="FavSortBtn_Click"
                         ToolTip="정렬 전환 (추가순 / 이름순)"/>
+                <!-- 커스텀 탭 전용: 순서 이동 (Column 1 공유) -->
+                <Button x:Name="CustomMoveUpBtn"
+                        Grid.Column="1" Width="28" Height="28"
+                        Content="↑" FontSize="13" FontWeight="SemiBold"
+                        Foreground="{StaticResource TextSecondary}"
+                        Background="Transparent"
+                        Visibility="Collapsed"
+                        Focusable="False"
+                        Click="CustomMoveUpBtn_Click"
+                        ToolTip="선택한 문자를 위로"/>
+                <!-- 커스텀 탭 전용: 순서 이동 (Column 2 공유) -->
+                <Button x:Name="CustomMoveDownBtn"
+                        Grid.Column="2" Width="28" Height="28"
+                        Content="↓" FontSize="13" FontWeight="SemiBold"
+                        Foreground="{StaticResource TextSecondary}"
+                        Background="Transparent"
+                        Visibility="Collapsed"
+                        Focusable="False"
+                        Click="CustomMoveDownBtn_Click"
+                        ToolTip="선택한 문자를 아래로"/>
                 <!-- 커스텀 탭 전용: 정렬 전환 -->
                 <Button x:Name="SortCustomBtn"
                         Grid.Column="2" Width="28" Height="28"
@@ -340,19 +360,19 @@
                             <TextBlock Grid.Row="18" Grid.Column="2" Text="최근 사용 목록 초기화" Style="{StaticResource DescStyle}"/>
 
                             <TextBlock Grid.Row="19" Grid.Column="0" Text="↑↓ 버튼 / Alt+↑↓"   Style="{StaticResource KeyStyle}"/>
-                            <TextBlock Grid.Row="19" Grid.Column="2" Text="즐겨찾기 탭에서 포커스 항목 순서 위/아래 이동 (버튼 클릭 또는 Alt+↑↓ 키, 이름순 정렬 중 비활성)" Style="{StaticResource DescStyle}"/>
+                            <TextBlock Grid.Row="19" Grid.Column="2" Text="즐겨찾기·사용자 탭에서 포커스 항목 순서 위/아래 이동 (버튼 클릭 또는 Alt+↑↓ 키, 이름순 정렬 중 비활성)" Style="{StaticResource DescStyle}"/>
 
                             <TextBlock Grid.Row="20" Grid.Column="0" Text="↕/↑A (사용자·즐겨찾기)" Style="{StaticResource KeyStyle}"/>
-                            <TextBlock Grid.Row="20" Grid.Column="2" Text="정렬 전환 (추가순 ↔ 이름순, 앱 재시작 후 복원) — 이름순 정렬 시 수동 이동 버튼 비활성화" Style="{StaticResource DescStyle}"/>
+                            <TextBlock Grid.Row="20" Grid.Column="2" Text="정렬 전환 (추가순 ↔ 이름순, 앱 재시작 후 복원) — 이름순 정렬 시 수동 이동 버튼 비활성화. 사용자 탭: ↑↓ 버튼으로도 수동 순서 변경 가능" Style="{StaticResource DescStyle}"/>
 
                             <TextBlock Grid.Row="21" Grid.Column="0" Text="U+XXXX 검색"         Style="{StaticResource KeyStyle}"/>
                             <TextBlock Grid.Row="21" Grid.Column="2" Text="코드포인트로 문자 직접 검색 (예: U+2665 → ♥)" Style="{StaticResource DescStyle}"/>
 
                             <TextBlock Grid.Row="22" Grid.Column="0" Text="검색 결과 배지"       Style="{StaticResource KeyStyle}"/>
-                            <TextBlock Grid.Row="22" Grid.Column="2" Text="각 문자 하단 카테고리·탭 배지(⭐·사용자 수) 표시" Style="{StaticResource DescStyle}"/>
+                            <TextBlock Grid.Row="22" Grid.Column="2" Text="각 문자 하단에 이름 일부 표시 — 검색어와 매칭된 텍스트는 밝게 강조, 미매칭 부분은 민트색으로 표시" Style="{StaticResource DescStyle}"/>
 
                             <TextBlock Grid.Row="23" Grid.Column="0" Text="트레이 우클릭"        Style="{StaticResource KeyStyle}"/>
-                            <TextBlock Grid.Row="23" Grid.Column="2" Text="내보내기/가져오기 (JSON) · 단축키 변경 — 5가지 조합 선택 가능" Style="{StaticResource DescStyle}"/>
+                            <TextBlock Grid.Row="23" Grid.Column="2" Text="⭐ 즐겨찾기 빠른 삽입 (최대 8개) · 내보내기/가져오기 (JSON) · 단축키 변경 — 5가지 조합 선택 가능" Style="{StaticResource DescStyle}"/>
 
                             <TextBlock Grid.Row="24" Grid.Column="0" Text="최근 탭 툴팁"         Style="{StaticResource KeyStyle}"/>
                             <TextBlock Grid.Row="24" Grid.Column="2" Text="문자 위에 마우스 올리면 사용 횟수 표시 (N회 사용)" Style="{StaticResource DescStyle}"/>

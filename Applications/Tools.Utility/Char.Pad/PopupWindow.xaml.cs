@@ -322,7 +322,10 @@ public partial class PopupWindow : System.Windows.Window
             FavSortBtn.Content  = _favSortByName ? "↑A" : "↕";
             FavSortBtn.ToolTip  = _favSortByName ? "정렬: 이름순 (클릭하면 추가순으로 전환)" : "정렬 전환 (추가순 / 이름순)";
         }
-        SortCustomBtn.Visibility   = tabId == "custom"   ? Visibility.Visible : Visibility.Collapsed;
+        // 커스텀 탭: 이름순 정렬 여부에 따라 이동 버튼 표시/숨김
+        CustomMoveUpBtn.Visibility   = tabId == "custom" && !_customSortByName ? Visibility.Visible : Visibility.Collapsed;
+        CustomMoveDownBtn.Visibility = tabId == "custom" && !_customSortByName ? Visibility.Visible : Visibility.Collapsed;
+        SortCustomBtn.Visibility     = tabId == "custom" ? Visibility.Visible : Visibility.Collapsed;
 
         RefreshGrid();
     }
@@ -411,11 +414,16 @@ public partial class PopupWindow : System.Windows.Window
                         .Where(t => t.Name.ToLowerInvariant().Contains(lq)
                                  || t.Char.Contains(query, StringComparison.OrdinalIgnoreCase))
                         .Select(t => new CharEntry(t.Char, t.Name, "custom"));
-                    var merged = results.Concat(customResults);
-                    entries = merged;
+                    // .ToList()로 IEnumerable 확정 — GroupBy와 entries 양쪽에서 이중 평가 방지
+                    var mergedList = results.Concat(customResults).ToList();
+                    // 즐겨찾기 탭에서는 즐겨찾기 문자만 필터링 (전체 검색 대신 탭 범위 내 검색)
+                    var filteredList = _activeTab == "favorite"
+                        ? mergedList.Where(e => favSet.Contains(e.Char)).ToList()
+                        : mergedList;
+                    entries = filteredList;
 
                     // 카테고리별 통계 표시
-                    var grouped = merged.GroupBy(e => e.Category)
+                    var grouped = filteredList.GroupBy(e => e.Category)
                         .OrderByDescending(g => g.Count())
                         .Select(g =>
                         {
@@ -481,11 +489,12 @@ public partial class PopupWindow : System.Windows.Window
         // 결과 없음 안내
         EmptyText.Visibility = list.Count == 0 ? Visibility.Visible : Visibility.Collapsed;
 
+        var displayQuery = isSearchResult ? query : null;
         CharGrid.Children.Clear();
         foreach (var entry in list)
         {
             int? uc = (recentUseCounts != null && recentUseCounts.TryGetValue(entry.Char, out int cnt)) ? cnt : null;
-            CharGrid.Children.Add(MakeCharButton(entry, favSet, isSearchResult, uc));
+            CharGrid.Children.Add(MakeCharButton(entry, favSet, isSearchResult, uc, displayQuery));
         }
     }
 
@@ -528,8 +537,35 @@ public partial class PopupWindow : System.Windows.Window
         return tip;
     }
 
+    // ── 검색어 하이라이팅 레이블 적용 ──────────────────────────────────
+    // 이름에서 query와 매칭된 부분은 TextPrimary(밝은 흰색), 나머지는 AccentHover(민트)로 표시
+    private void ApplyCatLabel(TextBlock tb, CharEntry entry, string? query)
+    {
+        var catName = Tabs.FirstOrDefault(t => t.Id == entry.Category).StatusName ?? entry.Category;
+        if (string.IsNullOrEmpty(query) || !entry.Name.Contains(query, StringComparison.OrdinalIgnoreCase))
+        {
+            tb.Text       = catName;
+            tb.Foreground = (SolidColorBrush)FindResource("AccentHover");
+            return;
+        }
+        // 이름에 query 포함: Inlines로 매칭 부분 강조
+        const int maxLen = 14;
+        var display = entry.Name.Length > maxLen ? entry.Name[..maxLen] + "…" : entry.Name;
+        var normalBrush    = (SolidColorBrush)FindResource("AccentHover");
+        var highlightBrush = (SolidColorBrush)FindResource("TextPrimary");
+        tb.Inlines.Clear();
+        int idx = display.IndexOf(query, StringComparison.OrdinalIgnoreCase);
+        if (idx < 0) { tb.Inlines.Add(new System.Windows.Documents.Run(display) { Foreground = normalBrush }); return; }
+        if (idx > 0)
+            tb.Inlines.Add(new System.Windows.Documents.Run(display[..idx]) { Foreground = normalBrush });
+        int end = Math.Min(idx + query.Length, display.Length);
+        tb.Inlines.Add(new System.Windows.Documents.Run(display[idx..end]) { Foreground = highlightBrush });
+        if (end < display.Length)
+            tb.Inlines.Add(new System.Windows.Documents.Run(display[end..]) { Foreground = normalBrush });
+    }
+
     // ── 문자 버튼 생성 ──────────────────────────────────────────────────
-    private UIElement MakeCharButton(CharEntry entry, HashSet<string> favSet, bool isSearchResult = false, int? useCount = null)
+    private UIElement MakeCharButton(CharEntry entry, HashSet<string> favSet, bool isSearchResult = false, int? useCount = null, string? searchQuery = null)
     {
         bool isFav = favSet.Contains(entry.Char);
         double size = ItemSize - 4;
@@ -582,10 +618,9 @@ public partial class PopupWindow : System.Windows.Window
             star.ToolTip = _storage.IsFavorite(entry.Char) ? "즐겨찾기 제거" : "즐겨찾기 추가";
         };
 
-        // 검색 결과 카테고리 배지 (하단 좌측 소형 레이블)
+        // 검색 결과 이름 배지 (하단 좌측 소형 레이블) — 매칭 부분 하이라이트
         var catLabel = new TextBlock
         {
-            Text                = Tabs.FirstOrDefault(t => t.Id == entry.Category).StatusName ?? entry.Category,
             FontSize            = 7,
             FontFamily          = new WpfFontFamily("Segoe UI"),
             Foreground          = (SolidColorBrush)FindResource("AccentHover"),
@@ -595,6 +630,7 @@ public partial class PopupWindow : System.Windows.Window
             IsHitTestVisible    = false,
             Visibility          = isSearchResult ? Visibility.Visible : Visibility.Collapsed,
         };
+        if (isSearchResult) ApplyCatLabel(catLabel, entry, searchQuery);
 
         // 다중 선택 순서 배지 (좌상단 숫자, Ctrl+클릭 순서 표시)
         int multiIdx = _multiSelected.FindIndex(e => e.Char == entry.Char);
@@ -626,20 +662,20 @@ public partial class PopupWindow : System.Windows.Window
         // 호버 / 포커스 시각 피드백 + 상태바 미리보기
         // grid 기준으로 이벤트 처리 — border와 star 모두 grid 자식이므로
         // border에만 붙이면 star 위로 마우스 이동 시 border.MouseLeave가 발동해 blink 발생
+        // star.Opacity: 1.0 = 즐겨찾기(항상 표시), 0.4 = 비즐겨찾기(호버 시만 표시)
+        // ToggleFavorite에서 Opacity를 동기화하므로 DB 재조회 불필요
         grid.MouseEnter += (_, _) =>
         {
             border.Background = (SolidColorBrush)FindResource("CharHover");
             StatusText.Text = GetUnicodeTooltip(entry, useCount);
-            // 현재 즐겨찾기 상태를 DB에서 재조회 (생성 시점 캡처값 isFav 대신 사용)
-            if (!_storage.IsFavorite(entry.Char)) star.Visibility = Visibility.Visible;
+            if (star.Opacity < 1.0) star.Visibility = Visibility.Visible;
         };
         grid.MouseLeave += (_, _) =>
         {
             if (!border.IsKeyboardFocused)
                 border.Background = (SolidColorBrush)FindResource("TabInactive");
             StatusText.Text = _lastStatusText;
-            // 즐겨찾기 아닌 상태에서 호버 벗어나면 별 다시 숨김
-            if (!_storage.IsFavorite(entry.Char))
+            if (star.Opacity < 1.0)
                 star.Visibility = Visibility.Collapsed;
         };
         border.GotKeyboardFocus  += (_, _) => border.Background = (SolidColorBrush)FindResource("CharHover");
@@ -1085,8 +1121,18 @@ public partial class PopupWindow : System.Windows.Window
             {
                 // 드롭다운 표시 중: 첫 탐색 시 원문 저장 후 위 항목 하이라이트
                 if (_historyDropdownIdx < 0) _historyPreNavText = SearchBox.Text;
-                int next = _historyDropdownIdx <= 0 ? 0 : _historyDropdownIdx - 1;
-                HighlightHistoryDropdownItem(next);
+                if (_historyDropdownIdx == 0)
+                {
+                    // 첫 번째 항목에서 ↑: 하이라이트 해제 + 원문 복원 (↓의 마지막 항목 동작과 대칭)
+                    HighlightHistoryDropdownItem(-1);
+                    SearchBox.Text = _historyPreNavText;
+                    SearchBox.CaretIndex = SearchBox.Text.Length;
+                }
+                else
+                {
+                    int next = _historyDropdownIdx < 0 ? 0 : _historyDropdownIdx - 1;
+                    HighlightHistoryDropdownItem(next);
+                }
                 e.Handled = true;
             }
         }
@@ -1162,18 +1208,20 @@ public partial class PopupWindow : System.Windows.Window
             SelectAllChars();
             e.Handled = true;
         }
-        // Alt+↑/↓: 즐겨찾기 탭에서 포커스 항목 순서 이동 (이름순 정렬 중이면 무시)
+        // Alt+↑/↓: 즐겨찾기·커스텀 탭에서 포커스 항목 순서 이동 (이름순 정렬 중이면 무시)
         else if (e.Key == Key.System && e.KeyboardDevice.Modifiers == ModifierKeys.Alt
-                 && _activeTab == "favorite" && !_favSortByName)
+                 && ((_activeTab == "favorite" && !_favSortByName) || (_activeTab == "custom" && !_customSortByName)))
         {
             if (e.SystemKey == Key.Up)
             {
-                MoveFocusedFavorite(-1);
+                if (_activeTab == "favorite") MoveFocusedFavorite(-1);
+                else MoveFocusedCustomChar(-1);
                 e.Handled = true;
             }
             else if (e.SystemKey == Key.Down)
             {
-                MoveFocusedFavorite(+1);
+                if (_activeTab == "favorite") MoveFocusedFavorite(+1);
+                else MoveFocusedCustomChar(+1);
                 e.Handled = true;
             }
         }
@@ -1548,6 +1596,24 @@ public partial class PopupWindow : System.Windows.Window
         }
     }
 
+    // ── 커스텀 탭 순서 이동 ─────────────────────────────────────────────
+    private void CustomMoveUpBtn_Click(object sender, RoutedEventArgs e)   => MoveFocusedCustomChar(-1);
+    private void CustomMoveDownBtn_Click(object sender, RoutedEventArgs e) => MoveFocusedCustomChar(+1);
+
+    private void MoveFocusedCustomChar(int delta)
+    {
+        var focused = FocusManager.GetFocusedElement(this) as Border;
+        if (focused?.Tag is not CharEntry entry) return;
+        _storage.MoveCustomChar(entry.Char, delta);
+        StatusText.Text = $"순서 변경: {entry.Char}  {entry.Name}";
+        RefreshGrid();
+        for (int i = 0; i < CharGrid.Children.Count; i++)
+        {
+            if (CharGrid.Children[i] is Grid g && g.Children[0] is Border b && b.Tag is CharEntry ce && ce.Char == entry.Char)
+            { b.Focus(); break; }
+        }
+    }
+
     // ── 즐겨찾기 탭 정렬 전환 ───────────────────────────────────────────
     private void FavSortBtn_Click(object sender, RoutedEventArgs e)
     {
@@ -1568,6 +1634,9 @@ public partial class PopupWindow : System.Windows.Window
         _storage.SetSetting("custom_sort_by_name", _customSortByName ? "1" : "0");
         SortCustomBtn.Content  = _customSortByName ? "↑A" : "↕";
         SortCustomBtn.ToolTip  = _customSortByName ? "정렬: 이름순 (클릭하면 추가순으로 전환)" : "정렬 전환 (추가순 / 이름순)";
+        // 이름순 정렬 시 수동 이동 버튼 숨김
+        CustomMoveUpBtn.Visibility   = _customSortByName ? Visibility.Collapsed : Visibility.Visible;
+        CustomMoveDownBtn.Visibility = _customSortByName ? Visibility.Collapsed : Visibility.Visible;
         RefreshGrid();
     }
 

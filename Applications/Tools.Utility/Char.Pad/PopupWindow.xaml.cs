@@ -624,14 +624,16 @@ public partial class PopupWindow : System.Windows.Window
         grid.Children.Add(multiOrderBadge);
 
         // 호버 / 포커스 시각 피드백 + 상태바 미리보기
-        border.MouseEnter += (_, _) =>
+        // grid 기준으로 이벤트 처리 — border와 star 모두 grid 자식이므로
+        // border에만 붙이면 star 위로 마우스 이동 시 border.MouseLeave가 발동해 blink 발생
+        grid.MouseEnter += (_, _) =>
         {
             border.Background = (SolidColorBrush)FindResource("CharHover");
             StatusText.Text = GetUnicodeTooltip(entry, useCount);
             // 현재 즐겨찾기 상태를 DB에서 재조회 (생성 시점 캡처값 isFav 대신 사용)
             if (!_storage.IsFavorite(entry.Char)) star.Visibility = Visibility.Visible;
         };
-        border.MouseLeave += (_, _) =>
+        grid.MouseLeave += (_, _) =>
         {
             if (!border.IsKeyboardFocused)
                 border.Background = (SolidColorBrush)FindResource("TabInactive");

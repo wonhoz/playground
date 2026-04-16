@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg2" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1A0040"/>
+      <stop offset="100%" stop-color="#311B92"/>
+    </linearGradient>
+    <radialGradient id="spot2" cx="50%" cy="40%" r="55%">
+      <stop offset="0%" stop-color="#FFF9C4" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="transparent" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <!-- Layer 1: Dark stage background -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg2)"/>
+  <!-- Spotlight glow -->
+  <ellipse cx="512" cy="420" rx="420" ry="360" fill="url(#spot2)"/>
+
+  <!-- Layer 2: Stage curtains -->
+  <path d="M0,190 Q120,400 60,700 L0,700 Z" fill="#C62828" opacity="0.85"/>
+  <path d="M1024,190 Q904,400 964,700 L1024,700 Z" fill="#C62828" opacity="0.85"/>
+  <!-- Stage floor -->
+  <ellipse cx="512" cy="820" rx="380" ry="60" fill="#4A148C" opacity="0.7"/>
+
+  <!-- Spotlight beam left -->
+  <polygon points="200,100 400,550 320,570" fill="#FFF9C4" opacity="0.12"/>
+  <!-- Spotlight beam right -->
+  <polygon points="824,100 624,550 704,570" fill="#FFF9C4" opacity="0.12"/>
+
+  <!-- Center podium -->
+  <rect x="390" y="620" width="244" height="130" rx="18" fill="#4A148C" stroke="#7E57C2" stroke-width="6"/>
+  <rect x="390" y="620" width="244" height="44" rx="18" fill="#7E57C2"/>
+  <rect x="390" y="642" width="244" height="22" fill="#7E57C2"/>
+
+  <!-- Big "?" on stage -->
+  <text x="512" y="620" font-family="Arial Black, sans-serif" font-size="360" font-weight="900" fill="#FFD600" text-anchor="middle" opacity="0.95">?</text>
+
+  <!-- Layer 3: Spotlight circles top -->
+  <circle cx="220" cy="130" r="52" fill="#FFD600" opacity="0.9"/>
+  <circle cx="804" cy="130" r="52" fill="#FFD600" opacity="0.9"/>
+  <circle cx="220" cy="130" r="34" fill="white" opacity="0.8"/>
+  <circle cx="804" cy="130" r="34" fill="white" opacity="0.8"/>
+
+  <!-- TRIVIA CAST label at bottom -->
+  <rect x="200" y="840" width="624" height="100" rx="50" fill="#FFD600"/>
+  <text x="512" y="908" font-family="Arial Black, sans-serif" font-size="62" font-weight="900" fill="#1A0040" text-anchor="middle">TRIVIA CAST</text>
+</svg>

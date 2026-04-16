@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg3" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FFF3E0"/>
+      <stop offset="100%" stop-color="#FFE0B2"/>
+    </linearGradient>
+    <linearGradient id="header3" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FF6F00"/>
+      <stop offset="100%" stop-color="#E65100"/>
+    </linearGradient>
+  </defs>
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg3)"/>
+
+  <!-- Layer 2: Quiz card -->
+  <rect x="120" y="140" width="784" height="700" rx="32" fill="white" stroke="#FFB300" stroke-width="10"/>
+  <rect x="120" y="140" width="784" height="130" rx="32" fill="url(#header3)"/>
+  <rect x="120" y="228" width="784" height="42" fill="url(#header3)"/>
+  <text x="512" y="225" font-family="Arial Black, sans-serif" font-size="64" font-weight="900" fill="white" text-anchor="middle">Trivia Quiz</text>
+
+  <!-- Question text -->
+  <text x="512" y="338" font-family="Arial Black, sans-serif" font-size="42" font-weight="700" fill="#E65100" text-anchor="middle">Which planet is</text>
+  <text x="512" y="390" font-family="Arial Black, sans-serif" font-size="42" font-weight="700" fill="#E65100" text-anchor="middle">the largest?</text>
+
+  <!-- 4 answer buttons -->
+  <!-- A -->
+  <rect x="148" y="428" width="330" height="88" rx="16" fill="#E3F2FD" stroke="#1565C0" stroke-width="6"/>
+  <text x="313" y="483" font-family="Arial Black, sans-serif" font-size="48" font-weight="900" fill="#1565C0" text-anchor="middle">A. Jupiter</text>
+
+  <!-- B -->
+  <rect x="546" y="428" width="330" height="88" rx="16" fill="#F3E5F5" stroke="#7B1FA2" stroke-width="6"/>
+  <text x="711" y="483" font-family="Arial Black, sans-serif" font-size="48" font-weight="900" fill="#7B1FA2" text-anchor="middle">B. Saturn</text>
+
+  <!-- C — correct answer highlighted -->
+  <rect x="148" y="534" width="330" height="88" rx="16" fill="#E8F5E9" stroke="#2E7D32" stroke-width="8"/>
+  <text x="313" y="589" font-family="Arial Black, sans-serif" font-size="48" font-weight="900" fill="#2E7D32" text-anchor="middle">C. Jupiter ✓</text>
+
+  <!-- D -->
+  <rect x="546" y="534" width="330" height="88" rx="16" fill="#FFF3E0" stroke="#E65100" stroke-width="6"/>
+  <text x="711" y="589" font-family="Arial Black, sans-serif" font-size="48" font-weight="900" fill="#E65100" text-anchor="middle">D. Neptune</text>
+
+  <!-- Streak indicator -->
+  <rect x="148" y="660" width="728" height="60" rx="30" fill="#FFF9C4" stroke="#FFB300" stroke-width="6"/>
+  <text x="512" y="700" font-family="Arial Black, sans-serif" font-size="44" font-weight="900" fill="#F57F17" text-anchor="middle">🔥 Streak × 7</text>
+
+  <!-- Timer circle -->
+  <circle cx="512" cy="808" r="64" fill="#FF6F00" stroke="white" stroke-width="10"/>
+  <text x="512" y="840" font-family="Arial Black, sans-serif" font-size="72" font-weight="900" fill="white" text-anchor="middle">15</text>
+
+  <!-- Layer 3: Corner badges -->
+  <circle cx="168" cy="188" r="36" fill="#FFD600"/>
+  <text x="168" y="204" font-family="Arial Black, sans-serif" font-size="38" font-weight="900" fill="#E65100" text-anchor="middle">Q</text>
+  <circle cx="856" cy="188" r="36" fill="#FFD600"/>
+  <text x="856" y="204" font-family="Arial Black, sans-serif" font-size="38" font-weight="900" fill="#E65100" text-anchor="middle">!</text>
+</svg>

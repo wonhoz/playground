@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg4" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FFFDE7"/>
+      <stop offset="100%" stop-color="#FFF9C4"/>
+    </linearGradient>
+    <radialGradient id="glow4" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FFF176" stop-opacity="1"/>
+      <stop offset="100%" stop-color="#FFD600" stop-opacity="0.3"/>
+    </radialGradient>
+  </defs>
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg4)"/>
+
+  <!-- Layer 2: Glow circle -->
+  <circle cx="512" cy="440" r="320" fill="url(#glow4)"/>
+
+  <!-- Lightbulb body -->
+  <!-- Glass bulb -->
+  <ellipse cx="512" cy="380" rx="190" ry="210" fill="#FFF59D" stroke="#FFD600" stroke-width="16"/>
+  <!-- Bulb shine -->
+  <ellipse cx="462" cy="320" rx="60" ry="80" fill="white" opacity="0.45"/>
+  <!-- Filament -->
+  <path d="M452,510 L452,560 Q512,580 572,560 L572,510" fill="none" stroke="#FF8F00" stroke-width="12" stroke-linecap="round"/>
+  <!-- Base rings -->
+  <rect x="420" y="560" width="184" height="36" rx="8" fill="#FFCA28" stroke="#FF8F00" stroke-width="6"/>
+  <rect x="420" y="608" width="184" height="36" rx="8" fill="#FFB300" stroke="#FF8F00" stroke-width="6"/>
+  <rect x="420" y="656" width="184" height="36" rx="8" fill="#FF8F00" stroke="#E65100" stroke-width="6"/>
+  <!-- Base bottom -->
+  <rect x="444" y="692" width="136" height="48" rx="14" fill="#E65100"/>
+
+  <!-- Big "?" inside bulb -->
+  <text x="512" y="470" font-family="Arial Black, sans-serif" font-size="200" font-weight="900" fill="#FF8F00" text-anchor="middle" opacity="0.7">?</text>
+
+  <!-- Layer 3: Sparkle rays -->
+  <line x1="512" y1="100" x2="512" y2="60" stroke="#FFD600" stroke-width="14" stroke-linecap="round"/>
+  <line x1="680" y1="140" x2="706" y2="110" stroke="#FFD600" stroke-width="14" stroke-linecap="round"/>
+  <line x1="760" y1="280" x2="800" y2="268" stroke="#FFD600" stroke-width="14" stroke-linecap="round"/>
+  <line x1="344" y1="140" x2="318" y2="110" stroke="#FFD600" stroke-width="14" stroke-linecap="round"/>
+  <line x1="264" y1="280" x2="224" y2="268" stroke="#FFD600" stroke-width="14" stroke-linecap="round"/>
+
+  <!-- "AHA!" tag -->
+  <rect x="290" y="800" width="444" height="96" rx="48" fill="#FF6F00"/>
+  <text x="512" y="864" font-family="Arial Black, sans-serif" font-size="72" font-weight="900" fill="white" text-anchor="middle">AHA! 💡</text>
+</svg>

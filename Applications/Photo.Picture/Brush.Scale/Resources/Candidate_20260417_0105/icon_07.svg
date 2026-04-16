@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg7" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#E0FFFF"/>
+      <stop offset="100%" stop-color="#B2EBF2"/>
+    </linearGradient>
+    <linearGradient id="lens7" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#00BCD4"/>
+      <stop offset="100%" stop-color="#0097A7"/>
+    </linearGradient>
+    <radialGradient id="glow7" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0%" stop-color="#E040FB" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#E040FB" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg7)"/>
+
+  <!-- Scattered pixel dots (input noise) -->
+  <g opacity="0.7">
+    <circle cx="160" cy="220" r="28" fill="#90A4AE"/>
+    <circle cx="270" cy="180" r="20" fill="#B0BEC5"/>
+    <circle cx="180" cy="340" r="24" fill="#78909C"/>
+    <circle cx="320" cy="280" r="18" fill="#90A4AE"/>
+    <circle cx="230" cy="440" r="26" fill="#607D8B"/>
+    <circle cx="140" cy="500" r="20" fill="#B0BEC5"/>
+    <circle cx="310" cy="380" r="22" fill="#78909C"/>
+    <circle cx="200" cy="600" r="18" fill="#90A4AE"/>
+    <circle cx="280" cy="560" r="24" fill="#607D8B"/>
+    <circle cx="150" cy="680" r="20" fill="#78909C"/>
+    <circle cx="300" cy="700" r="16" fill="#B0BEC5"/>
+    <circle cx="240" cy="790" r="22" fill="#90A4AE"/>
+  </g>
+
+  <!-- Convergence lines toward lens center -->
+  <g stroke="#00BCD4" stroke-width="8" opacity="0.4" stroke-linecap="round">
+    <line x1="160" y1="220" x2="560" y2="500"/>
+    <line x1="270" y1="180" x2="560" y2="500"/>
+    <line x1="180" y1="340" x2="560" y2="500"/>
+    <line x1="320" y1="280" x2="560" y2="500"/>
+    <line x1="230" y1="440" x2="560" y2="500"/>
+    <line x1="140" y1="500" x2="560" y2="500"/>
+    <line x1="280" y1="560" x2="560" y2="500"/>
+    <line x1="200" y1="600" x2="560" y2="500"/>
+    <line x1="240" y1="790" x2="560" y2="500"/>
+  </g>
+
+  <!-- Layer 2: AI Lens / magnifier -->
+  <circle cx="620" cy="480" r="260" fill="url(#lens7)" opacity="0.15"/>
+  <circle cx="620" cy="480" r="220" fill="white" opacity="0.7"/>
+  <circle cx="620" cy="480" r="220" fill="url(#glow7)" opacity="0.3"/>
+  <circle cx="620" cy="480" r="220" fill="none" stroke="url(#lens7)" stroke-width="28"/>
+
+  <!-- Inner sharp image (inside lens) -->
+  <!-- Sharp landscape inside circle -->
+  <clipPath id="lensClip7"><circle cx="620" cy="480" r="200"/></clipPath>
+  <g clip-path="url(#lensClip7)">
+    <rect x="420" y="280" width="400" height="400" fill="#B3E5FC"/>
+    <circle cx="580" cy="380" r="54" fill="#FF9800"/>
+    <path d="M420,500 L500,420 L570,460 L650,390 L730,440 L820,400 L820,680 L420,680 Z" fill="#2E7D32"/>
+    <ellipse cx="700" cy="360" rx="56" ry="30" fill="white" opacity="0.8"/>
+  </g>
+
+  <!-- Lens handle -->
+  <rect x="790" y="640" width="44" height="220" rx="22" fill="url(#lens7)" transform="rotate(45, 812, 750)"/>
+
+  <!-- Layer 3: AI badge in lens -->
+  <circle cx="620" cy="480" r="74" fill="#E040FB" opacity="0.9"/>
+  <text x="620" y="504" font-family="Arial Black, sans-serif" font-size="72" font-weight="900" fill="white" text-anchor="middle">AI</text>
+
+  <!-- Bottom label -->
+  <text x="512" y="940" font-family="Arial Black, sans-serif" font-size="68" font-weight="900" fill="#00838F" text-anchor="middle">Scale Up</text>
+</svg>

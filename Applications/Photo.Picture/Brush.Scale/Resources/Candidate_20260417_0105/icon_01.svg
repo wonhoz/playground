@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg1" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#E3F2FD"/>
+      <stop offset="100%" stop-color="#BBDEFB"/>
+    </linearGradient>
+    <clipPath id="card1"><rect x="110" y="140" width="804" height="744" rx="24"/></clipPath>
+  </defs>
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg1)"/>
+
+  <!-- Layer 2: Main card -->
+  <rect x="110" y="140" width="804" height="744" rx="24" fill="white" stroke="#90CAF9" stroke-width="8"/>
+
+  <!-- Left half: Low-res pixelated -->
+  <g clip-path="url(#card1)">
+    <rect x="110" y="140" width="402" height="744" fill="#E8F4FF"/>
+    <!-- Pixel grid 6x6 -->
+    <rect x="138" y="196" width="78" height="78" rx="4" fill="#90A4AE"/>
+    <rect x="226" y="196" width="78" height="78" rx="4" fill="#78909C"/>
+    <rect x="314" y="196" width="78" height="78" rx="4" fill="#B0BEC5"/>
+    <rect x="402" y="196" width="78" height="78" rx="4" fill="#607D8B"/>
+    <rect x="138" y="284" width="78" height="78" rx="4" fill="#607D8B"/>
+    <rect x="226" y="284" width="78" height="78" rx="4" fill="#90A4AE"/>
+    <rect x="314" y="284" width="78" height="78" rx="4" fill="#78909C"/>
+    <rect x="402" y="284" width="78" height="78" rx="4" fill="#B0BEC5"/>
+    <rect x="138" y="372" width="78" height="78" rx="4" fill="#B0BEC5"/>
+    <rect x="226" y="372" width="78" height="78" rx="4" fill="#607D8B"/>
+    <rect x="314" y="372" width="78" height="78" rx="4" fill="#90A4AE"/>
+    <rect x="402" y="372" width="78" height="78" rx="4" fill="#78909C"/>
+    <rect x="138" y="460" width="78" height="78" rx="4" fill="#78909C"/>
+    <rect x="226" y="460" width="78" height="78" rx="4" fill="#B0BEC5"/>
+    <rect x="314" y="460" width="78" height="78" rx="4" fill="#607D8B"/>
+    <rect x="402" y="460" width="78" height="78" rx="4" fill="#90A4AE"/>
+    <!-- Label -->
+    <rect x="138" y="614" width="200" height="62" rx="12" fill="#78909C" opacity="0.8"/>
+    <text x="238" y="655" font-family="Arial Black, sans-serif" font-size="40" font-weight="900" fill="white" text-anchor="middle">Low-Res</text>
+  </g>
+
+  <!-- Divider -->
+  <line x1="512" y1="140" x2="512" y2="884" stroke="#90CAF9" stroke-width="6" stroke-dasharray="18 10"/>
+
+  <!-- Right half: High-res sharp image -->
+  <g clip-path="url(#card1)">
+    <rect x="512" y="140" width="402" height="744" fill="#E3F2FD"/>
+    <!-- Sharp landscape scene -->
+    <rect x="512" y="140" width="402" height="450" fill="#B3E5FC"/>
+    <!-- Sky gradient -->
+    <circle cx="650" cy="280" r="80" fill="#FFD600"/>
+    <ellipse cx="700" cy="310" rx="90" ry="44" fill="white" opacity="0.8"/>
+    <ellipse cx="790" cy="300" rx="66" ry="36" fill="white" opacity="0.7"/>
+    <!-- Mountains -->
+    <path d="M512,560 L590,420 L668,490 L748,380 L830,460 L914,400 L914,590 L512,590 Z" fill="#42A5F5"/>
+    <!-- Ground -->
+    <path d="M512,560 L512,884 L914,884 L914,560 Q810,600 700,570 Q600,540 512,560 Z" fill="#66BB6A"/>
+    <!-- Label -->
+    <rect x="686" y="614" width="200" height="62" rx="12" fill="#1976D2" opacity="0.9"/>
+    <text x="786" y="655" font-family="Arial Black, sans-serif" font-size="40" font-weight="900" fill="white" text-anchor="middle">Hi-Res</text>
+  </g>
+
+  <!-- Layer 3: Scale badge -->
+  <circle cx="512" cy="884" r="80" fill="#FFD600" stroke="white" stroke-width="8"/>
+  <text x="512" y="907" font-family="Arial Black, sans-serif" font-size="72" font-weight="900" fill="#1565C0" text-anchor="middle">4×</text>
+</svg>

@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg2" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#E0F7FA"/>
+      <stop offset="100%" stop-color="#B2EBF2"/>
+    </linearGradient>
+    <linearGradient id="wave2" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#00BCD4"/>
+      <stop offset="50%" stop-color="#7C4DFF"/>
+      <stop offset="100%" stop-color="#E040FB"/>
+    </linearGradient>
+  </defs>
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg2)"/>
+
+  <!-- Layer 2: Left side — pixel grid (sharp squares) -->
+  <!-- 5x5 grid of squares -->
+  <g opacity="0.85">
+    <rect x="108" y="252" width="110" height="110" rx="6" fill="#78909C"/>
+    <rect x="228" y="252" width="110" height="110" rx="6" fill="#546E7A"/>
+    <rect x="348" y="252" width="110" height="110" rx="6" fill="#90A4AE"/>
+    <rect x="108" y="372" width="110" height="110" rx="6" fill="#546E7A"/>
+    <rect x="228" y="372" width="110" height="110" rx="6" fill="#78909C"/>
+    <rect x="348" y="372" width="110" height="110" rx="6" fill="#607D8B"/>
+    <rect x="108" y="492" width="110" height="110" rx="6" fill="#90A4AE"/>
+    <rect x="228" y="492" width="110" height="110" rx="6" fill="#607D8B"/>
+    <rect x="348" y="492" width="110" height="110" rx="6" fill="#546E7A"/>
+    <rect x="108" y="612" width="110" height="110" rx="6" fill="#607D8B"/>
+    <rect x="228" y="612" width="110" height="110" rx="6" fill="#90A4AE"/>
+    <rect x="348" y="612" width="110" height="110" rx="6" fill="#78909C"/>
+  </g>
+
+  <!-- Transition arrow in middle -->
+  <path d="M480,512 L560,512" stroke="url(#wave2)" stroke-width="40" stroke-linecap="round"/>
+  <polygon points="560,512 516,476 516,548" fill="#7C4DFF"/>
+
+  <!-- Right side — smooth wave/circles (upscaled) -->
+  <circle cx="758" cy="307" r="110" fill="#00BCD4" opacity="0.7"/>
+  <circle cx="870" cy="420" r="80" fill="#7C4DFF" opacity="0.6"/>
+  <circle cx="700" cy="460" r="130" fill="#00BCD4" opacity="0.5"/>
+  <circle cx="820" cy="560" r="100" fill="#E040FB" opacity="0.5"/>
+  <circle cx="700" cy="630" r="90" fill="#7C4DFF" opacity="0.4"/>
+  <circle cx="870" cy="680" r="70" fill="#00BCD4" opacity="0.5"/>
+
+  <!-- Smooth fill overlay on right -->
+  <ellipse cx="788" cy="510" rx="230" ry="260" fill="url(#wave2)" opacity="0.15"/>
+
+  <!-- Layer 3: Labels -->
+  <text x="228" y="800" font-family="Arial Black, sans-serif" font-size="52" font-weight="900" fill="#546E7A" text-anchor="middle" opacity="0.9">PIXEL</text>
+  <text x="788" y="800" font-family="Arial Black, sans-serif" font-size="52" font-weight="900" fill="#7C4DFF" text-anchor="middle">AI</text>
+  <text x="512" y="920" font-family="Arial Black, sans-serif" font-size="68" font-weight="900" fill="#00838F" text-anchor="middle">Upscale</text>
+</svg>

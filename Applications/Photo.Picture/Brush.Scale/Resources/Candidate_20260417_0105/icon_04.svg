@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg4" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FFF3E0"/>
+      <stop offset="100%" stop-color="#FFE0B2"/>
+    </linearGradient>
+    <linearGradient id="burst4" x1="0.5" y1="0" x2="0.5" y2="1">
+      <stop offset="0%" stop-color="#FF7043"/>
+      <stop offset="100%" stop-color="#FF5722"/>
+    </linearGradient>
+  </defs>
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg4)"/>
+
+  <!-- Burst lines radiating from center -->
+  <g stroke="#FFB300" stroke-width="18" stroke-linecap="round" opacity="0.6">
+    <line x1="512" y1="512" x2="512" y2="180"/>
+    <line x1="512" y1="512" x2="512" y2="844"/>
+    <line x1="512" y1="512" x2="180" y2="512"/>
+    <line x1="512" y1="512" x2="844" y2="512"/>
+    <line x1="512" y1="512" x2="278" y2="278"/>
+    <line x1="512" y1="512" x2="746" y2="278"/>
+    <line x1="512" y1="512" x2="278" y2="746"/>
+    <line x1="512" y1="512" x2="746" y2="746"/>
+  </g>
+
+  <!-- Layer 2: Small source image (center) -->
+  <rect x="390" y="390" width="244" height="244" rx="18" fill="url(#burst4)"/>
+  <!-- Small image content -->
+  <rect x="390" y="390" width="244" height="140" fill="#FF8A65"/>
+  <circle cx="454" cy="448" r="34" fill="#FFD600"/>
+  <path d="M390,490 L430,450 L470,470 L530,430 L634,490 L634,634 L390,634 Z" fill="#E64A19" opacity="0.6"/>
+
+  <!-- Expanding corner arrows (showing growth) -->
+  <!-- Top-left corner arrow -->
+  <g fill="none" stroke="#00BCD4" stroke-width="26" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M200,340 L200,200 L340,200"/>
+    <path d="M200,200 L300,300" stroke-width="0" fill="#00BCD4"/>
+  </g>
+  <polygon points="200,200 260,200 200,260" fill="#00BCD4"/>
+
+  <!-- Top-right corner arrow -->
+  <g fill="none" stroke="#00BCD4" stroke-width="26" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M684,200 L824,200 L824,340"/>
+  </g>
+  <polygon points="824,200 764,200 824,260" fill="#00BCD4"/>
+
+  <!-- Bottom-left corner arrow -->
+  <g fill="none" stroke="#00BCD4" stroke-width="26" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M200,684 L200,824 L340,824"/>
+  </g>
+  <polygon points="200,824 260,824 200,764" fill="#00BCD4"/>
+
+  <!-- Bottom-right corner arrow -->
+  <g fill="none" stroke="#00BCD4" stroke-width="26" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M684,824 L824,824 L824,684"/>
+  </g>
+  <polygon points="824,824 764,824 824,764" fill="#00BCD4"/>
+
+  <!-- Layer 3: Badge -->
+  <circle cx="512" cy="512" r="56" fill="white" opacity="0.9"/>
+  <text x="512" y="534" font-family="Arial Black, sans-serif" font-size="64" font-weight="900" fill="#FF5722" text-anchor="middle">↑</text>
+</svg>

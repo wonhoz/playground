@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg08" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1A237E"/>
+      <stop offset="100%" stop-color="#0D1B4B"/>
+    </linearGradient>
+    <radialGradient id="disk08" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#42A5F5"/>
+      <stop offset="100%" stop-color="#1565C0"/>
+    </radialGradient>
+  </defs>
+  <!-- Layer 1: 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg08)"/>
+  <!-- Layer 2: 디스크 원형 (레이어드) -->
+  <!-- 디스크 뒤 카드 -->
+  <circle cx="512" cy="480" r="270" fill="#1565C0" opacity="0.4"/>
+  <!-- 디스크 앞 -->
+  <circle cx="512" cy="480" r="230" fill="url(#disk08)"/>
+  <!-- 디스크 내부 링 -->
+  <circle cx="512" cy="480" r="80" fill="#0D47A1"/>
+  <!-- 사용/비어있는 파이 -->
+  <!-- 비어있는 공간 (큰 섹터, 초록) -->
+  <path d="M 512 480 L 512 250 A 230 230 0 1 1 300 630 Z" fill="#43A047" opacity="0.85"/>
+  <!-- 사용 중 공간 (작은 섹터, 회색) -->
+  <path d="M 512 480 L 300 630 A 230 230 0 0 1 512 250 Z" fill="#546E7A" opacity="0.7"/>
+  <!-- 디스크 중앙 -->
+  <circle cx="512" cy="480" r="80" fill="#0D47A1"/>
+  <circle cx="512" cy="480" r="32" fill="#1565C0"/>
+  <!-- Layer 3: FREE SPACE 배지 + 통계 -->
+  <rect x="240" y="760" width="544" height="88" rx="22" fill="#FDD835"/>
+  <text x="512" y="817" font-family="Arial Black, Arial, sans-serif" font-size="60" font-weight="900" fill="#1A237E" text-anchor="middle">FREE SPACE</text>
+  <!-- 레이블들 -->
+  <rect x="340" y="310" width="144" height="50" rx="12" fill="#43A047"/>
+  <text x="412" y="343" font-family="Arial Black, Arial, sans-serif" font-size="34" font-weight="900" fill="white" text-anchor="middle">+206MB</text>
+</svg>

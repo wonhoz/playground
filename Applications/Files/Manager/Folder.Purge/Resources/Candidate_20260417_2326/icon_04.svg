@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg04" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FFF3E0"/>
+      <stop offset="100%" stop-color="#BF360C"/>
+    </linearGradient>
+    <linearGradient id="bin04" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#EF9A9A"/>
+      <stop offset="100%" stop-color="#C62828"/>
+    </linearGradient>
+  </defs>
+  <!-- Layer 1: 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg04)"/>
+  <!-- Layer 2: 휴지통 (중앙) -->
+  <!-- 휴지통 덮개 -->
+  <rect x="340" y="480" width="344" height="36" rx="12" fill="url(#bin04)"/>
+  <rect x="414" y="450" width="196" height="40" rx="12" fill="#E53935"/>
+  <!-- 휴지통 몸통 -->
+  <rect x="356" y="516" width="312" height="280" rx="18" fill="url(#bin04)"/>
+  <!-- 줄무늬 -->
+  <rect x="430" y="542" width="20" height="220" rx="10" fill="#C62828" opacity="0.5"/>
+  <rect x="492" y="542" width="20" height="220" rx="10" fill="#C62828" opacity="0.5"/>
+  <rect x="554" y="542" width="20" height="220" rx="10" fill="#C62828" opacity="0.5"/>
+  <!-- Layer 3: 폴더들 빨려들어가는 중 (위에서 아래) -->
+  <!-- 폴더 3개 -->
+  <rect x="280" y="280" width="130" height="100" rx="14" fill="#FF8F00" opacity="0.9" transform="rotate(-10 345 330)"/>
+  <text x="345" y="338" font-family="Arial, sans-serif" font-size="32" fill="white" text-anchor="middle">bin</text>
+  <rect x="440" y="220" width="130" height="100" rx="14" fill="#FF8F00" opacity="0.85" transform="rotate(5 505 270)"/>
+  <text x="505" y="278" font-family="Arial, sans-serif" font-size="32" fill="white" text-anchor="middle">obj</text>
+  <rect x="600" y="270" width="130" height="100" rx="14" fill="#FFA726" opacity="0.8" transform="rotate(12 665 320)"/>
+  <text x="665" y="328" font-family="Arial, sans-serif" font-size="30" fill="white" text-anchor="middle">empty</text>
+  <!-- 화살표들 (아래 방향) -->
+  <polygon points="345,380 325,440 365,440" fill="#E53935" opacity="0.8"/>
+  <polygon points="505,320 485,440 525,440" fill="#E53935" opacity="0.8"/>
+  <polygon points="665,370 645,440 685,440" fill="#E53935" opacity="0.8"/>
+</svg>

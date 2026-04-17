@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg02" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FF8A65"/>
+      <stop offset="100%" stop-color="#FF3D00"/>
+    </linearGradient>
+    <linearGradient id="ring02" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#4DD0E1"/>
+      <stop offset="100%" stop-color="#00838F"/>
+    </linearGradient>
+  </defs>
+  <!-- Layer 1: 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg02)"/>
+  <!-- Layer 2: 순환 화살표 고리 -->
+  <circle cx="512" cy="490" r="270" fill="none" stroke="url(#ring02)" stroke-width="80" stroke-dasharray="750 200" stroke-linecap="round"/>
+  <!-- 화살촉 위쪽 -->
+  <polygon points="740,260 820,340 700,360" fill="#4DD0E1"/>
+  <!-- 화살촉 아래쪽 -->
+  <polygon points="284,620 204,700 324,720" fill="#4DD0E1"/>
+  <!-- Layer 3: 중앙 이미지 변환 표시 -->
+  <rect x="390" y="400" width="244" height="180" rx="18" fill="white" opacity="0.92"/>
+  <text x="512" y="510" font-family="Arial Black, Arial, sans-serif" font-size="72" font-weight="900" fill="#E65100" text-anchor="middle">IMG</text>
+  <text x="512" y="575" font-family="Arial, sans-serif" font-size="40" fill="#FF8A65" text-anchor="middle">convert</text>
+</svg>

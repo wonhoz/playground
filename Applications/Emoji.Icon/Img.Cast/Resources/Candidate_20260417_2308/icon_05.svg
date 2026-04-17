@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg05" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FF9800"/>
+      <stop offset="100%" stop-color="#E64A19"/>
+    </linearGradient>
+    <linearGradient id="bolt" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFF9C4"/>
+      <stop offset="100%" stop-color="#FFEB3B"/>
+    </linearGradient>
+  </defs>
+  <!-- Layer 1: 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg05)"/>
+  <!-- Layer 2: 이미지 프레임 (왼쪽) -->
+  <rect x="90" y="300" width="300" height="240" rx="20" fill="white" opacity="0.9"/>
+  <rect x="110" y="320" width="260" height="160" rx="10" fill="#FFCC80"/>
+  <!-- 이미지 산 형태 -->
+  <polygon points="130,460 210,380 270,430 310,370 350,460" fill="#FF9800" opacity="0.7"/>
+  <circle cx="170" cy="360" r="24" fill="#FFF9C4" opacity="0.8"/>
+  <!-- 이미지 프레임 (오른쪽 변환 결과) -->
+  <rect x="634" y="300" width="300" height="240" rx="20" fill="#FFF9C4" opacity="0.95"/>
+  <rect x="654" y="320" width="260" height="160" rx="10" fill="#B2EBF2"/>
+  <!-- 변환된 이미지 산 형태 -->
+  <polygon points="674,460 754,380 814,430 854,370 894,460" fill="#00BCD4" opacity="0.7"/>
+  <circle cx="714" cy="360" r="24" fill="white" opacity="0.9"/>
+  <!-- Layer 3: 번개 대각선 -->
+  <polygon points="500,180 400,550 490,550 390,840 590,430 490,430 560,180" fill="url(#bolt)" stroke="#FF6F00" stroke-width="8"/>
+</svg>

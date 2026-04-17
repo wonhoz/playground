@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg02" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#CE93D8"/>
+      <stop offset="100%" stop-color="#4A148C"/>
+    </linearGradient>
+    <linearGradient id="brush02" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FFD700"/>
+      <stop offset="100%" stop-color="#FF8F00"/>
+    </linearGradient>
+  </defs>
+  <!-- Layer 1: 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg02)"/>
+  <!-- Layer 2: AI 붓 (오른쪽 위 → 왼쪽 아래 대각선) -->
+  <!-- 붓 손잡이 -->
+  <rect x="560" y="140" width="60" height="440" rx="30" fill="url(#brush02)" transform="rotate(35 590 360)"/>
+  <!-- 붓 끝 -->
+  <ellipse cx="400" cy="680" rx="60" ry="100" fill="#FFD700" transform="rotate(35 400 680)"/>
+  <!-- 붓 끝 털 -->
+  <ellipse cx="370" cy="730" rx="30" ry="60" fill="#FFF9C4" opacity="0.9" transform="rotate(35 370 730)"/>
+  <!-- Layer 3: 이미지 선명화 효과 — 별 파티클 -->
+  <circle cx="260" cy="320" r="22" fill="#FFD700"/>
+  <circle cx="180" cy="440" r="14" fill="#FF80AB"/>
+  <circle cx="300" cy="500" r="18" fill="#80D8FF"/>
+  <circle cx="200" cy="600" r="12" fill="#CCFF90"/>
+  <!-- 화질 UP 텍스트 -->
+  <text x="680" y="820" font-family="Arial Black, Arial, sans-serif" font-size="100" font-weight="900" fill="#FFD700" text-anchor="middle" opacity="0.9">AI</text>
+</svg>

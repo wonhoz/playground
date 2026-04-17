@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg08" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#311B92"/>
+      <stop offset="100%" stop-color="#1A237E"/>
+    </linearGradient>
+    <radialGradient id="glow08" cx="50%" cy="35%" r="40%">
+      <stop offset="0%" stop-color="#CE93D8" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#311B92" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <!-- Layer 1: 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg08)"/>
+  <ellipse cx="512" cy="340" rx="320" ry="260" fill="url(#glow08)"/>
+  <!-- Layer 2: 퀴즈마스터 캐릭터 (실루엣) -->
+  <!-- 머리 -->
+  <circle cx="512" cy="280" r="110" fill="#FDD835"/>
+  <!-- 눈 -->
+  <circle cx="472" cy="265" r="18" fill="#311B92"/>
+  <circle cx="552" cy="265" r="18" fill="#311B92"/>
+  <!-- 웃는 입 -->
+  <path d="M 462 305 Q 512 350 562 305" fill="none" stroke="#311B92" stroke-width="12" stroke-linecap="round"/>
+  <!-- 모자 (마법사 모자) -->
+  <polygon points="512,110 452,200 572,200" fill="#7B1FA2"/>
+  <rect x="424" y="194" width="176" height="28" rx="8" fill="#9C27B0"/>
+  <!-- 별 장식 (모자) -->
+  <polygon points="512,130 520,154 546,154 526,168 534,192 512,178 490,192 498,168 478,154 504,154" fill="#FDD835"/>
+  <!-- 몸 -->
+  <rect x="392" y="380" width="240" height="260" rx="30" fill="#7B1FA2"/>
+  <!-- 넥타이/배지 -->
+  <polygon points="512,390 492,450 512,480 532,450" fill="#FDD835"/>
+  <!-- 팔 (양쪽) -->
+  <rect x="240" y="390" width="150" height="50" rx="25" fill="#7B1FA2" transform="rotate(20 315 415)"/>
+  <rect x="634" y="390" width="150" height="50" rx="25" fill="#7B1FA2" transform="rotate(-20 709 415)"/>
+  <!-- 손에 마이크 -->
+  <circle cx="228" cy="446" r="32" fill="#E0E0E0"/>
+  <rect x="220" y="478" width="16" height="40" rx="8" fill="#9E9E9E"/>
+  <!-- Layer 3: 점수 배지 -->
+  <rect x="280" y="760" width="464" height="80" rx="22" fill="#FDD835"/>
+  <text x="512" y="814" font-family="Arial Black, Arial, sans-serif" font-size="56" font-weight="900" fill="#311B92" text-anchor="middle">QUIZ MASTER</text>
+</svg>

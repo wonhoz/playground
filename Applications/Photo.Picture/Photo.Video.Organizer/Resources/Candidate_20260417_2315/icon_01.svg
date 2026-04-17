@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg01" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#90CAF9"/>
+      <stop offset="100%" stop-color="#1565C0"/>
+    </linearGradient>
+  </defs>
+  <!-- Layer 1: 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg01)"/>
+  <!-- Layer 2: 달력 -->
+  <rect x="160" y="200" width="700" height="560" rx="32" fill="white" opacity="0.95"/>
+  <!-- 달력 헤더 (날짜 색상 바) -->
+  <rect x="160" y="200" width="700" height="110" rx="32" fill="#1565C0"/>
+  <rect x="160" y="270" width="700" height="40" fill="#1565C0"/>
+  <!-- 달력 헤더 텍스트 -->
+  <text x="512" y="268" font-family="Arial Black, Arial, sans-serif" font-size="72" font-weight="900" fill="white" text-anchor="middle">2024</text>
+  <!-- 날짜 그리드 — 숫자들 (3×3 샘플) -->
+  <text x="260" y="410" font-family="Arial, sans-serif" font-size="72" font-weight="700" fill="#455A64" text-anchor="middle">01</text>
+  <text x="512" y="410" font-family="Arial, sans-serif" font-size="72" font-weight="700" fill="#455A64" text-anchor="middle">02</text>
+  <text x="764" y="410" font-family="Arial, sans-serif" font-size="72" font-weight="700" fill="#455A64" text-anchor="middle">03</text>
+  <!-- Layer 3: 사진 프레임 오버레이 -->
+  <rect x="356" y="480" width="312" height="230" rx="18" fill="#F8BBD9" opacity="0.92"/>
+  <!-- 사진 내용 (산+태양) -->
+  <polygon points="376,690 460,570 524,610 588,545 648,690" fill="#E91E63" opacity="0.6"/>
+  <circle cx="612" cy="550" r="30" fill="#FFD54F"/>
+  <!-- 사진 핀 -->
+  <circle cx="512" cy="487" r="18" fill="#E91E63"/>
+</svg>

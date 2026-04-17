@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg01" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#B3E5FC"/>
+      <stop offset="100%" stop-color="#0277BD"/>
+    </linearGradient>
+    <radialGradient id="globe01" cx="45%" cy="45%" r="50%">
+      <stop offset="0%" stop-color="#81C784"/>
+      <stop offset="100%" stop-color="#1B5E20"/>
+    </radialGradient>
+  </defs>
+  <!-- Layer 1: 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg01)"/>
+  <!-- Layer 2: 지구본 -->
+  <circle cx="460" cy="500" r="280" fill="#1565C0"/>
+  <circle cx="460" cy="500" r="280" fill="url(#globe01)" opacity="0.7"/>
+  <!-- 위도선 -->
+  <ellipse cx="460" cy="500" rx="280" ry="80" fill="none" stroke="#90CAF9" stroke-width="14" opacity="0.5"/>
+  <ellipse cx="460" cy="500" rx="160" ry="280" fill="none" stroke="#90CAF9" stroke-width="14" opacity="0.4"/>
+  <!-- 대륙 블롭 -->
+  <ellipse cx="410" cy="430" rx="90" ry="70" fill="#66BB6A" opacity="0.8"/>
+  <ellipse cx="510" cy="540" rx="70" ry="55" fill="#43A047" opacity="0.8"/>
+  <ellipse cx="350" cy="540" rx="50" ry="40" fill="#388E3C" opacity="0.7"/>
+  <!-- Layer 3: 물음표 배지 -->
+  <circle cx="700" cy="300" r="130" fill="#FDD835"/>
+  <text x="700" y="340" font-family="Arial Black, Arial, sans-serif" font-size="180" font-weight="900" fill="#1565C0" text-anchor="middle">?</text>
+</svg>

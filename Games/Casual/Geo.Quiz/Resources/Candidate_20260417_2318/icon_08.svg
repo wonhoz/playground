@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg08" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#E8EAF6"/>
+      <stop offset="100%" stop-color="#1A237E"/>
+    </linearGradient>
+    <radialGradient id="globe08" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#42A5F5"/>
+      <stop offset="100%" stop-color="#0D47A1"/>
+    </radialGradient>
+  </defs>
+  <!-- Layer 1: 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg08)"/>
+  <!-- Layer 2: 지구 -->
+  <circle cx="512" cy="540" r="240" fill="url(#globe08)"/>
+  <ellipse cx="512" cy="540" rx="240" ry="70" fill="none" stroke="white" stroke-width="10" opacity="0.35"/>
+  <ellipse cx="512" cy="540" rx="130" ry="240" fill="none" stroke="white" stroke-width="10" opacity="0.3"/>
+  <!-- 대륙 -->
+  <ellipse cx="460" cy="480" rx="70" ry="55" fill="#66BB6A" opacity="0.8"/>
+  <ellipse cx="570" cy="570" rx="55" ry="42" fill="#43A047" opacity="0.8"/>
+  <!-- Layer 3: 별 5개 (최고 점수) -->
+  <!-- 중앙 큰 별 -->
+  <polygon points="512,190 534,258 606,258 548,300 570,368 512,326 454,368 476,300 418,258 490,258" fill="#FDD835"/>
+  <!-- 왼쪽 별들 -->
+  <polygon points="320,260 335,307 384,307 345,334 360,381 320,354 280,381 295,334 256,307 305,307" fill="#FDD835" opacity="0.9"/>
+  <polygon points="220,360 231,393 266,393 238,413 249,446 220,426 191,446 202,413 174,393 209,393" fill="#FDD835" opacity="0.75"/>
+  <!-- 오른쪽 별들 -->
+  <polygon points="704,260 719,307 768,307 729,334 744,381 704,354 664,381 679,334 640,307 689,307" fill="#FDD835" opacity="0.9"/>
+  <polygon points="804,360 815,393 850,393 822,413 833,446 804,426 775,446 786,413 758,393 793,393" fill="#FDD835" opacity="0.75"/>
+  <!-- NEW RECORD 배지 -->
+  <rect x="320" y="820" width="384" height="70" rx="18" fill="#FDD835"/>
+  <text x="512" y="868" font-family="Arial Black, Arial, sans-serif" font-size="48" font-weight="900" fill="#1A237E" text-anchor="middle">NEW RECORD</text>
+</svg>

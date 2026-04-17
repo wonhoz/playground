@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg04" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FFE0B2"/>
+      <stop offset="100%" stop-color="#E65100"/>
+    </linearGradient>
+    <radialGradient id="globe04" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#81D4FA"/>
+      <stop offset="100%" stop-color="#0277BD"/>
+    </radialGradient>
+  </defs>
+  <!-- Layer 1: 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg04)"/>
+  <!-- Layer 2: 지구 (탐험 대상) -->
+  <circle cx="512" cy="560" r="260" fill="url(#globe04)"/>
+  <!-- 위도/경도 선 -->
+  <ellipse cx="512" cy="560" rx="260" ry="80" fill="none" stroke="white" stroke-width="10" opacity="0.4"/>
+  <ellipse cx="512" cy="560" rx="260" ry="160" fill="none" stroke="white" stroke-width="10" opacity="0.3"/>
+  <!-- 대륙 -->
+  <ellipse cx="470" cy="510" rx="80" ry="60" fill="#66BB6A" opacity="0.85"/>
+  <ellipse cx="570" cy="590" rx="60" ry="45" fill="#388E3C" opacity="0.8"/>
+  <!-- 탐험가 캐릭터 (지구 위에 서있는 형태) -->
+  <!-- 몸 -->
+  <circle cx="512" cy="270" r="64" fill="#FFCC80"/>
+  <!-- 모자 (탐험가 모자) -->
+  <ellipse cx="512" cy="228" rx="72" ry="20" fill="#E65100"/>
+  <rect x="468" y="188" width="88" height="46" rx="10" fill="#E65100"/>
+  <!-- 몸통 -->
+  <rect x="468" y="334" width="88" height="100" rx="18" fill="#FF8F00"/>
+  <!-- 다리 -->
+  <rect x="468" y="430" width="36" height="80" rx="12" fill="#FFCC80"/>
+  <rect x="520" y="430" width="36" height="80" rx="12" fill="#FFCC80"/>
+  <!-- Layer 3: 돋보기 (탐험 도구) -->
+  <circle cx="740" cy="320" r="70" fill="none" stroke="#FDD835" stroke-width="28"/>
+  <line x1="794" y1="374" x2="840" y2="420" stroke="#FDD835" stroke-width="28" stroke-linecap="round"/>
+</svg>

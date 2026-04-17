@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg03" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#E8EAF6"/>
+      <stop offset="100%" stop-color="#283593"/>
+    </linearGradient>
+  </defs>
+  <!-- Layer 1: 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg03)"/>
+  <!-- Layer 2: 퀴즈 UI 미리보기 -->
+  <!-- 메인 패널 -->
+  <rect x="130" y="170" width="764" height="620" rx="32" fill="white" opacity="0.95"/>
+  <!-- 질문 영역 -->
+  <rect x="155" y="195" width="714" height="130" rx="18" fill="#283593"/>
+  <text x="512" y="248" font-family="Arial, sans-serif" font-size="46" fill="white" text-anchor="middle">다음 나라의 수도는?</text>
+  <text x="512" y="308" font-family="Arial Black, Arial, sans-serif" font-size="60" font-weight="900" fill="#FDD835" text-anchor="middle">France</text>
+  <!-- 4지선다 선택지 -->
+  <!-- 정답 강조 (초록) -->
+  <rect x="155" y="360" width="340" height="90" rx="14" fill="#1B5E20" opacity="0.9"/>
+  <text x="325" y="414" font-family="Arial Black, Arial, sans-serif" font-size="52" font-weight="900" fill="#A5D6A7" text-anchor="middle">Paris</text>
+  <!-- 오답들 -->
+  <rect x="529" y="360" width="340" height="90" rx="14" fill="#E8EAF6"/>
+  <text x="699" y="414" font-family="Arial, sans-serif" font-size="50" fill="#283593" text-anchor="middle">Berlin</text>
+  <rect x="155" y="474" width="340" height="90" rx="14" fill="#E8EAF6"/>
+  <text x="325" y="528" font-family="Arial, sans-serif" font-size="50" fill="#283593" text-anchor="middle">Madrid</text>
+  <rect x="529" y="474" width="340" height="90" rx="14" fill="#E8EAF6"/>
+  <text x="699" y="528" font-family="Arial, sans-serif" font-size="50" fill="#283593" text-anchor="middle">Rome</text>
+  <!-- Layer 3: 타이머 바 + 진행 -->
+  <rect x="155" y="600" width="714" height="24" rx="12" fill="#E8EAF6"/>
+  <rect x="155" y="600" width="428" height="24" rx="12" fill="#E53935"/>
+  <text x="869" y="618" font-family="Arial Black, Arial, sans-serif" font-size="44" font-weight="900" fill="#283593" text-anchor="end">8s</text>
+</svg>

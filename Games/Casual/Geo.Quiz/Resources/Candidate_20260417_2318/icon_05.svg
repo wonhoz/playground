@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg05" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFF9C4"/>
+      <stop offset="100%" stop-color="#E65100"/>
+    </linearGradient>
+    <radialGradient id="fire" cx="50%" cy="100%" r="70%">
+      <stop offset="0%" stop-color="#FF3D00"/>
+      <stop offset="60%" stop-color="#FF6F00"/>
+      <stop offset="100%" stop-color="#FDD835"/>
+    </radialGradient>
+  </defs>
+  <!-- Layer 1: 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg05)"/>
+  <!-- Layer 2: 큰 불꽃 (대각선 동적) -->
+  <!-- 불꽃 1 (중앙 큰) -->
+  <path d="M512,900 C400,780 360,660 420,560 C440,520 480,540 500,500 C520,460 500,420 520,380 C540,340 580,360 600,320 C640,260 620,200 580,180 C660,200 700,280 680,360 C700,320 740,320 740,380 C760,440 720,480 700,520 C740,480 780,500 780,560 C780,640 720,720 640,780 C700,760 740,820 720,880 C680,920 560,920 512,900Z" fill="url(#fire)" opacity="0.95"/>
+  <!-- 불꽃 2 (왼쪽 작은) -->
+  <path d="M340,840 C280,760 270,680 310,620 C330,590 350,610 360,580 C380,540 360,510 380,480 C400,450 430,470 440,450 C460,400 440,360 420,340 C470,360 490,420 470,480 C500,440 530,460 520,510 C520,560 490,600 470,640 C500,620 520,660 510,700 C490,760 400,820 340,840Z" fill="#FF6F00" opacity="0.75"/>
+  <!-- Layer 3: 스트릭 숫자 -->
+  <circle cx="680" cy="750" r="110" fill="#FDD835" opacity="0.95"/>
+  <text x="680" y="730" font-family="Arial Black, Arial, sans-serif" font-size="80" font-weight="900" fill="#E65100" text-anchor="middle">🔥</text>
+  <text x="680" y="810" font-family="Arial Black, Arial, sans-serif" font-size="64" font-weight="900" fill="#E65100" text-anchor="middle">×5</text>
+</svg>

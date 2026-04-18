@@ -1,0 +1,50 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0D1B33"/>
+      <stop offset="100%" stop-color="#0A1628"/>
+    </linearGradient>
+    <clipPath id="cp"><rect width="1024" height="1024" rx="190"/></clipPath>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg)"/>
+  <g clip-path="url(#cp)">
+    <!-- 시스템 레이어 스택 — 뒤에서 앞으로 -->
+
+    <!-- Layer 5 (가장 뒤, 점선 = 임시파일 제거) -->
+    <rect x="80" y="110" width="720" height="120" rx="20" fill="none" stroke="#FF8F00" stroke-width="5" stroke-dasharray="18,10" opacity="0.5"/>
+    <text x="200" y="184" font-family="'Segoe UI',Arial,sans-serif" font-size="44" fill="#FF8F00" opacity="0.5">📁 Windows\Temp</text>
+    <line x1="720" y1="155" x2="760" y2="195" stroke="#FF8F00" stroke-width="8" stroke-linecap="round" opacity="0.6"/>
+    <line x1="760" y1="155" x2="720" y2="195" stroke="#FF8F00" stroke-width="8" stroke-linecap="round" opacity="0.6"/>
+
+    <!-- Layer 4 (점선 = 브라우저 캐시 제거) -->
+    <rect x="100" y="250" width="720" height="120" rx="20" fill="none" stroke="#FDD835" stroke-width="5" stroke-dasharray="18,10" opacity="0.6"/>
+    <text x="220" y="324" font-family="'Segoe UI',Arial,sans-serif" font-size="44" fill="#FDD835" opacity="0.6">💾 브라우저 캐시</text>
+    <line x1="740" y1="295" x2="780" y2="335" stroke="#FDD835" stroke-width="8" stroke-linecap="round" opacity="0.7"/>
+    <line x1="780" y1="295" x2="740" y2="335" stroke="#FDD835" stroke-width="8" stroke-linecap="round" opacity="0.7"/>
+
+    <!-- Layer 3 (점선 = 레지스트리 오류 제거) -->
+    <rect x="120" y="390" width="720" height="120" rx="20" fill="none" stroke="#EF5350" stroke-width="5" stroke-dasharray="18,10" opacity="0.7"/>
+    <text x="240" y="464" font-family="'Segoe UI',Arial,sans-serif" font-size="44" fill="#EF5350" opacity="0.7">🔑 레지스트리 오류 47개</text>
+    <line x1="760" y1="435" x2="800" y2="475" stroke="#EF5350" stroke-width="8" stroke-linecap="round" opacity="0.8"/>
+    <line x1="800" y1="435" x2="760" y2="475" stroke="#EF5350" stroke-width="8" stroke-linecap="round" opacity="0.8"/>
+
+    <!-- Layer 2 — 실선 (설치 프로그램 유지) -->
+    <rect x="140" y="530" width="720" height="120" rx="20" fill="#1565C0" opacity="0.85"/>
+    <text x="260" y="604" font-family="'Segoe UI',Arial,sans-serif" font-size="44" fill="#BBDEFB">📦 설치된 프로그램</text>
+    <text x="820" y="604" font-family="'Segoe UI',Arial,sans-serif" font-size="38" fill="#69F0AE" font-weight="700">✓</text>
+
+    <!-- Layer 1 — 실선 (핵심 시스템 유지) -->
+    <rect x="160" y="670" width="720" height="120" rx="20" fill="#0277BD"/>
+    <text x="280" y="744" font-family="'Segoe UI',Arial,sans-serif" font-size="44" fill="#FFFFFF" font-weight="700">⚙️ Windows 시스템 핵심</text>
+    <text x="840" y="744" font-family="'Segoe UI',Arial,sans-serif" font-size="38" fill="#69F0AE" font-weight="700">✓</text>
+
+    <!-- 화살표 제거 표시 (오른쪽에서 날아가는) -->
+    <text x="880" y="185" font-family="'Segoe UI',Arial,sans-serif" font-size="48" fill="#FF8F00" opacity="0.7">↗</text>
+    <text x="880" y="325" font-family="'Segoe UI',Arial,sans-serif" font-size="48" fill="#FDD835" opacity="0.7">↗</text>
+    <text x="880" y="465" font-family="'Segoe UI',Arial,sans-serif" font-size="48" fill="#EF5350" opacity="0.8">↗</text>
+
+    <!-- 타이틀 -->
+    <rect x="160" y="890" width="704" height="68" rx="20" fill="#FF8F00"/>
+    <text x="512" y="936" font-family="'Segoe UI',Arial,sans-serif" font-weight="900" font-size="50" fill="#0D1B33" text-anchor="middle">불필요 레이어 제거</text>
+  </g>
+</svg>

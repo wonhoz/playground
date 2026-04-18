@@ -1,0 +1,49 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="45%" r="70%">
+      <stop offset="0%" stop-color="#1565C0"/>
+      <stop offset="100%" stop-color="#0D3C8A"/>
+    </radialGradient>
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#42A5F5" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#42A5F5" stop-opacity="0"/>
+    </radialGradient>
+    <clipPath id="cp"><rect width="1024" height="1024" rx="190"/></clipPath>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg)"/>
+  <g clip-path="url(#cp)">
+    <!-- 글로우 -->
+    <ellipse cx="512" cy="460" rx="360" ry="320" fill="url(#glow)"/>
+
+    <!-- Windows 로고 (4개 사각형) -->
+    <!-- 왼쪽 위 (파란색) -->
+    <rect x="280" y="220" width="200" height="200" rx="18" fill="#4FC3F7"/>
+    <!-- 오른쪽 위 (파란색 진하게) -->
+    <rect x="504" y="220" width="200" height="200" rx="18" fill="#0288D1"/>
+    <!-- 왼쪽 아래 -->
+    <rect x="280" y="444" width="200" height="200" rx="18" fill="#0288D1"/>
+    <!-- 오른쪽 아래 -->
+    <rect x="504" y="444" width="200" height="200" rx="18" fill="#01579B"/>
+
+    <!-- Windows 로고 중앙 격자선 (흰 얇은 선) -->
+    <line x1="280" y1="318" x2="704" y2="318" stroke="#1565C0" stroke-width="10"/>
+    <line x1="484" y1="200" x2="484" y2="666" stroke="#1565C0" stroke-width="10"/>
+
+    <!-- 빗자루 — 오른쪽 아래에서 왼쪽 위 방향 -->
+    <line x1="760" y1="230" x2="380" y2="680" stroke="#FF8F00" stroke-width="32" stroke-linecap="round"/>
+    <!-- 빗자루 솔 -->
+    <ellipse cx="368" cy="695" rx="76" ry="30" fill="#F57F17" transform="rotate(-48 368 695)"/>
+    <!-- 솔 가닥 -->
+    <line x1="325" y1="735" x2="292" y2="768" stroke="#E65100" stroke-width="8" stroke-linecap="round"/>
+    <line x1="346" y1="742" x2="326" y2="782" stroke="#E65100" stroke-width="8" stroke-linecap="round"/>
+    <line x1="368" y1="746" x2="360" y2="788" stroke="#E65100" stroke-width="8" stroke-linecap="round"/>
+    <line x1="390" y1="740" x2="394" y2="782" stroke="#E65100" stroke-width="8" stroke-linecap="round"/>
+    <line x1="408" y1="728" x2="420" y2="768" stroke="#E65100" stroke-width="8" stroke-linecap="round"/>
+    <!-- 손잡이 끝 -->
+    <circle cx="770" cy="222" r="24" fill="#FFB300"/>
+
+    <!-- 하단 타이틀 -->
+    <rect x="140" y="860" width="744" height="72" rx="22" fill="#FF8F00"/>
+    <text x="512" y="910" font-family="'Segoe UI',Arial,sans-serif" font-weight="900" font-size="54" fill="#FFFFFF" text-anchor="middle">SYS.CLEAN</text>
+  </g>
+</svg>

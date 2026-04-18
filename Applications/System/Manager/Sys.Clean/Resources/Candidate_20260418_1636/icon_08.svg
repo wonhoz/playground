@@ -1,0 +1,71 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1A1A2E"/>
+      <stop offset="100%" stop-color="#16213E"/>
+    </linearGradient>
+    <linearGradient id="bar1" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#EF5350"/>
+      <stop offset="70%" stop-color="#FF8F00"/>
+      <stop offset="100%" stop-color="#FF8F00"/>
+    </linearGradient>
+    <linearGradient id="bar2" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#43A047"/>
+      <stop offset="100%" stop-color="#69F0AE"/>
+    </linearGradient>
+    <clipPath id="cp"><rect width="1024" height="1024" rx="190"/></clipPath>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg)"/>
+  <g clip-path="url(#cp)">
+    <!-- 앱 타이틀 -->
+    <text x="512" y="136" font-family="'Segoe UI',Arial,sans-serif" font-weight="900" font-size="72" fill="#FFFFFF" text-anchor="middle">SYS.CLEAN</text>
+    <line x1="100" y1="152" x2="924" y2="152" stroke="#37474F" stroke-width="3"/>
+
+    <!-- 섹션 1: 디스크 공간 -->
+    <text x="110" y="210" font-family="'Segoe UI',Arial,sans-serif" font-size="38" fill="#90A4AE" font-weight="700">💾 디스크 공간</text>
+    <!-- Before 바 -->
+    <text x="110" y="256" font-family="'Segoe UI',Arial,sans-serif" font-size="30" fill="#78909C">Before</text>
+    <rect x="200" y="232" width="700" height="38" rx="10" fill="#263238"/>
+    <rect x="200" y="232" width="560" height="38" rx="10" fill="url(#bar1)"/>
+    <text x="884" y="258" font-family="'Segoe UI',Arial,sans-serif" font-size="28" fill="#EF5350" text-anchor="end">80%</text>
+    <!-- After 바 -->
+    <text x="110" y="306" font-family="'Segoe UI',Arial,sans-serif" font-size="30" fill="#78909C">After</text>
+    <rect x="200" y="282" width="700" height="38" rx="10" fill="#263238"/>
+    <rect x="200" y="282" width="350" height="38" rx="10" fill="url(#bar2)"/>
+    <text x="884" y="308" font-family="'Segoe UI',Arial,sans-serif" font-size="28" fill="#69F0AE" text-anchor="end">50%</text>
+    <text x="700" y="340" font-family="'Segoe UI',Arial,sans-serif" font-size="30" fill="#69F0AE" text-anchor="end" font-weight="700">↓ 1.6 GB 확보</text>
+
+    <line x1="100" y1="368" x2="924" y2="368" stroke="#263238" stroke-width="2"/>
+
+    <!-- 섹션 2: 레지스트리 오류 -->
+    <text x="110" y="415" font-family="'Segoe UI',Arial,sans-serif" font-size="38" fill="#90A4AE" font-weight="700">🔑 레지스트리</text>
+    <text x="110" y="462" font-family="'Segoe UI',Arial,sans-serif" font-size="30" fill="#78909C">Before</text>
+    <rect x="200" y="438" width="700" height="38" rx="10" fill="#263238"/>
+    <rect x="200" y="438" width="423" height="38" rx="10" fill="#C62828"/>
+    <text x="884" y="464" font-family="'Segoe UI',Arial,sans-serif" font-size="28" fill="#EF5350" text-anchor="end">47 오류</text>
+    <text x="110" y="512" font-family="'Segoe UI',Arial,sans-serif" font-size="30" fill="#78909C">After</text>
+    <rect x="200" y="488" width="700" height="38" rx="10" fill="#263238"/>
+    <rect x="200" y="488" width="14" height="38" rx="10" fill="#43A047"/>
+    <text x="884" y="514" font-family="'Segoe UI',Arial,sans-serif" font-size="28" fill="#69F0AE" text-anchor="end">0 오류</text>
+    <text x="700" y="546" font-family="'Segoe UI',Arial,sans-serif" font-size="30" fill="#69F0AE" text-anchor="end" font-weight="700">↓ 47개 수정</text>
+
+    <line x1="100" y1="574" x2="924" y2="574" stroke="#263238" stroke-width="2"/>
+
+    <!-- 섹션 3: 시작 프로그램 -->
+    <text x="110" y="620" font-family="'Segoe UI',Arial,sans-serif" font-size="38" fill="#90A4AE" font-weight="700">🚀 시작 프로그램</text>
+    <text x="110" y="666" font-family="'Segoe UI',Arial,sans-serif" font-size="30" fill="#78909C">Before</text>
+    <rect x="200" y="642" width="700" height="38" rx="10" fill="#263238"/>
+    <rect x="200" y="642" width="280" height="38" rx="10" fill="#E65100"/>
+    <text x="884" y="668" font-family="'Segoe UI',Arial,sans-serif" font-size="28" fill="#FF8F00" text-anchor="end">12 오류</text>
+    <text x="110" y="716" font-family="'Segoe UI',Arial,sans-serif" font-size="30" fill="#78909C">After</text>
+    <rect x="200" y="692" width="700" height="38" rx="10" fill="#263238"/>
+    <rect x="200" y="692" width="14" height="38" rx="10" fill="#43A047"/>
+    <text x="884" y="718" font-family="'Segoe UI',Arial,sans-serif" font-size="28" fill="#69F0AE" text-anchor="end">0 오류</text>
+    <text x="700" y="750" font-family="'Segoe UI',Arial,sans-serif" font-size="30" fill="#69F0AE" text-anchor="end" font-weight="700">↓ 12개 수정</text>
+
+    <!-- 하단 총결산 -->
+    <rect x="100" y="824" width="824" height="100" rx="24" fill="#43A047"/>
+    <text x="512" y="876" font-family="'Segoe UI',Arial,sans-serif" font-weight="900" font-size="48" fill="#FFFFFF" text-anchor="middle">✅ 시스템 최적화 완료!</text>
+    <text x="512" y="914" font-family="'Segoe UI',Arial,sans-serif" font-size="34" fill="#E8F5E9" text-anchor="middle">1.6 GB 확보 · 59개 오류 수정</text>
+  </g>
+</svg>

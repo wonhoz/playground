@@ -1,0 +1,79 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#212121"/>
+      <stop offset="100%" stop-color="#1A2744"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="45%" cy="45%" r="55%">
+      <stop offset="0%" stop-color="#69F0AE" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#69F0AE" stop-opacity="0"/>
+    </radialGradient>
+    <clipPath id="cp"><rect width="1024" height="1024" rx="190"/></clipPath>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg)"/>
+  <g clip-path="url(#cp)">
+    <ellipse cx="440" cy="440" rx="360" ry="340" fill="url(#glow)"/>
+
+    <!-- 로봇 청소부 실루엣 -->
+    <!-- 머리 (육각형 스타일) -->
+    <rect x="300" y="130" width="260" height="200" rx="30" fill="#78909C"/>
+    <!-- 눈 (LED) -->
+    <circle cx="370" cy="210" r="30" fill="#212121"/>
+    <circle cx="370" cy="210" r="18" fill="#69F0AE"/>
+    <circle cx="370" cy="210" r="8" fill="#FFFFFF"/>
+    <circle cx="490" cy="210" r="30" fill="#212121"/>
+    <circle cx="490" cy="210" r="18" fill="#69F0AE"/>
+    <circle cx="490" cy="210" r="8" fill="#FFFFFF"/>
+    <!-- 로봇 입 (그릴) -->
+    <rect x="355" y="270" width="150" height="28" rx="10" fill="#546E7A"/>
+    <line x1="380" y1="270" x2="380" y2="298" stroke="#78909C" stroke-width="4"/>
+    <line x1="410" y1="270" x2="410" y2="298" stroke="#78909C" stroke-width="4"/>
+    <line x1="440" y1="270" x2="440" y2="298" stroke="#78909C" stroke-width="4"/>
+    <line x1="470" y1="270" x2="470" y2="298" stroke="#78909C" stroke-width="4"/>
+    <!-- 안테나 -->
+    <line x1="430" y1="130" x2="430" y2="80" stroke="#90A4AE" stroke-width="8" stroke-linecap="round"/>
+    <circle cx="430" cy="68" r="18" fill="#69F0AE"/>
+
+    <!-- 몸통 -->
+    <rect x="260" y="340" width="340" height="280" rx="30" fill="#546E7A"/>
+    <!-- 가슴 패널 -->
+    <rect x="300" y="375" width="260" height="180" rx="20" fill="#37474F"/>
+    <!-- 패널 게이지 -->
+    <rect x="320" y="395" width="220" height="28" rx="8" fill="#263238"/>
+    <rect x="320" y="395" width="80" height="28" rx="8" fill="#EF5350"/>
+    <text x="430" y="415" font-family="'Segoe UI',Arial,sans-serif" font-size="22" fill="#ECEFF1" text-anchor="middle">JUNK 36%</text>
+    <rect x="320" y="435" width="220" height="28" rx="8" fill="#263238"/>
+    <rect x="320" y="435" width="160" height="28" rx="8" fill="#69F0AE"/>
+    <text x="430" y="455" font-family="'Segoe UI',Arial,sans-serif" font-size="22" fill="#263238" font-weight="700" text-anchor="middle">CLEAN 73%</text>
+
+    <!-- 팔 — 오른쪽 (청소 도구 들고 있음) -->
+    <rect x="600" y="360" width="80" height="220" rx="30" fill="#546E7A"/>
+    <!-- 솔 (청소 도구) -->
+    <rect x="616" y="570" width="110" height="50" rx="14" fill="#FF8F00"/>
+    <!-- 솔 가닥 -->
+    <line x1="626" y1="620" x2="622" y2="660" stroke="#E65100" stroke-width="7" stroke-linecap="round"/>
+    <line x1="646" y1="620" x2="645" y2="662" stroke="#E65100" stroke-width="7" stroke-linecap="round"/>
+    <line x1="666" y1="620" x2="668" y2="662" stroke="#E65100" stroke-width="7" stroke-linecap="round"/>
+    <line x1="686" y1="620" x2="691" y2="660" stroke="#E65100" stroke-width="7" stroke-linecap="round"/>
+    <line x1="706" y1="620" x2="714" y2="658" stroke="#E65100" stroke-width="7" stroke-linecap="round"/>
+
+    <!-- 팔 — 왼쪽 -->
+    <rect x="180" y="360" width="80" height="200" rx="30" fill="#546E7A"/>
+
+    <!-- 다리 -->
+    <rect x="300" y="610" width="100" height="160" rx="20" fill="#455A64"/>
+    <circle cx="350" cy="780" r="44" fill="#37474F"/>
+    <rect x="400" y="610" width="100" fill="#455A64" height="160" rx="20"/>
+    <circle cx="450" cy="780" r="44" fill="#37474F"/>
+
+    <!-- 청소 이펙트 파티클 -->
+    <circle cx="720" cy="340" r="12" fill="#69F0AE" opacity="0.7"/>
+    <circle cx="760" cy="290" r="8" fill="#69F0AE" opacity="0.5"/>
+    <circle cx="780" cy="360" r="10" fill="#69F0AE" opacity="0.6"/>
+    <text x="740" y="248" font-family="'Segoe UI',Arial,sans-serif" font-size="44">✨</text>
+
+    <!-- 타이틀 -->
+    <rect x="160" y="900" width="704" height="68" rx="20" fill="#00695C"/>
+    <text x="512" y="948" font-family="'Segoe UI',Arial,sans-serif" font-weight="900" font-size="48" fill="#69F0AE" text-anchor="middle">Sys.Clean Bot</text>
+  </g>
+</svg>

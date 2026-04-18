@@ -1,0 +1,59 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="50%" r="70%">
+      <stop offset="0%" stop-color="#E0F2F1"/>
+      <stop offset="100%" stop-color="#B2DFDB"/>
+    </radialGradient>
+    <clipPath id="cp"><rect width="1024" height="1024" rx="190"/></clipPath>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg)"/>
+  <g clip-path="url(#cp)">
+    <!-- 원형 디스크 게이지 — BEFORE (정크 포함) -->
+    <!-- 배경 원 -->
+    <circle cx="280" cy="420" r="200" fill="#FFFFFF" stroke="#B2DFDB" stroke-width="6"/>
+    <!-- 정크 영역 (레드, 큰 조각) -->
+    <path d="M 280 420 L 480 420 A 200 200 0 0 0 354 240 Z" fill="#EF5350"/>
+    <!-- 임시파일 (오렌지) -->
+    <path d="M 280 420 L 354 240 A 200 200 0 0 0 110 310 Z" fill="#FF8F00"/>
+    <!-- 캐시 (황색) -->
+    <path d="M 280 420 L 110 310 A 200 200 0 0 0 100 440 Z" fill="#FDD835"/>
+    <!-- 정상 공간 (민트) -->
+    <path d="M 280 420 L 100 440 A 200 200 0 1 0 480 420 Z" fill="#26A69A"/>
+    <!-- 중앙 흰 원 (도넛) -->
+    <circle cx="280" cy="420" r="100" fill="#E0F2F1"/>
+    <text x="280" y="408" font-family="'Segoe UI',Arial,sans-serif" font-weight="900" font-size="34" fill="#37474F" text-anchor="middle">사용</text>
+    <text x="280" y="444" font-family="'Segoe UI',Arial,sans-serif" font-weight="700" font-size="28" fill="#EF5350" text-anchor="middle">42%정크</text>
+    <!-- BEFORE 라벨 -->
+    <text x="280" y="660" font-family="'Segoe UI',Arial,sans-serif" font-weight="900" font-size="42" fill="#B71C1C" text-anchor="middle">BEFORE</text>
+
+    <!-- 화살표 -->
+    <text x="512" y="440" font-family="'Segoe UI',Arial,sans-serif" font-size="80" text-anchor="middle" fill="#00897B">→</text>
+
+    <!-- 원형 디스크 게이지 — AFTER (청소 후) -->
+    <circle cx="744" cy="420" r="200" fill="#FFFFFF" stroke="#B2DFDB" stroke-width="6"/>
+    <!-- 소량 사용 (민트, 큰 영역이 민트) -->
+    <path d="M 744 420 L 944 420 A 200 200 0 1 0 744 220 Z" fill="#26A69A"/>
+    <!-- 남은 작은 사용량 -->
+    <path d="M 744 420 L 744 220 A 200 200 0 0 0 560 360 Z" fill="#4DB6AC"/>
+    <!-- 빈 공간 (연한 민트) -->
+    <path d="M 744 420 L 560 360 A 200 200 0 0 0 544 420 Z" fill="#B2EBF2"/>
+    <!-- 중앙 흰 원 -->
+    <circle cx="744" cy="420" r="100" fill="#E0F2F1"/>
+    <text x="744" y="408" font-family="'Segoe UI',Arial,sans-serif" font-weight="900" font-size="34" fill="#37474F" text-anchor="middle">여유</text>
+    <text x="744" y="444" font-family="'Segoe UI',Arial,sans-serif" font-weight="700" font-size="28" fill="#00897B" text-anchor="middle">+1.6 GB</text>
+    <!-- AFTER 라벨 -->
+    <text x="744" y="660" font-family="'Segoe UI',Arial,sans-serif" font-weight="900" font-size="42" fill="#00897B" text-anchor="middle">AFTER</text>
+
+    <!-- 범례 -->
+    <rect x="90" y="720" width="28" height="28" rx="6" fill="#EF5350"/>
+    <text x="126" y="744" font-family="'Segoe UI',Arial,sans-serif" font-size="30" fill="#37474F">정크</text>
+    <rect x="220" y="720" width="28" height="28" rx="6" fill="#FF8F00"/>
+    <text x="256" y="744" font-family="'Segoe UI',Arial,sans-serif" font-size="30" fill="#37474F">임시</text>
+    <rect x="346" y="720" width="28" height="28" rx="6" fill="#26A69A"/>
+    <text x="382" y="744" font-family="'Segoe UI',Arial,sans-serif" font-size="30" fill="#37474F">정상</text>
+
+    <!-- 타이틀 -->
+    <rect x="200" y="830" width="624" height="70" rx="20" fill="#00695C"/>
+    <text x="512" y="878" font-family="'Segoe UI',Arial,sans-serif" font-weight="900" font-size="50" fill="#FFFFFF" text-anchor="middle">💾 Sys.Clean</text>
+  </g>
+</svg>

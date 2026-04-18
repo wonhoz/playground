@@ -1,0 +1,49 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <!-- Layer 1: 황금-핫핑크 그라데이션 배경 -->
+  <defs>
+    <linearGradient id="bg04" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F857A6"/>
+      <stop offset="100%" stop-color="#FF5858"/>
+    </linearGradient>
+    <radialGradient id="glow04" cx="62%" cy="52%" r="35%">
+      <stop offset="0%" stop-color="#FFE566" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#FFE566" stop-opacity="0"/>
+    </radialGradient>
+    <clipPath id="clip04">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg04)"/>
+  <rect width="1024" height="1024" rx="190" fill="url(#glow04)"/>
+
+  <g clip-path="url(#clip04)">
+    <!-- Layer 2: 변환 전 파일 (좌측, 흐린) -->
+    <rect x="115" y="300" width="280" height="340" rx="22" fill="#FFFFFF" opacity="0.25"/>
+    <text x="255" y="500" font-family="'Segoe UI',Arial,sans-serif" font-weight="900" font-size="110" fill="#FFFFFF" text-anchor="middle" opacity="0.6">SVG</text>
+
+    <!-- 변환 화살표 + 마법 빛 -->
+    <path d="M415 512 L590 512" stroke="#FFE566" stroke-width="60" stroke-linecap="round"/>
+    <path d="M548 440 L620 512 L548 584" stroke="#FFE566" stroke-width="60" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+
+    <!-- 변환 후 파일 (우측, 선명) -->
+    <rect x="630" y="260" width="280" height="380" rx="22" fill="#FFFFFF" opacity="0.95"/>
+    <!-- 파일 모서리 -->
+    <path d="M850 260 L910 320 L850 320 Z" fill="#F857A6" opacity="0.5"/>
+    <text x="770" y="500" font-family="'Segoe UI',Arial,sans-serif" font-weight="900" font-size="110" fill="#F857A6" text-anchor="middle">ICO</text>
+
+    <!-- Layer 3: 스파클 별들 -->
+    <g fill="#FFE566" opacity="0.95">
+      <!-- 별1 -->
+      <path d="M560 260 L575 298 L614 298 L583 320 L595 358 L560 336 L525 358 L537 320 L506 298 L545 298 Z"/>
+      <!-- 별2 (작은) -->
+      <path d="M420 190 L430 215 L456 215 L435 231 L443 256 L420 240 L397 256 L405 231 L384 215 L410 215 Z" opacity="0.7"/>
+      <!-- 별3 (가장 작은) -->
+      <path d="M680 160 L687 178 L706 178 L692 189 L697 207 L680 196 L663 207 L668 189 L654 178 L673 178 Z" opacity="0.6"/>
+    </g>
+    <!-- 빛 입자들 -->
+    <circle cx="500" cy="360" r="16" fill="#FFFFFF" opacity="0.8"/>
+    <circle cx="620" cy="240" r="10" fill="#FFE566" opacity="0.9"/>
+    <circle cx="450" cy="700" r="13" fill="#FFFFFF" opacity="0.6"/>
+    <circle cx="750" cy="720" r="9" fill="#FFE566" opacity="0.7"/>
+  </g>
+</svg>

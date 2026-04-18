@@ -1,0 +1,50 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <!-- Layer 1: 민트-퍼플 그라데이션 배경 -->
+  <defs>
+    <radialGradient id="bg03" cx="50%" cy="50%" r="60%">
+      <stop offset="0%" stop-color="#E8F5E9"/>
+      <stop offset="100%" stop-color="#CE93D8"/>
+    </radialGradient>
+    <clipPath id="clip03">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg03)"/>
+
+  <!-- Layer 2: 중앙 ICO 파일 아이콘 -->
+  <g clip-path="url(#clip03)">
+    <!-- 파일 본체 -->
+    <rect x="322" y="260" width="380" height="460" rx="28" fill="#7B1FA2" opacity="0.92"/>
+    <!-- 파일 모서리 접힘 -->
+    <path d="M602 260 L702 360 L602 360 Z" fill="#FFFFFF" opacity="0.25"/>
+    <path d="M602 260 L702 360 L702 260 Z" fill="#7B1FA2" opacity="0.5"/>
+
+    <!-- ICO 텍스트 -->
+    <text x="512" y="540" font-family="'Segoe UI',Arial,sans-serif" font-weight="900" font-size="148" fill="#FFFFFF" text-anchor="middle">ICO</text>
+    <!-- 파일 확장자 라인 -->
+    <rect x="370" y="580" width="284" height="8" rx="4" fill="#CE93D8"/>
+    <rect x="370" y="614" width="200" height="8" rx="4" fill="#CE93D8" opacity="0.6"/>
+
+    <!-- Layer 3: 주변 포맷 레이블들 -->
+    <!-- SVG - 좌상 -->
+    <rect x="80" y="140" width="180" height="82" rx="18" fill="#26A69A"/>
+    <text x="170" y="200" font-family="'Segoe UI',Arial,sans-serif" font-weight="800" font-size="72" fill="#FFFFFF" text-anchor="middle">SVG</text>
+    <!-- 연결선 -->
+    <path d="M260 180 L322 320" stroke="#26A69A" stroke-width="14" stroke-linecap="round" opacity="0.7"/>
+
+    <!-- PNG - 우상 -->
+    <rect x="764" y="140" width="180" height="82" rx="18" fill="#FF7043"/>
+    <text x="854" y="200" font-family="'Segoe UI',Arial,sans-serif" font-weight="800" font-size="72" fill="#FFFFFF" text-anchor="middle">PNG</text>
+    <path d="M764 180 L702 320" stroke="#FF7043" stroke-width="14" stroke-linecap="round" opacity="0.7"/>
+
+    <!-- JPG - 좌하 -->
+    <rect x="80" y="780" width="180" height="82" rx="18" fill="#1565C0"/>
+    <text x="170" y="840" font-family="'Segoe UI',Arial,sans-serif" font-weight="800" font-size="72" fill="#FFFFFF" text-anchor="middle">JPG</text>
+    <path d="M260 820 L322 680" stroke="#1565C0" stroke-width="14" stroke-linecap="round" opacity="0.7"/>
+
+    <!-- WEBP - 우하 -->
+    <rect x="764" y="780" width="180" height="82" rx="18" fill="#F9A825"/>
+    <text x="854" y="840" font-family="'Segoe UI',Arial,sans-serif" font-weight="800" font-size="72" fill="#FFFFFF" text-anchor="middle">WP</text>
+    <path d="M764 820 L702 680" stroke="#F9A825" stroke-width="14" stroke-linecap="round" opacity="0.7"/>
+  </g>
+</svg>

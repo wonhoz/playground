@@ -1,0 +1,43 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <!-- Layer 1: 청록-라벤더 흐름 배경 -->
+  <defs>
+    <linearGradient id="bg05" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E0F7FA"/>
+      <stop offset="50%" stop-color="#EDE7F6"/>
+      <stop offset="100%" stop-color="#FFF9C4"/>
+    </linearGradient>
+    <clipPath id="clip05">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg05)"/>
+
+  <g clip-path="url(#clip05)">
+    <!-- Layer 2: 추상적 포맷 흐름 — 컬러 물결들 -->
+    <!-- 물결 1: 청록 (SVG) -->
+    <path d="M0 400 C180 320, 340 480, 512 400 C684 320, 844 480, 1024 400 L1024 600 C844 680, 684 520, 512 600 C340 680, 180 520, 0 600 Z" fill="#00BCD4" opacity="0.55"/>
+    <!-- 물결 2: 라벤더 (PNG) -->
+    <path d="M0 480 C200 400, 360 560, 512 480 C664 400, 824 560, 1024 480 L1024 640 C824 720, 664 560, 512 640 C360 720, 200 560, 0 640 Z" fill="#7C4DFF" opacity="0.45"/>
+    <!-- 물결 3: 살구 (ICO) -->
+    <path d="M0 550 C220 470, 380 630, 512 550 C644 470, 804 630, 1024 550 L1024 700 C804 780, 644 620, 512 700 C380 780, 220 620, 0 700 Z" fill="#FF7043" opacity="0.5"/>
+
+    <!-- Layer 3: 포맷 레이블 (물결 위에 떠 있는 느낌) -->
+    <rect x="140" y="200" width="200" height="90" rx="20" fill="#00BCD4"/>
+    <text x="240" y="265" font-family="'Segoe UI',Arial,sans-serif" font-weight="900" font-size="82" fill="#FFFFFF" text-anchor="middle">SVG</text>
+
+    <rect x="412" y="160" width="200" height="90" rx="20" fill="#7C4DFF"/>
+    <text x="512" y="225" font-family="'Segoe UI',Arial,sans-serif" font-weight="900" font-size="82" fill="#FFFFFF" text-anchor="middle">PNG</text>
+
+    <rect x="684" y="200" width="200" height="90" rx="20" fill="#FF7043"/>
+    <text x="784" y="265" font-family="'Segoe UI',Arial,sans-serif" font-weight="900" font-size="82" fill="#FFFFFF" text-anchor="middle">JPG</text>
+
+    <!-- 하단 ICO 결과물 -->
+    <rect x="362" y="780" width="300" height="120" rx="30" fill="#37474F"/>
+    <text x="512" y="866" font-family="'Segoe UI',Arial,sans-serif" font-weight="900" font-size="100" fill="#FFE082" text-anchor="middle">ICO</text>
+
+    <!-- 흐름 → ICO 수렴 화살표들 -->
+    <path d="M240 300 Q300 640 412 780" stroke="#00BCD4" stroke-width="18" stroke-linecap="round" fill="none" opacity="0.8"/>
+    <path d="M512 260 L512 780" stroke="#7C4DFF" stroke-width="18" stroke-linecap="round" fill="none" opacity="0.8"/>
+    <path d="M784 300 Q724 640 612 780" stroke="#FF7043" stroke-width="18" stroke-linecap="round" fill="none" opacity="0.8"/>
+  </g>
+</svg>

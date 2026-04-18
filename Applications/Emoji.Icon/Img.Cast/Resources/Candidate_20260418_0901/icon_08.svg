@@ -1,0 +1,58 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <!-- Layer 1: 딥 퍼플-시안 그라데이션 배경 -->
+  <defs>
+    <linearGradient id="bg08" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4A00E0"/>
+      <stop offset="100%" stop-color="#00C9FF"/>
+    </linearGradient>
+    <linearGradient id="arrow08" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#FFD700"/>
+      <stop offset="100%" stop-color="#FF6B35"/>
+    </linearGradient>
+    <filter id="glow08" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="12" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <clipPath id="clip08">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg08)"/>
+
+  <g clip-path="url(#clip08)">
+    <!-- Layer 2: 좌측 포맷 레이블 스택 -->
+    <rect x="80" y="200" width="220" height="84" rx="16" fill="#FFFFFF" opacity="0.2"/>
+    <text x="190" y="260" font-family="'Segoe UI',Arial,sans-serif" font-weight="900" font-size="78" fill="#FFFFFF" text-anchor="middle">SVG</text>
+
+    <rect x="80" y="314" width="220" height="84" rx="16" fill="#FFFFFF" opacity="0.2"/>
+    <text x="190" y="374" font-family="'Segoe UI',Arial,sans-serif" font-weight="900" font-size="78" fill="#00FFCC" text-anchor="middle">PNG</text>
+
+    <rect x="80" y="428" width="220" height="84" rx="16" fill="#FFFFFF" opacity="0.2"/>
+    <text x="190" y="488" font-family="'Segoe UI',Arial,sans-serif" font-weight="900" font-size="78" fill="#FFD700" text-anchor="middle">JPG</text>
+
+    <rect x="80" y="542" width="220" height="84" rx="16" fill="#FFFFFF" opacity="0.2"/>
+    <text x="190" y="602" font-family="'Segoe UI',Arial,sans-serif" font-weight="900" font-size="78" fill="#FF9CAD" text-anchor="middle">BMP</text>
+
+    <rect x="80" y="656" width="220" height="84" rx="16" fill="#FFFFFF" opacity="0.2"/>
+    <text x="190" y="716" font-family="'Segoe UI',Arial,sans-serif" font-weight="900" font-size="78" fill="#C5E1A5" text-anchor="middle">WP</text>
+
+    <!-- Layer 3: 마법 화살표 (황금 빛, 좌에서 우로 수렴) -->
+    <path d="M305 242 Q580 242 620 512" stroke="url(#arrow08)" stroke-width="22" stroke-linecap="round" fill="none" filter="url(#glow08)" opacity="0.9"/>
+    <path d="M305 356 Q560 356 620 512" stroke="url(#arrow08)" stroke-width="22" stroke-linecap="round" fill="none" filter="url(#glow08)" opacity="0.9"/>
+    <path d="M305 470 L620 512" stroke="url(#arrow08)" stroke-width="22" stroke-linecap="round" fill="none" filter="url(#glow08)"/>
+    <path d="M305 584 Q560 584 620 512" stroke="url(#arrow08)" stroke-width="22" stroke-linecap="round" fill="none" filter="url(#glow08)" opacity="0.9"/>
+    <path d="M305 698 Q580 698 620 512" stroke="url(#arrow08)" stroke-width="22" stroke-linecap="round" fill="none" filter="url(#glow08)" opacity="0.9"/>
+
+    <!-- 우측 ICO 결과 -->
+    <rect x="640" y="340" width="300" height="344" rx="36" fill="#FFFFFF" opacity="0.95"/>
+    <!-- 파일 접힘 효과 -->
+    <path d="M870 340 L940 410 L870 410 Z" fill="#4A00E0" opacity="0.3"/>
+    <text x="790" y="540" font-family="'Segoe UI',Arial,sans-serif" font-weight="900" font-size="130" fill="#4A00E0" text-anchor="middle">ICO</text>
+    <!-- 사이즈 힌트 -->
+    <text x="790" y="618" font-family="'Segoe UI',Arial,sans-serif" font-weight="600" font-size="48" fill="#888888" text-anchor="middle">16~256px</text>
+
+    <!-- 중앙 수렴점 빛 파티클 -->
+    <circle cx="632" cy="512" r="24" fill="#FFD700" filter="url(#glow08)"/>
+    <circle cx="632" cy="512" r="14" fill="#FFFFFF"/>
+  </g>
+</svg>

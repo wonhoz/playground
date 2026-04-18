@@ -1,0 +1,44 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <!-- Layer 1: 흰 배경 -->
+  <defs>
+    <radialGradient id="c1" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FF6B6B"/>
+      <stop offset="100%" stop-color="#FF6B6B" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="c2" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#4ECDC4"/>
+      <stop offset="100%" stop-color="#4ECDC4" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="c3" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FFE66D"/>
+      <stop offset="100%" stop-color="#FFE66D" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="c4" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#A78BFA"/>
+      <stop offset="100%" stop-color="#A78BFA" stop-opacity="0"/>
+    </radialGradient>
+    <clipPath id="clip06">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="#FAFAFA"/>
+
+  <g clip-path="url(#clip06)">
+    <!-- Layer 2: 4개 색원이 중앙에서 겹치며 합쳐지는 구성 -->
+    <!-- 각 원: 4 포맷을 상징 -->
+    <circle cx="340" cy="340" r="260" fill="url(#c1)" opacity="0.82"/>
+    <circle cx="684" cy="340" r="260" fill="url(#c2)" opacity="0.82"/>
+    <circle cx="340" cy="684" r="260" fill="url(#c3)" opacity="0.82"/>
+    <circle cx="684" cy="684" r="260" fill="url(#c4)" opacity="0.82"/>
+
+    <!-- Layer 3: 포맷 텍스트 (각 원 중심) -->
+    <text x="268" y="310" font-family="'Segoe UI',Arial,sans-serif" font-weight="900" font-size="100" fill="#C0392B" text-anchor="middle">SVG</text>
+    <text x="756" y="310" font-family="'Segoe UI',Arial,sans-serif" font-weight="900" font-size="100" fill="#1A7A74" text-anchor="middle">PNG</text>
+    <text x="268" y="724" font-family="'Segoe UI',Arial,sans-serif" font-weight="900" font-size="100" fill="#B8860B" text-anchor="middle">JPG</text>
+    <text x="756" y="724" font-family="'Segoe UI',Arial,sans-serif" font-weight="900" font-size="100" fill="#5B21B6" text-anchor="middle">ICO</text>
+
+    <!-- 중앙 교차점 — 변환 완성 심볼 -->
+    <circle cx="512" cy="512" r="90" fill="#FFFFFF" opacity="0.9"/>
+    <text x="512" y="558" font-family="'Segoe UI',Arial,sans-serif" font-weight="900" font-size="80" fill="#333333" text-anchor="middle">→</text>
+  </g>
+</svg>

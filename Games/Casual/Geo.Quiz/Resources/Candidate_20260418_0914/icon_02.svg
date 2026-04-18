@@ -1,0 +1,47 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <!-- Layer 1: 파랑-초록 지구 그라데이션 배경 -->
+  <defs>
+    <radialGradient id="bg02" cx="40%" cy="40%" r="60%">
+      <stop offset="0%" stop-color="#29B6F6"/>
+      <stop offset="100%" stop-color="#1565C0"/>
+    </radialGradient>
+    <clipPath id="clip02">
+      <rect width="1024" height="1024" rx="512"/>
+    </clipPath>
+    <clipPath id="globeClip">
+      <circle cx="430" cy="510" r="310"/>
+    </clipPath>
+  </defs>
+  <circle cx="512" cy="512" r="512" fill="url(#bg02)"/>
+
+  <!-- Layer 2: 지구본 (중앙) -->
+  <!-- 바다 -->
+  <circle cx="430" cy="510" r="310" fill="#1565C0"/>
+  <!-- 대륙들 -->
+  <g clip-path="url(#globeClip)">
+    <!-- 유럽/아프리카 -->
+    <path d="M380 220 Q420 200 450 240 Q480 280 460 340 Q440 400 420 430 Q400 460 380 500 Q360 540 370 580 Q380 620 410 650 Q440 680 430 720 Q420 760 400 780 L360 780 Q340 740 330 700 Q320 660 340 620 Q360 580 350 540 Q340 500 350 460 Q360 420 350 380 Q340 340 360 300 Z" fill="#66BB6A"/>
+    <!-- 아시아 -->
+    <path d="M480 200 Q540 180 600 220 Q660 260 680 320 Q700 380 680 440 Q660 500 620 520 Q580 540 540 510 Q500 480 490 440 Q480 400 500 360 Q520 320 500 280 Z" fill="#66BB6A"/>
+    <!-- 아메리카 -->
+    <path d="M130 260 Q170 240 200 280 Q230 320 220 380 Q210 440 200 500 Q190 560 210 620 Q230 680 210 740 Q190 800 160 820 L130 820 Q110 760 120 700 Q130 640 110 580 Q90 520 100 460 Q110 400 100 340 Q90 280 110 240 Z" fill="#66BB6A"/>
+    <!-- 경도선 -->
+    <ellipse cx="430" cy="510" rx="310" ry="310" fill="none" stroke="#29B6F6" stroke-width="6" opacity="0.5"/>
+    <ellipse cx="430" cy="510" rx="200" ry="310" fill="none" stroke="#29B6F6" stroke-width="4" opacity="0.4"/>
+    <ellipse cx="430" cy="510" rx="90" ry="310" fill="none" stroke="#29B6F6" stroke-width="4" opacity="0.4"/>
+    <!-- 위도선 -->
+    <line x1="120" y1="510" x2="740" y2="510" stroke="#29B6F6" stroke-width="4" opacity="0.5"/>
+    <ellipse cx="430" cy="380" rx="280" ry="80" fill="none" stroke="#29B6F6" stroke-width="4" opacity="0.4"/>
+    <ellipse cx="430" cy="640" rx="280" ry="80" fill="none" stroke="#29B6F6" stroke-width="4" opacity="0.4"/>
+  </g>
+  <circle cx="430" cy="510" r="310" fill="none" stroke="#FFFFFF" stroke-width="18"/>
+
+  <!-- Layer 3: 물음표 (우하 오버레이) -->
+  <circle cx="750" cy="740" r="170" fill="#FF6F00"/>
+  <circle cx="750" cy="740" r="160" fill="#FF8F00"/>
+  <text x="750" y="800" font-family="'Segoe UI',Arial,sans-serif" font-weight="900" font-size="220" fill="#FFFFFF" text-anchor="middle">?</text>
+
+  <!-- 상단 GEO QUIZ 텍스트 -->
+  <rect x="220" y="130" width="572" height="88" rx="26" fill="#FFFFFF" opacity="0.9"/>
+  <text x="506" y="191" font-family="'Segoe UI',Arial,sans-serif" font-weight="900" font-size="68" fill="#1565C0" text-anchor="middle">GEO QUIZ</text>
+</svg>

@@ -1,0 +1,49 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <!-- Layer 1: 라이트 스카이블루 배경 -->
+  <defs>
+    <linearGradient id="bg03" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#E1F5FE"/>
+      <stop offset="100%" stop-color="#F3E5F5"/>
+    </linearGradient>
+    <clipPath id="clip03">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg03)"/>
+
+  <g clip-path="url(#clip03)">
+    <!-- Layer 2: 퀴즈 질문 패널 -->
+    <rect x="120" y="160" width="784" height="160" rx="28" fill="#1565C0"/>
+    <text x="512" y="232" font-family="'Segoe UI',Arial,sans-serif" font-weight="900" font-size="62" fill="#FFFFFF" text-anchor="middle">이 나라의 수도는?</text>
+    <!-- 국기 표시 (일본 스타일) -->
+    <rect x="350" y="260" width="324" height="114" rx="16" fill="#FFFFFF"/>
+    <circle cx="512" cy="317" r="42" fill="#C62828"/>
+
+    <!-- Layer 3: 4지선다 보기 버튼들 -->
+    <!-- 정답 버튼 (초록) -->
+    <rect x="120" y="396" width="370" height="116" rx="22" fill="#2E7D32"/>
+    <text x="305" y="466" font-family="'Segoe UI',Arial,sans-serif" font-weight="800" font-size="58" fill="#FFFFFF" text-anchor="middle">도쿄</text>
+    <!-- 오답 버튼들 -->
+    <rect x="534" y="396" width="370" height="116" rx="22" fill="#FFFFFF" stroke="#B0BEC5" stroke-width="6"/>
+    <text x="719" y="466" font-family="'Segoe UI',Arial,sans-serif" font-weight="800" font-size="58" fill="#546E7A" text-anchor="middle">베이징</text>
+
+    <rect x="120" y="532" width="370" height="116" rx="22" fill="#FFFFFF" stroke="#B0BEC5" stroke-width="6"/>
+    <text x="305" y="602" font-family="'Segoe UI',Arial,sans-serif" font-weight="800" font-size="58" fill="#546E7A" text-anchor="middle">서울</text>
+
+    <rect x="534" y="532" width="370" height="116" rx="22" fill="#FFFFFF" stroke="#B0BEC5" stroke-width="6"/>
+    <text x="719" y="602" font-family="'Segoe UI',Arial,sans-serif" font-weight="800" font-size="58" fill="#546E7A" text-anchor="middle">방콕</text>
+
+    <!-- 타이머 바 -->
+    <rect x="120" y="680" width="784" height="36" rx="18" fill="#E0E0E0"/>
+    <rect x="120" y="680" width="480" height="36" rx="18" fill="#FF7043"/>
+    <text x="512" y="750" font-family="'Segoe UI',Arial,sans-serif" font-weight="700" font-size="52" fill="#546E7A" text-anchor="middle">⏱ 9초</text>
+
+    <!-- 스트릭 -->
+    <rect x="120" y="820" width="300" height="72" rx="20" fill="#FF6F00"/>
+    <text x="270" y="870" font-family="'Segoe UI',Arial,sans-serif" font-weight="900" font-size="58" fill="#FFFFFF" text-anchor="middle">🔥 5연속</text>
+
+    <!-- 점수 -->
+    <rect x="604" y="820" width="300" height="72" rx="20" fill="#7B1FA2"/>
+    <text x="754" y="870" font-family="'Segoe UI',Arial,sans-serif" font-weight="900" font-size="58" fill="#FFFFFF" text-anchor="middle">7 / 10</text>
+  </g>
+</svg>

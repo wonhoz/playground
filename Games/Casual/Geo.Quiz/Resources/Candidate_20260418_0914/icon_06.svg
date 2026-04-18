@@ -1,0 +1,36 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <!-- Layer 1: 오렌지-골드 불꽃 배경 -->
+  <defs>
+    <radialGradient id="bg06" cx="50%" cy="60%" r="55%">
+      <stop offset="0%" stop-color="#FFEE58"/>
+      <stop offset="100%" stop-color="#FF6F00"/>
+    </radialGradient>
+    <clipPath id="clip06">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg06)"/>
+
+  <g clip-path="url(#clip06)">
+    <!-- Layer 2: 불꽃 실루엣 (스트릭 감성) -->
+    <!-- 큰 불꽃 -->
+    <path d="M512 900 Q380 820 360 700 Q340 580 420 520 Q440 600 480 580 Q440 480 480 380 Q520 280 500 180 Q580 260 600 360 Q620 440 580 500 Q640 460 660 380 Q700 480 680 580 Q720 540 740 460 Q760 560 740 660 Q720 760 640 820 Q580 880 512 900 Z" fill="#E53935"/>
+    <!-- 안쪽 밝은 불꽃 -->
+    <path d="M512 860 Q420 800 410 710 Q400 620 460 570 Q470 630 510 620 Q475 540 510 450 Q540 360 530 270 Q590 330 600 420 Q610 500 575 545 Q610 520 630 460 Q660 540 640 630 Q660 600 680 540 Q700 620 680 710 Q660 800 590 845 Q555 870 512 860 Z" fill="#FF7043"/>
+    <!-- 중심 (밝은 골드) -->
+    <path d="M512 820 Q460 780 455 720 Q450 660 490 630 Q497 670 515 660 Q495 610 515 555 Q540 490 535 430 Q575 470 578 530 Q580 580 556 610 Q580 595 595 550 Q610 610 598 680 Q600 640 618 600 Q630 660 618 720 Q606 780 560 818 Q538 834 512 820 Z" fill="#FFEE58"/>
+
+    <!-- Layer 3: 지구본 오버레이 (스트릭 + 지리 퀴즈 연결) -->
+    <circle cx="512" cy="512" r="190" fill="#1565C0" opacity="0.9"/>
+    <ellipse cx="512" cy="512" rx="190" ry="190" fill="none" stroke="#29B6F6" stroke-width="8" opacity="0.7"/>
+    <ellipse cx="512" cy="512" rx="120" ry="190" fill="none" stroke="#29B6F6" stroke-width="6" opacity="0.6"/>
+    <line x1="322" y1="512" x2="702" y2="512" stroke="#29B6F6" stroke-width="6" opacity="0.6"/>
+    <!-- 녹지 (대륙) -->
+    <path d="M420 420 Q460 400 490 430 Q510 460 490 500 Q470 520 450 500 Q430 480 440 450 Z" fill="#66BB6A" opacity="0.8"/>
+    <path d="M530 450 Q565 435 590 460 Q610 490 590 520 Q570 535 545 515 Q525 495 535 470 Z" fill="#66BB6A" opacity="0.8"/>
+
+    <!-- 스트릭 텍스트 -->
+    <rect x="220" y="750" width="584" height="100" rx="28" fill="#FFFFFF" opacity="0.92"/>
+    <text x="512" y="818" font-family="'Segoe UI',Arial,sans-serif" font-weight="900" font-size="72" fill="#E53935" text-anchor="middle">🔥 연속 정답!</text>
+  </g>
+</svg>

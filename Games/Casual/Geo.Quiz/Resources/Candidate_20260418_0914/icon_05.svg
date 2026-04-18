@@ -1,0 +1,59 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <!-- Layer 1: 황토-크림 탐험 배경 -->
+  <defs>
+    <linearGradient id="bg05" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFF8E1"/>
+      <stop offset="100%" stop-color="#E3F2FD"/>
+    </linearGradient>
+    <clipPath id="clip05">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg05)"/>
+
+  <g clip-path="url(#clip05)">
+    <!-- Layer 2: 세계 지도 (단순화) -->
+    <!-- 바다 배경 -->
+    <rect x="120" y="200" width="784" height="540" rx="28" fill="#81D4FA" opacity="0.4"/>
+
+    <!-- 대륙들 (단순 실루엣) -->
+    <!-- 유럽/아프리카 -->
+    <path d="M380 240 Q420 220 440 270 Q460 320 440 390 Q420 460 410 530 Q400 600 420 660 Q440 720 420 760 L380 760 Q360 700 370 640 Q380 580 360 520 Q340 460 360 400 Q380 340 360 280 Z" fill="#8D6E63" opacity="0.6"/>
+    <!-- 아시아 -->
+    <path d="M520 230 Q580 210 650 250 Q720 290 740 360 Q760 430 720 480 Q680 530 620 510 Q560 490 540 440 Q520 390 550 340 Q580 290 550 260 Z" fill="#8D6E63" opacity="0.6"/>
+    <!-- 아메리카 -->
+    <path d="M160 260 Q200 240 220 290 Q240 340 220 420 Q200 500 210 580 Q220 660 200 740 L160 740 Q140 660 150 580 Q160 500 140 420 Q120 340 140 280 Z" fill="#8D6E63" opacity="0.6"/>
+    <!-- 호주 -->
+    <ellipse cx="750" cy="640" rx="90" ry="70" fill="#8D6E63" opacity="0.6"/>
+
+    <!-- Layer 3: 지도 핀들 (각 대륙) -->
+    <!-- 핀 스타일: 원형 머리 + 뾰족한 아래 -->
+    <!-- 아시아 핀 (빨강) -->
+    <circle cx="630" cy="320" r="36" fill="#C62828"/>
+    <path d="M630 356 L630 420" stroke="#C62828" stroke-width="20" stroke-linecap="round"/>
+    <circle cx="630" cy="420" r="10" fill="#C62828" opacity="0.5"/>
+    <text x="630" y="336" font-family="'Segoe UI',Arial,sans-serif" font-size="36" fill="#FFFFFF" text-anchor="middle">🌏</text>
+
+    <!-- 유럽 핀 (파랑) -->
+    <circle cx="400" cy="310" r="36" fill="#1565C0"/>
+    <path d="M400 346 L400 410" stroke="#1565C0" stroke-width="20" stroke-linecap="round"/>
+    <circle cx="400" cy="410" r="10" fill="#1565C0" opacity="0.5"/>
+    <text x="400" y="330" font-family="'Segoe UI',Arial,sans-serif" font-size="36" fill="#FFFFFF" text-anchor="middle">🌍</text>
+
+    <!-- 아메리카 핀 (초록) -->
+    <circle cx="180" cy="420" r="36" fill="#2E7D32"/>
+    <path d="M180 456 L180 520" stroke="#2E7D32" stroke-width="20" stroke-linecap="round"/>
+    <circle cx="180" cy="520" r="10" fill="#2E7D32" opacity="0.5"/>
+    <text x="180" y="440" font-family="'Segoe UI',Arial,sans-serif" font-size="36" fill="#FFFFFF" text-anchor="middle">🌎</text>
+
+    <!-- 아프리카 핀 (주황) -->
+    <circle cx="430" cy="580" r="36" fill="#E65100"/>
+    <path d="M430 616 L430 680" stroke="#E65100" stroke-width="20" stroke-linecap="round"/>
+    <circle cx="430" cy="680" r="10" fill="#E65100" opacity="0.5"/>
+    <text x="430" y="600" font-family="'Segoe UI',Arial,sans-serif" font-size="36" fill="#FFFFFF" text-anchor="middle">🌍</text>
+
+    <!-- 하단 물음표 + GEO QUIZ 텍스트 -->
+    <rect x="240" y="800" width="544" height="96" rx="28" fill="#1565C0"/>
+    <text x="512" y="864" font-family="'Segoe UI',Arial,sans-serif" font-weight="900" font-size="68" fill="#FFFFFF" text-anchor="middle">? GEO QUIZ ?</text>
+  </g>
+</svg>

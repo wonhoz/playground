@@ -1,0 +1,60 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <!-- Layer 1: 다크 퍼플-블루 배경 -->
+  <defs>
+    <radialGradient id="bg03" cx="50%" cy="45%" r="55%">
+      <stop offset="0%" stop-color="#2A1A5E"/>
+      <stop offset="100%" stop-color="#0D0D2B"/>
+    </radialGradient>
+    <clipPath id="clip03">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg03)"/>
+
+  <g clip-path="url(#clip03)">
+    <!-- Layer 2: 전/후 디스크 용량 비교 -->
+
+    <!-- 상단 "전" 섹션 -->
+    <rect x="80" y="130" width="864" height="200" rx="20" fill="#FFFFFF" opacity="0.07"/>
+    <text x="180" y="195" font-family="'Segoe UI',Arial,sans-serif" font-weight="700" font-size="36" fill="#EF9A9A">정리 전</text>
+
+    <!-- 막대 그래프 (꽉 찬 디스크) -->
+    <rect x="180" y="210" width="700" height="50" rx="14" fill="#FFFFFF" opacity="0.1"/>
+    <rect x="180" y="210" width="630" height="50" rx="14" fill="#F44336"/>
+    <text x="820" y="244" font-family="'Segoe UI',Arial,sans-serif" font-weight="700" font-size="30" fill="#EF9A9A" text-anchor="middle">90%</text>
+
+    <!-- 수치들 (전) -->
+    <text x="180" y="300" font-family="'Segoe UI',Arial,sans-serif" font-size="28" fill="#90A4AE">• 임시 파일: </text>
+    <text x="440" y="300" font-family="'Segoe UI',Arial,sans-serif" font-weight="700" font-size="28" fill="#EF9A9A">2.3 GB</text>
+    <text x="560" y="300" font-family="'Segoe UI',Arial,sans-serif" font-size="28" fill="#90A4AE">• 레지스트리: </text>
+    <text x="810" y="300" font-family="'Segoe UI',Arial,sans-serif" font-weight="700" font-size="28" fill="#EF9A9A">47개 오류</text>
+
+    <!-- 화살표 + 아이콘 -->
+    <text x="512" y="390" font-family="'Segoe UI',Arial,sans-serif" font-size="60" fill="#00BCD4" text-anchor="middle">🧹</text>
+    <text x="512" y="460" font-family="'Segoe UI',Arial,sans-serif" font-size="44" fill="#00BCD4" text-anchor="middle">↓  SYS.CLEAN  ↓</text>
+
+    <!-- 하단 "후" 섹션 -->
+    <rect x="80" y="490" width="864" height="200" rx="20" fill="#FFFFFF" opacity="0.07"/>
+    <text x="180" y="555" font-family="'Segoe UI',Arial,sans-serif" font-weight="700" font-size="36" fill="#80CBC4">정리 후</text>
+
+    <!-- 막대 그래프 (깨끗한 디스크) -->
+    <rect x="180" y="570" width="700" height="50" rx="14" fill="#FFFFFF" opacity="0.1"/>
+    <rect x="180" y="570" width="210" height="50" rx="14" fill="#00897B"/>
+    <text x="820" y="604" font-family="'Segoe UI',Arial,sans-serif" font-weight="700" font-size="30" fill="#80CBC4" text-anchor="middle">30%</text>
+
+    <!-- 수치들 (후) -->
+    <text x="180" y="660" font-family="'Segoe UI',Arial,sans-serif" font-size="28" fill="#90A4AE">• 임시 파일: </text>
+    <text x="440" y="660" font-family="'Segoe UI',Arial,sans-serif" font-weight="700" font-size="28" fill="#80CBC4">0 B</text>
+    <text x="560" y="660" font-family="'Segoe UI',Arial,sans-serif" font-size="28" fill="#90A4AE">• 레지스트리: </text>
+    <text x="810" y="660" font-family="'Segoe UI',Arial,sans-serif" font-weight="700" font-size="28" fill="#80CBC4">0개 오류</text>
+
+    <!-- Layer 3: 절약 배지 -->
+    <rect x="200" y="730" width="624" height="96" rx="28" fill="#00695C"/>
+    <text x="512" y="790" font-family="'Segoe UI',Arial,sans-serif" font-size="30" fill="#A7FFEB" text-anchor="middle">총 절약</text>
+    <text x="512" y="826" font-family="'Segoe UI',Arial,sans-serif" font-weight="900" font-size="56" fill="#FFFFFF" text-anchor="middle">3.2 GB 💾</text>
+
+    <!-- 하단 타이틀 -->
+    <rect x="240" y="870" width="544" height="76" rx="22" fill="#00BCD4"/>
+    <text x="512" y="922" font-family="'Segoe UI',Arial,sans-serif" font-weight="900" font-size="52" fill="#0D0D2B" text-anchor="middle">SYS.CLEAN</text>
+  </g>
+</svg>

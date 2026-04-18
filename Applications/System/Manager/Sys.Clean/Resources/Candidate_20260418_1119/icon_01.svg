@@ -1,0 +1,72 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <!-- Layer 1: 다크 테마 배경 -->
+  <defs>
+    <linearGradient id="bg01" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0A1628"/>
+      <stop offset="100%" stop-color="#1A2340"/>
+    </linearGradient>
+    <clipPath id="clip01">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg01)"/>
+
+  <g clip-path="url(#clip01)">
+    <!-- Layer 2: 청소 대상 체크리스트 패널 -->
+    <rect x="80" y="130" width="864" height="620" rx="24" fill="#FFFFFF" opacity="0.07"/>
+    <rect x="80" y="130" width="864" height="620" rx="24" fill="none" stroke="#00BCD4" stroke-width="2" opacity="0.5"/>
+
+    <!-- 헤더 -->
+    <rect x="80" y="130" width="864" height="68" rx="24" fill="#00838F" opacity="0.85"/>
+    <text x="200" y="175" font-family="'Segoe UI',Arial,sans-serif" font-weight="700" font-size="36" fill="#FFFFFF">시스템 스캔 중...</text>
+    <text x="830" y="175" font-family="'Segoe UI',Arial,sans-serif" font-size="28" fill="#80DEEA">84%</text>
+
+    <!-- 진행바 -->
+    <rect x="80" y="198" width="864" height="16" fill="#1A2340"/>
+    <rect x="80" y="198" width="726" height="16" fill="#00BCD4"/>
+
+    <!-- 항목 1: 임시 파일 (완료) -->
+    <rect x="100" y="234" width="824" height="68" rx="12" fill="#004D40" opacity="0.7"/>
+    <circle cx="140" cy="268" r="22" fill="#00897B"/>
+    <text x="140" y="276" font-family="'Segoe UI',Arial,sans-serif" font-weight="900" font-size="24" fill="#FFFFFF" text-anchor="middle">✓</text>
+    <text x="190" y="264" font-family="'Segoe UI',Arial,sans-serif" font-size="28" fill="#FFFFFF">🗂 임시 파일 (Temp)</text>
+    <text x="830" y="264" font-family="'Segoe UI',Arial,sans-serif" font-weight="700" font-size="28" fill="#80CBC4" text-anchor="end">2.3 GB</text>
+    <text x="190" y="294" font-family="'Segoe UI',Arial,sans-serif" font-size="22" fill="#4DB6AC">C:\Windows\Temp, %LocalAppData%\Temp</text>
+
+    <!-- 항목 2: 레지스트리 (완료) -->
+    <rect x="100" y="316" width="824" height="68" rx="12" fill="#1A237E" opacity="0.7"/>
+    <circle cx="140" cy="350" r="22" fill="#3F51B5"/>
+    <text x="140" y="358" font-family="'Segoe UI',Arial,sans-serif" font-weight="900" font-size="24" fill="#FFFFFF" text-anchor="middle">✓</text>
+    <text x="190" y="346" font-family="'Segoe UI',Arial,sans-serif" font-size="28" fill="#FFFFFF">🔑 레지스트리 오류</text>
+    <text x="830" y="346" font-family="'Segoe UI',Arial,sans-serif" font-weight="700" font-size="28" fill="#9FA8DA" text-anchor="end">47개</text>
+    <text x="190" y="376" font-family="'Segoe UI',Arial,sans-serif" font-size="22" fill="#7986CB">App Paths, Uninstall, SharedDlls...</text>
+
+    <!-- 항목 3: 캐시 (진행 중) -->
+    <rect x="100" y="398" width="824" height="68" rx="12" fill="#263238" opacity="0.8"/>
+    <circle cx="140" cy="432" r="22" fill="#00BCD4" opacity="0.8"/>
+    <text x="140" y="440" font-family="'Segoe UI',Arial,sans-serif" font-weight="900" font-size="22" fill="#FFFFFF" text-anchor="middle">...</text>
+    <text x="190" y="428" font-family="'Segoe UI',Arial,sans-serif" font-size="28" fill="#FFFFFF">🌐 브라우저 캐시</text>
+    <text x="830" y="428" font-family="'Segoe UI',Arial,sans-serif" font-weight="700" font-size="28" fill="#80DEEA" text-anchor="end">스캔 중</text>
+    <text x="190" y="458" font-family="'Segoe UI',Arial,sans-serif" font-size="22" fill="#546E7A">Chrome, Edge, Firefox...</text>
+
+    <!-- 항목 4: 이벤트 로그 -->
+    <rect x="100" y="480" width="824" height="68" rx="12" fill="#FFFFFF" opacity="0.04"/>
+    <circle cx="140" cy="514" r="22" fill="#FFFFFF" opacity="0.15"/>
+    <text x="190" y="510" font-family="'Segoe UI',Arial,sans-serif" font-size="28" fill="#B0BEC5">📋 이벤트 로그</text>
+    <text x="830" y="510" font-family="'Segoe UI',Arial,sans-serif" font-size="28" fill="#546E7A" text-anchor="end">대기 중</text>
+
+    <!-- 항목 5: 설치 프로그램 -->
+    <rect x="100" y="562" width="824" height="68" rx="12" fill="#FFFFFF" opacity="0.04"/>
+    <circle cx="140" cy="596" r="22" fill="#FFFFFF" opacity="0.15"/>
+    <text x="190" y="592" font-family="'Segoe UI',Arial,sans-serif" font-size="28" fill="#B0BEC5">📦 설치 프로그램 목록</text>
+    <text x="830" y="592" font-family="'Segoe UI',Arial,sans-serif" font-size="28" fill="#546E7A" text-anchor="end">대기 중</text>
+
+    <!-- 총계 -->
+    <rect x="100" y="648" width="824" height="60" rx="12" fill="#004D40" opacity="0.5"/>
+    <text x="200" y="686" font-family="'Segoe UI',Arial,sans-serif" font-size="28" fill="#80CBC4">현재까지 발견: 2.3 GB + 47 레지스트리 항목</text>
+
+    <!-- Layer 3: 하단 타이틀 -->
+    <rect x="220" y="830" width="584" height="80" rx="24" fill="#00838F"/>
+    <text x="512" y="882" font-family="'Segoe UI',Arial,sans-serif" font-weight="900" font-size="52" fill="#FFFFFF" text-anchor="middle">SYS.CLEAN</text>
+  </g>
+</svg>

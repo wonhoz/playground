@@ -1,0 +1,60 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <!-- Layer 1: 따뜻한 아이보리 배경 -->
+  <defs>
+    <linearGradient id="bg06" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFF9C4"/>
+      <stop offset="100%" stop-color="#FFF3E0"/>
+    </linearGradient>
+    <clipPath id="clip06">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg06)"/>
+
+  <g clip-path="url(#clip06)">
+    <!-- Layer 2: 레지스트리 구조 트리 (깨진 상태) -->
+    <!-- 루트 키 HKLM -->
+    <rect x="360" y="120" width="304" height="80" rx="16" fill="#795548"/>
+    <text x="512" y="170" font-family="'Segoe UI',Arial,sans-serif" font-weight="900" font-size="42" fill="#FFFFFF" text-anchor="middle">HKLM 🔑</text>
+
+    <!-- 트리 라인 -->
+    <line x1="512" y1="200" x2="512" y2="260" stroke="#795548" stroke-width="8"/>
+    <line x1="200" y1="260" x2="824" y2="260" stroke="#795548" stroke-width="8"/>
+    <line x1="200" y1="260" x2="200" y2="320" stroke="#795548" stroke-width="8"/>
+    <line x1="512" y1="260" x2="512" y2="320" stroke="#795548" stroke-width="8"/>
+    <line x1="824" y1="260" x2="824" y2="320" stroke="#795548" stroke-width="8"/>
+
+    <!-- 서브키들 -->
+    <!-- 앱 경로 (정상) -->
+    <rect x="100" y="320" width="200" height="64" rx="12" fill="#43A047"/>
+    <text x="200" y="358" font-family="'Segoe UI',Arial,sans-serif" font-size="24" fill="#FFFFFF" text-anchor="middle">App Paths ✓</text>
+
+    <!-- 언인스톨 (오류) -->
+    <rect x="400" y="320" width="224" height="64" rx="12" fill="#E53935"/>
+    <text x="512" y="350" font-family="'Segoe UI',Arial,sans-serif" font-weight="700" font-size="22" fill="#FFFFFF" text-anchor="middle">Uninstall</text>
+    <text x="512" y="376" font-family="'Segoe UI',Arial,sans-serif" font-size="22" fill="#FFCDD2" text-anchor="middle">⚠ 47개 오류</text>
+
+    <!-- SharedDLL (오류) -->
+    <rect x="722" y="320" width="204" height="64" rx="12" fill="#E53935"/>
+    <text x="824" y="350" font-family="'Segoe UI',Arial,sans-serif" font-weight="700" font-size="22" fill="#FFFFFF" text-anchor="middle">SharedDLLs</text>
+    <text x="824" y="376" font-family="'Segoe UI',Arial,sans-serif" font-size="22" fill="#FFCDD2" text-anchor="middle">⚠ 23개 오류</text>
+
+    <!-- 세부 오류 항목 (Uninstall 하위) -->
+    <line x1="512" y1="384" x2="512" y2="434" stroke="#E53935" stroke-width="5" stroke-dasharray="8,5"/>
+    <rect x="340" y="434" width="344" height="56" rx="10" fill="#FFCDD2"/>
+    <text x="512" y="468" font-family="'Segoe UI',Arial,sans-serif" font-size="22" fill="#B71C1C" text-anchor="middle">❌ 파일 없음: OldApp.exe</text>
+
+    <line x1="512" y1="490" x2="512" y2="530" stroke="#E53935" stroke-width="5" stroke-dasharray="8,5"/>
+    <rect x="340" y="530" width="344" height="56" rx="10" fill="#FFCDD2"/>
+    <text x="512" y="564" font-family="'Segoe UI',Arial,sans-serif" font-size="22" fill="#B71C1C" text-anchor="middle">❌ 경로 없음: DeletedApp</text>
+
+    <!-- Layer 3: 수정 도구 (빗자루/체크) -->
+    <rect x="200" y="640" width="624" height="96" rx="28" fill="#00695C"/>
+    <text x="512" y="698" font-family="'Segoe UI',Arial,sans-serif" font-weight="900" font-size="52" fill="#FFFFFF" text-anchor="middle">🔑 레지스트리 수정</text>
+    <text x="512" y="736" font-family="'Segoe UI',Arial,sans-serif" font-size="30" fill="#A7FFEB" text-anchor="middle">70개 항목 → 0개 오류</text>
+
+    <!-- 하단 타이틀 -->
+    <rect x="230" y="860" width="564" height="78" rx="22" fill="#E65100"/>
+    <text x="512" y="912" font-family="'Segoe UI',Arial,sans-serif" font-weight="900" font-size="52" fill="#FFFFFF" text-anchor="middle">SYS.CLEAN</text>
+  </g>
+</svg>

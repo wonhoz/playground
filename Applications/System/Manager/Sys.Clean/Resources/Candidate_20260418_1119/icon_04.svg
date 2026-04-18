@@ -1,0 +1,56 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <!-- Layer 1: 밝은 아쿠아-민트 배경 -->
+  <defs>
+    <radialGradient id="bg04" cx="50%" cy="50%" r="58%">
+      <stop offset="0%" stop-color="#E0F7FA"/>
+      <stop offset="100%" stop-color="#B2EBF2"/>
+    </radialGradient>
+    <clipPath id="clip04">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg04)"/>
+
+  <g clip-path="url(#clip04)">
+    <!-- Layer 2: 큰 톱니바퀴 (시스템) -->
+    <!-- 외부 톱니바퀴 -->
+    <circle cx="480" cy="460" r="250" fill="none" stroke="#00838F" stroke-width="60"/>
+    <!-- 톱니 (8개) -->
+    <rect x="450" y="134" width="60" height="90" rx="12" fill="#00838F"/>
+    <rect x="450" y="134" width="60" height="90" rx="12" fill="#00838F" transform="rotate(45 480 460)"/>
+    <rect x="450" y="134" width="60" height="90" rx="12" fill="#00838F" transform="rotate(90 480 460)"/>
+    <rect x="450" y="134" width="60" height="90" rx="12" fill="#00838F" transform="rotate(135 480 460)"/>
+    <rect x="450" y="134" width="60" height="90" rx="12" fill="#00838F" transform="rotate(180 480 460)"/>
+    <rect x="450" y="134" width="60" height="90" rx="12" fill="#00838F" transform="rotate(225 480 460)"/>
+    <rect x="450" y="134" width="60" height="90" rx="12" fill="#00838F" transform="rotate(270 480 460)"/>
+    <rect x="450" y="134" width="60" height="90" rx="12" fill="#00838F" transform="rotate(315 480 460)"/>
+    <!-- 내부 원 (흰 배경) -->
+    <circle cx="480" cy="460" r="160" fill="#E0F7FA"/>
+
+    <!-- Layer 3: 빗자루 + 반짝임 (시스템 청소 메타포) -->
+    <!-- 빗자루 자루 -->
+    <rect x="520" y="240" width="40" height="430" rx="20" fill="#795548" transform="rotate(25 540 455)"/>
+    <!-- 빗자루 헤드 -->
+    <path d="M360 550 Q460 510 560 550 Q575 620 556 680 Q460 720 360 680 Q345 620 360 550 Z" fill="#5D4037"/>
+    <!-- 빗자루 털 -->
+    <line x1="378" y1="550" x2="360" y2="694" stroke="#4E342E" stroke-width="8" stroke-linecap="round"/>
+    <line x1="414" y1="542" x2="402" y2="696" stroke="#4E342E" stroke-width="8" stroke-linecap="round"/>
+    <line x1="450" y1="536" x2="444" y2="696" stroke="#4E342E" stroke-width="8" stroke-linecap="round"/>
+    <line x1="486" y1="536" x2="484" y2="696" stroke="#4E342E" stroke-width="8" stroke-linecap="round"/>
+    <line x1="522" y1="540" x2="524" y2="694" stroke="#4E342E" stroke-width="8" stroke-linecap="round"/>
+
+    <!-- 반짝임 효과 (청소 완료) -->
+    <!-- 스파클 여러 개 -->
+    <text x="700" y="300" font-family="'Segoe UI',Arial,sans-serif" font-size="52">✨</text>
+    <text x="760" y="440" font-family="'Segoe UI',Arial,sans-serif" font-size="40">⭐</text>
+    <text x="640" y="220" font-family="'Segoe UI',Arial,sans-serif" font-size="36">✨</text>
+    <text x="820" y="340" font-family="'Segoe UI',Arial,sans-serif" font-size="30">⭐</text>
+
+    <!-- 톱니 중앙의 반짝이는 별 -->
+    <text x="480" y="490" font-family="'Segoe UI',Arial,sans-serif" font-size="100" text-anchor="middle">✨</text>
+
+    <!-- 하단 타이틀 -->
+    <rect x="200" y="820" width="624" height="84" rx="26" fill="#00697A"/>
+    <text x="512" y="876" font-family="'Segoe UI',Arial,sans-serif" font-weight="900" font-size="58" fill="#FFFFFF" text-anchor="middle">SYS.CLEAN</text>
+  </g>
+</svg>

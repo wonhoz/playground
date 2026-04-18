@@ -1,5 +1,6 @@
 using System.IO;
 using System.Text.Json;
+using MarkView.Models;
 
 namespace MarkView.Services;
 
@@ -36,6 +37,10 @@ public class AppSettings
     public Dictionary<string, List<int>> Bookmarks { get; set; } = [];
     // 문서별 마지막 내보내기 경로 (doc.FilePath → last export full path)
     public Dictionary<string, string> LastExportPaths { get; set; } = [];
+    // 사용자 정의 스니펫
+    public List<UserSnippet> CustomSnippets { get; set; } = [];
+    // 파일별 커스텀 탭 이름 (filePath → customTitle)
+    public Dictionary<string, string> CustomTabTitles { get; set; } = [];
 
     private const int MaxRecentFiles = 20;
 

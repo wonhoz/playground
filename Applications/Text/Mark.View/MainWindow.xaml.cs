@@ -41,6 +41,7 @@ public partial class MainWindow : Window
     private string? _cachedHeadingText;
     private bool _webViewReady = false;
     private readonly TaskCompletionSource _webViewReadyTcs = new();
+    private static readonly System.Net.Http.HttpClient _httpClient = new();
     private readonly Dictionary<string, FileSystemWatcher> _fileWatchers = new(StringComparer.OrdinalIgnoreCase);
     private readonly HashSet<string> _recentlySavedPaths = new(StringComparer.OrdinalIgnoreCase);
     private double _editorFontSize = 13;
@@ -705,8 +706,7 @@ public partial class MainWindow : Window
                             return;
                         }
                     }
-                    using var client = new System.Net.Http.HttpClient();
-                    var data = await client.GetByteArrayAsync(srcUri);
+                    var data = await _httpClient.GetByteArrayAsync(srcUri);
                     await System.IO.File.WriteAllBytesAsync(dlg.FileName, data);
                 }
                 catch { }
@@ -1229,6 +1229,15 @@ public partial class MainWindow : Window
             if (!sp.Children.Contains(tb)) return;
             var newName = tb.Text.Trim();
             doc.CustomTitle = string.IsNullOrEmpty(newName) ? null : newName;
+            // 저장된 파일은 커스텀 이름 영속화
+            if (!doc.IsNew)
+            {
+                if (doc.CustomTitle != null)
+                    _settings.CustomTabTitles[doc.FilePath] = doc.CustomTitle;
+                else
+                    _settings.CustomTabTitles.Remove(doc.FilePath);
+                _settings.Save();
+            }
             sp.Children.Remove(tb);
             titleBlock.Visibility = Visibility.Visible;
             UpdateTabTitle(idx);
@@ -1778,7 +1787,7 @@ public partial class MainWindow : Window
     {
         if (_activeIndex < 0 || !_isEditMode) return;
         var menu = new ContextMenu();
-        var snippets = new[]
+        var builtins = new[]
         {
             ("코드 블록",       "```\n\n```"),
             ("인라인 코드",     "`코드`"),
@@ -1791,16 +1800,43 @@ public partial class MainWindow : Window
             ("각주",            "[^1]: 각주 내용\n\n본문에서 [^1] 사용"),
             ("콜아웃 정보",     "> 💡 **참고**: "),
         };
-        foreach (var (name, content) in snippets)
+        foreach (var (name, content) in builtins)
         {
             var c = content;
             var item = new MenuItem { Header = name };
             item.Click += (_, _) => { Editor.Focus(); InsertAtNewLine(c); };
             menu.Items.Add(item);
         }
+
+        // 사용자 정의 스닛펫
+        if (_settings.CustomSnippets.Count > 0)
+        {
+            menu.Items.Add(new Separator());
+            foreach (var s in _settings.CustomSnippets)
+            {
+                var c = s.Content;
+                var item = new MenuItem { Header = s.Name };
+                item.Click += (_, _) => { Editor.Focus(); InsertAtNewLine(c); };
+                menu.Items.Add(item);
+            }
+        }
+
+        menu.Items.Add(new Separator());
+        var manageItem = new MenuItem { Header = "스닛펫 관리..." };
+        manageItem.Click += (_, _) => OpenSnippetManager();
+        menu.Items.Add(manageItem);
+
         menu.PlacementTarget = BtnFmtSnippet;
         menu.Placement = PlacementMode.Bottom;
         menu.IsOpen = true;
+    }
+
+    private SnippetManagerWindow? _snippetManagerWindow;
+    private void OpenSnippetManager()
+    {
+        if (_snippetManagerWindow?.IsVisible == true) { _snippetManagerWindow.Activate(); return; }
+        _snippetManagerWindow = new SnippetManagerWindow(_settings) { Owner = this };
+        _snippetManagerWindow.Show();
     }
 
     // ── 전체 탭 검색 ─────────────────────────────────────────────────────
@@ -2166,6 +2202,21 @@ public partial class MainWindow : Window
             : null;
         StatusMode.Text = _isEditMode ? "편집" : "뷰";
         StatusUndo.Visibility = _isEditMode && Editor.CanUndo ? Visibility.Visible : Visibility.Collapsed;
+        UpdateBookmarkStatus(doc);
+    }
+
+    private void UpdateBookmarkStatus(MarkDocument doc)
+    {
+        var count = GetCurrentBookmarks().Count;
+        if (count > 0)
+        {
+            StatusBookmarks.Text = $"● {count}";
+            StatusBookmarks.Visibility = Visibility.Visible;
+        }
+        else
+        {
+            StatusBookmarks.Visibility = Visibility.Collapsed;
+        }
     }
 
     // 상태바에 임시 메시지 표시 후 복원
@@ -2982,6 +3033,7 @@ public partial class MainWindow : Window
         if (list.Count == 0) _settings.Bookmarks.Remove(doc.FilePath);
         _settings.Save();
         SyncLineNumberOffset();
+        UpdateBookmarkStatus(doc);
     }
 
     private void JumpToBookmark(bool forward)
@@ -3015,6 +3067,111 @@ public partial class MainWindow : Window
         Editor.ScrollToLine(target - 1);
         Editor.Focus();
         ShowStatusHint($"북마크 {target}줄로 이동 ({sorted.IndexOf(target) + 1}/{sorted.Count})", 2);
+    }
+
+    // ── 북마크 목록 팝업 ────────────────────────────────────────────────────
+
+    private void StatusBookmarks_Click(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        => OpenBookmarkListPopup();
+
+    private void OpenBookmarkListPopup()
+    {
+        if (_activeIndex < 0 || _activeIndex >= _docs.Count) return;
+        var doc = _docs[_activeIndex];
+        var bookmarks = GetCurrentBookmarks();
+        if (bookmarks.Count == 0) { ShowStatusHint("북마크 없음 — 줄 번호를 클릭하여 추가", 2); return; }
+
+        BookmarkList.Items.Clear();
+        var lines = doc.Content.Split('\n');
+        foreach (var lineNum in bookmarks.OrderBy(l => l))
+        {
+            var preview = lineNum <= lines.Length ? lines[lineNum - 1].Trim() : "";
+            if (preview.Length > 60) preview = preview[..60] + "…";
+            var item = new ListBoxItem
+            {
+                Tag = lineNum,
+                Content = new StackPanel
+                {
+                    Orientation = Orientation.Horizontal,
+                    Children =
+                    {
+                        new TextBlock
+                        {
+                            Text = lineNum.ToString(),
+                            Width = 40,
+                            Foreground = (SolidColorBrush)FindResource("AccentBrush"),
+                            FontFamily = new System.Windows.Media.FontFamily("Cascadia Code, Consolas, monospace"),
+                            FontSize = 11,
+                        },
+                        new TextBlock
+                        {
+                            Text = string.IsNullOrEmpty(preview) ? "(빈 줄)" : preview,
+                            Foreground = string.IsNullOrEmpty(preview)
+                                ? (SolidColorBrush)FindResource("TextDimBrush")
+                                : (SolidColorBrush)FindResource("TextBrush"),
+                            FontSize = 11,
+                            TextTrimming = TextTrimming.CharacterEllipsis,
+                            MaxWidth = 380,
+                        }
+                    }
+                }
+            };
+            BookmarkList.Items.Add(item);
+        }
+        BookmarkListPopup.IsOpen = true;
+        Dispatcher.InvokeAsync(() => BookmarkList.Focus(),
+            System.Windows.Threading.DispatcherPriority.Input);
+    }
+
+    private void JumpToBookmarkLine(int lineNum)
+    {
+        BookmarkListPopup.IsOpen = false;
+        var text = Editor.Text;
+        var lines = text.Split('\n');
+        if (lineNum > lines.Length) return;
+        int charIdx = lines.Take(lineNum - 1).Sum(l => l.Length + 1);
+        if (_isEditMode)
+        {
+            Editor.CaretIndex = Math.Min(charIdx, text.Length);
+            Editor.ScrollToLine(lineNum - 1);
+            Editor.Focus();
+        }
+        ShowStatusHint($"북마크 {lineNum}줄로 이동", 2);
+    }
+
+    private void BookmarkList_DoubleClick(object sender, MouseButtonEventArgs e)
+    {
+        if (BookmarkList.SelectedItem is ListBoxItem item && item.Tag is int lineNum)
+            JumpToBookmarkLine(lineNum);
+    }
+
+    private void BookmarkList_KeyDown(object sender, KeyEventArgs e)
+    {
+        if (e.Key == Key.Enter && BookmarkList.SelectedItem is ListBoxItem item && item.Tag is int lineNum)
+        {
+            JumpToBookmarkLine(lineNum);
+            e.Handled = true;
+        }
+        else if (e.Key == Key.Delete && BookmarkList.SelectedItem is ListBoxItem delItem && delItem.Tag is int delLine)
+        {
+            ToggleBookmark(delLine);
+            OpenBookmarkListPopup();
+            e.Handled = true;
+        }
+        else if (e.Key == Key.Escape)
+        {
+            BookmarkListPopup.IsOpen = false;
+            e.Handled = true;
+        }
+    }
+
+    // ── 인쇄 ────────────────────────────────────────────────────────────────
+
+    private async Task PrintCurrentDocumentAsync()
+    {
+        if (!_webViewReady) return;
+        try { await Viewer.ExecuteScriptAsync("window.print()"); }
+        catch { }
     }
 
     private void LineNumCanvas_Click(object sender, MouseButtonEventArgs e)
@@ -3634,6 +3791,10 @@ public partial class MainWindow : Window
         { MoveLineUp(); e.Handled = true; }
         else if (e.Key == Key.Down && Keyboard.Modifiers == ModifierKeys.Alt && _isEditMode)
         { MoveLineDown(); e.Handled = true; }
+        else if (e.Key == Key.P && Keyboard.Modifiers == (ModifierKeys.Control | ModifierKeys.Alt) && _docs.Count > 0)
+        { _ = PrintCurrentDocumentAsync(); e.Handled = true; }
+        else if (e.Key == Key.Escape && BookmarkListPopup.IsOpen)
+        { BookmarkListPopup.IsOpen = false; e.Handled = true; }
         else if (e.Key == Key.Escape && AllTabsSearchPopup.IsOpen)
         { AllTabsSearchPopup.IsOpen = false; e.Handled = true; }
         else if (e.Key == Key.Escape && !string.IsNullOrEmpty(TxtFind.Text))
@@ -3906,7 +4067,10 @@ public partial class MainWindow : Window
         try
         {
             var content = await Task.Run(() => File.ReadAllText(path));
-            OpenDocument(new MarkDocument { FilePath = path, Content = content });
+            var doc = new MarkDocument { FilePath = path, Content = content };
+            if (_settings.CustomTabTitles.TryGetValue(path, out var savedTitle))
+                doc.CustomTitle = savedTitle;
+            OpenDocument(doc);
             _settings.AddRecentFile(path);
             _settings.Save();
             RefreshRecentList();
@@ -4086,6 +4250,7 @@ public partial class MainWindow : Window
 
     private void TxtRecentSearch_TextChanged(object sender, TextChangedEventArgs e)
     {
+        if (!IsLoaded) return;
         FilterRecentList(TxtRecentSearch.Text);
     }
 

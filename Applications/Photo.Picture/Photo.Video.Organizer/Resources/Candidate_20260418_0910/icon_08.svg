@@ -1,0 +1,60 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <!-- Layer 1: 라임-퍼플 배경 -->
+  <defs>
+    <linearGradient id="bg08" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F9FBE7"/>
+      <stop offset="100%" stop-color="#EDE7F6"/>
+    </linearGradient>
+    <clipPath id="clip08">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg08)"/>
+
+  <g clip-path="url(#clip08)">
+    <!-- Layer 2: 사진 프레임 (중앙 좌측) -->
+    <rect x="130" y="200" width="340" height="280" rx="22" fill="#FFFFFF" stroke="#FF7043" stroke-width="10"/>
+    <!-- 사진 내용 (풍경) -->
+    <rect x="148" y="218" width="304" height="200" rx="12" fill="#81D4FA"/>
+    <circle cx="390" cy="270" r="44" fill="#FFD54F"/>
+    <path d="M148 368 L220 308 L300 350 L380 316 L452 350 L452 418 L148 418Z" fill="#66BB6A" opacity="0.8"/>
+    <!-- 사진 라벨 -->
+    <rect x="160" y="452" width="296" height="50" rx="12" fill="#FF7043"/>
+    <text x="308" y="488" font-family="'Segoe UI',Arial,sans-serif" font-weight="900" font-size="42" fill="#FFFFFF" text-anchor="middle">📷 PHOTO</text>
+
+    <!-- 동영상 프레임 (중앙 우측) -->
+    <rect x="554" y="200" width="340" height="280" rx="22" fill="#FFFFFF" stroke="#7B1FA2" stroke-width="10"/>
+    <rect x="572" y="218" width="304" height="200" rx="12" fill="#CE93D8"/>
+    <!-- 플레이 버튼 -->
+    <circle cx="724" cy="318" r="58" fill="rgba(0,0,0,0.18)"/>
+    <path d="M706 294 L706 342 L754 318 Z" fill="#FFFFFF"/>
+    <!-- 동영상 라벨 -->
+    <rect x="566" y="452" width="296" height="50" rx="12" fill="#7B1FA2"/>
+    <text x="714" y="488" font-family="'Segoe UI',Arial,sans-serif" font-weight="900" font-size="42" fill="#FFFFFF" text-anchor="middle">🎬 VIDEO</text>
+
+    <!-- Layer 3: 아래 폴더 (캘린더 탭 + 날짜 텍스트) -->
+    <rect x="220" y="570" width="584" height="56" rx="20" fill="#FF6F00"/>
+    <!-- 폴더 탭 -->
+    <rect x="240" y="540" width="160" height="50" rx="14" fill="#E65100"/>
+    <text x="320" y="572" font-family="'Segoe UI',Arial,sans-serif" font-weight="700" font-size="36" fill="#FFFFFF" text-anchor="middle">2024</text>
+    <!-- 폴더 본체 -->
+    <rect x="220" y="590" width="584" height="220" rx="20" fill="#FFA726"/>
+
+    <!-- 폴더 안 날짜 구조 -->
+    <rect x="246" y="614" width="250" height="72" rx="14" fill="#FFFFFF" opacity="0.92"/>
+    <text x="371" y="660" font-family="'Segoe UI','Consolas',monospace" font-weight="800" font-size="48" fill="#E65100" text-anchor="middle">06/15</text>
+
+    <rect x="528" y="614" width="250" height="72" rx="14" fill="#FFFFFF" opacity="0.92"/>
+    <text x="653" y="660" font-family="'Segoe UI','Consolas',monospace" font-weight="800" font-size="48" fill="#7B1FA2" text-anchor="middle">07/04</text>
+
+    <rect x="246" y="704" width="250" height="72" rx="14" fill="#FFFFFF" opacity="0.92"/>
+    <text x="371" y="750" font-family="'Segoe UI','Consolas',monospace" font-weight="800" font-size="48" fill="#1565C0" text-anchor="middle">08/20</text>
+
+    <rect x="528" y="704" width="250" height="72" rx="14" fill="#FFFFFF" opacity="0.92"/>
+    <text x="653" y="750" font-family="'Segoe UI','Consolas',monospace" font-weight="800" font-size="48" fill="#2E7D32" text-anchor="middle">12/31</text>
+
+    <!-- 연결 화살표 (사진+동영상 → 폴더) -->
+    <path d="M308 500 Q308 548 380 570" stroke="#FF7043" stroke-width="24" stroke-linecap="round" fill="none"/>
+    <path d="M714 500 Q714 548 644 570" stroke="#7B1FA2" stroke-width="24" stroke-linecap="round" fill="none"/>
+  </g>
+</svg>

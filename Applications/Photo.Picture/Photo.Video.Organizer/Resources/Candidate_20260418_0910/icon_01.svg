@@ -1,0 +1,62 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <!-- Layer 1: 파스텔 오렌지-하늘 배경 -->
+  <defs>
+    <linearGradient id="bg01" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFF3E0"/>
+      <stop offset="100%" stop-color="#E3F2FD"/>
+    </linearGradient>
+    <clipPath id="clip01">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg01)"/>
+
+  <g clip-path="url(#clip01)">
+    <!-- Layer 2: 날짜별 폴더들 (우측) -->
+    <!-- 폴더 2024/06 -->
+    <rect x="560" y="180" width="360" height="100" rx="16" fill="#FF8F00"/>
+    <rect x="560" y="220" width="360" height="140" rx="16" fill="#FFB300"/>
+    <text x="740" y="308" font-family="'Segoe UI',Arial,sans-serif" font-weight="800" font-size="56" fill="#FFFFFF" text-anchor="middle">2024/06</text>
+    <!-- 폴더 2024/07 -->
+    <rect x="560" y="390" width="360" height="100" rx="16" fill="#1565C0"/>
+    <rect x="560" y="430" width="360" height="140" rx="16" fill="#1976D2"/>
+    <text x="740" y="518" font-family="'Segoe UI',Arial,sans-serif" font-weight="800" font-size="56" fill="#FFFFFF" text-anchor="middle">2024/07</text>
+    <!-- 폴더 2024/08 -->
+    <rect x="560" y="600" width="360" height="100" rx="16" fill="#2E7D32"/>
+    <rect x="560" y="640" width="360" height="140" rx="16" fill="#388E3C"/>
+    <text x="740" y="728" font-family="'Segoe UI',Arial,sans-serif" font-weight="800" font-size="56" fill="#FFFFFF" text-anchor="middle">2024/08</text>
+
+    <!-- Layer 3: 사진/동영상 파일들 (좌측 → 폴더로 날아가는 화살표) -->
+    <!-- 사진 파일들 -->
+    <rect x="120" y="210" width="180" height="140" rx="14" fill="#FFFFFF" stroke="#FFCC80" stroke-width="8"/>
+    <!-- 사진 썸네일 -->
+    <rect x="132" y="222" width="156" height="96" rx="8" fill="#81D4FA"/>
+    <circle cx="180" cy="262" r="26" fill="#FFD54F"/>
+    <path d="M132 294 L200 248 L260 280 L288 260 L288 318 L132 318Z" fill="#66BB6A" opacity="0.8"/>
+
+    <rect x="120" y="380" width="180" height="140" rx="14" fill="#FFFFFF" stroke="#FF8A80" stroke-width="8"/>
+    <rect x="132" y="392" width="156" height="96" rx="8" fill="#F48FB1"/>
+    <!-- 동영상 플레이버튼 -->
+    <circle cx="210" cy="440" r="30" fill="rgba(0,0,0,0.25)"/>
+    <path d="M198 425 L198 455 L230 440 Z" fill="#FFFFFF"/>
+
+    <rect x="120" y="550" width="180" height="140" rx="14" fill="#FFFFFF" stroke="#A5D6A7" stroke-width="8"/>
+    <rect x="132" y="562" width="156" height="96" rx="8" fill="#CE93D8"/>
+    <circle cx="180" cy="600" r="22" fill="#7B1FA2" opacity="0.5"/>
+    <circle cx="250" cy="590" r="18" fill="#E91E63" opacity="0.5"/>
+
+    <!-- 화살표: 파일 → 폴더 -->
+    <path d="M308 280 L540 280" stroke="#FF8F00" stroke-width="36" stroke-linecap="round"/>
+    <path d="M508 248 L552 280 L508 312" stroke="#FF8F00" stroke-width="36" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+
+    <path d="M308 450 L540 490" stroke="#1565C0" stroke-width="36" stroke-linecap="round"/>
+    <path d="M510 462 L552 490 L522 524" stroke="#1565C0" stroke-width="36" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+
+    <path d="M308 620 L540 700" stroke="#2E7D32" stroke-width="36" stroke-linecap="round"/>
+    <path d="M512 676 L552 700 L530 736" stroke="#2E7D32" stroke-width="36" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+
+    <!-- 자동 정리 힌트 -->
+    <rect x="110" y="820" width="800" height="80" rx="20" fill="#FF6F00" opacity="0.15"/>
+    <text x="512" y="874" font-family="'Segoe UI',Arial,sans-serif" font-weight="700" font-size="58" fill="#E65100" text-anchor="middle">EXIF 날짜별 자동 정리</text>
+  </g>
+</svg>

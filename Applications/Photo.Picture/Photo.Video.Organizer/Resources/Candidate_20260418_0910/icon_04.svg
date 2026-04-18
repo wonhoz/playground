@@ -1,0 +1,47 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <!-- Layer 1: 흰 배경 -->
+  <defs>
+    <linearGradient id="bg04" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FAFAFA"/>
+      <stop offset="100%" stop-color="#F3E5F5"/>
+    </linearGradient>
+    <clipPath id="clip04">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg04)"/>
+
+  <g clip-path="url(#clip04)">
+    <!-- Layer 2: 좌측 — 혼돈 (뒤죽박죽 사진들) -->
+    <!-- 겹치고 삐뚤어진 사진 카드들 -->
+    <rect x="80" y="240" width="160" height="130" rx="10" fill="#EF5350" transform="rotate(-15 160 305)"/>
+    <rect x="160" y="180" width="160" height="130" rx="10" fill="#FFA726" transform="rotate(8 240 245)"/>
+    <rect x="80" y="380" width="160" height="130" rx="10" fill="#AB47BC" transform="rotate(-22 160 445)"/>
+    <rect x="190" y="340" width="160" height="130" rx="10" fill="#42A5F5" transform="rotate(12 270 405)"/>
+    <rect x="100" y="510" width="160" height="130" rx="10" fill="#26A69A" transform="rotate(-8 180 575)"/>
+    <rect x="220" y="480" width="160" height="130" rx="10" fill="#EF9A9A" transform="rotate(18 300 545)"/>
+    <!-- 혼돈 라벨 -->
+    <rect x="80" y="720" width="340" height="74" rx="18" fill="#B0BEC5"/>
+    <text x="250" y="768" font-family="'Segoe UI',Arial,sans-serif" font-weight="800" font-size="52" fill="#546E7A" text-anchor="middle">BEFORE</text>
+
+    <!-- 중앙 대각선 변환 화살표 -->
+    <path d="M440 512 L584 512" stroke="#7B1FA2" stroke-width="64" stroke-linecap="round"/>
+    <path d="M544 448 L600 512 L544 576" stroke="#7B1FA2" stroke-width="64" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+
+    <!-- Layer 3: 우측 — 정리된 격자 (깔끔하게 배열된 사진들) -->
+    <!-- 3×2 깔끔한 격자 -->
+    <rect x="620" y="215" width="150" height="115" rx="12" fill="#EF5350" opacity="0.9"/>
+    <rect x="782" y="215" width="150" height="115" rx="12" fill="#FFA726" opacity="0.9"/>
+    <rect x="620" y="345" width="150" height="115" rx="12" fill="#AB47BC" opacity="0.9"/>
+    <rect x="782" y="345" width="150" height="115" rx="12" fill="#42A5F5" opacity="0.9"/>
+    <rect x="620" y="475" width="150" height="115" rx="12" fill="#26A69A" opacity="0.9"/>
+    <rect x="782" y="475" width="150" height="115" rx="12" fill="#EF9A9A" opacity="0.9"/>
+
+    <!-- 날짜 라벨들 (우측 격자 아래) -->
+    <rect x="620" y="604" width="312" height="50" rx="12" fill="#7B1FA2"/>
+    <text x="776" y="638" font-family="'Segoe UI','Consolas',monospace" font-weight="700" font-size="38" fill="#FFFFFF" text-anchor="middle">2024/06 · 2024/07</text>
+
+    <rect x="620" y="720" width="312" height="74" rx="18" fill="#7B1FA2"/>
+    <text x="776" y="768" font-family="'Segoe UI',Arial,sans-serif" font-weight="800" font-size="52" fill="#FFFFFF" text-anchor="middle">AFTER</text>
+  </g>
+</svg>

@@ -1,0 +1,61 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <!-- Layer 1: 다크 네이비 배경 -->
+  <defs>
+    <linearGradient id="bg05" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0D1B2A"/>
+      <stop offset="100%" stop-color="#1B2838"/>
+    </linearGradient>
+    <clipPath id="clip05">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg05)"/>
+
+  <g clip-path="url(#clip05)">
+    <!-- Layer 2: 쓰레기통 (하단 중앙, 큰) -->
+    <!-- 쓰레기통 몸체 -->
+    <rect x="340" y="580" width="344" height="320" rx="20" fill="#37474F"/>
+    <!-- 쓰레기통 그릴 라인들 -->
+    <line x1="430" y1="600" x2="430" y2="880" stroke="#546E7A" stroke-width="8"/>
+    <line x1="512" y1="600" x2="512" y2="880" stroke="#546E7A" stroke-width="8"/>
+    <line x1="594" y1="600" x2="594" y2="880" stroke="#546E7A" stroke-width="8"/>
+    <!-- 쓰레기통 뚜껑 -->
+    <rect x="300" y="540" width="424" height="50" rx="14" fill="#455A64"/>
+    <!-- 손잡이 -->
+    <rect x="446" y="506" width="132" height="44" rx="16" fill="#455A64"/>
+
+    <!-- Layer 3: 폴더들이 대각선으로 날아 들어가는 궤적 -->
+    <!-- 좌상단 폴더 → 쓰레기통 궤적 -->
+    <path d="M160 180 Q240 360 420 560" stroke="#FF8F00" stroke-width="6" stroke-dasharray="16,10" fill="none" opacity="0.7"/>
+    <!-- 좌 폴더 -->
+    <rect x="100" y="120" width="180" height="140" rx="16" fill="#FF8F00"/>
+    <rect x="100" y="92" width="72" height="36" rx="10" fill="#FF8F00"/>
+    <text x="190" y="190" font-family="'Segoe UI',Arial,sans-serif" font-size="64" text-anchor="middle">📁</text>
+    <text x="190" y="248" font-family="'Segoe UI',Arial,sans-serif" font-size="24" fill="#FFF8E1" text-anchor="middle">bin 256MB</text>
+
+    <!-- 상단 중앙 폴더 → 쓰레기통 궤적 -->
+    <path d="M512 140 Q512 340 512 540" stroke="#EF5350" stroke-width="6" stroke-dasharray="16,10" fill="none" opacity="0.7"/>
+    <!-- 위 폴더 -->
+    <rect x="402" y="80" width="220" height="160" rx="18" fill="#EF5350"/>
+    <rect x="402" y="52" width="88" height="38" rx="10" fill="#EF5350"/>
+    <text x="512" y="162" font-family="'Segoe UI',Arial,sans-serif" font-size="76" text-anchor="middle">📁</text>
+    <text x="512" y="228" font-family="'Segoe UI',Arial,sans-serif" font-size="26" fill="#FFCDD2" text-anchor="middle">obj 128MB</text>
+
+    <!-- 우상단 폴더 → 쓰레기통 궤적 -->
+    <path d="M864 180 Q780 360 604 560" stroke="#66BB6A" stroke-width="6" stroke-dasharray="16,10" fill="none" opacity="0.7"/>
+    <!-- 우 폴더 -->
+    <rect x="744" y="120" width="180" height="140" rx="16" fill="#43A047"/>
+    <rect x="744" y="92" width="72" height="36" rx="10" fill="#43A047"/>
+    <text x="834" y="190" font-family="'Segoe UI',Arial,sans-serif" font-size="64" text-anchor="middle">📁</text>
+    <text x="834" y="248" font-family="'Segoe UI',Arial,sans-serif" font-size="24" fill="#E8F5E9" text-anchor="middle">빈폴더 0B</text>
+
+    <!-- 화살표 (중간 위치) -->
+    <text x="280" y="380" font-family="'Segoe UI',Arial,sans-serif" font-size="44" fill="#FF8F00" opacity="0.8">↓</text>
+    <text x="512" y="380" font-family="'Segoe UI',Arial,sans-serif" font-size="44" fill="#EF5350" opacity="0.8" text-anchor="middle">↓</text>
+    <text x="744" y="380" font-family="'Segoe UI',Arial,sans-serif" font-size="44" fill="#66BB6A" opacity="0.8">↓</text>
+
+    <!-- 절약 용량 표시 -->
+    <rect x="190" y="870" width="644" height="80" rx="24" fill="#E65100"/>
+    <text x="512" y="922" font-family="'Segoe UI',Arial,sans-serif" font-weight="900" font-size="52" fill="#FFFFFF" text-anchor="middle">🗑 384 MB 삭제!</text>
+  </g>
+</svg>

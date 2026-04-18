@@ -1,0 +1,56 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <!-- Layer 1: 민트-청록 배경 -->
+  <defs>
+    <linearGradient id="bg07" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E0F7FA"/>
+      <stop offset="100%" stop-color="#B2EBF2"/>
+    </linearGradient>
+    <clipPath id="clip07">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg07)"/>
+
+  <g clip-path="url(#clip07)">
+    <!-- Layer 2: 비포/에프터 도넛 차트 (디스크 사용량) -->
+
+    <!-- 왼쪽: 비포 (꽉 찬 디스크) -->
+    <!-- 도넛 배경 -->
+    <circle cx="280" cy="440" r="180" fill="none" stroke="#EF9A9A" stroke-width="60"/>
+    <!-- 사용 중 (빨강, ~90%) -->
+    <circle cx="280" cy="440" r="180" fill="none" stroke="#F44336" stroke-width="60"
+      stroke-dasharray="1017 113" stroke-dashoffset="-283"
+      transform="rotate(-90 280 440)"/>
+    <!-- 중앙 텍스트 -->
+    <text x="280" y="430" font-family="'Segoe UI',Arial,sans-serif" font-weight="900" font-size="58" fill="#C62828" text-anchor="middle">90%</text>
+    <text x="280" y="480" font-family="'Segoe UI',Arial,sans-serif" font-size="28" fill="#EF5350" text-anchor="middle">사용</text>
+    <!-- 라벨 -->
+    <text x="280" y="680" font-family="'Segoe UI',Arial,sans-serif" font-weight="700" font-size="34" fill="#C62828" text-anchor="middle">정리 전</text>
+
+    <!-- 가운데 화살표 -->
+    <text x="512" y="460" font-family="'Segoe UI',Arial,sans-serif" font-size="80" fill="#546E7A" text-anchor="middle">→</text>
+    <!-- 빗자루 이모지 -->
+    <text x="512" y="360" font-family="'Segoe UI',Arial,sans-serif" font-size="70" text-anchor="middle">🧹</text>
+
+    <!-- 오른쪽: 에프터 (깨끗한 디스크) -->
+    <!-- 도넛 배경 (빈 공간, 회색) -->
+    <circle cx="744" cy="440" r="180" fill="none" stroke="#E0E0E0" stroke-width="60"/>
+    <!-- 사용 중 (초록, ~30%) -->
+    <circle cx="744" cy="440" r="180" fill="none" stroke="#43A047" stroke-width="60"
+      stroke-dasharray="339 791" stroke-dashoffset="-283"
+      transform="rotate(-90 744 440)"/>
+    <!-- 중앙 텍스트 -->
+    <text x="744" y="430" font-family="'Segoe UI',Arial,sans-serif" font-weight="900" font-size="58" fill="#2E7D32" text-anchor="middle">30%</text>
+    <text x="744" y="480" font-family="'Segoe UI',Arial,sans-serif" font-size="28" fill="#4CAF50" text-anchor="middle">사용</text>
+    <!-- 라벨 -->
+    <text x="744" y="680" font-family="'Segoe UI',Arial,sans-serif" font-weight="700" font-size="34" fill="#2E7D32" text-anchor="middle">정리 후</text>
+
+    <!-- Layer 3: 절약 배지 -->
+    <rect x="240" y="750" width="544" height="90" rx="28" fill="#00838F"/>
+    <text x="512" y="806" font-family="'Segoe UI',Arial,sans-serif" font-weight="900" font-size="52" fill="#FFFFFF" text-anchor="middle">384 MB 절약! 💾</text>
+
+    <!-- 상단 타이틀 -->
+    <rect x="220" y="120" width="584" height="72" rx="22" fill="#00838F"/>
+    <text x="512" y="174" font-family="'Segoe UI',Arial,sans-serif" font-weight="900" font-size="50" fill="#FFFFFF" text-anchor="middle">FOLDER PURGE</text>
+  </g>
+</svg>

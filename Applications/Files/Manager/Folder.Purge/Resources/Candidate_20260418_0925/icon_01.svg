@@ -1,0 +1,37 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <!-- Layer 1: 밝은 오렌지-살구 그라데이션 배경 -->
+  <defs>
+    <linearGradient id="bg01" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFE0B2"/>
+      <stop offset="100%" stop-color="#FFCCBC"/>
+    </linearGradient>
+    <clipPath id="clip01">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg01)"/>
+
+  <g clip-path="url(#clip01)">
+    <!-- Layer 2: 폴더 아이콘 (큰, 중앙) -->
+    <!-- 폴더 탭 -->
+    <rect x="180" y="280" width="240" height="60" rx="20" fill="#FF8F00"/>
+    <!-- 폴더 몸체 -->
+    <rect x="160" y="330" width="700" height="440" rx="36" fill="#FFB300"/>
+    <!-- 폴더 내부 (빈 느낌) -->
+    <rect x="200" y="380" width="620" height="350" rx="20" fill="#FFF3E0" opacity="0.6"/>
+    <!-- 빈 폴더 표시 (대시선) -->
+    <line x1="290" y1="510" x2="734" y2="510" stroke="#FFCC80" stroke-width="6" stroke-dasharray="20,12"/>
+    <line x1="290" y1="560" x2="600" y2="560" stroke="#FFCC80" stroke-width="6" stroke-dasharray="20,12"/>
+
+    <!-- Layer 3: 큰 X 오버레이 (삭제 표시) -->
+    <circle cx="680" cy="680" r="160" fill="#F44336"/>
+    <!-- X 라인 1 -->
+    <line x1="600" y1="600" x2="760" y2="760" stroke="#FFFFFF" stroke-width="40" stroke-linecap="round"/>
+    <!-- X 라인 2 -->
+    <line x1="760" y1="600" x2="600" y2="760" stroke="#FFFFFF" stroke-width="40" stroke-linecap="round"/>
+
+    <!-- 상단 타이틀 -->
+    <rect x="190" y="150" width="640" height="80" rx="22" fill="#E65100"/>
+    <text x="512" y="204" font-family="'Segoe UI',Arial,sans-serif" font-weight="900" font-size="54" fill="#FFFFFF" text-anchor="middle">FOLDER PURGE</text>
+  </g>
+</svg>

@@ -1,0 +1,43 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="60%" r="55%">
+      <stop offset="0%" stop-color="#FFECB3"/>
+      <stop offset="100%" stop-color="#FF6F00"/>
+    </radialGradient>
+    <clipPath id="cp"><rect width="1024" height="1024" rx="190"/></clipPath>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg)"/>
+  <g clip-path="url(#cp)">
+    <!-- Layer 2: 용광로 몸체 -->
+    <rect x="260" y="460" width="504" height="360" rx="40" fill="#5D4037"/>
+    <rect x="310" y="510" width="404" height="260" rx="24" fill="#3E2723"/>
+    <!-- 용광로 불꽃 -->
+    <path d="M512 510 Q440 460 420 380 Q460 420 490 390 Q490 320 520 260 Q550 320 545 390 Q580 360 600 380 Q580 460 512 510 Z" fill="#FF6D00"/>
+    <path d="M512 510 Q460 468 448 410 Q472 440 498 418 Q498 360 520 310 Q540 360 536 418 Q560 440 570 410 Q558 468 512 510 Z" fill="#FFD740"/>
+
+    <!-- 용광로 주둥이 (입력) -->
+    <rect x="180" y="480" width="160" height="80" rx="16" fill="#78909C"/>
+    <text x="260" y="530" font-family="'Segoe UI',Arial,sans-serif" font-weight="900" font-size="46" fill="#ECEFF1" text-anchor="middle">SVG</text>
+
+    <!-- 용광로 출구 (출력) -->
+    <rect x="684" y="480" width="160" height="80" rx="16" fill="#EF6C00"/>
+    <text x="764" y="530" font-family="'Segoe UI',Arial,sans-serif" font-weight="900" font-size="46" fill="#FFFFFF" text-anchor="middle">ICO</text>
+
+    <!-- 화살표 -->
+    <line x1="340" y1="520" x2="420" y2="520" stroke="#FFFFFF" stroke-width="10" stroke-linecap="round"/>
+    <line x1="600" y1="520" x2="684" y2="520" stroke="#FFFFFF" stroke-width="10" stroke-linecap="round"/>
+
+    <!-- Layer 3: 용광로 라벨 + 파티클 -->
+    <rect x="344" y="742" width="336" height="60" rx="16" fill="#BF360C" opacity="0.9"/>
+    <text x="512" y="782" font-family="'Segoe UI',Arial,sans-serif" font-weight="700" font-size="38" fill="#FFFFFF" text-anchor="middle">포맷 주조소</text>
+
+    <!-- 파티클 -->
+    <circle cx="380" cy="380" r="12" fill="#FFD740" opacity="0.8"/>
+    <circle cx="640" cy="340" r="10" fill="#FF6D00" opacity="0.7"/>
+    <circle cx="420" cy="300" r="8" fill="#FFD740" opacity="0.6"/>
+    <circle cx="600" cy="290" r="14" fill="#FF6D00" opacity="0.6"/>
+
+    <rect x="230" y="860" width="564" height="80" rx="24" fill="#BF360C"/>
+    <text x="512" y="914" font-family="'Segoe UI',Arial,sans-serif" font-weight="900" font-size="54" fill="#FFFFFF" text-anchor="middle">IMG.CAST</text>
+  </g>
+</svg>

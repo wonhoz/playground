@@ -1,0 +1,42 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1A237E"/>
+      <stop offset="100%" stop-color="#283593"/>
+    </linearGradient>
+    <clipPath id="cp"><rect width="1024" height="1024" rx="190"/></clipPath>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg)"/>
+  <g clip-path="url(#cp)">
+    <!-- Layer 2: 원형 순환 화살표 -->
+    <!-- 원형 트랙 -->
+    <circle cx="512" cy="500" r="280" fill="none" stroke="#5C6BC0" stroke-width="20" opacity="0.4"/>
+    <!-- 곡선 화살표 4개 (회전 방향) -->
+    <path d="M512 222 A280 280 0 0 1 790 500" fill="none" stroke="#42A5F5" stroke-width="22" stroke-linecap="round"/>
+    <polygon points="800,462 810,510 768,490" fill="#42A5F5"/>
+    <path d="M790 500 A280 280 0 0 1 512 778" fill="none" stroke="#66BB6A" stroke-width="22" stroke-linecap="round"/>
+    <polygon points="550,788 512,808 530,766" fill="#66BB6A"/>
+    <path d="M512 778 A280 280 0 0 1 234 500" fill="none" stroke="#FFA726" stroke-width="22" stroke-linecap="round"/>
+    <polygon points="224,538 214,490 256,510" fill="#FFA726"/>
+    <path d="M234 500 A280 280 0 0 1 512 222" fill="none" stroke="#EC407A" stroke-width="22" stroke-linecap="round"/>
+    <polygon points="474,212 512,192 494,234" fill="#EC407A"/>
+
+    <!-- Layer 3: 포맷 라벨 (원형 위 4개 위치) -->
+    <!-- 상단 SVG -->
+    <rect x="422" y="126" width="180" height="68" rx="18" fill="#42A5F5"/>
+    <text x="512" y="172" font-family="'Segoe UI',Arial,sans-serif" font-weight="900" font-size="50" fill="#FFFFFF" text-anchor="middle">SVG</text>
+    <!-- 우측 PNG -->
+    <rect x="832" y="468" width="160" height="68" rx="18" fill="#66BB6A"/>
+    <text x="912" y="514" font-family="'Segoe UI',Arial,sans-serif" font-weight="900" font-size="50" fill="#FFFFFF" text-anchor="middle">PNG</text>
+    <!-- 하단 ICO -->
+    <rect x="426" y="786" width="172" height="68" rx="18" fill="#FFA726"/>
+    <text x="512" y="832" font-family="'Segoe UI',Arial,sans-serif" font-weight="900" font-size="50" fill="#FFFFFF" text-anchor="middle">ICO</text>
+    <!-- 좌측 JPG -->
+    <rect x="34" y="468" width="160" height="68" rx="18" fill="#EC407A"/>
+    <text x="114" y="514" font-family="'Segoe UI',Arial,sans-serif" font-weight="900" font-size="50" fill="#FFFFFF" text-anchor="middle">JPG</text>
+
+    <!-- 중앙 심볼 -->
+    <circle cx="512" cy="500" r="90" fill="#FFD54F"/>
+    <text x="512" y="530" font-family="'Segoe UI',Arial,sans-serif" font-size="90" text-anchor="middle">🔄</text>
+  </g>
+</svg>

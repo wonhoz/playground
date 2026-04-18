@@ -1,0 +1,55 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <!-- Layer 1: 딥퍼플 배경 -->
+  <defs>
+    <linearGradient id="bg03" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1A004A"/>
+      <stop offset="50%" stop-color="#2D0070"/>
+      <stop offset="100%" stop-color="#1A004A"/>
+    </linearGradient>
+    <clipPath id="clip03">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg03)"/>
+
+  <g clip-path="url(#clip03)">
+    <!-- Layer 2: 스코어보드 카드 (메인) -->
+    <rect x="90" y="120" width="844" height="560" rx="32" fill="#FFFFFF" opacity="0.1"/>
+    <rect x="90" y="120" width="844" height="560" rx="32" fill="none" stroke="#FFD54F" stroke-width="3" opacity="0.6"/>
+
+    <!-- 타이틀 -->
+    <text x="512" y="180" font-family="'Segoe UI',Arial,sans-serif" font-weight="900" font-size="42" fill="#FFD54F" text-anchor="middle">🏆 게임 결과</text>
+
+    <!-- 구분선 -->
+    <line x1="130" y1="205" x2="894" y2="205" stroke="#FFD54F" stroke-width="2" opacity="0.4"/>
+
+    <!-- 점수 큰 숫자 -->
+    <text x="512" y="315" font-family="'Segoe UI',Arial,sans-serif" font-weight="900" font-size="130" fill="#FFD54F" text-anchor="middle">2450</text>
+    <text x="512" y="360" font-family="'Segoe UI',Arial,sans-serif" font-size="34" fill="#B0BEC5" text-anchor="middle">점</text>
+
+    <!-- 통계 3개 -->
+    <!-- 정확도 -->
+    <rect x="110" y="400" width="238" height="120" rx="16" fill="#FFFFFF" opacity="0.12"/>
+    <text x="229" y="450" font-family="'Segoe UI',Arial,sans-serif" font-weight="900" font-size="52" fill="#4CAF50" text-anchor="middle">90%</text>
+    <text x="229" y="500" font-family="'Segoe UI',Arial,sans-serif" font-size="28" fill="#B0BEC5" text-anchor="middle">정확도</text>
+
+    <!-- 스트릭 (강조) -->
+    <rect x="392" y="390" width="240" height="140" rx="16" fill="#FF6B6B" opacity="0.9"/>
+    <text x="512" y="455" font-family="'Segoe UI',Arial,sans-serif" font-weight="900" font-size="60" fill="#FFFFFF" text-anchor="middle">🔥 7</text>
+    <text x="512" y="510" font-family="'Segoe UI',Arial,sans-serif" font-size="28" fill="#FFCDD2" text-anchor="middle">최대 연속</text>
+
+    <!-- 정답수 -->
+    <rect x="676" y="400" width="238" height="120" rx="16" fill="#FFFFFF" opacity="0.12"/>
+    <text x="795" y="450" font-family="'Segoe UI',Arial,sans-serif" font-weight="900" font-size="52" fill="#29B6F6" text-anchor="middle">18/20</text>
+    <text x="795" y="500" font-family="'Segoe UI',Arial,sans-serif" font-size="28" fill="#B0BEC5" text-anchor="middle">정답수</text>
+
+    <!-- 등급 배지 -->
+    <circle cx="512" cy="700" r="96" fill="#FFD54F"/>
+    <text x="512" y="660" font-family="'Segoe UI',Arial,sans-serif" font-size="54" text-anchor="middle">🏆</text>
+    <text x="512" y="730" font-family="'Segoe UI',Arial,sans-serif" font-weight="900" font-size="46" fill="#1A004A" text-anchor="middle">A+</text>
+
+    <!-- Layer 3: 하단 TRIVIA CAST 표시 -->
+    <rect x="230" y="840" width="564" height="70" rx="20" fill="#FFD54F"/>
+    <text x="512" y="888" font-family="'Segoe UI',Arial,sans-serif" font-weight="900" font-size="48" fill="#1A004A" text-anchor="middle">TRIVIA CAST</text>
+  </g>
+</svg>

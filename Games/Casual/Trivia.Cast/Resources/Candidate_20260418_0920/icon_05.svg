@@ -1,0 +1,71 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <!-- Layer 1: 다크블루 + 별빛 배경 -->
+  <defs>
+    <radialGradient id="bg05" cx="50%" cy="40%" r="60%">
+      <stop offset="0%" stop-color="#1A237E"/>
+      <stop offset="100%" stop-color="#0D0D2B"/>
+    </radialGradient>
+    <clipPath id="clip05">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg05)"/>
+
+  <g clip-path="url(#clip05)">
+    <!-- 배경 별들 (작은) -->
+    <circle cx="200" cy="180" r="3" fill="#FFFFFF" opacity="0.5"/>
+    <circle cx="380" cy="130" r="2" fill="#FFFFFF" opacity="0.4"/>
+    <circle cx="700" cy="160" r="3" fill="#FFFFFF" opacity="0.5"/>
+    <circle cx="850" cy="220" r="2" fill="#FFFFFF" opacity="0.4"/>
+    <circle cx="140" cy="320" r="2" fill="#FFFFFF" opacity="0.4"/>
+    <circle cx="920" cy="350" r="3" fill="#FFFFFF" opacity="0.5"/>
+
+    <!-- Layer 2: 12개 카테고리 별들이 중앙으로 수렴하는 궤적 -->
+    <!-- 중앙 목표점: ? (큰 물음표) -->
+    <!-- 수렴선들 -->
+    <line x1="200" y1="200" x2="512" y2="512" stroke="#FFD54F" stroke-width="3" opacity="0.4" stroke-dasharray="8,6"/>
+    <line x1="512" y1="130" x2="512" y2="512" stroke="#FF6B6B" stroke-width="3" opacity="0.4" stroke-dasharray="8,6"/>
+    <line x1="820" y1="200" x2="512" y2="512" stroke="#81C784" stroke-width="3" opacity="0.4" stroke-dasharray="8,6"/>
+    <line x1="920" y1="512" x2="512" y2="512" stroke="#29B6F6" stroke-width="3" opacity="0.4" stroke-dasharray="8,6"/>
+    <line x1="104" y1="512" x2="512" y2="512" stroke="#CE93D8" stroke-width="3" opacity="0.4" stroke-dasharray="8,6"/>
+    <line x1="200" y1="820" x2="512" y2="512" stroke="#FF8A65" stroke-width="3" opacity="0.4" stroke-dasharray="8,6"/>
+    <line x1="512" y1="900" x2="512" y2="512" stroke="#FFCC02" stroke-width="3" opacity="0.4" stroke-dasharray="8,6"/>
+    <line x1="820" y1="820" x2="512" y2="512" stroke="#80DEEA" stroke-width="3" opacity="0.4" stroke-dasharray="8,6"/>
+
+    <!-- 카테고리 별 (외곽, 다양한 색) -->
+    <!-- 🔬 과학 -->
+    <circle cx="160" cy="190" r="48" fill="#1565C0"/>
+    <text x="160" y="207" font-family="'Segoe UI',Arial,sans-serif" font-size="48" text-anchor="middle">🔬</text>
+    <!-- 📜 역사 -->
+    <circle cx="512" cy="110" r="48" fill="#7B1FA2"/>
+    <text x="512" y="127" font-family="'Segoe UI',Arial,sans-serif" font-size="48" text-anchor="middle">📜</text>
+    <!-- 💻 IT -->
+    <circle cx="864" cy="190" r="48" fill="#2E7D32"/>
+    <text x="864" y="207" font-family="'Segoe UI',Arial,sans-serif" font-size="48" text-anchor="middle">💻</text>
+    <!-- ⚽ 스포츠 -->
+    <circle cx="940" cy="512" r="44" fill="#E65100"/>
+    <text x="940" y="529" font-family="'Segoe UI',Arial,sans-serif" font-size="44" text-anchor="middle">⚽</text>
+    <!-- 🎬 영화 -->
+    <circle cx="864" cy="834" r="44" fill="#C62828"/>
+    <text x="864" y="851" font-family="'Segoe UI',Arial,sans-serif" font-size="44" text-anchor="middle">🎬</text>
+    <!-- 🎵 음악 -->
+    <circle cx="512" cy="910" r="44" fill="#3949AB"/>
+    <text x="512" y="927" font-family="'Segoe UI',Arial,sans-serif" font-size="44" text-anchor="middle">🎵</text>
+    <!-- 🌍 지리 -->
+    <circle cx="160" cy="834" r="44" fill="#00695C"/>
+    <text x="160" y="851" font-family="'Segoe UI',Arial,sans-serif" font-size="44" text-anchor="middle">🌍</text>
+    <!-- 🎮 게임 -->
+    <circle cx="84" cy="512" r="44" fill="#1B5E20"/>
+    <text x="84" y="529" font-family="'Segoe UI',Arial,sans-serif" font-size="44" text-anchor="middle">🎮</text>
+
+    <!-- Layer 3: 중앙 큰 물음표 -->
+    <circle cx="512" cy="512" r="140" fill="#FFD54F"/>
+    <text x="512" y="582" font-family="'Segoe UI',Arial,sans-serif" font-weight="900" font-size="170" fill="#1A237E" text-anchor="middle">?</text>
+
+    <!-- 작은 보조 카테고리 (대각선 방향) -->
+    <text x="295" y="310" font-family="'Segoe UI',Arial,sans-serif" font-size="36" text-anchor="middle">🍜</text>
+    <text x="730" y="310" font-family="'Segoe UI',Arial,sans-serif" font-size="36" text-anchor="middle">🔢</text>
+    <text x="295" y="720" font-family="'Segoe UI',Arial,sans-serif" font-size="36" text-anchor="middle">🎨</text>
+    <text x="730" y="720" font-family="'Segoe UI',Arial,sans-serif" font-size="36" text-anchor="middle">🌟</text>
+  </g>
+</svg>

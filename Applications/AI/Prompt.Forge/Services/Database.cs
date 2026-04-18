@@ -383,5 +383,14 @@ sealed class Database : IDisposable
         cmd.ExecuteNonQuery();
     }
 
+    /// VACUUM INTO로 현재 DB를 지정 경로에 백업 (SQLite 3.27+ 필요)
+    public void Backup(string backupPath)
+    {
+        var cmd = _conn.CreateCommand();
+        cmd.CommandText = "VACUUM INTO $path";
+        cmd.Parameters.AddWithValue("$path", backupPath);
+        cmd.ExecuteNonQuery();
+    }
+
     public void Dispose() => _conn.Dispose();
 }

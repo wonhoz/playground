@@ -308,29 +308,38 @@
                                                ctrl:TextHighlighter.RawText="{Binding Title}"
                                                ctrl:TextHighlighter.Query="{Binding DataContext.Search,
                                                    RelativeSource={RelativeSource AncestorType=Window}}"/>
-                                    <StackPanel Orientation="Horizontal">
-                                        <TextBlock Text="{Binding Tags}" FontSize="11"
-                                                   Foreground="#64B5F6"
-                                                   TextTrimming="CharacterEllipsis"
-                                                   Margin="0,2,0,0"
-                                                   Cursor="Hand"
-                                                   ToolTip="클릭하여 태그 필터 적용"
-                                                   MouseLeftButtonDown="TagLabel_Click"/>
-                                        <TextBlock FontSize="10" Foreground="#3A5570"
-                                                   VerticalAlignment="Center" Margin="6,2,0,0"
-                                                   Text="{Binding UseCount, StringFormat={}{0}회}">
-                                            <TextBlock.Style>
-                                                <Style TargetType="TextBlock">
-                                                    <Setter Property="Visibility" Value="Visible"/>
-                                                    <Style.Triggers>
-                                                        <DataTrigger Binding="{Binding UseCount}" Value="0">
-                                                            <Setter Property="Visibility" Value="Collapsed"/>
-                                                        </DataTrigger>
-                                                    </Style.Triggers>
-                                                </Style>
-                                            </TextBlock.Style>
-                                        </TextBlock>
-                                    </StackPanel>
+                                    <!-- 태그 pill 목록: 태그별 고유 색상 -->
+                                    <ItemsControl ItemsSource="{Binding TagList}" Margin="0,2,0,1">
+                                        <ItemsControl.ItemsPanel>
+                                            <ItemsPanelTemplate>
+                                                <WrapPanel Orientation="Horizontal"/>
+                                            </ItemsPanelTemplate>
+                                        </ItemsControl.ItemsPanel>
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding}" FontSize="11"
+                                                           Foreground="{Binding Converter={StaticResource TagColorConverter}}"
+                                                           Margin="0,0,6,0"
+                                                           Cursor="Hand"
+                                                           ToolTip="클릭하여 태그 필터 적용"
+                                                           MouseLeftButtonDown="TagPill_Click"/>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+                                    <TextBlock FontSize="10" Foreground="#3A5570"
+                                               Margin="0,0,0,0"
+                                               Text="{Binding UseCount, StringFormat={}{0}회}">
+                                        <TextBlock.Style>
+                                            <Style TargetType="TextBlock">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding UseCount}" Value="0">
+                                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </TextBlock.Style>
+                                    </TextBlock>
                                 </StackPanel>
                                 <StackPanel Grid.Column="1" Orientation="Horizontal"
                                            VerticalAlignment="Center" Margin="6,0,0,0">
@@ -793,19 +802,19 @@
                             <LineBreak/>
                             <Run Text="• 변수 재실행 시 이전 입력값 자동 복원"/>
                             <LineBreak/>
-                            <Run Text="• 태그/서비스 입력 시 자동완성 드롭다운"/>
+                            <Run Text="• 태그/서비스 입력 시 자동완성 (↑↓ 탐색, Enter 선택)"/>
                             <LineBreak/>
-                            <Run Text="• 태그 클릭 → 필터 / 다중 태그 시 선택 메뉴"/>
+                            <Run Text="• 태그 클릭 → 해당 태그 필터 즉시 적용"/>
+                            <LineBreak/>
+                            <Run Text="• 태그는 이름별 고유 색상으로 구분됨"/>
                             <LineBreak/>
                             <Run Text="• ★ → 즐겨찾기 토글 / 📌 → 상단 고정"/>
                             <LineBreak/>
                             <Run Text="• '버전 저장' → 히스토리에 현재 버전 보관"/>
                             <LineBreak/>
-                            <Run Text="• 내보내기/가져오기: JSON·CSV, 필터 결과 선택 가능"/>
+                            <Run Text="• 내보내기/가져오기: JSON·CSV, 기존 항목 업데이트 지원"/>
                             <LineBreak/>
-                            <Run Text="• 내보내기/가져오기 마지막 경로 자동 기억"/>
-                            <LineBreak/>
-                            <Run Text="• 상태바: N자 · ~N tokens (글자수÷4 추정)"/>
+                            <Run Text="• 상태바: N자 · ~N tokens / 검색 중 본문 일치 수 표시"/>
                             <LineBreak/>
                             <Run Text="• Ctrl+클릭 복수 선택 → 일괄 태그 편집 / 합치기 복사"/>
                             <LineBreak/>
@@ -822,6 +831,8 @@
                             <Run Text="• ▾ → 최근 복사 히스토리 (최대 5개) 재복사"/>
                             <LineBreak/>
                             <Run Text="• 📊 통계 버튼 → 복사 가능한 통계 창"/>
+                            <LineBreak/>
+                            <Run Text="• DB 자동 백업: 7일마다 backup/ 폴더에 저장"/>
                             <LineBreak/>
                             <Run Text="• 정렬·검색어·창 크기·마지막 선택 재시작 후 복원"/>
                         </TextBlock>

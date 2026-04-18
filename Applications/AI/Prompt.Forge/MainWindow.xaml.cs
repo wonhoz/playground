@@ -97,6 +97,9 @@ public partial class MainWindow : Window
         // 최근 검색어 복원
         _recentSearches.AddRange(_appSettings.RecentSearches);
 
+        // 자동 백업 (7일마다)
+        TryAutoBackup();
+
         // 검색 X버튼 표시/숨김
         TxtSearch.TextChanged += (_, _) =>
             BtnClearSearch.Visibility = string.IsNullOrEmpty(TxtSearch.Text)
@@ -104,6 +107,7 @@ public partial class MainWindow : Window
 
         // 태그/서비스 자동완성
         TxtTags.TextChanged    += TxtTags_TextChanged;
+        TxtTags.PreviewKeyDown += TxtTags_PreviewKeyDown;
         TxtService.TextChanged += TxtService_TextChanged;
 
         // 최근 검색어
@@ -167,12 +171,17 @@ public partial class MainWindow : Window
             return;
         }
 
-        // Esc: 검색창 포커스 상태일 때 검색·필터 전체 초기화
-        if (e.Key == Key.Escape && TxtSearch.IsFocused)
+        // Esc: 필터/검색이 활성화된 경우 초기화 (FindBar가 열린 경우는 FindBar가 먼저 처리)
+        if (e.Key == Key.Escape && FindBar.Visibility == Visibility.Collapsed)
         {
-            ClearSearch_Click(this, new RoutedEventArgs());
-            e.Handled = true;
-            return;
+            var hasFilter = !string.IsNullOrWhiteSpace(_vm.Search) ||
+                            _vm.FilterTag != null || _vm.FilterService != null || _vm.FavOnly;
+            if (hasFilter)
+            {
+                ClearSearch_Click(this, new RoutedEventArgs());
+                e.Handled = true;
+                return;
+            }
         }
 
         // Ctrl+Shift+F: 즐겨찾기 토글
@@ -261,6 +270,31 @@ public partial class MainWindow : Window
             handled = true;
         }
         return IntPtr.Zero;
+    }
+
+    void TryAutoBackup()
+    {
+        try
+        {
+            if ((DateTime.Now - _appSettings.LastBackupDate).TotalDays < 7) return;
+            var dbPath = _appSettings.ResolvedDbPath;
+            if (!File.Exists(dbPath)) return;
+
+            var backupDir = Path.Combine(Path.GetDirectoryName(dbPath)!, "backup");
+            Directory.CreateDirectory(backupDir);
+            var backupPath = Path.Combine(backupDir, $"prompts_{DateTime.Now:yyyyMMdd}.db");
+
+            _db.Backup(backupPath);
+
+            // 오래된 백업 정리 (최대 5개 유지)
+            var old = Directory.GetFiles(backupDir, "prompts_*.db")
+                                .OrderByDescending(f => f).Skip(5);
+            foreach (var f in old) File.Delete(f);
+
+            _appSettings.LastBackupDate = DateTime.Now;
+            _appSettings.Save();
+        }
+        catch { /* 백업 실패는 앱 동작에 영향 없음 */ }
     }
 
     void OnClosing(object? s, System.ComponentModel.CancelEventArgs e)
@@ -485,6 +519,22 @@ public partial class MainWindow : Window
         TxtNotes.Text   = p.Notes;
         BtnFav.Content  = p.IsFavorite ? "★" : "☆";
         UpdatePinButton();
+
+        // 검색어가 활성화된 경우 본문 일치 수 상태바 표시
+        if (!string.IsNullOrWhiteSpace(_vm.Search) && !string.IsNullOrEmpty(p.Content))
+        {
+            var matches = CountOccurrences(p.Content, _vm.Search);
+            if (matches > 0)
+                _vm.StatusText = $"본문 {matches}개 일치  (Ctrl+G로 이동)";
+        }
+    }
+
+    static int CountOccurrences(string text, string term)
+    {
+        int count = 0, pos = 0;
+        while ((pos = text.IndexOf(term, pos, StringComparison.OrdinalIgnoreCase)) >= 0)
+        { count++; pos += term.Length; }
+        return count;
     }
 
     void UpdatePinButton()
@@ -496,46 +546,12 @@ public partial class MainWindow : Window
 
     // ── 에디터 이벤트 ─────────────────────────────────────────────────────────
 
-    void TagLabel_Click(object sender, System.Windows.Input.MouseButtonEventArgs e)
+    void TagPill_Click(object sender, System.Windows.Input.MouseButtonEventArgs e)
     {
         if (sender is not TextBlock tb || string.IsNullOrWhiteSpace(tb.Text)) return;
-        var allTags = tb.Text.Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries)
-                             .Where(t => _vm.Tags.Contains(t))
-                             .ToList();
-        if (allTags.Count == 0) return;
-        e.Handled = true;
-
-        if (allTags.Count == 1)
-        {
-            var idx = _vm.Tags.IndexOf(allTags[0]);
-            if (idx >= 0) CbTag.SelectedIndex = idx;
-            return;
-        }
-
-        // 여러 태그 — ContextMenu로 선택
-        var menu = new ContextMenu { Background = new System.Windows.Media.SolidColorBrush(
-            (System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString("#0F1E2E")) };
-        menu.BorderBrush = new System.Windows.Media.SolidColorBrush(
-            (System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString("#1E3555"));
-
-        foreach (var tag in allTags)
-        {
-            var mi = new MenuItem
-            {
-                Header = tag,
-                Foreground = new System.Windows.Media.SolidColorBrush(
-                    (System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString("#B0C8E0"))
-            };
-            mi.Click += (_, _) =>
-            {
-                var i = _vm.Tags.IndexOf(tag);
-                if (i >= 0) CbTag.SelectedIndex = i;
-            };
-            menu.Items.Add(mi);
-        }
-        tb.ContextMenu = menu;
-        menu.PlacementTarget = tb;
-        menu.IsOpen = true;
+        var tag = tb.Text.Trim();
+        var idx = _vm.Tags.IndexOf(tag);
+        if (idx >= 0) CbTag.SelectedIndex = idx;
     }
 
     void TxtContent_TextChanged(object sender, TextChangedEventArgs e)
@@ -1130,12 +1146,46 @@ public partial class MainWindow : Window
                 _vm.StatusText = "가져올 데이터가 없습니다";
                 return;
             }
-            var existingTitles = new HashSet<string>(
-                _db.GetAll().Select(p => p.Title), StringComparer.OrdinalIgnoreCase);
-            int imported = 0, skipped = 0;
+
+            var existingAll = _db.GetAll();
+            var existingMap = existingAll.ToDictionary(p => p.Title, p => p, StringComparer.OrdinalIgnoreCase);
+
+            var toUpdate = items
+                .Where(item => existingMap.TryGetValue(item.Title ?? "", out var ex) &&
+                               (ex.Content != (item.Content ?? "") ||
+                                ex.Tags    != (item.Tags    ?? "") ||
+                                ex.Service != (item.Service ?? "") ||
+                                ex.Notes   != (item.Notes   ?? "")))
+                .ToList();
+
+            bool doMerge = false;
+            if (toUpdate.Count > 0)
+            {
+                var mergeResult = MessageBox.Show(
+                    $"기존 항목 중 {toUpdate.Count}개가 변경되었습니다.\n업데이트하시겠습니까?",
+                    "머지 확인", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                doMerge = mergeResult == MessageBoxResult.Yes;
+            }
+
+            int imported = 0, updated = 0, skipped = 0;
             foreach (var item in items)
             {
-                if (existingTitles.Contains(item.Title ?? "")) { skipped++; continue; }
+                if (existingMap.TryGetValue(item.Title ?? "", out var existing))
+                {
+                    if (doMerge && toUpdate.Any(u => string.Equals(u.Title, item.Title, StringComparison.OrdinalIgnoreCase)))
+                    {
+                        existing.Content    = item.Content ?? "";
+                        existing.Tags       = item.Tags    ?? "";
+                        existing.Service    = item.Service ?? "";
+                        existing.Notes      = item.Notes   ?? "";
+                        existing.IsFavorite = item.IsFavorite;
+                        existing.Version    = item.Version > 0 ? item.Version : existing.Version;
+                        _db.Update(existing);
+                        updated++;
+                    }
+                    else { skipped++; }
+                    continue;
+                }
                 _db.Insert(new PromptItem
                 {
                     Title      = item.Title ?? "",
@@ -1155,9 +1205,11 @@ public partial class MainWindow : Window
             _appSettings.LastImportPath = Path.GetDirectoryName(dlg.FileName) ?? "";
             _appSettings.Save();
             var fmt = isCsv ? "CSV" : "JSON";
-            _vm.StatusText = skipped > 0
-                ? $"가져오기 완료 — {imported}개 추가, {skipped}개 중복 스킵 ({fmt})"
-                : $"가져오기 완료 — {imported}개 ({fmt})";
+            var parts = new List<string>();
+            if (imported > 0) parts.Add($"{imported}개 추가");
+            if (updated  > 0) parts.Add($"{updated}개 업데이트");
+            if (skipped  > 0) parts.Add($"{skipped}개 스킵");
+            _vm.StatusText = $"가져오기 완료 — {string.Join(", ", parts)} ({fmt})";
         }
         catch (Exception ex)
         {
@@ -1386,9 +1438,8 @@ public partial class MainWindow : Window
         TagPopup.IsOpen = true;
     }
 
-    void TagSuggestion_Selected(object sender, SelectionChangedEventArgs e)
+    void ApplyTagSuggestion(string tag)
     {
-        if (LstTagSuggestions.SelectedItem is not string tag) return;
         TagPopup.IsOpen = false;
         var text = TxtTags.Text;
         var lastComma = text.LastIndexOf(',');
@@ -1396,6 +1447,42 @@ public partial class MainWindow : Window
         TxtTags.CaretIndex = TxtTags.Text.Length;
         TxtTags.Focus();
         LstTagSuggestions.SelectedItem = null;
+    }
+
+    void TagSuggestion_Selected(object sender, SelectionChangedEventArgs e)
+    {
+        if (LstTagSuggestions.SelectedItem is not string tag) return;
+        ApplyTagSuggestion(tag);
+    }
+
+    void TxtTags_PreviewKeyDown(object sender, KeyEventArgs e)
+    {
+        if (!TagPopup.IsOpen) return;
+        var count = LstTagSuggestions.Items.Count;
+        if (count == 0) return;
+
+        if (e.Key == Key.Down)
+        {
+            LstTagSuggestions.SelectedIndex = LstTagSuggestions.SelectedIndex < count - 1
+                ? LstTagSuggestions.SelectedIndex + 1 : 0;
+            e.Handled = true;
+        }
+        else if (e.Key == Key.Up)
+        {
+            LstTagSuggestions.SelectedIndex = LstTagSuggestions.SelectedIndex > 0
+                ? LstTagSuggestions.SelectedIndex - 1 : count - 1;
+            e.Handled = true;
+        }
+        else if (e.Key == Key.Enter && LstTagSuggestions.SelectedItem is string tag)
+        {
+            ApplyTagSuggestion(tag);
+            e.Handled = true;
+        }
+        else if (e.Key == Key.Escape)
+        {
+            TagPopup.IsOpen = false;
+            e.Handled = true;
+        }
     }
 
     // ── 서비스 자동완성 ───────────────────────────────────────────────────────
@@ -1511,8 +1598,11 @@ public partial class MainWindow : Window
             item.UpdatedAt = DateTime.UtcNow;
             _db.Update(item);
         }
+        var firstId = selected[0].Id;
         _vm.Refresh();
         RefreshFilterCombos();
+        _vm.Selected = _vm.Items.FirstOrDefault(x => x.Id == firstId);
+        LoadSelected();
         _vm.StatusText = $"{selected.Count}개 항목 태그 업데이트 완료";
     }
 

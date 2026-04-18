@@ -20,6 +20,9 @@ public sealed class AppSettings
     public string LastExportPath { get; set; } = "";
     public string LastImportPath { get; set; } = "";
 
+    // 자동 백업 마지막 실행 날짜
+    public DateTime LastBackupDate { get; set; } = DateTime.MinValue;
+
     // 창 위치/크기 — double.NaN은 저장 없음 (CenterScreen 사용)
     public double WindowLeft   { get; set; } = double.NaN;
     public double WindowTop    { get; set; } = double.NaN;

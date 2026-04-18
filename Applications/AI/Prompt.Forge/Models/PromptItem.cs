@@ -27,6 +27,10 @@ public sealed class PromptItem : INotifyPropertyChanged
     public int     SortOrder   { get; set; }
     public bool    IsPinned    { get; set; }
 
+    public IEnumerable<string> TagList =>
+        string.IsNullOrEmpty(Tags) ? [] :
+        Tags.Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
+
     public event PropertyChangedEventHandler? PropertyChanged;
 
     /// {{변수명}} 목록 추출 (영문, 숫자, _, 한글 지원)

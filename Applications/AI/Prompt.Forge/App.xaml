@@ -1,8 +1,11 @@
 ﻿<Application x:Class="Prompt.Forge.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:ctrl="clr-namespace:Prompt.Forge.Controls"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
+
+        <ctrl:TagColorConverter x:Key="TagColorConverter"/>
 
         <!-- ── Label ────────────────────────────────────────────────────── -->
         <Style TargetType="Label">

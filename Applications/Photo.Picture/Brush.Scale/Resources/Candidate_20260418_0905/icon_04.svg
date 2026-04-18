@@ -1,0 +1,62 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <!-- Layer 1: 밝은 코랄 배경 -->
+  <defs>
+    <linearGradient id="bg04" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFCCBC"/>
+      <stop offset="100%" stop-color="#FFE0B2"/>
+    </linearGradient>
+    <linearGradient id="lens04" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E3F2FD" stop-opacity="0.85"/>
+      <stop offset="100%" stop-color="#BBDEFB" stop-opacity="0.85"/>
+    </linearGradient>
+    <clipPath id="clip04">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+    <clipPath id="lensClip">
+      <circle cx="450" cy="460" r="290"/>
+    </clipPath>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg04)"/>
+
+  <g clip-path="url(#clip04)">
+    <!-- Layer 2: 돋보기 — 렌즈 안에 선명한 이미지 -->
+    <!-- 렌즈 테두리 -->
+    <circle cx="450" cy="460" r="300" fill="#1565C0" opacity="0.25"/>
+    <circle cx="450" cy="460" r="290" fill="url(#lens04)"/>
+
+    <!-- 렌즈 안 선명한 이미지 (고화질 풍경) -->
+    <g clip-path="url(#lensClip)">
+      <!-- 하늘 -->
+      <rect x="162" y="172" width="576" height="200" fill="#64B5F6"/>
+      <!-- 구름 -->
+      <ellipse cx="310" cy="250" rx="80" ry="44" fill="#FFFFFF" opacity="0.9"/>
+      <ellipse cx="380" cy="235" rx="60" ry="36" fill="#FFFFFF" opacity="0.9"/>
+      <ellipse cx="560" cy="260" rx="70" ry="40" fill="#FFFFFF" opacity="0.85"/>
+      <!-- 태양 -->
+      <circle cx="650" cy="220" r="60" fill="#FFD54F"/>
+      <!-- 초록 들판 -->
+      <rect x="162" y="372" width="576" height="240" fill="#66BB6A"/>
+      <!-- 산 실루엣 -->
+      <path d="M162 430 L310 280 L450 420 L570 310 L740 430" fill="#388E3C"/>
+      <!-- 물 반사 -->
+      <rect x="162" y="612" width="576" height="120" fill="#42A5F5" opacity="0.7"/>
+    </g>
+
+    <!-- 렌즈 테두리 링 -->
+    <circle cx="450" cy="460" r="290" fill="none" stroke="#1565C0" stroke-width="40"/>
+    <!-- 렌즈 광택 -->
+    <ellipse cx="370" cy="340" rx="80" ry="50" fill="#FFFFFF" opacity="0.3" transform="rotate(-30 370 340)"/>
+
+    <!-- 손잡이 -->
+    <path d="M685 695 L870 880" stroke="#BF360C" stroke-width="80" stroke-linecap="round"/>
+    <path d="M685 695 L870 880" stroke="#FF8A65" stroke-width="52" stroke-linecap="round"/>
+
+    <!-- Layer 3: "선명!" 강조 배지 -->
+    <rect x="560" y="180" width="380" height="90" rx="22" fill="#FF7043"/>
+    <text x="750" y="240" font-family="'Segoe UI',Arial,sans-serif" font-weight="900" font-size="68" fill="#FFFFFF" text-anchor="middle">AI UPSCALE</text>
+
+    <!-- 배율 표시 -->
+    <rect x="600" y="290" width="300" height="68" rx="18" fill="#FFFFFF" opacity="0.9"/>
+    <text x="750" y="340" font-family="'Segoe UI',Arial,sans-serif" font-weight="900" font-size="60" fill="#FF7043" text-anchor="middle">2x · 4x · 8x</text>
+  </g>
+</svg>

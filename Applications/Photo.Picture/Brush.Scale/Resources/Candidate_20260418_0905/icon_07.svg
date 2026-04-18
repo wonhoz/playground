@@ -1,0 +1,49 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <!-- Layer 1: 따뜻한 크림 배경 -->
+  <defs>
+    <linearGradient id="bg07" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFF8E1"/>
+      <stop offset="100%" stop-color="#FCE4EC"/>
+    </linearGradient>
+    <clipPath id="clip07">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg07)"/>
+
+  <g clip-path="url(#clip07)">
+    <!-- Layer 2: AI 붓 (브러시) 형태 — 이미지를 선명하게 칠하는 장면 -->
+
+    <!-- 브러시 손잡이 -->
+    <rect x="240" y="120" width="80" height="480" rx="38" fill="#795548" transform="rotate(-30 280 360)"/>
+    <!-- 브러시 금속 페룰 -->
+    <rect x="208" y="430" width="126" height="52" rx="10" fill="#9E9E9E" transform="rotate(-30 271 456)"/>
+    <!-- 브러시 모 — 컬러풀한 붓터치 -->
+    <ellipse cx="160" cy="640" rx="58" ry="90" fill="#E53935" transform="rotate(-30 160 640)"/>
+    <!-- 붓터치 흔적들 (이미지를 칠하는 효과) -->
+    <path d="M180 680 Q320 600 460 640 Q580 680 680 620" stroke="#E53935" stroke-width="56" stroke-linecap="round" fill="none" opacity="0.9"/>
+    <path d="M220 760 Q380 680 520 720 Q640 760 760 700" stroke="#FF9800" stroke-width="50" stroke-linecap="round" fill="none" opacity="0.85"/>
+    <path d="M260 840 Q420 760 560 800 Q700 840 820 780" stroke="#7CB342" stroke-width="44" stroke-linecap="round" fill="none" opacity="0.8"/>
+
+    <!-- Layer 3: 이미지 프레임 (선명해진 결과물) -->
+    <rect x="480" y="160" width="440" height="440" rx="28" fill="#FFFFFF" stroke="#FF9800" stroke-width="10"/>
+    <!-- 선명한 고화질 이미지 내용 -->
+    <defs>
+      <linearGradient id="sky07" x1="0%" y1="0%" x2="0%" y2="100%">
+        <stop offset="0%" stop-color="#81D4FA"/>
+        <stop offset="100%" stop-color="#4FC3F7"/>
+      </linearGradient>
+    </defs>
+    <rect x="494" y="174" width="412" height="160" rx="12" fill="url(#sky07)"/>
+    <circle cx="850" cy="230" r="50" fill="#FFD54F"/>
+    <ellipse cx="650" cy="220" rx="72" ry="38" fill="#FFFFFF" opacity="0.9"/>
+    <rect x="494" y="334" width="412" height="166" rx="12" fill="#66BB6A"/>
+    <path d="M494 380 L600 280 L680 360 L760 290 L906 380" fill="#2E7D32"/>
+    <!-- AI 뱃지 -->
+    <rect x="564" y="560" width="200" height="64" rx="18" fill="#FF7043"/>
+    <text x="664" y="604" font-family="'Segoe UI',Arial,sans-serif" font-weight="900" font-size="52" fill="#FFFFFF" text-anchor="middle">AI 4x</text>
+
+    <!-- 브러시 앱 이름 힌트 -->
+    <text x="512" y="920" font-family="'Segoe UI',Arial,sans-serif" font-weight="700" font-size="72" fill="#795548" text-anchor="middle" opacity="0.7">Brush · Scale</text>
+  </g>
+</svg>

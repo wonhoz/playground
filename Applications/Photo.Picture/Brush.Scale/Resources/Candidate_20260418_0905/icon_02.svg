@@ -1,0 +1,36 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <!-- Layer 1: 딥 퍼플 배경 -->
+  <defs>
+    <linearGradient id="bg02" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4A148C"/>
+      <stop offset="100%" stop-color="#7B1FA2"/>
+    </linearGradient>
+    <radialGradient id="glow02" cx="50%" cy="50%" r="45%">
+      <stop offset="0%" stop-color="#FFD600" stop-opacity="0.25"/>
+      <stop offset="100%" stop-color="#FFD600" stop-opacity="0"/>
+    </radialGradient>
+    <clipPath id="clip02">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg02)"/>
+  <rect width="1024" height="1024" rx="190" fill="url(#glow02)"/>
+
+  <g clip-path="url(#clip02)">
+    <!-- Layer 2: 크고 굵은 "4x" 메인 텍스트 -->
+    <text x="512" y="590" font-family="'Segoe UI',Arial,sans-serif" font-weight="900" font-size="520" fill="#FFD600" text-anchor="middle" opacity="0.97">4x</text>
+
+    <!-- Layer 3: 확장 방향 화살표들 (4방향) -->
+    <!-- 좌상 → 우하 대각선 화살표 (확대 방향) -->
+    <path d="M120 120 L280 120 L280 280" stroke="#FFFFFF" stroke-width="52" stroke-linecap="round" stroke-linejoin="round" fill="none" opacity="0.7"/>
+    <path d="M904 120 L744 120 L744 280" stroke="#FFFFFF" stroke-width="52" stroke-linecap="round" stroke-linejoin="round" fill="none" opacity="0.7"/>
+    <path d="M120 904 L280 904 L280 744" stroke="#FFFFFF" stroke-width="52" stroke-linecap="round" stroke-linejoin="round" fill="none" opacity="0.7"/>
+    <path d="M904 904 L744 904 L744 744" stroke="#FFFFFF" stroke-width="52" stroke-linecap="round" stroke-linejoin="round" fill="none" opacity="0.7"/>
+
+    <!-- 중앙 상단 배율 선택 힌트 -->
+    <rect x="310" y="140" width="404" height="78" rx="20" fill="#FFFFFF" opacity="0.15"/>
+    <text x="400" y="194" font-family="'Segoe UI',Arial,sans-serif" font-weight="700" font-size="60" fill="#FFD600" text-anchor="middle">2x</text>
+    <text x="512" y="194" font-family="'Segoe UI',Arial,sans-serif" font-weight="900" font-size="68" fill="#FFFFFF" text-anchor="middle">4x</text>
+    <text x="624" y="194" font-family="'Segoe UI',Arial,sans-serif" font-weight="700" font-size="60" fill="#CE93D8" text-anchor="middle">8x</text>
+  </g>
+</svg>

@@ -1,0 +1,56 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <!-- Layer 1: 레몬-라임 + 퍼플 그라데이션 배경 -->
+  <defs>
+    <linearGradient id="bg08" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F9FBE7"/>
+      <stop offset="50%" stop-color="#EDE7F6"/>
+      <stop offset="100%" stop-color="#FCE4EC"/>
+    </linearGradient>
+    <clipPath id="clip08">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg08)"/>
+
+  <g clip-path="url(#clip08)">
+    <!-- Layer 2: 이미지 레이어들이 2x→4x→8x로 쌓이는 구성 -->
+    <!-- 맨 뒤 레이어 (8x — 가장 크고 투명) -->
+    <rect x="220" y="440" width="600" height="460" rx="22" fill="#CE93D8" opacity="0.4"/>
+    <rect x="220" y="440" width="600" height="460" rx="22" fill="none" stroke="#AB47BC" stroke-width="8"/>
+    <text x="520" y="870" font-family="'Segoe UI',Arial,sans-serif" font-weight="900" font-size="56" fill="#7B1FA2" text-anchor="middle">8x</text>
+
+    <!-- 중간 레이어 (4x) -->
+    <rect x="170" y="300" width="520" height="400" rx="22" fill="#80CBC4" opacity="0.6"/>
+    <rect x="170" y="300" width="520" height="400" rx="22" fill="none" stroke="#00897B" stroke-width="8"/>
+    <text x="430" y="688" font-family="'Segoe UI',Arial,sans-serif" font-weight="900" font-size="56" fill="#004D40" text-anchor="middle">4x</text>
+
+    <!-- 앞 레이어 (2x — 가장 작지만 선명) -->
+    <rect x="120" y="160" width="420" height="320" rx="22" fill="#FFFFFF" opacity="0.95"/>
+    <rect x="120" y="160" width="420" height="320" rx="22" fill="none" stroke="#F48FB1" stroke-width="8"/>
+    <!-- 2x 레이어 안 내용 (선명한 이미지) -->
+    <defs>
+      <linearGradient id="imgInner" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#FF6F00"/>
+        <stop offset="100%" stop-color="#FFD740"/>
+      </linearGradient>
+    </defs>
+    <rect x="136" y="176" width="168" height="148" rx="10" fill="url(#imgInner)"/>
+    <rect x="312" y="176" width="214" height="148" rx="10" fill="#42A5F5"/>
+    <rect x="136" y="332" width="390" height="134" rx="10" fill="#66BB6A"/>
+    <text x="330" y="456" font-family="'Segoe UI',Arial,sans-serif" font-weight="900" font-size="56" fill="#880E4F" text-anchor="middle">2x</text>
+
+    <!-- Layer 3: 우측 배율 레이블 스택 (세로로) -->
+    <rect x="720" y="180" width="200" height="76" rx="20" fill="#F48FB1"/>
+    <text x="820" y="231" font-family="'Segoe UI',Arial,sans-serif" font-weight="900" font-size="64" fill="#FFFFFF" text-anchor="middle">2x</text>
+
+    <rect x="720" y="280" width="200" height="76" rx="20" fill="#4DB6AC"/>
+    <text x="820" y="331" font-family="'Segoe UI',Arial,sans-serif" font-weight="900" font-size="64" fill="#FFFFFF" text-anchor="middle">4x</text>
+
+    <rect x="720" y="380" width="200" height="76" rx="20" fill="#AB47BC"/>
+    <text x="820" y="431" font-family="'Segoe UI',Arial,sans-serif" font-weight="900" font-size="64" fill="#FFFFFF" text-anchor="middle">8x</text>
+
+    <!-- 상단 AI 배지 -->
+    <rect x="720" y="100" width="200" height="60" rx="16" fill="#FDD835"/>
+    <text x="820" y="143" font-family="'Segoe UI',Arial,sans-serif" font-weight="900" font-size="50" fill="#333333" text-anchor="middle">AI UP</text>
+  </g>
+</svg>

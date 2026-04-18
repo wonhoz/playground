@@ -1,0 +1,63 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <!-- Layer 1: 밝은 하늘블루 배경 -->
+  <defs>
+    <linearGradient id="bg01" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E3F2FD"/>
+      <stop offset="100%" stop-color="#BBDEFB"/>
+    </linearGradient>
+    <clipPath id="clip01">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg01)"/>
+
+  <g clip-path="url(#clip01)">
+    <!-- Layer 2: Before — 작고 픽셀 깨진 이미지 (좌) -->
+    <rect x="90" y="360" width="210" height="210" rx="14" fill="#FFFFFF" stroke="#90CAF9" stroke-width="8"/>
+    <!-- 픽셀 모자이크 (흐린 이미지 표현) -->
+    <rect x="103" y="373" width="50" height="50" rx="4" fill="#BDBDBD"/>
+    <rect x="157" y="373" width="50" height="50" rx="4" fill="#EF9A9A"/>
+    <rect x="211" y="373" width="75" height="50" rx="4" fill="#90CAF9"/>
+    <rect x="103" y="427" width="75" height="50" rx="4" fill="#A5D6A7"/>
+    <rect x="182" y="427" width="50" height="50" rx="4" fill="#BDBDBD"/>
+    <rect x="236" y="427" width="50" height="50" rx="4" fill="#FFCC80"/>
+    <rect x="103" y="481" width="50" height="75" rx="4" fill="#CE93D8"/>
+    <rect x="157" y="481" width="75" height="75" rx="4" fill="#80DEEA"/>
+    <rect x="236" y="481" width="50" height="75" rx="4" fill="#EF9A9A"/>
+    <!-- SMALL 레이블 -->
+    <rect x="100" y="572" width="190" height="44" rx="10" fill="#90CAF9"/>
+    <text x="195" y="601" font-family="'Segoe UI',Arial,sans-serif" font-weight="700" font-size="36" fill="#1565C0" text-anchor="middle">320×320</text>
+
+    <!-- 화살표 -->
+    <path d="M318 480 L490 480" stroke="#FF7043" stroke-width="56" stroke-linecap="round"/>
+    <path d="M452 424 L510 480 L452 536" stroke="#FF7043" stroke-width="56" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+
+    <!-- Layer 3: After — 크고 선명한 이미지 (우) -->
+    <rect x="516" y="215" width="400" height="400" rx="22" fill="#FFFFFF" stroke="#42A5F5" stroke-width="10"/>
+    <!-- 선명한 이미지 표현 (작은 픽셀들 → 선명한 그라데이션) -->
+    <defs>
+      <linearGradient id="imgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#81C784"/>
+        <stop offset="50%" stop-color="#64B5F6"/>
+        <stop offset="100%" stop-color="#FFB74D"/>
+      </linearGradient>
+    </defs>
+    <rect x="528" y="227" width="376" height="376" rx="14" fill="url(#imgGrad)" opacity="0.3"/>
+    <!-- 선명한 사각형들 -->
+    <rect x="535" y="234" width="120" height="120" rx="8" fill="#66BB6A" opacity="0.9"/>
+    <rect x="665" y="234" width="120" height="120" rx="8" fill="#42A5F5" opacity="0.9"/>
+    <rect x="795" y="234" width="108" height="120" rx="8" fill="#FFA726" opacity="0.9"/>
+    <rect x="535" y="364" width="180" height="120" rx="8" fill="#EF5350" opacity="0.85"/>
+    <rect x="725" y="364" width="178" height="120" rx="8" fill="#AB47BC" opacity="0.85"/>
+    <rect x="535" y="494" width="110" height="108" rx="8" fill="#26C6DA" opacity="0.9"/>
+    <rect x="655" y="494" width="110" height="108" rx="8" fill="#D4E157" opacity="0.9"/>
+    <rect x="775" y="494" width="128" height="108" rx="8" fill="#FF7043" opacity="0.9"/>
+    <!-- BIG 레이블 -->
+    <rect x="526" y="625" width="380" height="52" rx="12" fill="#42A5F5"/>
+    <text x="716" y="661" font-family="'Segoe UI',Arial,sans-serif" font-weight="700" font-size="40" fill="#FFFFFF" text-anchor="middle">1280×1280</text>
+
+    <!-- 4x 배지 -->
+    <circle cx="868" cy="216" r="76" fill="#FF7043"/>
+    <text x="868" y="244" font-family="'Segoe UI',Arial,sans-serif" font-weight="900" font-size="82" fill="#FFFFFF" text-anchor="middle">4x</text>
+  </g>
+</svg>

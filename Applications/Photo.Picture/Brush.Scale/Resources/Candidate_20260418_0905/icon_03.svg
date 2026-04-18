@@ -1,0 +1,79 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <!-- Layer 1: 민트-노랑 파스텔 배경 -->
+  <defs>
+    <linearGradient id="bg03" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E8F5E9"/>
+      <stop offset="100%" stop-color="#FFFDE7"/>
+    </linearGradient>
+    <clipPath id="clip03">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg03)"/>
+
+  <g clip-path="url(#clip03)">
+    <!-- 중앙 구분선 -->
+    <line x1="512" y1="130" x2="512" y2="894" stroke="#C8E6C9" stroke-width="6" stroke-dasharray="20 12"/>
+
+    <!-- Layer 2: Before 패널 (좌) — 픽셀 깨진 거친 이미지 -->
+    <rect x="80" y="180" width="400" height="400" rx="22" fill="#FFFFFF" stroke="#A5D6A7" stroke-width="8"/>
+    <!-- 큰 픽셀 모자이크 블록들 (저해상도 표현) -->
+    <rect x="92" y="192" width="90" height="90" rx="6" fill="#EF9A9A"/>
+    <rect x="186" y="192" width="90" height="90" rx="6" fill="#B0BEC5"/>
+    <rect x="280" y="192" width="90" height="90" rx="6" fill="#80CBC4"/>
+    <rect x="374" y="192" width="94" height="90" rx="6" fill="#FFE082"/>
+    <rect x="92" y="286" width="90" height="90" rx="6" fill="#CE93D8"/>
+    <rect x="186" y="286" width="90" height="90" rx="6" fill="#EF9A9A"/>
+    <rect x="280" y="286" width="90" height="90" rx="6" fill="#B0BEC5"/>
+    <rect x="374" y="286" width="94" height="90" rx="6" fill="#80CBC4"/>
+    <rect x="92" y="380" width="90" height="90" rx="6" fill="#FFE082"/>
+    <rect x="186" y="380" width="90" height="90" rx="6" fill="#CE93D8"/>
+    <rect x="280" y="380" width="90" height="90" rx="6" fill="#EF9A9A"/>
+    <rect x="374" y="380" width="94" height="90" rx="6" fill="#B0BEC5"/>
+    <rect x="92" y="474" width="90" height="94" rx="6" fill="#80CBC4"/>
+    <rect x="186" y="474" width="90" height="94" rx="6" fill="#FFE082"/>
+    <rect x="280" y="474" width="184" height="94" rx="6" fill="#CE93D8"/>
+
+    <!-- BEFORE 라벨 -->
+    <rect x="110" y="608" width="200" height="56" rx="14" fill="#A5D6A7"/>
+    <text x="210" y="646" font-family="'Segoe UI',Arial,sans-serif" font-weight="800" font-size="42" fill="#2E7D32" text-anchor="middle">BEFORE</text>
+    <text x="210" y="714" font-family="'Segoe UI',Arial,sans-serif" font-weight="600" font-size="44" fill="#78909C" text-anchor="middle">320px</text>
+
+    <!-- Layer 3: After 패널 (우) — 선명한 고해상도 -->
+    <rect x="544" y="180" width="400" height="400" rx="22" fill="#FFFFFF" stroke="#F48FB1" stroke-width="8"/>
+    <!-- 선명한 작은 픽셀 → 실제 이미지처럼 -->
+    <defs>
+      <linearGradient id="sky" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#81D4FA"/>
+        <stop offset="100%" stop-color="#4FC3F7"/>
+      </linearGradient>
+      <linearGradient id="grass" x1="0%" y1="0%" x2="0%" y2="100%">
+        <stop offset="0%" stop-color="#A5D6A7"/>
+        <stop offset="100%" stop-color="#66BB6A"/>
+      </linearGradient>
+    </defs>
+    <!-- 배경 하늘 -->
+    <rect x="556" y="192" width="376" height="240" rx="12" fill="url(#sky)"/>
+    <!-- 태양 -->
+    <circle cx="880" cy="240" r="56" fill="#FFD54F"/>
+    <!-- 구름 -->
+    <ellipse cx="700" cy="230" rx="70" ry="38" fill="#FFFFFF" opacity="0.9"/>
+    <ellipse cx="760" cy="220" rx="50" ry="32" fill="#FFFFFF" opacity="0.9"/>
+    <!-- 땅 -->
+    <rect x="556" y="432" width="376" height="136" rx="12" fill="url(#grass)"/>
+    <!-- 나무 실루엣 -->
+    <rect x="620" y="380" width="28" height="80" fill="#5D4037"/>
+    <ellipse cx="634" cy="368" rx="52" ry="48" fill="#388E3C"/>
+    <rect x="750" y="400" width="22" height="60" fill="#5D4037"/>
+    <ellipse cx="761" cy="390" rx="42" ry="38" fill="#2E7D32"/>
+
+    <!-- AFTER 라벨 -->
+    <rect x="614" y="608" width="200" height="56" rx="14" fill="#F48FB1"/>
+    <text x="714" y="646" font-family="'Segoe UI',Arial,sans-serif" font-weight="800" font-size="42" fill="#880E4F" text-anchor="middle">AFTER</text>
+    <text x="714" y="714" font-family="'Segoe UI',Arial,sans-serif" font-weight="600" font-size="44" fill="#78909C" text-anchor="middle">1280px</text>
+
+    <!-- 중앙 AI 배지 -->
+    <rect x="436" y="450" width="152" height="66" rx="18" fill="#FDD835"/>
+    <text x="512" y="496" font-family="'Segoe UI',Arial,sans-serif" font-weight="900" font-size="52" fill="#333333" text-anchor="middle">AI 4x</text>
+  </g>
+</svg>

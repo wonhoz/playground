@@ -1,0 +1,57 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E0F2F1"/>
+      <stop offset="100%" stop-color="#E3F2FD"/>
+    </linearGradient>
+    <linearGradient id="globe" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#26C6DA"/>
+      <stop offset="100%" stop-color="#00838F"/>
+    </linearGradient>
+    <clipPath id="cp"><rect width="1024" height="1024" rx="190"/></clipPath>
+    <clipPath id="globeClip">
+      <circle cx="512" cy="340" r="230"/>
+    </clipPath>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg)"/>
+  <g clip-path="url(#cp)">
+    <!-- 지구 실루엣 (배경) -->
+    <circle cx="512" cy="340" r="240" fill="#00838F" opacity="0.15"/>
+    <circle cx="512" cy="340" r="230" fill="#26C6DA"/>
+    <!-- 지구 경선/위선 -->
+    <ellipse cx="512" cy="340" rx="230" ry="70" fill="none" stroke="#FFFFFF" stroke-width="4" opacity="0.4" clip-path="url(#globeClip)"/>
+    <ellipse cx="512" cy="340" rx="230" ry="150" fill="none" stroke="#FFFFFF" stroke-width="3" opacity="0.3" clip-path="url(#globeClip)"/>
+    <line x1="512" y1="110" x2="512" y2="570" stroke="#FFFFFF" stroke-width="4" opacity="0.4" clip-path="url(#globeClip)"/>
+    <line x1="282" y1="340" x2="742" y2="340" stroke="#FFFFFF" stroke-width="4" opacity="0.4" clip-path="url(#globeClip)"/>
+    <ellipse cx="512" cy="340" rx="115" ry="230" fill="none" stroke="#B2EBF2" stroke-width="3" opacity="0.4" clip-path="url(#globeClip)"/>
+    <!-- 대륙 -->
+    <ellipse cx="430" cy="290" rx="100" ry="70" fill="#4CAF50" opacity="0.75" clip-path="url(#globeClip)"/>
+    <ellipse cx="450" cy="400" rx="80" ry="100" fill="#66BB6A" opacity="0.7" clip-path="url(#globeClip)"/>
+    <ellipse cx="630" cy="300" rx="140" ry="90" fill="#43A047" opacity="0.7" clip-path="url(#globeClip)"/>
+    <ellipse cx="310" cy="330" rx="80" ry="90" fill="#4CAF50" opacity="0.65" clip-path="url(#globeClip)"/>
+    <!-- 지구 테두리 -->
+    <circle cx="512" cy="340" r="230" fill="none" stroke="#00695C" stroke-width="10"/>
+
+    <!-- 4지선다 버튼들 (하단) -->
+    <!-- 버튼 A -->
+    <rect x="80" y="620" width="400" height="110" rx="20" fill="#00897B"/>
+    <text x="280" y="688" font-family="'Segoe UI',Arial,sans-serif" font-weight="900" font-size="52" fill="#FFFFFF" text-anchor="middle">🇯🇵 도쿄</text>
+    <!-- 버튼 B (정답 하이라이트) -->
+    <rect x="544" y="620" width="400" height="110" rx="20" fill="#F44336"/>
+    <text x="744" y="688" font-family="'Segoe UI',Arial,sans-serif" font-weight="900" font-size="52" fill="#FFFFFF" text-anchor="middle">🇫🇷 파리</text>
+    <!-- 버튼 C -->
+    <rect x="80" y="746" width="400" height="100" rx="20" fill="#0097A7"/>
+    <text x="280" y="808" font-family="'Segoe UI',Arial,sans-serif" font-weight="900" font-size="50" fill="#FFFFFF" text-anchor="middle">🇧🇷 브라질</text>
+    <!-- 버튼 D -->
+    <rect x="544" y="746" width="400" height="100" rx="20" fill="#0097A7"/>
+    <text x="744" y="808" font-family="'Segoe UI',Arial,sans-serif" font-weight="900" font-size="50" fill="#FFFFFF" text-anchor="middle">🇩🇪 베를린</text>
+
+    <!-- 타이머 (지구본 위) -->
+    <rect x="312" y="120" width="400" height="60" rx="20" fill="#FF8F00" opacity="0.9"/>
+    <text x="512" y="162" font-family="'Segoe UI',Arial,sans-serif" font-weight="900" font-size="46" fill="#FFFFFF" text-anchor="middle">⏱ 12초</text>
+
+    <!-- 타이틀 -->
+    <rect x="200" y="880" width="624" height="68" rx="24" fill="#004D40"/>
+    <text x="512" y="927" font-family="'Segoe UI',Arial,sans-serif" font-weight="900" font-size="52" fill="#FFFFFF" text-anchor="middle">GEO.QUIZ</text>
+  </g>
+</svg>

@@ -1,0 +1,76 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1565C0"/>
+      <stop offset="100%" stop-color="#0D47A1"/>
+    </linearGradient>
+    <linearGradient id="ocean" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1976D2"/>
+      <stop offset="100%" stop-color="#1565C0"/>
+    </linearGradient>
+    <clipPath id="cp"><rect width="1024" height="1024" rx="190"/></clipPath>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg)"/>
+  <g clip-path="url(#cp)">
+    <!-- 세계 지도 (단순화된 대륙 실루엣) -->
+    <!-- 바다 배경 -->
+    <rect x="80" y="140" width="864" height="680" rx="20" fill="url(#ocean)" opacity="0.5"/>
+
+    <!-- 유럽 -->
+    <ellipse cx="450" cy="320" rx="120" ry="90" fill="#4CAF50" opacity="0.85"/>
+    <!-- 아프리카 -->
+    <ellipse cx="470" cy="560" rx="100" ry="140" fill="#8BC34A" opacity="0.8"/>
+    <!-- 아시아 -->
+    <ellipse cx="700" cy="360" rx="180" ry="130" fill="#66BB6A" opacity="0.8"/>
+    <!-- 아메리카 (북) -->
+    <ellipse cx="220" cy="320" rx="120" ry="130" fill="#4CAF50" opacity="0.75"/>
+    <!-- 아메리카 (남) -->
+    <ellipse cx="270" cy="580" rx="80" ry="120" fill="#43A047" opacity="0.8"/>
+    <!-- 오세아니아 -->
+    <ellipse cx="800" cy="640" rx="90" ry="60" fill="#66BB6A" opacity="0.75"/>
+
+    <!-- 핀(수도 마커)들 -->
+    <!-- 파리 핀 (빨강) -->
+    <circle cx="440" cy="290" r="18" fill="#F44336"/>
+    <circle cx="440" cy="290" r="10" fill="#FFCDD2"/>
+    <line x1="440" y1="308" x2="440" y2="340" stroke="#F44336" stroke-width="5"/>
+
+    <!-- 도쿄 핀 (노랑) -->
+    <circle cx="780" cy="310" r="18" fill="#FFD600"/>
+    <circle cx="780" cy="310" r="10" fill="#FFFDE7"/>
+    <line x1="780" y1="328" x2="780" y2="360" stroke="#FFD600" stroke-width="5"/>
+
+    <!-- 런던 핀 (흰색) -->
+    <circle cx="410" cy="255" r="16" fill="#FFFFFF"/>
+    <circle cx="410" cy="255" r="8" fill="#90CAF9"/>
+    <line x1="410" y1="271" x2="410" y2="298" stroke="#FFFFFF" stroke-width="5"/>
+
+    <!-- 브라질리아 핀 (초록) -->
+    <circle cx="280" cy="590" r="16" fill="#4CAF50"/>
+    <circle cx="280" cy="590" r="8" fill="#C8E6C9"/>
+    <line x1="280" y1="606" x2="280" y2="630" stroke="#4CAF50" stroke-width="5"/>
+
+    <!-- 북경 핀 (오렌지) -->
+    <circle cx="730" cy="310" r="16" fill="#FF6D00"/>
+    <circle cx="730" cy="310" r="8" fill="#FFE0B2"/>
+    <line x1="730" y1="326" x2="730" y2="355" stroke="#FF6D00" stroke-width="5"/>
+
+    <!-- 캔버라 핀 (퍼플) -->
+    <circle cx="820" cy="640" r="14" fill="#9C27B0"/>
+    <circle cx="820" cy="640" r="7" fill="#E1BEE7"/>
+    <line x1="820" y1="654" x2="820" y2="678" stroke="#9C27B0" stroke-width="4"/>
+
+    <!-- 카이로 핀 (시안) -->
+    <circle cx="490" cy="450" r="15" fill="#00BCD4"/>
+    <circle cx="490" cy="450" r="8" fill="#B2EBF2"/>
+    <line x1="490" y1="465" x2="490" y2="488" stroke="#00BCD4" stroke-width="4"/>
+
+    <!-- 물음표 라벨 -->
+    <circle cx="570" cy="510" r="46" fill="#FF8F00"/>
+    <text x="570" y="530" font-family="'Segoe UI',Arial,sans-serif" font-weight="900" font-size="60" fill="#FFFFFF" text-anchor="middle">?</text>
+
+    <!-- 타이틀 -->
+    <rect x="200" y="848" width="624" height="70" rx="24" fill="#0A2472"/>
+    <text x="512" y="895" font-family="'Segoe UI',Arial,sans-serif" font-weight="900" font-size="54" fill="#FFFFFF" text-anchor="middle">GEO.QUIZ</text>
+  </g>
+</svg>

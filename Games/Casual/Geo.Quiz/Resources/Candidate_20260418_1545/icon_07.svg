@@ -1,0 +1,55 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="60%" r="60%">
+      <stop offset="0%" stop-color="#FF6D00"/>
+      <stop offset="60%" stop-color="#E65100"/>
+      <stop offset="100%" stop-color="#BF360C"/>
+    </radialGradient>
+    <radialGradient id="flame" cx="50%" cy="80%" r="60%">
+      <stop offset="0%" stop-color="#FFD600"/>
+      <stop offset="50%" stop-color="#FF6D00"/>
+      <stop offset="100%" stop-color="#BF360C"/>
+    </radialGradient>
+    <clipPath id="cp"><rect width="1024" height="1024" rx="190"/></clipPath>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg)"/>
+  <g clip-path="url(#cp)">
+    <!-- 불꽃 이펙트 (대형) -->
+    <!-- 큰 불꽃 -->
+    <ellipse cx="512" cy="480" rx="200" ry="320" fill="url(#flame)" opacity="0.85"/>
+    <ellipse cx="512" cy="440" rx="140" ry="260" fill="#FFD600" opacity="0.8"/>
+    <ellipse cx="512" cy="400" rx="80" ry="180" fill="#FFF176" opacity="0.7"/>
+    <!-- 작은 불꽃들 -->
+    <ellipse cx="350" cy="520" rx="70" ry="140" fill="#FF8F00" opacity="0.7"/>
+    <ellipse cx="674" cy="520" rx="70" ry="140" fill="#FF8F00" opacity="0.7"/>
+    <ellipse cx="400" cy="460" rx="50" ry="100" fill="#FFD600" opacity="0.6"/>
+    <ellipse cx="624" cy="460" rx="50" ry="100" fill="#FFD600" opacity="0.6"/>
+
+    <!-- 큰 불꽃 이모지 -->
+    <text x="512" y="440" font-family="'Segoe UI',Arial,sans-serif" font-size="200" text-anchor="middle">🔥</text>
+
+    <!-- 연속 정답 숫자 -->
+    <text x="512" y="320" font-family="'Segoe UI',Arial,sans-serif" font-weight="900" font-size="180" fill="#FFFFFF" text-anchor="middle" opacity="0.95">5</text>
+    <text x="512" y="160" font-family="'Segoe UI',Arial,sans-serif" font-weight="900" font-size="90" fill="#FFD600" text-anchor="middle">연속!</text>
+
+    <!-- 체크마크들 (아래) -->
+    <circle cx="200" cy="700" r="58" fill="#FFD600" opacity="0.9"/>
+    <text x="200" y="720" font-family="'Segoe UI',Arial,sans-serif" font-size="72" fill="#BF360C" text-anchor="middle">✓</text>
+
+    <circle cx="350" cy="700" r="58" fill="#FFD600" opacity="0.9"/>
+    <text x="350" y="720" font-family="'Segoe UI',Arial,sans-serif" font-size="72" fill="#BF360C" text-anchor="middle">✓</text>
+
+    <circle cx="500" cy="700" r="58" fill="#FFD600" opacity="0.9"/>
+    <text x="500" y="720" font-family="'Segoe UI',Arial,sans-serif" font-size="72" fill="#BF360C" text-anchor="middle">✓</text>
+
+    <circle cx="650" cy="700" r="58" fill="#FFD600" opacity="0.9"/>
+    <text x="650" y="720" font-family="'Segoe UI',Arial,sans-serif" font-size="72" fill="#BF360C" text-anchor="middle">✓</text>
+
+    <circle cx="800" cy="700" r="58" fill="#FFD600" opacity="0.9"/>
+    <text x="800" y="720" font-family="'Segoe UI',Arial,sans-serif" font-size="72" fill="#BF360C" text-anchor="middle">✓</text>
+
+    <!-- 타이틀 -->
+    <rect x="200" y="840" width="624" height="70" rx="24" fill="#6D1800"/>
+    <text x="512" y="887" font-family="'Segoe UI',Arial,sans-serif" font-weight="900" font-size="54" fill="#FFD600" text-anchor="middle">GEO.QUIZ</text>
+  </g>
+</svg>

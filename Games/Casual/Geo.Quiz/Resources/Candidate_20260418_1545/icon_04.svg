@@ -1,0 +1,49 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E8EAF6"/>
+      <stop offset="100%" stop-color="#E3F2FD"/>
+    </linearGradient>
+    <radialGradient id="globe" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#42A5F5"/>
+      <stop offset="60%" stop-color="#1565C0"/>
+      <stop offset="100%" stop-color="#0D47A1"/>
+    </radialGradient>
+    <clipPath id="cp"><rect width="1024" height="1024" rx="190"/></clipPath>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg)"/>
+  <g clip-path="url(#cp)">
+    <!-- 지구본 -->
+    <circle cx="512" cy="440" r="280" fill="url(#globe)"/>
+    <!-- 지구본 경선/위선 -->
+    <ellipse cx="512" cy="440" rx="280" ry="90" fill="none" stroke="#90CAF9" stroke-width="5" opacity="0.5"/>
+    <ellipse cx="512" cy="440" rx="280" ry="180" fill="none" stroke="#90CAF9" stroke-width="5" opacity="0.3"/>
+    <line x1="512" y1="160" x2="512" y2="720" stroke="#90CAF9" stroke-width="5" opacity="0.4"/>
+    <line x1="232" y1="440" x2="792" y2="440" stroke="#90CAF9" stroke-width="5" opacity="0.4"/>
+    <!-- 경선 (사선) -->
+    <ellipse cx="512" cy="440" rx="140" ry="280" fill="none" stroke="#64B5F6" stroke-width="4" opacity="0.4"/>
+    <ellipse cx="512" cy="440" rx="240" ry="280" fill="none" stroke="#64B5F6" stroke-width="3" opacity="0.3"/>
+
+    <!-- 대륙 실루엣 (단순) -->
+    <ellipse cx="420" cy="380" rx="100" ry="70" fill="#4CAF50" opacity="0.7"/>
+    <ellipse cx="440" cy="500" rx="80" ry="110" fill="#66BB6A" opacity="0.6"/>
+    <ellipse cx="630" cy="380" rx="130" ry="90" fill="#43A047" opacity="0.65"/>
+    <ellipse cx="310" cy="420" rx="70" ry="80" fill="#388E3C" opacity="0.6"/>
+
+    <!-- 큰 물음표 -->
+    <circle cx="512" cy="440" r="130" fill="#FF8F00" opacity="0.92"/>
+    <text x="512" y="490" font-family="'Segoe UI',Arial,sans-serif" font-weight="900" font-size="160" fill="#FFFFFF" text-anchor="middle">?</text>
+
+    <!-- 지구본 테두리 반사 -->
+    <circle cx="512" cy="440" r="280" fill="none" stroke="#90CAF9" stroke-width="8" opacity="0.4"/>
+    <ellipse cx="430" cy="290" rx="80" ry="40" fill="#FFFFFF" opacity="0.15" transform="rotate(-20 430 290)"/>
+
+    <!-- 대륙 필터 라벨 (하단) -->
+    <rect x="160" y="760" width="704" height="60" rx="20" fill="#1565C0" opacity="0.85"/>
+    <text x="512" y="800" font-family="'Segoe UI',Arial,sans-serif" font-size="38" fill="#FFFFFF" text-anchor="middle">아시아 · 유럽 · 아프리카 · 아메리카</text>
+
+    <!-- 타이틀 -->
+    <rect x="200" y="858" width="624" height="70" rx="24" fill="#0D47A1"/>
+    <text x="512" y="905" font-family="'Segoe UI',Arial,sans-serif" font-weight="900" font-size="54" fill="#FFFFFF" text-anchor="middle">GEO.QUIZ</text>
+  </g>
+</svg>

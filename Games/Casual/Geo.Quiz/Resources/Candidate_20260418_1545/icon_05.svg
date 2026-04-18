@@ -1,0 +1,68 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFF8F0"/>
+      <stop offset="100%" stop-color="#FFF3E0"/>
+    </linearGradient>
+    <linearGradient id="map" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#DCEDC8"/>
+      <stop offset="100%" stop-color="#C8E6C9"/>
+    </linearGradient>
+    <clipPath id="cp"><rect width="1024" height="1024" rx="190"/></clipPath>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg)"/>
+  <g clip-path="url(#cp)">
+    <!-- 지도 배경 -->
+    <rect x="80" y="140" width="864" height="580" rx="20" fill="url(#map)" stroke="#A5D6A7" stroke-width="6"/>
+    <!-- 격자 선 (지도 위도/경도) -->
+    <line x1="80" y1="333" x2="944" y2="333" stroke="#A5D6A7" stroke-width="3" opacity="0.7"/>
+    <line x1="80" y1="527" x2="944" y2="527" stroke="#A5D6A7" stroke-width="3" opacity="0.7"/>
+    <line x1="272" y1="140" x2="272" y2="720" stroke="#A5D6A7" stroke-width="3" opacity="0.7"/>
+    <line x1="512" y1="140" x2="512" y2="720" stroke="#A5D6A7" stroke-width="3" opacity="0.7"/>
+    <line x1="752" y1="140" x2="752" y2="720" stroke="#A5D6A7" stroke-width="3" opacity="0.7"/>
+
+    <!-- 대륙들 (단순화) -->
+    <ellipse cx="350" cy="330" rx="150" ry="100" fill="#81C784" opacity="0.8"/>
+    <ellipse cx="430" cy="490" rx="110" ry="140" fill="#66BB6A" opacity="0.75"/>
+    <ellipse cx="680" cy="350" rx="180" ry="120" fill="#A5D6A7" opacity="0.8"/>
+    <ellipse cx="210" cy="340" rx="100" ry="120" fill="#81C784" opacity="0.7"/>
+    <ellipse cx="240" cy="530" rx="80" ry="110" fill="#66BB6A" opacity="0.7"/>
+    <ellipse cx="820" cy="570" rx="80" ry="60" fill="#A5D6A7" opacity="0.75"/>
+
+    <!-- 탐험가 캐릭터 (중앙, 크게) -->
+    <!-- 모자 -->
+    <ellipse cx="512" cy="195" rx="110" ry="30" fill="#5D4037"/>
+    <rect x="452" y="145" width="120" height="60" rx="12" fill="#6D4C41"/>
+    <!-- 머리 -->
+    <circle cx="512" cy="230" r="70" fill="#FFCCBC"/>
+    <!-- 눈 -->
+    <circle cx="490" cy="222" r="10" fill="#3E2723"/>
+    <circle cx="534" cy="222" r="10" fill="#3E2723"/>
+    <!-- 입 (웃음) -->
+    <path d="M 496 250 Q 512 268 528 250" fill="none" stroke="#BF360C" stroke-width="5" stroke-linecap="round"/>
+    <!-- 감탄 표정 -->
+    <text x="560" y="210" font-family="'Segoe UI',Arial,sans-serif" font-size="44">💡</text>
+    <!-- 몸통 -->
+    <rect x="442" y="300" width="140" height="180" rx="28" fill="#1565C0"/>
+    <!-- 팔 (좌: 지도 들고) -->
+    <rect x="312" y="320" width="130" height="50" rx="22" fill="#1565C0"/>
+    <!-- 지도 -->
+    <rect x="180" y="300" width="140" height="110" rx="16" fill="#FFCA28"/>
+    <line x1="200" y1="330" x2="300" y2="330" stroke="#FF8F00" stroke-width="4"/>
+    <line x1="200" y1="355" x2="280" y2="355" stroke="#FF8F00" stroke-width="4"/>
+    <circle cx="250" cy="385" r="14" fill="#F44336"/>
+    <line x1="250" y1="399" x2="250" y2="416" stroke="#F44336" stroke-width="4"/>
+    <!-- 팔 (우: 물음표 들고) -->
+    <rect x="582" y="320" width="130" height="50" rx="22" fill="#1565C0"/>
+    <circle cx="760" cy="330" r="56" fill="#FF8F00"/>
+    <text x="760" y="355" font-family="'Segoe UI',Arial,sans-serif" font-weight="900" font-size="70" fill="#FFFFFF" text-anchor="middle">?</text>
+
+    <!-- 부츠/다리 -->
+    <rect x="462" y="480" width="50" height="100" rx="16" fill="#3E2723"/>
+    <rect x="532" y="480" width="50" height="100" rx="16" fill="#3E2723"/>
+
+    <!-- 타이틀 -->
+    <rect x="200" y="848" width="624" height="70" rx="24" fill="#4E342E"/>
+    <text x="512" y="895" font-family="'Segoe UI',Arial,sans-serif" font-weight="900" font-size="54" fill="#FFFFFF" text-anchor="middle">GEO.QUIZ</text>
+  </g>
+</svg>

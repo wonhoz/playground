@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Layer 1: Background teal clean -->
+  <defs>
+    <linearGradient id="bg03" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#E0F2F1"/>
+      <stop offset="100%" stop-color="#00695C"/>
+    </linearGradient>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg03)"/>
+  <!-- Layer 2: Before disk (messy) and After disk (clean) -->
+  <!-- Before circle left -->
+  <circle cx="280" cy="440" r="210" fill="#FFFFFF" opacity="0.9"/>
+  <!-- Messy pie chart - full disk -->
+  <path d="M280 440 L280 230 A210 210 0 1 1 79.3 540.5 Z" fill="#E53935" opacity="0.8"/>
+  <path d="M280 440 L79.3 540.5 A210 210 0 0 1 170.7 249.5 Z" fill="#FF7043" opacity="0.8"/>
+  <text x="280" y="430" font-family="Arial Black, sans-serif" font-size="42" font-weight="900" fill="#B71C1C" text-anchor="middle">Before</text>
+  <text x="280" y="480" font-family="Arial, sans-serif" font-size="32" fill="#B71C1C" text-anchor="middle">98% full</text>
+  <!-- Arrow -->
+  <path d="M510 440 L580 440" stroke="#00695C" stroke-width="24" stroke-linecap="round"/>
+  <polygon points="580,410 650,440 580,470" fill="#00695C"/>
+  <!-- After circle right -->
+  <circle cx="750" cy="440" r="210" fill="#FFFFFF" opacity="0.95"/>
+  <!-- Clean pie chart - mostly free -->
+  <path d="M750 440 L750 230 A210 210 0 0 1 943 370 Z" fill="#E53935" opacity="0.6"/>
+  <path d="M750 440 L943 370 A210 210 0 1 1 750 230 Z" fill="#A5D6A7" opacity="0.9"/>
+  <text x="750" y="430" font-family="Arial Black, sans-serif" font-size="42" font-weight="900" fill="#00695C" text-anchor="middle">After</text>
+  <text x="750" y="480" font-family="Arial, sans-serif" font-size="32" fill="#00695C" text-anchor="middle">22% full</text>
+  <!-- Layer 3: Space freed badge -->
+  <rect x="260" y="730" width="504" height="100" rx="20" fill="#00695C"/>
+  <text x="512" y="793" font-family="Arial Black, sans-serif" font-size="50" font-weight="900" fill="#A5D6A7" text-anchor="middle">+76% freed!</text>
+</svg>

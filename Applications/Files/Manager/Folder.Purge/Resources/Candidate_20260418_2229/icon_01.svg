@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Layer 1: Background warm orange -->
+  <defs>
+    <linearGradient id="bg01" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFF3E0"/>
+      <stop offset="100%" stop-color="#E65100"/>
+    </linearGradient>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg01)"/>
+  <!-- Layer 2: Empty folder + trash can -->
+  <!-- Folder shape (open, empty) -->
+  <path d="M150 360 L150 740 L874 740 L874 360 L540 360 L500 280 L150 280 Z" fill="#FF8F00" opacity="0.9"/>
+  <rect x="150" y="360" width="724" height="380" rx="0" fill="#FFCC02" opacity="0.85"/>
+  <!-- Empty indicator inside folder -->
+  <rect x="220" y="430" width="584" height="230" rx="16" fill="#FFFFFF" opacity="0.9"/>
+  <text x="512" y="560" font-family="Arial, sans-serif" font-size="52" fill="#FF8F00" text-anchor="middle" opacity="0.6">(empty)</text>
+  <!-- Trash can overlaid bottom right -->
+  <rect x="620" y="560" width="180" height="200" rx="12" fill="#E53935" opacity="0.95"/>
+  <rect x="596" y="540" width="228" height="36" rx="10" fill="#C62828"/>
+  <rect x="668" y="516" width="88" height="30" rx="10" fill="#EF9A9A"/>
+  <!-- Trash lines -->
+  <line x1="680" y1="600" x2="680" y2="730" stroke="#FFCDD2" stroke-width="12" stroke-linecap="round"/>
+  <line x1="710" y1="600" x2="710" y2="730" stroke="#FFCDD2" stroke-width="12" stroke-linecap="round"/>
+  <line x1="740" y1="600" x2="740" y2="730" stroke="#FFCDD2" stroke-width="12" stroke-linecap="round"/>
+  <!-- Layer 3: Delete count badge -->
+  <circle cx="220" cy="280" r="70" fill="#E53935"/>
+  <text x="220" y="268" font-family="Arial Black, sans-serif" font-size="48" font-weight="900" fill="#FFFFFF" text-anchor="middle">42</text>
+  <text x="220" y="316" font-family="Arial, sans-serif" font-size="28" fill="#FFCDD2" text-anchor="middle">found</text>
+</svg>

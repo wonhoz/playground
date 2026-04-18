@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Layer 1: Background warm orange gradient -->
+  <defs>
+    <linearGradient id="bgGrad04" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFE0B2"/>
+      <stop offset="100%" stop-color="#FF6F00"/>
+    </linearGradient>
+    <linearGradient id="furnaceGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FF8F00"/>
+      <stop offset="100%" stop-color="#BF360C"/>
+    </linearGradient>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bgGrad04)"/>
+  <!-- Layer 2: Furnace/cauldron body -->
+  <ellipse cx="512" cy="700" rx="280" ry="180" fill="url(#furnaceGrad)"/>
+  <rect x="232" y="580" width="560" height="180" rx="20" fill="#E65100"/>
+  <!-- Molten glow inside -->
+  <ellipse cx="512" cy="600" rx="220" ry="90" fill="#FFCA28" opacity="0.9"/>
+  <ellipse cx="512" cy="600" rx="150" ry="55" fill="#FF6F00" opacity="0.8"/>
+  <!-- Flames -->
+  <path d="M420 580 Q400 480 440 420 Q430 500 480 480 Q460 420 510 360 Q510 450 560 430 Q530 490 570 480 Q610 440 600 520 Q640 480 620 580 Z" fill="#FF3D00" opacity="0.9"/>
+  <path d="M460 580 Q440 500 480 450 Q470 510 510 490 Q500 450 530 400 Q535 475 570 460 Q550 510 580 500 Q600 465 590 540 Q620 505 610 580 Z" fill="#FFAB00" opacity="0.85"/>
+  <!-- Input file label above -->
+  <rect x="360" y="200" width="304" height="110" rx="18" fill="#FFFFFF" opacity="0.9"/>
+  <text x="512" y="272" font-family="Arial Black, sans-serif" font-size="68" font-weight="900" fill="#E65100" text-anchor="middle">IMG</text>
+  <!-- Arrow down into furnace -->
+  <path d="M512 320 L512 460" stroke="#FF6F00" stroke-width="20" stroke-linecap="round" stroke-dasharray="18 10"/>
+  <polygon points="475,450 512,510 549,450" fill="#FF6F00"/>
+  <!-- Layer 3: Output format badge -->
+  <rect x="660" y="700" width="210" height="80" rx="16" fill="#FFD54F"/>
+  <text x="765" y="757" font-family="Arial Black, sans-serif" font-size="48" font-weight="900" fill="#BF360C" text-anchor="middle">ICO</text>
+</svg>

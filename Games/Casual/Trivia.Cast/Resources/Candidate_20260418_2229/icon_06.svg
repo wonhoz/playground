@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Layer 1: Background teal fishing scene -->
+  <defs>
+    <linearGradient id="bg06" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#E0F7FA"/>
+      <stop offset="100%" stop-color="#00838F"/>
+    </linearGradient>
+    <linearGradient id="water" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#26C6DA"/>
+      <stop offset="100%" stop-color="#006064"/>
+    </linearGradient>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg06)"/>
+  <!-- Water -->
+  <rect x="130" y="560" width="764" height="340" rx="20" fill="url(#water)" opacity="0.8"/>
+  <!-- Layer 2: Fishing rod casting -->
+  <!-- Rod -->
+  <path d="M200 200 Q500 300 700 580" stroke="#5D4037" stroke-width="16" stroke-linecap="round" fill="none"/>
+  <!-- Fishing line -->
+  <path d="M700 580 Q760 640 760 700" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round" stroke-dasharray="12 8" fill="none" opacity="0.7"/>
+  <!-- Hook with question mark = knowledge -->
+  <circle cx="760" cy="740" r="50" fill="#FFD740"/>
+  <text x="760" y="758" font-family="Arial Black, sans-serif" font-size="60" font-weight="900" fill="#006064" text-anchor="middle">?</text>
+  <!-- Fish (knowledge answer) jumping up -->
+  <ellipse cx="500" cy="650" rx="100" ry="50" fill="#00BCD4" opacity="0.9" transform="rotate(-20 500 650)"/>
+  <polygon points="500 600 450 640 500 680" fill="#0097A7" transform="rotate(-20 500 650)"/>
+  <!-- Small fish with A label -->
+  <ellipse cx="300" cy="700" rx="66" ry="32" fill="#26C6DA" opacity="0.85"/>
+  <text x="300" y="712" font-family="Arial Black, sans-serif" font-size="36" fill="#FFFFFF" text-anchor="middle">A</text>
+  <!-- Layer 3: Cast label -->
+  <rect x="180" y="130" width="200" height="80" rx="16" fill="#006064"/>
+  <text x="280" y="182" font-family="Arial Black, sans-serif" font-size="48" font-weight="900" fill="#E0F7FA" text-anchor="middle">Cast!</text>
+</svg>

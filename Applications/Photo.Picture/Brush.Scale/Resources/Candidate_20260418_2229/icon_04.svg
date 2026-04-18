@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Layer 1: Background lime yellow -->
+  <defs>
+    <radialGradient id="bg04" cx="40%" cy="40%" r="65%">
+      <stop offset="0%" stop-color="#F9FBE7"/>
+      <stop offset="100%" stop-color="#C6FF00"/>
+    </radialGradient>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg04)"/>
+  <!-- Layer 2: Magnifying glass -->
+  <!-- Glass circle -->
+  <circle cx="440" cy="420" r="240" fill="#FFFFFF" opacity="0.9"/>
+  <circle cx="440" cy="420" r="240" fill="none" stroke="#558B2F" stroke-width="48"/>
+  <!-- Inside the glass: enlarged sharp image -->
+  <clipPath id="lens">
+    <circle cx="440" cy="420" r="216"/>
+  </clipPath>
+  <g clip-path="url(#lens)">
+    <rect x="224" y="204" width="432" height="432" rx="0" fill="#DCEDC8"/>
+    <polygon points="440 250 320 460 560 460" fill="#558B2F" opacity="0.8"/>
+    <polygon points="520 230 400 460 640 460" fill="#33691E"/>
+    <circle cx="320" cy="248" r="44" fill="#FFD740"/>
+  </g>
+  <!-- Handle -->
+  <rect x="626" y="600" width="60" height="240" rx="30" fill="#558B2F" transform="rotate(40 656 720)"/>
+  <!-- Layer 3: Scale badge (4x) -->
+  <rect x="620" y="180" width="200" height="100" rx="20" fill="#76FF03"/>
+  <text x="720" y="252" font-family="Arial Black, sans-serif" font-size="72" font-weight="900" fill="#1B5E20" text-anchor="middle">4x</text>
+</svg>

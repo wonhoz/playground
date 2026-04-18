@@ -1,0 +1,62 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4A148C"/>
+      <stop offset="100%" stop-color="#6A1B9A"/>
+    </linearGradient>
+    <radialGradient id="qGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FFD600" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#FF8F00" stop-opacity="0"/>
+    </radialGradient>
+    <clipPath id="cp"><rect width="1024" height="1024" rx="190"/></clipPath>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg)"/>
+  <g clip-path="url(#cp)">
+    <!-- 배경 글로우 -->
+    <circle cx="512" cy="480" r="350" fill="url(#qGlow)"/>
+
+    <!-- 중앙 큰 물음표 -->
+    <circle cx="512" cy="480" r="200" fill="#FFD600"/>
+    <text x="512" y="570" font-family="'Segoe UI',Arial,sans-serif" font-weight="900" font-size="260" fill="#4A148C" text-anchor="middle">?</text>
+
+    <!-- 주변 카테고리 이모지 (원형 배치, 8개) -->
+    <!-- 상단 -->
+    <circle cx="512" cy="150" r="54" fill="#7B1FA2"/>
+    <text x="512" y="176" font-family="'Segoe UI',Arial,sans-serif" font-size="60" text-anchor="middle">⚗️</text>
+    <!-- 우상단 -->
+    <circle cx="756" cy="250" r="54" fill="#6A1B9A"/>
+    <text x="756" y="276" font-family="'Segoe UI',Arial,sans-serif" font-size="60" text-anchor="middle">🎵</text>
+    <!-- 우측 -->
+    <circle cx="840" cy="480" r="54" fill="#7B1FA2"/>
+    <text x="840" y="506" font-family="'Segoe UI',Arial,sans-serif" font-size="60" text-anchor="middle">🎬</text>
+    <!-- 우하단 -->
+    <circle cx="756" cy="710" r="54" fill="#6A1B9A"/>
+    <text x="756" y="736" font-family="'Segoe UI',Arial,sans-serif" font-size="60" text-anchor="middle">🌍</text>
+    <!-- 하단 -->
+    <circle cx="512" cy="810" r="54" fill="#7B1FA2"/>
+    <text x="512" y="836" font-family="'Segoe UI',Arial,sans-serif" font-size="60" text-anchor="middle">💡</text>
+    <!-- 좌하단 -->
+    <circle cx="268" cy="710" r="54" fill="#6A1B9A"/>
+    <text x="268" y="736" font-family="'Segoe UI',Arial,sans-serif" font-size="60" text-anchor="middle">🎮</text>
+    <!-- 좌측 -->
+    <circle cx="184" cy="480" r="54" fill="#7B1FA2"/>
+    <text x="184" y="506" font-family="'Segoe UI',Arial,sans-serif" font-size="60" text-anchor="middle">📜</text>
+    <!-- 좌상단 -->
+    <circle cx="268" cy="250" r="54" fill="#6A1B9A"/>
+    <text x="268" y="276" font-family="'Segoe UI',Arial,sans-serif" font-size="60" text-anchor="middle">🍕</text>
+
+    <!-- 방사선 (중심→외곽) -->
+    <line x1="512" y1="280" x2="512" y2="150" stroke="#CE93D8" stroke-width="4" opacity="0.4"/>
+    <line x1="653" y1="321" x2="720" y2="280" stroke="#CE93D8" stroke-width="4" opacity="0.4"/>
+    <line x1="712" y1="480" x2="786" y2="480" stroke="#CE93D8" stroke-width="4" opacity="0.4"/>
+    <line x1="653" y1="638" x2="720" y2="686" stroke="#CE93D8" stroke-width="4" opacity="0.4"/>
+    <line x1="512" y1="680" x2="512" y2="756" stroke="#CE93D8" stroke-width="4" opacity="0.4"/>
+    <line x1="371" y1="638" x2="304" y2="686" stroke="#CE93D8" stroke-width="4" opacity="0.4"/>
+    <line x1="312" y1="480" x2="238" y2="480" stroke="#CE93D8" stroke-width="4" opacity="0.4"/>
+    <line x1="371" y1="321" x2="304" y2="276" stroke="#CE93D8" stroke-width="4" opacity="0.4"/>
+
+    <!-- 타이틀 -->
+    <rect x="140" y="892" width="744" height="70" rx="24" fill="#1A0032"/>
+    <text x="512" y="939" font-family="'Segoe UI',Arial,sans-serif" font-weight="900" font-size="54" fill="#FFD600" text-anchor="middle">TRIVIA.CAST</text>
+  </g>
+</svg>

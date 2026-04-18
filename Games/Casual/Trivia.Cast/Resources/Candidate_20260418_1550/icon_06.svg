@@ -1,0 +1,68 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0D0D1A"/>
+      <stop offset="100%" stop-color="#1A0D2E"/>
+    </linearGradient>
+    <radialGradient id="stage" cx="50%" cy="100%" r="80%">
+      <stop offset="0%" stop-color="#FF8F00" stop-opacity="0.6"/>
+      <stop offset="50%" stop-color="#E91E63" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#9C27B0" stop-opacity="0"/>
+    </radialGradient>
+    <clipPath id="cp"><rect width="1024" height="1024" rx="190"/></clipPath>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg)"/>
+  <g clip-path="url(#cp)">
+    <!-- 무대 조명 빔들 -->
+    <ellipse cx="512" cy="300" rx="700" ry="500" fill="url(#stage)"/>
+
+    <!-- 조명 빔들 (위에서 내려오는) -->
+    <polygon points="180,80 240,80 400,640 320,640" fill="#FFD600" opacity="0.12"/>
+    <polygon points="380,80 440,80 540,640 480,640" fill="#FF8F00" opacity="0.12"/>
+    <polygon points="560,80 620,80 600,640 560,640" fill="#E91E63" opacity="0.10"/>
+    <polygon points="700,80 760,80 780,640 700,640" fill="#9C27B0" opacity="0.12"/>
+    <polygon points="840,80 900,80 950,640 870,640" fill="#3F51B5" opacity="0.12"/>
+
+    <!-- TV 스크린 프레임 -->
+    <rect x="120" y="100" width="784" height="520" rx="30" fill="#1A1A3E" stroke="#FFD600" stroke-width="8"/>
+    <!-- 화면 내용: 퀴즈쇼 세트 -->
+    <!-- 무대 배경 (그라데이션) -->
+    <rect x="136" y="116" width="752" height="488" rx="22" fill="#0D0D2E"/>
+    <!-- 무대 조명 -->
+    <circle cx="200" cy="160" r="28" fill="#FFD600" opacity="0.9"/>
+    <circle cx="350" cy="140" r="24" fill="#FF8F00" opacity="0.8"/>
+    <circle cx="512" cy="135" r="32" fill="#E91E63" opacity="0.85"/>
+    <circle cx="674" cy="140" r="24" fill="#9C27B0" opacity="0.8"/>
+    <circle cx="824" cy="160" r="28" fill="#3F51B5" opacity="0.9"/>
+
+    <!-- TRIVIA.CAST 로고 (무대 위) -->
+    <rect x="220" y="200" width="584" height="90" rx="20" fill="#FFD600"/>
+    <text x="512" y="260" font-family="'Segoe UI',Arial,sans-serif" font-weight="900" font-size="62" fill="#0D0D2E" text-anchor="middle">TRIVIA.CAST</text>
+
+    <!-- 무대 퀴즈 텍스트 -->
+    <rect x="180" y="316" width="664" height="64" rx="16" fill="#1565C0"/>
+    <text x="512" y="360" font-family="'Segoe UI',Arial,sans-serif" font-weight="900" font-size="44" fill="#FFFFFF" text-anchor="middle">빛의 속도는 몇 km/s?</text>
+
+    <!-- 4개 답안 버튼 (가로) -->
+    <rect x="148" y="402" width="156" height="56" rx="14" fill="#2E7D32"/>
+    <text x="226" y="438" font-family="'Segoe UI',Arial,sans-serif" font-weight="900" font-size="36" fill="#FFFFFF" text-anchor="middle">30만</text>
+    <rect x="320" y="402" width="156" height="56" rx="14" fill="#1A237E"/>
+    <text x="398" y="438" font-family="'Segoe UI',Arial,sans-serif" font-weight="900" font-size="36" fill="#FFFFFF" text-anchor="middle">15만</text>
+    <rect x="492" y="402" width="156" height="56" rx="14" fill="#1A237E"/>
+    <text x="570" y="438" font-family="'Segoe UI',Arial,sans-serif" font-weight="900" font-size="36" fill="#FFFFFF" text-anchor="middle">3만</text>
+    <rect x="664" y="402" width="156" height="56" rx="14" fill="#1A237E"/>
+    <text x="742" y="438" font-family="'Segoe UI',Arial,sans-serif" font-weight="900" font-size="36" fill="#FFFFFF" text-anchor="middle">60만</text>
+
+    <!-- 타이머/점수 (하단 바) -->
+    <rect x="148" y="480" width="664" height="48" rx="12" fill="#FF6D00" opacity="0.8"/>
+    <text x="512" y="511" font-family="'Segoe UI',Arial,sans-serif" font-weight="900" font-size="36" fill="#FFFFFF" text-anchor="middle">⏱ 12초  •  🔥 4연속  •  210점</text>
+
+    <!-- TV 베젤 하단 -->
+    <rect x="400" y="620" width="224" height="30" rx="10" fill="#37474F"/>
+    <rect x="360" y="650" width="304" height="24" rx="8" fill="#455A64"/>
+
+    <!-- 타이틀 (TV 아래) -->
+    <rect x="140" y="780" width="744" height="70" rx="24" fill="#311B92"/>
+    <text x="512" y="827" font-family="'Segoe UI',Arial,sans-serif" font-weight="900" font-size="54" fill="#FFD600" text-anchor="middle">TRIVIA.CAST</text>
+  </g>
+</svg>

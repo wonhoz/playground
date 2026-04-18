@@ -1,0 +1,69 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#B71C1C"/>
+      <stop offset="100%" stop-color="#880E4F"/>
+    </linearGradient>
+    <radialGradient id="spotlight" cx="40%" cy="30%" r="60%">
+      <stop offset="0%" stop-color="#FFD600" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#FF8F00" stop-opacity="0"/>
+    </radialGradient>
+    <clipPath id="cp"><rect width="1024" height="1024" rx="190"/></clipPath>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg)"/>
+  <g clip-path="url(#cp)">
+    <!-- 스포트라이트 효과 -->
+    <ellipse cx="400" cy="320" rx="400" ry="350" fill="url(#spotlight)"/>
+
+    <!-- 퀴즈 호스트 실루엣 -->
+    <!-- 머리 -->
+    <circle cx="380" cy="210" r="90" fill="#FFCA28"/>
+    <!-- 얼굴 -->
+    <circle cx="380" cy="210" r="70" fill="#FFECB3"/>
+    <!-- 눈 (미소 짓는) -->
+    <path d="M 354 200 Q 360 192 366 200" fill="none" stroke="#5D4037" stroke-width="6" stroke-linecap="round"/>
+    <path d="M 394 200 Q 400 192 406 200" fill="none" stroke="#5D4037" stroke-width="6" stroke-linecap="round"/>
+    <!-- 큰 미소 -->
+    <path d="M 352 230 Q 380 258 408 230" fill="none" stroke="#D84315" stroke-width="7" stroke-linecap="round"/>
+    <!-- 머리카락 -->
+    <rect x="310" y="142" width="140" height="40" rx="18" fill="#5D4037"/>
+    <!-- 타이 -->
+    <polygon points="380,440 355,490 380,640 405,490" fill="#FFD600"/>
+    <!-- 몸통 (정장) -->
+    <rect x="280" y="300" width="200" height="340" rx="30" fill="#C62828"/>
+    <!-- 라펠 -->
+    <polygon points="280,300 330,300 380,440 280,340" fill="#B71C1C"/>
+    <polygon points="480,300 430,300 380,440 480,340" fill="#B71C1C"/>
+
+    <!-- 마이크 (오른쪽 손) -->
+    <rect x="510" y="350" width="50" height="160" rx="25" fill="#424242"/>
+    <ellipse cx="535" cy="345" rx="42" ry="52" fill="#616161"/>
+    <!-- 마이크 그릴 -->
+    <ellipse cx="535" cy="330" rx="32" ry="42" fill="#757575"/>
+    <ellipse cx="535" cy="315" rx="22" ry="28" fill="#9E9E9E"/>
+    <!-- 마이크 코드 -->
+    <path d="M 535 510 Q 580 560 620 600 Q 660 640 640 720" fill="none" stroke="#424242" stroke-width="8" stroke-linecap="round"/>
+
+    <!-- 왼팔 (들어올린) -->
+    <rect x="90" y="330" width="190" height="50" rx="24" fill="#C62828"/>
+    <!-- 왼손 제스처 (엄지척) -->
+    <text x="80" y="340" font-family="'Segoe UI',Arial,sans-serif" font-size="80">👍</text>
+
+    <!-- TRIVIA 글자 배너 -->
+    <rect x="620" y="140" width="340" height="90" rx="24" fill="#FFD600"/>
+    <text x="790" y="202" font-family="'Segoe UI',Arial,sans-serif" font-weight="900" font-size="60" fill="#B71C1C" text-anchor="middle">TRIVIA!</text>
+
+    <!-- 별 이펙트 -->
+    <text x="700" y="280" font-family="'Segoe UI',Arial,sans-serif" font-size="60">⭐</text>
+    <text x="800" y="360" font-family="'Segoe UI',Arial,sans-serif" font-size="50">✨</text>
+    <text x="660" y="430" font-family="'Segoe UI',Arial,sans-serif" font-size="44">💫</text>
+
+    <!-- 점수 배너 -->
+    <rect x="620" y="480" width="340" height="80" rx="20" fill="#FFCA28"/>
+    <text x="790" y="532" font-family="'Segoe UI',Arial,sans-serif" font-weight="900" font-size="54" fill="#B71C1C" text-anchor="middle">300점!</text>
+
+    <!-- 타이틀 -->
+    <rect x="140" y="860" width="744" height="70" rx="24" fill="#4A0000"/>
+    <text x="512" y="907" font-family="'Segoe UI',Arial,sans-serif" font-weight="900" font-size="54" fill="#FFD600" text-anchor="middle">TRIVIA.CAST</text>
+  </g>
+</svg>

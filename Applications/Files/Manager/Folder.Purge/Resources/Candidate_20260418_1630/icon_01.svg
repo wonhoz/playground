@@ -1,0 +1,58 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E3F2FD"/>
+      <stop offset="100%" stop-color="#BBDEFB"/>
+    </linearGradient>
+    <clipPath id="cp"><rect width="1024" height="1024" rx="190"/></clipPath>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg)"/>
+  <g clip-path="url(#cp)">
+    <!-- 스캔 결과 패널 -->
+    <rect x="80" y="100" width="864" height="824" rx="28" fill="#FFFFFF" stroke="#90CAF9" stroke-width="4"/>
+    <!-- 헤더 -->
+    <rect x="80" y="100" width="864" height="72" rx="28" fill="#1565C0"/>
+    <rect x="80" y="144" width="864" height="28" fill="#1565C0"/>
+    <text x="300" y="148" font-family="'Segoe UI',Arial,sans-serif" font-weight="900" font-size="52" fill="#FFFFFF">📂 Folder.Purge</text>
+
+    <!-- 스캔 항목들 -->
+    <!-- 빈 폴더 항목 -->
+    <rect x="100" y="196" width="824" height="84" rx="12" fill="#FFEBEE"/>
+    <rect x="120" y="216" width="44" height="44" rx="8" fill="#FFFFFF" stroke="#EF5350" stroke-width="3"/>
+    <line x1="130" y1="238" x2="154" y2="238" stroke="#EF5350" stroke-width="4"/>
+    <text x="184" y="248" font-family="'Segoe UI',Arial,sans-serif" font-size="42" fill="#C62828">📁  .vs\Solution1\v17</text>
+    <text x="720" y="248" font-family="'Segoe UI',Arial,sans-serif" font-size="36" fill="#EF5350" font-weight="700">빈 폴더</text>
+
+    <!-- bin 폴더 항목 -->
+    <rect x="100" y="292" width="824" height="84" rx="12" fill="#FFEBEE"/>
+    <rect x="120" y="312" width="44" height="44" rx="8" fill="#FFFFFF" stroke="#EF5350" stroke-width="3"/>
+    <line x1="130" y1="334" x2="154" y2="334" stroke="#EF5350" stroke-width="4"/>
+    <text x="184" y="344" font-family="'Segoe UI',Arial,sans-serif" font-size="42" fill="#C62828">📁  MyProject\bin\Release</text>
+    <text x="760" y="344" font-family="'Segoe UI',Arial,sans-serif" font-size="36" fill="#EF5350" font-weight="700">bin</text>
+
+    <!-- obj 폴더 항목 -->
+    <rect x="100" y="388" width="824" height="84" rx="12" fill="#FFEBEE"/>
+    <rect x="120" y="408" width="44" height="44" rx="8" fill="#FFFFFF" stroke="#EF5350" stroke-width="3"/>
+    <line x1="130" y1="430" x2="154" y2="430" stroke="#EF5350" stroke-width="4"/>
+    <text x="184" y="440" font-family="'Segoe UI',Arial,sans-serif" font-size="42" fill="#C62828">📁  MyProject\obj\Debug</text>
+    <text x="760" y="440" font-family="'Segoe UI',Arial,sans-serif" font-size="36" fill="#EF5350" font-weight="700">obj</text>
+
+    <!-- 정상 폴더 항목 (체크됨) -->
+    <rect x="100" y="484" width="824" height="84" rx="12" fill="#E8F5E9"/>
+    <rect x="120" y="504" width="44" height="44" rx="8" fill="#43A047" stroke="#43A047" stroke-width="3"/>
+    <polyline points="128,526 138,538 156,518" fill="none" stroke="#FFFFFF" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="184" y="536" font-family="'Segoe UI',Arial,sans-serif" font-size="42" fill="#2E7D32">📁  Source\MainProject</text>
+    <text x="730" y="536" font-family="'Segoe UI',Arial,sans-serif" font-size="36" fill="#43A047" font-weight="700">유지</text>
+
+    <!-- .log 파일 항목 -->
+    <rect x="100" y="580" width="824" height="84" rx="12" fill="#FFF8E1"/>
+    <rect x="120" y="600" width="44" height="44" rx="8" fill="#FFFFFF" stroke="#FFA000" stroke-width="3"/>
+    <line x1="130" y1="622" x2="154" y2="622" stroke="#FFA000" stroke-width="4"/>
+    <text x="184" y="632" font-family="'Segoe UI',Arial,sans-serif" font-size="42" fill="#E65100">📄  Temp\build_log.log</text>
+    <text x="750" y="632" font-family="'Segoe UI',Arial,sans-serif" font-size="36" fill="#FFA000" font-weight="700">.log</text>
+
+    <!-- 하단 요약 바 -->
+    <rect x="100" y="780" width="824" height="80" rx="16" fill="#1565C0"/>
+    <text x="512" y="830" font-family="'Segoe UI',Arial,sans-serif" font-weight="900" font-size="44" fill="#FFFFFF" text-anchor="middle">🗑 삭제 대상 · 4개 항목</text>
+  </g>
+</svg>

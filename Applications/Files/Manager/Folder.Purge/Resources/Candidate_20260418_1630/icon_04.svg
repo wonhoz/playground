@@ -1,0 +1,44 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="45%" r="65%">
+      <stop offset="0%" stop-color="#C62828"/>
+      <stop offset="100%" stop-color="#4A0000"/>
+    </radialGradient>
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FF8F00" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#FF8F00" stop-opacity="0"/>
+    </radialGradient>
+    <clipPath id="cp"><rect width="1024" height="1024" rx="190"/></clipPath>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg)"/>
+  <g clip-path="url(#cp)">
+    <!-- 글로우 -->
+    <ellipse cx="512" cy="490" rx="340" ry="300" fill="url(#glow)"/>
+
+    <!-- 폴더 메인 아이콘 -->
+    <!-- 폴더 탭 -->
+    <rect x="200" y="320" width="220" height="60" rx="16" fill="#FFCA28"/>
+    <!-- 폴더 몸통 -->
+    <rect x="160" y="370" width="700" height="460" rx="28" fill="#FFCA28"/>
+    <!-- 폴더 안쪽 음영 -->
+    <rect x="190" y="400" width="640" height="400" rx="20" fill="#FFB300" opacity="0.5"/>
+
+    <!-- 빗자루 (오른쪽 아래에서 왼쪽 위 방향으로 겹침) -->
+    <!-- 빗자루 막대 -->
+    <line x1="720" y1="280" x2="360" y2="700" stroke="#5D4037" stroke-width="36" stroke-linecap="round"/>
+    <!-- 빗자루 솔 부분 -->
+    <ellipse cx="348" cy="716" rx="90" ry="36" fill="#8D6E63" transform="rotate(-45 348 716)"/>
+    <!-- 솔 가닥들 -->
+    <line x1="300" y1="760" x2="260" y2="800" stroke="#6D4C41" stroke-width="10" stroke-linecap="round"/>
+    <line x1="325" y1="770" x2="300" y2="818" stroke="#6D4C41" stroke-width="10" stroke-linecap="round"/>
+    <line x1="352" y1="774" x2="340" y2="826" stroke="#6D4C41" stroke-width="10" stroke-linecap="round"/>
+    <line x1="375" y1="768" x2="378" y2="818" stroke="#6D4C41" stroke-width="10" stroke-linecap="round"/>
+    <line x1="395" y1="756" x2="408" y2="802" stroke="#6D4C41" stroke-width="10" stroke-linecap="round"/>
+    <!-- 빗자루 손잡이 끝 원 -->
+    <circle cx="730" cy="270" r="28" fill="#FF8F00"/>
+
+    <!-- PURGE 텍스트 -->
+    <rect x="230" y="455" width="564" height="80" rx="20" fill="#B71C1C"/>
+    <text x="512" y="510" font-family="'Segoe UI',Arial,sans-serif" font-weight="900" font-size="58" fill="#FFFFFF" text-anchor="middle">PURGE</text>
+  </g>
+</svg>

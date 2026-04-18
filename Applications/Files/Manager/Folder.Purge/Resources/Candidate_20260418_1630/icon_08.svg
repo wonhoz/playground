@@ -1,0 +1,86 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1A2744"/>
+      <stop offset="100%" stop-color="#0D1B33"/>
+    </linearGradient>
+    <clipPath id="cp"><rect width="1024" height="1024" rx="190"/></clipPath>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg)"/>
+  <g clip-path="url(#cp)">
+    <!-- 3x3 폴더 격자 — 색상으로 상태 구분 -->
+    <!-- 범례: 민트=정상, 레드=삭제대상, 회색=빈폴더 -->
+
+    <!-- Row 1 -->
+    <!-- 정상(민트) -->
+    <rect x="88" y="140" width="240" height="200" rx="20" fill="#00897B"/>
+    <rect x="88" y="112" width="130" height="38" rx="12" fill="#00897B"/>
+    <text x="208" y="246" font-family="'Segoe UI',Arial,sans-serif" font-size="80" text-anchor="middle">📁</text>
+    <text x="208" y="308" font-family="'Segoe UI',Arial,sans-serif" font-size="30" text-anchor="middle" fill="#B2EBF2" font-weight="700">Source</text>
+
+    <!-- 삭제(레드) -->
+    <rect x="392" y="140" width="240" height="200" rx="20" fill="#C62828"/>
+    <rect x="392" y="112" width="130" height="38" rx="12" fill="#C62828"/>
+    <text x="512" y="246" font-family="'Segoe UI',Arial,sans-serif" font-size="80" text-anchor="middle">📁</text>
+    <text x="512" y="308" font-family="'Segoe UI',Arial,sans-serif" font-size="30" text-anchor="middle" fill="#FFCDD2" font-weight="700">bin</text>
+    <!-- X -->
+    <line x1="456" y1="162" x2="528" y2="234" stroke="#FFFFFF" stroke-width="10" stroke-linecap="round" opacity="0.9"/>
+    <line x1="528" y1="162" x2="456" y2="234" stroke="#FFFFFF" stroke-width="10" stroke-linecap="round" opacity="0.9"/>
+
+    <!-- 삭제(레드) -->
+    <rect x="696" y="140" width="240" height="200" rx="20" fill="#C62828"/>
+    <rect x="696" y="112" width="130" height="38" rx="12" fill="#C62828"/>
+    <text x="816" y="246" font-family="'Segoe UI',Arial,sans-serif" font-size="80" text-anchor="middle">📁</text>
+    <text x="816" y="308" font-family="'Segoe UI',Arial,sans-serif" font-size="30" text-anchor="middle" fill="#FFCDD2" font-weight="700">obj</text>
+    <line x1="760" y1="162" x2="832" y2="234" stroke="#FFFFFF" stroke-width="10" stroke-linecap="round" opacity="0.9"/>
+    <line x1="832" y1="162" x2="760" y2="234" stroke="#FFFFFF" stroke-width="10" stroke-linecap="round" opacity="0.9"/>
+
+    <!-- Row 2 -->
+    <!-- 빈폴더(회색) -->
+    <rect x="88" y="396" width="240" height="200" rx="20" fill="#455A64"/>
+    <rect x="88" y="368" width="130" height="38" rx="12" fill="#455A64"/>
+    <text x="208" y="502" font-family="'Segoe UI',Arial,sans-serif" font-size="80" text-anchor="middle">📁</text>
+    <text x="208" y="564" font-family="'Segoe UI',Arial,sans-serif" font-size="28" text-anchor="middle" fill="#90A4AE" font-weight="700">Empty</text>
+
+    <!-- 정상(민트) -->
+    <rect x="392" y="396" width="240" height="200" rx="20" fill="#00897B"/>
+    <rect x="392" y="368" width="130" height="38" rx="12" fill="#00897B"/>
+    <text x="512" y="502" font-family="'Segoe UI',Arial,sans-serif" font-size="80" text-anchor="middle">📁</text>
+    <text x="512" y="564" font-family="'Segoe UI',Arial,sans-serif" font-size="28" text-anchor="middle" fill="#B2EBF2" font-weight="700">Tests</text>
+
+    <!-- 삭제(레드) -->
+    <rect x="696" y="396" width="240" height="200" rx="20" fill="#C62828"/>
+    <rect x="696" y="368" width="130" height="38" rx="12" fill="#C62828"/>
+    <text x="816" y="502" font-family="'Segoe UI',Arial,sans-serif" font-size="80" text-anchor="middle">📁</text>
+    <text x="816" y="564" font-family="'Segoe UI',Arial,sans-serif" font-size="28" text-anchor="middle" fill="#FFCDD2" font-weight="700">.vs</text>
+    <line x1="760" y1="418" x2="832" y2="490" stroke="#FFFFFF" stroke-width="10" stroke-linecap="round" opacity="0.9"/>
+    <line x1="832" y1="418" x2="760" y2="490" stroke="#FFFFFF" stroke-width="10" stroke-linecap="round" opacity="0.9"/>
+
+    <!-- Row 3 -->
+    <!-- 정상(민트) -->
+    <rect x="88" y="652" width="240" height="200" rx="20" fill="#00897B"/>
+    <rect x="88" y="624" width="130" height="38" rx="12" fill="#00897B"/>
+    <text x="208" y="758" font-family="'Segoe UI',Arial,sans-serif" font-size="80" text-anchor="middle">📁</text>
+    <text x="208" y="820" font-family="'Segoe UI',Arial,sans-serif" font-size="28" text-anchor="middle" fill="#B2EBF2" font-weight="700">Models</text>
+
+    <!-- 빈폴더(회색) -->
+    <rect x="392" y="652" width="240" height="200" rx="20" fill="#455A64"/>
+    <rect x="392" y="624" width="130" height="38" rx="12" fill="#455A64"/>
+    <text x="512" y="758" font-family="'Segoe UI',Arial,sans-serif" font-size="80" text-anchor="middle">📁</text>
+    <text x="512" y="820" font-family="'Segoe UI',Arial,sans-serif" font-size="28" text-anchor="middle" fill="#90A4AE" font-weight="700">Temp</text>
+
+    <!-- 정상(민트) -->
+    <rect x="696" y="652" width="240" height="200" rx="20" fill="#00897B"/>
+    <rect x="696" y="624" width="130" height="38" rx="12" fill="#00897B"/>
+    <text x="816" y="758" font-family="'Segoe UI',Arial,sans-serif" font-size="80" text-anchor="middle">📁</text>
+    <text x="816" y="820" font-family="'Segoe UI',Arial,sans-serif" font-size="28" text-anchor="middle" fill="#B2EBF2" font-weight="700">Views</text>
+
+    <!-- 하단 범례 -->
+    <rect x="88" y="892" width="200" height="48" rx="12" fill="#00897B"/>
+    <text x="188" y="924" font-family="'Segoe UI',Arial,sans-serif" font-size="28" text-anchor="middle" fill="#FFFFFF" font-weight="700">✅ 유지</text>
+    <rect x="312" y="892" width="200" height="48" rx="12" fill="#C62828"/>
+    <text x="412" y="924" font-family="'Segoe UI',Arial,sans-serif" font-size="28" text-anchor="middle" fill="#FFFFFF" font-weight="700">🗑 삭제</text>
+    <rect x="536" y="892" width="200" height="48" rx="12" fill="#455A64"/>
+    <text x="636" y="924" font-family="'Segoe UI',Arial,sans-serif" font-size="28" text-anchor="middle" fill="#FFFFFF" font-weight="700">○ 빈폴더</text>
+  </g>
+</svg>

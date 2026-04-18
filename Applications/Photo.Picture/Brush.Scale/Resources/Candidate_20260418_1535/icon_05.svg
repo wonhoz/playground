@@ -1,0 +1,67 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFF3E0"/>
+      <stop offset="100%" stop-color="#FCE4EC"/>
+    </linearGradient>
+    <radialGradient id="lensGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FFCC80" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#FF8A65" stop-opacity="0"/>
+    </radialGradient>
+    <clipPath id="cp"><rect width="1024" height="1024" rx="190"/></clipPath>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg)"/>
+  <g clip-path="url(#cp)">
+    <!-- 돋보기 손잡이 -->
+    <rect x="680" y="620" width="200" height="56" rx="28" fill="#BF360C" transform="rotate(45 700 680)"/>
+
+    <!-- 돋보기 렌즈 (글로우) -->
+    <circle cx="420" cy="440" r="260" fill="url(#lensGlow)"/>
+    <!-- 렌즈 테두리 -->
+    <circle cx="420" cy="440" r="240" fill="none" stroke="#FF7043" stroke-width="40"/>
+    <!-- 렌즈 내부 -->
+    <circle cx="420" cy="440" r="200" fill="#FFF8F0" opacity="0.95"/>
+
+    <!-- 렌즈 안의 픽셀 → 선명한 이미지 -->
+    <!-- 좌측 절반: 픽셀 격자 (저해상도) -->
+    <clipPath id="leftLens">
+      <path d="M220 440 A200 200 0 0 1 420 240 L420 440 Z"/>
+    </clipPath>
+    <clipPath id="fullLens">
+      <circle cx="420" cy="440" r="200"/>
+    </clipPath>
+    <!-- 전체 렌즈 배경 -->
+    <rect x="220" y="240" width="400" height="400" fill="#FFF8F0" clip-path="url(#fullLens)"/>
+    <!-- 픽셀 격자 (좌측) -->
+    <rect x="232" y="256" width="80" height="80" rx="4" fill="#FFAB40" clip-path="url(#fullLens)"/>
+    <rect x="320" y="256" width="80" height="80" rx="4" fill="#FF7043" clip-path="url(#fullLens)"/>
+    <rect x="232" y="344" width="80" height="80" rx="4" fill="#FF8A65" clip-path="url(#fullLens)"/>
+    <rect x="320" y="344" width="80" height="80" rx="4" fill="#FFAB40" clip-path="url(#fullLens)"/>
+    <!-- 선명한 부분 (우측 / 하단) -->
+    <circle cx="500" cy="460" r="60" fill="#FF7043" clip-path="url(#fullLens)"/>
+    <circle cx="500" cy="460" r="40" fill="#FF8A65" clip-path="url(#fullLens)"/>
+    <circle cx="500" cy="460" r="20" fill="#FFF8F0" clip-path="url(#fullLens)"/>
+    <rect x="400" y="540" width="160" height="12" rx="4" fill="#FF7043" opacity="0.6" clip-path="url(#fullLens)"/>
+    <rect x="400" y="562" width="120" height="12" rx="4" fill="#FFAB40" opacity="0.5" clip-path="url(#fullLens)"/>
+
+    <!-- 렌즈 반사광 -->
+    <ellipse cx="360" cy="340" rx="60" ry="30" fill="#FFFFFF" opacity="0.5" transform="rotate(-30 360 340)"/>
+
+    <!-- 선명도 화살표 포인트 -->
+    <text x="680" y="280" font-family="'Segoe UI',Arial,sans-serif" font-size="90" fill="#FF5722" text-anchor="middle">🔍</text>
+
+    <!-- 배율 라벨 -->
+    <rect x="620" y="340" width="280" height="80" rx="24" fill="#E64A19"/>
+    <text x="760" y="392" font-family="'Segoe UI',Arial,sans-serif" font-weight="900" font-size="56" fill="#FFFFFF" text-anchor="middle">×4 HD</text>
+
+    <!-- 픽셀/선명 비교 라벨 -->
+    <rect x="110" y="710" width="200" height="52" rx="16" fill="#90A4AE"/>
+    <text x="210" y="745" font-family="'Segoe UI',Arial,sans-serif" font-weight="700" font-size="34" fill="#FFFFFF" text-anchor="middle">흐릿</text>
+    <rect x="540" y="710" width="200" height="52" rx="16" fill="#FF7043"/>
+    <text x="640" y="745" font-family="'Segoe UI',Arial,sans-serif" font-weight="700" font-size="34" fill="#FFFFFF" text-anchor="middle">선명!</text>
+
+    <!-- 타이틀 -->
+    <rect x="212" y="850" width="600" height="70" rx="24" fill="#BF360C"/>
+    <text x="512" y="897" font-family="'Segoe UI',Arial,sans-serif" font-weight="900" font-size="50" fill="#FFFFFF" text-anchor="middle">BRUSH.SCALE</text>
+  </g>
+</svg>

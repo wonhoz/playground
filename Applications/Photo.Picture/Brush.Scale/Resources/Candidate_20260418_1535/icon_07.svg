@@ -1,0 +1,61 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1A237E"/>
+      <stop offset="100%" stop-color="#0D47A1"/>
+    </linearGradient>
+    <linearGradient id="arrow" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#40C4FF"/>
+      <stop offset="100%" stop-color="#00E5FF"/>
+    </linearGradient>
+    <linearGradient id="bigImg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1565C0"/>
+      <stop offset="100%" stop-color="#0288D1"/>
+    </linearGradient>
+    <clipPath id="cp"><rect width="1024" height="1024" rx="190"/></clipPath>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg)"/>
+  <g clip-path="url(#cp)">
+    <!-- 작은 이미지 (좌측 상단) -->
+    <rect x="80" y="120" width="200" height="200" rx="18" fill="#1E3A8A" stroke="#40C4FF" stroke-width="4"/>
+    <!-- 작은 이미지 내용 (흐릿한 느낌) -->
+    <rect x="96" y="136" width="168" height="168" rx="10" fill="#2D4DB3" opacity="0.9"/>
+    <rect x="108" y="148" width="60" height="60" rx="6" fill="#3D5AFE" opacity="0.7"/>
+    <rect x="176" y="148" width="60" height="60" rx="6" fill="#536DFE" opacity="0.5"/>
+    <rect x="108" y="216" width="60" height="60" rx="6" fill="#536DFE" opacity="0.5"/>
+    <rect x="176" y="216" width="60" height="60" rx="6" fill="#3D5AFE" opacity="0.6"/>
+    <text x="180" y="335" font-family="'Segoe UI',Arial,sans-serif" font-size="38" fill="#90CAF9" text-anchor="middle">원본</text>
+
+    <!-- 성장 화살표들 (폭발적 확산) -->
+    <!-- 큰 화살표 -->
+    <polygon points="320,220 540,100 480,180 700,80 640,160 860,50 800,170 880,140 820,280 740,220 660,300 580,200 500,340 440,260 360,380" fill="url(#arrow)" opacity="0.9"/>
+
+    <!-- 큰 이미지 (우측 하단, 레이어드) -->
+    <!-- 그림자 레이어 -->
+    <rect x="500" y="430" width="420" height="420" rx="28" fill="#1E88E5" opacity="0.3"/>
+    <!-- 중간 레이어 -->
+    <rect x="520" y="450" width="420" height="420" rx="28" fill="#1976D2" opacity="0.5"/>
+    <!-- 메인 큰 이미지 -->
+    <rect x="540" y="470" width="420" height="420" rx="28" fill="url(#bigImg)"/>
+    <!-- 큰 이미지 내용 (선명한 느낌) -->
+    <rect x="556" y="486" width="388" height="388" rx="20" fill="#0D47A1"/>
+    <!-- 선명한 이미지 요소 -->
+    <circle cx="720" cy="620" rx="100" ry="100" fill="#1565C0" stroke="#40C4FF" stroke-width="3">
+      <animate attributeName="r" values="100" dur="0"/>
+    </circle>
+    <circle cx="720" cy="620" r="100" fill="#1565C0"/>
+    <circle cx="720" cy="620" r="70" fill="#1976D2"/>
+    <circle cx="720" cy="620" r="40" fill="#42A5F5"/>
+    <circle cx="720" cy="620" r="16" fill="#FFFFFF"/>
+    <rect x="570" y="750" width="380" height="8" rx="4" fill="#40C4FF" opacity="0.6"/>
+    <rect x="570" y="770" width="280" height="8" rx="4" fill="#00E5FF" opacity="0.4"/>
+
+    <!-- 크기 배율 뱃지 -->
+    <rect x="560" y="850" width="380" height="72" rx="24" fill="#0288D1"/>
+    <text x="750" y="899" font-family="'Segoe UI',Arial,sans-serif" font-weight="900" font-size="54" fill="#FFFFFF" text-anchor="middle">4× BIGGER</text>
+
+    <!-- 타이틀 -->
+    <rect x="80" y="880" width="380" height="70" rx="24" fill="#00838F"/>
+    <text x="270" y="927" font-family="'Segoe UI',Arial,sans-serif" font-weight="900" font-size="40" fill="#FFFFFF" text-anchor="middle">BRUSH.SCALE</text>
+  </g>
+</svg>

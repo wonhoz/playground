@@ -1,0 +1,77 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E8F5E9"/>
+      <stop offset="100%" stop-color="#B2EBF2"/>
+    </linearGradient>
+    <linearGradient id="sliderL" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#B0BEC5"/>
+      <stop offset="100%" stop-color="#CFD8DC"/>
+    </linearGradient>
+    <linearGradient id="sliderR" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00E676"/>
+      <stop offset="100%" stop-color="#1DE9B6"/>
+    </linearGradient>
+    <clipPath id="cp"><rect width="1024" height="1024" rx="190"/></clipPath>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg)"/>
+  <g clip-path="url(#cp)">
+    <!-- 좌측: 픽셀화된 이미지 (저해상도) -->
+    <rect x="80" y="200" width="420" height="624" rx="20" fill="url(#sliderL)"/>
+    <!-- 픽셀 격자 (저해상도 느낌) -->
+    <rect x="100" y="220" width="56" height="56" rx="4" fill="#78909C"/>
+    <rect x="164" y="220" width="56" height="56" rx="4" fill="#90A4AE"/>
+    <rect x="228" y="220" width="56" height="56" rx="4" fill="#607D8B"/>
+    <rect x="292" y="220" width="56" height="56" rx="4" fill="#78909C"/>
+    <rect x="356" y="220" width="56" height="56" rx="4" fill="#B0BEC5"/>
+    <rect x="420" y="220" width="56" height="56" rx="4" fill="#78909C"/>
+    <rect x="100" y="284" width="56" height="56" rx="4" fill="#90A4AE"/>
+    <rect x="164" y="284" width="56" height="56" rx="4" fill="#607D8B"/>
+    <rect x="228" y="284" width="56" height="56" rx="4" fill="#78909C"/>
+    <rect x="292" y="284" width="56" height="56" rx="4" fill="#B0BEC5"/>
+    <rect x="356" y="284" width="56" height="56" rx="4" fill="#607D8B"/>
+    <rect x="420" y="284" width="56" height="56" rx="4" fill="#90A4AE"/>
+    <rect x="100" y="348" width="120" height="120" rx="8" fill="#B0BEC5"/>
+    <rect x="228" y="348" width="120" height="120" rx="8" fill="#78909C"/>
+    <rect x="356" y="348" width="120" height="120" rx="8" fill="#607D8B"/>
+    <rect x="100" y="476" width="56" height="56" rx="4" fill="#78909C"/>
+    <rect x="164" y="476" width="56" height="56" rx="4" fill="#B0BEC5"/>
+    <rect x="228" y="476" width="56" height="56" rx="4" fill="#90A4AE"/>
+    <rect x="292" y="476" width="56" height="56" rx="4" fill="#607D8B"/>
+    <rect x="356" y="476" width="56" height="56" rx="4" fill="#78909C"/>
+    <rect x="420" y="476" width="56" height="56" rx="4" fill="#90A4AE"/>
+    <!-- BEFORE 라벨 -->
+    <rect x="120" y="750" width="200" height="52" rx="18" fill="#546E7A"/>
+    <text x="220" y="785" font-family="'Segoe UI',Arial,sans-serif" font-weight="900" font-size="36" fill="#FFFFFF" text-anchor="middle">BEFORE</text>
+
+    <!-- 우측: 선명한 이미지 (고해상도) -->
+    <rect x="524" y="200" width="420" height="624" rx="20" fill="url(#sliderR)" opacity="0.15"/>
+    <rect x="524" y="200" width="420" height="624" rx="20" fill="#E8F5E9" opacity="0.6"/>
+    <!-- 선명한 이미지 요소들 -->
+    <circle cx="634" cy="360" r="80" fill="#00C853" opacity="0.9"/>
+    <circle cx="634" cy="360" r="55" fill="#69F0AE"/>
+    <circle cx="634" cy="360" r="30" fill="#FFFFFF"/>
+    <rect x="740" y="280" width="160" height="28" rx="8" fill="#00897B"/>
+    <rect x="740" y="320" width="120" height="18" rx="6" fill="#26A69A"/>
+    <rect x="740" y="350" width="140" height="18" rx="6" fill="#80CBC4"/>
+    <rect x="740" y="380" width="100" height="18" rx="6" fill="#26A69A"/>
+    <rect x="544" y="480" width="380" height="4" rx="2" fill="#00E676" opacity="0.5"/>
+    <rect x="544" y="500" width="360" height="4" rx="2" fill="#1DE9B6" opacity="0.4"/>
+    <rect x="544" y="520" width="380" height="4" rx="2" fill="#00E676" opacity="0.3"/>
+    <!-- AFTER 라벨 -->
+    <rect x="604" y="750" width="200" height="52" rx="18" fill="#00897B"/>
+    <text x="704" y="785" font-family="'Segoe UI',Arial,sans-serif" font-weight="900" font-size="36" fill="#FFFFFF" text-anchor="middle">AFTER</text>
+
+    <!-- 중앙 슬라이더 라인 -->
+    <rect x="504" y="180" width="16" height="664" rx="8" fill="#FFFFFF" opacity="0.9"/>
+    <!-- 슬라이더 핸들 -->
+    <circle cx="512" cy="512" r="44" fill="#FFFFFF"/>
+    <circle cx="512" cy="512" r="36" fill="#00E676"/>
+    <!-- 좌우 화살표 -->
+    <text x="512" y="528" font-family="'Segoe UI',Arial,sans-serif" font-size="40" fill="#FFFFFF" text-anchor="middle">⟺</text>
+
+    <!-- 타이틀 -->
+    <rect x="212" y="870" width="600" height="70" rx="24" fill="#00695C"/>
+    <text x="512" y="917" font-family="'Segoe UI',Arial,sans-serif" font-weight="900" font-size="50" fill="#FFFFFF" text-anchor="middle">BRUSH.SCALE</text>
+  </g>
+</svg>

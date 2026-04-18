@@ -1,0 +1,53 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFF8E1"/>
+      <stop offset="100%" stop-color="#FFF3E0"/>
+    </linearGradient>
+    <linearGradient id="dropzone" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFE0B2"/>
+      <stop offset="100%" stop-color="#FFCC80"/>
+    </linearGradient>
+    <clipPath id="cp"><rect width="1024" height="1024" rx="190"/></clipPath>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg)"/>
+  <g clip-path="url(#cp)">
+    <!-- 드롭존 영역 -->
+    <rect x="100" y="220" width="824" height="500" rx="32" fill="url(#dropzone)" opacity="0.4"/>
+    <!-- 점선 테두리 효과 -->
+    <rect x="116" y="236" width="792" height="468" rx="24" fill="none" stroke="#FF8F00" stroke-width="8" stroke-dasharray="24,12"/>
+
+    <!-- 내려오는 이미지 파일 카드들 -->
+    <!-- 카드 1 (JPG) - 좌측 -->
+    <rect x="160" y="100" width="180" height="220" rx="20" fill="#FF8F00"/>
+    <text x="250" y="200" font-family="'Segoe UI',Arial,sans-serif" font-weight="900" font-size="52" fill="#FFFFFF" text-anchor="middle">JPG</text>
+    <rect x="180" y="220" width="140" height="14" rx="4" fill="#FFD54F" opacity="0.7"/>
+    <rect x="180" y="244" width="100" height="14" rx="4" fill="#FFD54F" opacity="0.5"/>
+    <!-- 화살표 아래로 -->
+    <text x="250" y="340" font-family="'Segoe UI',Arial,sans-serif" font-size="60" fill="#E65100" text-anchor="middle">↓</text>
+
+    <!-- 카드 2 (PNG) - 중앙 -->
+    <rect x="422" y="80" width="180" height="220" rx="20" fill="#E65100"/>
+    <text x="512" y="180" font-family="'Segoe UI',Arial,sans-serif" font-weight="900" font-size="52" fill="#FFFFFF" text-anchor="middle">PNG</text>
+    <rect x="442" y="200" width="140" height="14" rx="4" fill="#FFAB40" opacity="0.7"/>
+    <rect x="442" y="224" width="100" height="14" rx="4" fill="#FFAB40" opacity="0.5"/>
+    <!-- 화살표 아래로 -->
+    <text x="512" y="318" font-family="'Segoe UI',Arial,sans-serif" font-size="60" fill="#BF360C" text-anchor="middle">↓</text>
+
+    <!-- 카드 3 (BMP) - 우측 -->
+    <rect x="684" y="110" width="180" height="220" rx="20" fill="#F4511E"/>
+    <text x="774" y="210" font-family="'Segoe UI',Arial,sans-serif" font-weight="900" font-size="52" fill="#FFFFFF" text-anchor="middle">BMP</text>
+    <rect x="704" y="230" width="140" height="14" rx="4" fill="#FFD54F" opacity="0.7"/>
+    <rect x="704" y="254" width="100" height="14" rx="4" fill="#FFD54F" opacity="0.5"/>
+    <!-- 화살표 아래로 -->
+    <text x="774" y="348" font-family="'Segoe UI',Arial,sans-serif" font-size="60" fill="#BF360C" text-anchor="middle">↓</text>
+
+    <!-- 드롭존 안내 텍스트 -->
+    <text x="512" y="540" font-family="'Segoe UI',Arial,sans-serif" font-size="52" fill="#FF8F00" text-anchor="middle">이미지를 여기에 놓으세요</text>
+    <text x="512" y="600" font-family="'Segoe UI',Arial,sans-serif" font-size="40" fill="#FFA726" text-anchor="middle">드래그 &amp; 드롭</text>
+
+    <!-- 타이틀 -->
+    <rect x="212" y="840" width="600" height="70" rx="24" fill="#E65100"/>
+    <text x="512" y="887" font-family="'Segoe UI',Arial,sans-serif" font-weight="900" font-size="50" fill="#FFFFFF" text-anchor="middle">BRUSH.SCALE</text>
+  </g>
+</svg>

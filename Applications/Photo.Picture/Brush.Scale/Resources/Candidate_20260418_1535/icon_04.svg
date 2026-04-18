@@ -1,0 +1,77 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#EDE7F6"/>
+      <stop offset="100%" stop-color="#F3E5F5"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#CE93D8" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#AB47BC" stop-opacity="0"/>
+    </radialGradient>
+    <clipPath id="cp"><rect width="1024" height="1024" rx="190"/></clipPath>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg)"/>
+  <g clip-path="url(#cp)">
+    <!-- 배경 글로우 -->
+    <ellipse cx="512" cy="450" rx="380" ry="320" fill="url(#glow)"/>
+
+    <!-- AI 신경망 격자 패턴 -->
+    <!-- 노드들 (원형) -->
+    <!-- 1행 -->
+    <circle cx="200" cy="240" r="28" fill="#CE93D8"/>
+    <circle cx="380" cy="240" r="28" fill="#BA68C8"/>
+    <circle cx="560" cy="240" r="28" fill="#AB47BC"/>
+    <circle cx="740" cy="240" r="28" fill="#CE93D8"/>
+    <!-- 2행 -->
+    <circle cx="290" cy="400" r="34" fill="#9C27B0"/>
+    <circle cx="512" cy="400" r="34" fill="#7B1FA2"/>
+    <circle cx="734" cy="400" r="34" fill="#9C27B0"/>
+    <!-- 3행 (출력) -->
+    <circle cx="380" cy="570" r="40" fill="#6A1B9A"/>
+    <circle cx="644" cy="570" r="40" fill="#4A148C"/>
+
+    <!-- 연결선들 (신경망 엣지) -->
+    <line x1="200" y1="240" x2="290" y2="400" stroke="#CE93D8" stroke-width="6" opacity="0.6"/>
+    <line x1="200" y1="240" x2="512" y2="400" stroke="#BA68C8" stroke-width="4" opacity="0.4"/>
+    <line x1="380" y1="240" x2="290" y2="400" stroke="#CE93D8" stroke-width="6" opacity="0.6"/>
+    <line x1="380" y1="240" x2="512" y2="400" stroke="#AB47BC" stroke-width="6" opacity="0.6"/>
+    <line x1="380" y1="240" x2="734" y2="400" stroke="#BA68C8" stroke-width="4" opacity="0.4"/>
+    <line x1="560" y1="240" x2="290" y2="400" stroke="#BA68C8" stroke-width="4" opacity="0.4"/>
+    <line x1="560" y1="240" x2="512" y2="400" stroke="#9C27B0" stroke-width="6" opacity="0.6"/>
+    <line x1="560" y1="240" x2="734" y2="400" stroke="#AB47BC" stroke-width="6" opacity="0.6"/>
+    <line x1="740" y1="240" x2="512" y2="400" stroke="#CE93D8" stroke-width="4" opacity="0.4"/>
+    <line x1="740" y1="240" x2="734" y2="400" stroke="#CE93D8" stroke-width="6" opacity="0.6"/>
+    <line x1="290" y1="400" x2="380" y2="570" stroke="#9C27B0" stroke-width="8" opacity="0.7"/>
+    <line x1="290" y1="400" x2="644" y2="570" stroke="#7B1FA2" stroke-width="6" opacity="0.5"/>
+    <line x1="512" y1="400" x2="380" y2="570" stroke="#7B1FA2" stroke-width="8" opacity="0.7"/>
+    <line x1="512" y1="400" x2="644" y2="570" stroke="#7B1FA2" stroke-width="8" opacity="0.7"/>
+    <line x1="734" y1="400" x2="380" y2="570" stroke="#6A1B9A" stroke-width="6" opacity="0.5"/>
+    <line x1="734" y1="400" x2="644" y2="570" stroke="#6A1B9A" stroke-width="8" opacity="0.7"/>
+
+    <!-- 노드 하이라이트 재렌더 (위에 선이 가릴 수 있으므로) -->
+    <circle cx="200" cy="240" r="28" fill="#CE93D8"/>
+    <circle cx="380" cy="240" r="28" fill="#BA68C8"/>
+    <circle cx="560" cy="240" r="28" fill="#AB47BC"/>
+    <circle cx="740" cy="240" r="28" fill="#CE93D8"/>
+    <circle cx="290" cy="400" r="34" fill="#9C27B0"/>
+    <circle cx="512" cy="400" r="34" fill="#7B1FA2"/>
+    <circle cx="734" cy="400" r="34" fill="#9C27B0"/>
+    <circle cx="380" cy="570" r="40" fill="#6A1B9A"/>
+    <circle cx="644" cy="570" r="40" fill="#4A148C"/>
+    <!-- 화이트 코어 -->
+    <circle cx="380" cy="570" r="20" fill="#CE93D8"/>
+    <circle cx="644" cy="570" r="20" fill="#BA68C8"/>
+
+    <!-- AI 라벨 -->
+    <rect x="154" y="640" width="160" height="68" rx="20" fill="#7B1FA2"/>
+    <text x="234" y="686" font-family="'Segoe UI',Arial,sans-serif" font-weight="900" font-size="50" fill="#FFFFFF" text-anchor="middle">AI</text>
+
+    <!-- 입력/출력 라벨 -->
+    <text x="512" y="180" font-family="'Segoe UI',Arial,sans-serif" font-size="38" fill="#7B1FA2" text-anchor="middle" opacity="0.7">입력 레이어</text>
+    <text x="512" y="670" font-family="'Segoe UI',Arial,sans-serif" font-size="38" fill="#4A148C" text-anchor="middle" opacity="0.7">출력 레이어</text>
+
+    <!-- 타이틀 -->
+    <rect x="212" y="840" width="600" height="70" rx="24" fill="#4A148C"/>
+    <text x="512" y="887" font-family="'Segoe UI',Arial,sans-serif" font-weight="900" font-size="50" fill="#FFFFFF" text-anchor="middle">BRUSH.SCALE</text>
+  </g>
+</svg>

@@ -1,0 +1,61 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FAFAFA"/>
+      <stop offset="100%" stop-color="#FCE4EC"/>
+    </linearGradient>
+    <linearGradient id="canvas" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFF9C4"/>
+      <stop offset="100%" stop-color="#FFF3E0"/>
+    </linearGradient>
+    <clipPath id="cp"><rect width="1024" height="1024" rx="190"/></clipPath>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg)"/>
+  <g clip-path="url(#cp)">
+    <!-- 캔버스 (이미지) -->
+    <rect x="100" y="160" width="540" height="560" rx="20" fill="url(#canvas)" stroke="#FFD54F" stroke-width="8"/>
+    <!-- 캔버스 위 이미지 내용 (풍경) -->
+    <!-- 하늘 -->
+    <rect x="116" y="176" width="508" height="200" rx="12" fill="#81D4FA"/>
+    <!-- 구름 -->
+    <ellipse cx="280" cy="240" rx="80" ry="40" fill="#FFFFFF" opacity="0.9"/>
+    <ellipse cx="380" cy="225" rx="60" ry="35" fill="#FFFFFF" opacity="0.8"/>
+    <ellipse cx="520" cy="250" rx="70" ry="38" fill="#FFFFFF" opacity="0.85"/>
+    <!-- 땅 -->
+    <rect x="116" y="376" width="508" height="140" rx="4" fill="#81C784"/>
+    <rect x="116" y="476" width="508" height="60" rx="4" fill="#4CAF50"/>
+    <!-- 나무 -->
+    <rect x="240" y="356" width="28" height="120" rx="6" fill="#5D4037"/>
+    <ellipse cx="254" cy="340" rx="54" ry="50" fill="#388E3C"/>
+    <rect x="440" y="370" width="24" height="106" rx="6" fill="#5D4037"/>
+    <ellipse cx="452" cy="352" rx="48" ry="44" fill="#43A047"/>
+    <!-- 태양 -->
+    <circle cx="560" cy="210" r="44" fill="#FFD54F"/>
+
+    <!-- 붓 실루엣 (크고 뚜렷하게) -->
+    <!-- 붓 손잡이 -->
+    <rect x="590" y="130" width="48" height="460" rx="24" fill="#D32F2F" transform="rotate(20 590 400)"/>
+    <!-- 붓 금속 고정링 -->
+    <rect x="590" y="540" width="48" height="40" rx="8" fill="#B0BEC5" transform="rotate(20 590 400)"/>
+    <!-- 붓 모 (털 부분) -->
+    <ellipse cx="680" cy="650" rx="50" ry="100" fill="#E91E63" transform="rotate(20 680 650)"/>
+    <ellipse cx="680" cy="680" rx="38" ry="80" fill="#F06292" transform="rotate(20 680 680)"/>
+
+    <!-- 스파클 이펙트 (AI 처리 중) -->
+    <text x="820" y="300" font-family="'Segoe UI',Arial,sans-serif" font-size="70">✨</text>
+    <text x="760" y="180" font-family="'Segoe UI',Arial,sans-serif" font-size="50">⭐</text>
+    <text x="860" y="420" font-family="'Segoe UI',Arial,sans-serif" font-size="50">✨</text>
+
+    <!-- HD 뱃지 -->
+    <rect x="660" y="480" width="260" height="80" rx="24" fill="#E91E63"/>
+    <text x="790" y="534" font-family="'Segoe UI',Arial,sans-serif" font-weight="900" font-size="60" fill="#FFFFFF" text-anchor="middle">AI HD</text>
+
+    <!-- 픽셀 → 선명 텍스트 -->
+    <rect x="660" y="580" width="260" height="52" rx="16" fill="#AD1457"/>
+    <text x="790" y="614" font-family="'Segoe UI',Arial,sans-serif" font-size="32" fill="#FCE4EC" text-anchor="middle">고해상도 복원</text>
+
+    <!-- 타이틀 -->
+    <rect x="212" y="860" width="600" height="70" rx="24" fill="#880E4F"/>
+    <text x="512" y="907" font-family="'Segoe UI',Arial,sans-serif" font-weight="900" font-size="50" fill="#FFFFFF" text-anchor="middle">BRUSH.SCALE</text>
+  </g>
+</svg>

@@ -6,8 +6,13 @@ namespace MarkView.Services;
 // COM IFileDialog 기반 네이티브 폴더 선택기 (추가 패키지 불필요)
 public static class FolderPicker
 {
-    public static string? Show(string? initialDir = null)
+    public enum PickStatus { Success, Cancelled, Error }
+
+    public static string? Show(string? initialDir = null) => TryShow(initialDir, out var path, out _) ? path : null;
+
+    public static bool TryShow(string? initialDir, out string? path, out PickStatus status)
     {
+        path = null;
         try
         {
             var dialog = (IFileOpenDialog)new NativeFileOpenDialog();
@@ -20,15 +25,21 @@ public static class FolderPicker
             }
 
             int hr = dialog.Show(nint.Zero);
-            if (hr != 0) return null; // 취소
+            const int HR_CANCELLED = unchecked((int)0x800704C7);
+            if (hr == HR_CANCELLED || hr == 1) { status = PickStatus.Cancelled; return false; }
+            if (hr != 0) { status = PickStatus.Error; return false; }
 
             dialog.GetResult(out var item);
-            item.GetDisplayName(SIGDN.FILESYSPATH, out var path);
-            return path;
+            item.GetDisplayName(SIGDN.FILESYSPATH, out var p);
+            path = p;
+            status = PickStatus.Success;
+            return true;
         }
-        catch
+        catch (Exception ex)
         {
-            return null;
+            System.Diagnostics.Debug.WriteLine($"FolderPicker: {ex.Message}");
+            status = PickStatus.Error;
+            return false;
         }
     }
 

@@ -27,6 +27,9 @@ public class AppSettings
     public double PreviewFontSize { get; set; } = 15;
     public bool IsMaximized { get; set; } = false;
     public bool IsFocusMode { get; set; } = false;
+    public bool IsTypewriterMode { get; set; } = false;
+    public bool IsHeadingAutoNumber { get; set; } = false;
+    public bool IsSpellCheck { get; set; } = false;
     public bool IsWordWrap { get; set; } = true;
     public string ExportDir { get; set; } = "";
     public string PdfPageSize { get; set; } = "a4"; // a4, letter, legal
@@ -63,6 +66,20 @@ public class AppSettings
     public bool IsPinned(string path) =>
         PinnedFiles.Contains(path, StringComparer.OrdinalIgnoreCase);
 
+    public void PrunePathEntries(string path)
+    {
+        FileCursorPositions.Remove(path);
+        FileScrollPositions.Remove(path);
+        Bookmarks.Remove(path);
+        LastExportPaths.Remove(path);
+        CustomTabTitles.Remove(path);
+    }
+
+    public void PrunePathEntries(IEnumerable<string> paths)
+    {
+        foreach (var p in paths) PrunePathEntries(p);
+    }
+
     public static AppSettings Load()
     {
         if (!File.Exists(_path)) return new AppSettings();
@@ -71,8 +88,9 @@ public class AppSettings
             var json = File.ReadAllText(_path);
             return JsonSerializer.Deserialize<AppSettings>(json) ?? new AppSettings();
         }
-        catch
+        catch (Exception ex)
         {
+            System.Diagnostics.Debug.WriteLine($"AppSettings.Load: {ex.Message}");
             // 손상된 설정 파일은 백업 후 초기화
             try
             {
@@ -80,7 +98,7 @@ public class AppSettings
                 File.Copy(_path, backup, overwrite: true);
                 File.Delete(_path);
             }
-            catch { }
+            catch (Exception bex) { System.Diagnostics.Debug.WriteLine($"AppSettings.Load backup: {bex.Message}"); }
             return new AppSettings();
         }
     }
@@ -93,6 +111,6 @@ public class AppSettings
             File.WriteAllText(_path, JsonSerializer.Serialize(this,
                 new JsonSerializerOptions { WriteIndented = true }));
         }
-        catch { }
+        catch (Exception ex) { System.Diagnostics.Debug.WriteLine($"AppSettings.Save: {ex.Message}"); }
     }
 }

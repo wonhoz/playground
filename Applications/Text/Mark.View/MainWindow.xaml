@@ -69,6 +69,12 @@
                     Click="FmtBtn_Click" ToolTip="인라인 코드" Padding="6,3" Margin="0,0,1,0">
               <TextBlock Text="`C`" FontSize="11" FontFamily="Cascadia Code, Consolas, monospace"/>
             </Button>
+            <Button Style="{StaticResource IconButton}" Tag="strike"
+                    Click="FmtBtn_Click" ToolTip="취소선 (Ctrl+Shift+X)" Padding="6,3" Margin="0,0,1,0">
+              <TextBlock Text="S" FontSize="12" FontWeight="Bold">
+                <TextBlock.TextDecorations><TextDecoration Location="Strikethrough"/></TextBlock.TextDecorations>
+              </TextBlock>
+            </Button>
             <Button Style="{StaticResource IconButton}" Tag="codeblock"
                     Click="FmtBtn_Click" ToolTip="코드 블록" Padding="6,3" Margin="0,0,4,0">
               <TextBlock Text="```" FontSize="11" FontFamily="Cascadia Code, Consolas, monospace"/>

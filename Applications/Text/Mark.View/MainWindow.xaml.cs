@@ -26,6 +26,7 @@ public partial class MainWindow : Window
     private bool _isEditMode;
     private bool _isTocVisible;
     private bool _isFocusMode;
+    private bool _isTypewriterMode;
     private bool _suppressEditorChange;
     private bool _suppressTocSelection;
     private bool _caseSensitive;
@@ -1433,9 +1434,23 @@ public partial class MainWindow : Window
             codeItem.Click += (_, _) => WrapSelection("`", "`");
             menu.Items.Add(codeItem);
 
+            var strikeItem = new MenuItem { Header = "취소선\tCtrl+Shift+X", IsEnabled = hasSel };
+            strikeItem.Click += (_, _) => WrapSelection("~~", "~~");
+            menu.Items.Add(strikeItem);
+
             var linkItem = new MenuItem { Header = "링크 삽입\tCtrl+K" };
             linkItem.Click += (_, _) => WrapAsLink();
             menu.Items.Add(linkItem);
+
+            menu.Items.Add(new Separator());
+
+            var sortAscItem = new MenuItem { Header = "선택 줄 정렬 A→Z", IsEnabled = hasSel };
+            sortAscItem.Click += (_, _) => SortSelectedLines(false);
+            menu.Items.Add(sortAscItem);
+
+            var sortDescItem = new MenuItem { Header = "선택 줄 정렬 Z→A", IsEnabled = hasSel };
+            sortDescItem.Click += (_, _) => SortSelectedLines(true);
+            menu.Items.Add(sortDescItem);
 
             menu.Items.Add(new Separator());
 
@@ -1642,6 +1657,8 @@ public partial class MainWindow : Window
         if (_settings.IsEditMode) SetEditMode(true);
         if (_settings.IsTocVisible) SetTocVisible(true);
         if (_settings.IsFocusMode) SetFocusMode(true);
+        if (_settings.IsTypewriterMode) _isTypewriterMode = true;
+        if (_settings.IsSpellCheck) Editor.SpellCheck.IsEnabled = true;
         if (!_settings.IsWordWrap) SetWordWrap(false);
     }
 
@@ -1692,6 +1709,7 @@ public partial class MainWindow : Window
             case "bold":     WrapSelection("**", "**"); break;
             case "italic":   WrapSelection("*", "*"); break;
             case "code":     WrapSelection("`", "`"); break;
+            case "strike":   WrapSelection("~~", "~~"); break;
             case "codeblock":WrapSelection("\n```\n", "\n```\n"); break;
             case "link":     WrapAsLink(); break;
             case "quote":    InsertLinePrefix("> "); break;
@@ -2011,6 +2029,98 @@ public partial class MainWindow : Window
         StatusBarBorder.Visibility = focus ? Visibility.Collapsed : Visibility.Visible;
         _settings.IsFocusMode = focus;
         _settings.Save();
+    }
+
+    // ── Typewriter 모드 ──────────────────────────────────────────────────
+
+    private void SetTypewriterMode(bool enabled)
+    {
+        _isTypewriterMode = enabled;
+        _settings.IsTypewriterMode = enabled;
+        _settings.Save();
+        ShowStatusHint(enabled ? "Typewriter 모드 켜짐 — 현재 줄이 중앙 고정" : "Typewriter 모드 꺼짐", 2);
+        if (enabled) CenterCaretLine();
+    }
+
+    private void CenterCaretLine()
+    {
+        if (!_isTypewriterMode || !_isEditMode) return;
+        try
+        {
+            var rect = Editor.GetRectFromCharacterIndex(Editor.CaretIndex);
+            if (rect.IsEmpty || double.IsInfinity(rect.Top)) return;
+            var lineHeight = rect.Height > 0 ? rect.Height : 20;
+            var targetOffset = Editor.VerticalOffset + rect.Top - (Editor.ViewportHeight / 2) + (lineHeight / 2);
+            if (targetOffset < 0) targetOffset = 0;
+            Editor.ScrollToVerticalOffset(targetOffset);
+        }
+        catch { }
+    }
+
+    // ── 헤딩 자동 번호 ───────────────────────────────────────────────────
+
+    private static readonly Regex _headingNumberRegex = new(@"^(#{1,6})(\s+)(?:(\d+(?:\.\d+)*\.?)\s+)?(.*)$", RegexOptions.Compiled);
+
+    private void ApplyHeadingAutoNumber()
+    {
+        if (_activeIndex < 0 || _activeIndex >= _docs.Count) return;
+        var lines = Editor.Text.Replace("\r\n", "\n").Split('\n');
+        var counters = new int[6];
+        bool inFence = false;
+        bool changed = false;
+        for (int i = 0; i < lines.Length; i++)
+        {
+            var trimmed = lines[i].TrimStart();
+            if (trimmed.StartsWith("```") || trimmed.StartsWith("~~~")) inFence = !inFence;
+            if (inFence) continue;
+            var m = _headingNumberRegex.Match(lines[i]);
+            if (!m.Success) continue;
+            int level = m.Groups[1].Length;
+            counters[level - 1]++;
+            for (int j = level; j < 6; j++) counters[j] = 0;
+            var num = string.Join('.', counters.Take(level));
+            var rebuilt = $"{m.Groups[1].Value} {num} {m.Groups[4].Value}";
+            if (lines[i] != rebuilt) { lines[i] = rebuilt; changed = true; }
+        }
+        if (!changed) { ShowStatusHint("헤딩에 변경할 내용이 없습니다", 2); return; }
+        var caret = Editor.CaretIndex;
+        Editor.Text = string.Join('\n', lines);
+        Editor.CaretIndex = Math.Min(caret, Editor.Text.Length);
+        ShowStatusHint("헤딩 번호 부여 완료", 2);
+    }
+
+    private void RemoveHeadingAutoNumber()
+    {
+        if (_activeIndex < 0 || _activeIndex >= _docs.Count) return;
+        var lines = Editor.Text.Replace("\r\n", "\n").Split('\n');
+        bool inFence = false;
+        bool changed = false;
+        for (int i = 0; i < lines.Length; i++)
+        {
+            var trimmed = lines[i].TrimStart();
+            if (trimmed.StartsWith("```") || trimmed.StartsWith("~~~")) inFence = !inFence;
+            if (inFence) continue;
+            var m = _headingNumberRegex.Match(lines[i]);
+            if (!m.Success || !m.Groups[3].Success) continue;
+            var rebuilt = $"{m.Groups[1].Value} {m.Groups[4].Value}";
+            if (lines[i] != rebuilt) { lines[i] = rebuilt; changed = true; }
+        }
+        if (!changed) { ShowStatusHint("제거할 헤딩 번호가 없습니다", 2); return; }
+        var caret = Editor.CaretIndex;
+        Editor.Text = string.Join('\n', lines);
+        Editor.CaretIndex = Math.Min(caret, Editor.Text.Length);
+        ShowStatusHint("헤딩 번호 제거 완료", 2);
+    }
+
+    // ── 스펠 체크 ────────────────────────────────────────────────────────
+
+    private void ToggleSpellCheck()
+    {
+        var enabled = !Editor.SpellCheck.IsEnabled;
+        Editor.SpellCheck.IsEnabled = enabled;
+        _settings.IsSpellCheck = enabled;
+        _settings.Save();
+        ShowStatusHint(enabled ? "맞춤법 검사 켜짐" : "맞춤법 검사 꺼짐", 2);
     }
 
     // ── Word Wrap ────────────────────────────────────────────────────────
@@ -2600,8 +2710,12 @@ public partial class MainWindow : Window
         // 폴더 선택 → 하위 .md/.markdown 파일 모두 열기
         var initDir = _activeIndex >= 0 && !_docs[_activeIndex].IsNew
             ? _docs[_activeIndex].Directory : null;
-        var dir = FolderPicker.Show(initDir);
-        if (dir == null) return;
+        if (!FolderPicker.TryShow(initDir, out var dir, out var pickStatus) || string.IsNullOrEmpty(dir))
+        {
+            if (pickStatus == FolderPicker.PickStatus.Error)
+                ShowStatusHint("폴더 선택 대화상자를 열 수 없습니다", 3);
+            return;
+        }
 
         var files = Directory.GetFiles(dir, "*.md", SearchOption.TopDirectoryOnly)
             .Concat(Directory.GetFiles(dir, "*.markdown", SearchOption.TopDirectoryOnly))
@@ -3339,6 +3453,9 @@ public partial class MainWindow : Window
         // 현재 줄 하이라이트
         UpdateCurrentLineHighlight(caret);
 
+        // Typewriter 모드: 캐럿 줄을 뷰포트 중앙 고정
+        if (_isTypewriterMode) CenterCaretLine();
+
         // Breadcrumb: 디바운스로 대용량 문서 성능 보호
         _breadcrumbTimer?.Stop();
         _breadcrumbTimer ??= new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(150) };
@@ -3408,12 +3525,7 @@ public partial class MainWindow : Window
         }
     }
 
-    private async void StatusMermaid_Click(object sender, System.Windows.Input.MouseButtonEventArgs e)
-    {
-        if (!_webViewReady) return;
-        try
-        {
-            await Viewer.ExecuteScriptAsync(@"
+    private const string MermaidPngExportScript = @"
 (function() {
     var svgs = document.querySelectorAll('.mermaid svg, pre.mermaid svg, [class*=""mermaid""] svg');
     if (svgs.length === 0) {
@@ -3444,9 +3556,13 @@ public partial class MainWindow : Window
         window.chrome.webview.postMessage('mermaid-png:error');
     };
     img.src = url;
-})()");
-        }
-        catch { }
+})()";
+
+    private async void StatusMermaid_Click(object sender, System.Windows.Input.MouseButtonEventArgs e)
+    {
+        if (!_webViewReady) return;
+        try { await Viewer.ExecuteScriptAsync(MermaidPngExportScript); }
+        catch (Exception ex) { System.Diagnostics.Debug.WriteLine($"Mermaid PNG export: {ex.Message}"); }
     }
 
     private void DetectMermaidBlock(int caretIdx, string text)
@@ -3628,6 +3744,33 @@ public partial class MainWindow : Window
         }
     }
 
+    private void SortSelectedLines(bool descending)
+    {
+        if (!_isEditMode || _activeIndex < 0 || Editor.SelectionLength == 0) return;
+        string text = Editor.Text;
+        int selStart = Editor.SelectionStart;
+        int selEnd = selStart + Editor.SelectionLength;
+
+        int lineStart = selStart > 0 ? text.LastIndexOf('\n', selStart - 1) + 1 : 0;
+        int lastPos = (selEnd > lineStart && selEnd > 0 && selEnd <= text.Length
+                       && text[selEnd - 1] == '\n') ? selEnd - 1 : selEnd;
+        int lineEnd = lastPos >= text.Length ? text.Length : text.IndexOf('\n', lastPos);
+        if (lineEnd < 0) lineEnd = text.Length;
+        if (lineEnd < lineStart) lineEnd = lineStart;
+
+        var lines = text[lineStart..lineEnd].Split('\n');
+        if (lines.Length < 2) return;
+        var sorted = descending
+            ? lines.OrderByDescending(l => l, StringComparer.CurrentCultureIgnoreCase).ToArray()
+            : lines.OrderBy(l => l, StringComparer.CurrentCultureIgnoreCase).ToArray();
+        var joined = string.Join('\n', sorted);
+
+        Editor.Select(lineStart, lineEnd - lineStart);
+        Editor.SelectedText = joined;
+        Editor.Select(lineStart, joined.Length);
+        ShowStatusHint($"{lines.Length}줄 정렬 완료 ({(descending ? "Z→A" : "A→Z")})", 2);
+    }
+
     private void IndentSelection(bool dedent)
     {
         string text = Editor.Text;
@@ -3763,6 +3906,14 @@ public partial class MainWindow : Window
         { ResetFontSize(); e.Handled = true; }
         else if (e.Key == Key.F11)
         { SetFocusMode(!_isFocusMode); e.Handled = true; }
+        else if (e.Key == Key.T && Keyboard.Modifiers == (ModifierKeys.Control | ModifierKeys.Alt))
+        { SetTypewriterMode(!_isTypewriterMode); e.Handled = true; }
+        else if (e.Key == Key.H && Keyboard.Modifiers == (ModifierKeys.Control | ModifierKeys.Alt) && _isEditMode)
+        { ApplyHeadingAutoNumber(); e.Handled = true; }
+        else if (e.Key == Key.H && Keyboard.Modifiers == (ModifierKeys.Control | ModifierKeys.Alt | ModifierKeys.Shift) && _isEditMode)
+        { RemoveHeadingAutoNumber(); e.Handled = true; }
+        else if (e.Key == Key.F7 && _isEditMode)
+        { ToggleSpellCheck(); e.Handled = true; }
         else if (e.Key == Key.F1)
         { ShowHelp(); e.Handled = true; }
         else if (e.Key == Key.H && Keyboard.Modifiers == ModifierKeys.Control)
@@ -3773,6 +3924,8 @@ public partial class MainWindow : Window
         { PasteClipboardAsNewTab(); e.Handled = true; }
         else if (e.Key == Key.M && Keyboard.Modifiers == (ModifierKeys.Control | ModifierKeys.Shift))
         { CopyMarkdownToClipboard(); e.Handled = true; }
+        else if (e.Key == Key.X && Keyboard.Modifiers == (ModifierKeys.Control | ModifierKeys.Shift) && _isEditMode)
+        { WrapSelection("~~", "~~"); e.Handled = true; }
         else if (e.Key == Key.Z && Keyboard.Modifiers == ModifierKeys.Alt)
         { SetWordWrap(!_settings.IsWordWrap); e.Handled = true; }
         else if (e.Key == Key.C && Keyboard.Modifiers == ModifierKeys.Alt)
@@ -3836,7 +3989,11 @@ public partial class MainWindow : Window
     private void PasteClipboardAsNewTab()
     {
         var text = Clipboard.GetText();
-        if (string.IsNullOrEmpty(text)) return;
+        if (string.IsNullOrEmpty(text))
+        {
+            ShowStatusHint("클립보드가 비어있습니다", 2);
+            return;
+        }
         var doc = new MarkDocument { Content = text };
         OpenDocument(doc);
         if (!_isEditMode) SetEditMode(true);
@@ -4203,7 +4360,9 @@ public partial class MainWindow : Window
         bool changed = false;
         if (validRecent.Count != _settings.RecentFiles.Count)
         {
+            var removed = _settings.RecentFiles.Except(validRecent, StringComparer.OrdinalIgnoreCase).ToList();
             _settings.RecentFiles = validRecent;
+            _settings.PrunePathEntries(removed);
             changed = true;
         }
         if (validPinned.Count != _settings.PinnedFiles.Count)
@@ -4320,6 +4479,7 @@ public partial class MainWindow : Window
         {
             _settings.RecentFiles.Remove(path);
             _settings.PinnedFiles.RemoveAll(p => p.Equals(path, StringComparison.OrdinalIgnoreCase));
+            _settings.PrunePathEntries(path);
             _settings.Save();
             RefreshRecentList();
         }

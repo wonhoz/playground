@@ -34,7 +34,7 @@ namespace StayAwake
                 if (File.Exists(iconPath))
                     key.SetValue("IconUri", iconPath);
             }
-            catch { /* 실패해도 앱 실행은 계속 */ }
+            catch (Exception ex) { Logger.LogException("RegisterAumid", ex); /* 실패해도 앱 실행은 계속 */ }
         }
 
         /// <summary>
@@ -51,8 +51,8 @@ namespace StayAwake
             if (!isNew)
             {
                 _mutex.Dispose();
-                MessageBox.Show("StayAwake가 이미 실행 중입니다.", "StayAwake",
-                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+                ApplicationConfiguration.Initialize();
+                DarkInfoDialog.Show("StayAwake", "StayAwake가 이미 실행 중입니다.", 360, 180);
                 return;
             }
 
@@ -60,6 +60,11 @@ namespace StayAwake
             {
                 ApplicationConfiguration.Initialize();
                 Application.Run(new TrayApplicationContext());
+            }
+            catch (Exception ex)
+            {
+                Logger.LogException("Main", ex);
+                throw;
             }
             finally
             {

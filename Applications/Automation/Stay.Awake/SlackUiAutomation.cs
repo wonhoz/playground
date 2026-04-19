@@ -23,26 +23,31 @@ namespace StayAwake
 
         /// <summary>
         /// 매 분 호출: 출근/퇴근 시간이면 Slack 상태 자동 변경
+        /// - 정각 분 매치뿐 아니라 '그 시각 이후 당일 처음 실행되는 경우'도 보정
+        ///   (PC 꺼짐·앱 미실행 등으로 정확한 분을 놓쳐도 당일 자동 전환 보장)
         /// </summary>
         public async Task<SlackUiResult?> CheckAndSetPresenceAsync()
         {
             if (!IsEnabled) return null;
 
             var now = DateTime.Now;
+            var startMinutes = WorkStartHour * 60 + WorkStartMinute;
+            var endMinutes = WorkEndHour * 60 + WorkEndMinute;
+            var nowMinutes = now.Hour * 60 + now.Minute;
 
-            // 아침 WorkStartHour:WorkStartMinute → 활성
-            if (now.Hour == WorkStartHour && now.Minute == WorkStartMinute && LastActiveSet.Date != now.Date)
-            {
-                var result = await SetPresenceAsync("active");
-                if (result.Success) LastActiveSet = now;
-                return result;
-            }
-
-            // 저녁 WorkEndHour:WorkEndMinute → 자리 비움
-            if (now.Hour == WorkEndHour && now.Minute == WorkEndMinute && LastAwaySet.Date != now.Date)
+            // 퇴근 시각을 이미 지난 경우 — 자리비움 먼저 처리 (퇴근 후 재가동 시 활성 재전송 방지)
+            if (nowMinutes >= endMinutes && LastAwaySet.Date != now.Date)
             {
                 var result = await SetPresenceAsync("away");
                 if (result.Success) LastAwaySet = now;
+                return result;
+            }
+
+            // 출근 시각~퇴근 시각 사이 — 활성 (정각 분 놓쳐도 당일 내 첫 체크에서 자동 보정)
+            if (nowMinutes >= startMinutes && nowMinutes < endMinutes && LastActiveSet.Date != now.Date)
+            {
+                var result = await SetPresenceAsync("active");
+                if (result.Success) LastActiveSet = now;
                 return result;
             }
 
@@ -157,7 +162,7 @@ Write-Output 'SUCCESS'
             }
             finally
             {
-                try { File.Delete(tempFile); } catch { }
+                try { File.Delete(tempFile); } catch (Exception ex) { Logger.LogException("SlackUiAutomation.DeleteTemp", ex); }
             }
         }
     }

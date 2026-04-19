@@ -41,7 +41,7 @@ namespace StayAwake
                     return JsonSerializer.Deserialize<AppSettings>(json) ?? new AppSettings();
                 }
             }
-            catch { /* 읽기 실패 시 기본값 사용 */ }
+            catch (Exception ex) { Logger.LogException("AppSettings.Load", ex); /* 읽기 실패 시 기본값 사용 */ }
             return new AppSettings();
         }
 
@@ -52,7 +52,17 @@ namespace StayAwake
                 Directory.CreateDirectory(Path.GetDirectoryName(_settingsPath)!);
                 File.WriteAllText(_settingsPath, JsonSerializer.Serialize(this, _jsonOptions));
             }
-            catch { /* 저장 실패 시 무시 */ }
+            catch (Exception ex) { Logger.LogException("AppSettings.Save", ex); /* 저장 실패 시 무시 */ }
+        }
+
+        public async Task SaveAsync()
+        {
+            try
+            {
+                Directory.CreateDirectory(Path.GetDirectoryName(_settingsPath)!);
+                await File.WriteAllTextAsync(_settingsPath, JsonSerializer.Serialize(this, _jsonOptions));
+            }
+            catch (Exception ex) { Logger.LogException("AppSettings.SaveAsync", ex); /* 저장 실패 시 무시 */ }
         }
     }
 }

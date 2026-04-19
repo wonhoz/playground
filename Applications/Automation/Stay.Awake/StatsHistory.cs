@@ -29,7 +29,7 @@ namespace StayAwake
                         return [.. list.OrderByDescending(x => x.Date).Take(maxDays)];
                 }
             }
-            catch { }
+            catch (Exception ex) { Logger.LogException("StatsHistory.Load", ex); }
             return [];
         }
 
@@ -47,7 +47,7 @@ namespace StayAwake
                 Directory.CreateDirectory(Path.GetDirectoryName(_historyPath)!);
                 File.WriteAllText(_historyPath, JsonSerializer.Serialize(sorted, _jsonOptions));
             }
-            catch { }
+            catch (Exception ex) { Logger.LogException("StatsHistory.Append", ex); }
         }
     }
 }

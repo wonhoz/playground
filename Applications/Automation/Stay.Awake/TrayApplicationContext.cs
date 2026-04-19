@@ -21,6 +21,8 @@ namespace StayAwake
         private Font? _startStopFont;
         private Icon? _cachedRunningIcon;
         private Icon? _cachedStoppedIcon;
+        private Icon? _currentProgressIcon; // 동적 진행률 아이콘 (매초 교체 — 이전 핸들 해제 필수)
+        private int _lastProgressBucket = -1; // 0~10 버킷 (매초 렌더 대신 10% 단위 변화 시에만 갱신)
 
         private ToolStripMenuItem _startStopItem = null!;
         private ToolStripMenuItem _intervalItem = null!;
@@ -30,6 +32,7 @@ namespace StayAwake
         private ToolStripMenuItem _slackAutoStatusItem = null!;
         private ToolStripMenuItem _preventSleepItem = null!;
         private ToolStripMenuItem _activityTypeItem = null!;
+        private ToolStripMenuItem _autoStartItem = null!;
         // private ToolStripMenuItem _pauseItem = null!;
         // private ToolStripMenuItem _pauseCancelItem = null!;
 
@@ -238,6 +241,13 @@ namespace StayAwake
             };
             menu.Items.Add(_skipIfActiveItem);
 
+            // Windows 시작 시 자동 실행
+            _autoStartItem = new ToolStripMenuItem("Windows 시작 시 자동 실행", null, (s, e) => ToggleAutoStart())
+            {
+                Checked = AutoStart.IsEnabled()
+            };
+            menu.Items.Add(_autoStartItem);
+
             menu.Items.Add(new ToolStripSeparator());
 
             // 지금 실행
@@ -330,7 +340,8 @@ namespace StayAwake
                 _tooltipTimer.Start();
                 _startStopItem.Text = "⏹ 정지";
                 _startStopItem.ForeColor = Color.FromArgb(234, 67, 53); // Red for stop
-                _trayIcon.Icon = CreateIcon(true);
+                _lastProgressBucket = -1;
+                UpdateProgressIcon(); // 진행률 0% 아이콘으로 즉시 교체
                 UpdateTooltip();
                 UpdateStatus();
 
@@ -354,6 +365,9 @@ namespace StayAwake
                 _simulator.AllowSleep(); // 절전 방지 해제
                 _startStopItem.Text = "▶ 시작";
                 _startStopItem.ForeColor = Color.FromArgb(67, 217, 123); // Green for start
+                _currentProgressIcon?.Dispose();
+                _currentProgressIcon = null;
+                _lastProgressBucket = -1;
                 _trayIcon.Icon = CreateIcon(false);
                 var stoppedTime = _todayActiveTime;
                 var stoppedText = $"StayAwake - 정지됨 (오늘 {(int)stoppedTime.TotalHours:D2}:{stoppedTime:mm\\:ss})";
@@ -379,6 +393,8 @@ namespace StayAwake
                 _activityTimer.Stop();
                 _lastActivityTime = DateTime.Now;
                 _activityTimer.Start();
+                _lastProgressBucket = -1;
+                UpdateProgressIcon(); // 진행률 아이콘 즉시 리셋
                 UpdateTooltip(); // 간격 변경 즉시 카운트다운 갱신
             }
 
@@ -442,6 +458,25 @@ namespace StayAwake
             SaveSettings();
         }
 
+        private void ToggleAutoStart()
+        {
+            var target = !_autoStartItem.Checked;
+            var ok = target ? AutoStart.Enable() : AutoStart.Disable();
+            _autoStartItem.Checked = AutoStart.IsEnabled();
+
+            if (!ok)
+            {
+                _trayIcon.ShowBalloonTip(2000, "StayAwake",
+                    "자동 실행 설정 변경 실패 (레지스트리 접근 오류)", ToolTipIcon.Warning);
+                return;
+            }
+
+            var msg = _autoStartItem.Checked
+                ? "Windows 시작 시 자동 실행 활성화"
+                : "Windows 시작 시 자동 실행 비활성화";
+            _trayIcon.ShowBalloonTip(1500, "StayAwake", msg, ToolTipIcon.Info);
+        }
+
         private void SaveSettings()
         {
             _settings.IntervalMinutes = _intervalMinutes;
@@ -497,7 +532,7 @@ namespace StayAwake
                 UpdateStatus(simulated);
                 SaveDailyStats();
             }
-            catch { /* 타이머 틱 예외 무시 — 다음 틱에서 재시도 */ }
+            catch (Exception ex) { Logger.LogException("OnTimerTick", ex); /* 타이머 틱 예외 무시 — 다음 틱에서 재시도 */ }
         }
 
         private async void SimulateNow()
@@ -528,7 +563,7 @@ namespace StayAwake
                     : "사용자 활동 감지됨 - 시뮬레이션 건너뜀";
                 _trayIcon.ShowBalloonTip(1000, "StayAwake", message, ToolTipIcon.Info);
             }
-            catch { /* 수동 실행 예외 무시 */ }
+            catch (Exception ex) { Logger.LogException("SimulateNow", ex); /* 수동 실행 예외 무시 */ }
         }
 
         private void UpdateStatus(bool? lastSimulated = null)
@@ -554,8 +589,32 @@ namespace StayAwake
 
         private void OnTooltipTimerTick(object? sender, EventArgs e)
         {
-            if (_isRunning) UpdateTooltip();
+            if (_isRunning)
+            {
+                UpdateTooltip();
+                UpdateProgressIcon();
+            }
             // else if (_isPaused) UpdatePauseTooltip();
+        }
+
+        /// <summary>
+        /// 다음 시뮬레이션까지 진행률을 트레이 아이콘에 반영
+        /// 10% 버킷 단위로만 갱신 — 1초마다 렌더하지 않아 CPU/GDI 리소스 절약
+        /// </summary>
+        private void UpdateProgressIcon()
+        {
+            var intervalSeconds = _intervalMinutes * 60.0;
+            var elapsed = (DateTime.Now - _lastActivityTime).TotalSeconds;
+            var progress = Math.Clamp(elapsed / intervalSeconds, 0.0, 1.0);
+            var bucket = (int)(progress * 10); // 0~10
+            if (bucket == _lastProgressBucket) return;
+
+            _lastProgressBucket = bucket;
+            var newIcon = IconGenerator.CreateProgressIcon(progress);
+            var oldIcon = _currentProgressIcon;
+            _currentProgressIcon = newIcon;
+            _trayIcon.Icon = newIcon;
+            oldIcon?.Dispose();
         }
 
         // private void UpdatePauseTooltip()
@@ -681,9 +740,14 @@ namespace StayAwake
 • 마우스 호버         카운트다운 + 오늘 활성 시간 + 세션 경과 시간 확인
                       (정지 시: 오늘 누적 활성 시간만 표시)
 
-[트레이 아이콘 색상]
-• 녹색 (●)            실행 중 — 활동 시뮬레이션 진행 중
-• 회색 (●)            정지됨 — 시뮬레이션 일시 중단 상태
+[트레이 아이콘 표시]
+• 원형 진행률 링 (실행 중) — 다음 시뮬레이션까지 남은 시간을
+                             시계 방향 원형 링으로 표시 (10% 단위 갱신)
+• 회색 ● (정지됨)          — 시뮬레이션 일시 중단 상태
+
+[대화상자 키 조작]
+• Esc / Enter         열린 다이얼로그(통계·도움말·정보) 닫기
+• 마우스 휠 / 드래그   스크롤바 이동
 
 [메뉴 — 시뮬레이션]
 • ▶ 시작 / ⏹ 정지     시작 / 정지 토글 (좌클릭 단일 클릭과 동일)
@@ -701,9 +765,14 @@ namespace StayAwake
 • 디스플레이 절전 방지  화면 꺼짐 / 시스템 절전 방지 On/Off
 • 사용 중이면 건너뛰기  직접 입력 감지 시 해당 틱 스킵
                        (건너뜀 횟수는 통계에 집계됨)
+• Windows 시작 시      체크 시 레지스트리 Run 키에 등록 —
+  자동 실행             부팅 후 로그인 시 StayAwake 자동 시작
+                       (관리자 권한 없이 HKCU에 저장)
 
 [메뉴 — Slack 자동 상태 변경]
 • 자동 변경 활성화     출퇴근 시각에 Active/Away 자동 전환
+                       시각을 놓쳐도(PC 꺼짐·앱 지연 등) 당일 범위 내
+                       첫 체크에서 자동 보정 실행 — 매일 1회 보장
 • 시간 설정            출퇴근 시각 변경 (기본 08:55 / 18:55)
 • 지금 활성/자리비움   즉시 수동 전환 — 결과를 풍선 알림으로 확인
 • 방해 금지 (DND)      30분 / 1시간 / 2시간 설정
@@ -723,9 +792,10 @@ namespace StayAwake
 [참고]
 • 앱 실행 시 자동으로 시뮬레이션이 시작됩니다
 • 설정은 자동 저장되며 앱 재시작 후에도 유지됩니다
-• 날짜가 바뀌면 전날 통계는 히스토리에 자동 저장됩니다";
+• 날짜가 바뀌면 전날 통계는 히스토리에 자동 저장됩니다
+• 예외 로그는 %AppData%\StayAwake\error.log에 기록됩니다";
 
-            DarkInfoDialog.Show("도움말", message, 740, 840);
+            DarkInfoDialog.Show("도움말", message, 740, 960);
         }
 
         private void ShowAbout()
@@ -761,9 +831,10 @@ Slack 자리 비움 상태 방지 도구
 • 활동 유형: {activityTypeLabel}
 • 디스플레이 절전 방지: {(_simulator.PreventDisplaySleep ? "켜짐" : "꺼짐")}
 • 사용 중 건너뛰기: {(_simulator.SkipIfUserActive ? "켜짐" : "꺼짐")}
+• Windows 시작 시 자동 실행: {(AutoStart.IsEnabled() ? "켜짐" : "꺼짐")}
 • Slack 자동 상태 변경: {slackStatusLine}";
 
-            DarkInfoDialog.Show($"StayAwake {versionStr}", message, 750, 770);
+            DarkInfoDialog.Show($"StayAwake {versionStr}", message, 750, 800);
         }
 
         private async void OnScheduleTimerTick(object? sender, EventArgs e)
@@ -794,7 +865,7 @@ Slack 자리 비움 상태 방지 도구
                         $"Slack 상태 변경 실패: {result.ErrorMessage}", ToolTipIcon.Warning);
                 }
             }
-            catch { /* 스케줄 타이머 예외 무시 */ }
+            catch (Exception ex) { Logger.LogException("OnScheduleTimerTick", ex); /* 스케줄 타이머 예외 무시 */ }
         }
 
         private void OpenSlackSettings()
@@ -981,6 +1052,7 @@ Slack 자리 비움 상태 방지 도구
                 _startStopFont?.Dispose();
                 _cachedRunningIcon?.Dispose();
                 _cachedStoppedIcon?.Dispose();
+                _currentProgressIcon?.Dispose();
             }
             base.Dispose(disposing);
         }

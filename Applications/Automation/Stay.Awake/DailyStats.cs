@@ -47,7 +47,7 @@ namespace StayAwake
                     }
                 }
             }
-            catch { /* 읽기 실패 시 새 통계 시작 */ }
+            catch (Exception ex) { Logger.LogException("DailyStats.Load", ex); /* 읽기 실패 시 새 통계 시작 */ }
             return new DailyStats();
         }
 
@@ -64,7 +64,7 @@ namespace StayAwake
                     return JsonSerializer.Deserialize<DailyStats>(json);
                 }
             }
-            catch { }
+            catch (Exception ex) { Logger.LogException("DailyStats.LoadRaw", ex); }
             return null;
         }
 
@@ -75,7 +75,17 @@ namespace StayAwake
                 Directory.CreateDirectory(Path.GetDirectoryName(_statsPath)!);
                 File.WriteAllText(_statsPath, JsonSerializer.Serialize(this, _jsonOptions));
             }
-            catch { /* 저장 실패 시 무시 */ }
+            catch (Exception ex) { Logger.LogException("DailyStats.Save", ex); /* 저장 실패 시 무시 */ }
+        }
+
+        public async Task SaveAsync()
+        {
+            try
+            {
+                Directory.CreateDirectory(Path.GetDirectoryName(_statsPath)!);
+                await File.WriteAllTextAsync(_statsPath, JsonSerializer.Serialize(this, _jsonOptions));
+            }
+            catch (Exception ex) { Logger.LogException("DailyStats.SaveAsync", ex); /* 저장 실패 시 무시 */ }
         }
     }
 }

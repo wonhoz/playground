@@ -133,8 +133,9 @@ namespace StayAwake
 
                 return true;
             }
-            catch
+            catch (Exception ex)
             {
+                Logger.LogException("SimulateActivity", ex);
                 // 실패해도 무시 (다음 타이머에서 재시도)
                 return false;
             }

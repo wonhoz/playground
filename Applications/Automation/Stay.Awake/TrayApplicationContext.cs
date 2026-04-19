@@ -33,6 +33,7 @@ namespace StayAwake
         private ToolStripMenuItem _preventSleepItem = null!;
         private ToolStripMenuItem _activityTypeItem = null!;
         private ToolStripMenuItem _autoStartItem = null!;
+        private ToolStripMenuItem _progressIconItem = null!;
         // private ToolStripMenuItem _pauseItem = null!;
         // private ToolStripMenuItem _pauseCancelItem = null!;
 
@@ -241,6 +242,13 @@ namespace StayAwake
             };
             menu.Items.Add(_skipIfActiveItem);
 
+            // 진행률 아이콘 표시 (카운트다운 원형 링 vs 고정 녹색 점)
+            _progressIconItem = new ToolStripMenuItem("카운트다운 진행률 아이콘", null, (s, e) => ToggleProgressIcon())
+            {
+                Checked = _settings.ShowProgressIcon
+            };
+            menu.Items.Add(_progressIconItem);
+
             // Windows 시작 시 자동 실행
             _autoStartItem = new ToolStripMenuItem("Windows 시작 시 자동 실행", null, (s, e) => ToggleAutoStart())
             {
@@ -341,7 +349,10 @@ namespace StayAwake
                 _startStopItem.Text = "⏹ 정지";
                 _startStopItem.ForeColor = Color.FromArgb(234, 67, 53); // Red for stop
                 _lastProgressBucket = -1;
-                UpdateProgressIcon(); // 진행률 0% 아이콘으로 즉시 교체
+                if (_settings.ShowProgressIcon)
+                    UpdateProgressIcon(); // 진행률 0% 아이콘으로 즉시 교체
+                else
+                    _trayIcon.Icon = _cachedRunningIcon!;
                 UpdateTooltip();
                 UpdateStatus();
 
@@ -394,7 +405,8 @@ namespace StayAwake
                 _lastActivityTime = DateTime.Now;
                 _activityTimer.Start();
                 _lastProgressBucket = -1;
-                UpdateProgressIcon(); // 진행률 아이콘 즉시 리셋
+                if (_settings.ShowProgressIcon)
+                    UpdateProgressIcon(); // 진행률 아이콘 즉시 리셋
                 UpdateTooltip(); // 간격 변경 즉시 카운트다운 갱신
             }
 
@@ -456,6 +468,30 @@ namespace StayAwake
             _simulator.SkipIfUserActive = !_simulator.SkipIfUserActive;
             _skipIfActiveItem.Checked = _simulator.SkipIfUserActive;
             SaveSettings();
+        }
+
+        private void ToggleProgressIcon()
+        {
+            _settings.ShowProgressIcon = !_settings.ShowProgressIcon;
+            _progressIconItem.Checked = _settings.ShowProgressIcon;
+            SaveSettings();
+
+            // 실행 중이면 즉시 반영 — 진행률 모드 → 동적 아이콘, 고정 모드 → 캐시 아이콘
+            if (_isRunning)
+            {
+                if (_settings.ShowProgressIcon)
+                {
+                    _lastProgressBucket = -1;
+                    UpdateProgressIcon();
+                }
+                else
+                {
+                    _currentProgressIcon?.Dispose();
+                    _currentProgressIcon = null;
+                    _lastProgressBucket = -1;
+                    _trayIcon.Icon = _cachedRunningIcon!;
+                }
+            }
         }
 
         private void ToggleAutoStart()
@@ -592,7 +628,8 @@ namespace StayAwake
             if (_isRunning)
             {
                 UpdateTooltip();
-                UpdateProgressIcon();
+                if (_settings.ShowProgressIcon)
+                    UpdateProgressIcon();
             }
             // else if (_isPaused) UpdatePauseTooltip();
         }
@@ -765,6 +802,8 @@ namespace StayAwake
 • 디스플레이 절전 방지  화면 꺼짐 / 시스템 절전 방지 On/Off
 • 사용 중이면 건너뛰기  직접 입력 감지 시 해당 틱 스킵
                        (건너뜀 횟수는 통계에 집계됨)
+• 카운트다운 진행률     체크 시 다음 실행까지 남은 시간을 원형 링으로 표시
+  아이콘                 체크 해제 시 기존 고정 녹색/회색 점으로 전환
 • Windows 시작 시      체크 시 레지스트리 Run 키에 등록 —
   자동 실행             부팅 후 로그인 시 StayAwake 자동 시작
                        (관리자 권한 없이 HKCU에 저장)

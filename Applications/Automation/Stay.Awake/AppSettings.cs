@@ -13,6 +13,9 @@ namespace StayAwake
         public bool PreventDisplaySleep { get; set; } = true;
         public bool SkipIfUserActive { get; set; } = true;
 
+        /// <summary>트레이 아이콘에 카운트다운 진행률 원형 링 표시 여부 (false: 고정 녹색/회색 점)</summary>
+        public bool ShowProgressIcon { get; set; } = true;
+
         // Slack 자동 상태 변경 (UI 자동화 방식 - 토큰 불필요)
         public bool SlackAutoStatusEnabled { get; set; } = false;
         public int WorkStartHour { get; set; } = 8;

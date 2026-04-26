@@ -97,6 +97,7 @@ namespace StayAwake
         private static async Task<string> RunPowerShellScriptAsync(string slashCommand)
         {
             // PowerShell 스크립트: {{ }} 는 C# 보간 이스케이프, PowerShell 중괄호 표현
+            // -Sta 모드 필수 — Clipboard.GetDataObject()/SetDataObject()는 STA 스레드에서만 동작
             var script = $@"
 $ErrorActionPreference = 'Stop'
 
@@ -125,14 +126,34 @@ Add-Type -AssemblyName System.Windows.Forms
 [System.Windows.Forms.SendKeys]::SendWait('{{ESC}}')
 Start-Sleep -Milliseconds 200
 
-$prevClipboard = Get-Clipboard -Raw
-Set-Clipboard -Value '{slashCommand}'
+# 클립보드 모든 포맷 백업 (텍스트뿐 아니라 이미지·파일·HTML 등 IDataObject 전체)
+$prevDataObject = [System.Windows.Forms.Clipboard]::GetDataObject()
+$savedData = @{{}}
+if ($prevDataObject) {{
+    foreach ($fmt in $prevDataObject.GetFormats($false)) {{
+        try {{
+            $value = $prevDataObject.GetData($fmt, $false)
+            if ($null -ne $value) {{ $savedData[$fmt] = $value }}
+        }} catch {{}}
+    }}
+}}
+
+[System.Windows.Forms.Clipboard]::SetText('{slashCommand}')
 Start-Sleep -Milliseconds 100
 [System.Windows.Forms.SendKeys]::SendWait('^v')
 Start-Sleep -Milliseconds 200
 [System.Windows.Forms.SendKeys]::SendWait('{{ENTER}}')
 
-if ($prevClipboard) {{ Set-Clipboard -Value $prevClipboard }} else {{ [System.Windows.Forms.Clipboard]::Clear() }}
+# 클립보드 원복 — 백업한 모든 포맷을 새 DataObject에 set 후 SetDataObject(copy=true)
+if ($savedData.Count -gt 0) {{
+    $newDataObject = New-Object System.Windows.Forms.DataObject
+    foreach ($fmt in $savedData.Keys) {{
+        try {{ $newDataObject.SetData($fmt, $savedData[$fmt]) }} catch {{}}
+    }}
+    try {{ [System.Windows.Forms.Clipboard]::SetDataObject($newDataObject, $true) }} catch {{ [System.Windows.Forms.Clipboard]::Clear() }}
+}} else {{
+    [System.Windows.Forms.Clipboard]::Clear()
+}}
 Start-Sleep -Milliseconds 400
 
 [SA.Win32]::SetForegroundWindow($prev) | Out-Null
@@ -148,7 +169,8 @@ Write-Output 'SUCCESS'
                 var psi = new ProcessStartInfo
                 {
                     FileName = "powershell.exe",
-                    Arguments = $"-ExecutionPolicy Bypass -NonInteractive -WindowStyle Hidden -File \"{tempFile}\"",
+                    // -Sta 필수: Clipboard API는 STA 스레드에서만 동작 (PowerShell 5.1 기본은 MTA)
+                    Arguments = $"-ExecutionPolicy Bypass -NonInteractive -Sta -WindowStyle Hidden -File \"{tempFile}\"",
                     UseShellExecute = false,
                     RedirectStandardOutput = true,
                     RedirectStandardError = true,

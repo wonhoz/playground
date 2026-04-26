@@ -13,15 +13,18 @@ namespace StayAwake
 
         private static readonly Color BgColor   = Color.FromArgb(30, 30, 30);
         private static readonly Color TextColor = Color.FromArgb(224, 224, 224);
+        private static readonly Color ChartFillColor  = Color.FromArgb(67, 217, 123);  // █ — 아이콘 ACTIVE 색상
+        private static readonly Color ChartTrackColor = Color.FromArgb(80, 80, 80);    // ░ — 차트 빈 영역
 
         /// <summary>다크 테마 정보 다이얼로그를 표시합니다.</summary>
-        public static void Show(string title, string message, int width = 480, int height = 400)
+        /// <param name="refresh">non-null이면 1초마다 호출되어 메시지를 갱신 (실시간 통계 등)</param>
+        public static void Show(string title, string message, int width = 480, int height = 400, Func<string>? refresh = null)
         {
-            using var form = new DarkInfoDialog(title, message, width, height);
+            using var form = new DarkInfoDialog(title, message, width, height, refresh);
             form.ShowDialog();
         }
 
-        private DarkInfoDialog(string title, string message, int width, int height)
+        private DarkInfoDialog(string title, string message, int width, int height, Func<string>? refresh = null)
         {
             Text = title;
             Size = new Size(width, height);
@@ -44,7 +47,6 @@ namespace StayAwake
 
             var textBox = new SlimScrollRichTextBox
             {
-                Text = message,
                 ReadOnly = true,
                 BorderStyle = BorderStyle.None,
                 BackColor = BgColor,
@@ -57,6 +59,7 @@ namespace StayAwake
                 TabStop = false,
                 DetectUrls = true
             };
+            SetTextWithChartColors(textBox, message);
             textBox.LinkClicked += (s, e) =>
             {
                 try { if (!string.IsNullOrEmpty(e.LinkText)) System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo(e.LinkText) { UseShellExecute = true }); }
@@ -72,12 +75,86 @@ namespace StayAwake
             // 스크롤 발생 시에만 커스텀 스크롤바 갱신 (타이머 없음 → 깜빡임 없음)
             textBox.VScroll += (s, e) => scrollBar.Invalidate();
 
+            // 1초마다 메시지 갱신 (실시간 통계용) — 스크롤 위치 보존
+            if (refresh != null)
+            {
+                var refreshTimer = new System.Windows.Forms.Timer { Interval = 1000 };
+                refreshTimer.Tick += (s, e) =>
+                {
+                    try
+                    {
+                        var newText = refresh();
+                        if (!string.Equals(newText, textBox.Text, StringComparison.Ordinal))
+                            UpdateTextPreservingScroll(textBox, scrollBar, newText);
+                    }
+                    catch (Exception ex) { Logger.LogException("DarkInfoDialog.Refresh", ex); }
+                };
+                refreshTimer.Start();
+                FormClosed += (s, e) => { refreshTimer.Stop(); refreshTimer.Dispose(); };
+            }
+
             // 확인 버튼 없음 — Esc 또는 X로 닫기
             KeyPreview = true;
             KeyDown += (s, e) => { if (e.KeyCode == Keys.Escape || e.KeyCode == Keys.Enter) Close(); };
 
             Controls.Add(scrollBar);
             Controls.Add(textBox);
+        }
+
+        /// <summary>
+        /// RichTextBox에 텍스트를 설정하고 ASCII 차트 문자(█/░)에 색상을 적용
+        /// </summary>
+        private static void SetTextWithChartColors(RichTextBox textBox, string text)
+        {
+            textBox.Text = text;
+            ApplyChartHighlights(textBox);
+        }
+
+        /// <summary>
+        /// █ → 녹색(#43D97B), ░ → 회색(#505050) 색상 적용 — 통계 활성시간 차트 가독성 향상
+        /// </summary>
+        private static void ApplyChartHighlights(RichTextBox textBox)
+        {
+            var content = textBox.Text;
+            var i = 0;
+            while (i < content.Length)
+            {
+                if (content[i] == '█')
+                {
+                    var start = i;
+                    while (i < content.Length && content[i] == '█') i++;
+                    textBox.Select(start, i - start);
+                    textBox.SelectionColor = ChartFillColor;
+                }
+                else if (content[i] == '░')
+                {
+                    var start = i;
+                    while (i < content.Length && content[i] == '░') i++;
+                    textBox.Select(start, i - start);
+                    textBox.SelectionColor = ChartTrackColor;
+                }
+                else
+                {
+                    i++;
+                }
+            }
+            textBox.Select(0, 0);
+        }
+
+        /// <summary>
+        /// 갱신 시 스크롤 위치를 보존하면서 텍스트와 차트 색상 재적용
+        /// </summary>
+        private static void UpdateTextPreservingScroll(RichTextBox textBox, Control scrollBar, string newText)
+        {
+            var firstVisibleChar = textBox.GetCharIndexFromPosition(new Point(1, 1));
+            SetTextWithChartColors(textBox, newText);
+            if (firstVisibleChar > 0 && firstVisibleChar < textBox.Text.Length)
+            {
+                textBox.SelectionStart = firstVisibleChar;
+                textBox.ScrollToCaret();
+            }
+            textBox.Select(0, 0);
+            scrollBar.Invalidate();
         }
 
         // ─────────────────────────────────────────────────────────────────

@@ -34,6 +34,8 @@ namespace StayAwake
         private ToolStripMenuItem _activityTypeItem = null!;
         private ToolStripMenuItem _autoStartItem = null!;
         private ToolStripMenuItem _progressIconItem = null!;
+        private ToolStripMenuItem _globalHotkeyItem = null!;
+        private GlobalHotkey? _hotkey;
         // private ToolStripMenuItem _pauseItem = null!;
         // private ToolStripMenuItem _pauseCancelItem = null!;
 
@@ -157,6 +159,9 @@ namespace StayAwake
                 }
             };
 
+            // 전역 단축키 등록 (활성화된 경우)
+            RegisterHotkeysIfEnabled();
+
             // 앱 실행 시 자동 시작
             ToggleRunning();
         }
@@ -255,6 +260,13 @@ namespace StayAwake
                 Checked = AutoStart.IsEnabled()
             };
             menu.Items.Add(_autoStartItem);
+
+            // 전역 단축키 (Ctrl+Alt+S 시작/정지, Ctrl+Alt+R 즉시 실행)
+            _globalHotkeyItem = new ToolStripMenuItem("전역 단축키 (Ctrl+Alt+S, Ctrl+Alt+R)", null, (s, e) => ToggleGlobalHotkey())
+            {
+                Checked = _settings.GlobalHotkeyEnabled
+            };
+            menu.Items.Add(_globalHotkeyItem);
 
             menu.Items.Add(new ToolStripSeparator());
 
@@ -359,8 +371,18 @@ namespace StayAwake
                 if (_isFirstStart)
                 {
                     _isFirstStart = false;
-                    _trayIcon.ShowBalloonTip(2000, "StayAwake",
-                        $"StayAwake 실행됨 — {_intervalMinutes}분 간격으로 활동 시뮬레이션을 시작합니다.", ToolTipIcon.Info);
+                    // 트레이 Visible 직후 OS toast 시스템이 아직 초기화되지 않을 수 있어
+                    // 짧은 지연 후 풍선 알림 표시 (메시지 펌프 다음 사이클 + α)
+                    var msg = $"StayAwake 실행됨 — {_intervalMinutes}분 간격으로 활동 시뮬레이션을 시작합니다.";
+                    var initTimer = new System.Windows.Forms.Timer { Interval = 300 };
+                    initTimer.Tick += (s, e) =>
+                    {
+                        initTimer.Stop();
+                        initTimer.Dispose();
+                        try { _trayIcon.ShowBalloonTip(2000, "StayAwake", msg, ToolTipIcon.Info); }
+                        catch (Exception ex) { Logger.LogException("FirstBalloon", ex); }
+                    };
+                    initTimer.Start();
                 }
                 else
                 {
@@ -491,6 +513,41 @@ namespace StayAwake
                     _lastProgressBucket = -1;
                     _trayIcon.Icon = _cachedRunningIcon!;
                 }
+            }
+        }
+
+        private void RegisterHotkeysIfEnabled()
+        {
+            if (!_settings.GlobalHotkeyEnabled) return;
+            try
+            {
+                _hotkey?.Dispose();
+                _hotkey = new GlobalHotkey();
+                var ok1 = _hotkey.Register(GlobalHotkey.MOD_CONTROL | GlobalHotkey.MOD_ALT, Keys.S, ToggleRunning);
+                var ok2 = _hotkey.Register(GlobalHotkey.MOD_CONTROL | GlobalHotkey.MOD_ALT, Keys.R, () => SimulateNow());
+                if (!ok1 || !ok2)
+                    Logger.LogWarn("Hotkey", $"전역 단축키 일부 등록 실패 (다른 앱이 점유 가능): Ctrl+Alt+S={ok1}, Ctrl+Alt+R={ok2}");
+            }
+            catch (Exception ex) { Logger.LogException("RegisterHotkeys", ex); }
+        }
+
+        private void ToggleGlobalHotkey()
+        {
+            _settings.GlobalHotkeyEnabled = !_settings.GlobalHotkeyEnabled;
+            _globalHotkeyItem.Checked = _settings.GlobalHotkeyEnabled;
+            SaveSettings();
+
+            if (_settings.GlobalHotkeyEnabled)
+            {
+                RegisterHotkeysIfEnabled();
+                _trayIcon.ShowBalloonTip(2000, "StayAwake",
+                    "전역 단축키 활성화 — Ctrl+Alt+S 시작/정지, Ctrl+Alt+R 즉시 실행", ToolTipIcon.Info);
+            }
+            else
+            {
+                _hotkey?.Dispose();
+                _hotkey = null;
+                _trayIcon.ShowBalloonTip(1500, "StayAwake", "전역 단축키 비활성화", ToolTipIcon.Info);
             }
         }
 
@@ -691,6 +748,23 @@ namespace StayAwake
             // 자정이 넘어간 경우 히스토리 저장 후 리셋 (ShowStats 직접 호출 시에도 최신 데이터 보장)
             CheckMidnightReset();
 
+            // dialogHeight는 첫 호출 시점 history 개수 + 월간 요약 섹션 유무 기준 — 이후 1초 갱신은 텍스트만 변경
+            var history7 = StatsHistory.Load(6).Where(x => x.Date.Date != DateTime.Today).Take(6).ToList();
+            var history30 = StatsHistory.Load(30).Where(x => x.Date.Date != DateTime.Today).ToList();
+            const int statsBaseHeight = 450;
+            const int historyBaseHeight = 620;
+            const int historyRowHeight = 30;
+            const int monthlyExtraHeight = 90; // [월간 요약] 4줄 분량
+            var dialogHeight = history7.Count > 0
+                ? historyBaseHeight + historyRowHeight * (history7.Count - 1) + (history30.Count > 7 ? monthlyExtraHeight : 0)
+                : statsBaseHeight;
+
+            DarkInfoDialog.Show("통계", BuildStatsText(), 500, dialogHeight, refresh: BuildStatsText);
+        }
+
+        /// <summary>통계 다이얼로그 본문 빌드 — 1초마다 호출되어 실시간 갱신됨</summary>
+        private string BuildStatsText()
+        {
             var activeTime = _isRunning
                 ? _todayActiveTime + (DateTime.Now - _sessionRunStart)
                 : _todayActiveTime;
@@ -707,7 +781,20 @@ namespace StayAwake
 
             var sb = new System.Text.StringBuilder();
             sb.AppendLine($"[오늘의 활동]  {_statsDate:yyyy-MM-dd} ({todayDayName})");
+
+            // 실행 중일 때 다음 시뮬레이션까지 카운트다운 표시
+            if (_isRunning)
+            {
+                var nextActivity = _lastActivityTime.AddMinutes(_intervalMinutes) - DateTime.Now;
+                if (nextActivity < TimeSpan.Zero) nextActivity = TimeSpan.Zero;
+                sb.AppendLine($"  실행 중 — 다음 시뮬레이션까지 {(int)nextActivity.TotalMinutes}분 {nextActivity.Seconds:D2}초");
+            }
+            else
+            {
+                sb.AppendLine("  정지됨");
+            }
             sb.AppendLine();
+
             sb.AppendLine("[활동 시뮬레이션]");
             sb.AppendLine($"• 시뮬레이션 실행: {_dailySimCount}회");
             sb.AppendLine($"• 사용자 활동으로 스킵: {_dailySkipCount}회");
@@ -717,7 +804,6 @@ namespace StayAwake
             sb.AppendLine($"• 누적 활성 시간: {(int)activeTime.TotalHours:D2}:{activeTime:mm\\:ss}");
             sb.AppendLine($"• 활성 비율: {activeRate:F1}%  ({(int)activeTime.TotalHours:D2}:{activeTime:mm\\:ss} / {(int)todayElapsed.TotalHours:D2}:{todayElapsed:mm\\:ss})");
 
-            // Slack 자동 상태 변경 통계 (오늘 변경이 1건 이상일 때만 표시)
             if (_dailySlackSuccessCount > 0 || _dailySlackFailCount > 0)
             {
                 sb.AppendLine();
@@ -726,10 +812,7 @@ namespace StayAwake
             }
 
             // 과거 히스토리 (오늘 제외 최대 6일)
-            var history = StatsHistory.Load(6)
-                .Where(x => x.Date.Date != DateTime.Today)
-                .Take(6)
-                .ToList();
+            var history = StatsHistory.Load(6).Where(x => x.Date.Date != DateTime.Today).Take(6).ToList();
 
             if (history.Count > 0)
             {
@@ -745,14 +828,13 @@ namespace StayAwake
                     sb.AppendLine($"{d:yyyy-MM-dd} ({dName})  {day.SimCount,4}회  {day.SkipCount,4}회   {(int)at.TotalHours:D2}:{at:mm\\:ss}");
                 }
 
-                // 주간 평균
                 var avgSim = history.Average(x => x.SimCount);
                 var avgSkip = history.Average(x => x.SkipCount);
                 var avgActive = TimeSpan.FromSeconds(history.Average(x => x.ActiveSeconds));
                 sb.AppendLine(new string('─', 42));
                 sb.AppendLine($"{"평균",-13} {avgSim,5:F0}회 {avgSkip,5:F0}회   {(int)avgActive.TotalHours:D2}:{avgActive:mm\\:ss}");
 
-                // ASCII 활성시간 차트
+                // ASCII 활성시간 차트 (█ 녹색 / ░ 회색은 DarkInfoDialog가 적용)
                 var chartData = history.Take(7).Reverse().ToList();
                 if (chartData.Count > 0)
                 {
@@ -772,23 +854,38 @@ namespace StayAwake
                 }
             }
 
-            const int statsBaseHeight = 450;
-            const int historyBaseHeight = 605;
-            const int historyRowHeight = 30;
-            var dialogHeight = history.Count > 0
-                ? historyBaseHeight + historyRowHeight * (history.Count - 1)
-                : statsBaseHeight;
-            DarkInfoDialog.Show("통계", sb.ToString(), 500, dialogHeight);
+            // 월간 요약 (히스토리가 7일 이상 쌓였을 때 의미 있음)
+            var history30 = StatsHistory.Load(30).Where(x => x.Date.Date != DateTime.Today).ToList();
+            if (history30.Count > 7)
+            {
+                var avgActive30 = TimeSpan.FromSeconds(history30.Average(x => x.ActiveSeconds));
+                var totalSim30 = history30.Sum(x => x.SimCount);
+                var maxDay = history30.OrderByDescending(x => x.ActiveSeconds).First();
+                var maxAt = maxDay.ActiveTime;
+                sb.AppendLine();
+                sb.AppendLine($"[최근 {history30.Count}일 요약]");
+                sb.AppendLine($"• 평균 활성 시간: {(int)avgActive30.TotalHours:D2}:{avgActive30:mm\\:ss}");
+                sb.AppendLine($"• 최고 활성일: {maxDay.Date:yyyy-MM-dd} ({(int)maxAt.TotalHours:D2}:{maxAt:mm\\:ss})");
+                sb.AppendLine($"• 총 시뮬레이션: {totalSim30:N0}회");
+            }
+
+            return sb.ToString();
         }
 
         private void ShowHelp()
         {
             var message = @"[트레이 아이콘 조작]
 • 좌클릭 (단일)       시작 / 정지 토글
-• 좌클릭 (더블)       오늘 통계 창 바로 열기
+• 좌클릭 (더블)       오늘 통계 창 바로 열기 (1초마다 자동 갱신)
 • 우클릭              컨텍스트 메뉴 열기
 • 마우스 호버         카운트다운 + 오늘 활성 시간 + 세션 경과 시간 확인
                       (정지 시: 오늘 누적 활성 시간만 표시)
+
+[전역 단축키]
+• Ctrl + Alt + S      시작 / 정지 토글 (트레이 클릭 없이 어디서나)
+• Ctrl + Alt + R      즉시 활동 시뮬레이션 실행 (Run now)
+• 메뉴 → '전역 단축키' 항목으로 켜기 / 끄기
+                      등록 실패 시(다른 앱이 점유) error.log에 기록됨
 
 [트레이 아이콘 표시]
 • 원형 진행률 링 (실행 중) — 다음 시뮬레이션까지 남은 시간을
@@ -798,18 +895,22 @@ namespace StayAwake
 [대화상자 키 조작]
 • Esc / Enter         열린 다이얼로그(통계·도움말·정보) 닫기
 • 마우스 휠 / 드래그   스크롤바 이동
+• 통계 창 자동 갱신    1초마다 카운트다운·활성 시간이 실시간으로 업데이트됨
+                       활성시간 차트의 █ 녹색 막대가 일별 비교 가독성을 높임
 
 [메뉴 — 시뮬레이션]
-• ▶ 시작 / ⏹ 정지     시작 / 정지 토글 (좌클릭 단일 클릭과 동일)
+• ▶ 시작 / ⏹ 정지     시작 / 정지 토글 (좌클릭 단일 클릭·Ctrl+Alt+S와 동일)
 • 상태 표시줄          실행 중 → '상태: 실행 중 (N회 · 다음 X분 XX초 후)'
                        메뉴를 열 때마다 카운트다운이 즉시 갱신됨
 • 지금 활동 실행       즉시 강제 시뮬레이션 실행 후 타이머 리셋
-                       (정지 상태에서도 1회 실행 가능)
+                       (정지 상태에서도 1회 실행 가능 · Ctrl+Alt+R과 동일)
 
 [메뉴 — 설정]
 • 간격                 1 / 2 / 3 / 5 / 10분 선택 (권장: 3~5분)
                        변경 즉시 타이머 리셋 — 새 간격이 바로 적용됨
 • 이동 거리            10 / 30 / 50 / 100 / 200px 선택
+                       멀티 모니터 환경에서 모서리에 있을 때 자동 방향 보정
+                       — 다른 모니터로 점프하지 않음
 • 활동 유형            마우스 이동 — 커서를 잠깐 이동 후 원위치
                        마우스 + 키보드 — 이동 + F15 키 (무해한 가상 키)
 • 디스플레이 절전 방지  화면 꺼짐 / 시스템 절전 방지 On/Off
@@ -820,6 +921,7 @@ namespace StayAwake
 • Windows 시작 시      체크 시 레지스트리 Run 키에 등록 —
   자동 실행             부팅 후 로그인 시 StayAwake 자동 시작
                        (관리자 권한 없이 HKCU에 저장)
+• 전역 단축키          체크 시 Ctrl+Alt+S / Ctrl+Alt+R 단축키 활성화
 
 [메뉴 — Slack 자동 상태 변경]
 • 자동 변경 활성화     출퇴근 시각에 Active/Away 자동 전환
@@ -834,7 +936,9 @@ namespace StayAwake
 
 [메뉴 — 통계]
 • 오늘 통계            시뮬레이션·스킵·활성 시간·최근 N일 히스토리·ASCII 차트
-                       더블클릭으로도 동일하게 열 수 있음
+                       더블클릭으로도 동일하게 열 수 있음 (1초마다 자동 갱신)
+                       히스토리 8일 이상 누적 시 '최근 N일 요약' 섹션 추가 표시
+                       (평균 활성·최고 활성일·총 시뮬 횟수)
 • 통계 CSV 내보내기    오늘 + 최근 30일 히스토리를 CSV 파일로 저장
 
 [호버 툴팁 읽는 법]
@@ -884,6 +988,7 @@ Slack 자리 비움 상태 방지 도구
 • 디스플레이 절전 방지: {(_simulator.PreventDisplaySleep ? "켜짐" : "꺼짐")}
 • 사용 중 건너뛰기: {(_simulator.SkipIfUserActive ? "켜짐" : "꺼짐")}
 • Windows 시작 시 자동 실행: {(AutoStart.IsEnabled() ? "켜짐" : "꺼짐")}
+• 전역 단축키: {(_settings.GlobalHotkeyEnabled ? "켜짐 (Ctrl+Alt+S, Ctrl+Alt+R)" : "꺼짐")}
 • Slack 자동 상태 변경: {slackStatusLine}";
 
             DarkInfoDialog.Show($"StayAwake {versionStr}", message, 750, 800);
@@ -1078,6 +1183,8 @@ Slack 자리 비움 상태 방지 도구
             _activityTimer.Stop();
             _tooltipTimer.Stop();
             // _pauseTimer.Stop();
+            _hotkey?.Dispose();
+            _hotkey = null;
             _simulator.AllowSleep(); // 절전 방지 해제
             _trayIcon.Visible = false;
             Application.Exit();
@@ -1098,6 +1205,7 @@ Slack 자리 비움 상태 방지 도구
                 _tooltipTimer.Dispose();
                 _singleClickTimer.Dispose();
                 // _pauseTimer.Dispose();
+                _hotkey?.Dispose();
                 _trayIcon.Dispose();
                 _contextMenu.Dispose();
                 _menuFont?.Dispose();

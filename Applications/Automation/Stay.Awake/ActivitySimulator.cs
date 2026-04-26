@@ -187,6 +187,15 @@ namespace StayAwake
                 int offsetY = _moveDirection ? MoveDistance / 2 : -MoveDistance / 2;
                 _moveDirection = !_moveDirection;
 
+                // 멀티 모니터: 현재 커서가 속한 모니터 경계를 벗어날 경우 반대 방향으로 보정
+                // (큰 MoveDistance + 화면 모서리에 있을 때 다른 모니터로 점프하는 것 방지)
+                var screen = Screen.FromPoint(new System.Drawing.Point(currentPos.X, currentPos.Y));
+                var bounds = screen.Bounds;
+                if (currentPos.X + offsetX < bounds.Left || currentPos.X + offsetX > bounds.Right - 1)
+                    offsetX = -offsetX;
+                if (currentPos.Y + offsetY < bounds.Top || currentPos.Y + offsetY > bounds.Bottom - 1)
+                    offsetY = -offsetY;
+
                 // 이동 (대각선으로 움직여서 더 눈에 띄게)
                 SetCursorPos(currentPos.X + offsetX, currentPos.Y + offsetY);
 

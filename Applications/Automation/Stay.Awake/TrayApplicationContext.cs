@@ -531,11 +531,23 @@ namespace StayAwake
         {
             if (DateTime.Today == _statsDate) return;
 
-            // 전날 최종 통계를 히스토리에 저장
-            SaveDailyStats();
-            StatsHistory.Append(_dailyStats);
+            // 전날 최종 통계 스냅샷 — _statsDate(전날 날짜) 그대로 유지하여 히스토리에 저장
+            // (SaveDailyStats()는 Date를 DateTime.Today로 덮어쓰므로 직접 호출하면 전날 데이터가 오늘로 잘못 마킹됨)
+            var activeTimeBeforeMidnight = _isRunning
+                ? _todayActiveTime + (DateTime.Now - _sessionRunStart)
+                : _todayActiveTime;
+            var previousStats = new DailyStats
+            {
+                Date = _statsDate,
+                SimCount = _dailySimCount,
+                SkipCount = _dailySkipCount,
+                SlackSuccessCount = _dailySlackSuccessCount,
+                SlackFailCount = _dailySlackFailCount,
+                ActiveTime = activeTimeBeforeMidnight
+            };
+            StatsHistory.Append(previousStats);
 
-            // 새 날짜로 리셋
+            // 새 날짜로 리셋 — 카운트·활성 시간 모두 0부터 시작
             _todayActiveTime = TimeSpan.Zero;
             _sessionRunStart = DateTime.Now;
             _dailySimCount = 0;
@@ -544,6 +556,7 @@ namespace StayAwake
             _dailySlackFailCount = 0;
             _statsDate = DateTime.Today;
             _dailyStats = new DailyStats();
+            SaveDailyStats(); // 새 날짜로 daily_stats.json 갱신 (전날 데이터 잔존 방지)
         }
 
         private async void OnTimerTick(object? sender, EventArgs e)

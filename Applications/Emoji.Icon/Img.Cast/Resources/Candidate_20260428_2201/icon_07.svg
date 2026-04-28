@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="g7" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#80CBC4"/>
+      <stop offset="1" stop-color="#26A69A"/>
+    </linearGradient>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#g7)"/>
+  <!-- morphing shapes left to right -->
+  <g>
+    <!-- square -->
+    <rect x="120" y="380" width="220" height="220" rx="28" fill="#FF7043" stroke="#004D40" stroke-width="14"/>
+    <!-- arrow 1 -->
+    <path d="M 360 480 L 420 480 L 420 460 L 460 490 L 420 520 L 420 500 L 360 500 Z" fill="#004D40"/>
+    <!-- circle (in middle morph) -->
+    <path d="M 480 380 L 700 380 Q 720 380 720 400 L 720 580 Q 720 600 700 600 L 480 600 Q 460 600 460 580 L 460 400 Q 460 380 480 380 Z" fill="#FFEB3B" stroke="#004D40" stroke-width="14"/>
+    <circle cx="590" cy="490" r="80" fill="#FFFFFF"/>
+    <!-- arrow 2 -->
+    <path d="M 740 480 L 800 480 L 800 460 L 840 490 L 800 520 L 800 500 L 740 500 Z" fill="#004D40"/>
+    <!-- final star -->
+    <polygon points="900,380 940,470 1020,480 962,540 980,620 900,580 820,620 838,540 780,480 860,470" fill="#7C4DFF" stroke="#004D40" stroke-width="14" stroke-linejoin="round" transform="translate(-80 0)"/>
+  </g>
+  <!-- bottom labels -->
+  <g font-family="Verdana, sans-serif" font-size="46" font-weight="900" fill="#004D40" text-anchor="middle">
+    <text x="230" y="720">PNG</text>
+    <text x="590" y="720">SVG</text>
+    <text x="850" y="720">ICO</text>
+  </g>
+  <!-- bottom flow line -->
+  <path d="M 120 800 Q 512 880 920 800" stroke="#004D40" stroke-width="14" fill="none" stroke-dasharray="4 18" stroke-linecap="round"/>
+</svg>

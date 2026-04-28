@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="g6" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#F8BBD0"/>
+      <stop offset="1" stop-color="#EC407A"/>
+    </linearGradient>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#g6)"/>
+  <!-- canvas being painted -->
+  <rect x="200" y="280" width="640" height="500" rx="32" fill="#FFFFFF" stroke="#1A237E" stroke-width="14"/>
+  <!-- left half: original PNG, right half: painted ICO swath -->
+  <text x="320" y="600" font-family="Verdana, sans-serif" font-size="120" font-weight="900" fill="#9E9E9E">PNG</text>
+  <!-- paint stroke covering right side -->
+  <g>
+    <path d="M 540 320 L 820 320 L 820 740 L 540 740 Z" fill="#FFEB3B"/>
+    <path d="M 540 320 Q 530 350 540 380 Q 555 405 540 430 Q 528 460 540 490 Q 552 520 540 550 Q 528 580 540 610 Q 555 640 540 670 Q 528 705 540 740 L 530 740 L 530 320 Z" fill="#FFEB3B"/>
+    <text x="700" y="600" font-family="Verdana, sans-serif" font-size="120" font-weight="900" text-anchor="middle" fill="#1A237E">ICO</text>
+  </g>
+  <!-- roller -->
+  <g transform="translate(440 220) rotate(20)">
+    <!-- handle -->
+    <rect x="0" y="-30" width="320" height="40" rx="20" fill="#3E2723"/>
+    <rect x="-40" y="-50" width="60" height="80" rx="14" fill="#FFC107" stroke="#1A237E" stroke-width="10"/>
+    <!-- roller cylinder -->
+    <rect x="-220" y="-90" width="200" height="160" rx="40" fill="#FFFFFF" stroke="#1A237E" stroke-width="14"/>
+    <rect x="-200" y="-70" width="160" height="120" rx="30" fill="#FFEB3B"/>
+    <!-- drips -->
+    <circle cx="-100" cy="120" r="22" fill="#FFEB3B"/>
+    <ellipse cx="-100" cy="160" rx="14" ry="22" fill="#FFEB3B"/>
+  </g>
+</svg>

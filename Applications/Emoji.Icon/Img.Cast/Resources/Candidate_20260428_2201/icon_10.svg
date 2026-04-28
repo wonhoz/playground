@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="ring" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#FF6F00"/>
+      <stop offset="0.33" stop-color="#E91E63"/>
+      <stop offset="0.66" stop-color="#7C4DFF"/>
+      <stop offset="1" stop-color="#00BCD4"/>
+    </linearGradient>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="#FFFFFF"/>
+  <rect x="40" y="40" width="944" height="944" rx="160" fill="none" stroke="#ECEFF1" stroke-width="6"/>
+  <!-- circular convert arrows -->
+  <g transform="translate(512 512)">
+    <!-- top arrow arc (clockwise) -->
+    <path d="M -260 0 A 260 260 0 0 1 260 0" stroke="url(#ring)" stroke-width="60" fill="none" stroke-linecap="round"/>
+    <polygon points="260,-30 320,0 260,30" fill="#00BCD4"/>
+    <!-- bottom arrow arc -->
+    <path d="M 260 0 A 260 260 0 0 1 -260 0" stroke="url(#ring)" stroke-width="60" fill="none" stroke-linecap="round" opacity="0.85"/>
+    <polygon points="-260,30 -320,0 -260,-30" fill="#FF6F00"/>
+  </g>
+  <!-- center file with extension chips -->
+  <g transform="translate(376 360)">
+    <rect width="280" height="320" rx="28" fill="#FFFFFF" stroke="#263238" stroke-width="14"/>
+    <polygon points="220,0 280,60 220,60" fill="#CFD8DC"/>
+    <!-- 4 chips -->
+    <rect x="32" y="92" width="100" height="44" rx="14" fill="#FFEB3B"/>
+    <text x="82" y="124" font-family="Verdana, sans-serif" font-size="22" font-weight="900" text-anchor="middle" fill="#263238">SVG</text>
+    <rect x="148" y="92" width="100" height="44" rx="14" fill="#A5D6A7"/>
+    <text x="198" y="124" font-family="Verdana, sans-serif" font-size="22" font-weight="900" text-anchor="middle" fill="#263238">PNG</text>
+    <rect x="32" y="156" width="100" height="44" rx="14" fill="#F48FB1"/>
+    <text x="82" y="188" font-family="Verdana, sans-serif" font-size="22" font-weight="900" text-anchor="middle" fill="#263238">JPG</text>
+    <rect x="148" y="156" width="100" height="44" rx="14" fill="#80DEEA"/>
+    <text x="198" y="188" font-family="Verdana, sans-serif" font-size="22" font-weight="900" text-anchor="middle" fill="#263238">ICO</text>
+    <!-- center label -->
+    <text x="140" y="276" font-family="Verdana, sans-serif" font-size="36" font-weight="900" text-anchor="middle" fill="#7C4DFF">CAST</text>
+  </g>
+</svg>

@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <radialGradient id="bg03" cx="0.5" cy="0.4" r="0.7">
+      <stop offset="0" stop-color="#1A0040"/>
+      <stop offset="1" stop-color="#08001F"/>
+    </radialGradient>
+  </defs>
+  <rect x="32" y="32" width="960" height="960" rx="190" fill="url(#bg03)"/>
+  <!-- bullet hell pattern -->
+  <g>
+    <!-- ring 1 -->
+    <g fill="#FF2E6E">
+      <circle cx="200" cy="200" r="22"/><circle cx="350" cy="170" r="22"/>
+      <circle cx="500" cy="140" r="22"/><circle cx="650" cy="170" r="22"/>
+      <circle cx="800" cy="200" r="22"/>
+    </g>
+    <!-- ring 2 -->
+    <g fill="#FFD24A">
+      <circle cx="170" cy="370" r="20"/><circle cx="320" cy="340" r="20"/>
+      <circle cx="700" cy="340" r="20"/><circle cx="850" cy="370" r="20"/>
+    </g>
+    <!-- bottom ring -->
+    <g fill="#9B4DFF">
+      <circle cx="220" cy="820" r="22"/><circle cx="380" cy="850" r="22"/>
+      <circle cx="640" cy="850" r="22"/><circle cx="800" cy="820" r="22"/>
+    </g>
+    <g fill="#FF8F2E">
+      <circle cx="180" cy="670" r="18"/><circle cx="320" cy="680" r="18"/>
+      <circle cx="700" cy="680" r="18"/><circle cx="840" cy="670" r="18"/>
+    </g>
+  </g>
+  <!-- safe zone glow -->
+  <circle cx="512" cy="540" r="180" fill="#00FFCC" opacity="0.12"/>
+  <circle cx="512" cy="540" r="120" fill="#00FFCC" opacity="0.18"/>
+  <!-- player diamond -->
+  <polygon points="512,400 660,540 512,680 364,540" fill="#0FFFD0" stroke="#FFFFFF" stroke-width="14"/>
+  <polygon points="512,460 600,540 512,620 424,540" fill="#E8FFFA" opacity="0.7"/>
+</svg>

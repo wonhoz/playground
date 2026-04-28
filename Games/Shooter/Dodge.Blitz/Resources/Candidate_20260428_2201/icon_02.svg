@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg02" x1="0" y1="1" x2="1" y2="0">
+      <stop offset="0" stop-color="#2D0E5F"/>
+      <stop offset="1" stop-color="#5B1F9C"/>
+    </linearGradient>
+    <linearGradient id="trail02" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#00FFCC" stop-opacity="0"/>
+      <stop offset="1" stop-color="#00FFCC" stop-opacity="1"/>
+    </linearGradient>
+  </defs>
+  <rect x="32" y="32" width="960" height="960" rx="190" fill="url(#bg02)"/>
+  <!-- stars -->
+  <g fill="#FFFFFF" opacity="0.9">
+    <circle cx="160" cy="200" r="6"/><circle cx="280" cy="160" r="4"/>
+    <circle cx="850" cy="240" r="6"/><circle cx="780" cy="780" r="5"/>
+    <circle cx="220" cy="850" r="5"/><circle cx="900" cy="700" r="4"/>
+    <circle cx="120" cy="540" r="4"/><circle cx="940" cy="460" r="5"/>
+  </g>
+  <!-- speed trails -->
+  <g stroke-linecap="round" fill="none" stroke-width="34">
+    <path d="M170,720 Q420,580 600,540" stroke="url(#trail02)" opacity="0.85"/>
+    <path d="M150,820 Q420,680 660,620" stroke="url(#trail02)" opacity="0.55"/>
+    <path d="M180,620 Q400,480 560,460" stroke="url(#trail02)" opacity="0.4"/>
+  </g>
+  <!-- diamond player tilted along trail -->
+  <g transform="translate(640 520) rotate(-18)">
+    <polygon points="0,-180 180,0 0,180 -180,0" fill="#0FFFD0" stroke="#7DFFE6" stroke-width="16"/>
+    <polygon points="0,-110 110,0 0,110 -110,0" fill="#E8FFFA" opacity="0.6"/>
+    <polygon points="-60,-40 -10,-90 30,-40" fill="#FFFFFF"/>
+  </g>
+</svg>

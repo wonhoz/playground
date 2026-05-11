@@ -48,6 +48,7 @@
 | `PDF.Forge` | Files | 오프라인 PDF 올인원 (병합·분리·압축·워터마크) | ✅ |
 | `Shortcut.Forge` | Files | Windows 바로가기(.lnk) 일괄 생성·편집 관리자 | ✅ |
 | `Zip.Peek` | Files | ZIP/7z/RAR 추출 없이 트리 탐색·선택 추출 | ✅ |
+| `Quant.Lab` | Finance | KRX 일봉 CSV 백테스트 프레임워크 (Core 라이브러리 + CLI, SMA Crossover 예제, HTML 리포트) ★사용자 직접 요청 (채택 2026-05-11) | 📌 |
 | `DNS.Flip` | Network | DNS 프리셋 원클릭 전환 트레이 앱 | ✅ |
 | `Net.Scan` | Network | LAN ARP 스캐너, 기기 탐지·제조사(OUI) 조회·포트 스캔·핑 모니터 | ✅ |
 | `Port.Watch` | Network | 포트 점유 프로세스 모니터 + 원클릭 종료 | ✅ |

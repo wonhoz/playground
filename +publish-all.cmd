@@ -87,6 +87,9 @@ call :pub "File.Unlocker"         "Applications\Files\Manager\File.Unlocker"    
 call :pub "Folder.Purge"          "Applications\Files\Manager\Folder.Purge"                 "Folder.Purge.exe"          "Applications\Files\Manager"
 call :pub "Shortcut.Forge"        "Applications\Files\Manager\Shortcut.Forge"               "Shortcut.Forge.exe"        "Applications\Files\Manager\Shortcut.Forge"
 
+:: ── Applications / Finance ─────────────────────────────────────────
+call :pub "Quant.Lab"             "Applications\Finance\Quant.Lab\Quant.Lab.Cli"            "Quant.Lab.exe"             "Applications\Finance\Quant.Lab"
+
 :: ── Applications / Network / Monitor ───────────────────────────────
 call :pub "DNS.Flip"              "Applications\Network\Monitor\DNS.Flip"                   "Dns.Flip.exe"              "Applications\Network\Monitor"
 call :pub "Net.Scan"              "Applications\Network\Monitor\Net.Scan"                   "Net.Scan.exe"              "Applications\Network\Monitor\Net.Scan"

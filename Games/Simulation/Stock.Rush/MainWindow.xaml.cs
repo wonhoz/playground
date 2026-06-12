@@ -25,6 +25,8 @@ public partial class MainWindow : Window
     private bool _muted;
     private bool _inTutorial;
     private int _uiTick;
+    private int _speed = 1;
+    private bool _settingSpeed;
 
     public MainWindow()
     {
@@ -62,6 +64,9 @@ public partial class MainWindow : Window
         TabPos.Unchecked += (_, _) => EnsureTab();
         TabOrd.Unchecked += (_, _) => EnsureTab();
         TabTrd.Unchecked += (_, _) => EnsureTab();
+        Spd1.Unchecked += (_, _) => EnsureSpeed();
+        Spd2.Unchecked += (_, _) => EnsureSpeed();
+        Spd4.Unchecked += (_, _) => EnsureSpeed();
 
         Closing += (_, _) => PersistRecord();
 
@@ -125,6 +130,7 @@ public partial class MainWindow : Window
 
         StartOverlay.Visibility = Visibility.Collapsed;
         TutorialBar.Visibility = Visibility.Visible;
+        SetSpeed(1); // 튜토리얼은 기본 속도로 시작 (지시문 읽을 시간 확보)
         _engine.OpenSession();
         _tutorial.Start(id, ctx);
         _timer.Start();
@@ -171,17 +177,47 @@ public partial class MainWindow : Window
     // ── 메인 루프 ────────────────────────────────────────────────
     private void Timer_Tick(object? sender, EventArgs e)
     {
-        _engine.Tick();
-        if (_inTutorial) _tutorial.Tick();
-        else _news.Tick();
+        // 배속만큼 엔진 틱을 반복 실행 (UI 갱신은 1회)
+        for (var i = 0; i < _speed; i++)
+        {
+            _engine.Tick();
+            if (_inTutorial) _tutorial.Tick();
+            else _news.Tick();
 
-        var filled = _account.MatchLimitOrders(_engine);
-        foreach (var o in filled)
-            ShowOrderMsg($"지정가 체결: {o.Name} {o.SideText} {o.Qty:N0}주 @ {o.LimitPrice:N0}원",
-                o.Side == OrderSide.매수 ? Ui.UpBrush : Ui.DownBrush);
+            var filled = _account.MatchLimitOrders(_engine);
+            foreach (var o in filled)
+                ShowOrderMsg($"지정가 체결: {o.Name} {o.SideText} {o.Qty:N0}주 @ {o.LimitPrice:N0}원",
+                    o.Side == OrderSide.매수 ? Ui.UpBrush : Ui.DownBrush);
+
+            if (!_engine.SessionOpen) break; // 장 마감 (DayClosed 처리됨)
+        }
 
         _uiTick++;
         UpdateUi(force: false);
+    }
+
+    // ── 배속 ─────────────────────────────────────────────────────
+    private void Speed_Changed(object sender, RoutedEventArgs e)
+    {
+        if (!IsLoaded || _settingSpeed) return;
+        SetSpeed(ReferenceEquals(sender, Spd1) ? 1 : ReferenceEquals(sender, Spd2) ? 2 : 4);
+    }
+
+    private void EnsureSpeed()
+    {
+        if (_settingSpeed) return;
+        if (Spd1.IsChecked != true && Spd2.IsChecked != true && Spd4.IsChecked != true)
+            SetSpeed(_speed);
+    }
+
+    private void SetSpeed(int speed)
+    {
+        _settingSpeed = true;
+        _speed = speed;
+        Spd1.IsChecked = speed == 1;
+        Spd2.IsChecked = speed == 2;
+        Spd4.IsChecked = speed == 4;
+        _settingSpeed = false;
     }
 
     private void UpdateUi(bool force)

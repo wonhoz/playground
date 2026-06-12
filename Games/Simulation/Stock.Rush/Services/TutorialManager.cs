@@ -1,5 +1,12 @@
 namespace StockRush.Services;
 
+/// <summary>스크립트 가격 시퀀스 한 구간 (틱당 드리프트 × 지속 틱)</summary>
+public class ScriptSegment
+{
+    public double Drift;
+    public int Ticks;
+}
+
 public class TutorialContext
 {
     public required MarketEngine Engine { get; init; }
@@ -13,6 +20,13 @@ public class TutorialContext
     public bool NewsFired;
     public bool ReversalFired;
     public int NewsFireTick;
+
+    /// <summary>순차 실행되는 가격 스크립트 — 캔들 모양·추세를 정밀 연출</summary>
+    public Queue<ScriptSegment> Script { get; } = new();
+    public void AddScript(double driftPerTick, int ticks)
+    {
+        if (ticks > 0) Script.Enqueue(new ScriptSegment { Drift = driftPerTick, Ticks = ticks });
+    }
 }
 
 public class TutorialStep
@@ -53,6 +67,7 @@ public class TutorialManager
         ("basic", "기초 매매", "시장가 매수 → 수익 실현 매도의 기본 흐름을 익힙니다."),
         ("news", "뉴스 트레이딩", "호재 속보에 빠르게 올라타고, 꺾이기 전에 빠져나오는 연습."),
         ("stoploss", "손절 연습", "악재 급락 시 손실을 -5% 이내로 끊어내는 훈련."),
+        ("candle", "캔들·추세 읽기", "망치형 반전, 추세 추종 — 캔들 차트로 매매 타이밍 잡는 법."),
     };
 
     public void Start(string id, TutorialContext ctx)
@@ -79,6 +94,15 @@ public class TutorialManager
         {
             _ctx.NewsFired = true;
             FireScriptedNews(_ctx);
+        }
+
+        // 가격 스크립트 시퀀스 실행 (다음 엔진 틱 1회분 드리프트 주입)
+        if (_ctx.Script.Count > 0)
+        {
+            var seg = _ctx.Script.Peek();
+            _ctx.Target.NewsDrift = seg.Drift;
+            _ctx.Target.NewsDriftTicks = 1;
+            if (--seg.Ticks <= 0) _ctx.Script.Dequeue();
         }
 
         // 뉴스 드리프트 종료 후 차익 매물 반전 (뉴스 트레이딩 시나리오)
@@ -247,6 +271,66 @@ public class TutorialManager
                     ? $"손절 성공! ({lossRate:F2}%) 손절은 더 큰 손실을 막는 보험입니다."
                     : $"손절이 늦었습니다. ({lossRate:F2}%) '조금만 더 기다리면 오르겠지'가 계좌를 녹입니다.";
                 return $"손절 연습 완료!\n\n{grade}";
+            }
+        },
+
+        "candle" => new TutorialScenario
+        {
+            Id = "candle",
+            Title = "캔들·추세 읽기",
+            Steps = new List<TutorialStep>
+            {
+                new()
+                {
+                    Text = "캔들 1개 = 5분입니다. 빨간 양봉은 종가가 시가보다 높게(상승 마감), 파란 음봉은 낮게(하락 마감) 끝났다는 뜻. " +
+                           "위아래 꼬리는 그 사이 닿았던 고가·저가입니다. 잠시 차트를 관찰하세요.",
+                    OnEnter = c => c.WaitUntilTick = c.Engine.TickCount + 70,
+                    IsComplete = c => c.Engine.TickCount >= c.WaitUntilTick
+                },
+                new()
+                {
+                    Text = "음봉이 이어지는 하락 추세가 시작됐습니다. 떨어지는 도중에 사는 것은 '떨어지는 칼날 잡기' — " +
+                           "바닥 신호가 나올 때까지 절대 매수하지 말고 기다리세요.",
+                    OnEnter = c => c.AddScript(-0.0004, 100),
+                    IsComplete = c => c.Script.Count == 0
+                },
+                new()
+                {
+                    Text = "바닥권에서 긴 아래꼬리 캔들(망치형·Hammer)이 만들어집니다 — 급락을 매수세가 받아 올린 대표적 반전 신호입니다. " +
+                           "꼬리가 완성되면 10주 이상 매수하세요!",
+                    OnEnter = c =>
+                    {
+                        // 다음 캔들 시작(틱%30==1)에 맞춰 망치형 연출: 급락 후 회복 = 긴 아래꼬리
+                        var pad = ((1 - c.Engine.TickCount % 30) + 30) % 30;
+                        c.AddScript(0, pad);
+                        c.AddScript(-0.0025, 12);
+                        c.AddScript(0.003, 12);
+                    },
+                    IsComplete = c => (c.Account.GetPosition(c.Target.Code)?.Qty ?? 0) >= 10
+                },
+                new()
+                {
+                    Text = "반전 성공, 상승 추세입니다! 저점과 고점이 함께 높아지는 동안은 보유가 원칙. " +
+                           "장대음봉이 나오며 추세가 꺾이기 시작하면 미련 없이 전량 매도하세요.",
+                    OnEnter = c =>
+                    {
+                        c.EntryAvg = c.Account.GetPosition(c.Target.Code)?.AvgPrice ?? c.Target.Price;
+                        c.AddScript(0.0003, 150);
+                        c.AddScript(-0.0006, 120);
+                    },
+                    IsComplete = c => c.Account.GetPosition(c.Target.Code) == null
+                },
+            },
+            ResultMessage = c =>
+            {
+                var realized = c.Account.Trades.FirstOrDefault(t => t.Side == OrderSide.매도)?.RealizedPnl ?? 0;
+                var grade = realized > 0
+                    ? "추세를 타고 수익 실현! 패턴이 보일 때까지 기다린 보상입니다."
+                    : "손실 마감... 매수가 늦었거나 매도가 늦었습니다. 패턴 출현 직후의 속도가 생명입니다.";
+                return $"캔들·추세 읽기 완료!\n\n실현손익: {(realized >= 0 ? "+" : "")}{realized:N0}원\n\n{grade}\n\n" +
+                       "오늘 배운 것 — ① 양봉/음봉과 꼬리 읽기 ② 하락 추세엔 칼날 잡지 않기 " +
+                       "③ 망치형 = 반전 신호 ④ 상승 추세는 꺾일 때까지 보유.\n" +
+                       "이는 실제 기술적 분석(캔들스틱 차트 분석)의 기본기지만, 실전에서 패턴은 확률일 뿐 — 항상 손절 원칙과 함께 쓰세요.";
             }
         },
 

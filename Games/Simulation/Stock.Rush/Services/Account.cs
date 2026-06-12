@@ -15,6 +15,16 @@ public class Account
     public ObservableCollection<Order> OpenOrders { get; } = new();
     public ObservableCollection<TradeRecord> Trades { get; } = new();
 
+    /// <summary>당일 체결 전체 (Trades는 100건 캡 — 일일 통계용 별도 보관)</summary>
+    public List<TradeRecord> TradesToday { get; } = new();
+
+    /// <summary>다음 날 개장 전 일일 집계 초기화</summary>
+    public void ResetDay()
+    {
+        RealizedPnlToday = 0;
+        TradesToday.Clear();
+    }
+
     public event Action<TradeRecord>? TradeExecuted;
 
     public Position? GetPosition(string code) => Positions.FirstOrDefault(p => p.Code == code);
@@ -92,6 +102,7 @@ public class Account
         };
         Trades.Insert(0, rec);
         while (Trades.Count > 100) Trades.RemoveAt(Trades.Count - 1);
+        TradesToday.Add(rec);
         TradeExecuted?.Invoke(rec);
     }
 

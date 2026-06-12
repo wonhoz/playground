@@ -462,13 +462,65 @@
         <!-- 장 마감 오버레이 -->
         <Grid x:Name="DayEndOverlay" Background="#D912121A" Visibility="Collapsed">
             <Border Background="{StaticResource PanelBrush}" BorderBrush="{StaticResource BorderBrushDark}" BorderThickness="1"
-                    CornerRadius="12" Padding="40,32" HorizontalAlignment="Center" VerticalAlignment="Center" MinWidth="420">
+                    CornerRadius="12" Padding="36,28" HorizontalAlignment="Center" VerticalAlignment="Center" MinWidth="620" MaxWidth="700">
                 <StackPanel>
                     <TextBlock x:Name="TxtDayEndTitle" Text="장 마감" FontSize="24" FontWeight="Black" HorizontalAlignment="Center"/>
-                    <TextBlock x:Name="TxtDayEndStats" Text="" FontSize="14" Margin="0,18,0,0" LineHeight="26" HorizontalAlignment="Center"
+                    <TextBlock x:Name="TxtDayEndStats" Text="" FontSize="14" Margin="0,14,0,0" LineHeight="25" HorizontalAlignment="Center"
                                TextAlignment="Center"/>
+
+                    <!-- 오늘의 매매 통계 -->
+                    <Border Background="#2A2A36" Height="1" Margin="0,16,0,12"/>
+                    <Grid>
+                        <TextBlock Text="오늘의 매매" FontSize="14" FontWeight="Bold"/>
+                        <TextBlock x:Name="TxtDayTradeSummary" Text="" FontSize="12" Foreground="{StaticResource DimBrush}"
+                                   HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                    </Grid>
+                    <TextBlock x:Name="TxtDayBestWorst" Text="" FontSize="12" Margin="0,6,0,0" Foreground="{StaticResource DimBrush}"/>
+                    <TextBlock x:Name="TxtNoTrades" Text="오늘은 매매가 없었습니다." FontSize="12" Margin="0,10,0,0"
+                               Foreground="{StaticResource DimBrush}" Visibility="Collapsed" HorizontalAlignment="Center"/>
+
+                    <Grid x:Name="DayStatHeader" Margin="2,12,2,4">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="120"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="110"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" Text="종목" FontSize="11" Foreground="{StaticResource DimBrush}"/>
+                        <TextBlock Grid.Column="1" Text="매수 (평균가)" FontSize="11" Foreground="{StaticResource DimBrush}"/>
+                        <TextBlock Grid.Column="2" Text="매도 (평균가)" FontSize="11" Foreground="{StaticResource DimBrush}"/>
+                        <TextBlock Grid.Column="3" Text="실현손익" FontSize="11" Foreground="{StaticResource DimBrush}"
+                                   HorizontalAlignment="Right"/>
+                    </Grid>
+                    <ScrollViewer MaxHeight="210" VerticalScrollBarVisibility="Auto">
+                        <ItemsControl x:Name="DayStatList">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Border Background="#20202B" CornerRadius="6" Padding="10,6" Margin="0,1">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="112"/>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="110"/>
+                                            </Grid.ColumnDefinitions>
+                                            <TextBlock Grid.Column="0" Text="{Binding Name}" FontSize="12" FontWeight="SemiBold"
+                                                       VerticalAlignment="Center" TextTrimming="CharacterEllipsis"/>
+                                            <TextBlock Grid.Column="1" Text="{Binding BuyText}" FontSize="12"
+                                                       Foreground="{StaticResource UpBrush}" VerticalAlignment="Center"/>
+                                            <TextBlock Grid.Column="2" Text="{Binding SellText}" FontSize="12"
+                                                       Foreground="{StaticResource DownBrush}" VerticalAlignment="Center"/>
+                                            <TextBlock Grid.Column="3" Text="{Binding PnlText}" FontSize="12" FontWeight="Bold"
+                                                       Foreground="{Binding PnlBrush}" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                                        </Grid>
+                                    </Border>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </ScrollViewer>
+
                     <Button x:Name="BtnNextDay" Style="{StaticResource BuyButton}" Content="다음 날 개장 →" FontSize="15"
-                            Padding="24,10" Margin="0,24,0,0" Click="BtnNextDay_Click"/>
+                            Padding="24,10" Margin="0,20,0,0" Click="BtnNextDay_Click"/>
                     <Button Style="{StaticResource DarkButton}" Content="메인 메뉴" FontSize="12" Padding="24,8"
                             Margin="0,8,0,0" Click="BtnMenu_Click"/>
                 </StackPanel>

@@ -100,6 +100,25 @@ public class TradeRecord
     public string Summary => $"{Name} {Qty:N0}주 @ {Price:N0}";
 }
 
+/// <summary>장 마감 정산 — 종목별 매매 통계 한 줄</summary>
+public class DayStatRow
+{
+    public string Name { get; init; } = "";
+    public long BuyQty { get; init; }
+    public long BuyAvg { get; init; }
+    public long SellQty { get; init; }
+    public long SellAvg { get; init; }
+    /// <summary>당일 매도 실현손익 합 (수수료·세금 차감 후)</summary>
+    public long Pnl { get; init; }
+    /// <summary>장 마감 시점 보유 수량 (미청산)</summary>
+    public long HeldQty { get; init; }
+
+    public string BuyText => BuyQty > 0 ? $"{BuyQty:N0}주 @ {BuyAvg:N0}" : "—";
+    public string SellText => SellQty > 0 ? $"{SellQty:N0}주 @ {SellAvg:N0}" : "—";
+    public string PnlText => SellQty > 0 ? $"{(Pnl >= 0 ? "+" : "")}{Pnl:N0}" : (HeldQty > 0 ? "보유 중" : "—");
+    public Brush PnlBrush => SellQty > 0 ? Ui.ForChange(Pnl) : Ui.DimBrush;
+}
+
 public class SaveData
 {
     public long BestEquity { get; set; }

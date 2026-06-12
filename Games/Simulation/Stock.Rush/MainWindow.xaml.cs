@@ -350,17 +350,76 @@ public partial class MainWindow : Window
 
         TxtDayEndTitle.Text = $"Day {_engine.Day} 장 마감";
         TxtDayEndStats.Text =
-            $"총자산  {equity:N0}원\n" +
-            $"일 실현손익  {(_account.RealizedPnlToday >= 0 ? "+" : "")}{_account.RealizedPnlToday:N0}원\n" +
-            $"평가손익  {(unrealized >= 0 ? "+" : "")}{unrealized:N0}원\n" +
-            $"누적 수익률  {(totalReturn >= 0 ? "+" : "")}{totalReturn:F2}%";
+            $"총자산  {equity:N0}원   ·   일 실현손익  {(_account.RealizedPnlToday >= 0 ? "+" : "")}{_account.RealizedPnlToday:N0}원\n" +
+            $"평가손익  {(unrealized >= 0 ? "+" : "")}{unrealized:N0}원   ·   누적 수익률  {(totalReturn >= 0 ? "+" : "")}{totalReturn:F2}%";
+        BuildDayTradeStats();
         DayEndOverlay.Visibility = Visibility.Visible;
+    }
+
+    /// <summary>장 마감 정산 — 종목별 매매 통계·승률·최고/최악 거래 집계</summary>
+    private void BuildDayTradeStats()
+    {
+        var trades = _account.TradesToday;
+        var hasTrades = trades.Count > 0;
+
+        TxtNoTrades.Visibility = hasTrades ? Visibility.Collapsed : Visibility.Visible;
+        DayStatHeader.Visibility = hasTrades ? Visibility.Visible : Visibility.Collapsed;
+        TxtDayBestWorst.Visibility = hasTrades ? Visibility.Visible : Visibility.Collapsed;
+
+        if (!hasTrades)
+        {
+            TxtDayTradeSummary.Text = "";
+            DayStatList.ItemsSource = null;
+            return;
+        }
+
+        var rows = trades
+            .GroupBy(t => t.Code)
+            .Select(g =>
+            {
+                var buys = g.Where(t => t.Side == OrderSide.매수).ToList();
+                var sells = g.Where(t => t.Side == OrderSide.매도).ToList();
+                var buyQty = buys.Sum(t => t.Qty);
+                var sellQty = sells.Sum(t => t.Qty);
+                return new DayStatRow
+                {
+                    Name = g.First().Name,
+                    BuyQty = buyQty,
+                    BuyAvg = buyQty > 0 ? buys.Sum(t => t.Price * t.Qty) / buyQty : 0,
+                    SellQty = sellQty,
+                    SellAvg = sellQty > 0 ? sells.Sum(t => t.Price * t.Qty) / sellQty : 0,
+                    Pnl = sells.Sum(t => t.RealizedPnl),
+                    HeldQty = _account.GetPosition(g.Key)?.Qty ?? 0
+                };
+            })
+            .OrderByDescending(r => r.SellQty > 0 ? 1 : 0)
+            .ThenByDescending(r => r.Pnl)
+            .ToList();
+        DayStatList.ItemsSource = rows;
+
+        var sellTrades = trades.Where(t => t.Side == OrderSide.매도).ToList();
+        var wins = sellTrades.Count(t => t.RealizedPnl > 0);
+        var losses = sellTrades.Count(t => t.RealizedPnl < 0);
+        var winRate = sellTrades.Count > 0 ? wins * 100.0 / sellTrades.Count : 0;
+        TxtDayTradeSummary.Text = sellTrades.Count > 0
+            ? $"체결 {trades.Count}건 · 청산 {sellTrades.Count}건 — 승 {wins} / 패 {losses} (승률 {winRate:F0}%)"
+            : $"체결 {trades.Count}건 · 청산 없음";
+
+        if (sellTrades.Count > 0)
+        {
+            var best = sellTrades.OrderByDescending(t => t.RealizedPnl).First();
+            var worst = sellTrades.OrderBy(t => t.RealizedPnl).First();
+            TxtDayBestWorst.Text =
+                $"최고: {best.Name} {(best.RealizedPnl >= 0 ? "+" : "")}{best.RealizedPnl:N0}원" +
+                (worst != best ? $"   ·   최악: {worst.Name} {(worst.RealizedPnl >= 0 ? "+" : "")}{worst.RealizedPnl:N0}원" : "");
+        }
+        else TxtDayBestWorst.Text = "매수만 있었습니다 — 내일 매도 시 손익이 확정됩니다.";
     }
 
     private void BtnNextDay_Click(object sender, RoutedEventArgs e)
     {
         DayEndOverlay.Visibility = Visibility.Collapsed;
-        _account.RealizedPnlToday = 0;
+        _account.ResetDay();
         _engine.NextDay();
         _timer.Start();
         PushSystemNews($"Day {_engine.Day} 장 시작! 오버나이트 갭에 주의하세요.");

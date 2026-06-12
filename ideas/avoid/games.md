@@ -56,6 +56,7 @@
 | `Fire.Craft` | Sandbox/Simulation ★33차 |
 | `Glitch.Hop` | Platformer/Surreal ★33차 |
 | `Trivia.Cast` | Casual/Quiz ★34차 | ✅ 구현 완료 (2026-04-01) |
+| `Stock.Rush` | Simulation/Trading (채택 2026-06-12) |
 
 ---
 

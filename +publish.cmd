@@ -144,6 +144,7 @@ for %%n in (!SEL!) do (
     if "%%n"=="104" call :pub "Zip.Peek"               "Applications\Files\Inspector\Zip.Peek"                   "Zip.Peek.exe"              "Applications\Files\Inspector\Zip.Peek"
     if "%%n"=="105" call :pub "Brush.Scale"            "Applications\Photo.Picture\Brush.Scale"                  "Brush.Scale.exe"           "Applications\Photo.Picture\Brush.Scale"
     if "%%n"=="106" call :pub "Quant.Lab"              "Applications\Finance\Quant.Lab\Quant.Lab.Cli"            "Quant.Lab.exe"             "Applications\Finance\Quant.Lab"
+    if "%%n"=="107" call :pub "Stock.Rush"             "Games\Simulation\Stock.Rush"                             "StockRush.exe"             "Games\Simulation"
 )
 goto :DONE
 :: ── 완료 ──────────────────────────────────────────────────────────

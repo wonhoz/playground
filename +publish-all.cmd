@@ -200,6 +200,7 @@ call :pub "Star.Strike"           "Games\Shooter\Star.Strike"                   
 
 :: ── Games / Simulation ─────────────────────────────────────────────
 call :pub "Leaf.Grow"             "Games\Simulation\Leaf.Grow"                              "Leaf.Grow.exe"             "Games\Simulation"
+call :pub "Stock.Rush"            "Games\Simulation\Stock.Rush"                             "StockRush.exe"             "Games\Simulation"
 
 :: ── Games / Sports ─────────────────────────────────────────────────
 call :pub "Golf.Cast"             "Games\Sports\Golf.Cast"                                  "Golf.Cast.exe"             "Games\Sports\Golf.Cast"

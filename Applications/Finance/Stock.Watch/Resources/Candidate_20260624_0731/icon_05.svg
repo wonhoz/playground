@@ -1,0 +1,34 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg5" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#1FD6C6"/>
+      <stop offset="1" stop-color="#1466A8"/>
+    </linearGradient>
+    <radialGradient id="sweep" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#BFFFF4" stop-opacity="0.9"/>
+      <stop offset="1" stop-color="#BFFFF4" stop-opacity="0"/>
+    </radialGradient>
+    <clipPath id="scope"><circle cx="512" cy="512" r="320"/></clipPath>
+  </defs>
+  <rect x="62" y="62" width="900" height="900" rx="195" fill="url(#bg5)"/>
+  <!-- 레이더 감시 화면 -->
+  <circle cx="512" cy="512" r="320" fill="#0E3F55"/>
+  <g clip-path="url(#scope)">
+    <!-- 스윕 -->
+    <path d="M512 512 L512 192 A320 320 0 0 1 800 512 Z" fill="url(#sweep)"/>
+    <!-- 감시 대상 캔들 -->
+    <g stroke-linecap="round">
+      <line x1="400" y1="470" x2="400" y2="660" stroke="#7FE9D8" stroke-width="20"/>
+      <rect x="370" y="520" width="60" height="110" rx="14" fill="#FF6B6B"/>
+      <line x1="540" y1="400" x2="540" y2="620" stroke="#7FE9D8" stroke-width="20"/>
+      <rect x="510" y="440" width="60" height="140" rx="14" fill="#FFD23F"/>
+      <line x1="660" y1="450" x2="660" y2="640" stroke="#7FE9D8" stroke-width="20"/>
+      <rect x="630" y="500" width="60" height="110" rx="14" fill="#FF6B6B"/>
+    </g>
+  </g>
+  <circle cx="512" cy="512" r="320" fill="none" stroke="#9BF5E6" stroke-width="22"/>
+  <circle cx="512" cy="512" r="200" fill="none" stroke="#9BF5E6" stroke-width="10" opacity="0.5"/>
+  <!-- 알림 핑 -->
+  <circle cx="540" cy="470" r="34" fill="#FFFFFF"/>
+  <circle cx="540" cy="470" r="16" fill="#FF6B6B"/>
+</svg>

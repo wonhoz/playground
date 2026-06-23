@@ -116,3 +116,4 @@
 | `Char.Pad` | Tools.Utility | 특수문자·수학기호·이모지 즐겨찾기 퀵 팝업 입력기 ★34차 | 📌 채택 (2026-03-31) |
 | `Case.Forge` | Text | camelCase·snake_case 등 10가지 케이스 전역 팝업 변환기 ★34차 | ✅ 구현 완료 (2026-04-01) |
 | `Copy.Path` | Files/Manager | 파일 경로를 다양한 포맷으로 팝업 복사 (전체·슬래시·UNC 등 9종) ★34차 | ✅ 구현 완료 (2026-04-01) |
+| `Stock.Watch` | Finance | 종목 매수/매도 조건(RSI·볼린저·거래량 등) 감시 후 충족 시 Slack 알림, 캔들·볼린저·RSI 차트, KIS Open API ★사용자 직접 요청 | ✅ 구현 완료 (2026-06-24) |

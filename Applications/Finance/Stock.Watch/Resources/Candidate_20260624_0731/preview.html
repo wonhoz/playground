@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>Stock.Watch — 아이콘 후보</title>
+<style>
+  :root { --bg:#141826; --card:#1e2438; --accent:#46e5c8; --muted:#8a93ad; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:#e8ecf5; font-family:'Segoe UI','Malgun Gothic',sans-serif; padding:42px; }
+  h1 { font-size:26px; margin:0 0 6px; }
+  h1 span { color:var(--accent); }
+  p.sub { color:var(--muted); margin:0 0 34px; }
+  .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:26px; }
+  .card { background:var(--card); border:1px solid #2c3450; border-radius:18px; padding:24px; text-align:center; transition:transform .2s, border-color .2s; }
+  .card:hover { transform:translateY(-6px); border-color:var(--accent); }
+  .icon { width:180px; height:180px; margin:0 auto 18px; transition:transform .25s; }
+  .card:hover .icon { transform:scale(1.12); }
+  .name { font-size:15px; font-weight:600; margin-bottom:6px; }
+  .concept { font-size:12.5px; color:var(--muted); line-height:1.5; min-height:54px; }
+  .pal { display:flex; gap:6px; justify-content:center; margin-top:14px; }
+  .sw { width:22px; height:22px; border-radius:6px; border:1px solid #00000033; }
+  .tag { display:inline-block; font-size:10.5px; padding:2px 9px; border-radius:20px; background:#2c3450; color:var(--accent); margin-bottom:12px; }
+</style>
+</head>
+<body>
+  <h1>📈 <span>Stock.Watch</span> 아이콘 후보</h1>
+  <p class="sub">종목 매수/매도 조건 감시 · 캔들/볼린저/RSI · Slack 알림 — Candidate_20260624_0731</p>
+  <div class="grid">
+    <div class="card">
+      <img class="icon" src="icon_01.svg">
+      <div class="tag">literal · 중앙심볼</div>
+      <div class="name">icon_01 — 캔들 + 알림 벨</div>
+      <div class="concept">상승 캔들 3개를 벨 배지가 지켜본다. 조건 충족 시 알림이라는 핵심을 직설적으로 표현.</div>
+      <div class="pal"><span class="sw" style="background:#46E5C8"></span><span class="sw" style="background:#FF6B6B"></span><span class="sw" style="background:#FFD23F"></span></div>
+    </div>
+    <div class="card">
+      <img class="icon" src="icon_02.svg">
+      <div class="tag">literal · 레이어드</div>
+      <div class="name">icon_02 — 볼린저 밴드 + 캔들</div>
+      <div class="concept">상·중·하 밴드 사이의 캔들. 앱이 보여주는 화면 자체를 미리보기로 담은 차트 아이콘.</div>
+      <div class="pal"><span class="sw" style="background:#8A6BE8"></span><span class="sw" style="background:#FFE16B"></span><span class="sw" style="background:#5BD6A8"></span></div>
+    </div>
+    <div class="card">
+      <img class="icon" src="icon_03.svg">
+      <div class="tag">metaphor · 동적</div>
+      <div class="name">icon_03 — 울리는 신호 벨</div>
+      <div class="concept">파동과 함께 울리는 벨 안에 상승 신호. "조건 도달 → 즉시 알림"의 순간을 의인화.</div>
+      <div class="pal"><span class="sw" style="background:#FF7A59"></span><span class="sw" style="background:#FFC36B"></span><span class="sw" style="background:#FFFFFF"></span></div>
+    </div>
+    <div class="card">
+      <img class="icon" src="icon_04.svg">
+      <div class="tag">metaphor · 기하추상</div>
+      <div class="name">icon_04 — 타겟 조준</div>
+      <div class="concept">조준선 정중앙에 포착된 상승 캔들. 설정한 조건(타겟)에 가격이 들어온 순간을 상징.</div>
+      <div class="pal"><span class="sw" style="background:#2E72E0"></span><span class="sw" style="background:#FF6B6B"></span><span class="sw" style="background:#FFD23F"></span></div>
+    </div>
+    <div class="card">
+      <img class="icon" src="icon_05.svg">
+      <div class="tag">hybrid · 공간/장면</div>
+      <div class="name">icon_05 — 레이더 감시</div>
+      <div class="concept">레이더 스윕이 캔들을 훑고 알림 핑이 켜진다. "감시(Watch)"와 차트를 결합한 장면.</div>
+      <div class="pal"><span class="sw" style="background:#1FD6C6"></span><span class="sw" style="background:#1466A8"></span><span class="sw" style="background:#FF6B6B"></span></div>
+    </div>
+  </div>
+</body>
+</html>

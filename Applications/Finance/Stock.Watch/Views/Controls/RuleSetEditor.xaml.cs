@@ -19,7 +19,11 @@ public partial class RuleSetEditor : UserControl
     /// <summary>조건/결합/활성화가 바뀔 때 발생(자동 저장·재평가용).</summary>
     public event Action? Changed;
 
-    private sealed record Opt(object Value, string Label);
+    private sealed record Opt(object Value, string Label)
+    {
+        // 닫힌 콤보(SelectionBox)가 레코드 ToString 대신 라벨을 표시하도록 한다.
+        public override string ToString() => Label;
+    }
 
     private static readonly Opt[] OperandOpts =
         Enum.GetValues<Operand>().Select(o => new Opt(o, Condition.OperandLabel(o))).ToArray();

@@ -22,6 +22,10 @@ public sealed class AppConfig
     // ── 알림 ──
     public string SlackWebhookUrl { get; set; } = string.Empty;
 
+    // ── 실시간(WebSocket) ──
+    /// <summary>WebSocket 실시간 체결가 사용. 폴링과 병행(폴링=일봉/지표 기준선, 실시간=틱 가격).</summary>
+    public bool UseRealtime { get; set; } = true;
+
     // ── 폴링 ──
     public int PollIntervalSeconds { get; set; } = 30;
 
@@ -36,6 +40,10 @@ public sealed class AppConfig
     // ── 캐시된 OAuth 토큰(만료 전까지 재사용) ──
     public string CachedToken { get; set; } = string.Empty;
     public DateTime TokenExpiresAt { get; set; } = DateTime.MinValue;
+
+    // ── 캐시된 WebSocket approval_key ──
+    public string CachedApprovalKey { get; set; } = string.Empty;
+    public DateTime ApprovalExpiresAt { get; set; } = DateTime.MinValue;
 
     [JsonIgnore] public bool HasCredentials => !string.IsNullOrWhiteSpace(AppKey) && !string.IsNullOrWhiteSpace(AppSecret);
 

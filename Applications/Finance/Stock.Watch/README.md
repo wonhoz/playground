@@ -3,12 +3,13 @@
 > 종목별 매수/매도 **조건을 미리 설정**해 두면, 조건이 충족되는 순간 **Slack으로 알림**을 보내는 WPF 데스크톱 앱.
 > 캔들 차트 · 볼린저 밴드 · RSI · 거래량을 한눈에 보면서 조건을 자유롭게 조합한다.
 
-**버전: v1.0.0** · .NET 10 / WPF · 데이터: 한국투자증권(KIS) Open API
+**버전: v1.1.0** · .NET 10 / WPF · 데이터: 한국투자증권(KIS) Open API
 
 ---
 
 ## 핵심 기능
 
+- **실시간 체결가(WebSocket)**: KIS 실시간 시세(`H0STCNT0`)를 구독해 장중 틱을 즉시 반영. 폴링(일봉·지표 기준선)과 병행하며, 끊기면 자동 재연결. 설정에서 끄면 폴링만으로 동작.
 - **조건 기반 알림**: `RSI < 30`, `현재가 ≤ 볼린저하단`, `거래량 ≥ 거래량MA20 × 2`, `현재가 SMA20 상향돌파` 등을 드롭다운으로 조합. 매수/매도 룰셋 분리, AND/OR 결합.
 - **차트 시각화**: 캔들(상승=빨강/하락=파랑) + 볼린저 밴드 + 거래량 막대 + RSI(14) 서브패널을 직접 렌더링(외부 차트 라이브러리 없음).
 - **Slack 알림**: 조건 충족 시 종목명·현재가·조건·지표값을 Incoming Webhook으로 전송.
@@ -59,5 +60,6 @@
 ## 기술 메모
 
 - KIS REST: `oauth2/tokenP`(토큰 24h 캐시) · `inquire-price`(현재가) · `inquire-daily-itemchartprice`(일봉 OHLCV)
-- 장중에는 당일 봉을 실시간 현재가로 갱신해 지표가 실시간 가격을 반영
-- 외부 NuGet 의존 없음 — `HttpClient` + WPF Shape 렌더링만 사용 (단일 파일 배포)
+- KIS 실시간: `oauth2/Approval`(approval_key) → WebSocket(`ws://ops.koreainvestment.com:21000`, 모의 31000) `H0STCNT0` 체결가 구독, PINGPONG 응답·자동 재연결
+- 장중에는 당일 봉을 실시간 체결가/현재가로 갱신해 지표가 실시간 가격을 반영(틱 평가는 종목당 0.8초 스로틀)
+- 외부 NuGet 의존 없음 — `HttpClient` + `ClientWebSocket` + WPF Shape 렌더링만 사용 (단일 파일 배포)

@@ -4,12 +4,12 @@ using Stock.Watch.Models;
 
 namespace Stock.Watch.Services;
 
-/// <summary>종목 1개의 폴링 결과(현재가 + 계산된 지표 세트). UI 차트/시세표 갱신용.</summary>
+/// <summary>종목 1개의 시세 결과(현재가 + 계산된 지표 세트). UI 차트/시세표 갱신용.</summary>
 public sealed record StockUpdate(WatchedStock Stock, Quote Quote, IndicatorSet Indicators);
 
 /// <summary>
-/// 폴링 루프의 핵심. 주기마다 관심종목 시세·일봉을 조회하고 지표를 계산해
-/// 매수/매도 룰을 평가한다. 룰이 false→true로 전이하고 쿨다운이 지났을 때만 알림을 발생시킨다(도배 방지).
+/// 감시 엔진. 폴링으로 일봉·지표 기준선을 주기 갱신하고, WebSocket 실시간 체결가로 장중 틱을 받아
+/// 당일 봉을 갱신·재평가한다. 룰이 false→true로 전이하고 쿨다운이 지났을 때만 알림을 발생시킨다(도배 방지).
 /// 이벤트는 백그라운드 스레드에서 발생하므로 UI 구독자는 Dispatcher로 마샬링해야 한다.
 /// </summary>
 public sealed class MonitorService
@@ -17,13 +17,23 @@ public sealed class MonitorService
     private readonly AppConfig _config;
     private readonly KisApiClient _api;
     private readonly SlackNotifier _slack;
+    private readonly KisRealtimeClient _realtime;
     private CancellationTokenSource? _cts;
+
+    // 폴링으로 받은 일봉(실시간 병합 전 기준선). 실시간 틱이 이 위에 당일 가격을 얹는다.
+    private readonly Dictionary<string, List<Candle>> _baseCandles = new();
+    private readonly Dictionary<string, DateTime> _lastTickEval = new();
+    private readonly object _sync = new();
 
     public MonitorService(AppConfig config, KisApiClient api, SlackNotifier slack)
     {
         _config = config;
         _api = api;
         _slack = slack;
+        _realtime = new KisRealtimeClient(api);
+        _realtime.Tick += OnRealtimeTick;
+        _realtime.StatusChanged += s => StatusChanged?.Invoke(s);
+        _realtime.ErrorOccurred += s => ErrorOccurred?.Invoke(s);
     }
 
     public bool IsRunning => _cts is { IsCancellationRequested: false };
@@ -38,13 +48,29 @@ public sealed class MonitorService
         if (IsRunning) return;
         _cts = new CancellationTokenSource();
         _ = RunLoopAsync(_cts.Token);
+
+        if (_config.UseRealtime)
+            _realtime.Start(_config.Watchlist.Select(s => s.Code));
     }
 
     public void Stop()
     {
         _cts?.Cancel();
         _cts = null;
+        _realtime.Stop();
         StatusChanged?.Invoke("감시 중지됨");
+    }
+
+    /// <summary>감시 중 종목 추가 시 실시간 구독도 즉시 반영.</summary>
+    public void AddRealtimeCode(string code)
+    {
+        if (_config.UseRealtime && _realtime.IsRunning) _ = _realtime.AddCodeAsync(code);
+    }
+
+    public void RemoveRealtimeCode(string code)
+    {
+        lock (_sync) { _baseCandles.Remove(code); _lastTickEval.Remove(code); }
+        if (_realtime.IsRunning) _ = _realtime.RemoveCodeAsync(code);
     }
 
     private async Task RunLoopAsync(CancellationToken ct)
@@ -77,7 +103,6 @@ public sealed class MonitorService
                 await RefreshStockAsync(stock, ct);
             }
             catch (KisApiException ex) { ErrorOccurred?.Invoke($"{stock.Display}: {ex.Message}"); }
-            // 호출 간 짧은 간격으로 레이트리밋 완화
             try { await Task.Delay(250, ct); } catch (OperationCanceledException) { break; }
         }
         StatusChanged?.Invoke($"갱신 완료 {DateTime.Now:HH:mm:ss}");
@@ -89,8 +114,11 @@ public sealed class MonitorService
         var candles = await _api.GetDailyCandlesAsync(stock.Code, 120, ct);
         if (candles.Count == 0) return null;
 
+        // 실시간 틱이 얹을 기준선 저장(병합 전 복사본)
+        lock (_sync) _baseCandles[stock.Code] = new List<Candle>(candles);
+
         var quote = await _api.GetQuoteAsync(stock.Code, ct);
-        MergeLiveQuote(candles, quote);
+        MergeLivePrice(candles, quote.Price, quote.Volume);
 
         stock.LastPrice = quote.Price;
         stock.LastChangeRate = quote.ChangeRate;
@@ -103,24 +131,52 @@ public sealed class MonitorService
         return set;
     }
 
-    /// <summary>오늘 봉을 실시간 현재가로 갱신(없으면 추가)해 지표가 장중 가격을 반영하도록 한다.</summary>
-    private static void MergeLiveQuote(List<Candle> candles, Quote quote)
+    // ──────────────────────────── 실시간 틱 ────────────────────────────
+    private void OnRealtimeTick(RealtimeTick tick)
     {
-        if (quote.Price <= 0) return;
+        var stock = _config.Watchlist.FirstOrDefault(s => s.Code == tick.Code);
+        if (stock == null) return;
+
+        // 가격은 항상 갱신, 지표 재계산·평가는 종목당 최소 0.8초 간격으로 스로틀
+        stock.LastPrice = tick.Price;
+        stock.LastChangeRate = tick.ChangeRate;
+
+        List<Candle>? baseC;
+        lock (_sync)
+        {
+            if (_lastTickEval.TryGetValue(tick.Code, out var last) && (DateTime.Now - last).TotalMilliseconds < 800)
+                return;
+            _lastTickEval[tick.Code] = DateTime.Now;
+            if (!_baseCandles.TryGetValue(tick.Code, out var bc)) return; // 폴링으로 일봉을 먼저 받아야 함
+            baseC = new List<Candle>(bc);
+        }
+
+        MergeLivePrice(baseC, tick.Price, tick.CumVolume);
+        var set = new IndicatorSet(baseC);
+        var quote = new Quote(tick.Code, tick.Price, 0, tick.ChangeRate, tick.CumVolume, tick.Time);
+
+        StockUpdated?.Invoke(new StockUpdate(stock, quote, set));
+        EvaluateRules(stock, set, quote);
+    }
+
+    /// <summary>오늘 봉을 실시간 가격으로 갱신(없으면 추가)해 지표가 장중 가격을 반영하도록 한다.</summary>
+    private static void MergeLivePrice(List<Candle> candles, decimal price, long cumVolume)
+    {
+        if (price <= 0 || candles.Count == 0) return;
         var last = candles[^1];
         if (last.Time.Date == DateTime.Today)
         {
             candles[^1] = last with
             {
-                High = Math.Max(last.High, quote.Price),
-                Low = last.Low <= 0 ? quote.Price : Math.Min(last.Low, quote.Price),
-                Close = quote.Price,
-                Volume = quote.Volume > 0 ? quote.Volume : last.Volume
+                High = Math.Max(last.High, price),
+                Low = last.Low <= 0 ? price : Math.Min(last.Low, price),
+                Close = price,
+                Volume = cumVolume > 0 ? cumVolume : last.Volume
             };
         }
         else if (DateTime.Today.DayOfWeek is not (DayOfWeek.Saturday or DayOfWeek.Sunday))
         {
-            candles.Add(new Candle(DateTime.Today, quote.Price, quote.Price, quote.Price, quote.Price, quote.Volume));
+            candles.Add(new Candle(DateTime.Today, price, price, price, price, cumVolume));
         }
     }
 
@@ -183,4 +239,6 @@ public sealed class MonitorService
         var t = now.TimeOfDay;
         return t >= new TimeSpan(9, 0, 0) && t <= new TimeSpan(15, 30, 0);
     }
+
+    public void DisposeRealtime() => _realtime.Dispose();
 }

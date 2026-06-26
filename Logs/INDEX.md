@@ -4,6 +4,7 @@
 
 | 파일 | 날짜 | 태그 | 설명 |
 |------|------|------|------|
+| [20260626_201304_feature_StockWatch_실시간WebSocket_다크테마_콤보수정.md](20260626_201304_feature_StockWatch_실시간WebSocket_다크테마_콤보수정.md) | 2026-06-26 | feature | Stock.Watch v1.1.0 — WebSocket 실시간 체결가(H0STCNT0) 추가, 설정창 다크 테마 수정(파생 Window implicit 스타일 미적용), 조건 콤보 라벨 표시 수정 |
 | [20260624_073541_feature_StockWatch_종목조건감시_Slack알림.md](20260624_073541_feature_StockWatch_종목조건감시_Slack알림.md) | 2026-06-24 | feature | Stock.Watch 신규 — 종목 매수/매도 조건(RSI·볼린저·거래량) 감시 후 Slack 알림, 캔들·볼린저·RSI 차트, KIS Open API |
 | [20260322_232100_feature_DiskLens_트리맵_파일폴더_색상구분.md](20260322_232100_feature_DiskLens_트리맵_파일폴더_색상구분.md) | 2026-03-22 | feature | Disk.Lens 트리맵 파일/폴더 색상 구분 (채도 낮은 별도 색 적용) |
 | [20260322_134254_docs_33차_브레인스토밍_아이디어_생성.md](20260322_134254_docs_33차_브레인스토밍_아이디어_생성.md) | 2026-03-22 | docs | 33차 아이디어 브레인스토밍 (앱 10개 + 게임 10개, 사용자 취향 적극 반영) |

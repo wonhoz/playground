@@ -48,7 +48,7 @@ public partial class MainWindow : Window
         SellEditor.Changed += OnRulesChanged;
 
         if (_stocks.Count > 0) StockList.SelectedIndex = 0;
-        Closing += (_, _) => { _monitor.Stop(); _config.Save(); _api.Dispose(); _slack.Dispose(); };
+        Closing += (_, _) => { _monitor.Stop(); _monitor.DisposeRealtime(); _config.Save(); _api.Dispose(); _slack.Dispose(); };
     }
 
     private StockVm? Selected => StockList.SelectedItem as StockVm;
@@ -167,6 +167,7 @@ public partial class MainWindow : Window
         _config.Watchlist.Add(ws);
         _stocks.Add(new StockVm(ws));
         _config.Save();
+        _monitor.AddRealtimeCode(code);
         NewCodeBox.Clear();
         StockList.SelectedItem = _stocks[^1];
     }
@@ -181,6 +182,7 @@ public partial class MainWindow : Window
         _config.Watchlist.RemoveAll(s => s.Code == vm.Code);
         _stocks.Remove(vm);
         _cache.Remove(vm.Code);
+        _monitor.RemoveRealtimeCode(vm.Code);
         _config.Save();
     }
 

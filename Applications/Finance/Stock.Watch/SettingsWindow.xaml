@@ -1,9 +1,10 @@
 <Window x:Class="Stock.Watch.SettingsWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Stock.Watch 설정" Height="560" Width="540"
+        Title="Stock.Watch 설정" Height="600" Width="540"
+        Background="#FF1A1A1A" FontFamily="Segoe UI, Malgun Gothic"
         WindowStartupLocation="CenterOwner" ResizeMode="NoResize">
-    <Grid Margin="18">
+    <Grid Margin="18" Background="#FF1A1A1A">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
@@ -54,6 +55,7 @@
                     <TextBox Grid.Column="1" x:Name="CooldownBox" HorizontalContentAlignment="Right"/>
                 </Grid>
                 <CheckBox x:Name="MarketHoursCheck" Content="장 시간(평일 09:00~15:30)에만 감시" Margin="0,12,0,0"/>
+                <CheckBox x:Name="RealtimeCheck" Content="WebSocket 실시간 체결가 사용 (장중 틱 즉시 반영)" Margin="0,10,0,0"/>
             </StackPanel>
         </ScrollViewer>
 

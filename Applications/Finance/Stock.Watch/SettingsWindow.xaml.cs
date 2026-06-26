@@ -20,6 +20,7 @@ public partial class SettingsWindow : Window
         PollBox.Text = config.PollIntervalSeconds.ToString();
         CooldownBox.Text = config.AlertCooldownSeconds.ToString();
         MarketHoursCheck.IsChecked = config.MarketHoursOnly;
+        RealtimeCheck.IsChecked = config.UseRealtime;
 
         TestSlackBtn.Click += TestSlack;
         SaveBtn.Click += Save;
@@ -53,10 +54,13 @@ public partial class SettingsWindow : Window
         _config.PollIntervalSeconds = ParseInt(PollBox.Text, _config.PollIntervalSeconds, 5, 3600);
         _config.AlertCooldownSeconds = ParseInt(CooldownBox.Text, _config.AlertCooldownSeconds, 0, 86400);
         _config.MarketHoursOnly = MarketHoursCheck.IsChecked == true;
+        _config.UseRealtime = RealtimeCheck.IsChecked == true;
 
-        // 자격 변경 시 캐시 토큰 무효화
+        // 자격 변경 시 캐시 토큰·approval_key 무효화
         _config.CachedToken = string.Empty;
         _config.TokenExpiresAt = DateTime.MinValue;
+        _config.CachedApprovalKey = string.Empty;
+        _config.ApprovalExpiresAt = DateTime.MinValue;
 
         _config.Save();
         DialogResult = true;

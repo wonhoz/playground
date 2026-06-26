@@ -34,6 +34,11 @@ public sealed class KisApiClient : IDisposable
 
     private string BaseUrl => _config.UseMockServer ? MockBase : RealBase;
 
+    /// <summary>실시간 WebSocket 접속 URL(실전 21000 / 모의 31000).</summary>
+    public string WebSocketUrl => _config.UseMockServer
+        ? "ws://ops.koreainvestment.com:31000"
+        : "ws://ops.koreainvestment.com:21000";
+
     // ────────────────────────────── OAuth 토큰 ──────────────────────────────
     private async Task<string> EnsureTokenAsync(CancellationToken ct)
     {
@@ -82,6 +87,39 @@ public sealed class KisApiClient : IDisposable
         {
             _tokenLock.Release();
         }
+    }
+
+    // ──────────────────────── WebSocket approval_key ────────────────────────
+    /// <summary>실시간 WebSocket 접속용 approval_key 발급(약 24h 캐시). OAuth 토큰과 별개.</summary>
+    public async Task<string> GetApprovalKeyAsync(CancellationToken ct = default)
+    {
+        if (!_config.HasCredentials)
+            throw new KisApiException("APP KEY / APP SECRET이 설정되지 않았습니다.");
+
+        if (!string.IsNullOrEmpty(_config.CachedApprovalKey) && DateTime.Now < _config.ApprovalExpiresAt)
+            return _config.CachedApprovalKey;
+
+        var body = JsonSerializer.Serialize(new
+        {
+            grant_type = "client_credentials",
+            appkey = _config.AppKey,
+            secretkey = _config.AppSecret   // approval 엔드포인트는 'secretkey' 필드명 사용
+        });
+
+        using var req = new HttpRequestMessage(HttpMethod.Post, $"{BaseUrl}/oauth2/Approval")
+        {
+            Content = new StringContent(body, Encoding.UTF8, "application/json")
+        };
+        using var resp = await _http.SendAsync(req, ct);
+        var text = await resp.Content.ReadAsStringAsync(ct);
+        using var doc = JsonDocument.Parse(text);
+        if (!doc.RootElement.TryGetProperty("approval_key", out var keyEl) || keyEl.GetString() is not { Length: > 0 } key)
+            throw new KisApiException($"approval_key 발급 실패: {text}");
+
+        _config.CachedApprovalKey = key;
+        _config.ApprovalExpiresAt = DateTime.Now.AddHours(12);
+        _saveConfig();
+        return key;
     }
 
     private async Task<HttpRequestMessage> BuildGetAsync(string path, string trId, string query, CancellationToken ct)

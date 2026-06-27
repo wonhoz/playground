@@ -22,6 +22,10 @@ public sealed class AppConfig
     // ── 알림 ──
     public string SlackWebhookUrl { get; set; } = string.Empty;
 
+    /// <summary>전송 대상 Slack 채널(예: "#claude"). 비우면 webhook 기본 채널로 전송.
+    /// channel 오버라이드를 지원하는 webhook에서만 동작한다.</summary>
+    public string SlackChannel { get; set; } = "#claude";
+
     // ── 실시간(WebSocket) ──
     /// <summary>WebSocket 실시간 체결가 사용. 폴링과 병행(폴링=일봉/지표 기준선, 실시간=틱 가격).</summary>
     public bool UseRealtime { get; set; } = true;

@@ -1,5 +1,6 @@
 using System.Net.Http;
 using System.Text.Json;
+using Stock.Fetch.Models;
 
 namespace Stock.Fetch.Services;
 
@@ -12,15 +13,42 @@ public sealed class NameResolver(HttpClient http)
     private const string Endpoint = "http://data.krx.co.kr/comm/bldAttendant/getJsonData.cmd";
     private const string Referer = "http://data.krx.co.kr/contents/MDC/MDI/mdiLoader/index.cmd";
 
+    /// <summary>코드 또는 이름(일부)으로 종목 후보 목록을 검색. KRX finder는 코드·이름 둘 다 매칭.</summary>
+    public async Task<List<StockHit>> SearchAsync(string text, CancellationToken ct = default)
+    {
+        var arr = await FinderBlock1Async(text, ct);
+        var hits = new List<StockHit>();
+        if (arr is { ValueKind: JsonValueKind.Array })
+            foreach (var e in arr.Value.EnumerateArray())
+            {
+                string code = GetStr(e, "short_code");
+                if (code.Length == 0) continue;
+                hits.Add(new StockHit(code, GetStr(e, "codeName"), GetStr(e, "marketName")));
+            }
+        return hits;
+    }
+
     /// <summary>종목명을 반환. 못 찾으면 null.</summary>
     public async Task<string?> LookupAsync(string code, CancellationToken ct = default)
+    {
+        var arr = await FinderBlock1Async(code, ct);
+        if (arr is not { ValueKind: JsonValueKind.Array }) return null;
+
+        // 단축코드 정확 일치 우선, 없으면 첫 항목.
+        foreach (var e in arr.Value.EnumerateArray())
+            if (GetStr(e, "short_code") == code) return GetStr(e, "codeName");
+        return arr.Value.GetArrayLength() > 0 ? GetStr(arr.Value[0], "codeName") : null;
+    }
+
+    /// <summary>finder 호출 후 block1 배열(검색 결과)을 Clone해 반환. 실패 시 null.</summary>
+    private async Task<JsonElement?> FinderBlock1Async(string text, CancellationToken ct)
     {
         var form = new Dictionary<string, string>
         {
             ["bld"] = "dbms/comm/finder/finder_stkisu",
             ["mktsel"] = "ALL",
             ["typeNo"] = "0",
-            ["searchText"] = code,
+            ["searchText"] = text,
         };
 
         try
@@ -32,16 +60,12 @@ public sealed class NameResolver(HttpClient http)
             req.Headers.Referrer = new Uri(Referer);
             req.Headers.Add("X-Requested-With", "XMLHttpRequest");
             using var resp = await http.SendAsync(req, ct);
-            string text = await resp.Content.ReadAsStringAsync(ct);
+            string s = await resp.Content.ReadAsStringAsync(ct);
 
-            using var doc = JsonDocument.Parse(text);
-            if (!doc.RootElement.TryGetProperty("block1", out var arr) || arr.ValueKind != JsonValueKind.Array)
-                return null;
-
-            // 단축코드 정확 일치 우선, 없으면 첫 항목.
-            foreach (var e in arr.EnumerateArray())
-                if (GetStr(e, "short_code") == code) return GetStr(e, "codeName");
-            return arr.GetArrayLength() > 0 ? GetStr(arr[0], "codeName") : null;
+            using var doc = JsonDocument.Parse(s);
+            if (doc.RootElement.TryGetProperty("block1", out var arr) && arr.ValueKind == JsonValueKind.Array)
+                return arr.Clone();
+            return null;
         }
         catch
         {

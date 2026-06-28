@@ -103,8 +103,14 @@
 - **가격 표시**: DataGrid 가격 컬럼 `StringFormat=N0`(소수점 제거·천단위 콤마).
 - **UI 다듬기**: 우측 버튼 폭 120→160(텍스트 잘림), 래더 창 스크롤바 우측 마진.
 
+## v1.4.0 후속 (사용자 요청)
+- **종목 이름 검색**: KRX finder가 코드·이름 둘 다 매칭(검증: 삼성전자→2건, 삼성→31건, 하이닉스→1건).
+  - `NameResolver.SearchAsync`(block1 전체 파싱) + `StockHit` 모델 + `SearchResultWindow`(선택 다이얼로그).
+  - `🔍 검색`: 0건 안내 / 1건 즉시 적용 / 다건 목록 선택(더블클릭). CodeBox MaxLength 제거(이름 입력 허용).
+  - LookupAsync/SearchAsync 공통 `FinderBlock1Async`로 정리(JsonElement.Clone 반환).
+
 ## 참고
-- KRX 통계는 차단(LOGOUT)이나 종목검색 finder는 무인증 동작 → 종목명 조회에 활용.
+- KRX 통계는 차단(LOGOUT)이나 종목검색 finder는 무인증 동작 → 종목명 조회·이름 검색에 활용.
 - KRX 차단은 거래소 정책 변화로, 향후 로그인/OTP 기반 우회가 필요. 현재는 다음 금융이 동등 대체.
 - XAML은 컴파일 통과해도 런타임 로딩에서 깨질 수 있음 → 신규 WPF 창은 exe 스모크 실행 필수.
 - 자동 캡처는 SetForegroundWindow 포그라운드 잠금으로 불안정 → `SetWindowPos` HWND_TOPMOST로 우회.

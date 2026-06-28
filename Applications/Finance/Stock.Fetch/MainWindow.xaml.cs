@@ -126,21 +126,39 @@ public partial class MainWindow : Window
         ToBox.Text = to.AddDays(d).ToString("yyyy-MM-dd");
     }
 
-    // ────────────────────────────── 종목명 조회 ──────────────────────────────
-    private async void Lookup_Click(object sender, RoutedEventArgs e)
+    // ────────────────────────────── 종목 검색 (코드 또는 이름) ──────────────────────────────
+    private async void Search_Click(object sender, RoutedEventArgs e)
     {
-        string code = CodeBox.Text.Trim();
-        if (code.Length is < 5 or > 6 || !code.All(char.IsDigit))
+        string text = CodeBox.Text.Trim();
+        if (string.IsNullOrEmpty(text))
         {
-            ShowError("종목코드는 6자리 숫자입니다(예: 005930).");
+            ShowError("종목코드 또는 이름을 입력하세요(예: 005930 / 삼성전자).");
             return;
         }
         LookupBtn.IsEnabled = false;
-        NameText.Text = "조회 중…";
+        NameText.Text = "검색 중…";
         try
         {
-            var name = await _registry.LookupNameAsync(code);
-            NameText.Text = string.IsNullOrEmpty(name) ? "(이름 못 찾음)" : name;
+            var hits = await _registry.SearchAsync(text);
+            if (hits.Count == 0) { NameText.Text = "(검색 결과 없음)"; return; }
+
+            // 1건이면 바로 적용, 여러 건이면 선택 다이얼로그.
+            StockHit? pick = hits.Count == 1 ? hits[0] : null;
+            if (pick is null)
+            {
+                var win = new SearchResultWindow(text, hits) { Owner = this };
+                pick = win.ShowDialog() == true ? win.Selected : null;
+            }
+
+            if (pick != null)
+            {
+                CodeBox.Text = pick.Code;
+                NameText.Text = pick.Name;
+            }
+            else if (NameText.Text == "검색 중…")
+            {
+                NameText.Text = ""; // 취소
+            }
         }
         finally
         {

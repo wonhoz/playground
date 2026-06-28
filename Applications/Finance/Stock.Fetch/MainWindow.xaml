@@ -29,14 +29,14 @@
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
 
-                <!-- 종목코드 + 이름 조회 -->
-                <TextBlock Grid.Row="0" Grid.Column="0" Text="종목코드" VerticalAlignment="Center"
+                <!-- 종목 (코드 또는 이름 검색) -->
+                <TextBlock Grid.Row="0" Grid.Column="0" Text="종목" VerticalAlignment="Center"
                            Margin="0,0,12,0" Foreground="{StaticResource FgMuted}"/>
                 <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal">
-                    <TextBox x:Name="CodeBox" Width="130" Text="005930" MaxLength="6"
+                    <TextBox x:Name="CodeBox" Width="160" Text="005930"
                              FontSize="14" FontWeight="SemiBold"/>
-                    <Button x:Name="LookupBtn" Content="🔍 이름 조회" Style="{StaticResource ChipButton}"
-                            Margin="8,0,0,0" Click="Lookup_Click"/>
+                    <Button x:Name="LookupBtn" Content="🔍 검색" Style="{StaticResource ChipButton}"
+                            Margin="8,0,0,0" Click="Search_Click"/>
                     <TextBlock x:Name="NameText" Text="" VerticalAlignment="Center" Margin="12,0,0,0"
                                FontWeight="SemiBold" Foreground="{StaticResource FgBrush}"/>
                 </StackPanel>

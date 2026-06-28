@@ -39,5 +39,9 @@ public sealed class PriceSourceRegistry : IDisposable
     public Task<string?> LookupNameAsync(string code, CancellationToken ct = default)
         => _nameResolver.LookupAsync(code, ct);
 
+    /// <summary>코드 또는 이름(일부)으로 종목 후보 검색.</summary>
+    public Task<List<StockHit>> SearchAsync(string text, CancellationToken ct = default)
+        => _nameResolver.SearchAsync(text, ct);
+
     public void Dispose() => _http.Dispose();
 }

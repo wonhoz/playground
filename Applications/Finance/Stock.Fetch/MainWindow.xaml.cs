@@ -152,6 +152,8 @@ public partial class MainWindow : Window
     private async void Save_Click(object sender, RoutedEventArgs e)
     {
         if (_series is null || FormatCombo.SelectedItem is not FormatItem fi) return;
+        var cols = SelectedColumns();
+        if (cols.Count == 0) { ShowError("내보낼 컬럼을 1개 이상 선택하세요."); return; }
 
         var dlg = new SaveFileDialog
         {
@@ -163,10 +165,10 @@ public partial class MainWindow : Window
 
         try
         {
-            await DataExporter.SaveAsync(_series, fi.Format, dlg.FileName);
+            await DataExporter.SaveAsync(_series, fi.Format, cols, dlg.FileName);
             _config.LastExportDir = Path.GetDirectoryName(dlg.FileName) ?? "";
             _config.Save();
-            SummaryText.Text = $"저장 완료: {dlg.FileName}";
+            SummaryText.Text = $"저장 완료({cols.Count}개 컬럼): {dlg.FileName}";
         }
         catch (Exception ex)
         {
@@ -177,15 +179,39 @@ public partial class MainWindow : Window
     private void Copy_Click(object sender, RoutedEventArgs e)
     {
         if (_series is null || FormatCombo.SelectedItem is not FormatItem fi) return;
+        var cols = SelectedColumns();
+        if (cols.Count == 0) { ShowError("복사할 컬럼을 1개 이상 선택하세요."); return; }
         try
         {
-            Clipboard.SetText(DataExporter.Serialize(_series, fi.Format));
-            SummaryText.Text = $"클립보드에 복사됨 ({fi.Label}, {_series.Candles.Count}건).";
+            Clipboard.SetText(DataExporter.Serialize(_series, fi.Format, cols));
+            SummaryText.Text = $"클립보드에 복사됨 ({fi.Label}, {cols.Count}개 컬럼 · {_series.Candles.Count}건).";
         }
         catch (Exception ex)
         {
             ShowError($"복사 실패: {ex.Message}");
         }
+    }
+
+    /// <summary>체크된 컬럼을 표시 순서(날짜-시가-종가-저가-고가-거래량)대로 반환.</summary>
+    private List<CandleColumn> SelectedColumns()
+    {
+        var list = new List<CandleColumn>();
+        if (ColDate.IsChecked == true) list.Add(CandleColumn.Date);
+        if (ColOpen.IsChecked == true) list.Add(CandleColumn.Open);
+        if (ColClose.IsChecked == true) list.Add(CandleColumn.Close);
+        if (ColLow.IsChecked == true) list.Add(CandleColumn.Low);
+        if (ColHigh.IsChecked == true) list.Add(CandleColumn.High);
+        if (ColVolume.IsChecked == true) list.Add(CandleColumn.Volume);
+        return list;
+    }
+
+    private void ColAll_Click(object sender, RoutedEventArgs e) => SetAllColumns(true);
+    private void ColNone_Click(object sender, RoutedEventArgs e) => SetAllColumns(false);
+
+    private void SetAllColumns(bool on)
+    {
+        ColDate.IsChecked = ColOpen.IsChecked = ColClose.IsChecked =
+            ColLow.IsChecked = ColHigh.IsChecked = ColVolume.IsChecked = on;
     }
 
     private static string BuildFileName(StockSeries s, ExportFormat fmt)

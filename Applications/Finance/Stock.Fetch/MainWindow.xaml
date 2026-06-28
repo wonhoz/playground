@@ -87,12 +87,12 @@
                 <DataGridTextColumn Header="날짜" Binding="{Binding Date, StringFormat=yyyy-MM-dd}" Width="120"/>
                 <DataGridTextColumn Header="시가" Binding="{Binding Open}" Width="*"
                                     ElementStyle="{StaticResource NumCell}"/>
-                <DataGridTextColumn Header="고가" Binding="{Binding High}" Width="*"
-                                    ElementStyle="{StaticResource NumCell}"/>
-                <DataGridTextColumn Header="저가" Binding="{Binding Low}" Width="*"
-                                    ElementStyle="{StaticResource NumCell}"/>
                 <DataGridTextColumn Header="종가" Binding="{Binding Close}" Width="*"
                                     ElementStyle="{StaticResource NumCellBold}"/>
+                <DataGridTextColumn Header="저가" Binding="{Binding Low}" Width="*"
+                                    ElementStyle="{StaticResource NumCell}"/>
+                <DataGridTextColumn Header="고가" Binding="{Binding High}" Width="*"
+                                    ElementStyle="{StaticResource NumCell}"/>
                 <DataGridTextColumn Header="거래량" Binding="{Binding Volume, StringFormat=N0}" Width="1.4*"
                                     ElementStyle="{StaticResource NumCell}"/>
             </DataGrid.Columns>
@@ -101,24 +101,41 @@
         <!-- ── 내보내기 바 ── -->
         <Border Grid.Row="3" Background="{StaticResource PanelBg}" BorderBrush="{StaticResource BorderBrush}"
                 BorderThickness="1" CornerRadius="8" Padding="14,12" Margin="0,12,0,0">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
-                </Grid.ColumnDefinitions>
+            <StackPanel>
+                <!-- 컬럼 선택 -->
+                <StackPanel Orientation="Horizontal" Margin="0,0,0,11">
+                    <TextBlock Text="내보낼 컬럼" VerticalAlignment="Center"
+                               Margin="0,0,14,0" Foreground="{StaticResource FgMuted}"/>
+                    <CheckBox x:Name="ColDate"   Content="날짜"   IsChecked="True" Margin="0,0,14,0"/>
+                    <CheckBox x:Name="ColOpen"   Content="시가"   IsChecked="True" Margin="0,0,14,0"/>
+                    <CheckBox x:Name="ColClose"  Content="종가"   IsChecked="True" Margin="0,0,14,0"/>
+                    <CheckBox x:Name="ColLow"    Content="저가"   IsChecked="True" Margin="0,0,14,0"/>
+                    <CheckBox x:Name="ColHigh"   Content="고가"   IsChecked="True" Margin="0,0,14,0"/>
+                    <CheckBox x:Name="ColVolume" Content="거래량" IsChecked="True" Margin="0,0,18,0"/>
+                    <Button Content="전체" Style="{StaticResource ChipButton}" Margin="0,0,6,0" Click="ColAll_Click"/>
+                    <Button Content="해제" Style="{StaticResource ChipButton}" Click="ColNone_Click"/>
+                </StackPanel>
 
-                <TextBlock Grid.Column="0" Text="출력 포맷" VerticalAlignment="Center"
-                           Margin="0,0,12,0" Foreground="{StaticResource FgMuted}"/>
-                <ComboBox x:Name="FormatCombo" Grid.Column="1" Width="200"/>
+                <!-- 포맷 + 내보내기 -->
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
 
-                <Button x:Name="CopyBtn" Grid.Column="3" Content="📋 클립보드 복사" Width="140"
-                        Margin="0,0,8,0" IsEnabled="False" Click="Copy_Click"/>
-                <Button x:Name="SaveBtn" Grid.Column="4" Content="💾 파일로 저장" Width="150"
-                        Style="{StaticResource AccentButton}" IsEnabled="False" Click="Save_Click"/>
-            </Grid>
+                    <TextBlock Grid.Column="0" Text="출력 포맷" VerticalAlignment="Center"
+                               Margin="0,0,12,0" Foreground="{StaticResource FgMuted}"/>
+                    <ComboBox x:Name="FormatCombo" Grid.Column="1" Width="200"/>
+
+                    <Button x:Name="CopyBtn" Grid.Column="3" Content="📋 클립보드 복사" Width="140"
+                            Margin="0,0,8,0" IsEnabled="False" Click="Copy_Click"/>
+                    <Button x:Name="SaveBtn" Grid.Column="4" Content="💾 파일로 저장" Width="150"
+                            Style="{StaticResource AccentButton}" IsEnabled="False" Click="Save_Click"/>
+                </Grid>
+            </StackPanel>
         </Border>
     </Grid>
 </Window>

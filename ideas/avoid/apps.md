@@ -117,3 +117,4 @@
 | `Case.Forge` | Text | camelCase·snake_case 등 10가지 케이스 전역 팝업 변환기 ★34차 | ✅ 구현 완료 (2026-04-01) |
 | `Copy.Path` | Files/Manager | 파일 경로를 다양한 포맷으로 팝업 복사 (전체·슬래시·UNC 등 9종) ★34차 | ✅ 구현 완료 (2026-04-01) |
 | `Stock.Watch` | Finance | 종목 매수/매도 조건(RSI·볼린저·거래량 등) 감시 후 충족 시 Slack 알림, 캔들·볼린저·RSI 차트, KIS Open API ★사용자 직접 요청 | ✅ 구현 완료 (2026-06-24) |
+| `Stock.Fetch` | Finance | 종목코드+기간으로 일별 OHLCV 시세를 4소스 선택형(네이버·다음·Yahoo·KIS)으로 조회해 CSV/TSV/JSON/XML/Markdown 내보내기 ★사용자 직접 요청 | ✅ 구현 완료 (2026-06-28) |

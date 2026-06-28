@@ -146,6 +146,7 @@ for %%n in (!SEL!) do (
     if "%%n"=="106" call :pub "Quant.Lab"              "Applications\Finance\Quant.Lab\Quant.Lab.Cli"            "Quant.Lab.exe"             "Applications\Finance\Quant.Lab"
     if "%%n"=="107" call :pub "Stock.Rush"             "Games\Simulation\Stock.Rush"                             "StockRush.exe"             "Games\Simulation"
     if "%%n"=="108" call :pub "Stock.Watch"            "Applications\Finance\Stock.Watch"                        "StockWatch.exe"            "Applications\Finance\Stock.Watch"
+    if "%%n"=="109" call :pub "Stock.Fetch"            "Applications\Finance\Stock.Fetch"                        "StockFetch.exe"            "Applications\Finance\Stock.Fetch"
 )
 goto :DONE
 :: ── 완료 ──────────────────────────────────────────────────────────

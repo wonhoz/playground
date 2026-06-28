@@ -1,0 +1,124 @@
+<Window x:Class="Stock.Fetch.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Stock.Fetch — 한국 주식 시세 내보내기" Height="720" Width="920"
+        Background="{StaticResource WindowBg}"
+        WindowStartupLocation="CenterScreen">
+    <Grid Margin="16" Background="{StaticResource WindowBg}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- ── 조회 입력 패널 ── -->
+        <Border Grid.Row="0" Background="{StaticResource PanelBg}" BorderBrush="{StaticResource BorderBrush}"
+                BorderThickness="1" CornerRadius="8" Padding="16">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <!-- 종목코드 -->
+                <TextBlock Grid.Row="0" Grid.Column="0" Text="종목코드" VerticalAlignment="Center"
+                           Margin="0,0,12,0" Foreground="{StaticResource FgMuted}"/>
+                <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal">
+                    <TextBox x:Name="CodeBox" Width="130" Text="005930" MaxLength="6"
+                             FontSize="14" FontWeight="SemiBold"/>
+                    <TextBlock x:Name="HintText" Text="예: 005930=삼성전자, 000660=SK하이닉스"
+                               VerticalAlignment="Center" Margin="12,0,0,0"
+                               Foreground="{StaticResource FgMuted}"/>
+                </StackPanel>
+
+                <!-- 기간 -->
+                <TextBlock Grid.Row="1" Grid.Column="0" Text="기간" VerticalAlignment="Center"
+                           Margin="0,12,12,0" Foreground="{StaticResource FgMuted}"/>
+                <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" Margin="0,12,0,0">
+                    <TextBox x:Name="FromBox" Width="110"/>
+                    <TextBlock Text="~" VerticalAlignment="Center" Margin="8,0"/>
+                    <TextBox x:Name="ToBox" Width="110"/>
+                    <Button Content="1개월" Style="{StaticResource ChipButton}" Margin="14,0,0,0" Tag="1M" Click="Preset_Click"/>
+                    <Button Content="3개월" Style="{StaticResource ChipButton}" Margin="6,0,0,0" Tag="3M" Click="Preset_Click"/>
+                    <Button Content="6개월" Style="{StaticResource ChipButton}" Margin="6,0,0,0" Tag="6M" Click="Preset_Click"/>
+                    <Button Content="1년" Style="{StaticResource ChipButton}" Margin="6,0,0,0" Tag="1Y" Click="Preset_Click"/>
+                    <Button Content="3년" Style="{StaticResource ChipButton}" Margin="6,0,0,0" Tag="3Y" Click="Preset_Click"/>
+                    <Button Content="올해" Style="{StaticResource ChipButton}" Margin="6,0,0,0" Tag="YTD" Click="Preset_Click"/>
+                </StackPanel>
+
+                <!-- 데이터 소스 + 조회 -->
+                <TextBlock Grid.Row="2" Grid.Column="0" Text="데이터 소스" VerticalAlignment="Center"
+                           Margin="0,12,12,0" Foreground="{StaticResource FgMuted}"/>
+                <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal" Margin="0,12,0,0">
+                    <ComboBox x:Name="SourceCombo" Width="230"/>
+                    <TextBlock x:Name="SourceNote" VerticalAlignment="Center" Margin="12,0,0,0"
+                               Foreground="{StaticResource FgMuted}"/>
+                </StackPanel>
+
+                <!-- 우측 액션 -->
+                <StackPanel Grid.Row="0" Grid.Column="2" Grid.RowSpan="3" VerticalAlignment="Center"
+                            HorizontalAlignment="Right">
+                    <Button x:Name="FetchBtn" Content="조회" Style="{StaticResource AccentButton}"
+                            Width="120" Height="46" FontSize="15" FontWeight="SemiBold" Click="Fetch_Click"/>
+                    <Button x:Name="SettingsBtn" Content="⚙ KIS 키 설정" Width="120" Margin="0,8,0,0"
+                            Click="Settings_Click"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <!-- ── 요약 줄 ── -->
+        <Border Grid.Row="1" Background="{StaticResource PanelBg2}" BorderBrush="{StaticResource BorderBrush}"
+                BorderThickness="1" CornerRadius="6" Padding="14,9" Margin="0,12,0,0">
+            <TextBlock x:Name="SummaryText" Text="종목코드·기간·소스를 선택한 뒤 [조회]를 누르세요."
+                       Foreground="{StaticResource FgMuted}" TextTrimming="CharacterEllipsis"/>
+        </Border>
+
+        <!-- ── 데이터 미리보기 ── -->
+        <DataGrid x:Name="Grid" Grid.Row="2" Margin="0,12,0,0"
+                  ColumnHeaderStyle="{StaticResource DarkColHeader}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="날짜" Binding="{Binding Date, StringFormat=yyyy-MM-dd}" Width="120"/>
+                <DataGridTextColumn Header="시가" Binding="{Binding Open}" Width="*"
+                                    ElementStyle="{StaticResource NumCell}"/>
+                <DataGridTextColumn Header="고가" Binding="{Binding High}" Width="*"
+                                    ElementStyle="{StaticResource NumCell}"/>
+                <DataGridTextColumn Header="저가" Binding="{Binding Low}" Width="*"
+                                    ElementStyle="{StaticResource NumCell}"/>
+                <DataGridTextColumn Header="종가" Binding="{Binding Close}" Width="*"
+                                    ElementStyle="{StaticResource NumCellBold}"/>
+                <DataGridTextColumn Header="거래량" Binding="{Binding Volume, StringFormat=N0}" Width="1.4*"
+                                    ElementStyle="{StaticResource NumCell}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <!-- ── 내보내기 바 ── -->
+        <Border Grid.Row="3" Background="{StaticResource PanelBg}" BorderBrush="{StaticResource BorderBrush}"
+                BorderThickness="1" CornerRadius="8" Padding="14,12" Margin="0,12,0,0">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Column="0" Text="출력 포맷" VerticalAlignment="Center"
+                           Margin="0,0,12,0" Foreground="{StaticResource FgMuted}"/>
+                <ComboBox x:Name="FormatCombo" Grid.Column="1" Width="200"/>
+
+                <Button x:Name="CopyBtn" Grid.Column="3" Content="📋 클립보드 복사" Width="140"
+                        Margin="0,0,8,0" IsEnabled="False" Click="Copy_Click"/>
+                <Button x:Name="SaveBtn" Grid.Column="4" Content="💾 파일로 저장" Width="150"
+                        Style="{StaticResource AccentButton}" IsEnabled="False" Click="Save_Click"/>
+            </Grid>
+        </Border>
+    </Grid>
+</Window>

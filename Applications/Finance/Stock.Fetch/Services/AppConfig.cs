@@ -18,9 +18,19 @@ public sealed class AppConfig
     /// <summary>true=모의투자(:29443), false=실전(:9443). 시세 조회는 실전 권장.</summary>
     public bool UseMockServer { get; set; } = false;
 
-    // ── 최근 사용 값(편의 복원) ──
+    // ── 즐겨찾기 종목 ──
+    public List<FavoriteStock> Favorites { get; set; } = new();
+
+    // ── 최근 사용 값(재실행 시 마지막 선택 복원) ──
     public SourceKind LastSource { get; set; } = SourceKind.Naver;
     public string LastCode { get; set; } = "005930";
+    public string LastName { get; set; } = string.Empty;
+    public string LastFrom { get; set; } = string.Empty;
+    public string LastTo { get; set; } = string.Empty;
+    public ExportFormat LastFormat { get; set; } = ExportFormat.Csv;
+    /// <summary>마지막 선택 컬럼(빈 목록이면 전체).</summary>
+    public List<CandleColumn> LastColumns { get; set; } = new();
+    public bool LastIncludeHeader { get; set; } = true;
     public string LastExportDir { get; set; } = string.Empty;
 
     // ── 캐시된 OAuth 토큰(만료 전까지 재사용) ──

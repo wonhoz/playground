@@ -11,6 +11,7 @@ public sealed class PriceSourceRegistry : IDisposable
 {
     private readonly HttpClient _http;
     private readonly Dictionary<SourceKind, IPriceSource> _sources;
+    private readonly NameResolver _nameResolver;
 
     public PriceSourceRegistry(AppConfig config, Action saveConfig)
     {
@@ -27,11 +28,16 @@ public sealed class PriceSourceRegistry : IDisposable
             [SourceKind.Daum] = new DaumPriceSource(_http),
             [SourceKind.Kis] = new KisPriceSource(config, saveConfig, _http),
         };
+        _nameResolver = new NameResolver(_http);
     }
 
     public IPriceSource Get(SourceKind kind) => _sources[kind];
 
     public IReadOnlyList<IPriceSource> All => _sources.Values.ToList();
+
+    /// <summary>단축 종목코드 → 한글 종목명(못 찾으면 null).</summary>
+    public Task<string?> LookupNameAsync(string code, CancellationToken ct = default)
+        => _nameResolver.LookupAsync(code, ct);
 
     public void Dispose() => _http.Dispose();
 }

@@ -70,26 +70,27 @@ public static class DataExporter
         _ => "텍스트|*.txt"
     };
 
-    /// <summary>선택 컬럼(null이면 전체)을 지정 포맷 문자열로 직렬화.</summary>
-    public static string Serialize(StockSeries series, ExportFormat fmt, IReadOnlyList<CandleColumn>? columns = null)
+    /// <summary>선택 컬럼(null이면 전체)을 지정 포맷 문자열로 직렬화. includeHeader는 CSV/TSV/Markdown의 헤더 행에 적용.</summary>
+    public static string Serialize(StockSeries series, ExportFormat fmt,
+        IReadOnlyList<CandleColumn>? columns = null, bool includeHeader = true)
     {
         var specs = Resolve(columns);
         return fmt switch
         {
-            ExportFormat.Csv => Delimited(series, specs, ','),
-            ExportFormat.Tsv => Delimited(series, specs, '\t'),
+            ExportFormat.Csv => Delimited(series, specs, ',', includeHeader),
+            ExportFormat.Tsv => Delimited(series, specs, '\t', includeHeader),
             ExportFormat.Json => ToJson(series, specs),
             ExportFormat.Xml => ToXml(series, specs),
-            ExportFormat.Markdown => ToMarkdown(series, specs),
+            ExportFormat.Markdown => ToMarkdown(series, specs, includeHeader),
             _ => throw new ArgumentOutOfRangeException(nameof(fmt))
         };
     }
 
     /// <summary>UTF-8(BOM)로 저장. 엑셀에서 한글 메타가 깨지지 않도록 BOM을 포함한다.</summary>
     public static async Task SaveAsync(StockSeries series, ExportFormat fmt,
-        IReadOnlyList<CandleColumn>? columns, string path, CancellationToken ct = default)
+        IReadOnlyList<CandleColumn>? columns, bool includeHeader, string path, CancellationToken ct = default)
     {
-        string content = Serialize(series, fmt, columns);
+        string content = Serialize(series, fmt, columns, includeHeader);
         await File.WriteAllTextAsync(path, content, new UTF8Encoding(encoderShouldEmitUTF8Identifier: true), ct);
     }
 
@@ -102,10 +103,11 @@ public static class DataExporter
     }
 
     // ────────────────────────────── CSV / TSV ──────────────────────────────
-    private static string Delimited(StockSeries s, IReadOnlyList<ColumnSpec> cols, char sep)
+    private static string Delimited(StockSeries s, IReadOnlyList<ColumnSpec> cols, char sep, bool includeHeader)
     {
         var sb = new StringBuilder();
-        sb.Append(string.Join(sep, cols.Select(c => c.Key))).Append('\n');
+        if (includeHeader)
+            sb.Append(string.Join(sep, cols.Select(c => c.Key))).Append('\n');
         foreach (var c in s.Candles)
         {
             sb.Append(string.Join(sep, cols.Select(col => Cell(c, col.Id)))).Append('\n');
@@ -177,13 +179,16 @@ public static class DataExporter
     }
 
     // ────────────────────────────── Markdown ──────────────────────────────
-    private static string ToMarkdown(StockSeries s, IReadOnlyList<ColumnSpec> cols)
+    private static string ToMarkdown(StockSeries s, IReadOnlyList<ColumnSpec> cols, bool includeHeader)
     {
         var sb = new StringBuilder();
         string title = string.IsNullOrEmpty(s.Name) ? s.Code : $"{s.Name} ({s.Code})";
         sb.Append("# ").Append(title).Append(" — ").Append(s.SourceLabel).Append('\n').Append('\n');
-        sb.Append("| ").Append(string.Join(" | ", cols.Select(c => c.Label))).Append(" |\n");
-        sb.Append('|').Append(string.Concat(cols.Select(_ => "------|"))).Append('\n');
+        if (includeHeader)
+        {
+            sb.Append("| ").Append(string.Join(" | ", cols.Select(c => c.Label))).Append(" |\n");
+            sb.Append('|').Append(string.Concat(cols.Select(_ => "------|"))).Append('\n');
+        }
         foreach (var c in s.Candles)
         {
             sb.Append("| ").Append(string.Join(" | ", cols.Select(col => Cell(c, col.Id, thousands: true)))).Append(" |\n");

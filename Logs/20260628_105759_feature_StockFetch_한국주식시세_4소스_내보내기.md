@@ -82,6 +82,18 @@
 - **JSON 정수 가격 정리**: 다음 금융 decimal(343000.000) → 정수는 trailing zero 제거(343000).
 - 헤드리스 러너로 순서·선택(날짜+종가, 날짜+종가+거래량, 시가+종가 등) 전수 검증.
 
+## v1.2.0 후속 (사용자 요청)
+- **즐겨찾기**: `AppConfig.Favorites`(List&lt;FavoriteStock&gt;), 콤보 선택·⭐추가·🗑제거. ToString으로 "코드 이름" 표시.
+- **종목명 조회**: `NameResolver`(KRX finder_stkisu 무인증) — 코드→한글명. `🔍 이름 조회` 버튼 + 조회 시 자동.
+  - finder는 통계 데이터와 달리 LOGOUT 차단 없이 동작(005930→삼성전자, 035720→카카오 검증).
+- **마지막 선택값 복원**: `Last*`(Code·Name·From·To·Source·Format·Columns·IncludeHeader) 저장, 생성자에서 `RestoreState`, 종료 시 `SaveState`.
+- **기간 ±1일**: `DayShift_Click` — from·to 동시 ±1일 이동.
+- **헤더 포함 여부**: `IncludeHeaderCheck` → `DataExporter.Serialize(..., includeHeader)`. CSV/TSV/Markdown 헤더 행 on/off(JSON/XML은 키 구조라 무지원).
+- **레이아웃**: 입력 패널 5행(종목코드·즐겨찾기·기간·프리셋·소스)으로 분리, 기간 프리셋 잘림 방지. 창 1040×780.
+- 헤드리스 러너로 이름조회·헤더옵션 검증, TOPMOST 캡처로 신규 레이아웃 육안 확인.
+
 ## 참고
+- KRX 통계는 차단(LOGOUT)이나 종목검색 finder는 무인증 동작 → 종목명 조회에 활용.
 - KRX 차단은 거래소 정책 변화로, 향후 로그인/OTP 기반 우회가 필요. 현재는 다음 금융이 동등 대체.
 - XAML은 컴파일 통과해도 런타임 로딩에서 깨질 수 있음 → 신규 WPF 창은 exe 스모크 실행 필수.
+- 자동 캡처는 SetForegroundWindow 포그라운드 잠금으로 불안정 → `SetWindowPos` HWND_TOPMOST로 우회.

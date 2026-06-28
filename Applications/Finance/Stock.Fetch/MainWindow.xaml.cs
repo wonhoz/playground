@@ -42,14 +42,52 @@ public partial class MainWindow : Window
             new FormatItem("XML", ExportFormat.Xml),
             new FormatItem("Markdown 표", ExportFormat.Markdown),
         };
-        FormatCombo.SelectedIndex = 0;
 
-        // 종목코드/기간 초기값
-        CodeBox.Text = string.IsNullOrWhiteSpace(_config.LastCode) ? "005930" : _config.LastCode;
-        ApplyPreset("3M");
+        // 즐겨찾기 콤보
+        RefreshFavorites();
+
+        // 마지막 선택값 복원
+        ApplyPreset("3M");      // 저장된 기간이 없을 때의 기본값
+        RestoreState();
 
         UpdateSourceNote();
-        Closed += (_, _) => _registry.Dispose();
+        Closed += (_, _) => { SaveState(); _registry.Dispose(); };
+    }
+
+    // ────────────────────────────── 상태 저장/복원 ──────────────────────────────
+    private void RestoreState()
+    {
+        CodeBox.Text = string.IsNullOrWhiteSpace(_config.LastCode) ? "005930" : _config.LastCode;
+        NameText.Text = _config.LastName;
+        if (TryParseDate(_config.LastFrom, out _)) FromBox.Text = _config.LastFrom;
+        if (TryParseDate(_config.LastTo, out _)) ToBox.Text = _config.LastTo;
+
+        SourceCombo.SelectedItem = _registry.Get(_config.LastSource);
+        FormatCombo.SelectedItem = FormatCombo.Items.Cast<FormatItem>()
+            .FirstOrDefault(f => f.Format == _config.LastFormat) ?? FormatCombo.Items[0];
+
+        // 컬럼 선택(빈 목록이면 전체)
+        var cols = _config.LastColumns.Count > 0 ? _config.LastColumns.ToHashSet() : null;
+        ColDate.IsChecked = cols?.Contains(CandleColumn.Date) ?? true;
+        ColOpen.IsChecked = cols?.Contains(CandleColumn.Open) ?? true;
+        ColClose.IsChecked = cols?.Contains(CandleColumn.Close) ?? true;
+        ColLow.IsChecked = cols?.Contains(CandleColumn.Low) ?? true;
+        ColHigh.IsChecked = cols?.Contains(CandleColumn.High) ?? true;
+        ColVolume.IsChecked = cols?.Contains(CandleColumn.Volume) ?? true;
+        IncludeHeaderCheck.IsChecked = _config.LastIncludeHeader;
+    }
+
+    private void SaveState()
+    {
+        _config.LastCode = CodeBox.Text.Trim();
+        _config.LastName = NameText.Text;
+        _config.LastFrom = FromBox.Text.Trim();
+        _config.LastTo = ToBox.Text.Trim();
+        if (SourceCombo.SelectedItem is IPriceSource src) _config.LastSource = src.Kind;
+        if (FormatCombo.SelectedItem is FormatItem fi) _config.LastFormat = fi.Format;
+        _config.LastColumns = SelectedColumns();
+        _config.LastIncludeHeader = IncludeHeaderCheck.IsChecked == true;
+        _config.Save();
     }
 
     // ────────────────────────────── 기간 프리셋 ──────────────────────────────
@@ -73,6 +111,96 @@ public partial class MainWindow : Window
         };
         FromBox.Text = from.ToString("yyyy-MM-dd");
         ToBox.Text = to.ToString("yyyy-MM-dd");
+    }
+
+    /// <summary>현재 입력된 기간(시작·종료) 전체를 ±N일 이동.</summary>
+    private void DayShift_Click(object sender, RoutedEventArgs e)
+    {
+        if (sender is not Button b || b.Tag is not string tag || !int.TryParse(tag, out int d)) return;
+        if (!TryParseDate(FromBox.Text, out var from) || !TryParseDate(ToBox.Text, out var to))
+        {
+            ShowError("기간은 yyyy-MM-dd 형식으로 입력하세요.");
+            return;
+        }
+        FromBox.Text = from.AddDays(d).ToString("yyyy-MM-dd");
+        ToBox.Text = to.AddDays(d).ToString("yyyy-MM-dd");
+    }
+
+    // ────────────────────────────── 종목명 조회 ──────────────────────────────
+    private async void Lookup_Click(object sender, RoutedEventArgs e)
+    {
+        string code = CodeBox.Text.Trim();
+        if (code.Length is < 5 or > 6 || !code.All(char.IsDigit))
+        {
+            ShowError("종목코드는 6자리 숫자입니다(예: 005930).");
+            return;
+        }
+        LookupBtn.IsEnabled = false;
+        NameText.Text = "조회 중…";
+        try
+        {
+            var name = await _registry.LookupNameAsync(code);
+            NameText.Text = string.IsNullOrEmpty(name) ? "(이름 못 찾음)" : name;
+        }
+        finally
+        {
+            LookupBtn.IsEnabled = true;
+        }
+    }
+
+    // ────────────────────────────── 즐겨찾기 ──────────────────────────────
+    private void RefreshFavorites()
+    {
+        FavCombo.ItemsSource = null;
+        FavCombo.ItemsSource = _config.Favorites;
+    }
+
+    private void Fav_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        if (FavCombo.SelectedItem is FavoriteStock f)
+        {
+            CodeBox.Text = f.Code;
+            NameText.Text = f.Name;
+        }
+    }
+
+    private void FavAdd_Click(object sender, RoutedEventArgs e)
+    {
+        string code = CodeBox.Text.Trim();
+        if (code.Length is < 5 or > 6 || !code.All(char.IsDigit))
+        {
+            ShowError("종목코드는 6자리 숫자입니다(예: 005930).");
+            return;
+        }
+        // 미조회/실패 표시는 이름으로 저장하지 않음
+        string name = NameText.Text is "조회 중…" or "(이름 못 찾음)" ? "" : NameText.Text.Trim();
+
+        var existing = _config.Favorites.FirstOrDefault(f => f.Code == code);
+        if (existing != null)
+        {
+            if (!string.IsNullOrEmpty(name)) existing.Name = name;
+        }
+        else
+        {
+            _config.Favorites.Add(new FavoriteStock { Code = code, Name = name });
+        }
+        _config.Save();
+        RefreshFavorites();
+        FavCombo.SelectedItem = _config.Favorites.FirstOrDefault(f => f.Code == code);
+        SummaryText.Text = $"⭐ 즐겨찾기 추가: {code}{(string.IsNullOrEmpty(name) ? "" : "  " + name)}";
+    }
+
+    private void FavRemove_Click(object sender, RoutedEventArgs e)
+    {
+        if (FavCombo.SelectedItem is not FavoriteStock f)
+        {
+            ShowError("제거할 즐겨찾기를 콤보에서 선택하세요.");
+            return;
+        }
+        _config.Favorites.RemoveAll(x => x.Code == f.Code);
+        _config.Save();
+        RefreshFavorites();
+        SummaryText.Text = $"🗑 즐겨찾기 제거: {f.Code}  {f.Name}";
     }
 
     // ────────────────────────────── 조회 ──────────────────────────────
@@ -110,6 +238,14 @@ public partial class MainWindow : Window
             Grid.ItemsSource = series.Candles;
             SaveBtn.IsEnabled = CopyBtn.IsEnabled = series.Candles.Count > 0;
             UpdateSummary(series);
+
+            // 종목명 자동 표시: 소스가 주면 사용, 아니면 KRX finder로 조회
+            if (!string.IsNullOrEmpty(series.Name)) NameText.Text = series.Name;
+            else if (string.IsNullOrEmpty(NameText.Text) || NameText.Text.StartsWith('('))
+            {
+                var nm = await _registry.LookupNameAsync(code);
+                if (!string.IsNullOrEmpty(nm)) NameText.Text = nm;
+            }
 
             // 최근 사용값 저장
             _config.LastSource = source.Kind;
@@ -165,7 +301,7 @@ public partial class MainWindow : Window
 
         try
         {
-            await DataExporter.SaveAsync(_series, fi.Format, cols, dlg.FileName);
+            await DataExporter.SaveAsync(_series, fi.Format, cols, IncludeHeaderCheck.IsChecked == true, dlg.FileName);
             _config.LastExportDir = Path.GetDirectoryName(dlg.FileName) ?? "";
             _config.Save();
             SummaryText.Text = $"저장 완료({cols.Count}개 컬럼): {dlg.FileName}";
@@ -183,7 +319,7 @@ public partial class MainWindow : Window
         if (cols.Count == 0) { ShowError("복사할 컬럼을 1개 이상 선택하세요."); return; }
         try
         {
-            Clipboard.SetText(DataExporter.Serialize(_series, fi.Format, cols));
+            Clipboard.SetText(DataExporter.Serialize(_series, fi.Format, cols, IncludeHeaderCheck.IsChecked == true));
             SummaryText.Text = $"클립보드에 복사됨 ({fi.Label}, {cols.Count}개 컬럼 · {_series.Candles.Count}건).";
         }
         catch (Exception ex)

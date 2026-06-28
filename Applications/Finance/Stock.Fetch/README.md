@@ -85,6 +85,7 @@ dotnet publish Applications/Finance/Stock.Fetch/Stock.Fetch.csproj -c Release -r
 
 ## 버전
 
+- **v1.4.1** (2026-06-29) — 검색 결과 목록 다크 테마 수정(항목 배경 PanelBg2·텍스트 밝은 색 명시 — 비선택 항목 가독성).
 - **v1.4.0** (2026-06-29) — 종목 이름 검색(코드 또는 이름 입력 → 후보 목록에서 선택, KRX finder).
 - **v1.3.0** (2026-06-28) — 매수/익절 래더 계산 창(stock-update 스킬 로직, 익절 4방식 제안),
   다음 금융 종료일 누락 버그 수정(`to` +1일), 조회 데이터 가격 천단위 콤마·소수점 제거,

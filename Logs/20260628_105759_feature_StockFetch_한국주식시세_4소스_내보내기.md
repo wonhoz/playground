@@ -108,6 +108,9 @@
   - `NameResolver.SearchAsync`(block1 전체 파싱) + `StockHit` 모델 + `SearchResultWindow`(선택 다이얼로그).
   - `🔍 검색`: 0건 안내 / 1건 즉시 적용 / 다건 목록 선택(더블클릭). CodeBox MaxLength 제거(이름 입력 허용).
   - LookupAsync/SearchAsync 공통 `FinderBlock1Async`로 정리(JsonElement.Clone 반환).
+- **v1.4.1**: 검색결과 ListBox 다크 테마 수정 — 비선택 항목이 밝은 배경+회색 텍스트로 안 보이던 것을
+  ListBoxItem 배경 `PanelBg2` 명시 + ItemTemplate 텍스트 `FgBrush` 명시(선택 시 White DataTrigger)로 해결.
+  (ContentPresenter가 App 암시적 스타일/시스템색을 받아 어두워지는 문제 → 명시로 강제. TOPMOST 전체캡처로 검증)
 
 ## 참고
 - KRX 통계는 차단(LOGOUT)이나 종목검색 finder는 무인증 동작 → 종목명 조회·이름 검색에 활용.

@@ -12,7 +12,7 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="ListBoxItem">
-                        <Border x:Name="bd" Background="Transparent" Padding="{TemplateBinding Padding}" CornerRadius="4">
+                        <Border x:Name="bd" Background="{StaticResource PanelBg2}" Padding="{TemplateBinding Padding}" CornerRadius="4">
                             <ContentPresenter/>
                         </Border>
                         <ControlTemplate.Triggers>
@@ -42,7 +42,27 @@
 
         <Border Grid.Row="1" Background="{StaticResource PanelBg2}" BorderBrush="{StaticResource BorderBrush}"
                 BorderThickness="1" CornerRadius="6" Padding="4">
-            <ListBox x:Name="ResultList" MouseDoubleClick="List_DoubleClick"/>
+            <ListBox x:Name="ResultList" Background="{StaticResource PanelBg2}" BorderThickness="0"
+                     MouseDoubleClick="List_DoubleClick">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding}">
+                            <TextBlock.Style>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="Foreground" Value="{StaticResource FgBrush}"/>
+                                    <Setter Property="FontSize" Value="13"/>
+                                    <Style.Triggers>
+                                        <!-- 선택 항목만 흰색(파란 배경 대비) -->
+                                        <DataTrigger Binding="{Binding IsSelected, RelativeSource={RelativeSource AncestorType=ListBoxItem}}" Value="True">
+                                            <Setter Property="Foreground" Value="White"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
         </Border>
 
         <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,12,0,0">

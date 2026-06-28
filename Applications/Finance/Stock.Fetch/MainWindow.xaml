@@ -88,8 +88,10 @@
                 <StackPanel Grid.Row="0" Grid.Column="2" Grid.RowSpan="5" VerticalAlignment="Center"
                             HorizontalAlignment="Right">
                     <Button x:Name="FetchBtn" Content="조회" Style="{StaticResource AccentButton}"
-                            Width="120" Height="46" FontSize="15" FontWeight="SemiBold" Click="Fetch_Click"/>
-                    <Button x:Name="SettingsBtn" Content="⚙ KIS 키 설정" Width="120" Margin="0,8,0,0"
+                            Width="160" Height="46" FontSize="15" FontWeight="SemiBold" Click="Fetch_Click"/>
+                    <Button x:Name="LadderBtn" Content="📊 매수/익절 계산" Width="160" Margin="0,8,0,0"
+                            IsEnabled="False" Click="Ladder_Click"/>
+                    <Button x:Name="SettingsBtn" Content="⚙ KIS 키 설정" Width="160" Margin="0,8,0,0"
                             Click="Settings_Click"/>
                 </StackPanel>
             </Grid>
@@ -107,13 +109,13 @@
                   ColumnHeaderStyle="{StaticResource DarkColHeader}">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="날짜" Binding="{Binding Date, StringFormat=yyyy-MM-dd}" Width="120"/>
-                <DataGridTextColumn Header="시가" Binding="{Binding Open}" Width="*"
+                <DataGridTextColumn Header="시가" Binding="{Binding Open, StringFormat=N0}" Width="*"
                                     ElementStyle="{StaticResource NumCell}"/>
-                <DataGridTextColumn Header="종가" Binding="{Binding Close}" Width="*"
+                <DataGridTextColumn Header="종가" Binding="{Binding Close, StringFormat=N0}" Width="*"
                                     ElementStyle="{StaticResource NumCellBold}"/>
-                <DataGridTextColumn Header="저가" Binding="{Binding Low}" Width="*"
+                <DataGridTextColumn Header="저가" Binding="{Binding Low, StringFormat=N0}" Width="*"
                                     ElementStyle="{StaticResource NumCell}"/>
-                <DataGridTextColumn Header="고가" Binding="{Binding High}" Width="*"
+                <DataGridTextColumn Header="고가" Binding="{Binding High, StringFormat=N0}" Width="*"
                                     ElementStyle="{StaticResource NumCell}"/>
                 <DataGridTextColumn Header="거래량" Binding="{Binding Volume, StringFormat=N0}" Width="1.4*"
                                     ElementStyle="{StaticResource NumCell}"/>

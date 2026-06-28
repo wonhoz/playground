@@ -236,7 +236,7 @@ public partial class MainWindow : Window
             var series = await source.FetchAsync(code, from, to);
             _series = series;
             Grid.ItemsSource = series.Candles;
-            SaveBtn.IsEnabled = CopyBtn.IsEnabled = series.Candles.Count > 0;
+            SaveBtn.IsEnabled = CopyBtn.IsEnabled = LadderBtn.IsEnabled = series.Candles.Count > 0;
             UpdateSummary(series);
 
             // 종목명 자동 표시: 소스가 주면 사용, 아니면 KRX finder로 조회
@@ -256,14 +256,14 @@ public partial class MainWindow : Window
         {
             _series = null;
             Grid.ItemsSource = null;
-            SaveBtn.IsEnabled = CopyBtn.IsEnabled = false;
+            SaveBtn.IsEnabled = CopyBtn.IsEnabled = LadderBtn.IsEnabled = false;
             ShowError(ex.Message);
         }
         catch (Exception ex)
         {
             _series = null;
             Grid.ItemsSource = null;
-            SaveBtn.IsEnabled = CopyBtn.IsEnabled = false;
+            SaveBtn.IsEnabled = CopyBtn.IsEnabled = LadderBtn.IsEnabled = false;
             ShowError($"조회 중 오류: {ex.Message}");
         }
         finally
@@ -358,6 +358,21 @@ public partial class MainWindow : Window
             ? $"_{s.Candles[0].Date:yyyyMMdd}-{s.Candles[^1].Date:yyyyMMdd}"
             : "";
         return $"{namePart}{range}{DataExporter.Extension(fmt)}";
+    }
+
+    // ────────────────────────────── 매수/익절 래더 계산 ──────────────────────────────
+    private void Ladder_Click(object sender, RoutedEventArgs e)
+    {
+        if (_series is null) return;
+        try
+        {
+            var result = LadderCalculator.Calculate(_series);
+            new LadderWindow(result) { Owner = this }.Show();   // 모달리스 — 여러 종목 비교 가능
+        }
+        catch (InvalidOperationException ex)
+        {
+            ShowError(ex.Message);
+        }
     }
 
     // ────────────────────────────── 설정 ──────────────────────────────

@@ -52,7 +52,9 @@ public sealed class DaumPriceSource(HttpClient http) : IPriceSource
     /// <summary>지정 종료일(to) 기준 과거 방향 limit개 봉 1페이지 조회.</summary>
     private async Task<List<Candle>> FetchPageAsync(string code, DateTime to, CancellationToken ct)
     {
-        string toParam = Uri.EscapeDataString($"{to:yyyy-MM-dd} 00:00:00");
+        // Daum의 to는 'candleTime 미만(exclusive)'이라 당일 00:00:00을 주면 종료일 봉이 빠진다.
+        // 다음날 00:00:00을 줘서 종료일 당일까지 포함시킨다(상한 초과분은 c.Date>to 필터로 컷).
+        string toParam = Uri.EscapeDataString($"{to.AddDays(1):yyyy-MM-dd} 00:00:00");
         string url = $"https://finance.daum.net/api/charts/A{code}/days" +
                      $"?limit={PageLimit}&to={toParam}&adjusted=true";
 

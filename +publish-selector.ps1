@@ -123,6 +123,7 @@ $allApps = @(
     [pscustomobject]@{N=106; Name="Quant.Lab";             Cat="Applications/Finance"}
     [pscustomobject]@{N=107; Name="Stock.Rush";            Cat="Games/Simulation"}
     [pscustomobject]@{N=108; Name="Stock.Watch";           Cat="Applications/Finance"}
+    [pscustomobject]@{N=109; Name="Stock.Fetch";           Cat="Applications/Finance"}
 )
 
 $checkedArr = New-Object bool[] $allApps.Count

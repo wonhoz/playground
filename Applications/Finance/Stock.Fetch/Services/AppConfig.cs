@@ -33,6 +33,16 @@ public sealed class AppConfig
     public bool LastIncludeHeader { get; set; } = true;
     public string LastExportDir { get; set; } = string.Empty;
 
+    // ── 차트 설정(재오픈 시 복원) ──
+    public BarInterval ChartInterval { get; set; } = BarInterval.Day;
+    public ChartSourceKind ChartSource { get; set; } = ChartSourceKind.Yahoo;
+    public bool ChartBollinger { get; set; } = true;
+    public bool ChartMa { get; set; } = true;
+    public bool ChartRsi { get; set; } = true;
+    public bool ChartVolume { get; set; } = true;
+    public bool ChartAutoRefresh { get; set; } = false;
+    public int ChartPeriodSec { get; set; } = 10;
+
     // ── 캐시된 OAuth 토큰(만료 전까지 재사용) ──
     public string CachedToken { get; set; } = string.Empty;
     public DateTime TokenExpiresAt { get; set; } = DateTime.MinValue;

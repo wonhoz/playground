@@ -10,6 +10,7 @@ namespace Stock.Fetch;
 public partial class ChartWindow : Window
 {
     private readonly PriceSourceRegistry _registry;
+    private readonly AppConfig _config;
     private readonly string _code;
     private readonly string _name;
     private readonly DispatcherTimer _timer = new();
@@ -30,11 +31,12 @@ public partial class ChartWindow : Window
         public override string ToString() => Label;
     }
 
-    public ChartWindow(string code, string name, PriceSourceRegistry registry)
+    public ChartWindow(string code, string name, PriceSourceRegistry registry, AppConfig config)
     {
         InitializeComponent();
         NativeTheme.ApplyDarkTitleBar(this);
         _registry = registry;
+        _config = config;
         _code = code;
         _name = name;
 
@@ -48,27 +50,52 @@ public partial class ChartWindow : Window
             new IntervalItem(BarInterval.Min60), new IntervalItem(BarInterval.Day),
             new IntervalItem(BarInterval.Week), new IntervalItem(BarInterval.Month),
         };
-        IntervalCombo.SelectedIndex = 5; // 일봉
-
         SourceCombo.ItemsSource = new[]
         {
             new SourceItem(ChartSourceKind.Yahoo, "Yahoo (분/일/주/월)"),
             new SourceItem(ChartSourceKind.Kis, "KIS (일/주/월)"),
         };
-        SourceCombo.SelectedIndex = 0;
-
         PeriodCombo.ItemsSource = new[]
         {
             new PeriodItem(5, "5초"), new PeriodItem(10, "10초"),
             new PeriodItem(30, "30초"), new PeriodItem(60, "1분"),
         };
-        PeriodCombo.SelectedIndex = 1; // 10초
+
+        // ── 저장된 차트 설정 복원(_ready=false 동안이라 변경 이벤트는 무시됨) ──
+        IntervalCombo.SelectedItem = IntervalCombo.Items.Cast<IntervalItem>()
+            .FirstOrDefault(x => x.Iv == config.ChartInterval) ?? IntervalCombo.Items[5];
+        SourceCombo.SelectedItem = SourceCombo.Items.Cast<SourceItem>()
+            .FirstOrDefault(x => x.Kind == config.ChartSource) ?? SourceCombo.Items[0];
+        PeriodCombo.SelectedItem = PeriodCombo.Items.Cast<PeriodItem>()
+            .FirstOrDefault(x => x.Seconds == config.ChartPeriodSec) ?? PeriodCombo.Items[1];
+        BollCheck.IsChecked = config.ChartBollinger;
+        MaCheck.IsChecked = config.ChartMa;
+        RsiCheck.IsChecked = config.ChartRsi;
+        VolCheck.IsChecked = config.ChartVolume;
+        AutoCheck.IsChecked = config.ChartAutoRefresh;
 
         _timer.Tick += async (_, _) => await LoadAsync();
 
         _ready = true;
-        Loaded += async (_, _) => await LoadAsync();
-        Closed += (_, _) => _timer.Stop();
+        Loaded += async (_, _) =>
+        {
+            await LoadAsync();
+            if (AutoCheck.IsChecked == true) { ApplyTimerInterval(); _timer.Start(); }
+        };
+        Closed += (_, _) => { _timer.Stop(); SaveState(); };
+    }
+
+    private void SaveState()
+    {
+        _config.ChartInterval = SelectedInterval();
+        _config.ChartSource = SelectedSource();
+        _config.ChartBollinger = BollCheck.IsChecked == true;
+        _config.ChartMa = MaCheck.IsChecked == true;
+        _config.ChartRsi = RsiCheck.IsChecked == true;
+        _config.ChartVolume = VolCheck.IsChecked == true;
+        _config.ChartAutoRefresh = AutoCheck.IsChecked == true;
+        _config.ChartPeriodSec = PeriodCombo.SelectedItem is PeriodItem p ? p.Seconds : 10;
+        _config.Save();
     }
 
     private BarInterval SelectedInterval() => ((IntervalItem)IntervalCombo.SelectedItem).Iv;
@@ -77,8 +104,8 @@ public partial class ChartWindow : Window
     private ChartOptions CurrentOptions()
     {
         var iv = SelectedInterval();
-        string fmt = ChartDataService.IsIntraday(iv)
-            ? (iv is BarInterval.Min60 ? "MM-dd HH:mm" : "HH:mm")
+        // 분봉은 여러 날에 걸치므로 날짜+시각, 일/주는 날짜, 월은 연-월.
+        string fmt = ChartDataService.IsIntraday(iv) ? "MM-dd HH:mm"
             : iv == BarInterval.Month ? "yy-MM" : "yy-MM-dd";
         return new ChartOptions(
             BollCheck.IsChecked == true, MaCheck.IsChecked == true,

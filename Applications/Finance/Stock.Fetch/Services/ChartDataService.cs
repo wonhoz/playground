@@ -64,12 +64,16 @@ public sealed class ChartDataService(HttpClient http, PriceSourceRegistry regist
     private async Task<List<Candle>> YahooAsync(string code, BarInterval iv, CancellationToken ct)
     {
         var (interval, range) = YahooParams(iv);
-        foreach (var suffix in new[] { ".KS", ".KQ" })
-        {
-            var candles = await YahooFetchAsync(code, suffix, interval, range, ct);
-            if (candles.Count > 0) return candles;
-        }
-        throw new PriceSourceException($"Yahoo에서 종목 '{code}'(.KS/.KQ) 차트를 찾지 못했습니다.");
+        // 코스피(.KS)/코스닥(.KQ)을 모두 조회해 봉 수가 많은 쪽을 채택한다.
+        // (코스닥 종목을 .KS로 조회하면 Yahoo가 빈 응답이 아니라 소수의 가짜 봉을 주므로
+        //  단순히 첫 비어있지 않은 결과를 쓰면 잘못된 시장 데이터가 잡힌다.)
+        var ksTask = YahooFetchAsync(code, ".KS", interval, range, ct);
+        var kqTask = YahooFetchAsync(code, ".KQ", interval, range, ct);
+        await Task.WhenAll(ksTask, kqTask);
+        var best = kqTask.Result.Count > ksTask.Result.Count ? kqTask.Result : ksTask.Result;
+        if (best.Count == 0)
+            throw new PriceSourceException($"Yahoo에서 종목 '{code}'(.KS/.KQ) 차트를 찾지 못했습니다.");
+        return best;
     }
 
     private async Task<List<Candle>> YahooFetchAsync(string code, string suffix, string interval, string range, CancellationToken ct)

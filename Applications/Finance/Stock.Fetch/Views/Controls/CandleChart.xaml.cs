@@ -26,20 +26,28 @@ public partial class CandleChart : UserControl
     private static readonly Brush Sma5B = new SolidColorBrush(Color.FromRgb(0x66, 0xBB, 0x6A));   // 초록
     private static readonly Brush Sma20B = new SolidColorBrush(Color.FromRgb(0xFF, 0x98, 0x00));  // 주황
     private static readonly Brush Sma60B = new SolidColorBrush(Color.FromRgb(0xAB, 0x47, 0xBC));  // 보라
+    private static readonly Brush Cross = new SolidColorBrush(Color.FromRgb(0xAA, 0xAA, 0xAA));
 
     static CandleChart()
     {
-        foreach (var b in new[] { Up, Down, Grid, Axis, BollMid, BollBand, RsiLine, Sma5B, Sma20B, Sma60B })
+        foreach (var b in new[] { Up, Down, Grid, Axis, BollMid, BollBand, RsiLine, Sma5B, Sma20B, Sma60B, Cross })
             b.Freeze();
     }
 
     private IndicatorSet? _set;
     private ChartOptions _opt = new(true, true, true, true);
 
+    // 마우스 오버 히트테스트용(Redraw에서 갱신)
+    private int _mStart;
+    private double _mSlot;
+    private double _mLeftPad;
+
     public CandleChart()
     {
         InitializeComponent();
         SizeChanged += (_, _) => Redraw();
+        MouseMove += OnMouseMove;
+        MouseLeave += OnMouseLeave;
     }
 
     public void Show(IndicatorSet set, ChartOptions opt)
@@ -82,11 +90,13 @@ public partial class CandleChart : UserControl
         if (_opt.Volume) { volTop = cursor; volH = usableH * 0.18; cursor += volH + gap; }
         if (_opt.Rsi) { rsiTop = cursor; rsiH = usableH - rsiTop; }
 
-        // 표시할 캔들 수
+        // 표시할 캔들 수. 캔들 너비(slot)는 일봉 기준 크기로 상한을 둬, 데이터가 적어도
+        // 캔들이 과도하게 넓어지지 않게 한다(부족분은 우측 여백).
+        const double maxSlot = 14.0;
         double slot = 9.0;
         int visible = Math.Min(_set.Candles.Count, Math.Max(20, (int)(plotW / slot)));
         int start = _set.Candles.Count - visible;
-        slot = plotW / visible;
+        slot = Math.Min(plotW / visible, maxSlot);
         double bodyW = Math.Max(2, slot * 0.62);
 
         // 가격 범위(캔들 고저 + 볼린저 상하단 포함)
@@ -176,6 +186,54 @@ public partial class CandleChart : UserControl
 
         // ── x축 시간 라벨 ──
         DrawTimeAxis(start, X, usableH, plotW, leftPad);
+
+        // 마우스 오버 히트테스트용 저장
+        _mStart = start; _mSlot = slot; _mLeftPad = leftPad;
+        OverlayCanvas.Children.Clear();
+        InfoBox.Visibility = Visibility.Collapsed;
+    }
+
+    // ────────────────────────────── 마우스 오버 ──────────────────────────────
+    private void OnMouseMove(object sender, System.Windows.Input.MouseEventArgs e)
+    {
+        if (_set == null || _set.Candles.Count == 0 || _mSlot <= 0) return;
+        var pos = e.GetPosition(PlotCanvas);
+        int count = _set.Candles.Count;
+        int idx = _mStart + (int)Math.Floor((pos.X - _mLeftPad) / _mSlot);
+        idx = Math.Clamp(idx, _mStart, count - 1);
+
+        OverlayCanvas.Children.Clear();
+        double cx = _mLeftPad + (idx - _mStart + 0.5) * _mSlot;
+        OverlayCanvas.Children.Add(new Line
+        {
+            X1 = cx, X2 = cx, Y1 = 0, Y2 = ActualHeight,
+            Stroke = Cross, StrokeThickness = 0.8,
+            StrokeDashArray = new DoubleCollection { 3, 3 }
+        });
+
+        InfoText.Text = BuildInfo(idx);
+        InfoBox.Visibility = Visibility.Visible;
+    }
+
+    private void OnMouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
+    {
+        OverlayCanvas.Children.Clear();
+        InfoBox.Visibility = Visibility.Collapsed;
+    }
+
+    private string BuildInfo(int idx)
+    {
+        var c = _set!.Candles[idx];
+        string s = $"{c.Date.ToString(_opt.DateFormat)}\n" +
+                   $"시 {c.Open:N0}  고 {c.High:N0}  저 {c.Low:N0}  종 {c.Close:N0}\n" +
+                   $"거래량 {c.Volume:N0}";
+        var extras = new List<string>();
+        if (_opt.Ma && !double.IsNaN(_set.Sma20[idx])) extras.Add($"MA20 {_set.Sma20[idx]:N0}");
+        if (_opt.Bollinger && !double.IsNaN(_set.BollUpper[idx]))
+            extras.Add($"BB {_set.BollLower[idx]:N0}~{_set.BollUpper[idx]:N0}");
+        if (_opt.Rsi && !double.IsNaN(_set.Rsi14[idx])) extras.Add($"RSI {_set.Rsi14[idx]:F1}");
+        if (extras.Count > 0) s += "\n" + string.Join("  ", extras);
+        return s;
     }
 
     private void DrawTimeAxis(int start, Func<int, double> x, double usableH, double plotW, double leftPad)

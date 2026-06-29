@@ -87,6 +87,8 @@ dotnet publish Applications/Finance/Stock.Fetch/Stock.Fetch.csproj -c Release -r
 
 ## 버전
 
+- **v1.6.0** (2026-06-29) — 차트 개선: 마우스 오버 상세정보(크로스헤어+OHLCV·지표), 선택값 저장/복원,
+  Yahoo 시장(.KS/.KQ) 자동 판별(코스닥 종목 분봉 오류 수정), 캔들 너비 상한, 분봉 x축 날짜+시각 라벨.
 - **v1.5.0** (2026-06-29) — 차트 창 추가(캔들·볼린저·이동평균·거래량·RSI, 1~60분/일/주/월,
   Yahoo·KIS 소스, 지표 토글, 자동갱신·수동 새로고침). Stock.Watch CandleChart·지표 포팅.
 - **v1.4.1** (2026-06-29) — 검색 결과 목록 다크 테마 수정(항목 배경 PanelBg2·텍스트 밝은 색 명시 — 비선택 항목 가독성).

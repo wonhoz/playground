@@ -120,9 +120,18 @@
 - **메인 📈 차트 버튼**: 종목코드 기반으로 차트 창(모달리스) 표시.
 - 검증: 헤드리스로 Yahoo 5분(1423봉)·일(243)·주(262)·월(121)봉 + RSI·볼린저·SMA 계산 확인. TOPMOST 전체캡처로 렌더 육안 확인.
 
+## v1.6.0 후속 (사용자 피드백 — 차트 개선)
+- **Yahoo 시장 판별 버그**: 코스닥 종목을 .KS로 조회하면 Yahoo가 빈 응답이 아니라 소수 가짜봉(브이엠 5분봉 21개)을
+  주어 잘못 채택됨 → **.KS/.KQ 둘 다 조회(Task.WhenAll) 후 봉 수 많은 쪽 채택**. 브이엠 21→1433봉으로 정상화.
+- **캔들 너비 상한**: 데이터 적을 때 캔들이 과대해지던 문제 → `slot = min(plotW/visible, 14)`(일봉 크기), 부족분 우측 여백.
+- **분봉 x축 라벨**: 여러 날 걸치는 분봉을 `MM-dd HH:mm`로(이전 `HH:mm`이라 날짜 구분 안 됨).
+- **마우스 오버 상세정보**: `OverlayCanvas` 크로스헤어(세로 점선) + `InfoBox`(날짜·시고저종·거래량·MA20·BB·RSI). MouseMove에서 인덱스 역산.
+- **차트 선택 저장/복원**: `AppConfig`에 Chart*(Interval·Source·지표토글·AutoRefresh·PeriodSec) 추가, ChartWindow 생성 시 복원·Closed 시 저장.
+
 ## 참고
 - KRX 통계는 차단(LOGOUT)이나 종목검색 finder는 무인증 동작 → 종목명 조회·이름 검색에 활용.
 - 차트 분봉은 Yahoo만(KIS 분봉은 당일·복잡으로 제외). Yahoo는 약 15분 지연.
+- 코스닥/코스피 종목은 Yahoo .KS/.KQ 둘 다 조회해 많은 쪽 채택(시장 자동 판별).
 - KRX 차단은 거래소 정책 변화로, 향후 로그인/OTP 기반 우회가 필요. 현재는 다음 금융이 동등 대체.
 - XAML은 컴파일 통과해도 런타임 로딩에서 깨질 수 있음 → 신규 WPF 창은 exe 스모크 실행 필수.
 - 자동 캡처는 SetForegroundWindow 포그라운드 잠금으로 불안정 → `SetWindowPos` HWND_TOPMOST로 우회.

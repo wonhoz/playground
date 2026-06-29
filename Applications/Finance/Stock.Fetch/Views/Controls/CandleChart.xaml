@@ -1,0 +1,11 @@
+<UserControl x:Class="Stock.Fetch.Views.Controls.CandleChart"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             Background="#FF161620">
+    <Grid>
+        <Canvas x:Name="PlotCanvas" ClipToBounds="True"/>
+        <TextBlock x:Name="EmptyHint" Text="조회하면 차트가 표시됩니다."
+                   Foreground="#FF888888" FontSize="13"
+                   HorizontalAlignment="Center" VerticalAlignment="Center"/>
+    </Grid>
+</UserControl>

@@ -378,6 +378,19 @@ public partial class MainWindow : Window
         return $"{namePart}{range}{DataExporter.Extension(fmt)}";
     }
 
+    // ────────────────────────────── 차트 ──────────────────────────────
+    private void Chart_Click(object sender, RoutedEventArgs e)
+    {
+        string code = CodeBox.Text.Trim();
+        if (code.Length is < 5 or > 6 || !code.All(char.IsDigit))
+        {
+            ShowError("종목코드 6자리를 입력하거나 검색하세요(예: 005930).");
+            return;
+        }
+        new ChartWindow(code, NameText.Text is "조회 중…" or "(이름 못 찾음)" or "(검색 결과 없음)" ? "" : NameText.Text, _registry)
+        { Owner = this }.Show();
+    }
+
     // ────────────────────────────── 매수/익절 래더 계산 ──────────────────────────────
     private void Ladder_Click(object sender, RoutedEventArgs e)
     {

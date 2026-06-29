@@ -37,7 +37,7 @@ public sealed class KisPriceSource(AppConfig config, Action saveConfig, HttpClie
 
         while (cursor >= from && guard++ < 60)
         {
-            var page = await FetchPageAsync(code, from, cursor, ct);
+            var page = await FetchPageAsync(code, from, cursor, 'D', ct);
             if (page.Count == 0) break;
 
             DateTime oldest = cursor;
@@ -59,13 +59,28 @@ public sealed class KisPriceSource(AppConfig config, Action saveConfig, HttpClie
         return new StockSeries(code, string.Empty, string.Empty, Kind, map.Values.ToList());
     }
 
-    /// <summary>지정 [start, end] 구간의 일봉 1페이지(최대 100봉) 조회.</summary>
-    private async Task<List<Candle>> FetchPageAsync(string code, DateTime start, DateTime end, CancellationToken ct)
+    /// <summary>
+    /// 차트용: 지정 기간을 봉주기(D=일/W=주/M=월)로 1회(최대 100봉) 조회해 과거→현재 정렬 반환.
+    /// 주/월봉은 100봉이면 충분(주 2년·월 8년)하므로 페이징하지 않는다.
+    /// </summary>
+    public async Task<List<Candle>> FetchChartAsync(string code, DateTime from, DateTime to, char period, CancellationToken ct = default)
+    {
+        if (!config.HasKisCredentials)
+            throw new PriceSourceException("KIS APP KEY / APP SECRET이 설정되지 않았습니다. 설정에서 입력하세요.");
+        var list = await FetchPageAsync(code, from, to, period, ct);
+        if (list.Count == 0)
+            throw new PriceSourceException($"KIS에서 종목 '{code}'의 차트 데이터가 없습니다.");
+        list.Sort((a, b) => a.Date.CompareTo(b.Date));
+        return list;
+    }
+
+    /// <summary>지정 [start, end] 구간을 봉주기(period)로 1페이지(최대 100봉) 조회.</summary>
+    private async Task<List<Candle>> FetchPageAsync(string code, DateTime start, DateTime end, char period, CancellationToken ct)
     {
         string query =
             $"FID_COND_MRKT_DIV_CODE=J&FID_INPUT_ISCD={code}" +
             $"&FID_INPUT_DATE_1={start:yyyyMMdd}&FID_INPUT_DATE_2={end:yyyyMMdd}" +
-            $"&FID_PERIOD_DIV_CODE=D&FID_ORG_ADJ_PRC=0";
+            $"&FID_PERIOD_DIV_CODE={period}&FID_ORG_ADJ_PRC=0";
 
         string token = await EnsureTokenAsync(ct);
         using var req = new HttpRequestMessage(HttpMethod.Get,

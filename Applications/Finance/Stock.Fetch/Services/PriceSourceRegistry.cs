@@ -12,6 +12,10 @@ public sealed class PriceSourceRegistry : IDisposable
     private readonly HttpClient _http;
     private readonly Dictionary<SourceKind, IPriceSource> _sources;
     private readonly NameResolver _nameResolver;
+    private readonly KisPriceSource _kis;
+
+    /// <summary>차트용 봉 데이터(분/일/주/월) 조회 서비스.</summary>
+    public ChartDataService Chart { get; }
 
     public PriceSourceRegistry(AppConfig config, Action saveConfig)
     {
@@ -21,15 +25,21 @@ public sealed class PriceSourceRegistry : IDisposable
             "(KHTML, like Gecko) Chrome/124.0 Safari/537.36");
         _http.DefaultRequestHeaders.Add("Accept", "application/json, text/plain, */*");
 
+        _kis = new KisPriceSource(config, saveConfig, _http);
         _sources = new()
         {
             [SourceKind.Naver] = new NaverPriceSource(_http),
             [SourceKind.Yahoo] = new YahooPriceSource(_http),
             [SourceKind.Daum] = new DaumPriceSource(_http),
-            [SourceKind.Kis] = new KisPriceSource(config, saveConfig, _http),
+            [SourceKind.Kis] = _kis,
         };
         _nameResolver = new NameResolver(_http);
+        Chart = new ChartDataService(_http, this);
     }
+
+    /// <summary>KIS 일/주/월봉(차트용) — ChartDataService에서 위임 호출.</summary>
+    public Task<List<Candle>> KisChartAsync(string code, DateTime from, DateTime to, char period, CancellationToken ct = default)
+        => _kis.FetchChartAsync(code, from, to, period, ct);
 
     public IPriceSource Get(SourceKind kind) => _sources[kind];
 

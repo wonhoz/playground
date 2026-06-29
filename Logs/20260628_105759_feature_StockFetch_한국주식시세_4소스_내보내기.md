@@ -112,8 +112,17 @@
   ListBoxItem 배경 `PanelBg2` 명시 + ItemTemplate 텍스트 `FgBrush` 명시(선택 시 White DataTrigger)로 해결.
   (ContentPresenter가 App 암시적 스타일/시스템색을 받아 어두워지는 문제 → 명시로 강제. TOPMOST 전체캡처로 검증)
 
+## v1.5.0 후속 (사용자 요청 — 차트)
+- **지표 포팅**: Stock.Watch `IndicatorMath`(SMA·EMA·RSI·볼린저)·`IndicatorSet`을 Stock.Fetch.Indicators로 포팅(차트 전용 간소화).
+- **CandleChart 포팅+확장**: 캔들+볼린저+거래량+RSI에 **이동평균선(MA5/20/60)·지표 토글·x축 시간라벨** 추가, 패널 동적 배분.
+- **차트 데이터(`ChartDataService`)**: `BarInterval`(1·5·15·30·60분/일/주/월). Yahoo는 전 interval(chart API interval/range), KIS는 일/주/월(`KisPriceSource.FetchChartAsync`, period D/W/M 파라미터화).
+- **ChartWindow**: 봉종류·소스(Yahoo/KIS)·지표토글 콤보/체크, 자동갱신(DispatcherTimer, 주기 선택)+수동 새로고침. 지표 토글은 재조회 없이 Redraw.
+- **메인 📈 차트 버튼**: 종목코드 기반으로 차트 창(모달리스) 표시.
+- 검증: 헤드리스로 Yahoo 5분(1423봉)·일(243)·주(262)·월(121)봉 + RSI·볼린저·SMA 계산 확인. TOPMOST 전체캡처로 렌더 육안 확인.
+
 ## 참고
 - KRX 통계는 차단(LOGOUT)이나 종목검색 finder는 무인증 동작 → 종목명 조회·이름 검색에 활용.
+- 차트 분봉은 Yahoo만(KIS 분봉은 당일·복잡으로 제외). Yahoo는 약 15분 지연.
 - KRX 차단은 거래소 정책 변화로, 향후 로그인/OTP 기반 우회가 필요. 현재는 다음 금융이 동등 대체.
 - XAML은 컴파일 통과해도 런타임 로딩에서 깨질 수 있음 → 신규 WPF 창은 exe 스모크 실행 필수.
 - 자동 캡처는 SetForegroundWindow 포그라운드 잠금으로 불안정 → `SetWindowPos` HWND_TOPMOST로 우회.

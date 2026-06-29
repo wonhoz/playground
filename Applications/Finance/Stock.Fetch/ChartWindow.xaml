@@ -1,0 +1,56 @@
+<Window x:Class="Stock.Fetch.ChartWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:ctrl="clr-namespace:Stock.Fetch.Views.Controls"
+        Title="차트" Height="760" Width="1040"
+        Background="{StaticResource WindowBg}"
+        WindowStartupLocation="CenterOwner">
+    <Grid Margin="12" Background="{StaticResource WindowBg}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- 컨트롤 바 -->
+        <Border Grid.Row="0" Background="{StaticResource PanelBg}" BorderBrush="{StaticResource BorderBrush}"
+                BorderThickness="1" CornerRadius="8" Padding="14,12">
+            <StackPanel>
+                <TextBlock x:Name="TitleText" FontSize="16" FontWeight="Bold"
+                           Foreground="{StaticResource FgBrush}" Margin="0,0,0,10"/>
+
+                <!-- 1줄: 봉종류·소스·새로고침·자동갱신 -->
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="봉" VerticalAlignment="Center" Margin="0,0,8,0" Foreground="{StaticResource FgMuted}"/>
+                    <ComboBox x:Name="IntervalCombo" Width="90" SelectionChanged="Reload_Changed"/>
+                    <TextBlock Text="소스" VerticalAlignment="Center" Margin="16,0,8,0" Foreground="{StaticResource FgMuted}"/>
+                    <ComboBox x:Name="SourceCombo" Width="150" SelectionChanged="Reload_Changed"/>
+                    <Button x:Name="RefreshBtn" Content="🔄 새로고침" Style="{StaticResource ChipButton}"
+                            Margin="16,0,0,0" Click="Refresh_Click"/>
+                    <CheckBox x:Name="AutoCheck" Content="자동갱신" VerticalAlignment="Center" Margin="20,0,8,0"
+                              Checked="Auto_Changed" Unchecked="Auto_Changed"/>
+                    <ComboBox x:Name="PeriodCombo" Width="80" SelectionChanged="Period_Changed"/>
+                </StackPanel>
+
+                <!-- 2줄: 지표 토글 -->
+                <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                    <TextBlock Text="지표" VerticalAlignment="Center" Margin="0,0,14,0" Foreground="{StaticResource FgMuted}"/>
+                    <CheckBox x:Name="BollCheck" Content="볼린저밴드" IsChecked="True" Margin="0,0,16,0" Checked="Indicator_Changed" Unchecked="Indicator_Changed"/>
+                    <CheckBox x:Name="MaCheck" Content="이동평균선" IsChecked="True" Margin="0,0,16,0" Checked="Indicator_Changed" Unchecked="Indicator_Changed"/>
+                    <CheckBox x:Name="RsiCheck" Content="RSI" IsChecked="True" Margin="0,0,16,0" Checked="Indicator_Changed" Unchecked="Indicator_Changed"/>
+                    <CheckBox x:Name="VolCheck" Content="거래량" IsChecked="True" Checked="Indicator_Changed" Unchecked="Indicator_Changed"/>
+                </StackPanel>
+            </StackPanel>
+        </Border>
+
+        <!-- 차트 -->
+        <Border Grid.Row="1" Margin="0,12,0,0" BorderBrush="{StaticResource BorderBrush}" BorderThickness="1"
+                CornerRadius="8" ClipToBounds="True">
+            <ctrl:CandleChart x:Name="Chart"/>
+        </Border>
+
+        <!-- 상태 -->
+        <TextBlock x:Name="StatusText" Grid.Row="2" Margin="2,8,0,0"
+                   Foreground="{StaticResource FgMuted}" FontSize="12"/>
+    </Grid>
+</Window>

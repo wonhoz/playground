@@ -164,6 +164,22 @@
 - 스모크: exe 실행→PortfolioWindow·TradeEditWindow 다크 테마 정상 렌더 확인(임시 트리거+TOPMOST 캡처 후 제거).
 - **다음(3단계 예정)**: 트레이 상주 백그라운드로 보유 종목 KIS 주기 조회 → ±2/5/7/10/12% 도달 시 Slack 알림(stock.watch 로직 참고).
 
+## v1.10.0 후속 (사용자 요청 — 트레이 상주 모니터링·Slack, 3단계)
+- **결정(AskUserQuestion)**: 알림 기준=평단 대비 수익률, 채널=Slack+트레이 풍선. 임계값 기본 ±2/5/7/10/12%(설정 편집).
+- **WinForms 트레이 활성화**: csproj `UseWindowsForms=true`. WPF와 implicit using 충돌(MessageBox·Clipboard·Color) →
+  `<Using Remove="System.Windows.Forms"/>`·`System.Drawing` 제거, 트레이 파일에서만 명시적 import.
+- **KIS 현재가**: `KisPriceSource.FetchQuoteAsync`(inquire-price FHKST01010100 → 현재가·등락률). `Registry.QuoteAsync`는
+  KIS 키 있으면 KIS, 없으면 네이버 최근종가 폴백. 실검증: 삼성 323,000(-4.9%)·원익 159,000(-2.9%)·하이닉스 2,628,000(-1.7%).
+- **모니터링 엔진** `PortfolioMonitor`: 폴링 루프(장중 게이팅·일일 리셋), 보유 종목별 ret=(현재가/평단−1). 임계값 상향/하향
+  **엣지 트리거**(직전 도달집합과 차집합만 알림 → 같은 임계는 되돌아갔다 재돌파해야 재알림). Slack+이벤트 발생(백그라운드, UI 마샬링).
+- **Slack** `SlackNotifier`(stock.watch 포팅): 평단대비 수익률·현재가·평가손익·시각. 설정창 테스트 전송 버튼.
+- **트레이** `TrayManager`(NotifyIcon)+`DarkMenuRenderer`(Stay.Awake 포팅): 열기/모니터링 토글/설정/종료, 더블클릭 복원, 풍선 알림.
+  앱 아이콘은 pack URI 리소스 스트림 로드. ShowImageMargin=false.
+- **생명주기**: App `ShutdownMode=OnExplicitShutdown`. MainWindow X→트레이로 Hide(상주), 종료는 트레이 메뉴(_reallyExit→Close→Shutdown).
+  설정 변경 시 모니터 즉시 시작/중지 동기화. 실행 시 풍선 안내.
+- 스모크: exe 실행→설정창(KIS·포트폴리오·Slack·모니터링 스크롤) 다크 렌더·트레이 초기화 정상(크래시 없음) 확인 후 임시 트리거 제거.
+- **완료**: stock.fetch가 종목 분석 + 자산 관리 + 보유 모니터링/알림의 전문 앱으로 1~3단계 완성.
+
 ## 참고
 - KRX 통계는 차단(LOGOUT)이나 종목검색 finder는 무인증 동작 → 종목명 조회·이름 검색에 활용.
 - 차트 분봉: Yahoo(여러 날·15분 지연)·KIS(당일치·실시간성↑). KIS 과거 분봉은 미제공.

@@ -1,3 +1,4 @@
+using System.Globalization;
 using System.Windows;
 using Stock.Fetch.Services;
 
@@ -6,17 +7,44 @@ namespace Stock.Fetch;
 public partial class SettingsWindow : Window
 {
     private readonly AppConfig _config;
+    private readonly SlackNotifier? _slack;
 
-    public SettingsWindow(AppConfig config)
+    public SettingsWindow(AppConfig config, SlackNotifier? slack = null)
     {
         InitializeComponent();
         NativeTheme.ApplyDarkTitleBar(this);
         _config = config;
+        _slack = slack;
 
         KeyBox.Text = config.AppKey;
         SecretBox.Password = config.AppSecret;
         MockCheck.IsChecked = config.UseMockServer;
         PortfolioPathBox.Text = config.PortfolioPath;
+
+        SlackUrlBox.Text = config.SlackWebhookUrl;
+        SlackChannelBox.Text = config.SlackChannel;
+        MonitorCheck.IsChecked = config.MonitorEnabled;
+        MarketHoursCheck.IsChecked = config.MonitorMarketHoursOnly;
+        IntervalBox.Text = config.MonitorIntervalSeconds.ToString();
+        ThresholdsBox.Text = string.Join(", ", config.AlertThresholds);
+    }
+
+    private async void Test_Click(object sender, RoutedEventArgs e)
+    {
+        // 입력 중인 값으로 테스트(저장 전). 임시로 config에 반영해 SlackNotifier가 읽게 한다.
+        _config.SlackWebhookUrl = SlackUrlBox.Text.Trim();
+        _config.SlackChannel = SlackChannelBox.Text.Trim();
+        if (_slack is null) { TestResult.Text = "테스트를 사용할 수 없습니다."; return; }
+        TestResult.Text = "전송 중…";
+        try
+        {
+            await _slack.SendTestAsync();
+            TestResult.Text = "✓ 전송 성공 — Slack을 확인하세요.";
+        }
+        catch (Exception ex)
+        {
+            TestResult.Text = "⚠ 전송 실패: " + ex.Message;
+        }
     }
 
     private void Save_Click(object sender, RoutedEventArgs e)
@@ -25,10 +53,29 @@ public partial class SettingsWindow : Window
         _config.AppSecret = SecretBox.Password.Trim();
         _config.UseMockServer = MockCheck.IsChecked == true;
         _config.PortfolioPath = PortfolioPathBox.Text.Trim();
+
+        _config.SlackWebhookUrl = SlackUrlBox.Text.Trim();
+        _config.SlackChannel = SlackChannelBox.Text.Trim();
+        _config.MonitorEnabled = MonitorCheck.IsChecked == true;
+        _config.MonitorMarketHoursOnly = MarketHoursCheck.IsChecked == true;
+        if (int.TryParse(IntervalBox.Text.Trim(), out var sec)) _config.MonitorIntervalSeconds = Math.Max(10, sec);
+        _config.AlertThresholds = ParseThresholds(ThresholdsBox.Text);
+
         // 자격 변경 시 캐시 토큰 무효화
         _config.CachedToken = string.Empty;
         _config.TokenExpiresAt = DateTime.MinValue;
         DialogResult = true;
+    }
+
+    private static List<double> ParseThresholds(string text)
+    {
+        var list = text.Split(new[] { ',', ' ', ';' }, StringSplitOptions.RemoveEmptyEntries)
+            .Select(s => double.TryParse(s, NumberStyles.Number, CultureInfo.InvariantCulture, out var d) ? Math.Abs(d) : -1)
+            .Where(d => d > 0)
+            .Distinct()
+            .OrderBy(d => d)
+            .ToList();
+        return list.Count > 0 ? list : new List<double> { 2, 5, 7, 10, 12 };
     }
 
     private void Cancel_Click(object sender, RoutedEventArgs e) => DialogResult = false;

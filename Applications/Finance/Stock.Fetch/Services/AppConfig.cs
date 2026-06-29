@@ -55,6 +55,19 @@ public sealed class AppConfig
     /// <summary>포트폴리오 JSON 저장 경로(비어 있으면 문서\StockFetch\portfolio.json). Dropbox 등 동기화 폴더 권장.</summary>
     public string PortfolioPath { get; set; } = string.Empty;
 
+    // ── 보유 종목 모니터링 / Slack 알림 ──
+    public string SlackWebhookUrl { get; set; } = string.Empty;
+    /// <summary>전송 대상 채널(예: "#claude"). 비우면 webhook 기본 채널.</summary>
+    public string SlackChannel { get; set; } = "#claude";
+    /// <summary>트레이 상주 모니터링 활성화.</summary>
+    public bool MonitorEnabled { get; set; } = false;
+    /// <summary>폴링 주기(초). 최소 10초.</summary>
+    public int MonitorIntervalSeconds { get; set; } = 60;
+    /// <summary>장 시간(09:00~15:30 평일)에만 폴링.</summary>
+    public bool MonitorMarketHoursOnly { get; set; } = true;
+    /// <summary>평단 대비 수익률 알림 임계값(% · 상승/하락 양방향). 기본 ±2/5/7/10/12.</summary>
+    public List<double> AlertThresholds { get; set; } = new() { 2, 5, 7, 10, 12 };
+
     // ── 캐시된 OAuth 토큰(만료 전까지 재사용) ──
     public string CachedToken { get; set; } = string.Empty;
     public DateTime TokenExpiresAt { get; set; } = DateTime.MinValue;

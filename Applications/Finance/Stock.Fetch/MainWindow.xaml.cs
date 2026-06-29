@@ -13,6 +13,13 @@ public partial class MainWindow : Window
     private readonly PriceSourceRegistry _registry;
     private StockSeries? _series;
 
+    // 트레이 상주 + 보유 종목 모니터링
+    private readonly SlackNotifier _slack;
+    private readonly PortfolioMonitor _monitor;
+    private readonly TrayManager _tray;
+    private bool _reallyExit;
+    private bool _trayHintShown;
+
     /// <summary>출력 포맷 콤보용 항목.</summary>
     private sealed record FormatItem(string Label, ExportFormat Format)
     {
@@ -51,7 +58,85 @@ public partial class MainWindow : Window
         RestoreState();
 
         UpdateSourceNote();
-        Closed += (_, _) => { SaveState(); _registry.Dispose(); };
+
+        // ── 트레이 상주 + 보유 종목 모니터링 ──
+        _slack = new SlackNotifier(_config);
+        _monitor = new PortfolioMonitor(_config, _registry, _slack);
+        _monitor.AlertRaised += OnAlertRaised;
+        _tray = new TrayManager();
+        _tray.OpenRequested += ShowFromTray;
+        _tray.ToggleMonitorRequested += ToggleMonitor;
+        _tray.SettingsRequested += () => Dispatcher.Invoke(() => Settings_Click(this, new RoutedEventArgs()));
+        _tray.ExitRequested += ExitApp;
+
+        Loaded += (_, _) =>
+        {
+            if (_config.MonitorEnabled) StartMonitor();
+            _tray.ShowBalloon("Stock.Fetch", _config.MonitorEnabled
+                ? "보유 종목 모니터링 중입니다. 창을 닫아도 트레이에서 계속 실행됩니다."
+                : "트레이에 상주합니다. 설정에서 모니터링을 켜면 보유 종목을 감시합니다.");
+        };
+    }
+
+    // ───────────────────────── 트레이/모니터링 ─────────────────────────
+
+    private void OnAlertRaised(Models.PortfolioAlert a) => Dispatcher.Invoke(() =>
+    {
+        string arrow = a.IsUp ? "▲" : "▼";
+        _tray.ShowBalloon(
+            $"{a.Display} {arrow} {a.ReturnPct:+0.0;-0.0}%",
+            $"현재가 {a.Price:N0}원 · 평단 {a.AvgPrice:N0}원 · 평가손익 {a.EvalPL:+#,0;-#,0;0}원",
+            warning: !a.IsUp);
+    });
+
+    private void StartMonitor()
+    {
+        _monitor.Start();
+        _tray.SetMonitorState(true);
+    }
+
+    private void ToggleMonitor() => Dispatcher.Invoke(() =>
+    {
+        if (_monitor.IsRunning) { _monitor.Stop(); _config.MonitorEnabled = false; _tray.SetMonitorState(false); }
+        else { _config.MonitorEnabled = true; StartMonitor(); }
+        _config.Save();
+    });
+
+    private void ShowFromTray() => Dispatcher.Invoke(() =>
+    {
+        Show();
+        WindowState = WindowState.Normal;
+        Activate();
+        Topmost = true; Topmost = false;
+    });
+
+    private void ExitApp() => Dispatcher.Invoke(() =>
+    {
+        _reallyExit = true;
+        Close();
+    });
+
+    protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
+    {
+        // X 버튼/Alt+F4 → 종료가 아니라 트레이로 숨김(상주). 종료는 트레이 메뉴 '종료'로만.
+        if (!_reallyExit)
+        {
+            e.Cancel = true;
+            Hide();
+            if (!_trayHintShown)
+            {
+                _trayHintShown = true;
+                _tray.ShowBalloon("Stock.Fetch", "트레이에서 계속 실행 중입니다. 완전히 끄려면 트레이 아이콘 우클릭 → 종료.");
+            }
+            return;
+        }
+        SaveState();
+        _monitor.Dispose();
+        _slack.Dispose();
+        _tray.Dispose();
+        _registry.Dispose();
+        base.OnClosing(e);
+        System.Windows.Application.Current.Shutdown();
     }
 
     // ────────────────────────────── 상태 저장/복원 ──────────────────────────────
@@ -415,11 +500,14 @@ public partial class MainWindow : Window
     // ────────────────────────────── 설정 ──────────────────────────────
     private void Settings_Click(object sender, RoutedEventArgs e)
     {
-        var win = new SettingsWindow(_config) { Owner = this };
+        var win = new SettingsWindow(_config, _slack) { Owner = this };
         if (win.ShowDialog() == true)
         {
             _config.Save();
             UpdateSourceNote();
+            // 모니터링 설정 변경 즉시 반영
+            if (_config.MonitorEnabled && !_monitor.IsRunning) StartMonitor();
+            else if (!_config.MonitorEnabled && _monitor.IsRunning) { _monitor.Stop(); _tray.SetMonitorState(false); }
         }
     }
 

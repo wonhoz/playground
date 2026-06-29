@@ -395,15 +395,13 @@ public partial class MainWindow : Window
     private void Ladder_Click(object sender, RoutedEventArgs e)
     {
         if (_series is null) return;
-        try
+        if (_series.Candles.Count < LadderCalculator.RequiredDays)
         {
-            var result = LadderCalculator.Calculate(_series);
-            new LadderWindow(result) { Owner = this }.Show();   // 모달리스 — 여러 종목 비교 가능
+            ShowError($"매수/익절 계산에는 최소 {LadderCalculator.RequiredDays}거래일이 필요합니다(현재 {_series.Candles.Count}일). 기간을 늘려 다시 조회하세요.");
+            return;
         }
-        catch (InvalidOperationException ex)
-        {
-            ShowError(ex.Message);
-        }
+        // 모달리스 — 여러 종목 비교 가능. 창 내부에서 공격성·추세 슬라이더로 라이브 재계산.
+        new LadderWindow(_series, _config) { Owner = this }.Show();
     }
 
     // ────────────────────────────── 설정 ──────────────────────────────

@@ -43,6 +43,14 @@ public sealed class AppConfig
     public bool ChartAutoRefresh { get; set; } = false;
     public int ChartPeriodSec { get; set; } = 10;
 
+    // ── 매수/익절 래더 설정(공격성·추세) ──
+    /// <summary>매수 공격성 0(보수)~1(공격).</summary>
+    public double LadderAggressiveness { get; set; } = 0.0;
+    /// <summary>익절 강도 0(보수·도달↑)~1(공격·수익↑).</summary>
+    public double LadderSellStrength { get; set; } = 0.0;
+    /// <summary>추세 자동 반영(켜면 슬라이더 자동 산정).</summary>
+    public bool LadderUseTrend { get; set; } = false;
+
     // ── 캐시된 OAuth 토큰(만료 전까지 재사용) ──
     public string CachedToken { get; set; } = string.Empty;
     public DateTime TokenExpiresAt { get; set; } = DateTime.MinValue;

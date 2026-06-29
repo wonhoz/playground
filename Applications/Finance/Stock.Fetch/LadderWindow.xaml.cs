@@ -1,6 +1,7 @@
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 using Stock.Fetch.Models;
 using Stock.Fetch.Services;
 
@@ -11,41 +12,145 @@ public partial class LadderWindow : Window
     private static readonly string[] Hoga =
         { "1호가 (정상)", "2호가 (조정)", "3호가 (중조정)", "4호가 (폭락)" };
 
-    private readonly string _copyText;
+    private readonly StockSeries _series;
+    private readonly AppConfig _config;
+    private string _copyText = string.Empty;
+    private bool _ready;
+    private bool _suppress;   // 추세 적용으로 슬라이더 값을 코드가 바꿀 때 재계산 루프 방지
 
-    public LadderWindow(LadderResult r)
+    public LadderWindow(StockSeries series, AppConfig config)
     {
         InitializeComponent();
         NativeTheme.ApplyDarkTitleBar(this);
+        _series = series;
+        _config = config;
 
-        string title = string.IsNullOrEmpty(r.Name) ? r.Code : $"{r.Name} ({r.Code})";
+        string title = string.IsNullOrEmpty(series.Name) ? series.Code : $"{series.Name} ({series.Code})";
         TitleText.Text = $"{title} — 매수/익절 래더";
-        SubText.Text = $"최근 {r.TradingDays}거래일 기준 · 하방변동성 σ_down {r.SigmaDown}%";
+
+        // 저장값 복원(_ready=false 동안이라 ValueChanged는 무시됨).
+        AggrSlider.Value = Math.Clamp(config.LadderAggressiveness, 0, 1) * 100;
+        SellSlider.Value = Math.Clamp(config.LadderSellStrength, 0, 1) * 100;
+        TrendCheck.IsChecked = config.LadderUseTrend;
+
+        _ready = true;
+        Recompute();
+    }
+
+    // ───────────────────────── 이벤트 ─────────────────────────
+
+    private void Slider_Changed(object sender, RoutedPropertyChangedEventArgs<double> e)
+    {
+        if (_ready && !_suppress) Recompute();
+    }
+
+    private void Trend_Changed(object sender, RoutedEventArgs e)
+    {
+        if (_ready) Recompute();
+    }
+
+    // ───────────────────────── 재계산/렌더 ─────────────────────────
+
+    private void Recompute()
+    {
+        bool useTrend = TrendCheck.IsChecked == true;
+        var p = new LadderParams(AggrSlider.Value / 100.0, SellSlider.Value / 100.0, useTrend);
+
+        LadderResult r;
+        try { r = LadderCalculator.Calculate(_series, p); }
+        catch (InvalidOperationException ex) { SubText.Text = "⚠ " + ex.Message; return; }
+
+        // 추세 적용 시: 자동 산정된 공격성으로 슬라이더 위치 갱신(+비활성화).
+        if (useTrend)
+        {
+            _suppress = true;
+            AggrSlider.Value = Math.Round(r.BuyAggressiveness * 100);
+            SellSlider.Value = Math.Round(r.SellStrength * 100);
+            _suppress = false;
+        }
+        AggrSlider.IsEnabled = SellSlider.IsEnabled = !useTrend;
+
+        Render(r);
+        SaveState();
+    }
+
+    private void Render(LadderResult r)
+    {
+        SubText.Text = $"최근 {r.TradingDays}거래일 · 하방변동성 σ_down {r.SigmaDown}% · 평단 {Won(r.AvgPrice)}";
+
+        AggrValueText.Text = $"{AggrLabel(r.BuyAggressiveness)} · {r.BuyAggressiveness * 100:0}%";
+        SellValueText.Text = $"{SellLabel(r.SellStrength)} · {r.SellStrength * 100:0}%";
+        TrendText.Text = r.TrendApplied
+            ? $"추세: {r.TrendLabel} → 공격성 자동 {r.BuyAggressiveness * 100:0}%"
+            : $"추세: {r.TrendLabel} (자동 반영 끔)";
 
         PrevLowText.Text = Won(r.PrevLow);
         PrevHighText.Text = Won(r.PrevHigh);
         PrevCloseText.Text = Won(r.PrevClose);
         GapText.Text = Won(r.GapCancelLine);
 
+        ClearFromRow(BuyGrid, 1);
         for (int i = 0; i < 4; i++)
-            AddBuyRow(i + 1, Hoga[i], r.BuyOffsets[i], r.BuyPrices[i]);
+            AddBuyRow(i + 1, Hoga[i], r.BuyOffsets[i], r.BuyPrices[i], r.FillProbs[i]);
 
         AvgText.Text = Won(r.AvgPrice);
         TotalText.Text = Won(r.TotalAmount);
         StopText.Text = Won(r.StopPrice);
         LossText.Text = Won(r.StopLoss);
 
+        ClearFromRow(SellGrid, 1);
         for (int i = 0; i < r.SellTargets.Length; i++)
             AddSellRow(i + 1, r.SellTargets[i]);
 
-        _copyText = BuildCopyText(r, title);
+        _copyText = BuildCopyText(r);
+    }
+
+    private static void ClearFromRow(Grid g, int fromRow)
+    {
+        for (int i = g.Children.Count - 1; i >= 0; i--)
+            if (Grid.GetRow(g.Children[i]) >= fromRow) g.Children.RemoveAt(i);
+    }
+
+    private static string AggrLabel(double a) => a < 0.34 ? "보수" : a < 0.67 ? "중도" : "공격";
+    private static string SellLabel(double a) => a < 0.34 ? "보수" : a < 0.67 ? "중도" : "공격";
+
+    private void AddBuyRow(int row, string label, int off, decimal price, double fill)
+    {
+        var muted = (Brush)FindResource("FgMuted");
+
+        var lbl = new TextBlock { Text = label, Style = (Style)FindResource("Lbl") };
+        Grid.SetRow(lbl, row); Grid.SetColumn(lbl, 0);
+
+        var offT = new TextBlock
+        {
+            Text = Pct(off), Foreground = muted,
+            HorizontalAlignment = HorizontalAlignment.Right, VerticalAlignment = VerticalAlignment.Center,
+            Margin = new Thickness(20, 3, 16, 3)
+        };
+        Grid.SetRow(offT, row); Grid.SetColumn(offT, 1);
+
+        var priceT = new TextBlock { Text = Won(price), Style = (Style)FindResource("Val") };
+        Grid.SetRow(priceT, row); Grid.SetColumn(priceT, 2);
+
+        var fillT = new TextBlock
+        {
+            Text = fill.ToString("P0"), Foreground = ProbBrush(fill),
+            HorizontalAlignment = HorizontalAlignment.Right, VerticalAlignment = VerticalAlignment.Center,
+            Margin = new Thickness(16, 3, 0, 3)
+        };
+        Grid.SetRow(fillT, row); Grid.SetColumn(fillT, 3);
+
+        BuyGrid.Children.Add(lbl);
+        BuyGrid.Children.Add(offT);
+        BuyGrid.Children.Add(priceT);
+        BuyGrid.Children.Add(fillT);
     }
 
     private void AddSellRow(int row, SellTarget t)
     {
-        var muted = (System.Windows.Media.Brush)FindResource("FgMuted");
-        var fg = (System.Windows.Media.Brush)FindResource("FgBrush");
-        var bull = (System.Windows.Media.Brush)FindResource("BullBrush");
+        var muted = (Brush)FindResource("FgMuted");
+        var fg = (Brush)FindResource("FgBrush");
+        var bull = (Brush)FindResource("BullBrush");
 
         var namePanel = new StackPanel { Margin = new Thickness(0, 4, 0, 4) };
         namePanel.Children.Add(new TextBlock { Text = t.Name, Foreground = fg, FontWeight = FontWeights.SemiBold });
@@ -68,50 +173,53 @@ public partial class LadderWindow : Window
         };
         Grid.SetRow(ret, row); Grid.SetColumn(ret, 2);
 
+        var reach = new TextBlock
+        {
+            Text = ((double)t.ReachProb).ToString("P0"), Foreground = ProbBrush((double)t.ReachProb),
+            HorizontalAlignment = HorizontalAlignment.Right, VerticalAlignment = VerticalAlignment.Center,
+            Margin = new Thickness(16, 3, 0, 3)
+        };
+        Grid.SetRow(reach, row); Grid.SetColumn(reach, 3);
+
         SellGrid.Children.Add(namePanel);
         SellGrid.Children.Add(price);
         SellGrid.Children.Add(ret);
+        SellGrid.Children.Add(reach);
     }
+
+    /// <summary>확률에 따라 색을 달리해 한눈에 가늠(낮음=보조색, 높음=강조색).</summary>
+    private Brush ProbBrush(double p) => p >= 0.5
+        ? (Brush)FindResource("AccentBrush")
+        : (Brush)FindResource("FgMuted");
+
+    private void SaveState()
+    {
+        _config.LadderAggressiveness = AggrSlider.Value / 100.0;
+        _config.LadderSellStrength = SellSlider.Value / 100.0;
+        _config.LadderUseTrend = TrendCheck.IsChecked == true;
+        _config.Save();
+    }
+
+    // ───────────────────────── 포맷/복사 ─────────────────────────
 
     private static string SignedPct(decimal r) => (r >= 0 ? "+" : "") + r.ToString("P2");
-
-    private void AddBuyRow(int row, string label, int off, decimal price)
-    {
-        var lbl = new TextBlock { Text = label, Style = (Style)FindResource("Lbl") };
-        Grid.SetRow(lbl, row); Grid.SetColumn(lbl, 0);
-
-        var offT = new TextBlock
-        {
-            Text = Pct(off),
-            Foreground = (System.Windows.Media.Brush)FindResource("FgMuted"),
-            HorizontalAlignment = HorizontalAlignment.Right,
-            VerticalAlignment = VerticalAlignment.Center,
-            Margin = new Thickness(20, 3, 16, 3)
-        };
-        Grid.SetRow(offT, row); Grid.SetColumn(offT, 1);
-
-        var priceT = new TextBlock { Text = Won(price), Style = (Style)FindResource("Val") };
-        Grid.SetRow(priceT, row); Grid.SetColumn(priceT, 2);
-
-        BuyGrid.Children.Add(lbl);
-        BuyGrid.Children.Add(offT);
-        BuyGrid.Children.Add(priceT);
-    }
-
     private static string Won(decimal d) => d.ToString("N0");
     private static string Pct(int p) => $"{p}%";
 
-    private static string BuildCopyText(LadderResult r, string title)
+    private string BuildCopyText(LadderResult r)
     {
+        string title = string.IsNullOrEmpty(r.Name) ? r.Code : $"{r.Name} ({r.Code})";
         var sb = new StringBuilder();
         sb.Append(title).Append(" — 매수/익절 래더\n");
-        sb.Append($"최근 {r.TradingDays}거래일 · σ_down {r.SigmaDown}%\n\n");
+        sb.Append($"최근 {r.TradingDays}거래일 · σ_down {r.SigmaDown}%\n");
+        sb.Append($"공격성 매수 {r.BuyAggressiveness * 100:0}% / 익절 {r.SellStrength * 100:0}%");
+        sb.Append(r.TrendApplied ? $" (추세 자동: {r.TrendLabel})\n\n" : "\n\n");
         sb.Append($"전일저가\t{Won(r.PrevLow)}\n");
         sb.Append($"전일고가\t{Won(r.PrevHigh)}\n");
         sb.Append($"전일종가(정규)\t{Won(r.PrevClose)}\n");
         sb.Append($"갭다운취소선\t{Won(r.GapCancelLine)}\n");
         for (int i = 0; i < 4; i++)
-            sb.Append($"{Hoga[i]} {Pct(r.BuyOffsets[i])}\t{Won(r.BuyPrices[i])}\n");
+            sb.Append($"{Hoga[i]} {Pct(r.BuyOffsets[i])}\t{Won(r.BuyPrices[i])}\t체결 {r.FillProbs[i]:P0}\n");
         sb.Append($"평단\t{Won(r.AvgPrice)}\n");
         sb.Append($"전량금액\t{Won(r.TotalAmount)}\n");
         sb.Append($"손절가\t{Won(r.StopPrice)}\n");
@@ -119,7 +227,7 @@ public partial class LadderWindow : Window
         sb.Append($"익절오프셋\t{Pct(r.SellOffset)}\n");
         sb.Append($"ATR\t{Won(r.Atr)}\n");
         foreach (var t in r.SellTargets)
-            sb.Append($"익절·{t.Name}\t{Won(t.Price)}\t{SignedPct(t.ReturnPct)}\n");
+            sb.Append($"익절·{t.Name}\t{Won(t.Price)}\t{SignedPct(t.ReturnPct)}\t도달 {(double)t.ReachProb:P0}\n");
         return sb.ToString();
     }
 

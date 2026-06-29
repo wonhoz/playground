@@ -41,6 +41,10 @@ public sealed class PriceSourceRegistry : IDisposable
     public Task<List<Candle>> KisChartAsync(string code, DateTime from, DateTime to, char period, CancellationToken ct = default)
         => _kis.FetchChartAsync(code, from, to, period, ct);
 
+    /// <summary>KIS 당일 1분봉(차트용) — ChartDataService에서 집계.</summary>
+    public Task<List<Candle>> KisMinutesAsync(string code, CancellationToken ct = default)
+        => _kis.FetchTodayMinutesAsync(code, ct);
+
     public IPriceSource Get(SourceKind kind) => _sources[kind];
 
     public IReadOnlyList<IPriceSource> All => _sources.Values.ToList();

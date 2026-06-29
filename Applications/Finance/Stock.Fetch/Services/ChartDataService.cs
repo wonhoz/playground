@@ -19,9 +19,6 @@ public enum ChartSourceKind { Yahoo, Kis }
 /// </summary>
 public sealed class ChartDataService(HttpClient http, PriceSourceRegistry registry)
 {
-    public static bool KisSupports(BarInterval iv) =>
-        iv is BarInterval.Day or BarInterval.Week or BarInterval.Month;
-
     public static string Label(BarInterval iv) => iv switch
     {
         BarInterval.Min1 => "1분", BarInterval.Min5 => "5분", BarInterval.Min15 => "15분",
@@ -38,13 +35,44 @@ public sealed class ChartDataService(HttpClient http, PriceSourceRegistry regist
     {
         if (src == ChartSourceKind.Kis)
         {
-            if (!KisSupports(iv))
-                throw new PriceSourceException("KIS 차트는 일/주/월봉만 지원합니다. 분봉은 Yahoo를 선택하세요.");
+            if (IsIntraday(iv))
+            {
+                // KIS는 당일 1분봉만 제공 → 1분봉을 요청 주기로 집계.
+                var min1 = await registry.KisMinutesAsync(code, ct);
+                int m = iv switch
+                {
+                    BarInterval.Min1 => 1, BarInterval.Min5 => 5, BarInterval.Min15 => 15,
+                    BarInterval.Min30 => 30, BarInterval.Min60 => 60, _ => 1
+                };
+                return Aggregate(min1, m);
+            }
             char p = iv switch { BarInterval.Week => 'W', BarInterval.Month => 'M', _ => 'D' };
             var (from, to) = KisRange(iv);
             return await registry.KisChartAsync(code, from, to, p, ct);
         }
         return await YahooAsync(code, iv, ct);
+    }
+
+    /// <summary>1분봉을 N분봉으로 집계(O=첫·H=최대·L=최소·C=마지막·V=합). 09:00 기준 N분 버킷.</summary>
+    private static List<Candle> Aggregate(List<Candle> min1, int minutes)
+    {
+        if (minutes <= 1 || min1.Count == 0) return min1;
+        var result = new List<Candle>();
+        foreach (var g in min1.GroupBy(c => Bucket(c.Date, minutes)).OrderBy(g => g.Key))
+        {
+            var bars = g.OrderBy(c => c.Date).ToList();
+            result.Add(new Candle(g.Key,
+                bars[0].Open, bars.Max(b => b.High), bars.Min(b => b.Low),
+                bars[^1].Close, bars.Sum(b => b.Volume)));
+        }
+        return result;
+    }
+
+    private static DateTime Bucket(DateTime t, int minutes)
+    {
+        int total = t.Hour * 60 + t.Minute;
+        int floor = total / minutes * minutes;
+        return t.Date.AddMinutes(floor);
     }
 
     // ────────────────────────────── Yahoo ──────────────────────────────

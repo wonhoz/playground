@@ -53,7 +53,7 @@ public partial class ChartWindow : Window
         SourceCombo.ItemsSource = new[]
         {
             new SourceItem(ChartSourceKind.Yahoo, "Yahoo (분/일/주/월)"),
-            new SourceItem(ChartSourceKind.Kis, "KIS (일/주/월)"),
+            new SourceItem(ChartSourceKind.Kis, "KIS (당일분봉·일/주/월)"),
         };
         PeriodCombo.ItemsSource = new[]
         {

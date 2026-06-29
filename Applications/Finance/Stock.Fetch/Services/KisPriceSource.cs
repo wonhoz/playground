@@ -74,6 +74,93 @@ public sealed class KisPriceSource(AppConfig config, Action saveConfig, HttpClie
         return list;
     }
 
+    /// <summary>
+    /// 차트용: 당일 1분봉 전체를 과거→현재 순서로 조회(inquire-time-itemchartprice, 30건씩 페이징).
+    /// KIS는 분봉을 당일치만 제공한다. 5·15·30·60분봉은 호출 측에서 집계한다.
+    /// </summary>
+    public async Task<List<Candle>> FetchTodayMinutesAsync(string code, CancellationToken ct = default)
+    {
+        if (!config.HasKisCredentials)
+            throw new PriceSourceException("KIS APP KEY / APP SECRET이 설정되지 않았습니다. 설정에서 입력하세요.");
+
+        var map = new SortedDictionary<DateTime, Candle>();
+        string inputHour = "";  // 빈값=최근부터
+        DateTime? prevOldest = null;
+
+        for (int guard = 0; guard < 16; guard++)  // 30×16≈480분 → 당일+α 충분
+        {
+            List<Candle> page;
+            try
+            {
+                page = await FetchMinutePageAsync(code, inputHour, ct);
+            }
+            catch (PriceSourceException) when (map.Count > 0)
+            {
+                break;  // 유량(초당 호출) 초과 등 → 그때까지 수집분으로 표시
+            }
+            if (page.Count == 0) break;
+            foreach (var c in page) map[c.Date] = c;
+
+            var oldest = page.Min(c => c.Date);
+            if (prevOldest != null && oldest >= prevOldest.Value) break;  // 진전 없음
+            prevOldest = oldest;
+            if (oldest.Hour < 9 || (oldest.Hour == 9 && oldest.Minute == 0)) break;  // 장 시작 도달
+            inputHour = oldest.AddMinutes(-1).ToString("HHmmss");
+            await Task.Delay(160, ct);  // KIS 초당 호출 제한(유량) 완화
+        }
+
+        if (map.Count == 0)
+            throw new PriceSourceException("KIS 당일 분봉 데이터가 없습니다(장 시간 외이거나 휴장일 수 있습니다).");
+        return map.Values.ToList();
+    }
+
+    /// <summary>당일 분봉 1페이지(최대 30건, inputHour 시각 이전) 조회.</summary>
+    private async Task<List<Candle>> FetchMinutePageAsync(string code, string inputHour, CancellationToken ct)
+    {
+        string query =
+            $"FID_ETC_CLS_CODE=&FID_COND_MRKT_DIV_CODE=J&FID_INPUT_ISCD={code}" +
+            $"&FID_INPUT_HOUR_1={inputHour}&FID_PW_DATA_INCU_YN=Y";
+
+        string token = await EnsureTokenAsync(ct);
+        using var req = new HttpRequestMessage(HttpMethod.Get,
+            $"{BaseUrl}/uapi/domestic-stock/v1/quotations/inquire-time-itemchartprice?{query}");
+        req.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
+        req.Headers.Add("appkey", config.AppKey);
+        req.Headers.Add("appsecret", config.AppSecret);
+        req.Headers.Add("tr_id", "FHKST03010200");
+        req.Headers.Add("custtype", "P");
+
+        using var resp = await http.SendAsync(req, ct);
+        string text = await resp.Content.ReadAsStringAsync(ct);
+        using var doc = JsonDocument.Parse(text);
+        var root = doc.RootElement;
+
+        if (root.TryGetProperty("rt_cd", out var rt) && rt.GetString() != "0")
+        {
+            string msg = root.TryGetProperty("msg1", out var m) ? m.GetString() ?? text : text;
+            throw new PriceSourceException($"KIS 분봉 응답 오류: {msg.Trim()}");
+        }
+
+        var list = new List<Candle>();
+        if (root.TryGetProperty("output2", out var arr) && arr.ValueKind == JsonValueKind.Array)
+        {
+            foreach (var b in arr.EnumerateArray())
+            {
+                string d = b.TryGetProperty("stck_bsop_date", out var de) ? de.GetString() ?? "" : "";
+                string h = b.TryGetProperty("stck_cntg_hour", out var he) ? he.GetString() ?? "" : "";
+                if (d.Length != 8 || h.Length != 6) continue;
+                if (!DateTime.TryParseExact(d + h, "yyyyMMddHHmmss", null,
+                        System.Globalization.DateTimeStyles.None, out var dt)) continue;
+                decimal close = ParseDecimal(b, "stck_prpr");
+                if (close <= 0) continue;
+                list.Add(new Candle(dt,
+                    ParseDecimal(b, "stck_oprc"), ParseDecimal(b, "stck_hgpr"),
+                    ParseDecimal(b, "stck_lwpr"), close, ParseLong(b, "cntg_vol")));
+            }
+        }
+        return list;
+    }
+
     /// <summary>지정 [start, end] 구간을 봉주기(period)로 1페이지(최대 100봉) 조회.</summary>
     private async Task<List<Candle>> FetchPageAsync(string code, DateTime start, DateTime end, char period, CancellationToken ct)
     {

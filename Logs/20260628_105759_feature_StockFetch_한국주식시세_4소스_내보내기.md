@@ -128,9 +128,16 @@
 - **마우스 오버 상세정보**: `OverlayCanvas` 크로스헤어(세로 점선) + `InfoBox`(날짜·시고저종·거래량·MA20·BB·RSI). MouseMove에서 인덱스 역산.
 - **차트 선택 저장/복원**: `AppConfig`에 Chart*(Interval·Source·지표토글·AutoRefresh·PeriodSec) 추가, ChartWindow 생성 시 복원·Closed 시 저장.
 
+## v1.7.0 후속 (사용자 요청 — KIS 차트 분봉)
+- **KIS 당일 분봉**: `inquire-time-itemchartprice`(FHKST03010200, output2: stck_bsop_date+stck_cntg_hour·oprc·hgpr·lwpr·prpr·cntg_vol).
+  당일 1분봉을 30건씩 inputHour 페이징(과거로). `ChartDataService.Aggregate`로 5·15·30·60분 집계(O=첫·H=max·L=min·C=끝·V=합).
+- **유량 제한 대응**: KIS 실전 "초당 거래건수 초과" → 페이징 사이 160ms throttle + 유량 초과 시 그때까지 수집분 부분반환.
+- `KisSupports` 제거(분봉 포함 전 interval 지원), 소스 라벨 "KIS (당일분봉·일/주/월)".
+- 검증(실전 키·장중): KIS 1분봉 270봉·5분 집계 55봉 정상. 시각이 PC 테스트시각과 달라 미래처럼 보이나 봉 자체는 정상.
+
 ## 참고
 - KRX 통계는 차단(LOGOUT)이나 종목검색 finder는 무인증 동작 → 종목명 조회·이름 검색에 활용.
-- 차트 분봉은 Yahoo만(KIS 분봉은 당일·복잡으로 제외). Yahoo는 약 15분 지연.
+- 차트 분봉: Yahoo(여러 날·15분 지연)·KIS(당일치·실시간성↑). KIS 과거 분봉은 미제공.
 - 코스닥/코스피 종목은 Yahoo .KS/.KQ 둘 다 조회해 많은 쪽 채택(시장 자동 판별).
 - KRX 차단은 거래소 정책 변화로, 향후 로그인/OTP 기반 우회가 필요. 현재는 다음 금융이 동등 대체.
 - XAML은 컴파일 통과해도 런타임 로딩에서 깨질 수 있음 → 신규 WPF 창은 exe 스모크 실행 필수.

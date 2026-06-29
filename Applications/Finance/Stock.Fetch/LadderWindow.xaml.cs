@@ -14,6 +14,7 @@ public partial class LadderWindow : Window
 
     private readonly StockSeries _series;
     private readonly AppConfig _config;
+    private readonly Holding? _holding;
     private string _copyText = string.Empty;
     private bool _ready;
     private bool _suppress;   // 추세 적용으로 슬라이더 값을 코드가 바꿀 때 재계산 루프 방지
@@ -24,6 +25,9 @@ public partial class LadderWindow : Window
         NativeTheme.ApplyDarkTitleBar(this);
         _series = series;
         _config = config;
+
+        // 포트폴리오에 보유 중이면 평단을 래더 계산에 반영.
+        _holding = PortfolioStore.HoldingOf(PortfolioStore.Load(config), series.Code);
 
         string title = string.IsNullOrEmpty(series.Name) ? series.Code : $"{series.Name} ({series.Code})";
         TitleText.Text = $"{title} — 매수/익절 래더";
@@ -54,7 +58,8 @@ public partial class LadderWindow : Window
     private void Recompute()
     {
         bool useTrend = TrendCheck.IsChecked == true;
-        var p = new LadderParams(AggrSlider.Value / 100.0, SellSlider.Value / 100.0, useTrend);
+        var p = new LadderParams(AggrSlider.Value / 100.0, SellSlider.Value / 100.0, useTrend,
+            _holding?.Quantity ?? 0, _holding?.AvgPrice ?? 0m);
 
         LadderResult r;
         try { r = LadderCalculator.Calculate(_series, p); }
@@ -76,7 +81,9 @@ public partial class LadderWindow : Window
 
     private void Render(LadderResult r)
     {
-        SubText.Text = $"최근 {r.TradingDays}거래일 · 하방변동성 σ_down {r.SigmaDown}% · 평단 {Won(r.AvgPrice)}";
+        SubText.Text = r.HoldingQty > 0
+            ? $"최근 {r.TradingDays}거래일 · σ_down {r.SigmaDown}% · 신규 평단 {Won(r.AvgPrice)}  |  보유 {r.HoldingQty}주 @ {Won(r.HoldingAvg)} → 합산 평단 {Won(r.CombinedAvg)} (손절·익절 기준)"
+            : $"최근 {r.TradingDays}거래일 · 하방변동성 σ_down {r.SigmaDown}% · 평단 {Won(r.AvgPrice)}";
 
         AggrValueText.Text = $"{AggrLabel(r.BuyAggressiveness)} · {r.BuyAggressiveness * 100:0}%";
         SellValueText.Text = $"{SellLabel(r.SellStrength)} · {r.SellStrength * 100:0}%";
@@ -213,7 +220,10 @@ public partial class LadderWindow : Window
         sb.Append(title).Append(" — 매수/익절 래더\n");
         sb.Append($"최근 {r.TradingDays}거래일 · σ_down {r.SigmaDown}%\n");
         sb.Append($"공격성 매수 {r.BuyAggressiveness * 100:0}% / 익절 {r.SellStrength * 100:0}%");
-        sb.Append(r.TrendApplied ? $" (추세 자동: {r.TrendLabel})\n\n" : "\n\n");
+        sb.Append(r.TrendApplied ? $" (추세 자동: {r.TrendLabel})\n" : "\n");
+        if (r.HoldingQty > 0)
+            sb.Append($"보유 {r.HoldingQty}주 @ {Won(r.HoldingAvg)} → 합산평단 {Won(r.CombinedAvg)}\n");
+        sb.Append('\n');
         sb.Append($"전일저가\t{Won(r.PrevLow)}\n");
         sb.Append($"전일고가\t{Won(r.PrevHigh)}\n");
         sb.Append($"전일종가(정규)\t{Won(r.PrevClose)}\n");

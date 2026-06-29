@@ -45,6 +45,18 @@ public sealed class PriceSourceRegistry : IDisposable
     public Task<List<Candle>> KisMinutesAsync(string code, CancellationToken ct = default)
         => _kis.FetchTodayMinutesAsync(code, ct);
 
+    /// <summary>현재가(가장 최근 종가) 조회 — 자산 평가용. 네이버(무인증·빠름) 우선, 실패 시 null.</summary>
+    public async Task<decimal?> CurrentCloseAsync(string code, CancellationToken ct = default)
+    {
+        try
+        {
+            var to = DateTime.Today;
+            var series = await _sources[SourceKind.Naver].FetchAsync(code, to.AddDays(-12), to, ct);
+            return series.Candles.Count > 0 ? series.Candles[^1].Close : null;
+        }
+        catch { return null; }
+    }
+
     public IPriceSource Get(SourceKind kind) => _sources[kind];
 
     public IReadOnlyList<IPriceSource> All => _sources.Values.ToList();

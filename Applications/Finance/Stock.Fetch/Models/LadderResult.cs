@@ -42,4 +42,8 @@ public sealed record LadderResult(
     double[] FillProbs,        // 매수 호가별 추정 체결확률(0~1)
     double TrendScore,         // −1(하락)~+1(상승)
     string TrendLabel,         // 상승/중립/하락 + 구성 요약
-    bool TrendApplied);        // 추세 자동 반영 여부
+    bool TrendApplied,         // 추세 자동 반영 여부
+    // ── 보유 평단 반영(포트폴리오 연동) ──
+    int HoldingQty,            // 현재 보유 수량(0이면 미보유)
+    decimal HoldingAvg,        // 현재 보유 평단
+    decimal CombinedAvg);      // 보유+신규4주 합산 평단(손절·익절 기준). 미보유면 신규 평단과 동일

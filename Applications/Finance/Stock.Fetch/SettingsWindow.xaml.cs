@@ -16,6 +16,7 @@ public partial class SettingsWindow : Window
         KeyBox.Text = config.AppKey;
         SecretBox.Password = config.AppSecret;
         MockCheck.IsChecked = config.UseMockServer;
+        PortfolioPathBox.Text = config.PortfolioPath;
     }
 
     private void Save_Click(object sender, RoutedEventArgs e)
@@ -23,6 +24,7 @@ public partial class SettingsWindow : Window
         _config.AppKey = KeyBox.Text.Trim();
         _config.AppSecret = SecretBox.Password.Trim();
         _config.UseMockServer = MockCheck.IsChecked == true;
+        _config.PortfolioPath = PortfolioPathBox.Text.Trim();
         // 자격 변경 시 캐시 토큰 무효화
         _config.CachedToken = string.Empty;
         _config.TokenExpiresAt = DateTime.MinValue;

@@ -10,7 +10,9 @@ namespace Stock.Fetch.Services;
 public readonly record struct LadderParams(
     double BuyAggressiveness,
     double SellStrength,
-    bool UseTrend)
+    bool UseTrend,
+    int HoldingQty = 0,
+    decimal HoldingAvg = 0m)
 {
     /// <summary>기본=보수(기존 v1.3.0 방법론과 동일한 오프셋).</summary>
     public static LadderParams Conservative => new(0.0, 0.0, false);
@@ -90,11 +92,18 @@ public static class LadderCalculator
         decimal pLow = last.Low, pHigh = last.High, pClose = last.Close;
 
         var buys = offs.Select(o => Mround(pLow * (1 + (decimal)o / 100), 100)).ToArray();
-        decimal avg = buys.Average();
+        decimal avg = buys.Average();          // 신규 4주 래더 평단
         decimal total = buys.Sum();
-        decimal stop = Mround(avg * 0.92m, 100);
-        decimal loss = (avg - stop) * 4;
         decimal gap = Mround(pClose * 0.95m, 100);
+
+        // 보유 평단 반영: 보유 중이면 합산 평단(보유 + 신규4주)을 손절·익절 기준으로.
+        decimal combinedAvg = avg;
+        if (p.HoldingQty > 0 && p.HoldingAvg > 0)
+            combinedAvg = (p.HoldingQty * p.HoldingAvg + total) / (p.HoldingQty + 4);
+        decimal effAvg = combinedAvg;
+
+        decimal stop = Mround(effAvg * 0.92m, 100);
+        decimal loss = (effAvg - stop) * (p.HoldingQty + 4);
 
         // ── 매수 체결확률(정규근사: P(저가변화율 ≤ 오프셋)) ──
         double FillProb(int offPct) => sdLow <= 0
@@ -108,7 +117,7 @@ public static class LadderCalculator
         double sellFloorPct = Lerp(8, 14, aSell);                    // 방식 2 평단 가산%
         double atrMult = Lerp(2.0, 3.0, aSell);                      // 방식 4 ATR 배수
 
-        decimal Ret(decimal price) => avg == 0 ? 0 : price / avg - 1;
+        decimal Ret(decimal price) => effAvg == 0 ? 0 : price / effAvg - 1;
         // 매도 체결 = 당일 고가 ≥ 익절가 = 고가변화율 ≥ (익절가/전일고가 − 1).
         decimal ReachProb(decimal price)
         {
@@ -120,11 +129,11 @@ public static class LadderCalculator
         }
 
         decimal sHigh = Mround(pHigh * (1 + (decimal)sellOff / 100), 100);
-        decimal sFloor = Mround(avg * (1 + (decimal)sellFloorPct / 100), 100);
+        decimal sFloor = Mround(effAvg * (1 + (decimal)sellFloorPct / 100), 100);
         decimal medHigh = Median(win.TakeLast(5).Select(c => c.High).ToList());
         decimal sRecent = Mround(medHigh * (1 + (decimal)sellOff / 100), 100);
         decimal atr = Atr(win);
-        decimal sAtr = Mround(avg + (decimal)atrMult * atr, 100);
+        decimal sAtr = Mround(effAvg + (decimal)atrMult * atr, 100);
 
         var targets = new[]
         {
@@ -142,7 +151,8 @@ public static class LadderCalculator
             sellOff, Math.Round(atr), targets,
             (decimal)Math.Round(sigma, 2),
             aBuy, aSell, fillProbs,
-            trend.Score, trend.Label, p.UseTrend);
+            trend.Score, trend.Label, p.UseTrend,
+            p.HoldingQty, p.HoldingAvg, combinedAvg);
     }
 
     // ───────────────────────── 추세 점수 ─────────────────────────

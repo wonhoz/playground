@@ -404,6 +404,14 @@ public partial class MainWindow : Window
         new LadderWindow(_series, _config) { Owner = this }.Show();
     }
 
+    // ────────────────────────────── 내 자산(포트폴리오) ──────────────────────────────
+    private void Portfolio_Click(object sender, RoutedEventArgs e)
+    {
+        string code = CodeBox.Text.Trim();
+        string name = NameText.Text is "조회 중…" or "검색 중…" or "(이름 못 찾음)" or "(검색 결과 없음)" ? "" : NameText.Text;
+        new PortfolioWindow(_config, _registry, code, name) { Owner = this }.Show();
+    }
+
     // ────────────────────────────── 설정 ──────────────────────────────
     private void Settings_Click(object sender, RoutedEventArgs e)
     {

@@ -51,6 +51,10 @@ public sealed class AppConfig
     /// <summary>추세 자동 반영(켜면 슬라이더 자동 산정).</summary>
     public bool LadderUseTrend { get; set; } = false;
 
+    // ── 자산 포트폴리오 ──
+    /// <summary>포트폴리오 JSON 저장 경로(비어 있으면 문서\StockFetch\portfolio.json). Dropbox 등 동기화 폴더 권장.</summary>
+    public string PortfolioPath { get; set; } = string.Empty;
+
     // ── 캐시된 OAuth 토큰(만료 전까지 재사용) ──
     public string CachedToken { get; set; } = string.Empty;
     public DateTime TokenExpiresAt { get; set; } = DateTime.MinValue;

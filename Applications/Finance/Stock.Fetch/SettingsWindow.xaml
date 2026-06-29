@@ -1,7 +1,7 @@
 <Window x:Class="Stock.Fetch.SettingsWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="KIS Open API 키 설정" Height="370" Width="520"
+        Title="설정" Height="470" Width="520"
         Background="{StaticResource WindowBg}"
         WindowStartupLocation="CenterOwner" ResizeMode="NoResize">
     <Grid Margin="20" Background="{StaticResource WindowBg}">
@@ -28,6 +28,13 @@
 
         <CheckBox x:Name="MockCheck" Grid.Row="4" Content="모의투자 서버 사용 (테스트용 · 시세는 실전 권장)"
                   Margin="0,4,0,0"/>
+
+        <StackPanel Grid.Row="5" Margin="0,18,0,0">
+            <TextBlock Text="자산 포트폴리오 저장 경로" FontSize="15" FontWeight="SemiBold" Margin="0,0,0,4"/>
+            <TextBlock TextWrapping="Wrap" Foreground="{StaticResource FgMuted}" Margin="0,0,0,8"
+                       Text="매수/매도 기록(평단·실현손익)을 저장할 JSON 경로. Dropbox 등 동기화 폴더를 지정하면 어느 PC에서든 같은 자산 내역을 불러옵니다. 비워두면 문서\StockFetch\portfolio.json."/>
+            <TextBox x:Name="PortfolioPathBox"/>
+        </StackPanel>
 
         <StackPanel Grid.Row="6" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,16,0,0">
             <Button Content="취소" Width="90" Margin="0,0,8,0" Click="Cancel_Click"/>

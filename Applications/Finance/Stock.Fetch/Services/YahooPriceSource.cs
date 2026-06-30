@@ -28,12 +28,12 @@ public sealed class YahooPriceSource(HttpClient http) : IPriceSource
     }
 
     /// <summary>
-    /// 현재가 스냅샷(미국 종목 등 접미사 없는 글로벌 티커용). meta의 regularMarketPrice·chartPreviousClose로
-    /// 현재가·전일 대비 등락율을 계산한다. Yahoo 무료 시세는 약 15분 지연.
+    /// 현재가 스냅샷(미국 종목 등 접미사 없는 글로벌 티커용). includePrePost로 프리/정규/애프터마켓을 모두 받아
+    /// marketState에 맞는 가격을 선택하고, 전일 종가(chartPreviousClose) 대비 등락율을 계산한다.
     /// </summary>
     public async Task<Quote> FetchQuoteAsync(string symbol, CancellationToken ct = default)
     {
-        string url = $"https://query1.finance.yahoo.com/v8/finance/chart/{symbol}?range=1d&interval=1d";
+        string url = $"https://query1.finance.yahoo.com/v8/finance/chart/{symbol}?range=1d&interval=1d&includePrePost=true";
         string text;
         try
         {
@@ -56,12 +56,26 @@ public sealed class YahooPriceSource(HttpClient http) : IPriceSource
             throw new PriceSourceException($"Yahoo Finance에서 종목 '{symbol}' 데이터가 없습니다.");
 
         var meta = resultArr[0].GetProperty("meta");
-        decimal price = MetaDec(meta, "regularMarketPrice");
+        decimal reg = MetaDec(meta, "regularMarketPrice");
+        string state = meta.TryGetProperty("marketState", out var ms) && ms.ValueKind == JsonValueKind.String
+            ? ms.GetString()! : "";
+
+        // 세션에 맞는 현재가 선택: 프리마켓→preMarketPrice, 애프터마켓→postMarketPrice, 그 외→정규가.
+        decimal price = state switch
+        {
+            "PRE" or "PREPRE" => Pick(MetaDec(meta, "preMarketPrice"), reg),
+            "POST" or "POSTPOST" or "POSTCLOSE" => Pick(MetaDec(meta, "postMarketPrice"), reg),
+            _ => reg
+        };
+        if (price <= 0) price = reg;
+
         decimal prev = MetaDec(meta, "chartPreviousClose");
         if (prev <= 0) prev = MetaDec(meta, "previousClose");
         decimal rate = prev > 0 ? Math.Round((price / prev - 1) * 100, 2) : 0m;
         return new Quote(symbol, price, rate, DateTime.Now);
     }
+
+    private static decimal Pick(decimal primary, decimal fallback) => primary > 0 ? primary : fallback;
 
     private static decimal MetaDec(JsonElement meta, string prop)
         => meta.TryGetProperty(prop, out var v) && v.ValueKind == JsonValueKind.Number ? v.GetDecimal() : 0m;

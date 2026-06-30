@@ -41,8 +41,17 @@ public sealed class AlpacaPriceSource(AppConfig config, HttpClient http)
         using var doc = JsonDocument.Parse(text);
         var root = doc.RootElement;
 
-        // 최신 체결가: latestTrade.p, 없으면 dailyBar.c 폴백.
+        // 최신 체결가: latestTrade.p(세션 무관 마지막 체결). 프리/애프터엔 IEX 체결이 드물 수 있어
+        // 호가(latestQuote) 중간값으로 보완하고, 그래도 없으면 당일 정규봉 종가로 폴백.
         decimal price = SubDec(root, "latestTrade", "p");
+        if (price <= 0)
+        {
+            decimal ask = SubDec(root, "latestQuote", "ap");
+            decimal bid = SubDec(root, "latestQuote", "bp");
+            if (ask > 0 && bid > 0) price = Math.Round((ask + bid) / 2, 2);
+            else if (ask > 0) price = ask;
+            else if (bid > 0) price = bid;
+        }
         if (price <= 0) price = SubDec(root, "dailyBar", "c");
         if (price <= 0)
             throw new PriceSourceException($"Alpaca에서 종목 '{sym}' 시세를 찾지 못했습니다(티커를 확인하세요).");

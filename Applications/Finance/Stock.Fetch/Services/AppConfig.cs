@@ -18,6 +18,17 @@ public sealed class AppConfig
     /// <summary>true=모의투자(:29443), false=실전(:9443). 시세 조회는 실전 권장.</summary>
     public bool UseMockServer { get; set; } = false;
 
+    // ── 해외 실시간 시세 키(관심 종목 미국 종목용 · 선택) ──
+    /// <summary>Finnhub API Key(무료). 미국 종목 실시간 시세 소스.</summary>
+    public string FinnhubApiKey { get; set; } = string.Empty;
+    /// <summary>Alpaca API Key ID(무료). 미국 종목 실시간(IEX) 시세 소스.</summary>
+    public string AlpacaApiKeyId { get; set; } = string.Empty;
+    /// <summary>Alpaca API Secret Key.</summary>
+    public string AlpacaApiSecret { get; set; } = string.Empty;
+
+    [JsonIgnore] public bool HasFinnhubKey => !string.IsNullOrWhiteSpace(FinnhubApiKey);
+    [JsonIgnore] public bool HasAlpacaKeys => !string.IsNullOrWhiteSpace(AlpacaApiKeyId) && !string.IsNullOrWhiteSpace(AlpacaApiSecret);
+
     // ── 즐겨찾기 종목 ──
     public List<FavoriteStock> Favorites { get; set; } = new();
 

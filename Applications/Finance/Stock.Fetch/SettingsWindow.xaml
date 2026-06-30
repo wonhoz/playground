@@ -51,6 +51,17 @@
                     <Button Grid.Column="1" Content="찾기" Width="80" Margin="8,0,0,0" Click="BrowsePortfolio_Click"/>
                 </Grid>
 
+                <!-- 해외 실시간 시세 키 -->
+                <TextBlock Text="해외 실시간 시세 키 (관심 종목 · 미국)" Style="{StaticResource Section}"/>
+                <TextBlock Style="{StaticResource Hint}"
+                           Text="미국 종목 실시간 시세 소스입니다. 무료 키만 발급해 넣으면 됩니다(Yahoo는 키 없이 동작하나 약 15분 지연). 키는 이 PC의 %LocalAppData%에만 저장됩니다."/>
+                <TextBlock Text="Finnhub API Key (finnhub.io · 실시간)" Style="{StaticResource FieldLbl}"/>
+                <TextBox x:Name="FinnhubKeyBox" Margin="0,0,0,10"/>
+                <TextBlock Text="Alpaca API Key ID (alpaca.markets · 실시간 IEX)" Style="{StaticResource FieldLbl}"/>
+                <TextBox x:Name="AlpacaKeyIdBox" Margin="0,0,0,10"/>
+                <TextBlock Text="Alpaca API Secret Key" Style="{StaticResource FieldLbl}"/>
+                <PasswordBox x:Name="AlpacaSecretBox" Margin="0,0,0,10"/>
+
                 <!-- Slack -->
                 <TextBlock Text="Slack 알림" Style="{StaticResource Section}"/>
                 <TextBlock Style="{StaticResource Hint}"

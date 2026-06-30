@@ -21,6 +21,10 @@ public partial class SettingsWindow : Window
         MockCheck.IsChecked = config.UseMockServer;
         PortfolioPathBox.Text = config.PortfolioPath;
 
+        FinnhubKeyBox.Text = config.FinnhubApiKey;
+        AlpacaKeyIdBox.Text = config.AlpacaApiKeyId;
+        AlpacaSecretBox.Password = config.AlpacaApiSecret;
+
         SlackUrlBox.Text = config.SlackWebhookUrl;
         SlackChannelBox.Text = config.SlackChannel;
         MonitorCheck.IsChecked = config.MonitorEnabled;
@@ -83,6 +87,10 @@ public partial class SettingsWindow : Window
         _config.AppSecret = SecretBox.Password.Trim();
         _config.UseMockServer = MockCheck.IsChecked == true;
         _config.PortfolioPath = PortfolioPathBox.Text.Trim();
+
+        _config.FinnhubApiKey = FinnhubKeyBox.Text.Trim();
+        _config.AlpacaApiKeyId = AlpacaKeyIdBox.Text.Trim();
+        _config.AlpacaApiSecret = AlpacaSecretBox.Password.Trim();
 
         _config.SlackWebhookUrl = SlackUrlBox.Text.Trim();
         _config.SlackChannel = SlackChannelBox.Text.Trim();

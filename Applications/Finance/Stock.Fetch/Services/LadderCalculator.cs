@@ -32,8 +32,10 @@ public readonly record struct LadderParams(
 /// </summary>
 public static class LadderCalculator
 {
-    /// <summary>방법론 전제: 11거래일(→10개 일일변화율).</summary>
+    /// <summary>최소 표본: 11거래일(→10개 일일변화율). 백분위·σ_down은 조회한 전체 기간으로 계산한다.</summary>
     public const int RequiredDays = 11;
+    /// <summary>ATR 고정 기간(표준 14). 표본 윈도우와 무관하게 최근 14개 True Range로 계산.</summary>
+    public const int AtrPeriod = 14;
 
     public static LadderResult Calculate(StockSeries series) => Calculate(series, LadderParams.Conservative);
 
@@ -44,10 +46,10 @@ public static class LadderCalculator
             throw new InvalidOperationException(
                 $"매수/익절 계산에는 최소 {RequiredDays}거래일이 필요합니다(현재 {all.Count}일). 기간을 늘려 다시 조회하세요.");
 
-        // 최근 11거래일(오래된→최신).
-        var win = all.Skip(all.Count - RequiredDays).ToList();
+        // 표본 = 조회한 전체 기간(오래된→최신). 조회 기간을 바꾸면 표본 기간도 함께 바뀐다.
+        var win = all;
 
-        // 일일변화율(10개).
+        // 일일변화율(전체 기간 → all.Count−1개).
         var lowCh = new List<double>();
         var highCh = new List<double>();
         for (int i = 1; i < win.Count; i++)
@@ -132,7 +134,7 @@ public static class LadderCalculator
         decimal sFloor = Mround(effAvg * (1 + (decimal)sellFloorPct / 100), 100);
         decimal medHigh = Median(win.TakeLast(5).Select(c => c.High).ToList());
         decimal sRecent = Mround(medHigh * (1 + (decimal)sellOff / 100), 100);
-        decimal atr = Atr(win);
+        decimal atr = Atr(all.TakeLast(AtrPeriod + 1).ToList());   // 표본과 무관하게 최근 14 TR 고정
         decimal sAtr = Mround(effAvg + (decimal)atrMult * atr, 100);
 
         var targets = new[]

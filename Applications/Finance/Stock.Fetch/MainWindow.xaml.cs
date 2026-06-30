@@ -338,6 +338,26 @@ public partial class MainWindow : Window
         SummaryText.Text = $"🗑 즐겨찾기 제거: {f.Code}  {f.Name}";
     }
 
+    private void FavUp_Click(object sender, RoutedEventArgs e) => MoveFavorite(-1);
+    private void FavDown_Click(object sender, RoutedEventArgs e) => MoveFavorite(+1);
+
+    /// <summary>선택된 즐겨찾기를 한 칸 위(-1)/아래(+1)로 이동하고 저장.</summary>
+    private void MoveFavorite(int dir)
+    {
+        if (FavCombo.SelectedItem is not FavoriteStock f)
+        {
+            ShowError("순서를 바꿀 즐겨찾기를 콤보에서 선택하세요.");
+            return;
+        }
+        int i = _config.Favorites.IndexOf(f);
+        int j = i + dir;
+        if (i < 0 || j < 0 || j >= _config.Favorites.Count) return;
+        (_config.Favorites[i], _config.Favorites[j]) = (_config.Favorites[j], _config.Favorites[i]);
+        _config.Save();
+        RefreshFavorites();
+        FavCombo.SelectedItem = _config.Favorites.FirstOrDefault(x => x.Code == f.Code);
+    }
+
     // ────────────────────────────── 조회 ──────────────────────────────
     private async void Fetch_Click(object sender, RoutedEventArgs e)
     {

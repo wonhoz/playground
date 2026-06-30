@@ -65,9 +65,11 @@
             <TextBlock Text="목록" Style="{StaticResource SectionHeader}"/>
             <StackPanel Grid.Column="1" Orientation="Horizontal">
                 <Button Content="🔄 현재가 갱신" Width="120" Margin="0,0,10,0" x:Name="RefreshBtn" Click="Refresh_Click"/>
-                <Button Content="＋ 추가" Width="76" Margin="0,0,6,0" Click="Add_Click"/>
-                <Button Content="✎ 수정" Width="76" Margin="0,0,6,0" Click="Edit_Click"/>
-                <Button Content="🗑 삭제" Width="76" Click="Delete_Click"/>
+                <Button Content="＋ 추가" Width="70" Margin="0,0,6,0" Click="Add_Click"/>
+                <Button Content="✎ 수정" Width="70" Margin="0,0,6,0" Click="Edit_Click"/>
+                <Button Content="🗑 삭제" Width="70" Margin="0,0,10,0" Click="Delete_Click"/>
+                <Button Content="▲" Width="34" Margin="0,0,4,0" Click="MoveUp_Click" ToolTip="선택 종목을 위로"/>
+                <Button Content="▼" Width="34" Click="MoveDown_Click" ToolTip="선택 종목을 아래로"/>
             </StackPanel>
         </Grid>
 
@@ -75,7 +77,10 @@
         <DataGrid Grid.Row="3" x:Name="WatchGrid" AutoGenerateColumns="False" IsReadOnly="True"
                   HeadersVisibility="Column" GridLinesVisibility="Horizontal"
                   ColumnHeaderStyle="{StaticResource DarkColHeader}" CanUserAddRows="False"
-                  SelectionMode="Extended" MouseDoubleClick="Edit_Click">
+                  SelectionMode="Extended" MouseDoubleClick="Edit_Click"
+                  AllowDrop="True" PreviewMouseLeftButtonDown="WatchGrid_PreviewMouseLeftButtonDown"
+                  PreviewMouseMove="WatchGrid_PreviewMouseMove"
+                  DragOver="WatchGrid_DragOver" Drop="WatchGrid_Drop">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="종목" Binding="{Binding Display}" Width="*"/>
                 <DataGridTextColumn Header="시장" Binding="{Binding MarketLabel}" Width="60"/>

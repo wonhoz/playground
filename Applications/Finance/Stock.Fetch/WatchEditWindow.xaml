@@ -33,11 +33,14 @@
                    Foreground="{StaticResource FgBrush}" Margin="0,0,0,16"/>
 
         <TextBlock Grid.Row="1" Grid.Column="0" Text="시장" Style="{StaticResource FieldLbl}"/>
-        <ComboBox Grid.Row="1" Grid.Column="1" x:Name="MarketCombo" Margin="0,0,0,10"
-                  SelectionChanged="Market_SelectionChanged">
-            <ComboBoxItem Content="국내 (KR)"/>
-            <ComboBoxItem Content="미국 (US)"/>
-        </ComboBox>
+        <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" Margin="0,0,0,10">
+            <ComboBox x:Name="MarketCombo" Width="150" SelectionChanged="Market_SelectionChanged">
+                <ComboBoxItem Content="국내 (KR)"/>
+                <ComboBoxItem Content="미국 (US)"/>
+            </ComboBox>
+            <CheckBox x:Name="IndexCheck" Content="지수(업종)" VerticalAlignment="Center" Margin="12,0,0,0"
+                      Click="Index_Click" ToolTip="국내 업종/지수(코스피 0001·코스닥 1001·코스피200 2001). KIS로 조회."/>
+        </StackPanel>
 
         <TextBlock Grid.Row="2" Grid.Column="0" x:Name="SymbolLbl" Text="종목코드" Style="{StaticResource FieldLbl}"/>
         <Grid Grid.Row="2" Grid.Column="1" Margin="0,0,0,10">
@@ -66,7 +69,7 @@
 
         <TextBlock Grid.Row="7" Grid.ColumnSpan="2" x:Name="HintText" Style="{x:Null}" TextWrapping="Wrap"
                    FontSize="11" Foreground="{StaticResource FgMuted}" VerticalAlignment="Top" Margin="0,4,0,0"
-                   Text="미국 종목은 티커(예: TSLA, SOXL, SPCX)를 입력하세요. 프리·정규·애프터마켓을 모두 받으려면 Yahoo 권장(세션별 가격 자동 선택). Finnhub·Alpaca는 정규장 위주이며 Alpaca는 호가로 확장시간 일부 보완. 추세 조건을 비우면 관심 종목 창의 전역 조건을 사용합니다."/>
+                   Text="미국 종목은 티커(예: TSLA, SOXL, SPCX). 프리·정규·애프터를 모두 받으려면 Yahoo 권장. 지수(업종) 체크 시 코스피 0001·코스닥 1001·코스피200 2001 코드를 입력하면 KIS로 조회합니다(KIS 키 필요). 추세 조건을 비우면 전역 조건을 사용합니다."/>
 
         <StackPanel Grid.Row="8" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right">
             <TextBlock x:Name="ErrorText" Foreground="{StaticResource BearBrush}" VerticalAlignment="Center" Margin="0,0,12,0"/>

@@ -78,7 +78,8 @@ public sealed class SlackNotifier(AppConfig config) : IDisposable
     }
 
     private static string FormatPrice(WatchItem item, decimal price)
-        => item.Market == MarketKind.US ? $"${price:N2}" : $"{price:N0}원";
+        => item.IsIndex ? $"{price:N2}p"
+           : item.Market == MarketKind.US ? $"${price:N2}" : $"{price:N0}원";
 
     /// <summary>시세 조회 연속 실패 알림(엣지 — 임계 도달 시 1회).</summary>
     public async Task SendFetchFailureAsync(string display, string context, string source, string reason, int fails, CancellationToken ct = default)

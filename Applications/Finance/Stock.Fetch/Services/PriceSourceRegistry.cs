@@ -85,6 +85,10 @@ public sealed class PriceSourceRegistry : IDisposable
     /// </summary>
     public async Task<Quote> WatchQuoteAsync(WatchItem item, CancellationToken ct = default)
     {
+        // 국내 업종/지수(코스피 0001 등)는 KIS 지수 엔드포인트로 조회.
+        if (item.IsIndex)
+            return await _kis.FetchIndexQuoteAsync(item.Symbol, ct);
+
         if (item.Market == MarketKind.US)
         {
             // 프리/애프터마켓엔 Yahoo로 고정(설정 시) — Finnhub·Alpaca 무료는 확장시간을 잘 주지 않으므로.

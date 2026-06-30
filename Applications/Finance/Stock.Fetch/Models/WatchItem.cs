@@ -22,14 +22,17 @@ public sealed class WatchItem
     /// <summary>미국 + KIS 소스용 거래소 코드(NAS=나스닥, NYS=뉴욕, AMS=아멕스/Arca). 그 외 빈값.</summary>
     public string Exchange { get; set; } = "NAS";
 
+    /// <summary>국내 업종/지수 여부(코스피 0001·코스닥 1001·코스피200 2001 등). KIS 지수 엔드포인트로 조회한다.</summary>
+    public bool IsIndex { get; set; } = false;
+
     /// <summary>이 종목 전용 추세 조건 목록. 비어 있으면 전역 설정(WatchRules)을 사용한다.</summary>
     public List<TrendRule> Rules { get; set; } = new();
 
     /// <summary>그리드 표시용: 전용 조건이 있으면 요약, 없으면 "전역".</summary>
     public string RulesLabel => Rules.Count > 0 ? TrendRule.Summary(Rules) : "전역";
 
-    public string MarketLabel => Market == MarketKind.US ? "미국" : "국내";
-    public string SourceLabel => Source switch
+    public string MarketLabel => IsIndex ? "지수" : Market == MarketKind.US ? "미국" : "국내";
+    public string SourceLabel => IsIndex ? "KIS" : Source switch
     {
         WatchSource.Naver => "네이버",
         WatchSource.Yahoo => "Yahoo",

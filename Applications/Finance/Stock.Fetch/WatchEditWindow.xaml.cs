@@ -25,12 +25,37 @@ public partial class WatchEditWindow : Window
         _registry = registry;
 
         HeaderText.Text = isNew ? "관심 종목 추가" : "관심 종목 수정";
+        IndexCheck.IsChecked = item.IsIndex;
         MarketCombo.SelectedIndex = item.Market == MarketKind.US ? 1 : 0; // SelectionChanged가 소스 콤보 채움
         SymbolBox.Text = item.Symbol;
         NameBox.Text = item.Name;
         RulesBox.Text = TrendRule.ToText(item.Rules);
         SelectSource(item.Source);
         SelectExchange(item.Exchange);
+        ApplyIndexMode();
+    }
+
+    private bool IsIndex => IndexCheck.IsChecked == true;
+
+    private void Index_Click(object sender, RoutedEventArgs e)
+    {
+        if (IsIndex) MarketCombo.SelectedIndex = 0; // 지수는 국내
+        ApplyIndexMode();
+    }
+
+    /// <summary>지수 모드: 시장/소스 콤보 비활성(국내·KIS 고정), 라벨·힌트 갱신.</summary>
+    private void ApplyIndexMode()
+    {
+        bool idx = IsIndex;
+        MarketCombo.IsEnabled = !idx;
+        SourceCombo.IsEnabled = !idx;
+        if (idx)
+        {
+            SymbolLbl.Text = "지수코드";
+            LookupBtn.IsEnabled = false;
+            ExchangeCombo.IsEnabled = false;
+        }
+        else UpdateLabels();
     }
 
     private MarketKind CurrentMarket => MarketCombo.SelectedIndex == 1 ? MarketKind.US : MarketKind.KR;
@@ -98,16 +123,29 @@ public partial class WatchEditWindow : Window
     private void Save_Click(object sender, RoutedEventArgs e)
     {
         string symbol = SymbolBox.Text.Trim();
-        var market = CurrentMarket;
         if (string.IsNullOrEmpty(symbol)) { Error("종목코드/티커를 입력하세요."); return; }
-        if (market == MarketKind.KR && (symbol.Length is < 5 or > 6 || !symbol.All(char.IsDigit)))
-        { Error("국내 종목코드는 6자리 숫자입니다(예: 005930)."); return; }
-        if (SourceCombo.SelectedItem is not SourceOption opt) { Error("시세 소스를 선택하세요."); return; }
 
-        _item.Market = market;
-        _item.Symbol = market == MarketKind.US ? symbol.ToUpperInvariant() : symbol;
-        _item.Name = NameBox.Text.Trim() is "조회 중…" ? "" : NameBox.Text.Trim();
-        _item.Source = opt.Source;
+        _item.IsIndex = IsIndex;
+        if (IsIndex)
+        {
+            if (!symbol.All(char.IsDigit) || symbol.Length is < 1 or > 6)
+            { Error("지수 코드는 숫자입니다(코스피 0001·코스닥 1001·코스피200 2001)."); return; }
+            _item.Market = MarketKind.KR;
+            _item.Symbol = symbol;
+        }
+        else
+        {
+            var market = CurrentMarket;
+            if (market == MarketKind.KR && (symbol.Length is < 5 or > 6 || !symbol.All(char.IsDigit)))
+            { Error("국내 종목코드는 6자리 숫자입니다(예: 005930)."); return; }
+            _item.Market = market;
+            _item.Symbol = market == MarketKind.US ? symbol.ToUpperInvariant() : symbol;
+        }
+
+        if (SourceCombo.SelectedItem is SourceOption opt) _item.Source = opt.Source;
+        string name = NameBox.Text.Trim() is "조회 중…" ? "" : NameBox.Text.Trim();
+        if (IsIndex && string.IsNullOrEmpty(name)) name = IndexName(symbol);   // 알려진 지수 기본 이름
+        _item.Name = name;
         _item.Exchange = (ExchangeCombo.SelectedItem as ComboBoxItem)?.Tag as string ?? "NAS";
 
         // 추세 조건(전용) — 비우면 전역 사용. 형식: "3:1, 5:2".
@@ -122,6 +160,14 @@ public partial class WatchEditWindow : Window
 
         DialogResult = true;
     }
+
+    private static string IndexName(string code) => code switch
+    {
+        "0001" => "코스피",
+        "1001" => "코스닥",
+        "2001" => "코스피200",
+        _ => ""
+    };
 
     private void Error(string msg) => ErrorText.Text = "⚠ " + msg;
     private void Cancel_Click(object sender, RoutedEventArgs e) => DialogResult = false;

@@ -146,6 +146,41 @@ public sealed class KisPriceSource(AppConfig config, Action saveConfig, HttpClie
     }
 
     /// <summary>
+    /// 국내 업종/지수 현재가 조회 — inquire-index-price(FHPUP02100000). 코스피 0001·코스닥 1001·코스피200 2001 등.
+    /// output.bstp_nmix_prpr(지수 현재가)·bstp_nmix_prdy_ctrt(전일 대비율 %).
+    /// </summary>
+    public async Task<Quote> FetchIndexQuoteAsync(string code, CancellationToken ct = default)
+    {
+        if (!config.HasKisCredentials)
+            throw new PriceSourceException("KIS APP KEY / APP SECRET이 설정되지 않았습니다. 설정에서 입력하세요.");
+
+        string query = $"FID_COND_MRKT_DIV_CODE=U&FID_INPUT_ISCD={code.Trim()}";
+        string token = await EnsureTokenAsync(ct);
+        using var req = new HttpRequestMessage(HttpMethod.Get,
+            $"{BaseUrl}/uapi/domestic-stock/v1/quotations/inquire-index-price?{query}");
+        req.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
+        req.Headers.Add("appkey", config.AppKey);
+        req.Headers.Add("appsecret", config.AppSecret);
+        req.Headers.Add("tr_id", "FHPUP02100000");
+        req.Headers.Add("custtype", "P");
+
+        using var resp = await http.SendAsync(req, ct);
+        string text = await resp.Content.ReadAsStringAsync(ct);
+        using var doc = JsonDocument.Parse(text);
+        var root = doc.RootElement;
+        if (root.TryGetProperty("rt_cd", out var rt) && rt.GetString() != "0")
+        {
+            string msg = root.TryGetProperty("msg1", out var m) ? m.GetString() ?? text : text;
+            throw new PriceSourceException($"KIS 지수 응답 오류: {msg.Trim()}");
+        }
+        var o = root.GetProperty("output");
+        decimal idx = ParseDecimal(o, "bstp_nmix_prpr");
+        if (idx <= 0)
+            throw new PriceSourceException($"KIS 지수 데이터가 없습니다('{code}'). 지수 코드를 확인하세요(코스피 0001·코스닥 1001).");
+        return new Quote(code, idx, ParseDecimal(o, "bstp_nmix_prdy_ctrt"), DateTime.Now);
+    }
+
+    /// <summary>
     /// 해외주식 현재가(실시간) 조회 — overseas-price/price(HHDFS00000300). 관심 종목(미국) 모니터링용.
     /// exchange: NAS(나스닥)/NYS(뉴욕)/AMS(아멕스·Arca). output.last(현재가)·output.rate(등락율%).
     /// </summary>

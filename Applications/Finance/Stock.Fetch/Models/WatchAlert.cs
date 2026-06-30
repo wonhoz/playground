@@ -20,5 +20,6 @@ public sealed record WatchAlert(
     public bool IsUp => IsStartup ? CurrentRate >= 0 : CurrentRate >= RefRate;
     /// <summary>기준값 대비 변화량(%포인트, 부호 포함).</summary>
     public decimal Delta => CurrentRate - RefRate;
-    public string PriceText => Item.Market == MarketKind.US ? $"${Price:N2}" : $"{Price:N0}원";
+    public string PriceText => Item.IsIndex ? $"{Price:N2}p"
+        : Item.Market == MarketKind.US ? $"${Price:N2}" : $"{Price:N0}원";
 }

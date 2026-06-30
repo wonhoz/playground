@@ -16,6 +16,7 @@ public partial class MainWindow : Window
     // 트레이 상주 + 보유 종목 모니터링
     private readonly SlackNotifier _slack;
     private readonly PortfolioMonitor _monitor;
+    private readonly WatchlistMonitor _watch;
     private readonly TrayManager _tray;
     private bool _reallyExit;
     private bool _trayHintShown;
@@ -63,6 +64,9 @@ public partial class MainWindow : Window
         _slack = new SlackNotifier(_config);
         _monitor = new PortfolioMonitor(_config, _registry, _slack);
         _monitor.AlertRaised += OnAlertRaised;
+        _watch = new WatchlistMonitor(_config, _registry, _slack);
+        _watch.WatchAlertRaised += OnWatchAlertRaised;
+        _watch.DigestReady += OnWatchDigest;
         _tray = new TrayManager();
         _tray.OpenRequested += ShowFromTray;
         _tray.ToggleMonitorRequested += ToggleMonitor;
@@ -72,11 +76,30 @@ public partial class MainWindow : Window
         Loaded += (_, _) =>
         {
             if (_config.MonitorEnabled) StartMonitor();
+            if (_config.WatchEnabled) _watch.Start();
             _tray.ShowBalloon("Stock.Fetch", _config.MonitorEnabled
                 ? "보유 종목 모니터링 중입니다. 창을 닫아도 트레이에서 계속 실행됩니다."
                 : "트레이에 상주합니다. 설정에서 모니터링을 켜면 보유 종목을 감시합니다.");
         };
     }
+
+    private void OnWatchAlertRaised(Models.WatchItem item, decimal price, decimal rate, double signedThreshold) => Dispatcher.Invoke(() =>
+    {
+        bool up = signedThreshold >= 0;
+        string arrow = up ? "▲" : "▼";
+        string priceText = item.Market == Models.MarketKind.US ? $"${price:N2}" : $"{price:N0}원";
+        _tray.ShowBalloon(
+            $"⭐ {item} {arrow} {rate:+0.0;-0.0}%",
+            $"현재가 {priceText} · {item.MarketLabel} · 소스 {item.SourceLabel}",
+            warning: !up);
+    });
+
+    private void OnWatchDigest(IReadOnlyList<WatchQuote> quotes) => Dispatcher.Invoke(() =>
+    {
+        string body = string.Join("\n", quotes.Take(6).Select(q =>
+            $"{q.Item} {(q.ChangeRate >= 0 ? "▲" : "▼")} {q.ChangeRate:+0.0;-0.0;0.0}%"));
+        _tray.ShowBalloon($"⭐ 관심 종목 시세 ({quotes.Count}종목)", body);
+    });
 
     // ───────────────────────── 트레이/모니터링 ─────────────────────────
 
@@ -132,6 +155,7 @@ public partial class MainWindow : Window
         }
         SaveState();
         _monitor.Dispose();
+        _watch.Dispose();
         _slack.Dispose();
         _tray.Dispose();
         _registry.Dispose();
@@ -495,6 +519,18 @@ public partial class MainWindow : Window
         string code = CodeBox.Text.Trim();
         string name = NameText.Text is "조회 중…" or "검색 중…" or "(이름 못 찾음)" or "(검색 결과 없음)" ? "" : NameText.Text;
         new PortfolioWindow(_config, _registry, code, name) { Owner = this }.Show();
+    }
+
+    // ────────────────────────────── 관심 종목(워치리스트) ──────────────────────────────
+    private void Watchlist_Click(object sender, RoutedEventArgs e)
+    {
+        var win = new WatchlistWindow(_config, _registry, _watch) { Owner = this };
+        win.MonitorToggled += on => Dispatcher.Invoke(() =>
+        {
+            if (on && !_watch.IsRunning) _watch.Start();
+            else if (!on && _watch.IsRunning) _watch.Stop();
+        });
+        win.Show();
     }
 
     // ────────────────────────────── 설정 ──────────────────────────────

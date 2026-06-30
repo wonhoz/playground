@@ -143,6 +143,42 @@ public sealed class KisPriceSource(AppConfig config, Action saveConfig, HttpClie
         return new Quote(code, ParseDecimal(o, "stck_prpr"), ParseDecimal(o, "prdy_ctrt"), DateTime.Now);
     }
 
+    /// <summary>
+    /// 해외주식 현재가(실시간) 조회 — overseas-price/price(HHDFS00000300). 관심 종목(미국) 모니터링용.
+    /// exchange: NAS(나스닥)/NYS(뉴욕)/AMS(아멕스·Arca). output.last(현재가)·output.rate(등락율%).
+    /// </summary>
+    public async Task<Quote> FetchOverseasQuoteAsync(string exchange, string symbol, CancellationToken ct = default)
+    {
+        if (!config.HasKisCredentials)
+            throw new PriceSourceException("KIS APP KEY / APP SECRET이 설정되지 않았습니다. 설정에서 입력하세요.");
+
+        string excd = string.IsNullOrWhiteSpace(exchange) ? "NAS" : exchange.Trim().ToUpperInvariant();
+        string query = $"AUTH=&EXCD={excd}&SYMB={symbol.Trim().ToUpperInvariant()}";
+        string token = await EnsureTokenAsync(ct);
+        using var req = new HttpRequestMessage(HttpMethod.Get,
+            $"{BaseUrl}/uapi/overseas-price/v1/quotations/price?{query}");
+        req.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
+        req.Headers.Add("appkey", config.AppKey);
+        req.Headers.Add("appsecret", config.AppSecret);
+        req.Headers.Add("tr_id", "HHDFS00000300");
+        req.Headers.Add("custtype", "P");
+
+        using var resp = await http.SendAsync(req, ct);
+        string text = await resp.Content.ReadAsStringAsync(ct);
+        using var doc = JsonDocument.Parse(text);
+        var root = doc.RootElement;
+        if (root.TryGetProperty("rt_cd", out var rt) && rt.GetString() != "0")
+        {
+            string msg = root.TryGetProperty("msg1", out var m) ? m.GetString() ?? text : text;
+            throw new PriceSourceException($"KIS 해외 현재가 응답 오류: {msg.Trim()}");
+        }
+        var o = root.GetProperty("output");
+        decimal last = ParseDecimal(o, "last");
+        if (last <= 0)
+            throw new PriceSourceException($"KIS 해외 현재가 데이터가 없습니다('{excd}:{symbol}'). 거래소 코드를 확인하세요.");
+        return new Quote(symbol, last, ParseDecimal(o, "rate"), DateTime.Now);
+    }
+
     /// <summary>당일 분봉 1페이지(최대 30건, inputHour 시각 이전) 조회.</summary>
     private async Task<List<Candle>> FetchMinutePageAsync(string code, string inputHour, CancellationToken ct)
     {

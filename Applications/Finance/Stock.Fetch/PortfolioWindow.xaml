@@ -47,7 +47,11 @@
         <Grid Grid.Row="1" Margin="0,16,0,6">
             <Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
             <TextBlock Text="보유 현황 (이동평균 평단)" Style="{StaticResource SectionHeader}"/>
-            <Button Grid.Column="1" x:Name="RefreshBtn" Content="🔄 현재가 갱신" Width="130" Click="Refresh_Click"/>
+            <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+                <CheckBox x:Name="AutoRefreshCheck" Content="자동 갱신" VerticalAlignment="Center"
+                          Margin="0,0,10,0" Click="AutoRefresh_Click"/>
+                <Button x:Name="RefreshBtn" Content="🔄 현재가 갱신" Width="130" Click="Refresh_Click"/>
+            </StackPanel>
         </Grid>
 
         <!-- 보유 DataGrid -->
@@ -106,7 +110,7 @@
         <DataGrid Grid.Row="5" x:Name="TradesGrid" AutoGenerateColumns="False" IsReadOnly="True"
                   HeadersVisibility="Column" GridLinesVisibility="Horizontal"
                   ColumnHeaderStyle="{StaticResource DarkColHeader}" CanUserAddRows="False"
-                  SelectionMode="Single" MouseDoubleClick="Edit_Click">
+                  SelectionMode="Extended" MouseDoubleClick="Edit_Click">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="날짜" Binding="{Binding DateText}" Width="100"/>
                 <DataGridTextColumn Header="종목" Binding="{Binding Display}" Width="*"/>

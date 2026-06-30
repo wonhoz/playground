@@ -11,13 +11,17 @@ public partial class TradeEditWindow : Window
 {
     private readonly Trade _trade;
     private readonly PriceSourceRegistry _registry;
+    private readonly AppConfig _config;
 
-    public TradeEditWindow(Trade trade, PriceSourceRegistry registry)
+    public TradeEditWindow(Trade trade, PriceSourceRegistry registry, AppConfig config)
     {
         InitializeComponent();
         NativeTheme.ApplyDarkTitleBar(this);
         _trade = trade;
         _registry = registry;
+        _config = config;
+
+        FavCombo.ItemsSource = _config.Favorites;
 
         HeaderText.Text = _trade.Side == TradeSide.Buy ? "매수 기록" : "매도 기록";
         CodeBox.Text = trade.Code;
@@ -27,6 +31,16 @@ public partial class TradeEditWindow : Window
         PriceBox.Text = trade.Price > 0 ? trade.Price.ToString("0.##") : string.Empty;
         QtyBox.Text = trade.Quantity > 0 ? trade.Quantity.ToString() : string.Empty;
         NoteBox.Text = trade.Note;
+    }
+
+    private void Fav_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        if (!IsLoaded) return;
+        if (FavCombo.SelectedItem is FavoriteStock f)
+        {
+            CodeBox.Text = f.Code;
+            NameBox.Text = f.Name;
+        }
     }
 
     private async void Lookup_Click(object sender, RoutedEventArgs e)

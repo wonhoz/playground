@@ -3,6 +3,7 @@ using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Threading;
 using Stock.Fetch.Models;
 using Stock.Fetch.Services;
 
@@ -16,6 +17,7 @@ public partial class PortfolioWindow : Window
     private readonly string _prefName;
     private Portfolio _pf;
     private readonly Dictionary<string, decimal?> _current = new();
+    private readonly DispatcherTimer _autoTimer = new();
 
     public PortfolioWindow(AppConfig config, PriceSourceRegistry registry, string prefillCode, string prefillName)
     {
@@ -29,6 +31,10 @@ public partial class PortfolioWindow : Window
         _pf = PortfolioStore.Load(config);
         PathText.Text = PortfolioStore.ResolvePath(config);
         RenderAll();
+
+        _autoTimer.Tick += async (_, _) => await RefreshPricesAsync();
+        AutoRefreshCheck.IsChecked = _config.PortfolioAutoRefresh;
+        if (_config.PortfolioAutoRefresh) StartAutoRefresh();
     }
 
     // ───────────────────────── 렌더 ─────────────────────────
@@ -78,7 +84,10 @@ public partial class PortfolioWindow : Window
 
     // ───────────────────────── 현재가 갱신 ─────────────────────────
 
-    private async void Refresh_Click(object sender, RoutedEventArgs e)
+    private async void Refresh_Click(object sender, RoutedEventArgs e) => await RefreshPricesAsync();
+
+    /// <summary>보유 종목 현재가를 일괄 조회해 갱신(수동 버튼·자동 타이머 공용).</summary>
+    private async Task RefreshPricesAsync()
     {
         var codes = PortfolioStore.Holdings(_pf).Where(h => h.Quantity > 0).Select(h => h.Code).ToList();
         if (codes.Count == 0) return;
@@ -98,6 +107,29 @@ public partial class PortfolioWindow : Window
         }
     }
 
+    private void AutoRefresh_Click(object sender, RoutedEventArgs e)
+    {
+        if (!IsLoaded) return;
+        bool on = AutoRefreshCheck.IsChecked == true;
+        _config.PortfolioAutoRefresh = on;
+        _config.Save();
+        if (on) StartAutoRefresh();
+        else _autoTimer.Stop();
+    }
+
+    private async void StartAutoRefresh()
+    {
+        _autoTimer.Interval = TimeSpan.FromSeconds(Math.Max(10, _config.PortfolioRefreshSeconds));
+        _autoTimer.Start();
+        await RefreshPricesAsync(); // 켜는 즉시 1회 갱신
+    }
+
+    protected override void OnClosed(EventArgs e)
+    {
+        _autoTimer.Stop();
+        base.OnClosed(e);
+    }
+
     // ───────────────────────── 매매 추가/수정/삭제 ─────────────────────────
 
     private void AddBuy_Click(object sender, RoutedEventArgs e) => AddTrade(TradeSide.Buy);
@@ -110,7 +142,7 @@ public partial class PortfolioWindow : Window
         if (HoldingsGrid.SelectedItem is HoldingRow hr) { code = hr.Code; name = hr.Name; }
 
         var t = new Trade { Code = code, Name = name, Side = side };
-        var dlg = new TradeEditWindow(t, _registry) { Owner = this };
+        var dlg = new TradeEditWindow(t, _registry, _config) { Owner = this };
         if (dlg.ShowDialog() == true)
         {
             _pf.Trades.Add(t);
@@ -121,16 +153,21 @@ public partial class PortfolioWindow : Window
     private void Edit_Click(object sender, RoutedEventArgs e)
     {
         if (TradesGrid.SelectedItem is not TradeRow row) return;
-        var dlg = new TradeEditWindow(row.Source, _registry) { Owner = this };
+        var dlg = new TradeEditWindow(row.Source, _registry, _config) { Owner = this };
         if (dlg.ShowDialog() == true) Persist();
     }
 
     private void Delete_Click(object sender, RoutedEventArgs e)
     {
-        if (TradesGrid.SelectedItem is not TradeRow row) return;
-        if (MessageBox.Show($"이 매매 기록을 삭제할까요?\n{row.DateText} {row.Display} {row.SideText} {row.Price:N0}×{row.Quantity}",
-                "삭제 확인", MessageBoxButton.YesNo, MessageBoxImage.Question) != MessageBoxResult.Yes) return;
-        _pf.Trades.Remove(row.Source);
+        var rows = TradesGrid.SelectedItems.Cast<TradeRow>().ToList();
+        if (rows.Count == 0) return;
+
+        string prompt = rows.Count == 1
+            ? $"이 매매 기록을 삭제할까요?\n{rows[0].DateText} {rows[0].Display} {rows[0].SideText} {rows[0].Price:N0}×{rows[0].Quantity}"
+            : $"선택한 매매 기록 {rows.Count}건을 삭제할까요?";
+        if (MessageBox.Show(prompt, "삭제 확인", MessageBoxButton.YesNo, MessageBoxImage.Question) != MessageBoxResult.Yes) return;
+
+        foreach (var row in rows) _pf.Trades.Remove(row.Source);
         Persist();
     }
 

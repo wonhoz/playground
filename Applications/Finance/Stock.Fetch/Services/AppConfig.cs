@@ -54,6 +54,21 @@ public sealed class AppConfig
     // ── 자산 포트폴리오 ──
     /// <summary>포트폴리오 JSON 저장 경로(비어 있으면 문서\StockFetch\portfolio.json). Dropbox 등 동기화 폴더 권장.</summary>
     public string PortfolioPath { get; set; } = string.Empty;
+    /// <summary>내 자산 창에서 현재가 자동 갱신 사용.</summary>
+    public bool PortfolioAutoRefresh { get; set; } = false;
+    /// <summary>내 자산 현재가 자동 갱신 주기(초). 최소 10초.</summary>
+    public int PortfolioRefreshSeconds { get; set; } = 60;
+
+    // ── 관심 종목(워치리스트) ──
+    public List<WatchItem> Watchlist { get; set; } = new();
+    /// <summary>관심 종목 백그라운드 모니터링 활성화.</summary>
+    public bool WatchEnabled { get; set; } = false;
+    /// <summary>관심 종목 폴링 주기(초·임계값 체크). 최소 10초.</summary>
+    public int WatchPollIntervalSeconds { get; set; } = 60;
+    /// <summary>관심 종목 다이제스트 알림 주기(분). 0이면 비활성.</summary>
+    public int WatchDigestIntervalMinutes { get; set; } = 0;
+    /// <summary>관심 종목 등락율 알림 임계값(% · 상승/하락 양방향). 기본 ±3/5/7/10.</summary>
+    public List<double> WatchThresholds { get; set; } = new() { 3, 5, 7, 10 };
 
     // ── 보유 종목 모니터링 / Slack 알림 ──
     public string SlackWebhookUrl { get; set; } = string.Empty;

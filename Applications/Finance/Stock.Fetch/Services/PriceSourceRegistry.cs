@@ -14,6 +14,7 @@ public sealed class PriceSourceRegistry : IDisposable
     private readonly Dictionary<SourceKind, IPriceSource> _sources;
     private readonly NameResolver _nameResolver;
     private readonly KisPriceSource _kis;
+    private readonly YahooPriceSource _yahoo;
 
     /// <summary>차트용 봉 데이터(분/일/주/월) 조회 서비스.</summary>
     public ChartDataService Chart { get; }
@@ -28,10 +29,11 @@ public sealed class PriceSourceRegistry : IDisposable
         _http.DefaultRequestHeaders.Add("Accept", "application/json, text/plain, */*");
 
         _kis = new KisPriceSource(config, saveConfig, _http);
+        _yahoo = new YahooPriceSource(_http);
         _sources = new()
         {
             [SourceKind.Naver] = new NaverPriceSource(_http),
-            [SourceKind.Yahoo] = new YahooPriceSource(_http),
+            [SourceKind.Yahoo] = _yahoo,
             [SourceKind.Daum] = new DaumPriceSource(_http),
             [SourceKind.Kis] = _kis,
         };
@@ -72,6 +74,33 @@ public sealed class PriceSourceRegistry : IDisposable
             return series.Candles.Count > 0 ? series.Candles[^1].Close : null;
         }
         catch { return null; }
+    }
+
+    /// <summary>
+    /// 관심 종목(워치리스트) 현재가·등락율 조회. 종목의 시장(KR/US)·소스(Naver/Yahoo/KIS)에 따라 분기한다.
+    /// </summary>
+    public async Task<Quote> WatchQuoteAsync(WatchItem item, CancellationToken ct = default)
+    {
+        if (item.Market == MarketKind.US)
+        {
+            return item.Source == WatchSource.Kis
+                ? await _kis.FetchOverseasQuoteAsync(item.Exchange, item.Symbol, ct)
+                : await _yahoo.FetchQuoteAsync(item.Symbol, ct);
+        }
+
+        // 국내
+        if (item.Source == WatchSource.Kis)
+            return await _kis.FetchQuoteAsync(item.Symbol, ct);
+
+        // 네이버: 최근 2봉 종가로 전일 대비 등락율 계산.
+        var to = DateTime.Today;
+        var series = await _sources[SourceKind.Naver].FetchAsync(item.Symbol, to.AddDays(-12), to, ct);
+        var c = series.Candles;
+        if (c.Count == 0) throw new PriceSourceException($"네이버에서 종목 '{item.Symbol}' 시세를 찾지 못했습니다.");
+        decimal price = c[^1].Close;
+        decimal prev = c.Count >= 2 ? c[^2].Close : price;
+        decimal rate = prev > 0 ? Math.Round((price / prev - 1) * 100, 2) : 0m;
+        return new Quote(item.Symbol, price, rate, DateTime.Now);
     }
 
     public IPriceSource Get(SourceKind kind) => _sources[kind];

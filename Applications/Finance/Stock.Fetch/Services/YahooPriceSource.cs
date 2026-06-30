@@ -27,6 +27,45 @@ public sealed class YahooPriceSource(HttpClient http) : IPriceSource
         throw new PriceSourceException($"Yahoo Finance에서 종목 '{code}'(.KS/.KQ)를 찾지 못했습니다.");
     }
 
+    /// <summary>
+    /// 현재가 스냅샷(미국 종목 등 접미사 없는 글로벌 티커용). meta의 regularMarketPrice·chartPreviousClose로
+    /// 현재가·전일 대비 등락율을 계산한다. Yahoo 무료 시세는 약 15분 지연.
+    /// </summary>
+    public async Task<Quote> FetchQuoteAsync(string symbol, CancellationToken ct = default)
+    {
+        string url = $"https://query1.finance.yahoo.com/v8/finance/chart/{symbol}?range=1d&interval=1d";
+        string text;
+        try
+        {
+            using var resp = await http.GetAsync(url, ct);
+            if (resp.StatusCode is HttpStatusCode.NotFound)
+                throw new PriceSourceException($"Yahoo Finance에서 종목 '{symbol}'을(를) 찾지 못했습니다.");
+            text = await resp.Content.ReadAsStringAsync(ct);
+        }
+        catch (PriceSourceException) { throw; }
+        catch (Exception ex) when (ex is not OperationCanceledException)
+        {
+            throw new PriceSourceException($"Yahoo Finance 요청 실패: {ex.Message}");
+        }
+
+        using var doc = JsonDocument.Parse(text);
+        var root = doc.RootElement.GetProperty("chart");
+        if (root.TryGetProperty("error", out var err) && err.ValueKind != JsonValueKind.Null)
+            throw new PriceSourceException($"Yahoo Finance 응답 오류: 종목 '{symbol}'.");
+        if (!root.TryGetProperty("result", out var resultArr) || resultArr.GetArrayLength() == 0)
+            throw new PriceSourceException($"Yahoo Finance에서 종목 '{symbol}' 데이터가 없습니다.");
+
+        var meta = resultArr[0].GetProperty("meta");
+        decimal price = MetaDec(meta, "regularMarketPrice");
+        decimal prev = MetaDec(meta, "chartPreviousClose");
+        if (prev <= 0) prev = MetaDec(meta, "previousClose");
+        decimal rate = prev > 0 ? Math.Round((price / prev - 1) * 100, 2) : 0m;
+        return new Quote(symbol, price, rate, DateTime.Now);
+    }
+
+    private static decimal MetaDec(JsonElement meta, string prop)
+        => meta.TryGetProperty(prop, out var v) && v.ValueKind == JsonValueKind.Number ? v.GetDecimal() : 0m;
+
     private async Task<StockSeries?> TryFetchAsync(string code, string suffix, string market,
         DateTime from, DateTime to, CancellationToken ct)
     {

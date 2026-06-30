@@ -35,6 +35,41 @@ public sealed class SlackNotifier(AppConfig config) : IDisposable
         await PostAsync(BuildPayload(sb.ToString()), ct);
     }
 
+    /// <summary>관심 종목 등락율 임계값 돌파 알림.</summary>
+    public async Task SendWatchAlertAsync(WatchItem item, decimal price, decimal changeRate, double signedThreshold, CancellationToken ct = default)
+    {
+        if (!IsConfigured) return;
+
+        bool up = signedThreshold >= 0;
+        string emoji = up ? ":red_circle:" : ":large_blue_circle:";   // 한국식: 상승 빨강 / 하락 파랑
+        string arrow = up ? "▲" : "▼";
+        string priceText = FormatPrice(item, price);
+        var sb = new StringBuilder();
+        sb.AppendLine($"{emoji} *{item}* ({item.MarketLabel}) {arrow} 전일 대비 *{changeRate:+0.0;-0.0}%* (임계 {Math.Abs(signedThreshold):0.#}%)");
+        sb.AppendLine($"• 현재가 *{priceText}* · 소스 {item.SourceLabel}");
+        sb.AppendLine($"• 시각 {DateTime.Now:yyyy-MM-dd HH:mm:ss}");
+
+        await PostAsync(BuildPayload(sb.ToString()), ct);
+    }
+
+    /// <summary>관심 종목 다이제스트(주기 요약) 알림.</summary>
+    public async Task SendDigestAsync(IReadOnlyList<WatchQuote> quotes, CancellationToken ct = default)
+    {
+        if (!IsConfigured || quotes.Count == 0) return;
+
+        var sb = new StringBuilder();
+        sb.AppendLine($":bar_chart: *관심 종목 시세* ({DateTime.Now:yyyy-MM-dd HH:mm})");
+        foreach (var q in quotes)
+        {
+            string arrow = q.ChangeRate >= 0 ? "▲" : "▼";
+            sb.AppendLine($"• {q.Item} ({q.Item.MarketLabel}) {arrow} {q.ChangeRate:+0.0;-0.0;0.0}% · {FormatPrice(q.Item, q.Price)}");
+        }
+        await PostAsync(BuildPayload(sb.ToString()), ct);
+    }
+
+    private static string FormatPrice(WatchItem item, decimal price)
+        => item.Market == MarketKind.US ? $"${price:N2}" : $"{price:N0}원";
+
     /// <summary>설정 화면의 "테스트 전송" 버튼용.</summary>
     public async Task SendTestAsync(CancellationToken ct = default)
     {

@@ -26,10 +26,16 @@ public sealed class WatchlistMonitor(AppConfig config, PriceSourceRegistry regis
 {
     private CancellationTokenSource? _cts;
     private readonly Dictionary<string, TrendState> _trend = new();
+    private readonly Dictionary<string, int> _failCount = new();   // 종목별 연속 실패 횟수
+    private readonly HashSet<string> _failAlerted = new();          // 실패 알림을 이미 보낸 종목
     private DateTime _lastDigestAt = DateTime.MinValue;
 
     public event Action<WatchAlert>? WatchAlertRaised;
     public event Action<IReadOnlyList<WatchQuote>>? DigestReady;
+    /// <summary>시세 조회 연속 실패 알림(item, 사유, 연속 실패 횟수).</summary>
+    public event Action<WatchItem, string, int>? FetchFailed;
+    /// <summary>실패 후 정상 복구 알림.</summary>
+    public event Action<WatchItem>? FetchRecovered;
     public event Action<string>? StatusChanged;
 
     public bool IsRunning => _cts is { IsCancellationRequested: false };
@@ -46,6 +52,8 @@ public sealed class WatchlistMonitor(AppConfig config, PriceSourceRegistry regis
         _cts?.Cancel();
         _cts = null;
         _trend.Clear();           // 재시작 시 기준값을 새로 잡고 시작 알림을 다시 보내도록
+        _failCount.Clear();
+        _failAlerted.Clear();
         _lastDigestAt = DateTime.MinValue;
         StatusChanged?.Invoke("관심 종목 모니터링 중지됨");
     }
@@ -73,22 +81,34 @@ public sealed class WatchlistMonitor(AppConfig config, PriceSourceRegistry regis
         double window = Math.Max(0, config.WatchWindowMinutes);
         var snapshot = new List<WatchQuote>();
 
-        // 목록에서 제거된 종목의 추세 상태 정리
+        // 목록에서 제거된 종목의 추세·실패 상태 정리
         var live = items.Select(i => i.Symbol).ToHashSet();
         foreach (var key in _trend.Keys.Where(k => !live.Contains(k)).ToList()) _trend.Remove(key);
+        foreach (var key in _failCount.Keys.Where(k => !live.Contains(k)).ToList()) _failCount.Remove(key);
+        _failAlerted.RemoveWhere(k => !live.Contains(k));
 
         foreach (var item in items)
         {
             ct.ThrowIfCancellationRequested();
-            Quote? q;
+            Quote? q = null;
+            string? failReason = null;
             try { q = await registry.WatchQuoteAsync(item, ct); }
-            catch { continue; }
-            if (q is null || q.Price <= 0) continue;
+            catch (OperationCanceledException) { break; }
+            catch (Exception ex) { failReason = ex.Message; }
+            if (q is null || q.Price <= 0) failReason ??= "시세를 가져오지 못했습니다(티커/소스 확인).";
 
-            item.Name = string.IsNullOrWhiteSpace(item.Name) ? item.Symbol : item.Name;
-            snapshot.Add(new WatchQuote(item, q.Price, q.ChangeRate));
-            double step = item.StepPercent > 0 ? item.StepPercent : globalStep; // 종목별 단위 우선
-            Evaluate(item, q.Price, q.ChangeRate, step, window);
+            if (failReason != null)
+            {
+                HandleFailure(item, failReason);
+            }
+            else
+            {
+                HandleSuccess(item);
+                item.Name = string.IsNullOrWhiteSpace(item.Name) ? item.Symbol : item.Name;
+                snapshot.Add(new WatchQuote(item, q!.Price, q.ChangeRate));
+                double step = item.StepPercent > 0 ? item.StepPercent : globalStep; // 종목별 단위 우선
+                Evaluate(item, q.Price, q.ChangeRate, step, window);
+            }
 
             try { await Task.Delay(250, ct); } catch (OperationCanceledException) { break; }
         }
@@ -131,6 +151,29 @@ public sealed class WatchlistMonitor(AppConfig config, PriceSourceRegistry regis
     {
         WatchAlertRaised?.Invoke(alert);
         _ = SafeAsync(() => slack.SendWatchAlertAsync(alert));
+    }
+
+    /// <summary>시세 조회 실패 누적 — 연속 임계 횟수 도달 시 1회 알림(엣지).</summary>
+    private void HandleFailure(WatchItem item, string reason)
+    {
+        int n = _failCount[item.Symbol] = _failCount.GetValueOrDefault(item.Symbol) + 1;
+        int thr = config.FetchFailAlertThreshold;
+        if (thr > 0 && n == thr && _failAlerted.Add(item.Symbol))
+        {
+            FetchFailed?.Invoke(item, reason, n);
+            _ = SafeAsync(() => slack.SendFetchFailureAsync(item.ToString(), "관심 종목", item.SourceLabel, reason, n));
+        }
+    }
+
+    /// <summary>조회 성공 — 실패 카운터 리셋, 직전에 실패 알림을 보냈다면 복구 알림 1회.</summary>
+    private void HandleSuccess(WatchItem item)
+    {
+        _failCount[item.Symbol] = 0;
+        if (_failAlerted.Remove(item.Symbol))
+        {
+            FetchRecovered?.Invoke(item);
+            _ = SafeAsync(() => slack.SendFetchRecoveryAsync(item.ToString(), "관심 종목"));
+        }
     }
 
     private void MaybeSendDigest(List<WatchQuote> snapshot)

@@ -64,9 +64,15 @@ public partial class MainWindow : Window
         _slack = new SlackNotifier(_config);
         _monitor = new PortfolioMonitor(_config, _registry, _slack);
         _monitor.AlertRaised += OnAlertRaised;
+        _monitor.FetchFailed += (code, name, reason, fails) => OnFetchFailed(
+            string.IsNullOrEmpty(name) ? code : $"{name} ({code})", "보유 종목", reason, fails);
+        _monitor.FetchRecovered += (code, name) => OnFetchRecovered(
+            string.IsNullOrEmpty(name) ? code : $"{name} ({code})", "보유 종목");
         _watch = new WatchlistMonitor(_config, _registry, _slack);
         _watch.WatchAlertRaised += OnWatchAlertRaised;
         _watch.DigestReady += OnWatchDigest;
+        _watch.FetchFailed += (item, reason, fails) => OnFetchFailed(item.ToString(), "관심 종목", reason, fails);
+        _watch.FetchRecovered += item => OnFetchRecovered(item.ToString(), "관심 종목");
         _tray = new TrayManager();
         _tray.OpenRequested += ShowFromTray;
         _tray.ToggleMonitorRequested += ToggleMonitor;
@@ -101,6 +107,12 @@ public partial class MainWindow : Window
                 warning: !a.IsUp);
         }
     });
+
+    private void OnFetchFailed(string display, string context, string reason, int fails) => Dispatcher.Invoke(() =>
+        _tray.ShowBalloon($"⚠ {display} 시세 조회 실패 (연속 {fails}회)", $"{context} · {reason}", warning: true));
+
+    private void OnFetchRecovered(string display, string context) => Dispatcher.Invoke(() =>
+        _tray.ShowBalloon($"✓ {display} 시세 조회 복구", $"{context} · 정상 수신 중"));
 
     private void OnWatchDigest(IReadOnlyList<WatchQuote> quotes) => Dispatcher.Invoke(() =>
     {

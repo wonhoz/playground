@@ -15,9 +15,15 @@ public sealed class PortfolioMonitor(AppConfig config, PriceSourceRegistry regis
     private readonly Dictionary<string, HashSet<double>> _prevDown = new();
     // 첫 폴링을 마친 종목(시작 시엔 가장 큰 임계값만 1회 알림하고 나머지는 시드).
     private readonly HashSet<string> _seeded = new();
+    private readonly Dictionary<string, int> _failCount = new();   // 종목별 연속 실패 횟수
+    private readonly HashSet<string> _failAlerted = new();          // 실패 알림을 이미 보낸 종목
     private DateOnly _stateDate = DateOnly.FromDateTime(DateTime.Today);
 
     public event Action<PortfolioAlert>? AlertRaised;
+    /// <summary>시세 조회 연속 실패 알림(code, name, 사유, 연속 실패 횟수).</summary>
+    public event Action<string, string, string, int>? FetchFailed;
+    /// <summary>실패 후 정상 복구 알림(code, name).</summary>
+    public event Action<string, string>? FetchRecovered;
     public event Action<string>? StatusChanged;
 
     public bool IsRunning => _cts is { IsCancellationRequested: false };
@@ -36,6 +42,8 @@ public sealed class PortfolioMonitor(AppConfig config, PriceSourceRegistry regis
         _prevUp.Clear();
         _prevDown.Clear();
         _seeded.Clear();   // 재시작 시 다시 가장 큰 임계값만 1회 알림하도록
+        _failCount.Clear();
+        _failAlerted.Clear();
         StatusChanged?.Invoke("모니터링 중지됨");
     }
 
@@ -66,17 +74,32 @@ public sealed class PortfolioMonitor(AppConfig config, PriceSourceRegistry regis
         var holdings = PortfolioStore.Holdings(pf).Where(h => h.Quantity > 0 && h.AvgPrice > 0).ToList();
         if (holdings.Count == 0) { StatusChanged?.Invoke("보유 종목 없음"); return; }
 
+        // 더 이상 보유하지 않는 종목의 실패 상태 정리
+        var live = holdings.Select(h => h.Code).ToHashSet();
+        foreach (var key in _failCount.Keys.Where(k => !live.Contains(k)).ToList()) _failCount.Remove(key);
+        _failAlerted.RemoveWhere(k => !live.Contains(k));
+
         var thresholds = config.AlertThresholds.Where(t => t > 0).OrderBy(t => t).ToList();
         foreach (var h in holdings)
         {
             ct.ThrowIfCancellationRequested();
-            Quote? q;
+            Quote? q = null;
+            string? failReason = null;
             try { q = await registry.QuoteAsync(h.Code, ct); }
-            catch { continue; }
-            if (q is null || q.Price <= 0) continue;
+            catch (OperationCanceledException) { break; }
+            catch (Exception ex) { failReason = ex.Message; }
+            if (q is null || q.Price <= 0) failReason ??= "시세를 가져오지 못했습니다.";
 
-            double ret = (double)(q.Price / h.AvgPrice - 1) * 100;
-            Evaluate(h, q.Price, ret, thresholds);
+            if (failReason != null)
+            {
+                HandleFailure(h, failReason);
+            }
+            else
+            {
+                HandleSuccess(h);
+                double ret = (double)(q!.Price / h.AvgPrice - 1) * 100;
+                Evaluate(h, q.Price, ret, thresholds);
+            }
 
             try { await Task.Delay(250, ct); } catch (OperationCanceledException) { break; }
         }
@@ -121,6 +144,38 @@ public sealed class PortfolioMonitor(AppConfig config, PriceSourceRegistry regis
     private async Task SendSlackSafeAsync(PortfolioAlert a)
     {
         try { await slack.SendAsync(a); }
+        catch (Exception ex) { StatusChanged?.Invoke("Slack 전송 오류: " + ex.Message); }
+    }
+
+    private static string DisplayOf(Holding h) => string.IsNullOrEmpty(h.Name) ? h.Code : $"{h.Name} ({h.Code})";
+
+    /// <summary>시세 조회 실패 누적 — 연속 임계 횟수 도달 시 1회 알림(엣지).</summary>
+    private void HandleFailure(Holding h, string reason)
+    {
+        int n = _failCount[h.Code] = _failCount.GetValueOrDefault(h.Code) + 1;
+        int thr = config.FetchFailAlertThreshold;
+        if (thr > 0 && n == thr && _failAlerted.Add(h.Code))
+        {
+            FetchFailed?.Invoke(h.Code, h.Name, reason, n);
+            string src = config.HasKisCredentials ? "KIS" : "네이버";
+            _ = SendFailSafeAsync(() => slack.SendFetchFailureAsync(DisplayOf(h), "보유 종목", src, reason, n));
+        }
+    }
+
+    /// <summary>조회 성공 — 실패 카운터 리셋, 직전에 실패 알림을 보냈다면 복구 알림 1회.</summary>
+    private void HandleSuccess(Holding h)
+    {
+        _failCount[h.Code] = 0;
+        if (_failAlerted.Remove(h.Code))
+        {
+            FetchRecovered?.Invoke(h.Code, h.Name);
+            _ = SendFailSafeAsync(() => slack.SendFetchRecoveryAsync(DisplayOf(h), "보유 종목"));
+        }
+    }
+
+    private async Task SendFailSafeAsync(Func<Task> action)
+    {
+        try { await action(); }
         catch (Exception ex) { StatusChanged?.Invoke("Slack 전송 오류: " + ex.Message); }
     }
 

@@ -85,7 +85,9 @@
                 <TextBlock Text="폴링 주기 (초 · 최소 10)" Style="{StaticResource FieldLbl}"/>
                 <TextBox x:Name="IntervalBox" Margin="0,0,0,10" Width="120" HorizontalAlignment="Left"/>
                 <TextBlock Text="알림 임계값 (% · 쉼표 구분 · 상승/하락 양방향)" Style="{StaticResource FieldLbl}"/>
-                <TextBox x:Name="ThresholdsBox"/>
+                <TextBox x:Name="ThresholdsBox" Margin="0,0,0,10"/>
+                <TextBlock Text="시세 조회 실패 알림 (연속 N회 · 0=끔 · 보유·관심 공통)" Style="{StaticResource FieldLbl}"/>
+                <TextBox x:Name="FailAlertBox" Width="120" HorizontalAlignment="Left"/>
             </StackPanel>
         </ScrollViewer>
 

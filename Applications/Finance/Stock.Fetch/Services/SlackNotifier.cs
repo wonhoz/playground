@@ -80,6 +80,28 @@ public sealed class SlackNotifier(AppConfig config) : IDisposable
     private static string FormatPrice(WatchItem item, decimal price)
         => item.Market == MarketKind.US ? $"${price:N2}" : $"{price:N0}원";
 
+    /// <summary>시세 조회 연속 실패 알림(엣지 — 임계 도달 시 1회).</summary>
+    public async Task SendFetchFailureAsync(string display, string context, string source, string reason, int fails, CancellationToken ct = default)
+    {
+        if (!IsConfigured) return;
+        var sb = new StringBuilder();
+        sb.AppendLine($":warning: *{display}* ({context}) 시세 조회 실패 — 연속 {fails}회");
+        sb.AppendLine($"• 사유: {reason}");
+        sb.AppendLine($"• 소스: {source}");
+        sb.AppendLine($"• 시각 {DateTime.Now:yyyy-MM-dd HH:mm:ss}");
+        await PostAsync(BuildPayload(sb.ToString()), ct);
+    }
+
+    /// <summary>시세 조회 복구 알림(실패 알림을 보냈던 종목이 정상 복구됐을 때 1회).</summary>
+    public async Task SendFetchRecoveryAsync(string display, string context, CancellationToken ct = default)
+    {
+        if (!IsConfigured) return;
+        var sb = new StringBuilder();
+        sb.AppendLine($":white_check_mark: *{display}* ({context}) 시세 조회 정상 복구됨");
+        sb.AppendLine($"• 시각 {DateTime.Now:yyyy-MM-dd HH:mm:ss}");
+        await PostAsync(BuildPayload(sb.ToString()), ct);
+    }
+
     /// <summary>설정 화면의 "테스트 전송" 버튼용.</summary>
     public async Task SendTestAsync(CancellationToken ct = default)
     {

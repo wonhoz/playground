@@ -95,6 +95,8 @@ public sealed class AppConfig
     public bool MonitorMarketHoursOnly { get; set; } = true;
     /// <summary>평단 대비 수익률 알림 임계값(% · 상승/하락 양방향). 기본 ±2/5/7/10/12.</summary>
     public List<double> AlertThresholds { get; set; } = new() { 2, 5, 7, 10, 12 };
+    /// <summary>시세 조회가 연속 N회 실패하면 알림(보유·관심 종목 공통). 0이면 끔. 기본 3회.</summary>
+    public int FetchFailAlertThreshold { get; set; } = 3;
 
     // ── 캐시된 OAuth 토큰(만료 전까지 재사용) ──
     public string CachedToken { get; set; } = string.Empty;

@@ -31,6 +31,7 @@ public partial class SettingsWindow : Window
         MarketHoursCheck.IsChecked = config.MonitorMarketHoursOnly;
         IntervalBox.Text = config.MonitorIntervalSeconds.ToString();
         ThresholdsBox.Text = string.Join(", ", config.AlertThresholds);
+        FailAlertBox.Text = config.FetchFailAlertThreshold.ToString();
     }
 
     private async void Test_Click(object sender, RoutedEventArgs e)
@@ -98,6 +99,7 @@ public partial class SettingsWindow : Window
         _config.MonitorMarketHoursOnly = MarketHoursCheck.IsChecked == true;
         if (int.TryParse(IntervalBox.Text.Trim(), out var sec)) _config.MonitorIntervalSeconds = Math.Max(10, sec);
         _config.AlertThresholds = ParseThresholds(ThresholdsBox.Text);
+        if (int.TryParse(FailAlertBox.Text.Trim(), out var fail)) _config.FetchFailAlertThreshold = Math.Max(0, fail);
 
         // 자격 변경 시 캐시 토큰 무효화
         _config.CachedToken = string.Empty;

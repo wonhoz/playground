@@ -69,7 +69,7 @@ public sealed class WatchlistMonitor(AppConfig config, PriceSourceRegistry regis
         var items = config.Watchlist.ToList();
         if (items.Count == 0) { StatusChanged?.Invoke("관심 종목 없음"); return; }
 
-        double step = Math.Max(0.1, config.WatchStepPercent);
+        double globalStep = Math.Max(0.001, config.WatchStepPercent);
         double window = Math.Max(0, config.WatchWindowMinutes);
         var snapshot = new List<WatchQuote>();
 
@@ -87,6 +87,7 @@ public sealed class WatchlistMonitor(AppConfig config, PriceSourceRegistry regis
 
             item.Name = string.IsNullOrWhiteSpace(item.Name) ? item.Symbol : item.Name;
             snapshot.Add(new WatchQuote(item, q.Price, q.ChangeRate));
+            double step = item.StepPercent > 0 ? item.StepPercent : globalStep; // 종목별 단위 우선
             Evaluate(item, q.Price, q.ChangeRate, step, window);
 
             try { await Task.Delay(250, ct); } catch (OperationCanceledException) { break; }

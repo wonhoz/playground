@@ -78,8 +78,9 @@
                   SelectionMode="Extended" MouseDoubleClick="Edit_Click">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="종목" Binding="{Binding Display}" Width="*"/>
-                <DataGridTextColumn Header="시장" Binding="{Binding MarketLabel}" Width="70"/>
+                <DataGridTextColumn Header="시장" Binding="{Binding MarketLabel}" Width="60"/>
                 <DataGridTextColumn Header="소스" Binding="{Binding SourceLabel}" Width="80"/>
+                <DataGridTextColumn Header="변화단위" Binding="{Binding StepLabel}" Width="80" ElementStyle="{StaticResource NumCell}"/>
                 <DataGridTextColumn Header="현재가" Binding="{Binding PriceText}" Width="130" ElementStyle="{StaticResource NumCell}"/>
                 <DataGridTextColumn Header="등락율" Binding="{Binding RateText}" Width="110">
                     <DataGridTextColumn.ElementStyle>

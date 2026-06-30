@@ -13,6 +13,8 @@ public sealed class PortfolioMonitor(AppConfig config, PriceSourceRegistry regis
     // 종목별 '직전 폴링에서 도달해 있던' 임계값 집합(상향/하향 분리). 엣지 검출용.
     private readonly Dictionary<string, HashSet<double>> _prevUp = new();
     private readonly Dictionary<string, HashSet<double>> _prevDown = new();
+    // 첫 폴링을 마친 종목(시작 시엔 가장 큰 임계값만 1회 알림하고 나머지는 시드).
+    private readonly HashSet<string> _seeded = new();
     private DateOnly _stateDate = DateOnly.FromDateTime(DateTime.Today);
 
     public event Action<PortfolioAlert>? AlertRaised;
@@ -31,6 +33,9 @@ public sealed class PortfolioMonitor(AppConfig config, PriceSourceRegistry regis
     {
         _cts?.Cancel();
         _cts = null;
+        _prevUp.Clear();
+        _prevDown.Clear();
+        _seeded.Clear();   // 재시작 시 다시 가장 큰 임계값만 1회 알림하도록
         StatusChanged?.Invoke("모니터링 중지됨");
     }
 
@@ -82,6 +87,18 @@ public sealed class PortfolioMonitor(AppConfig config, PriceSourceRegistry regis
     {
         var nowUp = thresholds.Where(t => ret >= t).ToHashSet();
         var nowDown = thresholds.Where(t => ret <= -t).ToHashSet();
+
+        // 첫 폴링: 이미 여러 임계값을 넘어 있어도 가장 큰 것 1회만 알림(도배 방지) 후 나머지는 시드.
+        if (!_seeded.Contains(h.Code))
+        {
+            _seeded.Add(h.Code);
+            if (nowUp.Count > 0) Raise(h, price, ret, +nowUp.Max());
+            else if (nowDown.Count > 0) Raise(h, price, ret, -nowDown.Max());
+            _prevUp[h.Code] = nowUp;
+            _prevDown[h.Code] = nowDown;
+            return;
+        }
+
         var prevUp = _prevUp.GetValueOrDefault(h.Code) ?? new HashSet<double>();
         var prevDown = _prevDown.GetValueOrDefault(h.Code) ?? new HashSet<double>();
 
@@ -113,6 +130,7 @@ public sealed class PortfolioMonitor(AppConfig config, PriceSourceRegistry regis
         if (today == _stateDate) return;
         _prevUp.Clear();
         _prevDown.Clear();
+        _seeded.Clear();   // 새 날 첫 폴링도 가장 큰 임계값만 1회 알림
         _stateDate = today;
     }
 

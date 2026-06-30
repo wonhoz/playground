@@ -153,6 +153,7 @@ public partial class WatchlistWindow : Window
         public string Display => string.IsNullOrEmpty(Source.Name) ? Source.Symbol : $"{Source.Name} ({Source.Symbol})";
         public string MarketLabel => Source.MarketLabel;
         public string SourceLabel => Source.SourceLabel;
+        public string StepLabel => Source.StepLabel;
         public string PriceText => quote is null ? "—"
             : Source.Market == MarketKind.US ? $"${quote.Price:N2}" : $"{quote.Price:N0}";
         public double? RateValue => quote is null ? null : (double)quote.ChangeRate;

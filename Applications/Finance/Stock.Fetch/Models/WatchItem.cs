@@ -22,6 +22,12 @@ public sealed class WatchItem
     /// <summary>미국 + KIS 소스용 거래소 코드(NAS=나스닥, NYS=뉴욕, AMS=아멕스/Arca). 그 외 빈값.</summary>
     public string Exchange { get; set; } = "NAS";
 
+    /// <summary>이 종목 전용 추세 변화 단위(%). 0이면 전역 설정(WatchStepPercent)을 사용한다.</summary>
+    public double StepPercent { get; set; } = 0;
+
+    /// <summary>그리드 표시용: 전용 단위가 있으면 값, 없으면 "전역".</summary>
+    public string StepLabel => StepPercent > 0 ? $"{StepPercent:0.###}%" : "전역";
+
     public string MarketLabel => Market == MarketKind.US ? "미국" : "국내";
     public string SourceLabel => Source switch
     {

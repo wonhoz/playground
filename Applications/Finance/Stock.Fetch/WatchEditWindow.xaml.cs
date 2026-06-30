@@ -1,3 +1,4 @@
+using System.Globalization;
 using System.Windows;
 using System.Windows.Controls;
 using Stock.Fetch.Models;
@@ -27,6 +28,7 @@ public partial class WatchEditWindow : Window
         MarketCombo.SelectedIndex = item.Market == MarketKind.US ? 1 : 0; // SelectionChanged가 소스 콤보 채움
         SymbolBox.Text = item.Symbol;
         NameBox.Text = item.Name;
+        StepBox.Text = item.StepPercent > 0 ? item.StepPercent.ToString("0.###", CultureInfo.InvariantCulture) : "";
         SelectSource(item.Source);
         SelectExchange(item.Exchange);
     }
@@ -107,6 +109,13 @@ public partial class WatchEditWindow : Window
         _item.Name = NameBox.Text.Trim() is "조회 중…" ? "" : NameBox.Text.Trim();
         _item.Source = opt.Source;
         _item.Exchange = (ExchangeCombo.SelectedItem as ComboBoxItem)?.Tag as string ?? "NAS";
+
+        // 변화 단위(전용) — 비우면 0(전역 사용). 소수점 허용.
+        string stepText = StepBox.Text.Trim();
+        if (string.IsNullOrEmpty(stepText)) _item.StepPercent = 0;
+        else if (double.TryParse(stepText, NumberStyles.Number, CultureInfo.InvariantCulture, out var step) && step > 0)
+            _item.StepPercent = step;
+        else { Error("변화 단위는 0보다 큰 숫자이거나 비워두세요(예: 1.5)."); return; }
 
         DialogResult = true;
     }

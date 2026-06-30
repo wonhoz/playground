@@ -70,6 +70,7 @@ public partial class MainWindow : Window
             string.IsNullOrEmpty(name) ? code : $"{name} ({code})", "보유 종목");
         _watch = new WatchlistMonitor(_config, _registry, _slack);
         _watch.WatchAlertRaised += OnWatchAlertRaised;
+        _watch.StartupSummary += OnWatchStartupSummary;
         _watch.DigestReady += OnWatchDigest;
         _watch.FetchFailed += (item, reason, fails) => OnFetchFailed(item.ToString(), "관심 종목", reason, fails);
         _watch.FetchRecovered += item => OnFetchRecovered(item.ToString(), "관심 종목");
@@ -92,20 +93,21 @@ public partial class MainWindow : Window
     private void OnWatchAlertRaised(Models.WatchAlert a) => Dispatcher.Invoke(() =>
     {
         string arrow = a.IsUp ? "▲" : "▼";
-        if (a.IsStartup)
-        {
-            _tray.ShowBalloon(
-                $"⭐ {a.Item} 모니터링 시작 {a.CurrentRate:+0.0;-0.0;0.0}%",
-                $"현재가 {a.PriceText} · 조건: {a.RulesText}");
-        }
-        else
-        {
-            string trend = a.IsUp ? "상승세" : "하락세";
-            _tray.ShowBalloon(
-                $"⭐ {a.Item} {arrow} {trend} {a.Delta:+0.0;-0.0}%p ({a.WindowMinutes:0.#}분/{a.Step:0.###}%)",
-                $"현재 {a.CurrentRate:+0.0;-0.0;0.0}% (기준 {a.RefRate:+0.0;-0.0;0.0}%) · 현재가 {a.PriceText}",
-                warning: !a.IsUp);
-        }
+        // 시작 알림은 OnWatchStartupSummary에서 요약 1건으로 처리. 여기서는 개별 추세 알림만.
+        string trend = a.IsUp ? "상승세" : "하락세";
+        _tray.ShowBalloon(
+            $"⭐ {a.Item} {arrow} {trend} {a.Delta:+0.0;-0.0}%p ({a.WindowMinutes:0.#}분/{a.Step:0.###}%)",
+            $"현재 {a.CurrentRate:+0.0;-0.0;0.0}% (기준 {a.RefRate:+0.0;-0.0;0.0}%) · 현재가 {a.PriceText}",
+            warning: !a.IsUp);
+    });
+
+    private void OnWatchStartupSummary(IReadOnlyList<Models.WatchAlert> alerts) => Dispatcher.Invoke(() =>
+    {
+        const int max = 6;
+        string body = string.Join("\n", alerts.Take(max).Select(a =>
+            $"{a.Item} {(a.CurrentRate >= 0 ? "▲" : "▼")} {a.CurrentRate:+0.0;-0.0;0.0}% · {a.PriceText}"));
+        if (alerts.Count > max) body += $"\n…외 {alerts.Count - max}종목";
+        _tray.ShowBalloon($"⭐ 관심 종목 모니터링 시작 ({alerts.Count}종목)", body);
     });
 
     private void OnFetchFailed(string display, string context, string reason, int fails) => Dispatcher.Invoke(() =>

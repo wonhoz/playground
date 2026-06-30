@@ -32,6 +32,8 @@ public sealed class WatchlistMonitor(AppConfig config, PriceSourceRegistry regis
     private DateTime _lastDigestAt = DateTime.MinValue;
 
     public event Action<WatchAlert>? WatchAlertRaised;
+    /// <summary>모니터링 시작 시 종목별 시작 알림을 한 번에 모아 전달(요약 1건).</summary>
+    public event Action<IReadOnlyList<WatchAlert>>? StartupSummary;
     public event Action<IReadOnlyList<WatchQuote>>? DigestReady;
     /// <summary>시세 조회 연속 실패 알림(item, 사유, 연속 실패 횟수).</summary>
     public event Action<WatchItem, string, int>? FetchFailed;
@@ -80,6 +82,7 @@ public sealed class WatchlistMonitor(AppConfig config, PriceSourceRegistry regis
 
         var globalRules = (config.WatchRules ?? new()).Where(r => r.StepPercent > 0 && r.WindowMinutes > 0).ToList();
         var snapshot = new List<WatchQuote>();
+        var startups = new List<WatchAlert>();   // 시작 알림은 모아서 한 번에 요약 전송
 
         // 목록에서 제거된 종목의 추세·실패 상태 정리
         var live = items.Select(i => i.Symbol).ToHashSet();
@@ -107,12 +110,13 @@ public sealed class WatchlistMonitor(AppConfig config, PriceSourceRegistry regis
                 item.Name = string.IsNullOrWhiteSpace(item.Name) ? item.Symbol : item.Name;
                 snapshot.Add(new WatchQuote(item, q!.Price, q.ChangeRate));
                 var rules = item.Rules.Count > 0 ? item.Rules : globalRules; // 종목별 조건 우선
-                Evaluate(item, q.Price, q.ChangeRate, rules);
+                Evaluate(item, q.Price, q.ChangeRate, rules, startups);
             }
 
             try { await Task.Delay(250, ct); } catch (OperationCanceledException) { break; }
         }
 
+        if (startups.Count > 0) RaiseStartupSummary(startups);
         MaybeSendDigest(snapshot);
         StatusChanged?.Invoke($"갱신 {DateTime.Now:HH:mm:ss} · 관심 {snapshot.Count}/{items.Count}종목");
     }
@@ -122,7 +126,7 @@ public sealed class WatchlistMonitor(AppConfig config, PriceSourceRegistry regis
     /// 방향과 함께 알림(엣지)하고 기준 갱신. 조건의 window 안에 step 변동이 없으면 기준값을 현재값으로 재설정.
     /// 종목 첫 관측은 모든 조건의 기준을 잡고 현재 수준 1회 알림(시작 알림).
     /// </summary>
-    private void Evaluate(WatchItem item, decimal price, decimal rate, List<TrendRule> rules)
+    private void Evaluate(WatchItem item, decimal price, decimal rate, List<TrendRule> rules, List<WatchAlert> startups)
     {
         if (rules.Count == 0) return;
         var now = DateTime.Now;
@@ -132,7 +136,8 @@ public sealed class WatchlistMonitor(AppConfig config, PriceSourceRegistry regis
             states = new Dictionary<string, TrendState>();
             foreach (var r in rules) states[r.Key] = new TrendState { RefRate = rate, RefTime = now };
             _trend[item.Symbol] = states;
-            Raise(new WatchAlert(item, price, rate, rate, 0, 0, IsStartup: true, now, TrendRule.Summary(rules)));
+            // 시작 알림은 개별 전송하지 않고 모아서 요약(아래 RaiseStartupSummary).
+            startups.Add(new WatchAlert(item, price, rate, rate, 0, 0, IsStartup: true, now, TrendRule.Summary(rules)));
             return;
         }
 
@@ -166,6 +171,13 @@ public sealed class WatchlistMonitor(AppConfig config, PriceSourceRegistry regis
     {
         WatchAlertRaised?.Invoke(alert);
         _ = SafeAsync(() => slack.SendWatchAlertAsync(alert));
+    }
+
+    /// <summary>모아둔 시작 알림을 요약 1건으로 전송(Slack·트레이 풍선 각 1회).</summary>
+    private void RaiseStartupSummary(IReadOnlyList<WatchAlert> alerts)
+    {
+        StartupSummary?.Invoke(alerts);
+        _ = SafeAsync(() => slack.SendWatchStartupSummaryAsync(alerts));
     }
 
     /// <summary>시세 조회 실패 누적 — 연속 임계 횟수 도달 시 1회 알림(엣지).</summary>

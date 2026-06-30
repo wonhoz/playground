@@ -62,6 +62,22 @@ public sealed class SlackNotifier(AppConfig config) : IDisposable
         await PostAsync(BuildPayload(sb.ToString()), ct);
     }
 
+    /// <summary>모니터링 시작 시 종목별 현재 수준을 한 메시지로 요약.</summary>
+    public async Task SendWatchStartupSummaryAsync(IReadOnlyList<WatchAlert> alerts, CancellationToken ct = default)
+    {
+        if (!IsConfigured || alerts.Count == 0) return;
+
+        var sb = new StringBuilder();
+        sb.AppendLine($":satellite_antenna: *관심 종목 모니터링 시작* ({alerts.Count}종목)");
+        foreach (var a in alerts)
+        {
+            string arrow = a.CurrentRate >= 0 ? "▲" : "▼";
+            sb.AppendLine($"• {a.Item} ({a.Item.MarketLabel}) {arrow} 전일 대비 {a.CurrentRate:+0.0;-0.0;0.0}% · {a.PriceText}");
+        }
+        sb.AppendLine($"• 이후 각 종목 조건 도달 시 개별 알림합니다. ({DateTime.Now:yyyy-MM-dd HH:mm:ss})");
+        await PostAsync(BuildPayload(sb.ToString()), ct);
+    }
+
     /// <summary>관심 종목 다이제스트(주기 요약) 알림.</summary>
     public async Task SendDigestAsync(IReadOnlyList<WatchQuote> quotes, CancellationToken ct = default)
     {

@@ -89,6 +89,11 @@ public sealed class AppConfig
     /// 기본 1개(3분당 2%).
     /// </summary>
     public List<TrendRule> WatchRules { get; set; } = new() { new TrendRule { WindowMinutes = 3, StepPercent = 2 } };
+    /// <summary>
+    /// 미국 종목의 프리/애프터마켓 시간대에는 종목 소스와 무관하게 Yahoo에서 시세를 가져온다(무료 확장시간 실시간).
+    /// 정규장에는 각 종목에 설정된 소스를 사용. 기본 켜짐.
+    /// </summary>
+    public bool WatchUseYahooExtended { get; set; } = true;
 
     // ── 보유 종목 모니터링 / Slack 알림 ──
     public string SlackWebhookUrl { get; set; } = string.Empty;

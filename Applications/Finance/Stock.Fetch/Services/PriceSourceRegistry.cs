@@ -87,7 +87,9 @@ public sealed class PriceSourceRegistry : IDisposable
     {
         if (item.Market == MarketKind.US)
         {
-            return item.Source switch
+            // 프리/애프터마켓엔 Yahoo로 고정(설정 시) — Finnhub·Alpaca 무료는 확장시간을 잘 주지 않으므로.
+            var src = _config.WatchUseYahooExtended && UsMarket.IsExtended() ? WatchSource.Yahoo : item.Source;
+            return src switch
             {
                 WatchSource.Kis => await _kis.FetchOverseasQuoteAsync(item.Exchange, item.Symbol, ct),
                 WatchSource.Finnhub => await _finnhub.FetchQuoteAsync(item.Symbol, ct),

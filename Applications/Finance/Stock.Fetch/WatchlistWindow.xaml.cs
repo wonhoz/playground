@@ -32,6 +32,7 @@ public partial class WatchlistWindow : Window
         PollBox.Text = _config.WatchPollIntervalSeconds.ToString();
         RulesBox.Text = TrendRule.ToText(_config.WatchRules);
         DigestBox.Text = _config.WatchDigestIntervalMinutes.ToString();
+        YahooExtendedCheck.IsChecked = _config.WatchUseYahooExtended;
 
         _monitor.StatusChanged += OnStatus;
         StatusText.Text = _monitor.IsRunning ? "모니터링 실행 중" : "모니터링 꺼짐";
@@ -210,6 +211,7 @@ public partial class WatchlistWindow : Window
         var rules = TrendRule.Parse(RulesBox.Text);
         if (rules.Count > 0) _config.WatchRules = rules;   // 잘못 입력 시 기존 조건 유지
         if (int.TryParse(DigestBox.Text.Trim(), out var dig)) _config.WatchDigestIntervalMinutes = Math.Max(0, dig);
+        _config.WatchUseYahooExtended = YahooExtendedCheck.IsChecked == true;
         // UI를 정규화된 값으로 되돌림
         PollBox.Text = _config.WatchPollIntervalSeconds.ToString();
         RulesBox.Text = TrendRule.ToText(_config.WatchRules);

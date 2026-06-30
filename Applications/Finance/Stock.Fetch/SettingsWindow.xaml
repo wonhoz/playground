@@ -45,7 +45,11 @@
                 <TextBlock Text="자산 포트폴리오 저장 경로" Style="{StaticResource Section}"/>
                 <TextBlock Style="{StaticResource Hint}"
                            Text="매수/매도 기록(평단·실현손익)을 저장할 JSON 경로. Dropbox 등 동기화 폴더를 지정하면 어느 PC에서든 같은 자산 내역을 불러옵니다. 비워두면 문서\StockFetch\portfolio.json."/>
-                <TextBox x:Name="PortfolioPathBox"/>
+                <Grid>
+                    <Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+                    <TextBox x:Name="PortfolioPathBox"/>
+                    <Button Grid.Column="1" Content="찾기" Width="80" Margin="8,0,0,0" Click="BrowsePortfolio_Click"/>
+                </Grid>
 
                 <!-- Slack -->
                 <TextBlock Text="Slack 알림" Style="{StaticResource Section}"/>

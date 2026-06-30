@@ -47,6 +47,36 @@ public partial class SettingsWindow : Window
         }
     }
 
+    private void BrowsePortfolio_Click(object sender, RoutedEventArgs e)
+    {
+        var dlg = new Microsoft.Win32.SaveFileDialog
+        {
+            Title = "자산 포트폴리오 저장 경로 선택",
+            Filter = "포트폴리오 JSON (*.json)|*.json|모든 파일 (*.*)|*.*",
+            DefaultExt = ".json",
+            FileName = "portfolio.json",
+            OverwritePrompt = false,
+            CheckPathExists = true
+        };
+
+        var current = PortfolioPathBox.Text.Trim();
+        if (!string.IsNullOrEmpty(current))
+        {
+            try
+            {
+                var dir = System.IO.Path.GetDirectoryName(current);
+                if (!string.IsNullOrEmpty(dir) && System.IO.Directory.Exists(dir))
+                    dlg.InitialDirectory = dir;
+                var file = System.IO.Path.GetFileName(current);
+                if (!string.IsNullOrEmpty(file)) dlg.FileName = file;
+            }
+            catch { /* 경로 파싱 실패 시 기본값 사용 */ }
+        }
+
+        if (dlg.ShowDialog(this) == true)
+            PortfolioPathBox.Text = dlg.FileName;
+    }
+
     private void Save_Click(object sender, RoutedEventArgs e)
     {
         _config.AppKey = KeyBox.Text.Trim();

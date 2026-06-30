@@ -30,8 +30,7 @@ public partial class WatchlistWindow : Window
 
         MonitorCheck.IsChecked = _config.WatchEnabled;
         PollBox.Text = _config.WatchPollIntervalSeconds.ToString();
-        StepBox.Text = _config.WatchStepPercent.ToString("0.#");
-        WindowBox.Text = _config.WatchWindowMinutes.ToString("0.#");
+        RulesBox.Text = TrendRule.ToText(_config.WatchRules);
         DigestBox.Text = _config.WatchDigestIntervalMinutes.ToString();
 
         _monitor.StatusChanged += OnStatus;
@@ -208,15 +207,12 @@ public partial class WatchlistWindow : Window
     private void SaveSettings()
     {
         if (int.TryParse(PollBox.Text.Trim(), out var poll)) _config.WatchPollIntervalSeconds = Math.Max(10, poll);
-        if (double.TryParse(StepBox.Text.Trim(), NumberStyles.Number, CultureInfo.InvariantCulture, out var step) && step > 0)
-            _config.WatchStepPercent = step;
-        if (double.TryParse(WindowBox.Text.Trim(), NumberStyles.Number, CultureInfo.InvariantCulture, out var win) && win >= 0)
-            _config.WatchWindowMinutes = win;
+        var rules = TrendRule.Parse(RulesBox.Text);
+        if (rules.Count > 0) _config.WatchRules = rules;   // 잘못 입력 시 기존 조건 유지
         if (int.TryParse(DigestBox.Text.Trim(), out var dig)) _config.WatchDigestIntervalMinutes = Math.Max(0, dig);
         // UI를 정규화된 값으로 되돌림
         PollBox.Text = _config.WatchPollIntervalSeconds.ToString();
-        StepBox.Text = _config.WatchStepPercent.ToString("0.#");
-        WindowBox.Text = _config.WatchWindowMinutes.ToString("0.#");
+        RulesBox.Text = TrendRule.ToText(_config.WatchRules);
         DigestBox.Text = _config.WatchDigestIntervalMinutes.ToString();
     }
 
@@ -237,7 +233,7 @@ public partial class WatchlistWindow : Window
         public string Display => string.IsNullOrEmpty(Source.Name) ? Source.Symbol : $"{Source.Name} ({Source.Symbol})";
         public string MarketLabel => Source.MarketLabel;
         public string SourceLabel => Source.SourceLabel;
-        public string StepLabel => Source.StepLabel;
+        public string RulesLabel => Source.RulesLabel;
         public string PriceText => quote is null ? "—"
             : Source.Market == MarketKind.US ? $"${quote.Price:N2}" : $"{quote.Price:N0}";
         public double? RateValue => quote is null ? null : (double)quote.ChangeRate;

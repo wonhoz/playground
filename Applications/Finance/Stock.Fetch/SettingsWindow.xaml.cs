@@ -1,5 +1,6 @@
 using System.Globalization;
 using System.Windows;
+using System.Windows.Controls;
 using Stock.Fetch.Services;
 
 namespace Stock.Fetch;
@@ -19,6 +20,7 @@ public partial class SettingsWindow : Window
         KeyBox.Text = config.AppKey;
         SecretBox.Password = config.AppSecret;
         MockCheck.IsChecked = config.UseMockServer;
+        SelectMarketDiv(config.KisMarketDiv);
         PortfolioPathBox.Text = config.PortfolioPath;
 
         FinnhubKeyBox.Text = config.FinnhubApiKey;
@@ -87,6 +89,7 @@ public partial class SettingsWindow : Window
         _config.AppKey = KeyBox.Text.Trim();
         _config.AppSecret = SecretBox.Password.Trim();
         _config.UseMockServer = MockCheck.IsChecked == true;
+        _config.KisMarketDiv = (MarketDivCombo.SelectedItem as ComboBoxItem)?.Tag as string ?? "UN";
         _config.PortfolioPath = PortfolioPathBox.Text.Trim();
 
         _config.FinnhubApiKey = FinnhubKeyBox.Text.Trim();
@@ -116,6 +119,14 @@ public partial class SettingsWindow : Window
             .OrderBy(d => d)
             .ToList();
         return list.Count > 0 ? list : new List<double> { 2, 5, 7, 10, 12 };
+    }
+
+    private void SelectMarketDiv(string code)
+    {
+        string target = string.IsNullOrWhiteSpace(code) ? "UN" : code.Trim().ToUpperInvariant();
+        foreach (ComboBoxItem it in MarketDivCombo.Items)
+            if ((it.Tag as string) == target) { MarketDivCombo.SelectedItem = it; return; }
+        MarketDivCombo.SelectedIndex = 0;
     }
 
     private void Cancel_Click(object sender, RoutedEventArgs e) => DialogResult = false;

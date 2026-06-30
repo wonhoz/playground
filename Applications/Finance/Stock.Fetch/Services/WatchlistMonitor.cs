@@ -25,7 +25,8 @@ internal sealed class TrendState
 public sealed class WatchlistMonitor(AppConfig config, PriceSourceRegistry registry, SlackNotifier slack) : IDisposable
 {
     private CancellationTokenSource? _cts;
-    private readonly Dictionary<string, TrendState> _trend = new();
+    // symbol → (조건 키 → 추세 상태). 조건(기간/단위)마다 기준값을 따로 추적한다.
+    private readonly Dictionary<string, Dictionary<string, TrendState>> _trend = new();
     private readonly Dictionary<string, int> _failCount = new();   // 종목별 연속 실패 횟수
     private readonly HashSet<string> _failAlerted = new();          // 실패 알림을 이미 보낸 종목
     private DateTime _lastDigestAt = DateTime.MinValue;
@@ -77,8 +78,7 @@ public sealed class WatchlistMonitor(AppConfig config, PriceSourceRegistry regis
         var items = config.Watchlist.ToList();
         if (items.Count == 0) { StatusChanged?.Invoke("관심 종목 없음"); return; }
 
-        double globalStep = Math.Max(0.001, config.WatchStepPercent);
-        double window = Math.Max(0, config.WatchWindowMinutes);
+        var globalRules = (config.WatchRules ?? new()).Where(r => r.StepPercent > 0 && r.WindowMinutes > 0).ToList();
         var snapshot = new List<WatchQuote>();
 
         // 목록에서 제거된 종목의 추세·실패 상태 정리
@@ -106,8 +106,8 @@ public sealed class WatchlistMonitor(AppConfig config, PriceSourceRegistry regis
                 HandleSuccess(item);
                 item.Name = string.IsNullOrWhiteSpace(item.Name) ? item.Symbol : item.Name;
                 snapshot.Add(new WatchQuote(item, q!.Price, q.ChangeRate));
-                double step = item.StepPercent > 0 ? item.StepPercent : globalStep; // 종목별 단위 우선
-                Evaluate(item, q.Price, q.ChangeRate, step, window);
+                var rules = item.Rules.Count > 0 ? item.Rules : globalRules; // 종목별 조건 우선
+                Evaluate(item, q.Price, q.ChangeRate, rules);
             }
 
             try { await Task.Delay(250, ct); } catch (OperationCanceledException) { break; }
@@ -118,32 +118,47 @@ public sealed class WatchlistMonitor(AppConfig config, PriceSourceRegistry regis
     }
 
     /// <summary>
-    /// 추세 감지: 기준값 대비 현재 등락율이 step만큼 변하면 방향과 함께 알림(엣지)하고 기준 갱신.
-    /// window 안에 step 변동이 없으면 기준값을 조용히 현재값으로 재설정한다. 첫 관측은 1회성 시작 알림.
+    /// 다중 조건 추세 감지: 조건마다 기준값을 따로 두고, 기준 대비 현재 등락율이 그 조건의 step만큼 변하면
+    /// 방향과 함께 알림(엣지)하고 기준 갱신. 조건의 window 안에 step 변동이 없으면 기준값을 현재값으로 재설정.
+    /// 종목 첫 관측은 모든 조건의 기준을 잡고 현재 수준 1회 알림(시작 알림).
     /// </summary>
-    private void Evaluate(WatchItem item, decimal price, decimal rate, double step, double window)
+    private void Evaluate(WatchItem item, decimal price, decimal rate, List<TrendRule> rules)
     {
+        if (rules.Count == 0) return;
         var now = DateTime.Now;
-        if (!_trend.TryGetValue(item.Symbol, out var st))
+
+        if (!_trend.TryGetValue(item.Symbol, out var states))
         {
-            // 첫 관측: 기준값 설정 + 현재 수준 1회 알림(시작 알림)
-            _trend[item.Symbol] = new TrendState { RefRate = rate, RefTime = now };
-            Raise(new WatchAlert(item, price, rate, rate, step, window, IsStartup: true, now));
+            states = new Dictionary<string, TrendState>();
+            foreach (var r in rules) states[r.Key] = new TrendState { RefRate = rate, RefTime = now };
+            _trend[item.Symbol] = states;
+            Raise(new WatchAlert(item, price, rate, rate, 0, 0, IsStartup: true, now, TrendRule.Summary(rules)));
             return;
         }
 
-        double delta = (double)(rate - st.RefRate);
-        if (Math.Abs(delta) >= step)
+        // 조건이 바뀌면 반영: 사라진 조건 제거, 새 조건은 기준만 잡고(알림 없음) 시작.
+        var keys = rules.Select(r => r.Key).ToHashSet();
+        foreach (var k in states.Keys.Where(k => !keys.Contains(k)).ToList()) states.Remove(k);
+
+        foreach (var r in rules)
         {
-            Raise(new WatchAlert(item, price, rate, st.RefRate, step, window, IsStartup: false, now));
-            st.RefRate = rate;
-            st.RefTime = now;
-        }
-        else if (window > 0 && (now - st.RefTime).TotalMinutes >= window)
-        {
-            // 기간 내 step 변동 없음 → 기준값을 현재값으로 조용히 재설정(최근 기간 추세만 추적)
-            st.RefRate = rate;
-            st.RefTime = now;
+            if (!states.TryGetValue(r.Key, out var st))
+            {
+                states[r.Key] = new TrendState { RefRate = rate, RefTime = now };
+                continue;
+            }
+            double delta = (double)(rate - st.RefRate);
+            if (Math.Abs(delta) >= r.StepPercent)
+            {
+                Raise(new WatchAlert(item, price, rate, st.RefRate, r.StepPercent, r.WindowMinutes, IsStartup: false, now));
+                st.RefRate = rate;
+                st.RefTime = now;
+            }
+            else if (r.WindowMinutes > 0 && (now - st.RefTime).TotalMinutes >= r.WindowMinutes)
+            {
+                st.RefRate = rate;   // 기간 내 변동 없음 → 기준 재설정(최근 기간 추세만 추적)
+                st.RefTime = now;
+            }
         }
     }
 

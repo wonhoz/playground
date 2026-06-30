@@ -28,7 +28,7 @@ public partial class WatchEditWindow : Window
         MarketCombo.SelectedIndex = item.Market == MarketKind.US ? 1 : 0; // SelectionChanged가 소스 콤보 채움
         SymbolBox.Text = item.Symbol;
         NameBox.Text = item.Name;
-        StepBox.Text = item.StepPercent > 0 ? item.StepPercent.ToString("0.###", CultureInfo.InvariantCulture) : "";
+        RulesBox.Text = TrendRule.ToText(item.Rules);
         SelectSource(item.Source);
         SelectExchange(item.Exchange);
     }
@@ -110,12 +110,15 @@ public partial class WatchEditWindow : Window
         _item.Source = opt.Source;
         _item.Exchange = (ExchangeCombo.SelectedItem as ComboBoxItem)?.Tag as string ?? "NAS";
 
-        // 변화 단위(전용) — 비우면 0(전역 사용). 소수점 허용.
-        string stepText = StepBox.Text.Trim();
-        if (string.IsNullOrEmpty(stepText)) _item.StepPercent = 0;
-        else if (double.TryParse(stepText, NumberStyles.Number, CultureInfo.InvariantCulture, out var step) && step > 0)
-            _item.StepPercent = step;
-        else { Error("변화 단위는 0보다 큰 숫자이거나 비워두세요(예: 1.5)."); return; }
+        // 추세 조건(전용) — 비우면 전역 사용. 형식: "3:1, 5:2".
+        string rulesText = RulesBox.Text.Trim();
+        if (string.IsNullOrEmpty(rulesText)) _item.Rules = new();
+        else
+        {
+            var rules = TrendRule.Parse(rulesText);
+            if (rules.Count == 0) { Error("추세 조건 형식은 '기간:변화단위'입니다(예: 3:1, 5:2). 비우면 전역 조건 사용."); return; }
+            _item.Rules = rules;
+        }
 
         DialogResult = true;
     }

@@ -39,7 +39,13 @@
                 <TextBox x:Name="KeyBox" Margin="0,0,0,10"/>
                 <TextBlock Text="APP SECRET" Style="{StaticResource FieldLbl}"/>
                 <PasswordBox x:Name="SecretBox" Margin="0,0,0,10"/>
-                <CheckBox x:Name="MockCheck" Content="모의투자 서버 사용 (테스트용 · 시세는 실전 권장)"/>
+                <CheckBox x:Name="MockCheck" Content="모의투자 서버 사용 (테스트용 · 시세는 실전 권장)" Margin="0,0,0,10"/>
+                <TextBlock Text="국내 현재가 시장 구분 (장 마감 후 NXT 시세 수신)" Style="{StaticResource FieldLbl}"/>
+                <ComboBox x:Name="MarketDivCombo" Width="280" HorizontalAlignment="Left">
+                    <ComboBoxItem Content="통합 KRX+NXT (권장 · ~20:00)" Tag="UN"/>
+                    <ComboBoxItem Content="NXT 넥스트레이드만" Tag="NX"/>
+                    <ComboBoxItem Content="KRX만 (09:00~15:30)" Tag="J"/>
+                </ComboBox>
 
                 <!-- 포트폴리오 경로 -->
                 <TextBlock Text="자산 포트폴리오 저장 경로" Style="{StaticResource Section}"/>

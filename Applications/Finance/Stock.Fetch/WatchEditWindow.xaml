@@ -60,9 +60,9 @@
             <ComboBoxItem Content="AMS (아멕스·Arca)" Tag="AMS"/>
         </ComboBox>
 
-        <TextBlock Grid.Row="6" Grid.Column="0" Text="변화 단위(%)" Style="{StaticResource FieldLbl}"/>
-        <TextBox Grid.Row="6" Grid.Column="1" x:Name="StepBox" Margin="0,0,0,10"
-                 ToolTip="이 종목 전용 추세 변화 단위(%). 소수점 가능(예: 1.5). 비우면 전역 설정 사용."/>
+        <TextBlock Grid.Row="6" Grid.Column="0" Text="추세 조건" Style="{StaticResource FieldLbl}"/>
+        <TextBox Grid.Row="6" Grid.Column="1" x:Name="RulesBox" Margin="0,0,0,10"
+                 ToolTip="이 종목 전용 추세 조건. 기간:변화단위 쌍을 쉼표로(예: 3:1, 5:2 → 3분당 1%, 5분당 2%). 소수점 가능. 비우면 전역 조건 사용."/>
 
         <TextBlock Grid.Row="7" Grid.ColumnSpan="2" x:Name="HintText" Style="{x:Null}" TextWrapping="Wrap"
                    FontSize="11" Foreground="{StaticResource FgMuted}" VerticalAlignment="Top" Margin="0,4,0,0"

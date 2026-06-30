@@ -120,7 +120,9 @@ public sealed class KisPriceSource(AppConfig config, Action saveConfig, HttpClie
         if (!config.HasKisCredentials)
             throw new PriceSourceException("KIS APP KEY / APP SECRET이 설정되지 않았습니다. 설정에서 입력하세요.");
 
-        string query = $"FID_COND_MRKT_DIV_CODE=J&FID_INPUT_ISCD={code}";
+        // 시장 구분: J=KRX, NX=NXT, UN=통합(KRX+NXT). 통합/NXT면 장 마감 후 NXT 시간대 시세도 수신.
+        string div = string.IsNullOrWhiteSpace(config.KisMarketDiv) ? "UN" : config.KisMarketDiv.Trim().ToUpperInvariant();
+        string query = $"FID_COND_MRKT_DIV_CODE={div}&FID_INPUT_ISCD={code}";
         string token = await EnsureTokenAsync(ct);
         using var req = new HttpRequestMessage(HttpMethod.Get,
             $"{BaseUrl}/uapi/domestic-stock/v1/quotations/inquire-price?{query}");

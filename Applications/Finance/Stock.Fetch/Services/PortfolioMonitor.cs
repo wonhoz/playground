@@ -54,7 +54,7 @@ public sealed class PortfolioMonitor(AppConfig config, PriceSourceRegistry regis
         {
             try
             {
-                if (!config.MonitorMarketHoursOnly || IsMarketOpen(DateTime.Now))
+                if (!config.MonitorMarketHoursOnly || IsMarketOpen(DateTime.Now, config))
                     await PollAsync(ct);
                 else
                     StatusChanged?.Invoke($"장 시간 외 대기 중 ({DateTime.Now:HH:mm})");
@@ -189,12 +189,17 @@ public sealed class PortfolioMonitor(AppConfig config, PriceSourceRegistry regis
         _stateDate = today;
     }
 
-    /// <summary>한국 정규장 09:00~15:30, 평일.</summary>
-    public static bool IsMarketOpen(DateTime now)
+    /// <summary>
+    /// 평일 장 시간. KRX(J)는 09:00~15:30, NXT/통합(NX·UN)은 NXT 운영시간(프리 08:00 ~ 애프터 20:00)까지 확장.
+    /// </summary>
+    public static bool IsMarketOpen(DateTime now, AppConfig? cfg = null)
     {
         if (now.DayOfWeek is DayOfWeek.Saturday or DayOfWeek.Sunday) return false;
         var t = now.TimeOfDay;
-        return t >= new TimeSpan(9, 0, 0) && t <= new TimeSpan(15, 30, 0);
+        bool nxt = cfg != null && !string.Equals(cfg.KisMarketDiv?.Trim(), "J", StringComparison.OrdinalIgnoreCase);
+        return nxt
+            ? t >= new TimeSpan(8, 0, 0) && t <= new TimeSpan(20, 0, 0)
+            : t >= new TimeSpan(9, 0, 0) && t <= new TimeSpan(15, 30, 0);
     }
 
     public void Dispose() => _cts?.Cancel();

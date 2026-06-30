@@ -9,10 +9,11 @@ public sealed record WatchAlert(
     decimal Price,         // 현재가
     decimal CurrentRate,   // 현재 등락율(전일 대비 %)
     decimal RefRate,       // 기준 등락율(직전 알림 시점 %)
-    double Step,           // 변화 단위(%)
-    double WindowMinutes,  // 추세 기간(분) — 기준값을 잡은 뒤 경과 의미
+    double Step,           // 트리거된 조건의 변화 단위(%)
+    double WindowMinutes,  // 트리거된 조건의 추세 기간(분)
     bool IsStartup,
-    DateTime Time)
+    DateTime Time,
+    string RulesText = "") // 시작 알림용: 적용 조건 요약("3분당 1%, 5분당 2%")
 {
     public string Display => string.IsNullOrEmpty(Item.Name) ? Item.Symbol : $"{Item.Name} ({Item.Symbol})";
     /// <summary>추세 방향: 시작 알림은 등락율 부호, 그 외엔 기준값 대비 변화 부호.</summary>

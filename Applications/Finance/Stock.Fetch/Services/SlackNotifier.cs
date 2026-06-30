@@ -48,13 +48,13 @@ public sealed class SlackNotifier(AppConfig config) : IDisposable
         {
             sb.AppendLine($":satellite_antenna: *{a.Item}* ({a.Item.MarketLabel}) 모니터링 시작 — 현재 전일 대비 *{a.CurrentRate:+0.0;-0.0;0.0}%*");
             sb.AppendLine($"• 현재가 *{a.PriceText}* · 소스 {a.Item.SourceLabel}");
-            sb.AppendLine($"• 이 값을 기준으로 {a.Step:0.#}% 변동 시 알림합니다(추세 기간 {a.WindowMinutes:0.#}분).");
+            sb.AppendLine($"• 적용 조건: {a.RulesText}");
         }
         else
         {
             string trend = a.IsUp ? "상승세" : "하락세";
             sb.AppendLine($"{emoji} *{a.Item}* ({a.Item.MarketLabel}) {arrow} {trend} — 직전 기준 대비 *{a.Delta:+0.0;-0.0}%p*");
-            sb.AppendLine($"• 현재 전일 대비 {a.CurrentRate:+0.0;-0.0;0.0}% (기준 {a.RefRate:+0.0;-0.0;0.0}%) · 단위 {a.Step:0.#}%");
+            sb.AppendLine($"• 조건 {a.WindowMinutes:0.#}분당 {a.Step:0.###}% · 현재 전일 대비 {a.CurrentRate:+0.0;-0.0;0.0}% (기준 {a.RefRate:+0.0;-0.0;0.0}%)");
             sb.AppendLine($"• 현재가 *{a.PriceText}* · 소스 {a.Item.SourceLabel}");
         }
         sb.AppendLine($"• 시각 {a.Time:yyyy-MM-dd HH:mm:ss}");

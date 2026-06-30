@@ -18,6 +18,12 @@ public sealed class AppConfig
     /// <summary>true=모의투자(:29443), false=실전(:9443). 시세 조회는 실전 권장.</summary>
     public bool UseMockServer { get; set; } = false;
 
+    /// <summary>
+    /// KIS 국내 현재가 조회 시장 구분(FID_COND_MRKT_DIV_CODE): "J"=KRX, "NX"=NXT(넥스트레이드),
+    /// "UN"=통합(KRX+NXT). 통합/NXT면 장 마감 후 NXT 시간대(~20:00) 시세도 수신. 기본 통합.
+    /// </summary>
+    public string KisMarketDiv { get; set; } = "UN";
+
     // ── 해외 실시간 시세 키(관심 종목 미국 종목용 · 선택) ──
     /// <summary>Finnhub API Key(무료). 미국 종목 실시간 시세 소스.</summary>
     public string FinnhubApiKey { get; set; } = string.Empty;
@@ -78,10 +84,11 @@ public sealed class AppConfig
     public int WatchPollIntervalSeconds { get; set; } = 60;
     /// <summary>관심 종목 다이제스트 알림 주기(분). 0이면 비활성.</summary>
     public int WatchDigestIntervalMinutes { get; set; } = 0;
-    /// <summary>관심 종목 추세 감지 변화 단위(%). 기준값 대비 이만큼 상승/하락하면 알림(엣지). 기본 2%.</summary>
-    public double WatchStepPercent { get; set; } = 2.0;
-    /// <summary>관심 종목 추세 기간(분). 이 기간 안에 step만큼 변동이 없으면 기준값을 현재값으로 재설정. 기본 3분.</summary>
-    public double WatchWindowMinutes { get; set; } = 3.0;
+    /// <summary>
+    /// 관심 종목 전역 추세 조건 목록(여러 개 가능: 예 3분당 1%, 5분당 2%). 종목에 자체 조건이 없으면 이 목록을 사용.
+    /// 기본 1개(3분당 2%).
+    /// </summary>
+    public List<TrendRule> WatchRules { get; set; } = new() { new TrendRule { WindowMinutes = 3, StepPercent = 2 } };
 
     // ── 보유 종목 모니터링 / Slack 알림 ──
     public string SlackWebhookUrl { get; set; } = string.Empty;

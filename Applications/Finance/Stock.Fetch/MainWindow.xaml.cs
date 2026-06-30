@@ -96,13 +96,13 @@ public partial class MainWindow : Window
         {
             _tray.ShowBalloon(
                 $"⭐ {a.Item} 모니터링 시작 {a.CurrentRate:+0.0;-0.0;0.0}%",
-                $"현재가 {a.PriceText} · 이 값 기준 {a.Step:0.#}% 변동 시 알림");
+                $"현재가 {a.PriceText} · 조건: {a.RulesText}");
         }
         else
         {
             string trend = a.IsUp ? "상승세" : "하락세";
             _tray.ShowBalloon(
-                $"⭐ {a.Item} {arrow} {trend} {a.Delta:+0.0;-0.0}%p",
+                $"⭐ {a.Item} {arrow} {trend} {a.Delta:+0.0;-0.0}%p ({a.WindowMinutes:0.#}분/{a.Step:0.###}%)",
                 $"현재 {a.CurrentRate:+0.0;-0.0;0.0}% (기준 {a.RefRate:+0.0;-0.0;0.0}%) · 현재가 {a.PriceText}",
                 warning: !a.IsUp);
         }

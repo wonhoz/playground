@@ -5,20 +5,30 @@ namespace Stock.Fetch.Services;
 /// <summary>관심 종목 1건의 폴링 결과(현재가·등락율).</summary>
 public sealed record WatchQuote(WatchItem Item, decimal Price, decimal ChangeRate);
 
+/// <summary>종목별 추세 추적 상태: 기준 등락율과 그 기준을 잡은 시각.</summary>
+internal sealed class TrendState
+{
+    public decimal RefRate;
+    public DateTime RefTime;
+}
+
 /// <summary>
-/// 관심 종목(워치리스트)을 주기적으로 폴링해, ① 전일 대비 등락율이 설정 임계값(±3/5/7/10% 등)을
-/// <b>새로 넘어설 때(엣지)</b> 알림하고, ② 다이제스트 주기마다 전체 종목 시세 요약을 알림한다.
-/// 미국장은 KST 야간이므로 장 시간 게이팅 없이 항상 폴링(주기는 사용자 제어). 이벤트는 백그라운드
-/// 스레드에서 발생하므로 UI 구독자는 Dispatcher 마샬링이 필요하다.
+/// 관심 종목(워치리스트)을 주기적으로 폴링해 <b>추세</b>를 감지·알림한다.
+/// ① 종목별 첫 관측 시 기준값을 잡고 현재 수준을 1회 알림(시작 알림).
+/// ② 이후 기준값(직전 알림 시점의 등락율) 대비 현재 등락율이 step(%)만큼 상승/하락하면
+///    방향과 함께 알림하고 기준값을 현재값으로 갱신(엣지).
+/// ③ window(분) 안에 step 변동이 없으면 기준값을 조용히 현재값으로 재설정 → "최근 기간의 추세"만 감지.
+/// ④ 다이제스트 주기마다 전체 종목 시세 요약을 알림.
+/// 미국장은 KST 야간이므로 장 시간 게이팅 없이 항상 폴링. 이벤트는 백그라운드 스레드에서 발생하므로
+/// UI 구독자는 Dispatcher 마샬링이 필요하다.
 /// </summary>
 public sealed class WatchlistMonitor(AppConfig config, PriceSourceRegistry registry, SlackNotifier slack) : IDisposable
 {
     private CancellationTokenSource? _cts;
-    private readonly Dictionary<string, HashSet<double>> _prevUp = new();
-    private readonly Dictionary<string, HashSet<double>> _prevDown = new();
+    private readonly Dictionary<string, TrendState> _trend = new();
     private DateTime _lastDigestAt = DateTime.MinValue;
 
-    public event Action<WatchItem, decimal, decimal, double>? WatchAlertRaised; // item, price, rate, signedThreshold
+    public event Action<WatchAlert>? WatchAlertRaised;
     public event Action<IReadOnlyList<WatchQuote>>? DigestReady;
     public event Action<string>? StatusChanged;
 
@@ -35,6 +45,8 @@ public sealed class WatchlistMonitor(AppConfig config, PriceSourceRegistry regis
     {
         _cts?.Cancel();
         _cts = null;
+        _trend.Clear();           // 재시작 시 기준값을 새로 잡고 시작 알림을 다시 보내도록
+        _lastDigestAt = DateTime.MinValue;
         StatusChanged?.Invoke("관심 종목 모니터링 중지됨");
     }
 
@@ -57,8 +69,13 @@ public sealed class WatchlistMonitor(AppConfig config, PriceSourceRegistry regis
         var items = config.Watchlist.ToList();
         if (items.Count == 0) { StatusChanged?.Invoke("관심 종목 없음"); return; }
 
-        var thresholds = config.WatchThresholds.Where(t => t > 0).OrderBy(t => t).ToList();
+        double step = Math.Max(0.1, config.WatchStepPercent);
+        double window = Math.Max(0, config.WatchWindowMinutes);
         var snapshot = new List<WatchQuote>();
+
+        // 목록에서 제거된 종목의 추세 상태 정리
+        var live = items.Select(i => i.Symbol).ToHashSet();
+        foreach (var key in _trend.Keys.Where(k => !live.Contains(k)).ToList()) _trend.Remove(key);
 
         foreach (var item in items)
         {
@@ -70,7 +87,7 @@ public sealed class WatchlistMonitor(AppConfig config, PriceSourceRegistry regis
 
             item.Name = string.IsNullOrWhiteSpace(item.Name) ? item.Symbol : item.Name;
             snapshot.Add(new WatchQuote(item, q.Price, q.ChangeRate));
-            Evaluate(item, q.Price, (double)q.ChangeRate, thresholds);
+            Evaluate(item, q.Price, q.ChangeRate, step, window);
 
             try { await Task.Delay(250, ct); } catch (OperationCanceledException) { break; }
         }
@@ -79,25 +96,40 @@ public sealed class WatchlistMonitor(AppConfig config, PriceSourceRegistry regis
         StatusChanged?.Invoke($"갱신 {DateTime.Now:HH:mm:ss} · 관심 {snapshot.Count}/{items.Count}종목");
     }
 
-    /// <summary>등락율이 임계값을 새로 돌파할 때만(엣지) 알림. 같은 임계값은 되돌아갔다 재돌파해야 재알림.</summary>
-    private void Evaluate(WatchItem item, decimal price, double rate, List<double> thresholds)
+    /// <summary>
+    /// 추세 감지: 기준값 대비 현재 등락율이 step만큼 변하면 방향과 함께 알림(엣지)하고 기준 갱신.
+    /// window 안에 step 변동이 없으면 기준값을 조용히 현재값으로 재설정한다. 첫 관측은 1회성 시작 알림.
+    /// </summary>
+    private void Evaluate(WatchItem item, decimal price, decimal rate, double step, double window)
     {
-        var nowUp = thresholds.Where(t => rate >= t).ToHashSet();
-        var nowDown = thresholds.Where(t => rate <= -t).ToHashSet();
-        var prevUp = _prevUp.GetValueOrDefault(item.Symbol) ?? new HashSet<double>();
-        var prevDown = _prevDown.GetValueOrDefault(item.Symbol) ?? new HashSet<double>();
+        var now = DateTime.Now;
+        if (!_trend.TryGetValue(item.Symbol, out var st))
+        {
+            // 첫 관측: 기준값 설정 + 현재 수준 1회 알림(시작 알림)
+            _trend[item.Symbol] = new TrendState { RefRate = rate, RefTime = now };
+            Raise(new WatchAlert(item, price, rate, rate, step, window, IsStartup: true, now));
+            return;
+        }
 
-        foreach (var t in nowUp.Except(prevUp).OrderBy(x => x)) Raise(item, price, rate, +t);
-        foreach (var t in nowDown.Except(prevDown).OrderBy(x => x)) Raise(item, price, rate, -t);
-
-        _prevUp[item.Symbol] = nowUp;
-        _prevDown[item.Symbol] = nowDown;
+        double delta = (double)(rate - st.RefRate);
+        if (Math.Abs(delta) >= step)
+        {
+            Raise(new WatchAlert(item, price, rate, st.RefRate, step, window, IsStartup: false, now));
+            st.RefRate = rate;
+            st.RefTime = now;
+        }
+        else if (window > 0 && (now - st.RefTime).TotalMinutes >= window)
+        {
+            // 기간 내 step 변동 없음 → 기준값을 현재값으로 조용히 재설정(최근 기간 추세만 추적)
+            st.RefRate = rate;
+            st.RefTime = now;
+        }
     }
 
-    private void Raise(WatchItem item, decimal price, double rate, double signedThreshold)
+    private void Raise(WatchAlert alert)
     {
-        WatchAlertRaised?.Invoke(item, price, (decimal)rate, signedThreshold);
-        _ = SafeAsync(() => slack.SendWatchAlertAsync(item, price, (decimal)rate, signedThreshold));
+        WatchAlertRaised?.Invoke(alert);
+        _ = SafeAsync(() => slack.SendWatchAlertAsync(alert));
     }
 
     private void MaybeSendDigest(List<WatchQuote> snapshot)

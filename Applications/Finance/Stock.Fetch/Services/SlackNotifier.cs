@@ -35,19 +35,29 @@ public sealed class SlackNotifier(AppConfig config) : IDisposable
         await PostAsync(BuildPayload(sb.ToString()), ct);
     }
 
-    /// <summary>관심 종목 등락율 임계값 돌파 알림.</summary>
-    public async Task SendWatchAlertAsync(WatchItem item, decimal price, decimal changeRate, double signedThreshold, CancellationToken ct = default)
+    /// <summary>관심 종목 추세 알림(시작 알림 또는 기준값 대비 step 변동).</summary>
+    public async Task SendWatchAlertAsync(WatchAlert a, CancellationToken ct = default)
     {
         if (!IsConfigured) return;
 
-        bool up = signedThreshold >= 0;
-        string emoji = up ? ":red_circle:" : ":large_blue_circle:";   // 한국식: 상승 빨강 / 하락 파랑
-        string arrow = up ? "▲" : "▼";
-        string priceText = FormatPrice(item, price);
+        string emoji = a.IsUp ? ":red_circle:" : ":large_blue_circle:";   // 한국식: 상승 빨강 / 하락 파랑
+        string arrow = a.IsUp ? "▲" : "▼";
         var sb = new StringBuilder();
-        sb.AppendLine($"{emoji} *{item}* ({item.MarketLabel}) {arrow} 전일 대비 *{changeRate:+0.0;-0.0}%* (임계 {Math.Abs(signedThreshold):0.#}%)");
-        sb.AppendLine($"• 현재가 *{priceText}* · 소스 {item.SourceLabel}");
-        sb.AppendLine($"• 시각 {DateTime.Now:yyyy-MM-dd HH:mm:ss}");
+
+        if (a.IsStartup)
+        {
+            sb.AppendLine($":satellite_antenna: *{a.Item}* ({a.Item.MarketLabel}) 모니터링 시작 — 현재 전일 대비 *{a.CurrentRate:+0.0;-0.0;0.0}%*");
+            sb.AppendLine($"• 현재가 *{a.PriceText}* · 소스 {a.Item.SourceLabel}");
+            sb.AppendLine($"• 이 값을 기준으로 {a.Step:0.#}% 변동 시 알림합니다(추세 기간 {a.WindowMinutes:0.#}분).");
+        }
+        else
+        {
+            string trend = a.IsUp ? "상승세" : "하락세";
+            sb.AppendLine($"{emoji} *{a.Item}* ({a.Item.MarketLabel}) {arrow} {trend} — 직전 기준 대비 *{a.Delta:+0.0;-0.0}%p*");
+            sb.AppendLine($"• 현재 전일 대비 {a.CurrentRate:+0.0;-0.0;0.0}% (기준 {a.RefRate:+0.0;-0.0;0.0}%) · 단위 {a.Step:0.#}%");
+            sb.AppendLine($"• 현재가 *{a.PriceText}* · 소스 {a.Item.SourceLabel}");
+        }
+        sb.AppendLine($"• 시각 {a.Time:yyyy-MM-dd HH:mm:ss}");
 
         await PostAsync(BuildPayload(sb.ToString()), ct);
     }

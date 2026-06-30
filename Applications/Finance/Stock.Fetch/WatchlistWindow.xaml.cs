@@ -26,8 +26,9 @@ public partial class WatchlistWindow : Window
 
         MonitorCheck.IsChecked = _config.WatchEnabled;
         PollBox.Text = _config.WatchPollIntervalSeconds.ToString();
+        StepBox.Text = _config.WatchStepPercent.ToString("0.#");
+        WindowBox.Text = _config.WatchWindowMinutes.ToString("0.#");
         DigestBox.Text = _config.WatchDigestIntervalMinutes.ToString();
-        ThresholdsBox.Text = string.Join(", ", _config.WatchThresholds);
 
         _monitor.StatusChanged += OnStatus;
         StatusText.Text = _monitor.IsRunning ? "모니터링 실행 중" : "모니터링 꺼짐";
@@ -119,24 +120,20 @@ public partial class WatchlistWindow : Window
         MonitorToggled?.Invoke(on);
     }
 
-    /// <summary>입력된 폴링·다이제스트·임계값을 파싱해 설정에 반영(저장은 호출 측).</summary>
+    /// <summary>입력된 폴링·변화 단위·추세 기간·다이제스트 값을 파싱해 설정에 반영(저장은 호출 측).</summary>
     private void SaveSettings()
     {
         if (int.TryParse(PollBox.Text.Trim(), out var poll)) _config.WatchPollIntervalSeconds = Math.Max(10, poll);
+        if (double.TryParse(StepBox.Text.Trim(), NumberStyles.Number, CultureInfo.InvariantCulture, out var step) && step > 0)
+            _config.WatchStepPercent = step;
+        if (double.TryParse(WindowBox.Text.Trim(), NumberStyles.Number, CultureInfo.InvariantCulture, out var win) && win >= 0)
+            _config.WatchWindowMinutes = win;
         if (int.TryParse(DigestBox.Text.Trim(), out var dig)) _config.WatchDigestIntervalMinutes = Math.Max(0, dig);
-        _config.WatchThresholds = ParseThresholds(ThresholdsBox.Text);
         // UI를 정규화된 값으로 되돌림
         PollBox.Text = _config.WatchPollIntervalSeconds.ToString();
+        StepBox.Text = _config.WatchStepPercent.ToString("0.#");
+        WindowBox.Text = _config.WatchWindowMinutes.ToString("0.#");
         DigestBox.Text = _config.WatchDigestIntervalMinutes.ToString();
-        ThresholdsBox.Text = string.Join(", ", _config.WatchThresholds);
-    }
-
-    private static List<double> ParseThresholds(string text)
-    {
-        var list = text.Split(new[] { ',', ' ', ';' }, StringSplitOptions.RemoveEmptyEntries)
-            .Select(s => double.TryParse(s, NumberStyles.Number, CultureInfo.InvariantCulture, out var d) ? Math.Abs(d) : -1)
-            .Where(d => d > 0).Distinct().OrderBy(d => d).ToList();
-        return list.Count > 0 ? list : new List<double> { 3, 5, 7, 10 };
     }
 
     private void Close_Click(object sender, RoutedEventArgs e) => Close();

@@ -83,15 +83,23 @@ public partial class MainWindow : Window
         };
     }
 
-    private void OnWatchAlertRaised(Models.WatchItem item, decimal price, decimal rate, double signedThreshold) => Dispatcher.Invoke(() =>
+    private void OnWatchAlertRaised(Models.WatchAlert a) => Dispatcher.Invoke(() =>
     {
-        bool up = signedThreshold >= 0;
-        string arrow = up ? "▲" : "▼";
-        string priceText = item.Market == Models.MarketKind.US ? $"${price:N2}" : $"{price:N0}원";
-        _tray.ShowBalloon(
-            $"⭐ {item} {arrow} {rate:+0.0;-0.0}%",
-            $"현재가 {priceText} · {item.MarketLabel} · 소스 {item.SourceLabel}",
-            warning: !up);
+        string arrow = a.IsUp ? "▲" : "▼";
+        if (a.IsStartup)
+        {
+            _tray.ShowBalloon(
+                $"⭐ {a.Item} 모니터링 시작 {a.CurrentRate:+0.0;-0.0;0.0}%",
+                $"현재가 {a.PriceText} · 이 값 기준 {a.Step:0.#}% 변동 시 알림");
+        }
+        else
+        {
+            string trend = a.IsUp ? "상승세" : "하락세";
+            _tray.ShowBalloon(
+                $"⭐ {a.Item} {arrow} {trend} {a.Delta:+0.0;-0.0}%p",
+                $"현재 {a.CurrentRate:+0.0;-0.0;0.0}% (기준 {a.RefRate:+0.0;-0.0;0.0}%) · 현재가 {a.PriceText}",
+                warning: !a.IsUp);
+        }
     });
 
     private void OnWatchDigest(IReadOnlyList<WatchQuote> quotes) => Dispatcher.Invoke(() =>

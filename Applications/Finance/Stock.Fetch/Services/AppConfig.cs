@@ -78,8 +78,10 @@ public sealed class AppConfig
     public int WatchPollIntervalSeconds { get; set; } = 60;
     /// <summary>관심 종목 다이제스트 알림 주기(분). 0이면 비활성.</summary>
     public int WatchDigestIntervalMinutes { get; set; } = 0;
-    /// <summary>관심 종목 등락율 알림 임계값(% · 상승/하락 양방향). 기본 ±3/5/7/10.</summary>
-    public List<double> WatchThresholds { get; set; } = new() { 3, 5, 7, 10 };
+    /// <summary>관심 종목 추세 감지 변화 단위(%). 기준값 대비 이만큼 상승/하락하면 알림(엣지). 기본 2%.</summary>
+    public double WatchStepPercent { get; set; } = 2.0;
+    /// <summary>관심 종목 추세 기간(분). 이 기간 안에 step만큼 변동이 없으면 기준값을 현재값으로 재설정. 기본 3분.</summary>
+    public double WatchWindowMinutes { get; set; } = 3.0;
 
     // ── 보유 종목 모니터링 / Slack 알림 ──
     public string SlackWebhookUrl { get; set; } = string.Empty;

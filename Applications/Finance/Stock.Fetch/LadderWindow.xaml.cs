@@ -1,6 +1,7 @@
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
 using Stock.Fetch.Models;
 using Stock.Fetch.Services;
@@ -14,7 +15,7 @@ public partial class LadderWindow : Window
 
     private readonly StockSeries _series;
     private readonly AppConfig _config;
-    private readonly Holding? _holding;
+    private Holding? _holding;
     private string _copyText = string.Empty;
     private bool _ready;
     private bool _suppress;   // 추세 적용으로 슬라이더 값을 코드가 바꿀 때 재계산 루프 방지
@@ -151,6 +152,51 @@ public partial class LadderWindow : Window
         BuyGrid.Children.Add(offT);
         BuyGrid.Children.Add(priceT);
         BuyGrid.Children.Add(fillT);
+
+        // 행 전체를 덮는 투명 히트영역(맨 위 z-order) — 더블클릭 시 매수 기록 추가.
+        var hit = new Border
+        {
+            Background = Brushes.Transparent,
+            Cursor = Cursors.Hand,
+            Tag = price,
+            ToolTip = "더블클릭 → 내 자산 매수 기록에 추가 (1주)"
+        };
+        Grid.SetRow(hit, row); Grid.SetColumn(hit, 0); Grid.SetColumnSpan(hit, 4);
+        hit.MouseLeftButtonDown += BuyRow_MouseDown;
+        BuyGrid.Children.Add(hit);
+    }
+
+    private void BuyRow_MouseDown(object sender, MouseButtonEventArgs e)
+    {
+        if (e.ClickCount == 2 && sender is FrameworkElement fe && fe.Tag is decimal price)
+            AddBuyToPortfolio(price);
+    }
+
+    /// <summary>선택한 매수가를 내 자산 매매 기록에 매수 1주로 추가하고, 보유 반영 후 재계산한다.</summary>
+    private void AddBuyToPortfolio(decimal price)
+    {
+        string title = string.IsNullOrEmpty(_series.Name) ? _series.Code : $"{_series.Name} ({_series.Code})";
+        if (MessageBox.Show($"{title}\n{Won(price)}원 × 1주를 매수 기록에 추가할까요?",
+                "매수 기록 추가", MessageBoxButton.YesNo, MessageBoxImage.Question) != MessageBoxResult.Yes)
+            return;
+
+        var pf = PortfolioStore.Load(_config);
+        pf.Trades.Add(new Trade
+        {
+            Code = _series.Code,
+            Name = _series.Name,
+            Side = TradeSide.Buy,
+            Date = DateOnly.FromDateTime(DateTime.Today),
+            Price = price,
+            Quantity = 1,
+            Note = "래더 매수"
+        });
+        PortfolioStore.Save(_config, pf);
+
+        // 보유 평단 갱신 → 합산 평단·손절·익절 재계산.
+        _holding = PortfolioStore.HoldingOf(pf, _series.Code);
+        Recompute();
+        SubText.Text = $"✓ 매수 기록 추가: {title} · {Won(price)}원 ×1주 ({DateTime.Now:HH:mm})";
     }
 
     private void AddSellRow(int row, SellTarget t)

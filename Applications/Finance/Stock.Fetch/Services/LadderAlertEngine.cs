@@ -50,13 +50,16 @@ public sealed class LadderAlertEngine(AppConfig config, PriceSourceRegistry regi
             if (lv.Buys[k] > 0 && price <= lv.Buys[k])
                 Fire(code, name, LadderAlertKind.BuyTouch, k + 1, price, lv.Buys[k], $"매수 {k + 1}호가 {lv.Buys[k]:N0}원 도달");
 
-        // 2) 익절 돌파(보유 + 상승세)
-        if (lv.HasHolding && lv.TrendUp)
+        // 2) 익절 도달(관심·보유 공통 · 상승세일 때만). 보유 없으면 익절가는 가상 4주 래더 평단 기준.
+        if (lv.TrendUp)
             for (int k = 0; k < lv.Targets.Length; k++)
             {
                 var t = lv.Targets[k];
                 if (t.Price > 0 && price >= t.Price)
-                    Fire(code, name, LadderAlertKind.SellBreak, k + 1, price, t.Price, $"익절 '{t.Name}' {t.Price:N0}원 돌파");
+                {
+                    string tag = lv.HasHolding ? "익절" : "익절목표";
+                    Fire(code, name, LadderAlertKind.SellBreak, k + 1, price, t.Price, $"{tag} '{t.Name}' {t.Price:N0}원 도달");
+                }
             }
 
         // 3) 갭다운(시초가)

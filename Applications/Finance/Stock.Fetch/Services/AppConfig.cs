@@ -115,6 +115,11 @@ public sealed class AppConfig
     /// <summary>한국·미국 장 세션(오픈·동시호가·마감 등) 5분 전 Slack·트레이 알림. 기본 켜짐.</summary>
     public bool MarketScheduleAlerts { get; set; } = true;
 
+    /// <summary>켜면 한국 종목 상승/하락(추세) 알림을 프리(08:00)·정규(09:00) 개장 직후 N분간 음소거. 기본 꺼짐.</summary>
+    public bool MuteKrOpenAlerts { get; set; } = false;
+    /// <summary>개장 직후 음소거 구간(분). 기본 10.</summary>
+    public int KrOpenMuteMinutes { get; set; } = 10;
+
     // ── 캐시된 OAuth 토큰(만료 전까지 재사용) ──
     public string CachedToken { get; set; } = string.Empty;
     public DateTime TokenExpiresAt { get; set; } = DateTime.MinValue;

@@ -23,15 +23,16 @@ public sealed class MarketScheduleNotifier(AppConfig config, SlackNotifier slack
     // (지역, 라벨, 시, 분) — KR은 KST, US는 ET 벽시계 기준.
     private static readonly (MarketRegion Region, string Label, int H, int M)[] Events =
     {
-        (MarketRegion.KR, "프리장 오픈",      8, 0),
-        (MarketRegion.KR, "장전 동시호가",    8, 50),
-        (MarketRegion.KR, "정규장 시작",      9, 0),
-        (MarketRegion.KR, "장마감 동시호가",  15, 20),
-        (MarketRegion.KR, "애프터마켓 마감",  20, 0),
-        (MarketRegion.US, "데이마켓 시작",    20, 0),   // ET 20:00 ≈ KST 09:00(서머타임)
-        (MarketRegion.US, "프리마켓 시작",    4, 0),    // ET 04:00 ≈ KST 17:00
-        (MarketRegion.US, "정규장 시작",      9, 0),    // ET 09:00 ≈ KST 22:00
-        (MarketRegion.US, "애프터마켓 시작",  16, 0),   // ET 16:00 ≈ KST 05:00
+        (MarketRegion.KR, "프리장 오픈",        8, 0),
+        (MarketRegion.KR, "장전 동시호가",      8, 50),
+        (MarketRegion.KR, "정규장 시작",        9, 0),
+        (MarketRegion.KR, "장마감 동시호가",    15, 20),
+        (MarketRegion.KR, "시간외 단일가 마감", 18, 0),
+        (MarketRegion.KR, "애프터마켓 마감",    20, 0),
+        (MarketRegion.US, "데이마켓 시작",      20, 0),   // ET 20:00 ≈ KST 09:00(서머타임)
+        (MarketRegion.US, "프리마켓 시작",      4, 0),    // ET 04:00 ≈ KST 17:00
+        (MarketRegion.US, "정규장 시작",        9, 30),   // ET 09:30 ≈ KST 22:30
+        (MarketRegion.US, "애프터마켓 시작",    16, 0),   // ET 16:00 ≈ KST 05:00
     };
 
     private CancellationTokenSource? _cts;

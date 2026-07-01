@@ -165,8 +165,10 @@ public sealed class WatchlistMonitor(AppConfig config, PriceSourceRegistry regis
             double step = up ? r.StepUp : r.StepDown;   // 상승/하락 임계값 개별 적용
             if (Math.Abs(delta) >= step)
             {
-                // 방향 필터: 상승/하락 중 종목이 원하는 방향만 알림(기준 갱신은 항상 수행).
-                if ((up && item.AlertUp) || (!up && item.AlertDown))
+                // 방향 필터 + 한국 개장 직후 음소거(기준 갱신은 항상 수행).
+                bool dirOk = (up && item.AlertUp) || (!up && item.AlertDown);
+                bool muted = item.Market == MarketKind.KR && IsKrOpenMuted(now);
+                if (dirOk && !muted)
                     Raise(new WatchAlert(item, price, rate, st.RefRate, step, r.WindowMinutes, IsStartup: false, now));
                 st.RefRate = rate;
                 st.RefTime = now;
@@ -177,6 +179,18 @@ public sealed class WatchlistMonitor(AppConfig config, PriceSourceRegistry regis
                 st.RefTime = now;
             }
         }
+    }
+
+    /// <summary>한국 개장 직후(프리 08:00·정규 09:00 후 N분) 추세 알림 음소거 구간 여부. 평일만.</summary>
+    private bool IsKrOpenMuted(DateTime now)
+    {
+        if (!config.MuteKrOpenAlerts) return false;
+        if (now.DayOfWeek is DayOfWeek.Saturday or DayOfWeek.Sunday) return false;
+        int mins = Math.Max(1, config.KrOpenMuteMinutes);
+        var t = now.TimeOfDay;
+        bool pre = t >= new TimeSpan(8, 0, 0) && t < new TimeSpan(8, 0, 0).Add(TimeSpan.FromMinutes(mins));
+        bool reg = t >= new TimeSpan(9, 0, 0) && t < new TimeSpan(9, 0, 0).Add(TimeSpan.FromMinutes(mins));
+        return pre || reg;
     }
 
     private void Raise(WatchAlert alert)

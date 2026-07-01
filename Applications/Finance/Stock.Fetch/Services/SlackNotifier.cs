@@ -138,6 +138,16 @@ public sealed class SlackNotifier(AppConfig config) : IDisposable
         await PostAsync(BuildPayload(sb.ToString()), ct);
     }
 
+    /// <summary>장 세션 시작·마감 5분 전 알림.</summary>
+    public async Task SendMarketScheduleAsync(string title, string detail, CancellationToken ct = default)
+    {
+        if (!IsConfigured) return;
+        var sb = new StringBuilder();
+        sb.AppendLine($":bell: *{title}*");
+        if (!string.IsNullOrEmpty(detail)) sb.AppendLine($"• {detail}");
+        await PostAsync(BuildPayload(sb.ToString()), ct);
+    }
+
     /// <summary>설정 화면의 "테스트 전송" 버튼용.</summary>
     public async Task SendTestAsync(CancellationToken ct = default)
     {

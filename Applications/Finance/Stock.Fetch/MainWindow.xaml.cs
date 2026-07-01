@@ -18,6 +18,7 @@ public partial class MainWindow : Window
     private readonly LadderAlertEngine _ladder;
     private readonly PortfolioMonitor _monitor;
     private readonly WatchlistMonitor _watch;
+    private readonly MarketScheduleNotifier _schedule;
     private readonly TrayManager _tray;
     private bool _reallyExit;
     private bool _trayHintShown;
@@ -75,6 +76,8 @@ public partial class MainWindow : Window
         _watch.WatchAlertRaised += OnWatchAlertRaised;
         _watch.StartupSummary += OnWatchStartupSummary;
         _watch.DigestReady += OnWatchDigest;
+        _schedule = new MarketScheduleNotifier(_config, _slack);
+        _schedule.Raised += OnScheduleAlert;
         _watch.FetchFailed += (item, reason, fails) => OnFetchFailed(item.ToString(), "관심 종목", reason, fails);
         _watch.FetchRecovered += item => OnFetchRecovered(item.ToString(), "관심 종목");
         _tray = new TrayManager();
@@ -87,6 +90,7 @@ public partial class MainWindow : Window
         {
             if (_config.MonitorEnabled) StartMonitor();
             if (_config.WatchEnabled) _watch.Start();
+            if (_config.MarketScheduleAlerts) _schedule.Start();
             _tray.ShowBalloon("Stock.Fetch", _config.MonitorEnabled
                 ? "보유 종목 모니터링 중입니다. 창을 닫아도 트레이에서 계속 실행됩니다."
                 : "트레이에 상주합니다. 설정에서 모니터링을 켜면 보유 종목을 감시합니다.");
@@ -112,6 +116,9 @@ public partial class MainWindow : Window
         if (alerts.Count > max) body += $"\n…외 {alerts.Count - max}종목";
         _tray.ShowBalloon($"⭐ 관심 종목 모니터링 시작 ({alerts.Count}종목)", body);
     });
+
+    private void OnScheduleAlert(string title, string detail) => Dispatcher.Invoke(() =>
+        _tray.ShowBalloon("🔔 " + title, detail));
 
     private void OnLadderAlert(Models.LadderAlert a) => Dispatcher.Invoke(() =>
     {
@@ -193,6 +200,7 @@ public partial class MainWindow : Window
         SaveState();
         _monitor.Dispose();
         _watch.Dispose();
+        _schedule.Dispose();
         _slack.Dispose();
         _tray.Dispose();
         _registry.Dispose();
@@ -601,6 +609,9 @@ public partial class MainWindow : Window
             // 모니터링 설정 변경 즉시 반영
             if (_config.MonitorEnabled && !_monitor.IsRunning) StartMonitor();
             else if (!_config.MonitorEnabled && _monitor.IsRunning) { _monitor.Stop(); _tray.SetMonitorState(false); }
+            // 장 세션 알림 토글 반영
+            if (_config.MarketScheduleAlerts && !_schedule.IsRunning) _schedule.Start();
+            else if (!_config.MarketScheduleAlerts && _schedule.IsRunning) _schedule.Stop();
         }
     }
 

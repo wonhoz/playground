@@ -112,6 +112,9 @@ public sealed class AppConfig
     /// <summary>시세 조회가 연속 N회 실패하면 알림(보유·관심 종목 공통). 0이면 끔. 기본 3회.</summary>
     public int FetchFailAlertThreshold { get; set; } = 3;
 
+    /// <summary>한국·미국 장 세션(오픈·동시호가·마감 등) 5분 전 Slack·트레이 알림. 기본 켜짐.</summary>
+    public bool MarketScheduleAlerts { get; set; } = true;
+
     // ── 캐시된 OAuth 토큰(만료 전까지 재사용) ──
     public string CachedToken { get; set; } = string.Empty;
     public DateTime TokenExpiresAt { get; set; } = DateTime.MinValue;

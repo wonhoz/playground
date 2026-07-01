@@ -11,6 +11,9 @@ public static class UsMarket
 {
     private static readonly TimeZoneInfo Et = ResolveEt();
 
+    /// <summary>미 동부시간대(서머타임 자동). 장 세션 알림 등에서 재사용.</summary>
+    public static TimeZoneInfo Eastern => Et;
+
     public static UsSession CurrentSession(DateTime? utc = null)
     {
         var nowEt = TimeZoneInfo.ConvertTimeFromUtc(utc ?? DateTime.UtcNow, Et);

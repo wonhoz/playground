@@ -122,6 +122,28 @@
             </Setter>
         </Style>
 
+        <!-- ───────────────────────── ToolTip (다크) ───────────────────────── -->
+        <Style TargetType="ToolTip">
+            <Setter Property="Foreground" Value="{StaticResource FgBrush}"/>
+            <Setter Property="Background" Value="{StaticResource PanelBg}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource BorderBrush}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Padding" Value="8,5"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="HasDropShadow" Value="False"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ToolTip">
+                        <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="5"
+                                Padding="{TemplateBinding Padding}">
+                            <ContentPresenter/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
         <!-- ───────────────────────── ScrollBar ───────────────────────── -->
         <Style x:Key="ScrollThumb" TargetType="Thumb">
             <Setter Property="Template">

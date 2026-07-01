@@ -349,6 +349,17 @@
 
         <!-- 암시적 DataGridColumnHeader 스타일은 DataGrid 내부 템플릿에 적용 안 됨 →
              DataGrid 엘리먼트에서 ColumnHeaderStyle로 직접 참조한다(MainWindow.xaml). -->
+        <!-- 컬럼 헤더 폭 조절용 투명 그립 -->
+        <Style x:Key="ColHeaderGripper" TargetType="Thumb">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Thumb">
+                        <Border Background="Transparent"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
         <Style x:Key="DarkColHeader" TargetType="DataGridColumnHeader">
             <Setter Property="Foreground" Value="{StaticResource FgBrush}"/>
             <Setter Property="FontWeight" Value="SemiBold"/>
@@ -360,12 +371,19 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="DataGridColumnHeader">
-                        <Border Background="{StaticResource PanelBg}" BorderBrush="{TemplateBinding BorderBrush}"
-                                BorderThickness="{TemplateBinding BorderThickness}">
-                            <ContentPresenter Margin="{TemplateBinding Padding}"
-                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                              VerticalAlignment="Center"/>
-                        </Border>
+                        <Grid>
+                            <Border Background="{StaticResource PanelBg}" BorderBrush="{TemplateBinding BorderBrush}"
+                                    BorderThickness="{TemplateBinding BorderThickness}">
+                                <ContentPresenter Margin="{TemplateBinding Padding}"
+                                                  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                  VerticalAlignment="Center"/>
+                            </Border>
+                            <!-- 컬럼 폭 조절 그립(좌·우) — DataGrid가 PART 이름으로 리사이즈를 연결한다. -->
+                            <Thumb x:Name="PART_LeftHeaderGripper" HorizontalAlignment="Left" Width="8"
+                                   Cursor="SizeWE" Style="{StaticResource ColHeaderGripper}"/>
+                            <Thumb x:Name="PART_RightHeaderGripper" HorizontalAlignment="Right" Width="8"
+                                   Cursor="SizeWE" Style="{StaticResource ColHeaderGripper}"/>
+                        </Grid>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>

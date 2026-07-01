@@ -60,7 +60,7 @@
                   ColumnHeaderStyle="{StaticResource DarkColHeader}" CanUserAddRows="False"
                   SelectionMode="Single" Margin="0,0,0,0">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="종목" Binding="{Binding Display}" Width="*"/>
+                <DataGridTextColumn Header="종목" Binding="{Binding Display}" Width="*" MinWidth="180"/>
                 <DataGridTextColumn Header="수량" Binding="{Binding Quantity, StringFormat={}{0:N0}}" Width="80" ElementStyle="{StaticResource NumCell}"/>
                 <DataGridTextColumn Header="평단" Binding="{Binding AvgPrice, StringFormat={}{0:N0}}" Width="100" ElementStyle="{StaticResource NumCell}"/>
                 <DataGridTextColumn Header="매입금액" Binding="{Binding Invested, StringFormat={}{0:N0}}" Width="120" ElementStyle="{StaticResource NumCell}"/>
@@ -122,7 +122,7 @@
                   SelectionMode="Extended" MouseDoubleClick="Edit_Click">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="날짜" Binding="{Binding DateText}" Width="100"/>
-                <DataGridTextColumn Header="종목" Binding="{Binding Display}" Width="*"/>
+                <DataGridTextColumn Header="종목" Binding="{Binding Display}" Width="*" MinWidth="160"/>
                 <DataGridTextColumn Header="구분" Binding="{Binding SideText}" Width="70">
                     <DataGridTextColumn.ElementStyle>
                         <Style TargetType="TextBlock">

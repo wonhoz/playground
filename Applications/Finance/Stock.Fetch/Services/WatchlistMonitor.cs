@@ -22,7 +22,7 @@ internal sealed class TrendState
 /// 미국장은 KST 야간이므로 장 시간 게이팅 없이 항상 폴링. 이벤트는 백그라운드 스레드에서 발생하므로
 /// UI 구독자는 Dispatcher 마샬링이 필요하다.
 /// </summary>
-public sealed class WatchlistMonitor(AppConfig config, PriceSourceRegistry registry, SlackNotifier slack, LadderAlertEngine ladder) : IDisposable
+public sealed class WatchlistMonitor(AppConfig config, PriceSourceRegistry registry, SlackNotifier slack, LadderAlertEngine ladder, ReversalEstimator reversal) : IDisposable
 {
     private CancellationTokenSource? _cts;
     // symbol → (조건 키 → 추세 상태). 조건(기간/단위)마다 기준값을 따로 추적한다.
@@ -169,7 +169,7 @@ public sealed class WatchlistMonitor(AppConfig config, PriceSourceRegistry regis
                 bool dirOk = (up && item.AlertUp) || (!up && item.AlertDown);
                 bool muted = item.Market == MarketKind.KR && IsKrOpenMuted(now);
                 if (dirOk && !muted)
-                    Raise(new WatchAlert(item, price, rate, st.RefRate, step, r.WindowMinutes, IsStartup: false, now));
+                    Raise(item, new WatchAlert(item, price, rate, st.RefRate, step, r.WindowMinutes, IsStartup: false, now));
                 st.RefRate = rate;
                 st.RefTime = now;
             }
@@ -193,10 +193,24 @@ public sealed class WatchlistMonitor(AppConfig config, PriceSourceRegistry regis
         return pre || reg;
     }
 
-    private void Raise(WatchAlert alert)
+    private void Raise(WatchItem item, WatchAlert alert) => _ = RaiseEnrichedAsync(item, alert);
+
+    /// <summary>추세 알림에 반등 추정을 첨부(설정·비지수)한 뒤 트레이·Slack으로 전송.</summary>
+    private async Task RaiseEnrichedAsync(WatchItem item, WatchAlert alert)
     {
-        WatchAlertRaised?.Invoke(alert);
-        _ = SafeAsync(() => slack.SendWatchAlertAsync(alert));
+        WatchAlert enriched = alert;
+        if (config.WatchReversalEstimate && !item.IsIndex)
+        {
+            try
+            {
+                var est = await reversal.EstimateAsync(item, alert.Price);
+                if (est != null)
+                    enriched = alert with { ReversalProb = est.Probability, ReversalDirText = est.DirText, ReversalText = est.Detail };
+            }
+            catch { /* 추정 실패 시 원본 알림 유지 */ }
+        }
+        WatchAlertRaised?.Invoke(enriched);
+        await SafeAsync(() => slack.SendWatchAlertAsync(enriched));
     }
 
     /// <summary>모아둔 시작 알림을 요약 1건으로 전송(Slack·트레이 풍선 각 1회).</summary>

@@ -117,13 +117,17 @@ public sealed class PriceSourceRegistry : IDisposable
         return new Quote(item.Symbol, price, rate, DateTime.Now);
     }
 
-    /// <summary>국내 일봉(최근 days일) — 래더/갭다운 계산용. 네이버(무인증) 사용.</summary>
+    /// <summary>국내 일봉(최근 days일) — 래더/갭다운/반등 계산용. 네이버(무인증) 사용.</summary>
     public async Task<IReadOnlyList<Candle>> KrDailyAsync(string code, int days = 40, CancellationToken ct = default)
     {
         var to = DateTime.Today;
         var series = await _sources[SourceKind.Naver].FetchAsync(code, to.AddDays(-days), to, ct);
         return series.Candles;
     }
+
+    /// <summary>미국 일봉(무접미사 티커) — 반등 지표 계산용. Yahoo(무인증) 사용.</summary>
+    public Task<List<Candle>> UsDailyAsync(string symbol, string range = "6mo", CancellationToken ct = default)
+        => _yahoo.FetchDailyCandlesAsync(symbol, range, ct);
 
     public IPriceSource Get(SourceKind kind) => _sources[kind];
 

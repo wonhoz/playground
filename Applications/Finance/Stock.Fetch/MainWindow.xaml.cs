@@ -16,6 +16,7 @@ public partial class MainWindow : Window
     // 트레이 상주 + 보유 종목 모니터링
     private readonly SlackNotifier _slack;
     private readonly LadderAlertEngine _ladder;
+    private readonly ReversalEstimator _reversal;
     private readonly PortfolioMonitor _monitor;
     private readonly WatchlistMonitor _watch;
     private readonly MarketScheduleNotifier _schedule;
@@ -72,7 +73,8 @@ public partial class MainWindow : Window
             string.IsNullOrEmpty(name) ? code : $"{name} ({code})", "보유 종목", reason, fails);
         _monitor.FetchRecovered += (code, name) => OnFetchRecovered(
             string.IsNullOrEmpty(name) ? code : $"{name} ({code})", "보유 종목");
-        _watch = new WatchlistMonitor(_config, _registry, _slack, _ladder);
+        _reversal = new ReversalEstimator(_registry);
+        _watch = new WatchlistMonitor(_config, _registry, _slack, _ladder, _reversal);
         _watch.WatchAlertRaised += OnWatchAlertRaised;
         _watch.StartupSummary += OnWatchStartupSummary;
         _watch.DigestReady += OnWatchDigest;
@@ -102,10 +104,12 @@ public partial class MainWindow : Window
         string arrow = a.IsUp ? "▲" : "▼";
         // 시작 알림은 OnWatchStartupSummary에서 요약 1건으로 처리. 여기서는 개별 추세 알림만.
         string trend = a.IsUp ? "상승세" : "하락세";
+        string body = $"현재 {a.CurrentRate:+0.0;-0.0;0.0}% (기준 {a.RefRate:+0.0;-0.0;0.0}%) · 현재가 {a.PriceText}";
+        if (a.ReversalProb is { } rp)
+            body += $"\n🔄 {a.ReversalDirText} 추정 ~{rp:P0} ({a.ReversalText})";
         _tray.ShowBalloon(
             $"⭐ {a.Item} {arrow} {trend} {a.Delta:+0.0;-0.0}%p ({a.WindowMinutes:0.#}분/{a.Step:0.###}%)",
-            $"현재 {a.CurrentRate:+0.0;-0.0;0.0}% (기준 {a.RefRate:+0.0;-0.0;0.0}%) · 현재가 {a.PriceText}",
-            warning: !a.IsUp);
+            body, warning: !a.IsUp);
     });
 
     private void OnWatchStartupSummary(IReadOnlyList<Models.WatchAlert> alerts) => Dispatcher.Invoke(() =>

@@ -13,7 +13,11 @@ public sealed record WatchAlert(
     double WindowMinutes,  // 트리거된 조건의 추세 기간(분)
     bool IsStartup,
     DateTime Time,
-    string RulesText = "") // 시작 알림용: 적용 조건 요약("3분당 1%, 5분당 2%")
+    string RulesText = "",     // 시작 알림용: 적용 조건 요약("3분당 1%, 5분당 2%")
+    // 반등 추정(추세 알림에만 첨부 · 널이면 미첨부)
+    double? ReversalProb = null,
+    string? ReversalDirText = null,
+    string? ReversalText = null)
 {
     public string Display => string.IsNullOrEmpty(Item.Name) ? Item.Symbol : $"{Item.Name} ({Item.Symbol})";
     /// <summary>추세 방향: 시작 알림은 등락율 부호, 그 외엔 기준값 대비 변화 부호.</summary>

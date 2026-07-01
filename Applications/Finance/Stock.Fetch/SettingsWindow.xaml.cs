@@ -35,6 +35,7 @@ public partial class SettingsWindow : Window
         ThresholdsBox.Text = string.Join(", ", config.AlertThresholds);
         FailAlertBox.Text = config.FetchFailAlertThreshold.ToString();
         ScheduleCheck.IsChecked = config.MarketScheduleAlerts;
+        ReversalCheck.IsChecked = config.WatchReversalEstimate;
         MuteKrOpenCheck.IsChecked = config.MuteKrOpenAlerts;
         KrOpenMuteBox.Text = config.KrOpenMuteMinutes.ToString();
     }
@@ -107,6 +108,7 @@ public partial class SettingsWindow : Window
         _config.AlertThresholds = ParseThresholds(ThresholdsBox.Text);
         if (int.TryParse(FailAlertBox.Text.Trim(), out var fail)) _config.FetchFailAlertThreshold = Math.Max(0, fail);
         _config.MarketScheduleAlerts = ScheduleCheck.IsChecked == true;
+        _config.WatchReversalEstimate = ReversalCheck.IsChecked == true;
         _config.MuteKrOpenAlerts = MuteKrOpenCheck.IsChecked == true;
         if (int.TryParse(KrOpenMuteBox.Text.Trim(), out var mute)) _config.KrOpenMuteMinutes = Math.Max(1, mute);
 

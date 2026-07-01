@@ -145,6 +145,55 @@ public sealed class YahooPriceSource(HttpClient http) : IPriceSource
         return new StockSeries(code, name, market, Kind, candles);
     }
 
+    /// <summary>
+    /// 접미사 없는 글로벌 티커(미국 등)의 일봉을 조회한다(반등/지표 계산용). 최근 range 구간, interval=1d.
+    /// 실패·데이터 없음 시 빈 리스트.
+    /// </summary>
+    public async Task<List<Candle>> FetchDailyCandlesAsync(string symbol, string range = "6mo", CancellationToken ct = default)
+    {
+        string url = $"https://query1.finance.yahoo.com/v8/finance/chart/{symbol}?range={range}&interval=1d";
+        string text;
+        try
+        {
+            using var resp = await http.GetAsync(url, ct);
+            if (resp.StatusCode is HttpStatusCode.NotFound) return new();
+            text = await resp.Content.ReadAsStringAsync(ct);
+        }
+        catch (Exception ex) when (ex is not OperationCanceledException)
+        {
+            throw new PriceSourceException($"Yahoo 일봉 요청 실패: {ex.Message}");
+        }
+
+        using var doc = JsonDocument.Parse(text);
+        var root = doc.RootElement.GetProperty("chart");
+        if (root.TryGetProperty("error", out var err) && err.ValueKind != JsonValueKind.Null) return new();
+        if (!root.TryGetProperty("result", out var resultArr) || resultArr.GetArrayLength() == 0) return new();
+
+        var result = resultArr[0];
+        if (!result.TryGetProperty("timestamp", out var ts) || ts.ValueKind != JsonValueKind.Array) return new();
+
+        var quote = result.GetProperty("indicators").GetProperty("quote")[0];
+        var opens = quote.GetProperty("open");
+        var highs = quote.GetProperty("high");
+        var lows = quote.GetProperty("low");
+        var closes = quote.GetProperty("close");
+        var vols = quote.GetProperty("volume");
+
+        var candles = new List<Candle>();
+        int n = ts.GetArrayLength();
+        for (int i = 0; i < n; i++)
+        {
+            if (closes[i].ValueKind == JsonValueKind.Null) continue;
+            // 미국 거래일 그대로(ET). 지표는 순서만 중요하므로 UTC Date 사용.
+            var date = DateTimeOffset.FromUnixTimeSeconds(ts[i].GetInt64()).UtcDateTime.Date;
+            candles.Add(new Candle(date,
+                GetDec(opens, i), GetDec(highs, i), GetDec(lows, i), GetDec(closes, i),
+                vols[i].ValueKind == JsonValueKind.Number ? vols[i].GetInt64() : 0));
+        }
+        candles.Sort((a, b) => a.Date.CompareTo(b.Date));
+        return candles;
+    }
+
     private static decimal GetDec(JsonElement arr, int i)
         => arr[i].ValueKind == JsonValueKind.Number ? Math.Round(arr[i].GetDecimal(), 2) : 0m;
 

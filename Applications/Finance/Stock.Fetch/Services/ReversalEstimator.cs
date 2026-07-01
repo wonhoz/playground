@@ -8,7 +8,7 @@ namespace Stock.Fetch.Services;
 /// RSI·볼린저·이격도·연속봉·캔들·거래량 신호(각 0~1)를 가중 결합한다. <b>휴리스틱 추정치</b>이며
 /// 검증된 확률이 아니다. 최근 추세가 하락이면 바닥반등, 상승이면 천정반전 관점으로 평가한다.
 /// </summary>
-public sealed class ReversalEstimator(PriceSourceRegistry registry)
+public sealed class ReversalEstimator(AppConfig config, PriceSourceRegistry registry)
 {
     private sealed class DailyCache { public List<Candle> Candles = new(); public bool Failed; }
 
@@ -28,12 +28,24 @@ public sealed class ReversalEstimator(PriceSourceRegistry registry)
 
         var candles = MergeLive(baseC, price);
         var ind = new IndicatorSet(candles);
-        int i = candles.Count - 1;
+        var (dir, raw, detail) = ScoreAt(candles, ind, candles.Count - 1);
 
+        // 과거 적중률 학습(캘리브레이션)이 있으면 raw 점수를 보정.
+        var cal = config.ReversalCalibration;
+        double prob = cal?.Apply(raw) ?? raw;
+        return new ReversalEstimate(dir, prob, detail, cal != null);
+    }
+
+    /// <summary>
+    /// 지정 인덱스 i에서 반등 raw 점수(0~1)·방향·근거를 계산한다(라이브·백테스트 공용, 순수 함수).
+    /// i는 20 이상 권장(지표 워밍업). 최근 5봉 하락이면 바닥반등, 아니면 천정반전 관점.
+    /// </summary>
+    public static (ReversalDir Dir, double Raw, string Detail) ScoreAt(IReadOnlyList<Candle> candles, IndicatorSet ind, int i)
+    {
         double close = (double)candles[i].Close;
         double prevClose = (double)candles[i - 1].Close;
         double c5 = (double)candles[Math.Max(0, i - 5)].Close;
-        bool bottom = close <= c5;   // 최근 5봉 하락 → 바닥반등 관점
+        bool bottom = close <= c5;
         var dir = bottom ? ReversalDir.BottomUp : ReversalDir.TopDown;
 
         double rsi = At(ind.Rsi14, i), rsiPrev = At(ind.Rsi14, i - 1);
@@ -92,7 +104,7 @@ public sealed class ReversalEstimator(PriceSourceRegistry registry)
         string detail = parts.Count > 0
             ? string.Join("·", parts.OrderByDescending(x => x.contrib).Take(2).Select(x => x.label))
             : "지표 신호 약함";
-        return new ReversalEstimate(dir, Clamp01(p), detail);
+        return (dir, Clamp01(p), detail);
     }
 
     // ───────────────────────── 일봉 캐시 ─────────────────────────
@@ -146,14 +158,14 @@ public sealed class ReversalEstimator(PriceSourceRegistry registry)
     private static double At(double[] a, int i) => (i >= 0 && i < a.Length) ? a[i] : double.NaN;
     private static double Clamp01(double x) => Math.Clamp(x, 0, 1);
 
-    private static int DownStreak(List<Candle> c, int i)
+    private static int DownStreak(IReadOnlyList<Candle> c, int i)
     {
         int s = 0;
         for (int k = i - 1; k >= 1; k--) { if (c[k].Close < c[k - 1].Close) s++; else break; }
         return s;
     }
 
-    private static int UpStreak(List<Candle> c, int i)
+    private static int UpStreak(IReadOnlyList<Candle> c, int i)
     {
         int s = 0;
         for (int k = i - 1; k >= 1; k--) { if (c[k].Close > c[k - 1].Close) s++; else break; }

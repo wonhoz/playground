@@ -57,7 +57,7 @@ public sealed class SlackNotifier(AppConfig config) : IDisposable
             sb.AppendLine($"• 조건 {a.WindowMinutes:0.#}분당 {a.Step:0.###}% · 현재 전일 대비 {a.CurrentRate:+0.0;-0.0;0.0}% (기준 {a.RefRate:+0.0;-0.0;0.0}%)");
             sb.AppendLine($"• 현재가 *{a.PriceText}* · 소스 {a.Item.SourceLabel}");
             if (a.ReversalProb is { } rp)
-                sb.AppendLine($"• :arrows_counterclockwise: {a.ReversalDirText} 추정 *~{rp:P0}* ({a.ReversalText}) · 지표 휴리스틱");
+                sb.AppendLine($"• :arrows_counterclockwise: {a.ReversalDirText} 추정 *~{rp:P0}* ({a.ReversalText}) · {a.ReversalBasis}");
         }
         sb.AppendLine($"• 시각 {a.Time:yyyy-MM-dd HH:mm:ss}");
 

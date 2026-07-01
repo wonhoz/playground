@@ -205,7 +205,7 @@ public sealed class WatchlistMonitor(AppConfig config, PriceSourceRegistry regis
             {
                 var est = await reversal.EstimateAsync(item, alert.Price);
                 if (est != null)
-                    enriched = alert with { ReversalProb = est.Probability, ReversalDirText = est.DirText, ReversalText = est.Detail };
+                    enriched = alert with { ReversalProb = est.Probability, ReversalDirText = est.DirText, ReversalText = est.Detail, ReversalBasis = est.BasisText };
             }
             catch { /* 추정 실패 시 원본 알림 유지 */ }
         }

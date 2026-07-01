@@ -108,6 +108,16 @@
                     <TextBlock Text="음소거 구간(분)" Style="{StaticResource FieldLbl}" VerticalAlignment="Center" Margin="0,0,8,0"/>
                     <TextBox x:Name="KrOpenMuteBox" Width="80"/>
                 </StackPanel>
+
+                <!-- 반등 캘리브레이션(백테스트) -->
+                <TextBlock Text="반등 확률 캘리브레이션 (백테스트)" Style="{StaticResource Section}"/>
+                <TextBlock Style="{StaticResource Hint}"
+                           Text="관심 종목 과거 일봉으로 반등 점수의 실제 적중률(향후 5거래일 내 반등 방향 2% 이동)을 학습해 확률을 보정합니다. 표본이 많을수록 정확해지며, 통계 근사일 뿐 미래 수익 보장이 아닙니다."/>
+                <Grid Margin="0,0,0,2">
+                    <Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+                    <TextBlock x:Name="CalibResult" VerticalAlignment="Center" Foreground="{StaticResource FgMuted}" FontSize="11.5"/>
+                    <Button Grid.Column="1" x:Name="CalibBtn" Content="지금 실행" Width="100" Margin="8,0,0,0" Click="Calibrate_Click"/>
+                </Grid>
             </StackPanel>
         </ScrollViewer>
 

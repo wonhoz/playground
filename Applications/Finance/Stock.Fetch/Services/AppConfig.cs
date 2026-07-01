@@ -117,6 +117,8 @@ public sealed class AppConfig
 
     /// <summary>추세 알림에 반등(반전) 확률 추정을 첨부(휴리스틱). 기본 켜짐.</summary>
     public bool WatchReversalEstimate { get; set; } = true;
+    /// <summary>반등 점수 → 과거 적중률 보정 곡선(백테스트 학습 결과). 널이면 raw 점수 사용.</summary>
+    public ReversalCalibration? ReversalCalibration { get; set; }
 
     /// <summary>켜면 한국 종목 상승/하락(추세) 알림을 프리(08:00)·정규(09:00) 개장 직후 N분간 음소거. 기본 꺼짐.</summary>
     public bool MuteKrOpenAlerts { get; set; } = false;

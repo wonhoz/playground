@@ -17,7 +17,8 @@ public sealed record WatchAlert(
     // 반등 추정(추세 알림에만 첨부 · 널이면 미첨부)
     double? ReversalProb = null,
     string? ReversalDirText = null,
-    string? ReversalText = null)
+    string? ReversalText = null,
+    string? ReversalBasis = null)  // "과거적중" | "지표 휴리스틱"
 {
     public string Display => string.IsNullOrEmpty(Item.Name) ? Item.Symbol : $"{Item.Name} ({Item.Symbol})";
     /// <summary>추세 방향: 시작 알림은 등락율 부호, 그 외엔 기준값 대비 변화 부호.</summary>

@@ -9,13 +9,15 @@ public partial class SettingsWindow : Window
 {
     private readonly AppConfig _config;
     private readonly SlackNotifier? _slack;
+    private readonly PriceSourceRegistry? _registry;
 
-    public SettingsWindow(AppConfig config, SlackNotifier? slack = null)
+    public SettingsWindow(AppConfig config, SlackNotifier? slack = null, PriceSourceRegistry? registry = null)
     {
         InitializeComponent();
         NativeTheme.ApplyDarkTitleBar(this);
         _config = config;
         _slack = slack;
+        _registry = registry;
 
         KeyBox.Text = config.AppKey;
         SecretBox.Password = config.AppSecret;
@@ -38,6 +40,33 @@ public partial class SettingsWindow : Window
         ReversalCheck.IsChecked = config.WatchReversalEstimate;
         MuteKrOpenCheck.IsChecked = config.MuteKrOpenAlerts;
         KrOpenMuteBox.Text = config.KrOpenMuteMinutes.ToString();
+        CalibResult.Text = config.ReversalCalibration?.Summary ?? "미학습 — 지표 휴리스틱 확률 사용 중";
+    }
+
+    private async void Calibrate_Click(object sender, RoutedEventArgs e)
+    {
+        if (_registry is null) { CalibResult.Text = "실행할 수 없습니다."; return; }
+        if (_config.Watchlist.Count == 0) { CalibResult.Text = "관심 종목이 없습니다. 먼저 등록하세요."; return; }
+
+        CalibBtn.IsEnabled = false;
+        var progress = new Progress<string>(s => CalibResult.Text = $"백테스트 중… {s}");
+        try
+        {
+            var calibrator = new ReversalCalibrator(_registry);
+            var cal = await calibrator.RunAsync(_config.Watchlist, progress: progress);
+            if (cal.TotalSamples == 0) { CalibResult.Text = "표본이 부족합니다(데이터 조회 실패/기간 부족)."; return; }
+            _config.ReversalCalibration = cal;
+            _config.Save();
+            CalibResult.Text = "✓ " + cal.Summary;
+        }
+        catch (Exception ex)
+        {
+            CalibResult.Text = "⚠ 실패: " + ex.Message;
+        }
+        finally
+        {
+            CalibBtn.IsEnabled = true;
+        }
     }
 
     private async void Test_Click(object sender, RoutedEventArgs e)

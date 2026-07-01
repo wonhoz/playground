@@ -73,7 +73,7 @@ public partial class MainWindow : Window
             string.IsNullOrEmpty(name) ? code : $"{name} ({code})", "보유 종목", reason, fails);
         _monitor.FetchRecovered += (code, name) => OnFetchRecovered(
             string.IsNullOrEmpty(name) ? code : $"{name} ({code})", "보유 종목");
-        _reversal = new ReversalEstimator(_registry);
+        _reversal = new ReversalEstimator(_config, _registry);
         _watch = new WatchlistMonitor(_config, _registry, _slack, _ladder, _reversal);
         _watch.WatchAlertRaised += OnWatchAlertRaised;
         _watch.StartupSummary += OnWatchStartupSummary;
@@ -106,7 +106,7 @@ public partial class MainWindow : Window
         string trend = a.IsUp ? "상승세" : "하락세";
         string body = $"현재 {a.CurrentRate:+0.0;-0.0;0.0}% (기준 {a.RefRate:+0.0;-0.0;0.0}%) · 현재가 {a.PriceText}";
         if (a.ReversalProb is { } rp)
-            body += $"\n🔄 {a.ReversalDirText} 추정 ~{rp:P0} ({a.ReversalText})";
+            body += $"\n🔄 {a.ReversalDirText} 추정 ~{rp:P0} ({a.ReversalText}·{a.ReversalBasis})";
         _tray.ShowBalloon(
             $"⭐ {a.Item} {arrow} {trend} {a.Delta:+0.0;-0.0}%p ({a.WindowMinutes:0.#}분/{a.Step:0.###}%)",
             body, warning: !a.IsUp);
@@ -605,7 +605,7 @@ public partial class MainWindow : Window
     // ────────────────────────────── 설정 ──────────────────────────────
     private void Settings_Click(object sender, RoutedEventArgs e)
     {
-        var win = new SettingsWindow(_config, _slack) { Owner = this };
+        var win = new SettingsWindow(_config, _slack, _registry) { Owner = this };
         if (win.ShowDialog() == true)
         {
             _config.Save();

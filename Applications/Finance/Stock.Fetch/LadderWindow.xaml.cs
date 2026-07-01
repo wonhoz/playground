@@ -14,17 +14,19 @@ public partial class LadderWindow : Window
         { "1호가 (정상)", "2호가 (조정)", "3호가 (중조정)", "4호가 (폭락)" };
 
     private readonly StockSeries _series;
+    private readonly PriceSourceRegistry _registry;
     private readonly AppConfig _config;
     private Holding? _holding;
     private string _copyText = string.Empty;
     private bool _ready;
     private bool _suppress;   // 추세 적용으로 슬라이더 값을 코드가 바꿀 때 재계산 루프 방지
 
-    public LadderWindow(StockSeries series, AppConfig config)
+    public LadderWindow(StockSeries series, PriceSourceRegistry registry, AppConfig config)
     {
         InitializeComponent();
         NativeTheme.ApplyDarkTitleBar(this);
         _series = series;
+        _registry = registry;
         _config = config;
 
         // 포트폴리오에 보유 중이면 평단을 래더 계산에 반영.
@@ -173,9 +175,15 @@ public partial class LadderWindow : Window
     }
 
     /// <summary>선택한 매수가를 내 자산 매매 기록에 매수 1주로 추가하고, 보유 반영 후 재계산한다.</summary>
-    private void AddBuyToPortfolio(decimal price)
+    private async void AddBuyToPortfolio(decimal price)
     {
-        string title = string.IsNullOrEmpty(_series.Name) ? _series.Code : $"{_series.Name} ({_series.Code})";
+        // 시리즈 이름이 비었거나 코드와 같으면 실제 종목명을 조회해 "종목명 (코드)"로 기록.
+        string name = _series.Name;
+        if (string.IsNullOrEmpty(name) || name == _series.Code)
+        {
+            try { name = await _registry.LookupNameAsync(_series.Code) ?? ""; } catch { name = ""; }
+        }
+        string title = string.IsNullOrEmpty(name) ? _series.Code : $"{name} ({_series.Code})";
         if (MessageBox.Show($"{title}\n{Won(price)}원 × 1주를 매수 기록에 추가할까요?",
                 "매수 기록 추가", MessageBoxButton.YesNo, MessageBoxImage.Question) != MessageBoxResult.Yes)
             return;
@@ -184,7 +192,7 @@ public partial class LadderWindow : Window
         pf.Trades.Add(new Trade
         {
             Code = _series.Code,
-            Name = _series.Name,
+            Name = name,
             Side = TradeSide.Buy,
             Date = DateOnly.FromDateTime(DateTime.Today),
             Price = price,

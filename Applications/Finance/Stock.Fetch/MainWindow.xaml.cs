@@ -567,7 +567,7 @@ public partial class MainWindow : Window
             return;
         }
         // 모달리스 — 여러 종목 비교 가능. 창 내부에서 공격성·추세 슬라이더로 라이브 재계산.
-        new LadderWindow(_series, _config) { Owner = this }.Show();
+        new LadderWindow(_series, _registry, _config) { Owner = this }.Show();
     }
 
     // ────────────────────────────── 내 자산(포트폴리오) ──────────────────────────────

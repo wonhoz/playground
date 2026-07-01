@@ -17,6 +17,7 @@ public partial class LadderWindow : Window
     private readonly PriceSourceRegistry _registry;
     private readonly AppConfig _config;
     private Holding? _holding;
+    private string _name;          // 표시용 종목명(비었거나 코드와 같으면 조회로 보완)
     private string _copyText = string.Empty;
     private bool _ready;
     private bool _suppress;   // 추세 적용으로 슬라이더 값을 코드가 바꿀 때 재계산 루프 방지
@@ -32,8 +33,10 @@ public partial class LadderWindow : Window
         // 포트폴리오에 보유 중이면 평단을 래더 계산에 반영.
         _holding = PortfolioStore.HoldingOf(PortfolioStore.Load(config), series.Code);
 
-        string title = string.IsNullOrEmpty(series.Name) ? series.Code : $"{series.Name} ({series.Code})";
-        TitleText.Text = $"{title} — 매수/익절 래더";
+        _name = series.Name;
+        UpdateTitle();
+        // 이름이 없거나 코드와 같으면 종목명 조회로 보완.
+        if (string.IsNullOrEmpty(_name) || _name == series.Code) _ = ResolveNameAsync();
 
         // 저장값 복원(_ready=false 동안이라 ValueChanged는 무시됨).
         AggrSlider.Value = Math.Clamp(config.LadderAggressiveness, 0, 1) * 100;
@@ -42,6 +45,24 @@ public partial class LadderWindow : Window
 
         _ready = true;
         Recompute();
+    }
+
+    private void UpdateTitle()
+    {
+        string title = string.IsNullOrEmpty(_name) || _name == _series.Code
+            ? _series.Code
+            : $"{_name} ({_series.Code})";
+        TitleText.Text = $"{title} — 매수/익절 래더";
+    }
+
+    private async System.Threading.Tasks.Task ResolveNameAsync()
+    {
+        try
+        {
+            var n = await _registry.LookupNameAsync(_series.Code);
+            if (!string.IsNullOrEmpty(n)) { _name = n!; UpdateTitle(); }
+        }
+        catch { /* 이름 조회 실패는 무시 */ }
     }
 
     // ───────────────────────── 이벤트 ─────────────────────────
@@ -177,11 +198,12 @@ public partial class LadderWindow : Window
     /// <summary>선택한 매수가를 내 자산 매매 기록에 매수 1주로 추가하고, 보유 반영 후 재계산한다.</summary>
     private async void AddBuyToPortfolio(decimal price)
     {
-        // 시리즈 이름이 비었거나 코드와 같으면 실제 종목명을 조회해 "종목명 (코드)"로 기록.
-        string name = _series.Name;
+        // 표시용 이름(_name) 우선 사용. 비었거나 코드와 같으면 조회로 보완.
+        string name = _name;
         if (string.IsNullOrEmpty(name) || name == _series.Code)
         {
             try { name = await _registry.LookupNameAsync(_series.Code) ?? ""; } catch { name = ""; }
+            if (!string.IsNullOrEmpty(name)) { _name = name; UpdateTitle(); }
         }
         string title = string.IsNullOrEmpty(name) ? _series.Code : $"{name} ({_series.Code})";
         if (MessageBox.Show($"{title}\n{Won(price)}원 × 1주를 매수 기록에 추가할까요?",

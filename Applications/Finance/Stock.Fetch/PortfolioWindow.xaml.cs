@@ -95,7 +95,8 @@ public partial class PortfolioWindow : Window
         RefreshBtn.Content = "갱신 중…";
         try
         {
-            var tasks = codes.Select(async c => (c, price: await _registry.CurrentCloseAsync(c))).ToList();
+            // KIS 키가 있으면 KIS 실시간(inquire-price·통합 NXT), 없으면 네이버 최근 종가로 폴백.
+            var tasks = codes.Select(async c => (c, price: (await _registry.QuoteAsync(c))?.Price)).ToList();
             foreach (var (c, price) in await Task.WhenAll(tasks))
                 _current[c] = price;
             RenderHoldings();

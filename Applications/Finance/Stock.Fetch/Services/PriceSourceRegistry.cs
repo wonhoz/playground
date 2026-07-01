@@ -117,6 +117,14 @@ public sealed class PriceSourceRegistry : IDisposable
         return new Quote(item.Symbol, price, rate, DateTime.Now);
     }
 
+    /// <summary>국내 일봉(최근 days일) — 래더/갭다운 계산용. 네이버(무인증) 사용.</summary>
+    public async Task<IReadOnlyList<Candle>> KrDailyAsync(string code, int days = 40, CancellationToken ct = default)
+    {
+        var to = DateTime.Today;
+        var series = await _sources[SourceKind.Naver].FetchAsync(code, to.AddDays(-days), to, ct);
+        return series.Candles;
+    }
+
     public IPriceSource Get(SourceKind kind) => _sources[kind];
 
     public IReadOnlyList<IPriceSource> All => _sources.Values.ToList();

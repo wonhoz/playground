@@ -7,7 +7,7 @@ namespace Stock.Fetch.Services;
 /// <b>새로 넘어설 때(엣지)</b>만 알림을 발생시킨다. 같은 임계값은 다시 아래로 내려갔다 재돌파해야 재알림(도배 방지).
 /// 장 시간(평일 09:00~15:30) 게이팅·일일 상태 리셋. 이벤트는 백그라운드 스레드에서 발생하므로 UI는 마샬링 필요.
 /// </summary>
-public sealed class PortfolioMonitor(AppConfig config, PriceSourceRegistry registry, SlackNotifier slack) : IDisposable
+public sealed class PortfolioMonitor(AppConfig config, PriceSourceRegistry registry, SlackNotifier slack, LadderAlertEngine ladder) : IDisposable
 {
     private CancellationTokenSource? _cts;
     // 종목별 '직전 폴링에서 도달해 있던' 임계값 집합(상향/하향 분리). 엣지 검출용.
@@ -99,6 +99,14 @@ public sealed class PortfolioMonitor(AppConfig config, PriceSourceRegistry regis
                 HandleSuccess(h);
                 double ret = (double)(q!.Price / h.AvgPrice - 1) * 100;
                 Evaluate(h, q.Price, ret, thresholds);
+
+                // 매수/익절 래더·갭다운 알림(옵트인 보유 종목)
+                if (config.LadderHoldingCodes.Contains(h.Code))
+                {
+                    try { await ladder.EvaluateAsync(h.Code, h.Name, q.Price, ct); }
+                    catch (OperationCanceledException) { break; }
+                    catch { /* 래더 알림 실패는 무시 */ }
+                }
             }
 
             try { await Task.Delay(250, ct); } catch (OperationCanceledException) { break; }

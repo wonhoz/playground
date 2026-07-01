@@ -1,7 +1,7 @@
 <Window x:Class="Stock.Fetch.WatchEditWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="관심 종목" Height="470" Width="430"
+        Title="관심 종목" Height="530" Width="430"
         Background="{StaticResource WindowBg}" ResizeMode="NoResize"
         WindowStartupLocation="CenterOwner">
     <Window.Resources>
@@ -14,6 +14,7 @@
 
     <Grid Margin="20" Background="{StaticResource WindowBg}">
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
@@ -67,11 +68,21 @@
         <TextBox Grid.Row="6" Grid.Column="1" x:Name="RulesBox" Margin="0,0,0,10"
                  ToolTip="이 종목 전용 추세 조건. 기간:변화단위 쌍을 쉼표로(예: 3:1, 5:2 → 3분당 1%, 5분당 2%). 소수점 가능. 비우면 전역 조건 사용."/>
 
-        <TextBlock Grid.Row="7" Grid.ColumnSpan="2" x:Name="HintText" Style="{x:Null}" TextWrapping="Wrap"
-                   FontSize="11" Foreground="{StaticResource FgMuted}" VerticalAlignment="Top" Margin="0,4,0,0"
-                   Text="미국 종목은 티커(예: TSLA, SOXL, SPCX). 프리·정규·애프터를 모두 받으려면 Yahoo 권장. 지수(업종) 체크 시 코스피 0001·코스닥 1001·코스피200 2001 코드를 입력하면 KIS로 조회합니다(KIS 키 필요). 추세 조건을 비우면 전역 조건을 사용합니다."/>
+        <TextBlock Grid.Row="7" Grid.Column="0" Text="알림" Style="{StaticResource FieldLbl}"/>
+        <StackPanel Grid.Row="7" Grid.Column="1" Orientation="Horizontal" Margin="0,0,0,10">
+            <CheckBox x:Name="AlertUpCheck" Content="상승" IsChecked="True" VerticalAlignment="Center" Margin="0,0,14,0"
+                      ToolTip="상승 추세 알림 받기"/>
+            <CheckBox x:Name="AlertDownCheck" Content="하락" IsChecked="True" VerticalAlignment="Center" Margin="0,0,18,0"
+                      ToolTip="하락 추세 알림 받기"/>
+            <CheckBox x:Name="LadderCheck" Content="매수 래더·갭다운" VerticalAlignment="Center"
+                      ToolTip="국내 종목만. 매수 1~4호가 도달·시초가 갭다운 취소선 알림."/>
+        </StackPanel>
 
-        <StackPanel Grid.Row="8" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right">
+        <TextBlock Grid.Row="8" Grid.ColumnSpan="2" x:Name="HintText" Style="{x:Null}" TextWrapping="Wrap"
+                   FontSize="11" Foreground="{StaticResource FgMuted}" VerticalAlignment="Top" Margin="0,4,0,0"
+                   Text="미국 종목은 티커(예: TSLA, SOXL, SPCX). 프리·정규·애프터를 모두 받으려면 Yahoo 권장. 지수(업종) 체크 시 코스피 0001·코스닥 1001·코스피200 2001 코드를 입력하면 KIS로 조회합니다(KIS 키 필요). 추세 조건을 비우면 전역 조건을 사용합니다. '매수 래더·갭다운'은 국내 종목만 지원합니다."/>
+
+        <StackPanel Grid.Row="9" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right">
             <TextBlock x:Name="ErrorText" Foreground="{StaticResource BearBrush}" VerticalAlignment="Center" Margin="0,0,12,0"/>
             <Button Content="취소" Width="80" Margin="0,0,8,0" Click="Cancel_Click"/>
             <Button Content="저장" Width="80" Style="{StaticResource AccentButton}" Click="Save_Click"/>

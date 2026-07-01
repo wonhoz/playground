@@ -119,6 +119,25 @@ public sealed class SlackNotifier(AppConfig config) : IDisposable
         await PostAsync(BuildPayload(sb.ToString()), ct);
     }
 
+    /// <summary>매수/익절 래더·갭다운 알림.</summary>
+    public async Task SendLadderAlertAsync(LadderAlert a, CancellationToken ct = default)
+    {
+        if (!IsConfigured) return;
+        (string emoji, string head) = a.Kind switch
+        {
+            LadderAlertKind.BuyTouch => (":large_blue_circle:", "매수 호가 도달"),
+            LadderAlertKind.SellBreak => (":red_circle:", "익절가 돌파"),
+            _ => (":warning:", "갭다운 취소선"),
+        };
+        var sb = new StringBuilder();
+        sb.AppendLine($"{emoji} *{a.Display}* — {head}");
+        sb.AppendLine($"• {a.Detail}");
+        if (a.Kind != LadderAlertKind.GapDown)
+            sb.AppendLine($"• 현재가 {a.Price:N0}원");
+        sb.AppendLine($"• 시각 {a.Time:yyyy-MM-dd HH:mm:ss}");
+        await PostAsync(BuildPayload(sb.ToString()), ct);
+    }
+
     /// <summary>설정 화면의 "테스트 전송" 버튼용.</summary>
     public async Task SendTestAsync(CancellationToken ct = default)
     {

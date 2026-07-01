@@ -48,7 +48,7 @@ public partial class PortfolioWindow : Window
     private void RenderHoldings()
     {
         var rows = PortfolioStore.Holdings(_pf)
-            .Select(h => new HoldingRow(h, _current.GetValueOrDefault(h.Code)))
+            .Select(h => new HoldingRow(h, _current.GetValueOrDefault(h.Code), _config))
             .ToList();
         HoldingsGrid.ItemsSource = rows;
         UpdateSummary(rows);
@@ -198,9 +198,21 @@ public partial class PortfolioWindow : Window
 
     // ───────────────────────── 뷰 모델 ─────────────────────────
 
-    public sealed class HoldingRow(Holding h, decimal? current)
+    public sealed class HoldingRow(Holding h, decimal? current, AppConfig cfg)
     {
         public string Code => h.Code;
+
+        /// <summary>매수/익절 래더·갭다운 알림 옵트인(config 저장). 체크박스 컬럼과 양방향 바인딩.</summary>
+        public bool LadderAlert
+        {
+            get => cfg.LadderHoldingCodes.Contains(h.Code);
+            set
+            {
+                if (value) { if (!cfg.LadderHoldingCodes.Contains(h.Code)) cfg.LadderHoldingCodes.Add(h.Code); }
+                else cfg.LadderHoldingCodes.Remove(h.Code);
+                cfg.Save();
+            }
+        }
         public string Name => h.Name;
         public string Display => string.IsNullOrEmpty(h.Name) ? h.Code : $"{h.Name} ({h.Code})";
         public int Quantity => h.Quantity;

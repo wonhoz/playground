@@ -75,6 +75,8 @@ public sealed class AppConfig
     public bool PortfolioAutoRefresh { get; set; } = false;
     /// <summary>내 자산 현재가 자동 갱신 주기(초). 최소 10초.</summary>
     public int PortfolioRefreshSeconds { get; set; } = 60;
+    /// <summary>매수/익절 래더·갭다운 알림을 켠 보유 종목 코드 목록(종목별 옵트인).</summary>
+    public List<string> LadderHoldingCodes { get; set; } = new();
 
     // ── 관심 종목(워치리스트) ──
     public List<WatchItem> Watchlist { get; set; } = new();

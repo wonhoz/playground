@@ -22,7 +22,7 @@ internal sealed class TrendState
 /// 미국장은 KST 야간이므로 장 시간 게이팅 없이 항상 폴링. 이벤트는 백그라운드 스레드에서 발생하므로
 /// UI 구독자는 Dispatcher 마샬링이 필요하다.
 /// </summary>
-public sealed class WatchlistMonitor(AppConfig config, PriceSourceRegistry registry, SlackNotifier slack) : IDisposable
+public sealed class WatchlistMonitor(AppConfig config, PriceSourceRegistry registry, SlackNotifier slack, LadderAlertEngine ladder) : IDisposable
 {
     private CancellationTokenSource? _cts;
     // symbol → (조건 키 → 추세 상태). 조건(기간/단위)마다 기준값을 따로 추적한다.
@@ -111,6 +111,14 @@ public sealed class WatchlistMonitor(AppConfig config, PriceSourceRegistry regis
                 snapshot.Add(new WatchQuote(item, q!.Price, q.ChangeRate));
                 var rules = item.Rules.Count > 0 ? item.Rules : globalRules; // 종목별 조건 우선
                 Evaluate(item, q.Price, q.ChangeRate, rules, startups);
+
+                // 매수 래더·갭다운 알림(국내·비지수·옵트인)
+                if (item.LadderAlert && !item.IsIndex && item.Market == MarketKind.KR)
+                {
+                    try { await ladder.EvaluateAsync(item.Symbol, item.Name, q.Price, ct); }
+                    catch (OperationCanceledException) { break; }
+                    catch { /* 래더 알림 실패는 무시 */ }
+                }
             }
 
             try { await Task.Delay(250, ct); } catch (OperationCanceledException) { break; }
@@ -155,7 +163,10 @@ public sealed class WatchlistMonitor(AppConfig config, PriceSourceRegistry regis
             double delta = (double)(rate - st.RefRate);
             if (Math.Abs(delta) >= r.StepPercent)
             {
-                Raise(new WatchAlert(item, price, rate, st.RefRate, r.StepPercent, r.WindowMinutes, IsStartup: false, now));
+                // 방향 필터: 상승/하락 중 종목이 원하는 방향만 알림(기준 갱신은 항상 수행).
+                bool up = delta >= 0;
+                if ((up && item.AlertUp) || (!up && item.AlertDown))
+                    Raise(new WatchAlert(item, price, rate, st.RefRate, r.StepPercent, r.WindowMinutes, IsStartup: false, now));
                 st.RefRate = rate;
                 st.RefTime = now;
             }

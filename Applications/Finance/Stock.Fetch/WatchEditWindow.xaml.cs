@@ -30,6 +30,9 @@ public partial class WatchEditWindow : Window
         SymbolBox.Text = item.Symbol;
         NameBox.Text = item.Name;
         RulesBox.Text = TrendRule.ToText(item.Rules);
+        AlertUpCheck.IsChecked = item.AlertUp;
+        AlertDownCheck.IsChecked = item.AlertDown;
+        LadderCheck.IsChecked = item.LadderAlert;
         SelectSource(item.Source);
         SelectExchange(item.Exchange);
         ApplyIndexMode();
@@ -54,6 +57,7 @@ public partial class WatchEditWindow : Window
             SymbolLbl.Text = "지수코드";
             LookupBtn.IsEnabled = false;
             ExchangeCombo.IsEnabled = false;
+            LadderCheck.IsEnabled = false;   // 지수는 래더 알림 미지원
         }
         else UpdateLabels();
     }
@@ -105,6 +109,7 @@ public partial class WatchEditWindow : Window
         LookupBtn.IsEnabled = !us;  // 이름 자동 조회는 국내만
         var src = (SourceCombo.SelectedItem as SourceOption)?.Source;
         ExchangeCombo.IsEnabled = us && src == WatchSource.Kis;  // 거래소 코드는 미국+KIS에서만 필요
+        LadderCheck.IsEnabled = !us;   // 매수 래더·갭다운은 국내 종목만
     }
 
     private async void Lookup_Click(object sender, RoutedEventArgs e)
@@ -157,6 +162,11 @@ public partial class WatchEditWindow : Window
             if (rules.Count == 0) { Error("추세 조건 형식은 '기간:변화단위'입니다(예: 3:1, 5:2). 비우면 전역 조건 사용."); return; }
             _item.Rules = rules;
         }
+
+        _item.AlertUp = AlertUpCheck.IsChecked == true;
+        _item.AlertDown = AlertDownCheck.IsChecked == true;
+        // 래더·갭다운은 국내·비지수만
+        _item.LadderAlert = LadderCheck.IsChecked == true && _item.Market == MarketKind.KR && !_item.IsIndex;
 
         DialogResult = true;
     }

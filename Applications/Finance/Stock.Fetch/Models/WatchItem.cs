@@ -28,6 +28,13 @@ public sealed class WatchItem
     /// <summary>이 종목 전용 추세 조건 목록. 비어 있으면 전역 설정(WatchRules)을 사용한다.</summary>
     public List<TrendRule> Rules { get; set; } = new();
 
+    /// <summary>추세 알림 방향 필터(둘 다 기본 true). false면 해당 방향 추세 알림을 보내지 않는다.</summary>
+    public bool AlertUp { get; set; } = true;
+    public bool AlertDown { get; set; } = true;
+
+    /// <summary>매수 래더·갭다운 알림 사용(국내 종목만 의미). 기본 꺼짐.</summary>
+    public bool LadderAlert { get; set; } = false;
+
     /// <summary>그리드 표시용: 전용 조건이 있으면 요약, 없으면 "전역".</summary>
     public string RulesLabel => Rules.Count > 0 ? TrendRule.Summary(Rules) : "전역";
 

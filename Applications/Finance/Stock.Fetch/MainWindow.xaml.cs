@@ -15,6 +15,7 @@ public partial class MainWindow : Window
 
     // 트레이 상주 + 보유 종목 모니터링
     private readonly SlackNotifier _slack;
+    private readonly LadderAlertEngine _ladder;
     private readonly PortfolioMonitor _monitor;
     private readonly WatchlistMonitor _watch;
     private readonly TrayManager _tray;
@@ -62,13 +63,15 @@ public partial class MainWindow : Window
 
         // ── 트레이 상주 + 보유 종목 모니터링 ──
         _slack = new SlackNotifier(_config);
-        _monitor = new PortfolioMonitor(_config, _registry, _slack);
+        _ladder = new LadderAlertEngine(_config, _registry, _slack);
+        _ladder.Raised += OnLadderAlert;
+        _monitor = new PortfolioMonitor(_config, _registry, _slack, _ladder);
         _monitor.AlertRaised += OnAlertRaised;
         _monitor.FetchFailed += (code, name, reason, fails) => OnFetchFailed(
             string.IsNullOrEmpty(name) ? code : $"{name} ({code})", "보유 종목", reason, fails);
         _monitor.FetchRecovered += (code, name) => OnFetchRecovered(
             string.IsNullOrEmpty(name) ? code : $"{name} ({code})", "보유 종목");
-        _watch = new WatchlistMonitor(_config, _registry, _slack);
+        _watch = new WatchlistMonitor(_config, _registry, _slack, _ladder);
         _watch.WatchAlertRaised += OnWatchAlertRaised;
         _watch.StartupSummary += OnWatchStartupSummary;
         _watch.DigestReady += OnWatchDigest;
@@ -108,6 +111,18 @@ public partial class MainWindow : Window
             $"{a.Item} {(a.CurrentRate >= 0 ? "▲" : "▼")} {a.CurrentRate:+0.0;-0.0;0.0}% · {a.PriceText}"));
         if (alerts.Count > max) body += $"\n…외 {alerts.Count - max}종목";
         _tray.ShowBalloon($"⭐ 관심 종목 모니터링 시작 ({alerts.Count}종목)", body);
+    });
+
+    private void OnLadderAlert(Models.LadderAlert a) => Dispatcher.Invoke(() =>
+    {
+        string head = a.Kind switch
+        {
+            Models.LadderAlertKind.BuyTouch => "🟦 매수 호가 도달",
+            Models.LadderAlertKind.SellBreak => "🟥 익절가 돌파",
+            _ => "⚠ 갭다운 취소선",
+        };
+        _tray.ShowBalloon($"{head} · {a.Display}", a.Detail,
+            warning: a.Kind == Models.LadderAlertKind.GapDown);
     });
 
     private void OnFetchFailed(string display, string context, string reason, int fails) => Dispatcher.Invoke(() =>

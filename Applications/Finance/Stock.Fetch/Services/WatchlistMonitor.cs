@@ -80,7 +80,7 @@ public sealed class WatchlistMonitor(AppConfig config, PriceSourceRegistry regis
         var items = config.Watchlist.ToList();
         if (items.Count == 0) { StatusChanged?.Invoke("관심 종목 없음"); return; }
 
-        var globalRules = (config.WatchRules ?? new()).Where(r => r.StepPercent > 0 && r.WindowMinutes > 0).ToList();
+        var globalRules = (config.WatchRules ?? new()).Where(r => r.StepUp > 0 && r.StepDown > 0 && r.WindowMinutes > 0).ToList();
         var snapshot = new List<WatchQuote>();
         var startups = new List<WatchAlert>();   // 시작 알림은 모아서 한 번에 요약 전송
 
@@ -161,12 +161,13 @@ public sealed class WatchlistMonitor(AppConfig config, PriceSourceRegistry regis
                 continue;
             }
             double delta = (double)(rate - st.RefRate);
-            if (Math.Abs(delta) >= r.StepPercent)
+            bool up = delta >= 0;
+            double step = up ? r.StepUp : r.StepDown;   // 상승/하락 임계값 개별 적용
+            if (Math.Abs(delta) >= step)
             {
                 // 방향 필터: 상승/하락 중 종목이 원하는 방향만 알림(기준 갱신은 항상 수행).
-                bool up = delta >= 0;
                 if ((up && item.AlertUp) || (!up && item.AlertDown))
-                    Raise(new WatchAlert(item, price, rate, st.RefRate, r.StepPercent, r.WindowMinutes, IsStartup: false, now));
+                    Raise(new WatchAlert(item, price, rate, st.RefRate, step, r.WindowMinutes, IsStartup: false, now));
                 st.RefRate = rate;
                 st.RefTime = now;
             }

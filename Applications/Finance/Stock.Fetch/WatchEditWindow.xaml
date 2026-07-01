@@ -66,7 +66,7 @@
 
         <TextBlock Grid.Row="6" Grid.Column="0" Text="추세 조건" Style="{StaticResource FieldLbl}"/>
         <TextBox Grid.Row="6" Grid.Column="1" x:Name="RulesBox" Margin="0,0,0,10"
-                 ToolTip="이 종목 전용 추세 조건. 기간:변화단위 쌍을 쉼표로(예: 3:1, 5:2 → 3분당 1%, 5분당 2%). 소수점 가능. 비우면 전역 조건 사용."/>
+                 ToolTip="이 종목 전용 추세 조건. 기간:상승[:하락] 쉼표 구분(예: 3:1:2 → 3분당 상승1%/하락2%, 5:2 → 5분당 ±2%). 소수점 가능. 비우면 전역 조건 사용."/>
 
         <TextBlock Grid.Row="7" Grid.Column="0" Text="알림" Style="{StaticResource FieldLbl}"/>
         <StackPanel Grid.Row="7" Grid.Column="1" Orientation="Horizontal" Margin="0,0,0,10">

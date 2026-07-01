@@ -90,7 +90,7 @@ public sealed class AppConfig
     /// 관심 종목 전역 추세 조건 목록(여러 개 가능: 예 3분당 1%, 5분당 2%). 종목에 자체 조건이 없으면 이 목록을 사용.
     /// 기본 1개(3분당 2%).
     /// </summary>
-    public List<TrendRule> WatchRules { get; set; } = new() { new TrendRule { WindowMinutes = 3, StepPercent = 2 } };
+    public List<TrendRule> WatchRules { get; set; } = new() { new TrendRule { WindowMinutes = 3, StepUp = 2, StepDown = 2 } };
     /// <summary>
     /// 미국 종목의 프리/애프터마켓 시간대에는 종목 소스와 무관하게 Yahoo에서 시세를 가져온다(무료 확장시간 실시간).
     /// 정규장에는 각 종목에 설정된 소스를 사용. 기본 켜짐.

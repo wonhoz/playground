@@ -51,6 +51,8 @@ public sealed class AppConfig
     public string LastExportDir { get; set; } = string.Empty;
     /// <summary>분봉 시그널 백테스트에서 마지막으로 CSV를 선택한 폴더.</summary>
     public string LastSignalDir { get; set; } = string.Empty;
+    /// <summary>분봉 시그널 결과(_시그널.csv)를 마지막으로 저장한 폴더.</summary>
+    public string LastSignalOutDir { get; set; } = string.Empty;
 
     // ── 차트 설정(재오픈 시 복원) ──
     public BarInterval ChartInterval { get; set; } = BarInterval.Day;
@@ -137,6 +139,11 @@ public sealed class AppConfig
     public int BottomTouchLookback { get; set; } = 5;
     /// <summary>1차 시그널 후 MA5/MA20 골든크로스 확인(2차) 알림 사용.</summary>
     public bool BottomConfirmCross { get; set; } = true;
+    /// <summary>
+    /// 1차 시그널 직후 첫 완성봉이 양봉이면 "반등 지속" 조기 확인 알림(골든크로스보다 1~5분 빠름).
+    /// 실측: 진짜 반등 3/4 직후 양봉, 가짜 2/3 직후 음봉 — 강/약 구분 힌트.
+    /// </summary>
+    public bool BottomFollowCandle { get; set; } = true;
     /// <summary>골든크로스 확인 대기 시간(분).</summary>
     public int BottomConfirmWindowMinutes { get; set; } = 20;
     /// <summary>같은 종목 1차 시그널 재알림 쿨다운(분).</summary>

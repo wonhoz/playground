@@ -131,6 +131,9 @@
                     <TextBox x:Name="BottomPbBox" Width="56"/>
                 </StackPanel>
                 <CheckBox x:Name="BottomCrossCheck" Content="골든크로스(MA5↗MA20) 확인 알림 (1차 시그널 후 20분 내)"/>
+                <CheckBox x:Name="BottomFollowCheck" Margin="0,6,0,0"
+                          Content="직후 양봉 지속 확인 알림 (골든크로스보다 빠른 조기 확인)"
+                          ToolTip="1차 시그널 직후 첫 완성봉이 양봉이면 '반등 지속' 알림. 실측: 진짜 반등 3/4 직후 양봉 vs 가짜 2/3 직후 음봉 — 강/약 반등 구분 힌트."/>
 
                 <!-- 고점 경고 시그널 -->
                 <TextBlock Text="고점 경고 시그널 (관심 종목 · 국내 1분봉)" Style="{StaticResource Section}"/>

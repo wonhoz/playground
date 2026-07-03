@@ -46,6 +46,7 @@ public partial class SettingsWindow : Window
         BottomWalkBox.Text = config.BottomWalkMaxTouches.ToString();
         BottomPbBox.Text = config.BottomMinPercentB.ToString("0.##");
         BottomCrossCheck.IsChecked = config.BottomConfirmCross;
+        BottomFollowCheck.IsChecked = config.BottomFollowCandle;
         TopRsiBox.Text = config.TopRsiMin.ToString("0.#");
         TopVolBox.Text = config.TopVolumeRatio.ToString("0.##");
         TopCooldownBox.Text = config.TopCooldownMinutes.ToString();
@@ -156,6 +157,7 @@ public partial class SettingsWindow : Window
         if (int.TryParse(BottomWalkBox.Text.Trim(), out var bwk)) _config.BottomWalkMaxTouches = Math.Clamp(bwk, 1, 10);
         if (double.TryParse(BottomPbBox.Text.Trim(), out var bpb)) _config.BottomMinPercentB = Math.Clamp(bpb, 0, 0.9);
         _config.BottomConfirmCross = BottomCrossCheck.IsChecked == true;
+        _config.BottomFollowCandle = BottomFollowCheck.IsChecked == true;
         if (double.TryParse(TopRsiBox.Text.Trim(), out var trsi)) _config.TopRsiMin = Math.Clamp(trsi, 5, 95);
         if (double.TryParse(TopVolBox.Text.Trim(), out var tvol)) _config.TopVolumeRatio = Math.Max(0, tvol);
         if (int.TryParse(TopCooldownBox.Text.Trim(), out var tcd)) _config.TopCooldownMinutes = Math.Max(1, tcd);

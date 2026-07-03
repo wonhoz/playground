@@ -144,6 +144,7 @@ public partial class MainWindow : Window
         string head = s.Kind switch
         {
             Models.MinuteSignalKind.Rebound => "📈 바닥 반등 시그널",
+            Models.MinuteSignalKind.FollowThrough => "↗ 반등 지속 (직후 양봉)",
             Models.MinuteSignalKind.GoldenCross => "✅ 반등 확인 (골든크로스)",
             Models.MinuteSignalKind.TopWarn => "📉 고점 경고 시그널",
             _ => "🔻 하락 확인 (데드크로스)",
@@ -655,8 +656,19 @@ public partial class MainWindow : Window
         };
         if (open.ShowDialog(this) != true || open.FileNames.Length == 0) return;
 
-        // 마지막 선택 폴더 기억 — 다음에 같은 위치에서 열리도록.
-        _config.LastSignalDir = Path.GetDirectoryName(open.FileNames[0]) ?? "";
+        // 결과(_시그널.csv) 저장 폴더 선택 — 기본은 마지막 저장 폴더, 없으면 원본 폴더.
+        string srcDir = Path.GetDirectoryName(open.FileNames[0]) ?? "";
+        var folder = new OpenFolderDialog
+        {
+            Title = "시그널 결과(_시그널.csv) 저장 폴더 선택",
+            InitialDirectory = Directory.Exists(_config.LastSignalOutDir) ? _config.LastSignalOutDir : srcDir
+        };
+        if (folder.ShowDialog(this) != true) return;
+        string outDir = folder.FolderName;
+
+        // 마지막 선택/저장 폴더 기억 — 다음에 같은 위치에서 열리도록.
+        _config.LastSignalDir = srcDir;
+        _config.LastSignalOutDir = outDir;
         _config.Save();
 
         SignalCsvBtn.IsEnabled = false;
@@ -677,8 +689,8 @@ public partial class MainWindow : Window
 
                     var signals = _minuteSignal.Backtest(bars, stem, "");
 
-                    // 결과 CSV: 원본과 같은 폴더에 "_시그널" 접미사. detail은 쉼표 포함 → 따옴표 이스케이프.
-                    string outPath = Path.Combine(Path.GetDirectoryName(file) ?? "", stem + "_시그널.csv");
+                    // 결과 CSV: 선택한 저장 폴더에 "_시그널" 접미사. detail은 쉼표 포함 → 따옴표 이스케이프.
+                    string outPath = Path.Combine(outDir, stem + "_시그널.csv");
                     var sb = new System.Text.StringBuilder();
                     sb.Append("date,time,signal,price,detail\n");
                     foreach (var s in signals)
@@ -712,6 +724,7 @@ public partial class MainWindow : Window
     private static string SignalLabel(Models.MinuteSignalKind kind) => kind switch
     {
         Models.MinuteSignalKind.Rebound => "바닥 반등",
+        Models.MinuteSignalKind.FollowThrough => "반등 지속(직후 양봉)",
         Models.MinuteSignalKind.GoldenCross => "골든크로스(반등 확인)",
         Models.MinuteSignalKind.TopWarn => "고점 경고",
         _ => "데드크로스(하락 확인)",

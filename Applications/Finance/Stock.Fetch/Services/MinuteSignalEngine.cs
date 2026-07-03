@@ -45,6 +45,7 @@ public sealed class MinuteSignalEngine(AppConfig config, PriceSourceRegistry reg
         // 바닥(반등) 상태
         public DateTime BottomFiredAt = DateTime.MinValue;        // 1차 알림 봉 시각(쿨다운·확인 창 기준)
         public bool AwaitGolden;                                   // 2차(골든크로스) 확인 대기
+        public bool AwaitFollow;                                   // 직후 봉 양봉 지속(조기 확인) 대기
         // 고점(경고) 상태
         public DateTime TopFiredAt = DateTime.MinValue;
         public bool AwaitDead;                                     // 2차(데드크로스) 확인 대기
@@ -122,9 +123,30 @@ public sealed class MinuteSignalEngine(AppConfig config, PriceSourceRegistry reg
         for (int i = Math.Max(fromIdx, 21); i < bars.Count; i++)
         {
             EvaluateCross(item, st, bars, i, ma5, ma20, emit);
+            if (bottom) EvaluateFollow(item, st, bars, i, emit);
             if (bottom) EvaluateBottom(item, st, bars, i, upper, lower, rsi, volMa, emit);
             if (top) EvaluateTop(item, st, bars, i, upper, lower, rsi, volMa, emit);
         }
+    }
+
+    /// <summary>
+    /// 1차 반등 직후 첫 완성봉의 양봉 지속(조기 확인) 판정 — 골든크로스보다 1~5분 빠른 힌트.
+    /// 실측: 진짜 반등 3/4에서 직후 양봉, 가짜 2/3에서 직후 음봉/보합.
+    /// </summary>
+    private void EvaluateFollow(WatchItem item, State st, List<Candle> bars, int i, Action<MinuteSignal> emit)
+    {
+        if (!st.AwaitFollow || bars[i].Date <= st.BottomFiredAt) return;
+        st.AwaitFollow = false;   // 직후 1봉만 판정(양봉 아니면 조용히 종료)
+        var bar = bars[i];
+        if (bar.Close <= bar.Open) return;
+
+        // 몸통 크기(직전 20봉 평균 대비) — 지속 강도 참고치.
+        decimal avgBody = 0;
+        for (int k = i - 20; k < i; k++) avgBody += Math.Abs(bars[k].Close - bars[k].Open);
+        avgBody /= 20;
+        double ratio = avgBody > 0 ? (double)(Math.Abs(bar.Close - bar.Open) / avgBody) : 0;
+        emit(new MinuteSignal(item.Symbol, item.Name, MinuteSignalKind.FollowThrough, bar.Close,
+            $"1차 반등({st.BottomFiredAt:HH:mm}) 직후 봉 양봉 지속 — 종가 {bar.Close:N0}원 · 몸통 {ratio:0.0}× (20봉 평균 대비)", bar.Date));
     }
 
     // ───────────────────────── 2차: 골든/데드크로스 확인 ─────────────────────────
@@ -148,14 +170,15 @@ public sealed class MinuteSignalEngine(AppConfig config, PriceSourceRegistry reg
             if (st.AwaitGolden && st.PrevBelow && !below)
             {
                 st.AwaitGolden = false;
+                // 경과 분 표기 — 실측상 진짜 반등은 5~9분 내 도달(빠를수록 신뢰↑).
                 emit(new MinuteSignal(item.Symbol, item.Name, MinuteSignalKind.GoldenCross, bar.Close,
-                    $"MA5 {ma5[i]:N0} > MA20 {ma20[i]:N0} 상향 돌파 — 반등 흐름 확인 (1차 시그널 {st.BottomFiredAt:HH:mm} 후속)", bar.Date));
+                    $"MA5 {ma5[i]:N0} > MA20 {ma20[i]:N0} 상향 돌파 — 반등 흐름 확인 (1차 시그널 {st.BottomFiredAt:HH:mm} 후 {(bar.Date - st.BottomFiredAt).TotalMinutes:0}분)", bar.Date));
             }
             if (st.AwaitDead && !st.PrevBelow && below)
             {
                 st.AwaitDead = false;
                 emit(new MinuteSignal(item.Symbol, item.Name, MinuteSignalKind.DeadCross, bar.Close,
-                    $"MA5 {ma5[i]:N0} < MA20 {ma20[i]:N0} 하향 돌파 — 하락 흐름 확인 (고점 경고 {st.TopFiredAt:HH:mm} 후속)", bar.Date));
+                    $"MA5 {ma5[i]:N0} < MA20 {ma20[i]:N0} 하향 돌파 — 하락 흐름 확인 (고점 경고 {st.TopFiredAt:HH:mm} 후 {(bar.Date - st.TopFiredAt).TotalMinutes:0}분)", bar.Date));
             }
         }
         st.PrevBelow = below;
@@ -216,6 +239,7 @@ public sealed class MinuteSignalEngine(AppConfig config, PriceSourceRegistry reg
 
         st.BottomFiredAt = bar.Date;
         st.AwaitGolden = config.BottomConfirmCross;
+        st.AwaitFollow = config.BottomFollowCandle;
         st.AwaitDead = false;   // 방향 전환 — 반대편 확인 대기 해제
         emit(new MinuteSignal(item.Symbol, item.Name, MinuteSignalKind.Rebound, bar.Close,
             $"볼린저 하단 {lower[i]:N0}원 터치({bars[touchIdx].Date:HH:mm}) 후 복귀 마감 {bar.Close:N0}원(%b {pb:0.00}) · " +

@@ -27,15 +27,13 @@ public sealed class SlackNotifier(AppConfig config) : IDisposable
         string emoji = a.IsUp ? ":red_circle:" : ":large_blue_circle:";   // 한국식: 상승 빨강 / 하락 파랑
         string arrow = a.IsUp ? "▲" : "▼";
         var sb = new StringBuilder();
-        sb.AppendLine($"{emoji} *{a.Display}* {arrow} 평단 대비 *{a.ReturnPct:+0.0;-0.0}%* (임계 {Math.Abs(a.Threshold):0.#}%)");
-        sb.AppendLine($"• 현재가 *{a.Price:N0}원* / 평단 {a.AvgPrice:N0}원 · {a.Quantity}주");
-        sb.AppendLine($"• 평가손익 {a.EvalPL:+#,0;-#,0;0}원");
-        sb.AppendLine($"• 시각 {a.Time:yyyy-MM-dd HH:mm:ss}");
+        sb.AppendLine($"{emoji} *{a.Display}* {arrow} 평단比 *{a.ReturnPct:+0.0;-0.0}%* (임계 {Math.Abs(a.Threshold):0.#}%) · *{a.Price:N0}원*");
+        sb.AppendLine($"평단 {a.AvgPrice:N0} × {a.Quantity}주 · 평가손익 {a.EvalPL:+#,0;-#,0;0}원");
 
         await PostAsync(BuildPayload(sb.ToString()), ct);
     }
 
-    /// <summary>관심 종목 추세 알림(시작 알림 또는 기준값 대비 step 변동).</summary>
+    /// <summary>관심 종목 추세 알림(시작 알림 또는 기준값 대비 step 변동). 모바일 가독성 우선 — 2~3줄.</summary>
     public async Task SendWatchAlertAsync(WatchAlert a, CancellationToken ct = default)
     {
         if (!IsConfigured) return;
@@ -46,20 +44,15 @@ public sealed class SlackNotifier(AppConfig config) : IDisposable
 
         if (a.IsStartup)
         {
-            sb.AppendLine($":satellite_antenna: *{a.Item}* ({a.Item.MarketLabel}) 모니터링 시작 — 현재 전일 대비 *{a.CurrentRate:+0.0;-0.0;0.0}%*");
-            sb.AppendLine($"• 현재가 *{a.PriceText}* · 소스 {a.Item.SourceLabel}");
-            sb.AppendLine($"• 적용 조건: {a.RulesText}");
+            sb.AppendLine($":satellite_antenna: *{a.Item}* 모니터링 시작 · 전일比 *{a.CurrentRate:+0.0;-0.0;0.0}%* · {a.PriceText}");
+            sb.AppendLine($"조건 {a.RulesText}");
         }
         else
         {
-            string trend = a.IsUp ? "상승세" : "하락세";
-            sb.AppendLine($"{emoji} *{a.Item}* ({a.Item.MarketLabel}) {arrow} {trend} — 직전 기준 대비 *{a.Delta:+0.0;-0.0}%p*");
-            sb.AppendLine($"• 조건 {a.WindowMinutes:0.#}분당 {a.Step:0.###}% · 현재 전일 대비 {a.CurrentRate:+0.0;-0.0;0.0}% (기준 {a.RefRate:+0.0;-0.0;0.0}%)");
-            sb.AppendLine($"• 현재가 *{a.PriceText}* · 소스 {a.Item.SourceLabel}");
+            sb.AppendLine($"{emoji} *{a.Item}* {arrow} *{a.Delta:+0.0;-0.0}%p* ({a.WindowMinutes:0.#}분/{a.Step:0.###}%) · 전일比 {a.CurrentRate:+0.0;-0.0;0.0}% · *{a.PriceText}*");
             if (a.ReversalProb is { } rp)
-                sb.AppendLine($"• :arrows_counterclockwise: {a.ReversalDirText} 추정 *~{rp:P0}* ({a.ReversalText}) · {a.ReversalBasis}");
+                sb.AppendLine($":arrows_counterclockwise: {a.ReversalDirText} ~{rp:P0} ({a.ReversalText} · {a.ReversalBasis})");
         }
-        sb.AppendLine($"• 시각 {a.Time:yyyy-MM-dd HH:mm:ss}");
 
         await PostAsync(BuildPayload(sb.ToString()), ct);
     }
@@ -74,9 +67,8 @@ public sealed class SlackNotifier(AppConfig config) : IDisposable
         foreach (var a in alerts)
         {
             string arrow = a.CurrentRate >= 0 ? "▲" : "▼";
-            sb.AppendLine($"• {a.Item} ({a.Item.MarketLabel}) {arrow} 전일 대비 {a.CurrentRate:+0.0;-0.0;0.0}% · {a.PriceText}");
+            sb.AppendLine($"• {a.Item} {arrow} {a.CurrentRate:+0.0;-0.0;0.0}% · {a.PriceText}");
         }
-        sb.AppendLine($"• 이후 각 종목 조건 도달 시 개별 알림합니다. ({DateTime.Now:yyyy-MM-dd HH:mm:ss})");
         await PostAsync(BuildPayload(sb.ToString()), ct);
     }
 
@@ -104,10 +96,8 @@ public sealed class SlackNotifier(AppConfig config) : IDisposable
     {
         if (!IsConfigured) return;
         var sb = new StringBuilder();
-        sb.AppendLine($":warning: *{display}* ({context}) 시세 조회 실패 — 연속 {fails}회");
-        sb.AppendLine($"• 사유: {reason}");
-        sb.AppendLine($"• 소스: {source}");
-        sb.AppendLine($"• 시각 {DateTime.Now:yyyy-MM-dd HH:mm:ss}");
+        sb.AppendLine($":warning: *{display}* 조회 실패 {fails}회 ({context} · {source})");
+        sb.AppendLine(reason);
         await PostAsync(BuildPayload(sb.ToString()), ct);
     }
 
@@ -115,10 +105,7 @@ public sealed class SlackNotifier(AppConfig config) : IDisposable
     public async Task SendFetchRecoveryAsync(string display, string context, CancellationToken ct = default)
     {
         if (!IsConfigured) return;
-        var sb = new StringBuilder();
-        sb.AppendLine($":white_check_mark: *{display}* ({context}) 시세 조회 정상 복구됨");
-        sb.AppendLine($"• 시각 {DateTime.Now:yyyy-MM-dd HH:mm:ss}");
-        await PostAsync(BuildPayload(sb.ToString()), ct);
+        await PostAsync(BuildPayload($":white_check_mark: *{display}* 조회 복구 ({context})"), ct);
     }
 
     /// <summary>매수/익절 래더·갭다운 알림.</summary>
@@ -132,11 +119,8 @@ public sealed class SlackNotifier(AppConfig config) : IDisposable
             _ => (":warning:", "갭다운 취소선"),
         };
         var sb = new StringBuilder();
-        sb.AppendLine($"{emoji} *{a.Display}* — {head}");
-        sb.AppendLine($"• {a.Detail}");
-        if (a.Kind != LadderAlertKind.GapDown)
-            sb.AppendLine($"• 현재가 {a.Price:N0}원");
-        sb.AppendLine($"• 시각 {a.Time:yyyy-MM-dd HH:mm:ss}");
+        sb.AppendLine($"{emoji} *{head}* · *{a.Display}*");
+        sb.AppendLine(a.Kind == LadderAlertKind.GapDown ? a.Detail : $"{a.Detail} · 현재 {a.Price:N0}원");
         await PostAsync(BuildPayload(sb.ToString()), ct);
     }
 
@@ -153,10 +137,8 @@ public sealed class SlackNotifier(AppConfig config) : IDisposable
             _ => (":rotating_light::small_red_triangle_down:", "하락 확인 (데드크로스)"),
         };
         var sb = new StringBuilder();
-        sb.AppendLine($"{emoji} *{head}* — *{s.Display}*");
-        sb.AppendLine($"• {s.Detail}");
-        sb.AppendLine($"• 종가 {s.Price:N0}원 (1분봉 {s.Time:HH:mm} 완성 기준)");
-        sb.AppendLine($"• 시각 {DateTime.Now:yyyy-MM-dd HH:mm:ss}");
+        sb.AppendLine($"{emoji} *{head}* · *{s.Display}* · *{s.Price:N0}원* ({s.Time:HH:mm})");
+        sb.AppendLine(s.Detail);
         await PostAsync(BuildPayload(sb.ToString()), ct);
     }
 

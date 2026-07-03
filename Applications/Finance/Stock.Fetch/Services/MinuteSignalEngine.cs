@@ -146,7 +146,7 @@ public sealed class MinuteSignalEngine(AppConfig config, PriceSourceRegistry reg
         avgBody /= 20;
         double ratio = avgBody > 0 ? (double)(Math.Abs(bar.Close - bar.Open) / avgBody) : 0;
         emit(new MinuteSignal(item.Symbol, item.Name, MinuteSignalKind.FollowThrough, bar.Close,
-            $"1차 반등({st.BottomFiredAt:HH:mm}) 직후 봉 양봉 지속 — 종가 {bar.Close:N0}원 · 몸통 {ratio:0.0}× (20봉 평균 대비)", bar.Date));
+            $"1차({st.BottomFiredAt:HH:mm}) 직후 양봉 지속 · 몸통 {ratio:0.0}×", bar.Date));
     }
 
     // ───────────────────────── 2차: 골든/데드크로스 확인 ─────────────────────────
@@ -172,13 +172,13 @@ public sealed class MinuteSignalEngine(AppConfig config, PriceSourceRegistry reg
                 st.AwaitGolden = false;
                 // 경과 분 표기 — 실측상 진짜 반등은 5~9분 내 도달(빠를수록 신뢰↑).
                 emit(new MinuteSignal(item.Symbol, item.Name, MinuteSignalKind.GoldenCross, bar.Close,
-                    $"MA5 {ma5[i]:N0} > MA20 {ma20[i]:N0} 상향 돌파 — 반등 흐름 확인 (1차 시그널 {st.BottomFiredAt:HH:mm} 후 {(bar.Date - st.BottomFiredAt).TotalMinutes:0}분)", bar.Date));
+                    $"MA5 {ma5[i]:N0} > MA20 {ma20[i]:N0} 돌파 · 1차({st.BottomFiredAt:HH:mm}) 후 {(bar.Date - st.BottomFiredAt).TotalMinutes:0}분", bar.Date));
             }
             if (st.AwaitDead && !st.PrevBelow && below)
             {
                 st.AwaitDead = false;
                 emit(new MinuteSignal(item.Symbol, item.Name, MinuteSignalKind.DeadCross, bar.Close,
-                    $"MA5 {ma5[i]:N0} < MA20 {ma20[i]:N0} 하향 돌파 — 하락 흐름 확인 (고점 경고 {st.TopFiredAt:HH:mm} 후 {(bar.Date - st.TopFiredAt).TotalMinutes:0}분)", bar.Date));
+                    $"MA5 {ma5[i]:N0} < MA20 {ma20[i]:N0} 돌파 · 경고({st.TopFiredAt:HH:mm}) 후 {(bar.Date - st.TopFiredAt).TotalMinutes:0}분", bar.Date));
             }
         }
         st.PrevBelow = below;
@@ -242,8 +242,7 @@ public sealed class MinuteSignalEngine(AppConfig config, PriceSourceRegistry reg
         st.AwaitFollow = config.BottomFollowCandle;
         st.AwaitDead = false;   // 방향 전환 — 반대편 확인 대기 해제
         emit(new MinuteSignal(item.Symbol, item.Name, MinuteSignalKind.Rebound, bar.Close,
-            $"볼린저 하단 {lower[i]:N0}원 터치({bars[touchIdx].Date:HH:mm}) 후 복귀 마감 {bar.Close:N0}원(%b {pb:0.00}) · " +
-            $"RSI {rsi[i]:0.#} 상승 전환(저점 {minRsi:0.#}) · 거래량 {volRatio:0.0}× (20봉 평균 대비)", bar.Date));
+            $"하단터치 {bars[touchIdx].Date:HH:mm} → 복귀 %b {pb:0.00} · RSI {rsi[i]:0.#}↑(저점 {minRsi:0.#}) · 거래량 {volRatio:0.0}×", bar.Date));
     }
 
     // ───────────────────────── 1차: 고점 경고 ─────────────────────────
@@ -317,8 +316,7 @@ public sealed class MinuteSignalEngine(AppConfig config, PriceSourceRegistry reg
         st.AwaitDead = config.TopConfirmCross;
         st.AwaitGolden = false;   // 방향 전환 — 반대편 확인 대기 해제
         emit(new MinuteSignal(item.Symbol, item.Name, MinuteSignalKind.TopWarn, bar.Close,
-            $"볼린저 상단 밴드워킹({touchCount}봉) 후 이탈 마감 {bar.Close:N0}원(%b {pb:0.00}) · " +
-            $"RSI {rsi[i]:0.#} 하향 전환(고점 {maxRsi:0.#}) · {evidence}", bar.Date));
+            $"상단워킹 {touchCount}봉 → 이탈 %b {pb:0.00} · RSI {rsi[i]:0.#}↓(고점 {maxRsi:0.#}) · {evidence}", bar.Date));
     }
 
     // ───────────────────────── 발생/전송 ─────────────────────────

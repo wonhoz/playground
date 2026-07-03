@@ -121,6 +121,15 @@
                     <TextBlock Text="쿨다운(분)" Style="{StaticResource FieldLbl}" VerticalAlignment="Center" Margin="16,0,8,0"/>
                     <TextBox x:Name="BottomCooldownBox" Width="56"/>
                 </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0,0,0,8">
+                    <TextBlock Text="밴드워킹 상한(봉)" Style="{StaticResource FieldLbl}" VerticalAlignment="Center" Margin="0,0,8,0"
+                               ToolTip="최근 10봉 중 하단 터치 봉이 이 수를 초과하면 '지속 하락 중'으로 보고 시그널을 건너뜁니다. 깊은 급락 V바닥은 터치가 5~7봉이므로 7 권장(실측)."/>
+                    <TextBox x:Name="BottomWalkBox" Width="56"
+                             ToolTip="권장 7 — 4 이하면 깊은 급락 후 대반등(터치 5~7봉)까지 걸러질 수 있습니다."/>
+                    <TextBlock Text="%b 회복 하한" Style="{StaticResource FieldLbl}" VerticalAlignment="Center" Margin="16,0,8,0"
+                               ToolTip="트리거 봉 종가의 최소 %b(하단 0~상단 1). 이 이상 회복 마감해야 시그널. 권장 0.15."/>
+                    <TextBox x:Name="BottomPbBox" Width="56"/>
+                </StackPanel>
                 <CheckBox x:Name="BottomCrossCheck" Content="골든크로스(MA5↗MA20) 확인 알림 (1차 시그널 후 20분 내)"/>
 
                 <!-- 고점 경고 시그널 -->

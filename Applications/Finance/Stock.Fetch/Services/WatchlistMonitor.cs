@@ -19,8 +19,10 @@ internal sealed class TrendState
 ///    방향과 함께 알림하고 기준값을 현재값으로 갱신(엣지).
 /// ③ window(분) 안에 step 변동이 없으면 기준값을 조용히 현재값으로 재설정 → "최근 기간의 추세"만 감지.
 /// ④ 다이제스트 주기마다 전체 종목 시세 요약을 알림.
-/// 미국장은 KST 야간이므로 장 시간 게이팅 없이 항상 폴링. 이벤트는 백그라운드 스레드에서 발생하므로
-/// UI 구독자는 Dispatcher 마샬링이 필요하다.
+/// 시장별 장 시간 게이팅: 한국은 평일 08:00~20:00 KST(KRX만 설정 시 09:00~15:30),
+/// 미국은 평일 프리~애프터(ET 04:00~20:00 · 서머타임 자동). 장외 종목은 폴링·알림을 건너뛰고
+/// 추세 기준을 비워 재개장 첫 관측에서 새로 잡는다(개장 요약 1회). 이벤트는 백그라운드 스레드에서
+/// 발생하므로 UI 구독자는 Dispatcher 마샬링이 필요하다.
 /// </summary>
 public sealed class WatchlistMonitor(AppConfig config, PriceSourceRegistry registry, SlackNotifier slack, LadderAlertEngine ladder, ReversalEstimator reversal, BottomSignalEngine bottom) : IDisposable
 {
@@ -90,9 +92,20 @@ public sealed class WatchlistMonitor(AppConfig config, PriceSourceRegistry regis
         foreach (var key in _failCount.Keys.Where(k => !live.Contains(k)).ToList()) _failCount.Remove(key);
         _failAlerted.RemoveWhere(k => !live.Contains(k));
 
+        int closed = 0;
         foreach (var item in items)
         {
             ct.ThrowIfCancellationRequested();
+
+            // 장 시간 게이팅: 장외 종목은 폴링·알림 스킵 + 추세 기준 제거(재개장 시 새로 잡고 개장 요약 1회).
+            if (!IsMarketActive(item))
+            {
+                closed++;
+                _trend.Remove(item.Symbol);
+                _failCount.Remove(item.Symbol);
+                continue;
+            }
+
             Quote? q = null;
             string? failReason = null;
             try { q = await registry.WatchQuoteAsync(item, ct); }
@@ -134,8 +147,19 @@ public sealed class WatchlistMonitor(AppConfig config, PriceSourceRegistry regis
 
         if (startups.Count > 0) RaiseStartupSummary(startups);
         MaybeSendDigest(snapshot);
-        StatusChanged?.Invoke($"갱신 {DateTime.Now:HH:mm:ss} · 관심 {snapshot.Count}/{items.Count}종목");
+        StatusChanged?.Invoke(closed == items.Count
+            ? $"장 시간 외 대기 중 ({DateTime.Now:HH:mm}) · 관심 {items.Count}종목"
+            : $"갱신 {DateTime.Now:HH:mm:ss} · 관심 {snapshot.Count}/{items.Count}종목{(closed > 0 ? $" (장외 {closed}종목 대기)" : "")}");
     }
+
+    /// <summary>
+    /// 종목의 시장이 현재 거래 시간대인지. 한국(지수 포함)=평일 08:00~20:00 KST(KRX만 설정 시 09:00~15:30),
+    /// 미국=평일 프리~애프터(ET 04:00~20:00 · 서머타임 자동).
+    /// </summary>
+    private bool IsMarketActive(WatchItem item)
+        => item.Market == MarketKind.KR
+            ? PortfolioMonitor.IsMarketOpen(DateTime.Now, config)
+            : UsMarket.CurrentSession() != UsSession.Closed;
 
     /// <summary>
     /// 다중 조건 추세 감지: 조건마다 기준값을 따로 두고, 기준 대비 현재 등락율이 그 조건의 step만큼 변하면

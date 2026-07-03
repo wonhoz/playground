@@ -140,15 +140,15 @@ public sealed class SlackNotifier(AppConfig config) : IDisposable
         await PostAsync(BuildPayload(sb.ToString()), ct);
     }
 
-    /// <summary>바닥 반등 시그널(볼린저 하단 반등·골든크로스 확인) 알림.</summary>
+    /// <summary>바닥 반등 시그널(볼린저 하단 반등·골든크로스 확인) 알림. 경광등 이모지로 강조해 눈에 띄게.</summary>
     public async Task SendBottomSignalAsync(BottomSignal s, CancellationToken ct = default)
     {
         if (!IsConfigured) return;
         (string emoji, string head) = s.Kind == BottomSignalKind.Rebound
-            ? (":chart_with_upwards_trend:", "바닥 반등 시그널")
-            : (":white_check_mark:", "반등 확인 (골든크로스)");
+            ? (":rotating_light::chart_with_upwards_trend:", "바닥 반등 시그널")
+            : (":rotating_light::white_check_mark:", "반등 확인 (골든크로스)");
         var sb = new StringBuilder();
-        sb.AppendLine($"{emoji} *{s.Display}* — {head}");
+        sb.AppendLine($"{emoji} *{head}* — *{s.Display}*");
         sb.AppendLine($"• {s.Detail}");
         sb.AppendLine($"• 종가 {s.Price:N0}원 (1분봉 {s.Time:HH:mm} 완성 기준)");
         sb.AppendLine($"• 시각 {DateTime.Now:yyyy-MM-dd HH:mm:ss}");

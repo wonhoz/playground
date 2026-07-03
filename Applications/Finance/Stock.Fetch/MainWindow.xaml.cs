@@ -349,14 +349,21 @@ public partial class MainWindow : Window
         }
     }
 
+    /// <summary>
+    /// 국내 단축코드 검증·정규화: 5~6자리 영숫자(2025년~ 신형 코드 0193T0 등 문자 포함 허용) → 대문자.
+    /// 실패 시 오류 표시 후 false.
+    /// </summary>
+    private bool TryGetKrCode(out string code)
+    {
+        code = CodeBox.Text.Trim().ToUpperInvariant();
+        if (code.Length is >= 5 and <= 6 && code.All(char.IsLetterOrDigit)) return true;
+        ShowError("종목코드는 5~6자리 영숫자입니다(예: 005930, 0193T0).");
+        return false;
+    }
+
     private void FavAdd_Click(object sender, RoutedEventArgs e)
     {
-        string code = CodeBox.Text.Trim();
-        if (code.Length is < 5 or > 6 || !code.All(char.IsDigit))
-        {
-            ShowError("종목코드는 6자리 숫자입니다(예: 005930).");
-            return;
-        }
+        if (!TryGetKrCode(out var code)) return;
         // 미조회/실패 표시는 이름으로 저장하지 않음
         string name = NameText.Text is "조회 중…" or "(이름 못 찾음)" ? "" : NameText.Text.Trim();
 
@@ -411,12 +418,7 @@ public partial class MainWindow : Window
     // ────────────────────────────── 조회 ──────────────────────────────
     private async void Fetch_Click(object sender, RoutedEventArgs e)
     {
-        string code = CodeBox.Text.Trim();
-        if (code.Length is < 5 or > 6 || !code.All(char.IsDigit))
-        {
-            ShowError("종목코드는 6자리 숫자입니다(예: 005930).");
-            return;
-        }
+        if (!TryGetKrCode(out var code)) return;
         if (!TryParseDate(FromBox.Text, out var from) || !TryParseDate(ToBox.Text, out var to))
         {
             ShowError("기간은 yyyy-MM-dd 형식으로 입력하세요.");
@@ -568,12 +570,7 @@ public partial class MainWindow : Window
     // ────────────────────────────── 차트 ──────────────────────────────
     private void Chart_Click(object sender, RoutedEventArgs e)
     {
-        string code = CodeBox.Text.Trim();
-        if (code.Length is < 5 or > 6 || !code.All(char.IsDigit))
-        {
-            ShowError("종목코드 6자리를 입력하거나 검색하세요(예: 005930).");
-            return;
-        }
+        if (!TryGetKrCode(out var code)) return;
         new ChartWindow(code, NameText.Text is "조회 중…" or "(이름 못 찾음)" or "(검색 결과 없음)" ? "" : NameText.Text, _registry, _config)
         { Owner = this }.Show();
     }

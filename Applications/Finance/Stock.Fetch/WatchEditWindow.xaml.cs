@@ -144,10 +144,11 @@ public partial class WatchEditWindow : Window
         else
         {
             var market = CurrentMarket;
-            if (market == MarketKind.KR && (symbol.Length is < 5 or > 6 || !symbol.All(char.IsDigit)))
-            { Error("국내 종목코드는 6자리 숫자입니다(예: 005930)."); return; }
+            // 신형 영숫자 코드(0193T0 등) 허용 — KIS·네이버 모두 조회 가능 확인됨.
+            if (market == MarketKind.KR && (symbol.Length is < 5 or > 6 || !symbol.All(char.IsLetterOrDigit)))
+            { Error("국내 종목코드는 5~6자리 영숫자입니다(예: 005930, 0193T0)."); return; }
             _item.Market = market;
-            _item.Symbol = market == MarketKind.US ? symbol.ToUpperInvariant() : symbol;
+            _item.Symbol = symbol.ToUpperInvariant();
         }
 
         if (SourceCombo.SelectedItem is SourceOption opt) _item.Source = opt.Source;

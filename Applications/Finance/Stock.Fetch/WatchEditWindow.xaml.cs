@@ -34,6 +34,7 @@ public partial class WatchEditWindow : Window
         AlertDownCheck.IsChecked = item.AlertDown;
         LadderCheck.IsChecked = item.LadderAlert;
         BottomCheck.IsChecked = item.BottomAlert;
+        TopCheck.IsChecked = item.TopAlert;
         SelectSource(item.Source);
         SelectExchange(item.Exchange);
         ApplyIndexMode();
@@ -60,6 +61,7 @@ public partial class WatchEditWindow : Window
             ExchangeCombo.IsEnabled = false;
             LadderCheck.IsEnabled = false;   // 지수는 래더 알림 미지원
             BottomCheck.IsEnabled = false;   // 지수는 반등 시그널 미지원
+            TopCheck.IsEnabled = false;      // 지수는 고점 경고 미지원
         }
         else UpdateLabels();
     }
@@ -113,6 +115,7 @@ public partial class WatchEditWindow : Window
         ExchangeCombo.IsEnabled = us && src == WatchSource.Kis;  // 거래소 코드는 미국+KIS에서만 필요
         LadderCheck.IsEnabled = !us;   // 매수 래더·갭다운은 국내 종목만
         BottomCheck.IsEnabled = !us;   // 바닥 반등 시그널도 국내 종목만(KIS 분봉)
+        TopCheck.IsEnabled = !us;      // 고점 경고 시그널도 국내 종목만(KIS 분봉)
     }
 
     private async void Lookup_Click(object sender, RoutedEventArgs e)
@@ -169,9 +172,11 @@ public partial class WatchEditWindow : Window
 
         _item.AlertUp = AlertUpCheck.IsChecked == true;
         _item.AlertDown = AlertDownCheck.IsChecked == true;
-        // 래더·갭다운/반등 시그널은 국내·비지수만
-        _item.LadderAlert = LadderCheck.IsChecked == true && _item.Market == MarketKind.KR && !_item.IsIndex;
-        _item.BottomAlert = BottomCheck.IsChecked == true && _item.Market == MarketKind.KR && !_item.IsIndex;
+        // 래더·갭다운/반등·고점 시그널은 국내·비지수만
+        bool krStock = _item.Market == MarketKind.KR && !_item.IsIndex;
+        _item.LadderAlert = LadderCheck.IsChecked == true && krStock;
+        _item.BottomAlert = BottomCheck.IsChecked == true && krStock;
+        _item.TopAlert = TopCheck.IsChecked == true && krStock;
 
         DialogResult = true;
     }

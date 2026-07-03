@@ -1,7 +1,7 @@
 <Window x:Class="Stock.Fetch.WatchEditWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="관심 종목" Height="565" Width="430"
+        Title="관심 종목" Height="595" Width="430"
         Background="{StaticResource WindowBg}" ResizeMode="NoResize"
         WindowStartupLocation="CenterOwner">
     <Window.Resources>
@@ -79,12 +79,14 @@
                           ToolTip="국내 종목만. 매수 1~4호가 도달·시초가 갭다운 취소선 알림."/>
             </StackPanel>
             <CheckBox x:Name="BottomCheck" Content="바닥 반등 시그널 (볼린저 하단 반등 · 1분봉)" Margin="0,8,0,0"
-                      ToolTip="국내 종목만 · KIS 키 필요. 급락 후 볼린저(20,2σ) 하단 터치 → 밴드 복귀 + RSI 과매도 상승 전환 + 거래량 급증이면 알림. 이후 MA5/MA20 골든크로스 확인 알림."/>
+                      ToolTip="국내 종목만 · KIS 키 필요. 급락 후 볼린저(20,2σ) 하단 터치 → 밴드 복귀 + RSI 과매도 상승 전환 + 거래량 급증이면 알림(밴드워킹·약반등 필터 적용). 이후 MA5/MA20 골든크로스 확인 알림."/>
+            <CheckBox x:Name="TopCheck" Content="고점 경고 시그널 (볼린저 상단 이탈 · 1분봉)" Margin="0,8,0,0"
+                      ToolTip="국내 종목만 · KIS 키 필요. 상단 밴드워킹(2봉+) + RSI 과매수(70+) 후 밴드 안 복귀 하락봉 + 소진 증거(긴 윗꼬리/거래량 클라이맥스)면 익절 경고. 이후 MA5/MA20 데드크로스 확인 알림."/>
         </StackPanel>
 
         <TextBlock Grid.Row="8" Grid.ColumnSpan="2" x:Name="HintText" Style="{x:Null}" TextWrapping="Wrap"
                    FontSize="11" Foreground="{StaticResource FgMuted}" VerticalAlignment="Top" Margin="0,4,0,0"
-                   Text="미국 종목은 티커(예: TSLA, SOXL, SPCX). 프리·정규·애프터를 모두 받으려면 Yahoo 권장. 지수(업종) 체크 시 코스피 0001·코스닥 1001·코스피200 2001 코드를 입력하면 KIS로 조회합니다(KIS 키 필요). 추세 조건을 비우면 전역 조건을 사용합니다. '매수 래더·갭다운'과 '바닥 반등 시그널'은 국내 종목만 지원합니다(반등 시그널은 KIS 1분봉 필요)."/>
+                   Text="미국 종목은 티커(예: TSLA, SOXL, SPCX). 프리·정규·애프터를 모두 받으려면 Yahoo 권장. 지수(업종) 체크 시 코스피 0001·코스닥 1001·코스피200 2001 코드를 입력하면 KIS로 조회합니다(KIS 키 필요). 추세 조건을 비우면 전역 조건을 사용합니다. '매수 래더·갭다운'·'바닥 반등'·'고점 경고'는 국내 종목만 지원합니다(반등·고점 시그널은 KIS 1분봉 필요)."/>
 
         <StackPanel Grid.Row="9" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right">
             <TextBlock x:Name="ErrorText" Foreground="{StaticResource BearBrush}" VerticalAlignment="Center" Margin="0,0,12,0"/>

@@ -140,13 +140,17 @@ public sealed class SlackNotifier(AppConfig config) : IDisposable
         await PostAsync(BuildPayload(sb.ToString()), ct);
     }
 
-    /// <summary>바닥 반등 시그널(볼린저 하단 반등·골든크로스 확인) 알림. 경광등 이모지로 강조해 눈에 띄게.</summary>
-    public async Task SendBottomSignalAsync(BottomSignal s, CancellationToken ct = default)
+    /// <summary>1분봉 시그널(바닥 반등·골든크로스·고점 경고·데드크로스) 알림. 경광등 이모지로 강조해 눈에 띄게.</summary>
+    public async Task SendMinuteSignalAsync(MinuteSignal s, CancellationToken ct = default)
     {
         if (!IsConfigured) return;
-        (string emoji, string head) = s.Kind == BottomSignalKind.Rebound
-            ? (":rotating_light::chart_with_upwards_trend:", "바닥 반등 시그널")
-            : (":rotating_light::white_check_mark:", "반등 확인 (골든크로스)");
+        (string emoji, string head) = s.Kind switch
+        {
+            MinuteSignalKind.Rebound => (":rotating_light::chart_with_upwards_trend:", "바닥 반등 시그널"),
+            MinuteSignalKind.GoldenCross => (":rotating_light::white_check_mark:", "반등 확인 (골든크로스)"),
+            MinuteSignalKind.TopWarn => (":rotating_light::chart_with_downwards_trend:", "고점 경고 시그널"),
+            _ => (":rotating_light::small_red_triangle_down:", "하락 확인 (데드크로스)"),
+        };
         var sb = new StringBuilder();
         sb.AppendLine($"{emoji} *{head}* — *{s.Display}*");
         sb.AppendLine($"• {s.Detail}");

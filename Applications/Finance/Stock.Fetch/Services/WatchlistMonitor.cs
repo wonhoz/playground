@@ -24,7 +24,7 @@ internal sealed class TrendState
 /// 추세 기준을 비워 재개장 첫 관측에서 새로 잡는다(개장 요약 1회). 이벤트는 백그라운드 스레드에서
 /// 발생하므로 UI 구독자는 Dispatcher 마샬링이 필요하다.
 /// </summary>
-public sealed class WatchlistMonitor(AppConfig config, PriceSourceRegistry registry, SlackNotifier slack, LadderAlertEngine ladder, ReversalEstimator reversal, BottomSignalEngine bottom) : IDisposable
+public sealed class WatchlistMonitor(AppConfig config, PriceSourceRegistry registry, SlackNotifier slack, LadderAlertEngine ladder, ReversalEstimator reversal, MinuteSignalEngine minuteSignal) : IDisposable
 {
     private CancellationTokenSource? _cts;
     // symbol → (조건 키 → 추세 상태). 조건(기간/단위)마다 기준값을 따로 추적한다.
@@ -133,12 +133,12 @@ public sealed class WatchlistMonitor(AppConfig config, PriceSourceRegistry regis
                     catch { /* 래더 알림 실패는 무시 */ }
                 }
 
-                // 바닥 반등 시그널(국내·비지수·옵트인·KIS 1분봉)
-                if (item.BottomAlert && !item.IsIndex && item.Market == MarketKind.KR)
+                // 1분봉 시그널: 바닥 반등·고점 경고(국내·비지수·옵트인·KIS 1분봉 · 분봉 캐시 공유)
+                if ((item.BottomAlert || item.TopAlert) && !item.IsIndex && item.Market == MarketKind.KR)
                 {
-                    try { await bottom.EvaluateAsync(item, ct); }
+                    try { await minuteSignal.EvaluateAsync(item, ct); }
                     catch (OperationCanceledException) { break; }
-                    catch { /* 반등 시그널 실패는 무시 */ }
+                    catch { /* 1분봉 시그널 실패는 무시 */ }
                 }
             }
 

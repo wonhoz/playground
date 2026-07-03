@@ -122,9 +122,9 @@ public sealed class AppConfig
 
     // ── 바닥 반등 시그널(관심 종목 · 국내 1분봉 · KIS 분봉 필요) ──
     /// <summary>셋업으로 인정할 RSI(14) 과매도 상한. 밴드 터치 구간 최저 RSI가 이 값 이하일 때만 시그널.</summary>
-    public double BottomRsiMax { get; set; } = 35;
+    public double BottomRsiMax { get; set; } = 30;
     /// <summary>거래량 급증 배수(1분봉 20봉 평균 대비). 터치 구간 최대 분봉 거래량 기준.</summary>
-    public double BottomVolumeRatio { get; set; } = 1.5;
+    public double BottomVolumeRatio { get; set; } = 2.0;
     /// <summary>볼린저 하단 터치를 찾는 최근 완성봉 수.</summary>
     public int BottomTouchLookback { get; set; } = 5;
     /// <summary>1차 시그널 후 MA5/MA20 골든크로스 확인(2차) 알림 사용.</summary>
@@ -133,6 +133,28 @@ public sealed class AppConfig
     public int BottomConfirmWindowMinutes { get; set; } = 20;
     /// <summary>같은 종목 1차 시그널 재알림 쿨다운(분).</summary>
     public int BottomCooldownMinutes { get; set; } = 15;
+    /// <summary>밴드워킹 필터: 최근 10봉 중 하단 터치 봉이 이 수를 초과하면 지속 하락으로 보고 스킵.</summary>
+    public int BottomWalkMaxTouches { get; set; } = 4;
+    /// <summary>트리거 봉 종가의 최소 %b(밴드 하단 0~상단 1). 이 이상 회복 마감해야 시그널(약반등 필터).</summary>
+    public double BottomMinPercentB { get; set; } = 0.15;
+
+    // ── 고점 경고 시그널(관심 종목 · 국내 1분봉 · 바닥의 거울상) ──
+    /// <summary>셋업으로 인정할 RSI(14) 과매수 하한. 상단 터치 구간 최고 RSI가 이 값 이상일 때만 시그널.</summary>
+    public double TopRsiMin { get; set; } = 70;
+    /// <summary>트리거 봉 종가의 최대 %b. 이 이하로 밴드 안 복귀 마감해야 시그널.</summary>
+    public double TopMaxPercentB { get; set; } = 0.8;
+    /// <summary>거래량 클라이맥스 배수(20봉 평균 대비). 긴 윗꼬리와 함께 소진 증거 중 하나.</summary>
+    public double TopVolumeRatio { get; set; } = 1.5;
+    /// <summary>볼린저 상단 터치를 찾는 최근 완성봉 수.</summary>
+    public int TopTouchLookback { get; set; } = 5;
+    /// <summary>상단 밴드워킹으로 인정할 최소 터치 봉 수(단발 터치 제외).</summary>
+    public int TopMinWalkTouches { get; set; } = 2;
+    /// <summary>1차 경고 후 MA5/MA20 데드크로스 확인(2차) 알림 사용.</summary>
+    public bool TopConfirmCross { get; set; } = true;
+    /// <summary>데드크로스 확인 대기 시간(분).</summary>
+    public int TopConfirmWindowMinutes { get; set; } = 20;
+    /// <summary>같은 종목 고점 경고 재알림 쿨다운(분).</summary>
+    public int TopCooldownMinutes { get; set; } = 15;
 
     /// <summary>켜면 한국 종목 상승/하락(추세) 알림을 프리(08:00)·정규(09:00) 개장 직후 N분간 음소거. 기본 꺼짐.</summary>
     public bool MuteKrOpenAlerts { get; set; } = false;

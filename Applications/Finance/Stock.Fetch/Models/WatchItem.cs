@@ -38,6 +38,9 @@ public sealed class WatchItem
     /// <summary>바닥 반등 시그널 알림 사용(국내 종목만 · KIS 1분봉 필요). 볼린저 하단 반등 + RSI·거래량 조건. 기본 꺼짐.</summary>
     public bool BottomAlert { get; set; } = false;
 
+    /// <summary>고점 경고 시그널 알림 사용(국내 종목만 · KIS 1분봉 필요). 볼린저 상단 밴드워킹 이탈 + RSI 과매수 전환. 기본 꺼짐.</summary>
+    public bool TopAlert { get; set; } = false;
+
     /// <summary>그리드 표시용: 전용 조건이 있으면 요약, 없으면 "전역".</summary>
     public string RulesLabel => Rules.Count > 0 ? TrendRule.Summary(Rules) : "전역";
 

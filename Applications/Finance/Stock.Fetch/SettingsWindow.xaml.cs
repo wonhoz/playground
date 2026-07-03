@@ -44,6 +44,10 @@ public partial class SettingsWindow : Window
         BottomVolBox.Text = config.BottomVolumeRatio.ToString("0.##");
         BottomCooldownBox.Text = config.BottomCooldownMinutes.ToString();
         BottomCrossCheck.IsChecked = config.BottomConfirmCross;
+        TopRsiBox.Text = config.TopRsiMin.ToString("0.#");
+        TopVolBox.Text = config.TopVolumeRatio.ToString("0.##");
+        TopCooldownBox.Text = config.TopCooldownMinutes.ToString();
+        TopCrossCheck.IsChecked = config.TopConfirmCross;
         CalibResult.Text = config.ReversalCalibration?.Summary ?? "미학습 — 지표 휴리스틱 확률 사용 중";
     }
 
@@ -148,6 +152,10 @@ public partial class SettingsWindow : Window
         if (double.TryParse(BottomVolBox.Text.Trim(), out var bvol)) _config.BottomVolumeRatio = Math.Max(0, bvol);
         if (int.TryParse(BottomCooldownBox.Text.Trim(), out var bcd)) _config.BottomCooldownMinutes = Math.Max(1, bcd);
         _config.BottomConfirmCross = BottomCrossCheck.IsChecked == true;
+        if (double.TryParse(TopRsiBox.Text.Trim(), out var trsi)) _config.TopRsiMin = Math.Clamp(trsi, 5, 95);
+        if (double.TryParse(TopVolBox.Text.Trim(), out var tvol)) _config.TopVolumeRatio = Math.Max(0, tvol);
+        if (int.TryParse(TopCooldownBox.Text.Trim(), out var tcd)) _config.TopCooldownMinutes = Math.Max(1, tcd);
+        _config.TopConfirmCross = TopCrossCheck.IsChecked == true;
 
         // 자격 변경 시 캐시 토큰 무효화
         _config.CachedToken = string.Empty;

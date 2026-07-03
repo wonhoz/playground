@@ -49,6 +49,8 @@ public sealed class AppConfig
     public List<CandleColumn> LastColumns { get; set; } = new();
     public bool LastIncludeHeader { get; set; } = true;
     public string LastExportDir { get; set; } = string.Empty;
+    /// <summary>분봉 시그널 백테스트에서 마지막으로 CSV를 선택한 폴더.</summary>
+    public string LastSignalDir { get; set; } = string.Empty;
 
     // ── 차트 설정(재오픈 시 복원) ──
     public BarInterval ChartInterval { get; set; } = BarInterval.Day;

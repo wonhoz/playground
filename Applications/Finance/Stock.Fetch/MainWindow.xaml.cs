@@ -640,50 +640,68 @@ public partial class MainWindow : Window
 
     // ────────────────────────────── 분봉 시그널 백테스트 ──────────────────────────────
     /// <summary>
-    /// 저장한 1분봉 CSV를 열어 바닥 반등·고점 경고 시그널(골든/데드크로스 확인 포함)이
-    /// 발생했을 시점을 라이브 엔진과 동일 조건으로 추출해 "원본명_시그널.csv"로 저장한다.
+    /// 저장한 1분봉 CSV(다중 선택 가능)를 열어 바닥 반등·고점 경고 시그널(골든/데드크로스 확인 포함)이
+    /// 발생했을 시점을 라이브 엔진과 동일 조건으로 추출해 파일별로 "원본명_시그널.csv"로 저장한다.
     /// </summary>
     private async void SignalCsv_Click(object sender, RoutedEventArgs e)
     {
         var open = new OpenFileDialog
         {
-            Title = "분봉 CSV 선택 (date,time,open,close,low,high,volume)",
+            Title = "분봉 CSV 선택 — 여러 파일 선택 가능 (date,time,open,close,low,high,volume)",
             Filter = "CSV (쉼표 구분)|*.csv|모든 파일|*.*",
-            InitialDirectory = Directory.Exists(_config.LastExportDir) ? _config.LastExportDir : null
+            Multiselect = true,
+            InitialDirectory = Directory.Exists(_config.LastSignalDir) ? _config.LastSignalDir
+                : Directory.Exists(_config.LastExportDir) ? _config.LastExportDir : null
         };
-        if (open.ShowDialog(this) != true) return;
+        if (open.ShowDialog(this) != true || open.FileNames.Length == 0) return;
+
+        // 마지막 선택 폴더 기억 — 다음에 같은 위치에서 열리도록.
+        _config.LastSignalDir = Path.GetDirectoryName(open.FileNames[0]) ?? "";
+        _config.Save();
 
         SignalCsvBtn.IsEnabled = false;
         try
         {
-            var bars = ParseMinuteCsv(open.FileName);
-            if (bars.Count < 26)
+            int okFiles = 0, failFiles = 0, totalSignals = 0;
+            var parts = new List<string>();
+            string lastOut = "";
+
+            foreach (var file in open.FileNames)
             {
-                ShowError($"분봉이 부족합니다({bars.Count}봉). 지표 계산에 최소 26봉이 필요합니다.");
-                return;
+                string stem = Path.GetFileNameWithoutExtension(file);
+                try
+                {
+                    var bars = ParseMinuteCsv(file);
+                    if (bars.Count < 26)
+                        throw new InvalidDataException($"분봉 부족({bars.Count}봉, 최소 26봉)");
+
+                    var signals = _minuteSignal.Backtest(bars, stem, "");
+
+                    // 결과 CSV: 원본과 같은 폴더에 "_시그널" 접미사. detail은 쉼표 포함 → 따옴표 이스케이프.
+                    string outPath = Path.Combine(Path.GetDirectoryName(file) ?? "", stem + "_시그널.csv");
+                    var sb = new System.Text.StringBuilder();
+                    sb.Append("date,time,signal,price,detail\n");
+                    foreach (var s in signals)
+                        sb.Append($"{s.Time:yyyy-MM-dd},{s.Time:HH:mm},{SignalLabel(s.Kind)},{s.Price.ToString("0.####", System.Globalization.CultureInfo.InvariantCulture)},\"{s.Detail.Replace("\"", "\"\"")}\"\n");
+                    await File.WriteAllTextAsync(outPath, sb.ToString(),
+                        new System.Text.UTF8Encoding(encoderShouldEmitUTF8Identifier: true));
+
+                    okFiles++;
+                    totalSignals += signals.Count;
+                    lastOut = outPath;
+                    parts.Add($"{stem} {signals.Count}건");
+                }
+                catch (Exception ex)
+                {
+                    failFiles++;
+                    parts.Add($"{stem} 실패({ex.Message})");
+                }
             }
 
-            string stem = Path.GetFileNameWithoutExtension(open.FileName);
-            var signals = _minuteSignal.Backtest(bars, stem, "");
-
-            // 결과 CSV: 원본과 같은 폴더에 "_시그널" 접미사로 저장. detail은 쉼표 포함 → 따옴표 이스케이프.
-            string outPath = Path.Combine(Path.GetDirectoryName(open.FileName) ?? "", stem + "_시그널.csv");
-            var sb = new System.Text.StringBuilder();
-            sb.Append("date,time,signal,price,detail\n");
-            foreach (var s in signals)
-                sb.Append($"{s.Time:yyyy-MM-dd},{s.Time:HH:mm},{SignalLabel(s.Kind)},{s.Price.ToString("0.####", System.Globalization.CultureInfo.InvariantCulture)},\"{s.Detail.Replace("\"", "\"\"")}\"\n");
-            await File.WriteAllTextAsync(outPath, sb.ToString(),
-                new System.Text.UTF8Encoding(encoderShouldEmitUTF8Identifier: true));
-
-            SummaryText.Text =
-                $"🧪 시그널 {signals.Count}건 — 바닥 반등 {Count(Models.MinuteSignalKind.Rebound)} · 골든크로스 {Count(Models.MinuteSignalKind.GoldenCross)} · " +
-                $"고점 경고 {Count(Models.MinuteSignalKind.TopWarn)} · 데드크로스 {Count(Models.MinuteSignalKind.DeadCross)} → {outPath}";
-
-            int Count(Models.MinuteSignalKind k) => signals.Count(s => s.Kind == k);
-        }
-        catch (Exception ex)
-        {
-            ShowError("시그널 추출 실패: " + ex.Message);
+            string detail = string.Join(" · ", parts.Take(4)) + (parts.Count > 4 ? $" · 외 {parts.Count - 4}개" : "");
+            SummaryText.Text = open.FileNames.Length == 1 && okFiles == 1
+                ? $"🧪 시그널 {totalSignals}건 → {lastOut}"
+                : $"🧪 {okFiles}/{open.FileNames.Length}개 파일 처리 · 시그널 총 {totalSignals}건{(failFiles > 0 ? $" · 실패 {failFiles}" : "")} — {detail}";
         }
         finally
         {

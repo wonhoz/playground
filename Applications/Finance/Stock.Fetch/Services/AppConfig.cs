@@ -120,6 +120,20 @@ public sealed class AppConfig
     /// <summary>반등 점수 → 과거 적중률 보정 곡선(백테스트 학습 결과). 널이면 raw 점수 사용.</summary>
     public ReversalCalibration? ReversalCalibration { get; set; }
 
+    // ── 바닥 반등 시그널(관심 종목 · 국내 1분봉 · KIS 분봉 필요) ──
+    /// <summary>셋업으로 인정할 RSI(14) 과매도 상한. 밴드 터치 구간 최저 RSI가 이 값 이하일 때만 시그널.</summary>
+    public double BottomRsiMax { get; set; } = 35;
+    /// <summary>거래량 급증 배수(1분봉 20봉 평균 대비). 터치 구간 최대 분봉 거래량 기준.</summary>
+    public double BottomVolumeRatio { get; set; } = 1.5;
+    /// <summary>볼린저 하단 터치를 찾는 최근 완성봉 수.</summary>
+    public int BottomTouchLookback { get; set; } = 5;
+    /// <summary>1차 시그널 후 MA5/MA20 골든크로스 확인(2차) 알림 사용.</summary>
+    public bool BottomConfirmCross { get; set; } = true;
+    /// <summary>골든크로스 확인 대기 시간(분).</summary>
+    public int BottomConfirmWindowMinutes { get; set; } = 20;
+    /// <summary>같은 종목 1차 시그널 재알림 쿨다운(분).</summary>
+    public int BottomCooldownMinutes { get; set; } = 15;
+
     /// <summary>켜면 한국 종목 상승/하락(추세) 알림을 프리(08:00)·정규(09:00) 개장 직후 N분간 음소거. 기본 꺼짐.</summary>
     public bool MuteKrOpenAlerts { get; set; } = false;
     /// <summary>개장 직후 음소거 구간(분). 기본 10.</summary>

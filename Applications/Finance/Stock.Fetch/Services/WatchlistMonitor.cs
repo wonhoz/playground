@@ -22,7 +22,7 @@ internal sealed class TrendState
 /// 미국장은 KST 야간이므로 장 시간 게이팅 없이 항상 폴링. 이벤트는 백그라운드 스레드에서 발생하므로
 /// UI 구독자는 Dispatcher 마샬링이 필요하다.
 /// </summary>
-public sealed class WatchlistMonitor(AppConfig config, PriceSourceRegistry registry, SlackNotifier slack, LadderAlertEngine ladder, ReversalEstimator reversal) : IDisposable
+public sealed class WatchlistMonitor(AppConfig config, PriceSourceRegistry registry, SlackNotifier slack, LadderAlertEngine ladder, ReversalEstimator reversal, BottomSignalEngine bottom) : IDisposable
 {
     private CancellationTokenSource? _cts;
     // symbol → (조건 키 → 추세 상태). 조건(기간/단위)마다 기준값을 따로 추적한다.
@@ -118,6 +118,14 @@ public sealed class WatchlistMonitor(AppConfig config, PriceSourceRegistry regis
                     try { await ladder.EvaluateAsync(item.Symbol, item.Name, q.Price, ct); }
                     catch (OperationCanceledException) { break; }
                     catch { /* 래더 알림 실패는 무시 */ }
+                }
+
+                // 바닥 반등 시그널(국내·비지수·옵트인·KIS 1분봉)
+                if (item.BottomAlert && !item.IsIndex && item.Market == MarketKind.KR)
+                {
+                    try { await bottom.EvaluateAsync(item, ct); }
+                    catch (OperationCanceledException) { break; }
+                    catch { /* 반등 시그널 실패는 무시 */ }
                 }
             }
 

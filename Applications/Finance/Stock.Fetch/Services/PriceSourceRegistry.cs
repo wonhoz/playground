@@ -53,6 +53,10 @@ public sealed class PriceSourceRegistry : IDisposable
     public Task<List<Candle>> KisMinutesAsync(string code, CancellationToken ct = default)
         => _kis.FetchTodayMinutesAsync(code, ct);
 
+    /// <summary>KIS 최근 1분봉(모니터링용 경량 조회) — 반등 시그널 엔진에서 증분 병합.</summary>
+    public Task<List<Candle>> KisRecentMinutesAsync(string code, int minBars, CancellationToken ct = default)
+        => _kis.FetchRecentMinutesAsync(code, minBars, ct);
+
     /// <summary>
     /// 모니터링용 현재가 — KIS 키가 있으면 KIS 실시간(inquire-price), 없으면 네이버 최근 종가로 폴백.
     /// 둘 다 실패하면 null.

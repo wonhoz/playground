@@ -40,6 +40,10 @@ public partial class SettingsWindow : Window
         ReversalCheck.IsChecked = config.WatchReversalEstimate;
         MuteKrOpenCheck.IsChecked = config.MuteKrOpenAlerts;
         KrOpenMuteBox.Text = config.KrOpenMuteMinutes.ToString();
+        BottomRsiBox.Text = config.BottomRsiMax.ToString("0.#");
+        BottomVolBox.Text = config.BottomVolumeRatio.ToString("0.##");
+        BottomCooldownBox.Text = config.BottomCooldownMinutes.ToString();
+        BottomCrossCheck.IsChecked = config.BottomConfirmCross;
         CalibResult.Text = config.ReversalCalibration?.Summary ?? "미학습 — 지표 휴리스틱 확률 사용 중";
     }
 
@@ -140,6 +144,10 @@ public partial class SettingsWindow : Window
         _config.WatchReversalEstimate = ReversalCheck.IsChecked == true;
         _config.MuteKrOpenAlerts = MuteKrOpenCheck.IsChecked == true;
         if (int.TryParse(KrOpenMuteBox.Text.Trim(), out var mute)) _config.KrOpenMuteMinutes = Math.Max(1, mute);
+        if (double.TryParse(BottomRsiBox.Text.Trim(), out var brsi)) _config.BottomRsiMax = Math.Clamp(brsi, 5, 95);
+        if (double.TryParse(BottomVolBox.Text.Trim(), out var bvol)) _config.BottomVolumeRatio = Math.Max(0, bvol);
+        if (int.TryParse(BottomCooldownBox.Text.Trim(), out var bcd)) _config.BottomCooldownMinutes = Math.Max(1, bcd);
+        _config.BottomConfirmCross = BottomCrossCheck.IsChecked == true;
 
         // 자격 변경 시 캐시 토큰 무효화
         _config.CachedToken = string.Empty;

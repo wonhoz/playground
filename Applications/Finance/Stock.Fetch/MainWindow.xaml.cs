@@ -16,6 +16,7 @@ public partial class MainWindow : Window
     // 트레이 상주 + 보유 종목 모니터링
     private readonly SlackNotifier _slack;
     private readonly LadderAlertEngine _ladder;
+    private readonly BottomSignalEngine _bottom;
     private readonly ReversalEstimator _reversal;
     private readonly PortfolioMonitor _monitor;
     private readonly WatchlistMonitor _watch;
@@ -73,8 +74,10 @@ public partial class MainWindow : Window
             string.IsNullOrEmpty(name) ? code : $"{name} ({code})", "보유 종목", reason, fails);
         _monitor.FetchRecovered += (code, name) => OnFetchRecovered(
             string.IsNullOrEmpty(name) ? code : $"{name} ({code})", "보유 종목");
+        _bottom = new BottomSignalEngine(_config, _registry, _slack);
+        _bottom.Raised += OnBottomSignal;
         _reversal = new ReversalEstimator(_config, _registry);
-        _watch = new WatchlistMonitor(_config, _registry, _slack, _ladder, _reversal);
+        _watch = new WatchlistMonitor(_config, _registry, _slack, _ladder, _reversal, _bottom);
         _watch.WatchAlertRaised += OnWatchAlertRaised;
         _watch.StartupSummary += OnWatchStartupSummary;
         _watch.DigestReady += OnWatchDigest;
@@ -134,6 +137,12 @@ public partial class MainWindow : Window
         };
         _tray.ShowBalloon($"{head} · {a.Display}", a.Detail,
             warning: a.Kind == Models.LadderAlertKind.GapDown);
+    });
+
+    private void OnBottomSignal(Models.BottomSignal s) => Dispatcher.Invoke(() =>
+    {
+        string head = s.Kind == Models.BottomSignalKind.Rebound ? "📈 바닥 반등 시그널" : "✅ 반등 확인 (골든크로스)";
+        _tray.ShowBalloon($"{head} · {s.Display}", s.Detail);
     });
 
     private void OnFetchFailed(string display, string context, string reason, int fails) => Dispatcher.Invoke(() =>

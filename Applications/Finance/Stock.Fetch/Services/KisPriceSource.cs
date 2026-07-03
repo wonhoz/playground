@@ -114,6 +114,37 @@ public sealed class KisPriceSource(AppConfig config, Action saveConfig, HttpClie
         return map.Values.ToList();
     }
 
+    /// <summary>
+    /// 모니터링용 경량 분봉 조회: 최근 완성 분봉을 minBars개 이상 확보될 때까지만 페이징(30건 단위).
+    /// 당일 전체를 훑는 <see cref="FetchTodayMinutesAsync"/>와 달리 폴링 주기에 맞춰 호출해도 유량 부담이 작다.
+    /// </summary>
+    public async Task<List<Candle>> FetchRecentMinutesAsync(string code, int minBars, CancellationToken ct = default)
+    {
+        if (!config.HasKisCredentials)
+            throw new PriceSourceException("KIS APP KEY / APP SECRET이 설정되지 않았습니다. 설정에서 입력하세요.");
+
+        var map = new SortedDictionary<DateTime, Candle>();
+        string inputHour = "";  // 빈값=최근부터
+        DateTime? prevOldest = null;
+
+        for (int guard = 0; guard < 8 && map.Count < minBars; guard++)
+        {
+            List<Candle> page;
+            try { page = await FetchMinutePageAsync(code, inputHour, ct); }
+            catch (PriceSourceException) when (map.Count > 0) { break; }   // 유량 초과 등 → 수집분 사용
+            if (page.Count == 0) break;
+            foreach (var c in page) map[c.Date] = c;
+
+            var oldest = page.Min(c => c.Date);
+            if (prevOldest != null && oldest >= prevOldest.Value) break;   // 진전 없음
+            prevOldest = oldest;
+            if (oldest.Hour < 9 || (oldest.Hour == 9 && oldest.Minute == 0)) break;  // 장 시작 도달
+            inputHour = oldest.AddMinutes(-1).ToString("HHmmss");
+            await Task.Delay(160, ct);  // KIS 초당 호출 제한(유량) 완화
+        }
+        return map.Values.ToList();
+    }
+
     /// <summary>현재가(실시간) 조회 — inquire-price(FHKST01010100). 모니터링용.</summary>
     public async Task<Quote> FetchQuoteAsync(string code, CancellationToken ct = default)
     {

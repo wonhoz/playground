@@ -57,6 +57,10 @@ public sealed class PriceSourceRegistry : IDisposable
     public Task<List<Candle>> KisRecentMinutesAsync(string code, int minBars, CancellationToken ct = default)
         => _kis.FetchRecentMinutesAsync(code, minBars, ct);
 
+    /// <summary>KIS 특정 일자 1분봉 전체(과거 일자 지원) — 분봉 CSV 내보내기용.</summary>
+    public Task<List<Candle>> KisDayMinutesAsync(string code, DateTime date, CancellationToken ct = default)
+        => _kis.FetchDayMinutesAsync(code, date, ct);
+
     /// <summary>
     /// 모니터링용 현재가 — KIS 키가 있으면 KIS 실시간(inquire-price), 없으면 네이버 최근 종가로 폴백.
     /// 둘 다 실패하면 null.

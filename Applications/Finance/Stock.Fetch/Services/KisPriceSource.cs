@@ -145,6 +145,110 @@ public sealed class KisPriceSource(AppConfig config, Action saveConfig, HttpClie
         return map.Values.ToList();
     }
 
+    /// <summary>
+    /// 특정 일자의 1분봉 전체 조회 — inquire-time-dailychartprice(FHKST03010230).
+    /// 15:30부터 역방향 페이징(페이지당 ~120건)하며, 응답이 요청일을 넘어 전일로 이어지므로
+    /// 요청일 데이터만 수집하고 날짜 경계에서 중단한다. 과거 일자(휴장일 제외)를 지원한다.
+    /// </summary>
+    public async Task<List<Candle>> FetchDayMinutesAsync(string code, DateTime date, CancellationToken ct = default)
+    {
+        if (!config.HasKisCredentials)
+            throw new PriceSourceException("KIS APP KEY / APP SECRET이 설정되지 않았습니다. 설정에서 입력하세요.");
+
+        var map = new SortedDictionary<DateTime, Candle>();
+        string inputHour = "153000";   // 정규장 마감부터 역방향
+        DateTime? prevOldest = null;
+
+        for (int guard = 0; guard < 8; guard++)   // 120봉 × 8페이지 ≈ 960분 → 하루치 충분
+        {
+            List<Candle> page;
+            try
+            {
+                page = await FetchDayMinutePageAsync(code, date, inputHour, ct);
+            }
+            catch (PriceSourceException) when (map.Count > 0)
+            {
+                break;   // 유량 초과 등 → 수집분 사용
+            }
+            if (page.Count == 0) break;
+
+            bool crossedDay = false;
+            foreach (var c in page)
+            {
+                if (c.Date.Date != date.Date) { crossedDay = true; continue; }   // 전일로 넘어간 봉은 버림
+                map[c.Date] = c;
+            }
+            if (crossedDay) break;   // 요청일 구간 완료
+
+            var dayBars = page.Where(c => c.Date.Date == date.Date).ToList();
+            if (dayBars.Count == 0) break;
+            var oldest = dayBars.Min(c => c.Date);
+            if (prevOldest != null && oldest >= prevOldest.Value) break;   // 진전 없음
+            prevOldest = oldest;
+            if (oldest.Hour < 9 || (oldest.Hour == 9 && oldest.Minute == 0)) break;   // 장 시작 도달
+            inputHour = oldest.AddMinutes(-1).ToString("HHmmss");
+            await Task.Delay(160, ct);   // KIS 초당 호출 제한(유량) 완화
+        }
+
+        if (map.Count == 0)
+            throw new PriceSourceException(
+                $"KIS에서 {date:yyyy-MM-dd} 분봉 데이터가 없습니다(휴장일이거나 KIS 보관 기간을 벗어났을 수 있습니다).");
+        return map.Values.ToList();
+    }
+
+    /// <summary>일별 분봉 1페이지(최대 ~120건, date 일자의 inputHour 시각 이전) 조회.</summary>
+    private async Task<List<Candle>> FetchDayMinutePageAsync(string code, DateTime date, string inputHour, CancellationToken ct)
+    {
+        string query =
+            $"FID_COND_MRKT_DIV_CODE=J&FID_INPUT_ISCD={code}" +
+            $"&FID_INPUT_DATE_1={date:yyyyMMdd}&FID_INPUT_HOUR_1={inputHour}" +
+            "&FID_PW_DATA_INCU_YN=Y&FID_FAKE_TICK_INCU_YN=";
+
+        string token = await EnsureTokenAsync(ct);
+        using var req = new HttpRequestMessage(HttpMethod.Get,
+            $"{BaseUrl}/uapi/domestic-stock/v1/quotations/inquire-time-dailychartprice?{query}");
+        req.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
+        req.Headers.Add("appkey", config.AppKey);
+        req.Headers.Add("appsecret", config.AppSecret);
+        req.Headers.Add("tr_id", "FHKST03010230");
+        req.Headers.Add("custtype", "P");
+
+        using var resp = await http.SendAsync(req, ct);
+        string text = await resp.Content.ReadAsStringAsync(ct);
+        using var doc = JsonDocument.Parse(text);
+        var root = doc.RootElement;
+
+        if (root.TryGetProperty("rt_cd", out var rt) && rt.GetString() != "0")
+        {
+            string msg = root.TryGetProperty("msg1", out var m) ? m.GetString() ?? text : text;
+            throw new PriceSourceException($"KIS 일별분봉 응답 오류: {msg.Trim()}");
+        }
+        return ParseMinuteBars(root);
+    }
+
+    /// <summary>분봉 응답(output2)의 공통 파싱 — 당일 분봉(FHKST03010200)·일별 분봉(FHKST03010230) 공용.</summary>
+    private static List<Candle> ParseMinuteBars(JsonElement root)
+    {
+        var list = new List<Candle>();
+        if (root.TryGetProperty("output2", out var arr) && arr.ValueKind == JsonValueKind.Array)
+        {
+            foreach (var b in arr.EnumerateArray())
+            {
+                string d = b.TryGetProperty("stck_bsop_date", out var de) ? de.GetString() ?? "" : "";
+                string h = b.TryGetProperty("stck_cntg_hour", out var he) ? he.GetString() ?? "" : "";
+                if (d.Length != 8 || h.Length != 6) continue;
+                if (!DateTime.TryParseExact(d + h, "yyyyMMddHHmmss", null,
+                        System.Globalization.DateTimeStyles.None, out var dt)) continue;
+                decimal close = ParseDecimal(b, "stck_prpr");
+                if (close <= 0) continue;
+                list.Add(new Candle(dt,
+                    ParseDecimal(b, "stck_oprc"), ParseDecimal(b, "stck_hgpr"),
+                    ParseDecimal(b, "stck_lwpr"), close, ParseLong(b, "cntg_vol")));
+            }
+        }
+        return list;
+    }
+
     /// <summary>현재가(실시간) 조회 — inquire-price(FHKST01010100). 모니터링용.</summary>
     public async Task<Quote> FetchQuoteAsync(string code, CancellationToken ct = default)
     {
@@ -273,25 +377,7 @@ public sealed class KisPriceSource(AppConfig config, Action saveConfig, HttpClie
             string msg = root.TryGetProperty("msg1", out var m) ? m.GetString() ?? text : text;
             throw new PriceSourceException($"KIS 분봉 응답 오류: {msg.Trim()}");
         }
-
-        var list = new List<Candle>();
-        if (root.TryGetProperty("output2", out var arr) && arr.ValueKind == JsonValueKind.Array)
-        {
-            foreach (var b in arr.EnumerateArray())
-            {
-                string d = b.TryGetProperty("stck_bsop_date", out var de) ? de.GetString() ?? "" : "";
-                string h = b.TryGetProperty("stck_cntg_hour", out var he) ? he.GetString() ?? "" : "";
-                if (d.Length != 8 || h.Length != 6) continue;
-                if (!DateTime.TryParseExact(d + h, "yyyyMMddHHmmss", null,
-                        System.Globalization.DateTimeStyles.None, out var dt)) continue;
-                decimal close = ParseDecimal(b, "stck_prpr");
-                if (close <= 0) continue;
-                list.Add(new Candle(dt,
-                    ParseDecimal(b, "stck_oprc"), ParseDecimal(b, "stck_hgpr"),
-                    ParseDecimal(b, "stck_lwpr"), close, ParseLong(b, "cntg_vol")));
-            }
-        }
-        return list;
+        return ParseMinuteBars(root);
     }
 
     /// <summary>지정 [start, end] 구간을 봉주기(period)로 1페이지(최대 100봉) 조회.</summary>

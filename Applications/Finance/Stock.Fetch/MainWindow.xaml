@@ -95,6 +95,9 @@
                             Width="160" Height="46" FontSize="15" FontWeight="SemiBold" Click="Fetch_Click"/>
                     <Button x:Name="ChartBtn" Content="📈 차트" Width="160" Margin="0,8,0,0"
                             Click="Chart_Click"/>
+                    <Button x:Name="MinuteCsvBtn" Content="🕐 분봉 CSV" Width="160" Margin="0,8,0,0"
+                            Click="MinuteCsv_Click"
+                            ToolTip="특정 날짜의 1분봉(09:00~15:30)을 CSV로 저장합니다 (KIS 키 필요 · 과거 영업일 지원)"/>
                     <Button x:Name="LadderBtn" Content="📊 매수/익절 계산" Width="160" Margin="0,8,0,0"
                             IsEnabled="False" Click="Ladder_Click"/>
                     <Button x:Name="PortfolioBtn" Content="💼 내 자산" Width="160" Margin="0,8,0,0"

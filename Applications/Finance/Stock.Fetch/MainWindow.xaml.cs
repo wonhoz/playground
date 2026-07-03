@@ -581,6 +581,63 @@ public partial class MainWindow : Window
         { Owner = this }.Show();
     }
 
+    // ────────────────────────────── 분봉 CSV ──────────────────────────────
+    /// <summary>특정 영업일의 1분봉을 KIS 일별분봉으로 조회해 CSV로 저장한다.</summary>
+    private async void MinuteCsv_Click(object sender, RoutedEventArgs e)
+    {
+        if (!TryGetKrCode(out var code)) return;
+        if (!_config.HasKisCredentials)
+        {
+            ShowError("분봉 조회에는 KIS API 키가 필요합니다. [⚙ KIS 키 설정]에서 입력하세요.");
+            return;
+        }
+
+        var pick = new MinuteCsvWindow { Owner = this };
+        if (pick.ShowDialog() != true) return;
+        var date = pick.SelectedDate;
+
+        string name = NameText.Text is "조회 중…" or "(이름 못 찾음)" or "(검색 결과 없음)" ? "" : NameText.Text.Trim();
+        var dlg = new SaveFileDialog
+        {
+            Filter = "CSV (쉼표 구분)|*.csv|모든 파일|*.*",
+            FileName = $"{(string.IsNullOrEmpty(name) ? code : $"{name}({code})")}_{date:yyyyMMdd}_1분봉.csv",
+            InitialDirectory = Directory.Exists(_config.LastExportDir) ? _config.LastExportDir : null
+        };
+        if (dlg.ShowDialog(this) != true) return;
+
+        MinuteCsvBtn.IsEnabled = false;
+        SummaryText.Text = $"🕐 {date:yyyy-MM-dd} 1분봉 조회 중… ({code})";
+        try
+        {
+            var bars = await _registry.KisDayMinutesAsync(code, date);
+
+            // 기존 내보내기 컬럼 순서(날짜-시가-종가-저가-고가-거래량)에 시각(time)만 추가.
+            var sb = new System.Text.StringBuilder();
+            sb.Append("date,time,open,close,low,high,volume\n");
+            foreach (var b in bars)
+                sb.Append($"{b.Date:yyyy-MM-dd},{b.Date:HH:mm},{Num(b.Open)},{Num(b.Close)},{Num(b.Low)},{Num(b.High)},{b.Volume}\n");
+            await File.WriteAllTextAsync(dlg.FileName, sb.ToString(),
+                new System.Text.UTF8Encoding(encoderShouldEmitUTF8Identifier: true));   // 엑셀 한글 호환 BOM
+
+            _config.LastExportDir = Path.GetDirectoryName(dlg.FileName) ?? "";
+            _config.Save();
+            SummaryText.Text = $"🕐 분봉 CSV 저장 완료: {date:yyyy-MM-dd} {bars.Count}봉 → {dlg.FileName}";
+        }
+        catch (Exception ex)
+        {
+            ShowError("분봉 조회/저장 실패: " + ex.Message);
+        }
+        finally
+        {
+            MinuteCsvBtn.IsEnabled = true;
+        }
+
+        // 불필요한 소수점 0 제거(예: 53000, 53.34) — ETF/ETN 정수가 아닌 가격 대비.
+        static string Num(decimal d) => d == Math.Truncate(d)
+            ? ((long)d).ToString(System.Globalization.CultureInfo.InvariantCulture)
+            : d.ToString("0.####", System.Globalization.CultureInfo.InvariantCulture);
+    }
+
     // ────────────────────────────── 매수/익절 래더 계산 ──────────────────────────────
     private void Ladder_Click(object sender, RoutedEventArgs e)
     {

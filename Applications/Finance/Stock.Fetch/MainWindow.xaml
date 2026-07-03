@@ -88,24 +88,30 @@
                                Foreground="{StaticResource FgMuted}"/>
                 </StackPanel>
 
-                <!-- 우측 액션 -->
+                <!-- 우측 액션 (조회 강조 + 2컬럼 그리드) -->
                 <StackPanel Grid.Row="0" Grid.Column="2" Grid.RowSpan="5" VerticalAlignment="Center"
                             HorizontalAlignment="Right">
                     <Button x:Name="FetchBtn" Content="조회" Style="{StaticResource AccentButton}"
-                            Width="160" Height="46" FontSize="15" FontWeight="SemiBold" Click="Fetch_Click"/>
-                    <Button x:Name="ChartBtn" Content="📈 차트" Width="160" Margin="0,8,0,0"
-                            Click="Chart_Click"/>
-                    <Button x:Name="MinuteCsvBtn" Content="🕐 분봉 CSV" Width="160" Margin="0,8,0,0"
-                            Click="MinuteCsv_Click"
-                            ToolTip="특정 날짜의 1분봉(09:00~15:30)을 CSV로 저장합니다 (KIS 키 필요 · 과거 영업일 지원)"/>
-                    <Button x:Name="LadderBtn" Content="📊 매수/익절 계산" Width="160" Margin="0,8,0,0"
-                            IsEnabled="False" Click="Ladder_Click"/>
-                    <Button x:Name="PortfolioBtn" Content="💼 내 자산" Width="160" Margin="0,8,0,0"
-                            Click="Portfolio_Click"/>
-                    <Button x:Name="WatchlistBtn" Content="⭐ 관심 종목" Width="160" Margin="0,8,0,0"
-                            Click="Watchlist_Click"/>
-                    <Button x:Name="SettingsBtn" Content="⚙ KIS 키 설정" Width="160" Margin="0,8,0,0"
-                            Click="Settings_Click"/>
+                            Width="256" Height="46" FontSize="15" FontWeight="SemiBold" Click="Fetch_Click"/>
+                    <UniformGrid Columns="2" Width="256" Margin="0,4,0,0">
+                        <Button x:Name="ChartBtn" Content="📈 차트" Margin="0,4,4,0"
+                                Click="Chart_Click"/>
+                        <Button x:Name="LadderBtn" Content="📊 매수/익절" Margin="4,4,0,0"
+                                IsEnabled="False" Click="Ladder_Click"
+                                ToolTip="매수 4호가·익절 4방식 래더 계산 (조회 후 사용 가능)"/>
+                        <Button x:Name="MinuteCsvBtn" Content="🕐 분봉 CSV" Margin="0,4,4,0"
+                                Click="MinuteCsv_Click"
+                                ToolTip="특정 날짜의 1분봉(09:00~15:30)을 CSV로 저장합니다 (KIS 키 필요 · 과거 영업일 지원)"/>
+                        <Button x:Name="SignalCsvBtn" Content="🧪 분봉 시그널" Margin="4,4,0,0"
+                                Click="SignalCsv_Click"
+                                ToolTip="저장한 1분봉 CSV에서 바닥 반등·고점 경고 시그널 시점을 라이브와 동일 조건으로 추출해 '_시그널.csv'로 저장합니다"/>
+                        <Button x:Name="PortfolioBtn" Content="💼 내 자산" Margin="0,4,4,0"
+                                Click="Portfolio_Click"/>
+                        <Button x:Name="WatchlistBtn" Content="⭐ 관심 종목" Margin="4,4,0,0"
+                                Click="Watchlist_Click"/>
+                        <Button x:Name="SettingsBtn" Content="⚙ KIS 키 설정" Margin="0,4,4,0"
+                                Click="Settings_Click"/>
+                    </UniformGrid>
                 </StackPanel>
             </Grid>
         </Border>

@@ -121,10 +121,16 @@ public sealed class AppConfig
     public ReversalCalibration? ReversalCalibration { get; set; }
 
     // ── 바닥 반등 시그널(관심 종목 · 국내 1분봉 · KIS 분봉 필요) ──
-    /// <summary>셋업으로 인정할 RSI(14) 과매도 상한. 밴드 터치 구간 최저 RSI가 이 값 이하일 때만 시그널.</summary>
-    public double BottomRsiMax { get; set; } = 30;
-    /// <summary>거래량 급증 배수(1분봉 20봉 평균 대비). 터치 구간 최대 분봉 거래량 기준.</summary>
-    public double BottomVolumeRatio { get; set; } = 2.0;
+    /// <summary>
+    /// 셋업으로 인정할 RSI(14) 과매도 상한. 밴드 터치 구간 최저 RSI가 이 값 이하일 때만 시그널.
+    /// 실측(0193T0 07.02~03 백테스트): 진짜 V바닥 저점 RSI 21~34 → 30이면 일부 누락, 35 권장.
+    /// </summary>
+    public double BottomRsiMax { get; set; } = 35;
+    /// <summary>
+    /// 거래량 급증 배수(1분봉 20봉 평균 대비). 터치 구간 최대 분봉 거래량 기준.
+    /// 실측: 급락 시 20봉 평균 자체가 부풀어 진짜 V바닥도 1.6~2.1× → 2.0이면 절반 누락, 1.5 권장.
+    /// </summary>
+    public double BottomVolumeRatio { get; set; } = 1.5;
     /// <summary>볼린저 하단 터치를 찾는 최근 완성봉 수.</summary>
     public int BottomTouchLookback { get; set; } = 5;
     /// <summary>1차 시그널 후 MA5/MA20 골든크로스 확인(2차) 알림 사용.</summary>
@@ -133,8 +139,11 @@ public sealed class AppConfig
     public int BottomConfirmWindowMinutes { get; set; } = 20;
     /// <summary>같은 종목 1차 시그널 재알림 쿨다운(분).</summary>
     public int BottomCooldownMinutes { get; set; } = 15;
-    /// <summary>밴드워킹 필터: 최근 10봉 중 하단 터치 봉이 이 수를 초과하면 지속 하락으로 보고 스킵.</summary>
-    public int BottomWalkMaxTouches { get; set; } = 4;
+    /// <summary>
+    /// 밴드워킹 필터: 최근 10봉 중 하단 터치 봉이 이 수를 초과하면 지속 하락으로 보고 스킵.
+    /// 실측: 깊은 급락 V바닥은 터치 5~7봉이라 4는 진짜 반등까지 차단 → 7 권장(8봉+만 스킵).
+    /// </summary>
+    public int BottomWalkMaxTouches { get; set; } = 7;
     /// <summary>트리거 봉 종가의 최소 %b(밴드 하단 0~상단 1). 이 이상 회복 마감해야 시그널(약반등 필터).</summary>
     public double BottomMinPercentB { get; set; } = 0.15;
 

@@ -638,6 +638,100 @@ public partial class MainWindow : Window
             : d.ToString("0.####", System.Globalization.CultureInfo.InvariantCulture);
     }
 
+    // ────────────────────────────── 분봉 시그널 백테스트 ──────────────────────────────
+    /// <summary>
+    /// 저장한 1분봉 CSV를 열어 바닥 반등·고점 경고 시그널(골든/데드크로스 확인 포함)이
+    /// 발생했을 시점을 라이브 엔진과 동일 조건으로 추출해 "원본명_시그널.csv"로 저장한다.
+    /// </summary>
+    private async void SignalCsv_Click(object sender, RoutedEventArgs e)
+    {
+        var open = new OpenFileDialog
+        {
+            Title = "분봉 CSV 선택 (date,time,open,close,low,high,volume)",
+            Filter = "CSV (쉼표 구분)|*.csv|모든 파일|*.*",
+            InitialDirectory = Directory.Exists(_config.LastExportDir) ? _config.LastExportDir : null
+        };
+        if (open.ShowDialog(this) != true) return;
+
+        SignalCsvBtn.IsEnabled = false;
+        try
+        {
+            var bars = ParseMinuteCsv(open.FileName);
+            if (bars.Count < 26)
+            {
+                ShowError($"분봉이 부족합니다({bars.Count}봉). 지표 계산에 최소 26봉이 필요합니다.");
+                return;
+            }
+
+            string stem = Path.GetFileNameWithoutExtension(open.FileName);
+            var signals = _minuteSignal.Backtest(bars, stem, "");
+
+            // 결과 CSV: 원본과 같은 폴더에 "_시그널" 접미사로 저장. detail은 쉼표 포함 → 따옴표 이스케이프.
+            string outPath = Path.Combine(Path.GetDirectoryName(open.FileName) ?? "", stem + "_시그널.csv");
+            var sb = new System.Text.StringBuilder();
+            sb.Append("date,time,signal,price,detail\n");
+            foreach (var s in signals)
+                sb.Append($"{s.Time:yyyy-MM-dd},{s.Time:HH:mm},{SignalLabel(s.Kind)},{s.Price.ToString("0.####", System.Globalization.CultureInfo.InvariantCulture)},\"{s.Detail.Replace("\"", "\"\"")}\"\n");
+            await File.WriteAllTextAsync(outPath, sb.ToString(),
+                new System.Text.UTF8Encoding(encoderShouldEmitUTF8Identifier: true));
+
+            SummaryText.Text =
+                $"🧪 시그널 {signals.Count}건 — 바닥 반등 {Count(Models.MinuteSignalKind.Rebound)} · 골든크로스 {Count(Models.MinuteSignalKind.GoldenCross)} · " +
+                $"고점 경고 {Count(Models.MinuteSignalKind.TopWarn)} · 데드크로스 {Count(Models.MinuteSignalKind.DeadCross)} → {outPath}";
+
+            int Count(Models.MinuteSignalKind k) => signals.Count(s => s.Kind == k);
+        }
+        catch (Exception ex)
+        {
+            ShowError("시그널 추출 실패: " + ex.Message);
+        }
+        finally
+        {
+            SignalCsvBtn.IsEnabled = true;
+        }
+    }
+
+    private static string SignalLabel(Models.MinuteSignalKind kind) => kind switch
+    {
+        Models.MinuteSignalKind.Rebound => "바닥 반등",
+        Models.MinuteSignalKind.GoldenCross => "골든크로스(반등 확인)",
+        Models.MinuteSignalKind.TopWarn => "고점 경고",
+        _ => "데드크로스(하락 확인)",
+    };
+
+    /// <summary>분봉 CSV(헤더 date,time,open,close,low,high,volume · 순서 무관) → Candle 목록. 형식 오류 시 예외.</summary>
+    private static List<Candle> ParseMinuteCsv(string path)
+    {
+        var lines = File.ReadAllLines(path);
+        if (lines.Length < 2)
+            throw new InvalidDataException("CSV에 데이터 행이 없습니다.");
+
+        var header = lines[0].TrimStart('﻿').Split(',').Select(h => h.Trim().ToLowerInvariant()).ToList();
+        int Idx(string key) => header.IndexOf(key) is var i && i >= 0
+            ? i
+            : throw new InvalidDataException($"분봉 CSV 형식이 아닙니다 — '{key}' 컬럼이 없습니다(필수 헤더: date,time,open,close,low,high,volume).");
+        int di = Idx("date"), ti = Idx("time"), oi = Idx("open"), ci = Idx("close"), li = Idx("low"), hi = Idx("high"), vi = Idx("volume");
+
+        var inv = System.Globalization.CultureInfo.InvariantCulture;
+        var bars = new List<Candle>();
+        foreach (var line in lines.Skip(1))
+        {
+            if (string.IsNullOrWhiteSpace(line)) continue;
+            var f = line.Split(',');
+            if (f.Length <= Math.Max(vi, Math.Max(hi, Math.Max(li, Math.Max(ci, Math.Max(oi, ti)))))) continue;
+            if (!DateTime.TryParse($"{f[di].Trim()} {f[ti].Trim()}", inv, System.Globalization.DateTimeStyles.None, out var dt)) continue;
+            if (!decimal.TryParse(f[oi], System.Globalization.NumberStyles.Number, inv, out var o) ||
+                !decimal.TryParse(f[ci], System.Globalization.NumberStyles.Number, inv, out var c) ||
+                !decimal.TryParse(f[li], System.Globalization.NumberStyles.Number, inv, out var lo) ||
+                !decimal.TryParse(f[hi], System.Globalization.NumberStyles.Number, inv, out var h)) continue;
+            long.TryParse(f[vi], System.Globalization.NumberStyles.Number, inv, out var v);
+            bars.Add(new Candle(dt, o, h, lo, c, v));
+        }
+        if (bars.Count == 0)
+            throw new InvalidDataException("파싱된 분봉이 없습니다. [🕐 분봉 CSV]로 저장한 파일인지 확인하세요.");
+        return bars;
+    }
+
     // ────────────────────────────── 매수/익절 래더 계산 ──────────────────────────────
     private void Ladder_Click(object sender, RoutedEventArgs e)
     {

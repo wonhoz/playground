@@ -85,7 +85,33 @@ public sealed class MinuteSignalEngine(AppConfig config, PriceSourceRegistry reg
         int last = bars.Count - 1;
         if (last < 25) return;   // BB20 + RSI14 최소 표본
 
-        // 지표 일괄 계산.
+        // 새로 완성된 봉들만 순서대로 판정(폴링 간격 동안 여러 봉이 쌓였어도 놓치지 않음).
+        int start = 0;
+        while (start <= last && bars[start].Date <= st.LastEvalBar) start++;
+        ScanBars(item, st, bars, start, Fire, item.BottomAlert, item.TopAlert);
+        st.LastEvalBar = bars[last].Date;
+    }
+
+    /// <summary>
+    /// 과거 1분봉 목록을 라이브와 <b>동일한 조건</b>(쿨다운·확인 창·필터 포함)으로 스캔해
+    /// 알림이 발생했을 시점 목록을 반환한다(알림 전송·상태 오염 없음). 분봉 CSV 백테스트용.
+    /// </summary>
+    public List<MinuteSignal> Backtest(IReadOnlyList<Candle> minuteBars, string code, string name)
+    {
+        var bars = minuteBars.OrderBy(b => b.Date).ToList();
+        var result = new List<MinuteSignal>();
+        if (bars.Count < 26) return result;
+
+        var item = new WatchItem { Symbol = code, Name = name };
+        var st = new State();   // 라이브 상태와 분리된 임시 상태
+        ScanBars(item, st, bars, 0, result.Add, bottom: true, top: true);
+        return result;
+    }
+
+    /// <summary>지표 일괄 계산 후 fromIdx부터 완성봉을 순서대로 판정 — 라이브(Fire)·백테스트(수집) 공용 코어.</summary>
+    private void ScanBars(WatchItem item, State st, List<Candle> bars, int fromIdx,
+        Action<MinuteSignal> emit, bool bottom, bool top)
+    {
         var closes = bars.Select(b => (double)b.Close).ToList();
         var (upper, _, lower) = IndicatorMath.Bollinger(closes);
         var rsi = IndicatorMath.Rsi(closes);
@@ -93,22 +119,19 @@ public sealed class MinuteSignalEngine(AppConfig config, PriceSourceRegistry reg
         var ma20 = IndicatorMath.Sma(closes, 20);
         var volMa = IndicatorMath.Sma(bars.Select(b => (double)b.Volume).ToList(), 20);
 
-        // 새로 완성된 봉들만 순서대로 판정(폴링 간격 동안 여러 봉이 쌓였어도 놓치지 않음).
-        int start = 0;
-        while (start <= last && bars[start].Date <= st.LastEvalBar) start++;
-        for (int i = Math.Max(start, 21); i <= last; i++)
+        for (int i = Math.Max(fromIdx, 21); i < bars.Count; i++)
         {
-            EvaluateCross(item, st, bars, i, ma5, ma20);
-            if (item.BottomAlert) EvaluateBottom(item, st, bars, i, upper, lower, rsi, volMa);
-            if (item.TopAlert) EvaluateTop(item, st, bars, i, upper, lower, rsi, volMa);
+            EvaluateCross(item, st, bars, i, ma5, ma20, emit);
+            if (bottom) EvaluateBottom(item, st, bars, i, upper, lower, rsi, volMa, emit);
+            if (top) EvaluateTop(item, st, bars, i, upper, lower, rsi, volMa, emit);
         }
-        st.LastEvalBar = bars[last].Date;
     }
 
     // ───────────────────────── 2차: 골든/데드크로스 확인 ─────────────────────────
 
     /// <summary>MA5/MA20 관계를 봉마다 추적해 1차 시그널 후 확인 창 내 크로스를 알림한다.</summary>
-    private void EvaluateCross(WatchItem item, State st, List<Candle> bars, int i, double[] ma5, double[] ma20)
+    private void EvaluateCross(WatchItem item, State st, List<Candle> bars, int i, double[] ma5, double[] ma20,
+        Action<MinuteSignal> emit)
     {
         if (double.IsNaN(ma5[i]) || double.IsNaN(ma20[i])) return;
         var bar = bars[i];
@@ -125,14 +148,14 @@ public sealed class MinuteSignalEngine(AppConfig config, PriceSourceRegistry reg
             if (st.AwaitGolden && st.PrevBelow && !below)
             {
                 st.AwaitGolden = false;
-                Fire(item, MinuteSignalKind.GoldenCross, bar.Close, bar.Date,
-                    $"MA5 {ma5[i]:N0} > MA20 {ma20[i]:N0} 상향 돌파 — 반등 흐름 확인 (1차 시그널 {st.BottomFiredAt:HH:mm} 후속)");
+                emit(new MinuteSignal(item.Symbol, item.Name, MinuteSignalKind.GoldenCross, bar.Close,
+                    $"MA5 {ma5[i]:N0} > MA20 {ma20[i]:N0} 상향 돌파 — 반등 흐름 확인 (1차 시그널 {st.BottomFiredAt:HH:mm} 후속)", bar.Date));
             }
             if (st.AwaitDead && !st.PrevBelow && below)
             {
                 st.AwaitDead = false;
-                Fire(item, MinuteSignalKind.DeadCross, bar.Close, bar.Date,
-                    $"MA5 {ma5[i]:N0} < MA20 {ma20[i]:N0} 하향 돌파 — 하락 흐름 확인 (고점 경고 {st.TopFiredAt:HH:mm} 후속)");
+                emit(new MinuteSignal(item.Symbol, item.Name, MinuteSignalKind.DeadCross, bar.Close,
+                    $"MA5 {ma5[i]:N0} < MA20 {ma20[i]:N0} 하향 돌파 — 하락 흐름 확인 (고점 경고 {st.TopFiredAt:HH:mm} 후속)", bar.Date));
             }
         }
         st.PrevBelow = below;
@@ -143,7 +166,7 @@ public sealed class MinuteSignalEngine(AppConfig config, PriceSourceRegistry reg
 
     /// <summary>완성봉 1개(인덱스 i)에 대한 바닥 반등 판정. 밴드워킹·%b 필터로 지속 하락·약반등을 걸러낸다.</summary>
     private void EvaluateBottom(WatchItem item, State st, List<Candle> bars, int i,
-        double[] upper, double[] lower, double[] rsi, double[] volMa)
+        double[] upper, double[] lower, double[] rsi, double[] volMa, Action<MinuteSignal> emit)
     {
         var bar = bars[i];
         if (double.IsNaN(lower[i]) || double.IsNaN(upper[i]) ||
@@ -194,9 +217,9 @@ public sealed class MinuteSignalEngine(AppConfig config, PriceSourceRegistry reg
         st.BottomFiredAt = bar.Date;
         st.AwaitGolden = config.BottomConfirmCross;
         st.AwaitDead = false;   // 방향 전환 — 반대편 확인 대기 해제
-        Fire(item, MinuteSignalKind.Rebound, bar.Close, bar.Date,
+        emit(new MinuteSignal(item.Symbol, item.Name, MinuteSignalKind.Rebound, bar.Close,
             $"볼린저 하단 {lower[i]:N0}원 터치({bars[touchIdx].Date:HH:mm}) 후 복귀 마감 {bar.Close:N0}원(%b {pb:0.00}) · " +
-            $"RSI {rsi[i]:0.#} 상승 전환(저점 {minRsi:0.#}) · 거래량 {volRatio:0.0}× (20봉 평균 대비)");
+            $"RSI {rsi[i]:0.#} 상승 전환(저점 {minRsi:0.#}) · 거래량 {volRatio:0.0}× (20봉 평균 대비)", bar.Date));
     }
 
     // ───────────────────────── 1차: 고점 경고 ─────────────────────────
@@ -206,7 +229,7 @@ public sealed class MinuteSignalEngine(AppConfig config, PriceSourceRegistry reg
     /// 상단 밴드워킹(최소 봉 수) + RSI 과매수 → 밴드 안 복귀 하락봉 + RSI 하향 전환 + 소진 증거(윗꼬리/거래량).
     /// </summary>
     private void EvaluateTop(WatchItem item, State st, List<Candle> bars, int i,
-        double[] upper, double[] lower, double[] rsi, double[] volMa)
+        double[] upper, double[] lower, double[] rsi, double[] volMa, Action<MinuteSignal> emit)
     {
         var bar = bars[i];
         if (double.IsNaN(lower[i]) || double.IsNaN(upper[i]) ||
@@ -269,16 +292,16 @@ public sealed class MinuteSignalEngine(AppConfig config, PriceSourceRegistry reg
         st.TopFiredAt = bar.Date;
         st.AwaitDead = config.TopConfirmCross;
         st.AwaitGolden = false;   // 방향 전환 — 반대편 확인 대기 해제
-        Fire(item, MinuteSignalKind.TopWarn, bar.Close, bar.Date,
+        emit(new MinuteSignal(item.Symbol, item.Name, MinuteSignalKind.TopWarn, bar.Close,
             $"볼린저 상단 밴드워킹({touchCount}봉) 후 이탈 마감 {bar.Close:N0}원(%b {pb:0.00}) · " +
-            $"RSI {rsi[i]:0.#} 하향 전환(고점 {maxRsi:0.#}) · {evidence}");
+            $"RSI {rsi[i]:0.#} 하향 전환(고점 {maxRsi:0.#}) · {evidence}", bar.Date));
     }
 
     // ───────────────────────── 발생/전송 ─────────────────────────
 
-    private void Fire(WatchItem item, MinuteSignalKind kind, decimal price, DateTime barTime, string detail)
+    /// <summary>라이브 경로의 emit — 트레이 이벤트 + Slack 전송.</summary>
+    private void Fire(MinuteSignal s)
     {
-        var s = new MinuteSignal(item.Symbol, item.Name, kind, price, detail, barTime);
         Raised?.Invoke(s);
         _ = SafeSlackAsync(s);
     }

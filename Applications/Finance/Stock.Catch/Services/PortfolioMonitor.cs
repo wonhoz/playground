@@ -166,7 +166,7 @@ public sealed class PortfolioMonitor(AppConfig config, PriceSourceRegistry regis
         {
             FetchFailed?.Invoke(h.Code, h.Name, reason, n);
             string src = config.HasKisCredentials ? "KIS" : "네이버";
-            _ = SendFailSafeAsync(() => slack.SendFetchFailureAsync(DisplayOf(h), "보유 종목", src, reason, n));
+            _ = SendFailSafeAsync(() => slack.SendFetchFailureAsync(DisplayOf(h), "보유 종목", src, reason, n, h.Code));
         }
     }
 
@@ -177,7 +177,7 @@ public sealed class PortfolioMonitor(AppConfig config, PriceSourceRegistry regis
         if (_failAlerted.Remove(h.Code))
         {
             FetchRecovered?.Invoke(h.Code, h.Name);
-            _ = SendFailSafeAsync(() => slack.SendFetchRecoveryAsync(DisplayOf(h), "보유 종목"));
+            _ = SendFailSafeAsync(() => slack.SendFetchRecoveryAsync(DisplayOf(h), "보유 종목", h.Code));
         }
     }
 

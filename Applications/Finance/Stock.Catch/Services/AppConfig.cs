@@ -103,8 +103,8 @@ public sealed class AppConfig
 
     // ── 보유 종목 모니터링 / Slack 알림 ──
     public string SlackWebhookUrl { get; set; } = string.Empty;
-    /// <summary>전송 대상 채널(예: "#claude"). 비우면 webhook 기본 채널.</summary>
-    public string SlackChannel { get; set; } = "#claude";
+    /// <summary>전송 대상 기본 채널(예: "#stock"). 비우면 webhook 기본 채널. 관심 종목별 채널(WatchItem.SlackChannel)이 우선한다.</summary>
+    public string SlackChannel { get; set; } = "#stock";
     /// <summary>트레이 상주 모니터링 활성화.</summary>
     public bool MonitorEnabled { get; set; } = false;
     /// <summary>폴링 주기(초). 최소 10초.</summary>

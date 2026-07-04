@@ -393,6 +393,21 @@ public partial class MainWindow : Window
         SummaryText.Text = $"⭐ 즐겨찾기 추가: {code}{(string.IsNullOrEmpty(name) ? "" : "  " + name)}";
     }
 
+    private void FavRename_Click(object sender, RoutedEventArgs e)
+    {
+        if (FavCombo.SelectedItem is not FavoriteStock f)
+        {
+            ShowError("이름을 수정할 즐겨찾기를 콤보에서 선택하세요.");
+            return;
+        }
+        var win = new FavoriteEditWindow(f) { Owner = this };
+        if (win.ShowDialog() != true) return;
+        _config.Save();
+        RefreshFavorites();
+        FavCombo.SelectedItem = _config.Favorites.FirstOrDefault(x => x.Code == f.Code);
+        SummaryText.Text = $"✏ 즐겨찾기 이름 수정: {f.Code}  {f.Name}";
+    }
+
     private void FavRemove_Click(object sender, RoutedEventArgs e)
     {
         if (FavCombo.SelectedItem is not FavoriteStock f)

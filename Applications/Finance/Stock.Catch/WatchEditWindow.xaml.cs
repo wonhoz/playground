@@ -35,6 +35,7 @@ public partial class WatchEditWindow : Window
         LadderCheck.IsChecked = item.LadderAlert;
         BottomCheck.IsChecked = item.BottomAlert;
         TopCheck.IsChecked = item.TopAlert;
+        ChannelBox.Text = item.SlackChannel;
         SelectSource(item.Source);
         SelectExchange(item.Exchange);
         ApplyIndexMode();
@@ -169,6 +170,11 @@ public partial class WatchEditWindow : Window
             if (rules.Count == 0) { Error("추세 조건 형식은 '기간:변화단위'입니다(예: 3:1, 5:2). 비우면 전역 조건 사용."); return; }
             _item.Rules = rules;
         }
+
+        // 종목 전용 Slack 채널 — 비우면 기본 채널. #/@ 접두사가 없으면 # 채널로 정규화.
+        string channel = ChannelBox.Text.Trim();
+        if (channel.Length > 0 && channel[0] is not ('#' or '@')) channel = "#" + channel;
+        _item.SlackChannel = channel;
 
         _item.AlertUp = AlertUpCheck.IsChecked == true;
         _item.AlertDown = AlertDownCheck.IsChecked == true;

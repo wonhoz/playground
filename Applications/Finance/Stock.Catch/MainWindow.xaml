@@ -48,6 +48,8 @@
                     <ComboBox x:Name="FavCombo" Width="230" SelectionChanged="Fav_SelectionChanged"/>
                     <Button x:Name="FavAddBtn" Content="⭐ 현재 추가" Style="{StaticResource ChipButton}"
                             Margin="8,0,0,0" Click="FavAdd_Click"/>
+                    <Button x:Name="FavRenameBtn" Content="✏ 이름" Style="{StaticResource ChipButton}"
+                            Margin="6,0,0,0" Click="FavRename_Click" ToolTip="선택 즐겨찾기의 표시 이름 수정 (긴 정식 명칭 → 짧은 별칭)"/>
                     <Button x:Name="FavRemoveBtn" Content="🗑 제거" Style="{StaticResource ChipButton}"
                             Margin="6,0,0,0" Click="FavRemove_Click"/>
                     <Button x:Name="FavUpBtn" Content="▲" Style="{StaticResource ChipButton}" Width="34"

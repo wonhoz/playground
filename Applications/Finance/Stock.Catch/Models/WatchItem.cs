@@ -41,6 +41,9 @@ public sealed class WatchItem
     /// <summary>고점 경고 시그널 알림 사용(국내 종목만 · KIS 1분봉 필요). 볼린저 상단 밴드워킹 이탈 + RSI 과매수 전환. 기본 꺼짐.</summary>
     public bool TopAlert { get; set; } = false;
 
+    /// <summary>이 종목 전용 Slack 채널(예: "#stock-sk"). 비우면 전역 기본 채널(설정의 SlackChannel)을 사용한다.</summary>
+    public string SlackChannel { get; set; } = string.Empty;
+
     /// <summary>그리드 표시용: 전용 조건이 있으면 요약, 없으면 "전역".</summary>
     public string RulesLabel => Rules.Count > 0 ? TrendRule.Summary(Rules) : "전역";
 

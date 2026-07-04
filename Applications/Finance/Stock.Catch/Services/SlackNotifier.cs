@@ -15,10 +15,25 @@ public sealed class SlackNotifier(AppConfig config) : IDisposable
 
     public bool IsConfigured => !string.IsNullOrWhiteSpace(config.SlackWebhookUrl);
 
-    private string BuildPayload(string text)
-        => string.IsNullOrWhiteSpace(config.SlackChannel)
-            ? JsonSerializer.Serialize(new { username = "Stock.Catch", text })
-            : JsonSerializer.Serialize(new { channel = config.SlackChannel, username = "Stock.Catch", text });
+    /// <summary>
+    /// 전송 채널 결정: 종목 코드가 관심 종목에 있고 전용 채널이 지정돼 있으면 그 채널,
+    /// 없으면 전역 기본 채널(SlackChannel). 둘 다 비어 있으면 webhook 기본 채널.
+    /// </summary>
+    private string? ChannelFor(string? code)
+    {
+        if (!string.IsNullOrEmpty(code))
+        {
+            var own = config.Watchlist.FirstOrDefault(w =>
+                string.Equals(w.Symbol, code, StringComparison.OrdinalIgnoreCase))?.SlackChannel;
+            if (!string.IsNullOrWhiteSpace(own)) return own;
+        }
+        return string.IsNullOrWhiteSpace(config.SlackChannel) ? null : config.SlackChannel;
+    }
+
+    private string BuildPayload(string text, string? code = null)
+        => ChannelFor(code) is { } channel
+            ? JsonSerializer.Serialize(new { channel, username = "Stock.Catch", text })
+            : JsonSerializer.Serialize(new { username = "Stock.Catch", text });
 
     public async Task SendAsync(PortfolioAlert a, CancellationToken ct = default)
     {
@@ -30,7 +45,7 @@ public sealed class SlackNotifier(AppConfig config) : IDisposable
         sb.AppendLine($"{emoji} *{a.Display}* {arrow} 평단比 *{a.ReturnPct:+0.0;-0.0}%* (임계 {Math.Abs(a.Threshold):0.#}%) · *{a.Price:N0}원*");
         sb.AppendLine($"평단 {a.AvgPrice:N0} × {a.Quantity}주 · 평가손익 {a.EvalPL:+#,0;-#,0;0}원");
 
-        await PostAsync(BuildPayload(sb.ToString()), ct);
+        await PostAsync(BuildPayload(sb.ToString(), a.Code), ct);
     }
 
     /// <summary>관심 종목 추세 알림(시작 알림 또는 기준값 대비 step 변동). 모바일 가독성 우선 — 2~3줄.</summary>
@@ -54,7 +69,7 @@ public sealed class SlackNotifier(AppConfig config) : IDisposable
                 sb.AppendLine($":arrows_counterclockwise: {a.ReversalDirText} ~{rp:P0} ({a.ReversalText} · {a.ReversalBasis})");
         }
 
-        await PostAsync(BuildPayload(sb.ToString()), ct);
+        await PostAsync(BuildPayload(sb.ToString(), a.Item.Symbol), ct);
     }
 
     /// <summary>모니터링 시작 시 종목별 현재 수준을 한 메시지로 요약.</summary>
@@ -92,20 +107,20 @@ public sealed class SlackNotifier(AppConfig config) : IDisposable
            : item.Market == MarketKind.US ? $"${price:N2}" : $"{price:N0}원";
 
     /// <summary>시세 조회 연속 실패 알림(엣지 — 임계 도달 시 1회).</summary>
-    public async Task SendFetchFailureAsync(string display, string context, string source, string reason, int fails, CancellationToken ct = default)
+    public async Task SendFetchFailureAsync(string display, string context, string source, string reason, int fails, string? code = null, CancellationToken ct = default)
     {
         if (!IsConfigured) return;
         var sb = new StringBuilder();
         sb.AppendLine($":warning: *{display}* 조회 실패 {fails}회 ({context} · {source})");
         sb.AppendLine(reason);
-        await PostAsync(BuildPayload(sb.ToString()), ct);
+        await PostAsync(BuildPayload(sb.ToString(), code), ct);
     }
 
     /// <summary>시세 조회 복구 알림(실패 알림을 보냈던 종목이 정상 복구됐을 때 1회).</summary>
-    public async Task SendFetchRecoveryAsync(string display, string context, CancellationToken ct = default)
+    public async Task SendFetchRecoveryAsync(string display, string context, string? code = null, CancellationToken ct = default)
     {
         if (!IsConfigured) return;
-        await PostAsync(BuildPayload($":white_check_mark: *{display}* 조회 복구 ({context})"), ct);
+        await PostAsync(BuildPayload($":white_check_mark: *{display}* 조회 복구 ({context})", code), ct);
     }
 
     /// <summary>매수/익절 래더·갭다운 알림.</summary>
@@ -121,7 +136,7 @@ public sealed class SlackNotifier(AppConfig config) : IDisposable
         var sb = new StringBuilder();
         sb.AppendLine($"{emoji} *{head}* · *{a.Display}*");
         sb.AppendLine(a.Kind == LadderAlertKind.GapDown ? a.Detail : $"{a.Detail} · 현재 {a.Price:N0}원");
-        await PostAsync(BuildPayload(sb.ToString()), ct);
+        await PostAsync(BuildPayload(sb.ToString(), a.Code), ct);
     }
 
     /// <summary>1분봉 시그널(바닥 반등·골든크로스·고점 경고·데드크로스) 알림. 경광등 이모지로 강조해 눈에 띄게.</summary>
@@ -142,7 +157,7 @@ public sealed class SlackNotifier(AppConfig config) : IDisposable
         var sb = new StringBuilder();
         sb.AppendLine($"{emoji} *{s.TfLabel}{head}* · *{s.Display}* · *{s.Price:N0}원* ({s.Time:HH:mm})");
         sb.AppendLine(s.Detail);
-        await PostAsync(BuildPayload(sb.ToString()), ct);
+        await PostAsync(BuildPayload(sb.ToString(), s.Code), ct);
     }
 
     /// <summary>장 세션 시작·마감 5분 전 알림.</summary>

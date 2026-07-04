@@ -74,7 +74,7 @@
                            Text="보유 종목이 평단 대비 임계값에 도달하면 Slack Incoming Webhook으로 알림을 보냅니다."/>
                 <TextBlock Text="Webhook URL" Style="{StaticResource FieldLbl}"/>
                 <TextBox x:Name="SlackUrlBox" Margin="0,0,0,10"/>
-                <TextBlock Text="채널 (예: #claude · 비우면 webhook 기본 채널)" Style="{StaticResource FieldLbl}"/>
+                <TextBlock Text="기본 채널 (예: #stock · 비우면 webhook 기본 채널 · 관심 종목별 채널이 우선)" Style="{StaticResource FieldLbl}"/>
                 <Grid Margin="0,0,0,2">
                     <Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
                     <TextBox x:Name="SlackChannelBox"/>

@@ -260,7 +260,7 @@ public sealed class WatchlistMonitor(AppConfig config, PriceSourceRegistry regis
         if (thr > 0 && n == thr && _failAlerted.Add(item.Symbol))
         {
             FetchFailed?.Invoke(item, reason, n);
-            _ = SafeAsync(() => slack.SendFetchFailureAsync(item.ToString(), "관심 종목", item.SourceLabel, reason, n));
+            _ = SafeAsync(() => slack.SendFetchFailureAsync(item.ToString(), "관심 종목", item.SourceLabel, reason, n, item.Symbol));
         }
     }
 
@@ -271,7 +271,7 @@ public sealed class WatchlistMonitor(AppConfig config, PriceSourceRegistry regis
         if (_failAlerted.Remove(item.Symbol))
         {
             FetchRecovered?.Invoke(item);
-            _ = SafeAsync(() => slack.SendFetchRecoveryAsync(item.ToString(), "관심 종목"));
+            _ = SafeAsync(() => slack.SendFetchRecoveryAsync(item.ToString(), "관심 종목", item.Symbol));
         }
     }
 

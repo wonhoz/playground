@@ -133,6 +133,7 @@ public sealed class SlackNotifier(AppConfig config) : IDisposable
             MinuteSignalKind.Rebound => (":rotating_light::chart_with_upwards_trend:", "바닥 반등 시그널"),
             MinuteSignalKind.FollowThrough => (":rotating_light::arrow_upper_right:", "반등 지속 (직후 양봉)"),
             MinuteSignalKind.GoldenCross => (":rotating_light::white_check_mark:", "반등 확인 (골든크로스)"),
+            MinuteSignalKind.WeakGoldenCross => (":warning:", "약한 확인 (횡보성 크로스)"),
             MinuteSignalKind.TopWarn => (":rotating_light::chart_with_downwards_trend:", "고점 경고 시그널"),
             _ => (":rotating_light::small_red_triangle_down:", "하락 확인 (데드크로스)"),
         };

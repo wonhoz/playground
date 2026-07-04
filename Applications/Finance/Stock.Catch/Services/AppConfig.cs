@@ -149,6 +149,11 @@ public sealed class AppConfig
     /// <summary>같은 종목 1차 시그널 재알림 쿨다운(분).</summary>
     public int BottomCooldownMinutes { get; set; } = 15;
     /// <summary>
+    /// 골든크로스 모멘텀 임계(%): 1차 시그널 이후 이 비율 이상 올라 있어야 '반등 확인(강)'.
+    /// 미달이면 '약한 확인'으로 구분 알림. 실측: 가짜 GC +0.51% vs 진짜 +0.90~6.73% → 기본 0.8.
+    /// </summary>
+    public double BottomGcMinRisePct { get; set; } = 0.8;
+    /// <summary>
     /// 밴드워킹 필터: 최근 10봉 중 하단 터치 봉이 이 수를 초과하면 지속 하락으로 보고 스킵.
     /// 실측: 깊은 급락 V바닥은 터치 5~7봉이라 4는 진짜 반등까지 차단 → 7 권장(8봉+만 스킵).
     /// </summary>

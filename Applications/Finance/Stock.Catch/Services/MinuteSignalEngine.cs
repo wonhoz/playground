@@ -44,6 +44,7 @@ public sealed class MinuteSignalEngine(AppConfig config, PriceSourceRegistry reg
         public DateTime LastFetch = DateTime.MinValue;            // 조회 스로틀
         // 바닥(반등) 상태
         public DateTime BottomFiredAt = DateTime.MinValue;        // 1차 알림 봉 시각(쿨다운·확인 창 기준)
+        public decimal BottomFiredPrice;                           // 1차 알림 봉 종가(GC 모멘텀 판정 기준)
         public bool AwaitGolden;                                   // 2차(골든크로스) 확인 대기
         public bool AwaitFollow;                                   // 직후 봉 양봉 지속(조기 확인) 대기
         // 고점(경고) 상태
@@ -170,9 +171,14 @@ public sealed class MinuteSignalEngine(AppConfig config, PriceSourceRegistry reg
             if (st.AwaitGolden && st.PrevBelow && !below)
             {
                 st.AwaitGolden = false;
-                // 경과 분 표기 — 실측상 진짜 반등은 5~9분 내 도달(빠를수록 신뢰↑).
-                emit(new MinuteSignal(item.Symbol, item.Name, MinuteSignalKind.GoldenCross, bar.Close,
-                    $"MA5 {ma5[i]:N0} > MA20 {ma20[i]:N0} 돌파 · 1차({st.BottomFiredAt:HH:mm}) 후 {(bar.Date - st.BottomFiredAt).TotalMinutes:0}분", bar.Date));
+                // GC 모멘텀 필터: 1차 이후 상승률이 임계(기본 0.8%) 미달이면 "약한 확인"으로 강등.
+                // 실측: 가짜 GC(07-02 12:35)는 +0.51%, 진짜는 +0.90~6.73% — 횡보성 크로스 구분.
+                double rise = st.BottomFiredPrice > 0 ? (double)(bar.Close / st.BottomFiredPrice - 1) * 100 : 0;
+                bool strong = rise >= config.BottomGcMinRisePct;
+                emit(new MinuteSignal(item.Symbol, item.Name,
+                    strong ? MinuteSignalKind.GoldenCross : MinuteSignalKind.WeakGoldenCross, bar.Close,
+                    $"MA5 {ma5[i]:N0} > MA20 {ma20[i]:N0} 돌파 · 1차({st.BottomFiredAt:HH:mm}) 후 {(bar.Date - st.BottomFiredAt).TotalMinutes:0}분 · " +
+                    $"{rise:+0.00;-0.00}%{(strong ? "" : $" (모멘텀 {config.BottomGcMinRisePct:0.0#}% 미달 — 횡보성 크로스 주의)")}", bar.Date));
             }
             if (st.AwaitDead && !st.PrevBelow && below)
             {
@@ -238,6 +244,7 @@ public sealed class MinuteSignalEngine(AppConfig config, PriceSourceRegistry reg
         if (volRatio < config.BottomVolumeRatio) return;
 
         st.BottomFiredAt = bar.Date;
+        st.BottomFiredPrice = bar.Close;
         st.AwaitGolden = config.BottomConfirmCross;
         st.AwaitFollow = config.BottomFollowCandle;
         st.AwaitDead = false;   // 방향 전환 — 반대편 확인 대기 해제

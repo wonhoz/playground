@@ -3,11 +3,14 @@
 /// <summary>
 /// 1분봉 시그널 종류.
 /// Rebound=바닥 반등(볼린저 하단 반등), FollowThrough=반등 지속(1차 직후 봉 양봉 · 조기 확인),
-/// GoldenCross=반등 확인(MA5↗MA20), TopWarn=고점 경고(볼린저 상단 이탈), DeadCross=하락 확인(MA5↘MA20).
-/// 실측(0193T0 07.02~03): 진짜 반등은 직후 양봉 3/4·GC 4/4, 가짜는 직후 양봉 1/3·GC 1/3 —
-/// 직후 양봉·GC가 강/약 반등을 가르는 확인 신호다(트리거 봉 장대양봉은 오히려 가짜에서 큼).
+/// GoldenCross=반등 확인(MA5↗MA20 + 모멘텀 충분), WeakGoldenCross=약한 확인(크로스는 떴지만
+/// 1차 이후 상승률 임계 미달 — 횡보성 크로스 · 하락 추세 속 반등 위험),
+/// TopWarn=고점 경고(볼린저 상단 이탈), DeadCross=하락 확인(MA5↘MA20).
+/// 실측(0193T0 07.02~03): 진짜 반등은 직후 양봉 3/4·GC 4/4, 가짜는 직후 양봉 1/3·GC 1/3.
+/// GC 5건 중 가짜 1건(07-02 12:35)은 1차→GC 상승률 +0.51%로 진짜(+0.90~6.73%)와 분리 —
+/// 모멘텀 임계(기본 0.8%)가 강/약 확인을 가른다(트리거 봉 장대양봉은 오히려 가짜에서 큼).
 /// </summary>
-public enum MinuteSignalKind { Rebound, FollowThrough, GoldenCross, TopWarn, DeadCross }
+public enum MinuteSignalKind { Rebound, FollowThrough, GoldenCross, WeakGoldenCross, TopWarn, DeadCross }
 
 /// <summary>
 /// 1분봉 시그널 알림 1건(관심 종목 · 국내).

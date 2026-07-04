@@ -89,8 +89,7 @@ call :pub "Shortcut.Forge"        "Applications\Files\Manager\Shortcut.Forge"   
 
 :: ── Applications / Finance ─────────────────────────────────────────
 call :pub "Quant.Lab"             "Applications\Finance\Quant.Lab\Quant.Lab.Cli"            "Quant.Lab.exe"             "Applications\Finance\Quant.Lab"
-call :pub "Stock.Fetch"           "Applications\Finance\Stock.Fetch"                        "StockFetch.exe"            "Applications\Finance\Stock.Fetch"
-call :pub "Stock.Watch"           "Applications\Finance\Stock.Watch"                        "StockWatch.exe"            "Applications\Finance\Stock.Watch"
+call :pub "Stock.Catch"           "Applications\Finance\Stock.Catch"                        "StockCatch.exe"            "Applications\Finance\Stock.Catch"
 
 :: ── Applications / Network / Monitor ───────────────────────────────
 call :pub "DNS.Flip"              "Applications\Network\Monitor\DNS.Flip"                   "Dns.Flip.exe"              "Applications\Network\Monitor"

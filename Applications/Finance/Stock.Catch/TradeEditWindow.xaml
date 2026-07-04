@@ -1,0 +1,77 @@
+﻿<Window x:Class="Stock.Catch.TradeEditWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="매매 기록" Height="560" Width="420"
+        Background="{StaticResource WindowBg}" ResizeMode="NoResize"
+        WindowStartupLocation="CenterOwner">
+    <Window.Resources>
+        <Style x:Key="FieldLbl" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="{StaticResource FgMuted}"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="0,0,12,0"/>
+        </Style>
+    </Window.Resources>
+
+    <Grid Margin="20" Background="{StaticResource WindowBg}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="90"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <TextBlock Grid.Row="0" Grid.ColumnSpan="2" x:Name="HeaderText" FontSize="17" FontWeight="Bold"
+                   Foreground="{StaticResource FgBrush}" Margin="0,0,0,16"/>
+
+        <TextBlock Grid.Row="1" Grid.Column="0" Text="즐겨찾기" Style="{StaticResource FieldLbl}"/>
+        <ComboBox Grid.Row="1" Grid.Column="1" x:Name="FavCombo" Margin="0,0,0,10"
+                  SelectionChanged="Fav_SelectionChanged"/>
+
+        <TextBlock Grid.Row="2" Grid.Column="0" Text="종목코드" Style="{StaticResource FieldLbl}"/>
+        <Grid Grid.Row="2" Grid.Column="1" Margin="0,0,0,10">
+            <Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+            <TextBox x:Name="CodeBox" MaxLength="6"/>
+            <Button Grid.Column="1" Content="🔍 이름" Width="70" Margin="8,0,0,0" Click="Lookup_Click"/>
+        </Grid>
+
+        <TextBlock Grid.Row="3" Grid.Column="0" Text="종목명" Style="{StaticResource FieldLbl}"/>
+        <TextBox Grid.Row="3" Grid.Column="1" x:Name="NameBox" Margin="0,0,0,10"/>
+
+        <TextBlock Grid.Row="4" Grid.Column="0" Text="구분" Style="{StaticResource FieldLbl}"/>
+        <ComboBox Grid.Row="4" Grid.Column="1" x:Name="SideCombo" Margin="0,0,0,10">
+            <ComboBoxItem Content="매수"/>
+            <ComboBoxItem Content="매도"/>
+        </ComboBox>
+
+        <TextBlock Grid.Row="5" Grid.Column="0" Text="날짜" Style="{StaticResource FieldLbl}"/>
+        <TextBox Grid.Row="5" Grid.Column="1" x:Name="DateBox" Margin="0,0,0,10"
+                 ToolTip="yyyy-MM-dd"/>
+
+        <TextBlock Grid.Row="6" Grid.Column="0" Text="체결가" Style="{StaticResource FieldLbl}"/>
+        <TextBox Grid.Row="6" Grid.Column="1" x:Name="PriceBox" Margin="0,0,0,10"/>
+
+        <TextBlock Grid.Row="7" Grid.Column="0" Text="수량" Style="{StaticResource FieldLbl}"/>
+        <TextBox Grid.Row="7" Grid.Column="1" x:Name="QtyBox" Margin="0,0,0,10"/>
+
+        <TextBlock Grid.Row="8" Grid.Column="0" Text="메모" Style="{StaticResource FieldLbl}" VerticalAlignment="Top" Margin="0,4,12,0"/>
+        <TextBox Grid.Row="8" Grid.Column="1" x:Name="NoteBox" Margin="0,0,0,10"
+                 AcceptsReturn="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" MinHeight="48"/>
+
+        <StackPanel Grid.Row="9" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right">
+            <TextBlock x:Name="ErrorText" Foreground="{StaticResource BearBrush}" VerticalAlignment="Center"
+                       Margin="0,0,12,0"/>
+            <Button Content="취소" Width="80" Margin="0,0,8,0" Click="Cancel_Click"/>
+            <Button Content="저장" Width="80" Style="{StaticResource AccentButton}" Click="Save_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>

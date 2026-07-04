@@ -152,9 +152,35 @@ public partial class MainWindow : Window
             Models.MinuteSignalKind.TopWarn => "📉 고점 경고 시그널",
             _ => "🔻 하락 확인 (데드크로스)",
         };
+        // 풍선도 Slack과 동일하게 종합 판정 우선(즉답형) — 지표 상세는 시그널 로그·분석 창에서.
         _tray.ShowBalloon($"{s.TfLabel}{head} · {s.Display}",
-            string.IsNullOrEmpty(s.Context) ? s.Detail : $"{s.Detail}\n{s.Context}", warning: s.IsBearish);
+            s.Kind == Models.MinuteSignalKind.MorningBrief ? s.Detail : s.VerdictLine, warning: s.IsBearish);
+        AppendSignalLog(s);
     });
+
+    /// <summary>
+    /// 라이브 시그널 로그: 알림 1건마다 일자별 CSV에 전체 상세(판정·근거·컨텍스트)를 append.
+    /// Slack 알림은 2줄 즉답형이라, 매수 후 상세 분석은 이 로그에서 본다 —
+    /// 경로: %LocalAppData%\Playground\Stock.Catch\signals\yyyyMMdd_시그널로그.csv (트레이 메뉴에서 열기).
+    /// </summary>
+    private static void AppendSignalLog(Models.MinuteSignal s)
+    {
+        try
+        {
+            string dir = System.IO.Path.Combine(Services.AppConfig.ConfigDir, "signals");
+            System.IO.Directory.CreateDirectory(dir);
+            string path = System.IO.Path.Combine(dir, $"{s.Time:yyyyMMdd}_시그널로그.csv");
+            bool fresh = !System.IO.File.Exists(path);
+            static string Q(string v) => $"\"{v.Replace("\"", "\"\"")}\"";
+            var line = string.Join(",",
+                s.Time.ToString("HH:mm:ss"), Q(s.Display), $"{s.Timeframe}분", Q(s.VerdictLine),
+                s.Price.ToString("0.####"), Q(s.Detail), Q(s.Context));
+            System.IO.File.AppendAllText(path,
+                (fresh ? "time,종목,tf,판정,price,근거 상세,컨텍스트\r\n" : "") + line + "\r\n",
+                new System.Text.UTF8Encoding(true));
+        }
+        catch { /* 로그 실패가 알림을 막지 않도록 무시 */ }
+    }
 
     private void OnFetchFailed(string display, string context, string reason, int fails) => Dispatcher.Invoke(() =>
         _tray.ShowBalloon($"⚠ {display} 시세 조회 실패 (연속 {fails}회)", $"{context} · {reason}", warning: true));

@@ -141,7 +141,12 @@ public sealed class SlackNotifier(AppConfig config) : IDisposable
         await PostAsync(BuildPayload(sb.ToString(), a.Code), ct);
     }
 
-    /// <summary>1분봉 시그널(바닥 반등·골든크로스·고점 경고·데드크로스) 알림. 경광등 이모지로 강조해 눈에 띄게.</summary>
+    /// <summary>
+    /// 1분봉 시그널(바닥 반등·골든크로스·고점 경고·데드크로스) 알림 — 2줄 고정.
+    /// 1줄: 시그널 종류·종목·가격·시각 / 2줄: ★5단계 종합 판정(실측 승률 근거).
+    /// 지표 수치 상세(RSI·%b·거래량·컨텍스트)는 시그널 로그 CSV·분봉 시그널 분석 창에서 확인
+    /// — 알림은 "타이밍을 놓치지 않는" 즉답형으로 유지한다.
+    /// </summary>
     public async Task SendMinuteSignalAsync(MinuteSignal s, CancellationToken ct = default)
     {
         if (!IsConfigured) return;
@@ -158,7 +163,7 @@ public sealed class SlackNotifier(AppConfig config) : IDisposable
         };
         var sb = new StringBuilder();
         sb.AppendLine($"{emoji} *{s.TfLabel}{head}* · *{s.Display}* · *{s.Price:N0}원* ({s.Time:HH:mm})");
-        sb.AppendLine(s.Detail);
+        sb.AppendLine($"*{s.VerdictLine}*");
         await PostAsync(BuildPayload(sb.ToString(), s.Code), ct);
     }
 

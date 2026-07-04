@@ -43,6 +43,7 @@ public sealed class MinuteSignalEngine(AppConfig config, PriceSourceRegistry reg
         public decimal BottomFiredPrice;                           // 1차 알림 봉 종가(GC 모멘텀 판정 기준)
         public bool AwaitGolden;                                   // 2차(골든크로스) 확인 대기
         public bool AwaitFollow;                                   // 직후 봉 양봉 지속(조기 확인) 대기 — 1분봉 전용
+        public bool BottomFiredDiv;                                // 1차 시그널의 다이버전스 여부(GC가 상속)
         // 고점(경고) 상태
         public DateTime TopFiredAt = DateTime.MinValue;
         public bool AwaitDead;                                     // 2차(데드크로스) 확인 대기
@@ -288,7 +289,8 @@ public sealed class MinuteSignalEngine(AppConfig config, PriceSourceRegistry reg
                     : MinuteSignalKind.GoldenCross;
                 emit(new MinuteSignal(item.Symbol, item.Name, kind, bar.Close,
                     $"MA5 {ma5[i]:N0} > MA20 {ma20[i]:N0} 돌파 · 1차({st.BottomFiredAt:HH:mm}) 후 {(bar.Date - st.BottomFiredAt).TotalMinutes:0}분 · " +
-                    $"{rise:+0.00;-0.00}%{reason}", bar.Date, tf, Context(bars, i, dayTrend, prevClose, vwap)));
+                    $"{rise:+0.00;-0.00}%{reason}", bar.Date, tf, Context(bars, i, dayTrend, prevClose, vwap),
+                    AboveVwapAt(vwap, bar), st.BottomFiredDiv));
             }
             if (st.AwaitDead && !st.PrevBelow && below)
             {
@@ -300,6 +302,11 @@ public sealed class MinuteSignalEngine(AppConfig config, PriceSourceRegistry reg
         st.PrevBelow = below;
         st.HasPrevRel = true;
     }
+
+    /// <summary>시그널 봉 종가의 세션 VWAP 상/하 판정(널=VWAP 미계산).</summary>
+    private static bool? AboveVwapAt(IReadOnlyDictionary<DateTime, double>? vwap, Candle bar)
+        => vwap != null && vwap.TryGetValue(bar.Date, out var v) && !double.IsNaN(v) && v > 0
+            ? (double)bar.Close >= v : null;
 
     /// <summary>사람 판단 보조 컨텍스트: 갭·당일 등락·저점比·VWAP 위치·일봉추세 — "폭락 후 V바닥 초입"인지 식별용.</summary>
     private string Context(List<Candle> bars, int i, double? dayTrend, decimal prevClose,
@@ -387,6 +394,7 @@ public sealed class MinuteSignalEngine(AppConfig config, PriceSourceRegistry reg
 
         st.BottomFiredAt = bar.Date;
         st.BottomFiredPrice = bar.Close;
+        st.BottomFiredDiv = divergence;
         st.AwaitGolden = config.BottomConfirmCross;
         st.AwaitFollow = tf == 1 && config.BottomFollowCandle;
         st.AwaitDead = false;   // 방향 전환 — 반대편 확인 대기 해제
@@ -394,7 +402,8 @@ public sealed class MinuteSignalEngine(AppConfig config, PriceSourceRegistry reg
         emit(new MinuteSignal(item.Symbol, item.Name, MinuteSignalKind.Rebound, bar.Close,
             $"하단터치 {bars[touchIdx].Date:HH:mm} → 복귀 %b {pb:0.00} · RSI {rsi[i]:0.#}↑(저점 {minRsi:0.#}) · 거래량 {volRatio:0.0}×" +
             (divergence ? " · 다이버전스" : ""),
-            bar.Date, tf, Context(bars, i, dayTrend, prevClose, vwap)));
+            bar.Date, tf, Context(bars, i, dayTrend, prevClose, vwap),
+            AboveVwapAt(vwap, bar), divergence));
     }
 
     // ───────────────────────── 1차: 고점 경고 ─────────────────────────

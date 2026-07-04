@@ -37,11 +37,25 @@ public sealed class TrayManager : IDisposable
         var settings = new ToolStripMenuItem("설정");
         settings.Click += (_, _) => SettingsRequested?.Invoke();
 
+        // 시그널 로그: Slack 2줄 알림의 상세 분석(근거·컨텍스트)이 일자별 CSV로 쌓이는 폴더.
+        var signalLog = new ToolStripMenuItem("시그널 로그 폴더");
+        signalLog.Click += (_, _) =>
+        {
+            try
+            {
+                string dir = System.IO.Path.Combine(AppConfig.ConfigDir, "signals");
+                System.IO.Directory.CreateDirectory(dir);
+                System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo(dir) { UseShellExecute = true });
+            }
+            catch { /* 탐색기 열기 실패 무시 */ }
+        };
+
         var exit = new ToolStripMenuItem("종료");
         exit.Click += (_, _) => ExitRequested?.Invoke();
 
         menu.Items.Add(open);
         menu.Items.Add(_monitorItem);
+        menu.Items.Add(signalLog);
         menu.Items.Add(settings);
         menu.Items.Add(new ToolStripSeparator());
         menu.Items.Add(exit);

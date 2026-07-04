@@ -25,7 +25,9 @@ public sealed record MinuteSignal(
     string Detail,
     DateTime Time,
     int Timeframe = 1,
-    string Context = "")   // 판단 보조 컨텍스트(갭·당일·저점比·일봉추세) — Slack 3번째 줄
+    string Context = "",       // 판단 보조 컨텍스트(갭·당일·저점比·VWAP·일봉추세) — 분석 창·CSV용
+    bool? AboveVwap = null,    // 시그널 봉 종가의 세션 VWAP 상/하 (널=미계산)
+    bool Divergence = false)   // RSI 불리시 다이버전스(반등 1차에서 판정 · GC는 1차 값 상속)
 {
     public string Display => string.IsNullOrEmpty(Name) ? Code : $"{Name} ({Code})";
 
@@ -34,4 +36,46 @@ public sealed record MinuteSignal(
 
     /// <summary>알림 구분용 타임프레임 접두 — 1분봉은 생략, 롤링 봉은 "[N분] ".</summary>
     public string TfLabel => Timeframe > 1 ? $"[{Timeframe}분] " : "";
+
+    /// <summary>
+    /// 종합 판정 5단계(★). 실측(14일×3종목 · 이후 30분 ±1% 선도달) 근거:
+    /// 🔥 63%·건당 +4.6% / ✅+VWAP위 71%·낙폭 −0.97% / ✅ 50% / ↗ 44% / 📈 50% / ⚠ 49%(수익폭 열위).
+    /// 0=등급 없음(브리핑·하락 계열).
+    /// </summary>
+    public int Stars => Kind switch
+    {
+        MinuteSignalKind.StrongGoldenCross => 5,
+        MinuteSignalKind.GoldenCross => AboveVwap == true ? 5 : 4,
+        MinuteSignalKind.FollowThrough => 3,
+        MinuteSignalKind.Rebound => Divergence ? 3 : 2,
+        MinuteSignalKind.WeakGoldenCross => 1,
+        _ => 0
+    };
+
+    /// <summary>Slack·트레이용 한 줄 종합 판정 — 별점 + 라벨 (+ 핵심 태그). 지표 수치는 분석 창에서.</summary>
+    public string VerdictLine
+    {
+        get
+        {
+            if (Kind == MinuteSignalKind.TopWarn) return "⚠️ 경계 — 과열 이탈 · 보유 중이면 익절 검토";
+            if (Kind == MinuteSignalKind.DeadCross) return "🔻 하락 확인 — 반등 무효 · 정리/관망";
+            if (Kind == MinuteSignalKind.MorningBrief) return Detail;
+
+            string stars = new string('★', Stars) + new string('☆', 5 - Stars);
+            string label = Stars switch
+            {
+                5 => Kind == MinuteSignalKind.StrongGoldenCross
+                    ? "최상 — 즉시 주목 (실측 ~63% · 건당 +4.6%)"
+                    : "최상 — 즉시 주목 (실측 ~71% · 낙폭 얕음)",
+                4 => "좋음 — 진입 검토",
+                3 => Kind == MinuteSignalKind.FollowThrough ? "주목 — 반등 흐름 지속" : "주목 — 확인(GC) 대기",
+                2 => "관찰 — 1차 후보 · 확인 대기",
+                _ => "참고 — 횡보성 · 무시 가능",
+            };
+            var tags = new List<string>(2);
+            if (AboveVwap == true) tags.Add("VWAP 위");
+            if (Divergence) tags.Add("다이버전스");
+            return $"{stars} {label}{(tags.Count > 0 ? " · " + string.Join(" · ", tags) : "")}";
+        }
+    }
 }

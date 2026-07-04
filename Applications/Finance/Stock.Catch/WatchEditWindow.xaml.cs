@@ -180,6 +180,8 @@ public partial class WatchEditWindow : Window
         string pair = PairBox.Text.Trim().ToUpperInvariant();
         if (pair.Length > 0 && (pair.Length is < 5 or > 6 || !pair.All(char.IsLetterOrDigit)))
         { Error("반대 짝 코드는 5~6자리 영숫자입니다(예: 0197X0). 비우면 사용 안 함."); return; }
+        if (pair.Length > 0 && pair == _item.Symbol)
+        { Error("반대 짝 코드는 자기 자신과 달라야 합니다(레버리지↔인버스)."); return; }
         _item.PairSymbol = pair;
 
         _item.AlertUp = AlertUpCheck.IsChecked == true;

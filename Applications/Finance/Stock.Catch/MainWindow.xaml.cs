@@ -618,7 +618,10 @@ public partial class MainWindow : Window
             return;
         }
 
-        var pick = new MinuteCsvWindow { Owner = this };
+        // 메인 창의 조회 기간을 초기값으로 전달(파싱 실패 시 기본값 — 최근 영업일 하루)
+        var pick = new MinuteCsvWindow(
+            TryParseDate(FromBox.Text, out var mf) ? mf : null,
+            TryParseDate(ToBox.Text, out var mt) ? mt : null) { Owner = this };
         if (pick.ShowDialog() != true) return;
 
         var folder = new OpenFolderDialog

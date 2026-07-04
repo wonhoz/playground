@@ -16,13 +16,21 @@ public partial class MinuteCsvWindow : Window
     /// <summary>과도한 KIS 호출 방지용 최대 기간(달력일).</summary>
     private const int MaxRangeDays = 45;
 
-    public MinuteCsvWindow()
+    /// <summary>초기 기간을 지정하면(메인 창의 조회 기간) 그 값으로 시작한다. 미지정 시 최근 영업일 하루.</summary>
+    public MinuteCsvWindow(DateTime? initFrom = null, DateTime? initTo = null)
     {
         InitializeComponent();
         NativeTheme.ApplyDarkTitleBar(this);
-        string d = LastBusinessDay(DateTime.Today).ToString("yyyy-MM-dd");
-        FromBox.Text = d;
-        ToBox.Text = d;
+
+        var to = LastBusinessDay(initTo?.Date is { } t && t <= DateTime.Today ? t : DateTime.Today);
+        var from = initFrom?.Date is { } f && f <= to ? f : to;
+        if ((to - from).TotalDays >= MaxRangeDays)
+        {
+            from = to.AddDays(-(MaxRangeDays - 1));
+            ErrorText.Text = $"⚠ 기간 최대 {MaxRangeDays}일 — 시작일을 보정했습니다.";
+        }
+        FromBox.Text = from.ToString("yyyy-MM-dd");
+        ToBox.Text = to.ToString("yyyy-MM-dd");
     }
 
     /// <summary>주말이면 직전 금요일로 보정.</summary>

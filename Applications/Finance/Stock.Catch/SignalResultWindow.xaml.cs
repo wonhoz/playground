@@ -148,10 +148,11 @@ public partial class SignalResultWindow : Window
             MinuteSignalKind.GoldenCross => 1,
             MinuteSignalKind.Rebound => 2,
             MinuteSignalKind.FollowThrough => 3,
-            MinuteSignalKind.TopWarn => 4,
-            MinuteSignalKind.DeadCross => 5,
-            MinuteSignalKind.WeakGoldenCross => 6,
-            _ => 7,
+            MinuteSignalKind.CrossTurn => 4,
+            MinuteSignalKind.TopWarn => 5,
+            MinuteSignalKind.DeadCross => 6,
+            MinuteSignalKind.WeakGoldenCross => 7,
+            _ => 8,
         };
 
         public string Icon => s.Kind switch
@@ -160,6 +161,7 @@ public partial class SignalResultWindow : Window
             MinuteSignalKind.GoldenCross => "✅",
             MinuteSignalKind.Rebound => "📈",
             MinuteSignalKind.FollowThrough => "↗",
+            MinuteSignalKind.CrossTurn => "🔁",
             MinuteSignalKind.TopWarn => "📉",
             MinuteSignalKind.DeadCross => "🔻",
             MinuteSignalKind.WeakGoldenCross => "⚠",
@@ -172,6 +174,7 @@ public partial class SignalResultWindow : Window
             MinuteSignalKind.GoldenCross => "반등 확인",
             MinuteSignalKind.Rebound => "바닥 반등",
             MinuteSignalKind.FollowThrough => "반등 지속",
+            MinuteSignalKind.CrossTurn => "전환 확인",
             MinuteSignalKind.TopWarn => "고점 경고",
             MinuteSignalKind.DeadCross => "데드크로스",
             MinuteSignalKind.WeakGoldenCross => "약한 확인",

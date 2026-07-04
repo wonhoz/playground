@@ -62,6 +62,11 @@ public sealed class MinuteSignalEngine(AppConfig config, PriceSourceRegistry reg
         public DateTime LastTrendTry = DateTime.MinValue;
         public bool BriefSent;                                     // 개장 브리핑(하루 1회) 전송 여부
         public Dictionary<int, State> Tf = new();                  // 타임프레임 → 판정 상태
+        // ── 라이브 전용 상태 ──
+        public DateTime LastTopWarnAt = DateTime.MinValue;         // 최근 고점 경고 시각(교차 알림용)
+        public DateTime LastCrossAt = DateTime.MinValue;           // 최근 전환 확인 발화(쿨다운 30분)
+        public int BoostLevel;                                     // 적응형 폴링: 0=기본 · 1=관찰(20초) · 2=주목(15초)
+        public DateTime BoostUntil = DateTime.MinValue;            // 부스트 만료(확인 창 종료 시각)
     }
 
     private readonly Dictionary<string, SymbolData> _symbols = new();
@@ -86,7 +91,9 @@ public sealed class MinuteSignalEngine(AppConfig config, PriceSourceRegistry reg
         if (now.TimeOfDay < new TimeSpan(9, 5, 0) || now.TimeOfDay > new TimeSpan(15, 40, 0)) return;
 
         if (!_symbols.TryGetValue(item.Symbol, out var sd)) _symbols[item.Symbol] = sd = new SymbolData();
-        if ((now - sd.LastFetch).TotalSeconds < 25) return;   // 폴링보다 잦은 재조회 방지
+        // 재조회 스로틀: 기본 25초, 적응형 부스트 중(1차 후 확인 창)엔 12초까지 촘촘하게.
+        int fetchGap = sd.BoostLevel > 0 && sd.BoostUntil > now ? 12 : 25;
+        if ((now - sd.LastFetch).TotalSeconds < fetchGap) return;
         sd.LastFetch = now;
 
         // 일봉 컨텍스트(추세점수·전일 종가)를 하루 1회 로드 — 실패 시 10분 후 재시도, 없어도 판정은 계속.
@@ -482,11 +489,85 @@ public sealed class MinuteSignalEngine(AppConfig config, PriceSourceRegistry reg
 
     // ───────────────────────── 발생/전송 ─────────────────────────
 
-    /// <summary>라이브 경로의 emit — 트레이 이벤트 + Slack 전송.</summary>
+    /// <summary>
+    /// 적응형 폴링 제안(초). 1차 반등 후 확인 창 동안만 관찰 20초 / 주목(★3) 15초로 단축을 제안하고,
+    /// GC 확인(어느 등급이든)·창 만료 시 기본으로 복귀한다. null=부스트 없음(기본 주기 사용).
+    /// 분봉은 1분에 1개 완성되므로 상시 단축은 낭비 — 확인 창에서만 GC 포착 지연을 줄인다.
+    /// </summary>
+    public int? SuggestedPollSeconds
+    {
+        get
+        {
+            var now = DateTime.Now;
+            int? best = null;
+            foreach (var sd in _symbols.Values)
+                if (sd.BoostLevel > 0 && sd.BoostUntil > now)
+                    best = Math.Min(best ?? int.MaxValue, sd.BoostLevel >= 2 ? 15 : 20);
+            return best;
+        }
+    }
+
+    /// <summary>라이브 경로의 emit — 라이브 상태 갱신(부스트·교차) 후 트레이 이벤트 + Slack 전송.</summary>
     private void Fire(MinuteSignal s)
     {
+        UpdateLiveState(s);
         Raised?.Invoke(s);
         _ = SafeSlackAsync(s);
+    }
+
+    /// <summary>
+    /// 라이브 시그널에 따른 적응형 폴링 부스트와 🔁 전환 확인(교차) 판정.
+    /// 부스트: 📈1차=20초 관찰(다이버전스면 15초), ↗직후양봉=15초 주목 — 확인 창(20분) 동안만.
+    /// GC(등급 무관)가 뜨면 확인이 소비된 것이므로 기본 주기로 복귀.
+    /// 교차: 고점 경고 시각을 기록해 두고, 반대 짝 종목(PairSymbol)의 반등 확인(✅🔥)이 15분 내
+    /// 따라오면 경고 종목 명의로 전환 확인을 발화(쿨다운 30분 · 실측 93% 하락 근거).
+    /// </summary>
+    private void UpdateLiveState(MinuteSignal s)
+    {
+        if (!_symbols.TryGetValue(s.Code, out var sd)) return;
+        var window = TimeSpan.FromMinutes(Math.Max(1, config.BottomConfirmWindowMinutes));
+
+        switch (s.Kind)
+        {
+            case MinuteSignalKind.Rebound:
+                sd.BoostLevel = Math.Max(sd.BoostLevel, s.Divergence ? 2 : 1);
+                sd.BoostUntil = s.Time + window;
+                break;
+            case MinuteSignalKind.FollowThrough:
+                sd.BoostLevel = 2;
+                sd.BoostUntil = s.Time + window;
+                break;
+            case MinuteSignalKind.GoldenCross or MinuteSignalKind.StrongGoldenCross or MinuteSignalKind.WeakGoldenCross:
+                sd.BoostLevel = 0;   // 확인 소비 → 기본 주기 복귀
+                if (s.Kind != MinuteSignalKind.WeakGoldenCross) TryCrossTurn(s);
+                break;
+            case MinuteSignalKind.TopWarn:
+                sd.LastTopWarnAt = s.Time;
+                sd.BoostLevel = 0;   // 방향 전환 — 반등 확인 대기 부스트 해제
+                break;
+            case MinuteSignalKind.DeadCross:
+                sd.BoostLevel = 0;
+                break;
+        }
+    }
+
+    /// <summary>반등 확인(✅🔥)이 뜬 종목의 반대 짝에서 15분 내 선행 고점 경고가 있었으면 전환 확인 발화.</summary>
+    private void TryCrossTurn(MinuteSignal gc)
+    {
+        // 확인이 뜬 종목(gc.Code)을 짝으로 지정한 경고 종목을 찾는다(경고→확인 순서만 유효 — 역순은 실측 실패).
+        var warnItem = config.Watchlist.FirstOrDefault(w =>
+            string.Equals(w.PairSymbol, gc.Code, StringComparison.OrdinalIgnoreCase));
+        if (warnItem is null || !_symbols.TryGetValue(warnItem.Symbol, out var wd)) return;
+
+        double sinceWarn = (gc.Time - wd.LastTopWarnAt).TotalMinutes;
+        if (sinceWarn is < 0 or > 15) return;
+        if ((gc.Time - wd.LastCrossAt).TotalMinutes < 30) return;   // 쿨다운
+        wd.LastCrossAt = gc.Time;
+
+        decimal warnPrice = wd.Bars.Count > 0 ? wd.Bars.Values.Last().Close : 0;   // 경고(매도 대상) 종목 현재가
+        Fire(new MinuteSignal(warnItem.Symbol, warnItem.Name, MinuteSignalKind.CrossTurn, warnPrice,
+            $"고점 경고({wd.LastTopWarnAt:HH:mm}) 후 {sinceWarn:0}분 — 반대 종목 {gc.Display} 반등 확인 · 방향 전환 교차 검증",
+            gc.Time, gc.Timeframe));
     }
 
     private async Task SafeSlackAsync(MinuteSignal s)

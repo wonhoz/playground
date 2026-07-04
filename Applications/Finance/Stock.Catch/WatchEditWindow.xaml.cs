@@ -38,6 +38,7 @@ public partial class WatchEditWindow : Window
         BottomCheck.IsChecked = item.BottomAlert;
         TopCheck.IsChecked = item.TopAlert;
         ChannelBox.Text = item.SlackChannel;
+        PairBox.Text = item.PairSymbol;
         SelectSource(item.Source);
         SelectExchange(item.Exchange);
         ApplyIndexMode();
@@ -174,6 +175,12 @@ public partial class WatchEditWindow : Window
         }
 
         _item.SlackChannel = NormalizedChannel();
+
+        // 반대 짝 코드(교차 알림) — 비우면 미사용, 형식만 검증.
+        string pair = PairBox.Text.Trim().ToUpperInvariant();
+        if (pair.Length > 0 && (pair.Length is < 5 or > 6 || !pair.All(char.IsLetterOrDigit)))
+        { Error("반대 짝 코드는 5~6자리 영숫자입니다(예: 0197X0). 비우면 사용 안 함."); return; }
+        _item.PairSymbol = pair;
 
         _item.AlertUp = AlertUpCheck.IsChecked == true;
         _item.AlertDown = AlertDownCheck.IsChecked == true;

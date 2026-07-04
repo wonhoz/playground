@@ -150,6 +150,7 @@ public partial class MainWindow : Window
             Models.MinuteSignalKind.StrongGoldenCross => "🔥 강력 확인 (골든크로스)",
             Models.MinuteSignalKind.WeakGoldenCross => "⚠ 약한 확인 (횡보성 크로스)",
             Models.MinuteSignalKind.TopWarn => "📉 고점 경고 시그널",
+            Models.MinuteSignalKind.CrossTurn => "🔁 전환 확인 (교차)",
             _ => "🔻 하락 확인 (데드크로스)",
         };
         // 풍선도 Slack과 동일하게 종합 판정 우선(즉답형) — 지표 상세는 시그널 로그·분석 창에서.

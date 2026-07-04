@@ -44,6 +44,13 @@ public sealed class WatchItem
     /// <summary>이 종목 전용 Slack 채널(예: "#stock-sk"). 비우면 전역 기본 채널(설정의 SlackChannel)을 사용한다.</summary>
     public string SlackChannel { get; set; } = string.Empty;
 
+    /// <summary>
+    /// 반대 방향 짝 종목 코드(레버리지↔인버스 · 예: 0193T0의 짝 = 0197X0). 지정하면 이 종목의
+    /// 고점 경고 후 15분 내 짝 종목 반등 확인(✅🔥)이 뜰 때 "🔁 전환 확인" 교차 알림을 보낸다
+    /// (실측 14일: 30분 내 1% 이상 하락 93% · 평균 −4.1%). 비우면 교차 알림 없음.
+    /// </summary>
+    public string PairSymbol { get; set; } = string.Empty;
+
     /// <summary>그리드 표시용: 전용 조건이 있으면 요약, 없으면 "전역".</summary>
     public string RulesLabel => Rules.Count > 0 ? TrendRule.Summary(Rules) : "전역";
 

@@ -72,7 +72,10 @@ public sealed class WatchlistMonitor(AppConfig config, PriceSourceRegistry regis
             catch (OperationCanceledException) { break; }
             catch (Exception ex) { StatusChanged?.Invoke("오류: " + ex.Message); }
 
-            try { await Task.Delay(TimeSpan.FromSeconds(Math.Max(10, config.WatchPollIntervalSeconds)), ct); }
+            // 적응형 폴링: 1차 반등 후 확인 창 동안 엔진이 20/15초 단축을 제안(기본보다 길어지진 않음).
+            int baseSec = Math.Max(10, config.WatchPollIntervalSeconds);
+            int delay = minuteSignal.SuggestedPollSeconds is { } boost ? Math.Min(baseSec, boost) : baseSec;
+            try { await Task.Delay(TimeSpan.FromSeconds(delay), ct); }
             catch (OperationCanceledException) { break; }
         }
     }

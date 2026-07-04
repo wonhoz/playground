@@ -10,7 +10,16 @@
 /// GC 5건 중 가짜 1건(07-02 12:35)은 1차→GC 상승률 +0.51%로 진짜(+0.90~6.73%)와 분리 —
 /// 모멘텀 임계(기본 0.8%)가 강/약 확인을 가른다(트리거 봉 장대양봉은 오히려 가짜에서 큼).
 /// </summary>
-public enum MinuteSignalKind { MorningBrief, Rebound, FollowThrough, GoldenCross, StrongGoldenCross, WeakGoldenCross, TopWarn, DeadCross }
+public enum MinuteSignalKind
+{
+    MorningBrief, Rebound, FollowThrough, GoldenCross, StrongGoldenCross, WeakGoldenCross, TopWarn, DeadCross,
+    /// <summary>
+    /// 🔁 전환 확인(교차): X의 고점 경고 후 15분 내 반대 짝 종목(레버리지↔인버스)의 반등 확인(✅🔥)이
+    /// 따라온 케이스 — 실측(14일·27건): 30분 내 1% 이상 하락 93% · 평균 낙폭 −4.1%(경고 단독 43~67%·−1.3~−2.6%).
+    /// 경고가 확인보다 늦은 역순은 실측 실패라 제외. 라이브 전용(백테스트는 종목 단위라 미발생).
+    /// </summary>
+    CrossTurn
+}
 
 /// <summary>
 /// 1분봉 시그널 알림 1건(관심 종목 · 국내).
@@ -31,8 +40,8 @@ public sealed record MinuteSignal(
 {
     public string Display => string.IsNullOrEmpty(Name) ? Code : $"{Name} ({Code})";
 
-    /// <summary>하락 계열(고점 경고·데드크로스) 여부 — 트레이 warning 표시 등에 사용.</summary>
-    public bool IsBearish => Kind is MinuteSignalKind.TopWarn or MinuteSignalKind.DeadCross;
+    /// <summary>하락 계열(고점 경고·데드크로스·전환 확인) 여부 — 트레이 warning 표시 등에 사용.</summary>
+    public bool IsBearish => Kind is MinuteSignalKind.TopWarn or MinuteSignalKind.DeadCross or MinuteSignalKind.CrossTurn;
 
     /// <summary>알림 구분용 타임프레임 접두 — 1분봉은 생략, 롤링 봉은 "[N분] ".</summary>
     public string TfLabel => Timeframe > 1 ? $"[{Timeframe}분] " : "";
@@ -57,6 +66,7 @@ public sealed record MinuteSignal(
     {
         get
         {
+            if (Kind == MinuteSignalKind.CrossTurn) return "🔁 전환 확인 — 매도 타이밍 (실측 93% 하락 · 30분 평균 −4.1%)";
             if (Kind == MinuteSignalKind.TopWarn) return "⚠️ 경계 — 과열 이탈 · 보유 중이면 익절 검토";
             if (Kind == MinuteSignalKind.DeadCross) return "🔻 하락 확인 — 반등 무효 · 정리/관망";
             if (Kind == MinuteSignalKind.MorningBrief) return Detail;

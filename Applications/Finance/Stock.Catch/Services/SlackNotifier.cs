@@ -159,6 +159,7 @@ public sealed class SlackNotifier(AppConfig config) : IDisposable
             MinuteSignalKind.StrongGoldenCross => (":rotating_light::fire:", "강력 확인 (골든크로스)"),
             MinuteSignalKind.WeakGoldenCross => (":warning:", "약한 확인 (횡보성 크로스)"),
             MinuteSignalKind.TopWarn => (":rotating_light::chart_with_downwards_trend:", "고점 경고 시그널"),
+            MinuteSignalKind.CrossTurn => (":rotating_light::arrows_counterclockwise:", "전환 확인 (교차)"),
             _ => (":rotating_light::small_red_triangle_down:", "하락 확인 (데드크로스)"),
         };
         var sb = new StringBuilder();

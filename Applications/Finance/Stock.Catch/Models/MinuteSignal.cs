@@ -23,10 +23,14 @@ public sealed record MinuteSignal(
     MinuteSignalKind Kind,
     decimal Price,
     string Detail,
-    DateTime Time)
+    DateTime Time,
+    int Timeframe = 1)
 {
     public string Display => string.IsNullOrEmpty(Name) ? Code : $"{Name} ({Code})";
 
     /// <summary>하락 계열(고점 경고·데드크로스) 여부 — 트레이 warning 표시 등에 사용.</summary>
     public bool IsBearish => Kind is MinuteSignalKind.TopWarn or MinuteSignalKind.DeadCross;
+
+    /// <summary>알림 구분용 타임프레임 접두 — 1분봉은 생략, 롤링 봉은 "[N분] ".</summary>
+    public string TfLabel => Timeframe > 1 ? $"[{Timeframe}분] " : "";
 }

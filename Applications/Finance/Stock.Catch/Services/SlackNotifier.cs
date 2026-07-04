@@ -139,7 +139,7 @@ public sealed class SlackNotifier(AppConfig config) : IDisposable
             _ => (":rotating_light::small_red_triangle_down:", "하락 확인 (데드크로스)"),
         };
         var sb = new StringBuilder();
-        sb.AppendLine($"{emoji} *{head}* · *{s.Display}* · *{s.Price:N0}원* ({s.Time:HH:mm})");
+        sb.AppendLine($"{emoji} *{s.TfLabel}{head}* · *{s.Display}* · *{s.Price:N0}원* ({s.Time:HH:mm})");
         sb.AppendLine(s.Detail);
         await PostAsync(BuildPayload(sb.ToString()), ct);
     }

@@ -1,34 +1,31 @@
-﻿using Stock.Catch.Indicators;
+using Stock.Catch.Indicators;
 using Stock.Catch.Models;
 
 namespace Stock.Catch.Services;
 
 /// <summary>
-/// 관심 종목의 <b>1분봉 시그널</b> 알림 엔진(국내 · 당일 1분봉 · KIS 분봉 필요).
-/// 바닥·고점이 같은 분봉 캐시를 공유하므로 한 종목에 둘 다 켜도 KIS 호출은 폴링당 1회다.
+/// 관심 종목의 <b>멀티 타임프레임 1분봉 시그널</b> 알림 엔진(국내 · 당일 1분봉 · KIS 분봉 필요).
+/// 1분봉을 기준으로 3/5/10/15분 <b>롤링(convolution) 봉</b>을 합성해 타임프레임별로 독립 판정한다
+/// — 롤링 봉은 매 1분마다 최근 N분을 집계(O=첫 시가, H/L=구간 최고/최저, C=마지막 종가, V=합)하므로
+/// 고정 경계 봉과 달리 매분 갱신되는 "약간 멀리서 본" 지표를 제공한다.
 ///
 /// <para><b>바닥 반등 시그널</b> (급락 → 볼린저 하단 터치 → 반등):</para>
 /// <list type="number">
-/// <item>셋업: 최근 N봉(기본 5) 내 저가가 볼린저(20,2σ) 하단 터치/이탈 + 그 구간 최저 RSI(14)가 과매도(기본 ≤30)</item>
-/// <item>트리거(1차): 완성봉이 밴드 안 복귀 마감 + %b ≥ 하한(기본 0.15 · 밴드폭의 15% 이상 회복) + 상승봉
-///       + RSI 상승 전환 + 터치 구간 최대 거래량 ≥ 20봉 평균 × 배수(기본 2.0)</item>
-/// <item>밴드워킹 필터: 최근 10봉 중 하단 터치 봉이 임계(기본 4) 초과면 "지속 하락 중"으로 보고 스킵
-///       (진짜 V바닥은 터치가 1~3봉에 집중 · 완만한 흘러내림은 바닥이 아님)</item>
-/// <item>확인(2차): 1차 후 M분(기본 20) 내 MA5가 MA20 상향 돌파(골든크로스 · 옵션)</item>
+/// <item>셋업: 최근 N봉(기본 5) 내 저가가 볼린저(20,2σ) 하단 터치/이탈 + 그 구간 최저 RSI(14) 과매도(기본 ≤35)</item>
+/// <item>트리거(1차): 밴드 안 복귀 마감 + %b ≥ 하한(기본 0.15) + 상승봉 + RSI 상승 전환
+///       + 터치 구간 최대 거래량 ≥ 20봉 평균 × 배수(기본 1.5)</item>
+/// <item>밴드워킹 필터: 최근 10봉 중 하단 터치 봉이 임계(기본 7) 초과면 지속 하락으로 스킵</item>
+/// <item>확인(2차): 1차 후 M분×tf 내 MA5↗MA20 골든크로스 — 모멘텀(1차 대비 상승률)로
+///       🔥강력(≥2.0%)/✅강(≥0.8%)/⚠약 등급. 직후 양봉 조기 확인은 1분봉 전용.</item>
 /// </list>
 ///
-/// <para><b>고점 경고 시그널</b> (상단 밴드워킹 → 이탈, 바닥의 거울상):</para>
-/// <list type="number">
-/// <item>셋업: 최근 N봉(기본 5) 내 고가가 상단 터치 ≥ 최소 봉 수(기본 2 · 밴드워킹 확인)
-///       + 그 구간 최고 RSI가 과매수(기본 ≥70)</item>
-/// <item>트리거(1차): 완성봉이 밴드 안 복귀 마감(%b ≤ 기본 0.8) + 하락봉 + RSI 하향 전환
-///       + 소진 증거(구간 내 긴 윗꼬리 봉 또는 클라이맥스 거래량 ≥ 평균×배수) 중 1개 이상</item>
-/// <item>확인(2차): 1차 후 M분 내 MA5가 MA20 하향 돌파(데드크로스 · 옵션)</item>
-/// </list>
+/// <para><b>고점 경고 시그널</b>: 상단 밴드워킹(≥2봉) + RSI 과매수(≥70) → 밴드 안 복귀 하락봉
+/// + RSI 하향 전환 + 소진 증거(긴 윗꼬리/클라이맥스 거래량) → M분×tf 내 데드크로스 확인.</para>
 ///
-/// 판정은 <b>완성봉</b>(현재 형성 중인 분봉 제외)에서만 하고 같은 봉은 재판정하지 않는다(엣지).
-/// 1차 알림 후 방향별 쿨다운(기본 15분) 동안 재알림하지 않는다. 분봉은 폴링마다 최신 1페이지(30봉)만
-/// 증분 병합해 KIS 유량 부담을 최소화한다. 알림은 <see cref="Raised"/>(트레이)와 Slack으로 동시 전송.
+/// 판정은 <b>완성봉</b>에서만(같은 봉 재판정 없음 · 엣지), 쿨다운·확인 창은 타임프레임에 비례해
+/// 스케일(예: 15분봉 쿨다운 = 15분 × 15). 일봉 추세점수·전일 종가(갭)는 컨텍스트로 표기만 한다
+/// (강등 아님 — 실측상 최고 시그널이 폭락 직후(추세 −1.00)에 발생). 알림은 <see cref="Raised"/>
+/// (트레이)와 Slack으로 동시 전송하며 타임프레임을 [N분] 접두로 구분한다.
 /// </summary>
 public sealed class MinuteSignalEngine(AppConfig config, PriceSourceRegistry registry, SlackNotifier slack)
 {
@@ -37,29 +34,43 @@ public sealed class MinuteSignalEngine(AppConfig config, PriceSourceRegistry reg
 
     public event Action<MinuteSignal>? Raised;
 
+    /// <summary>타임프레임별 판정 상태(쿨다운·확인 대기·크로스 추적).</summary>
     private sealed class State
     {
-        public SortedDictionary<DateTime, Candle> Bars = new();   // 당일 1분봉 캐시
         public DateTime LastEvalBar = DateTime.MinValue;          // 마지막 판정 완성봉 시각
-        public DateTime LastFetch = DateTime.MinValue;            // 조회 스로틀
         // 바닥(반등) 상태
         public DateTime BottomFiredAt = DateTime.MinValue;        // 1차 알림 봉 시각(쿨다운·확인 창 기준)
         public decimal BottomFiredPrice;                           // 1차 알림 봉 종가(GC 모멘텀 판정 기준)
         public bool AwaitGolden;                                   // 2차(골든크로스) 확인 대기
-        public bool AwaitFollow;                                   // 직후 봉 양봉 지속(조기 확인) 대기
+        public bool AwaitFollow;                                   // 직후 봉 양봉 지속(조기 확인) 대기 — 1분봉 전용
         // 고점(경고) 상태
         public DateTime TopFiredAt = DateTime.MinValue;
         public bool AwaitDead;                                     // 2차(데드크로스) 확인 대기
         // MA5/MA20 관계 추적(골든·데드 공용)
         public bool PrevBelow;                                     // 직전 완성봉 MA5≤MA20 여부
         public bool HasPrevRel;
-        // 일봉 추세 게이트(하루 1회 계산 · 실패 시 10분 후 재시도)
-        public double? DayTrend;                                   // 래더 추세점수(−1~+1 · null=미로드)
-        public DateTime LastTrendTry = DateTime.MinValue;
     }
 
-    private readonly Dictionary<string, State> _states = new();
+    /// <summary>종목 단위 공용 데이터(분봉 캐시·일봉 컨텍스트) + 타임프레임별 상태.</summary>
+    private sealed class SymbolData
+    {
+        public SortedDictionary<DateTime, Candle> Bars = new();   // 당일 1분봉 캐시
+        public DateTime LastFetch = DateTime.MinValue;            // 조회 스로틀
+        public double? DayTrend;                                   // 일봉 추세점수(−1~+1 · 컨텍스트)
+        public decimal PrevClose;                                  // 전일 정규 종가(갭 컨텍스트 · 0=미로드)
+        public DateTime LastTrendTry = DateTime.MinValue;
+        public Dictionary<int, State> Tf = new();                  // 타임프레임 → 판정 상태
+    }
+
+    private readonly Dictionary<string, SymbolData> _symbols = new();
     private DateOnly _day = DateOnly.FromDateTime(DateTime.Today);
+
+    /// <summary>설정의 시그널 타임프레임 목록 정제(1~60분 · 중복 제거 · 오름차순 · 비면 1분).</summary>
+    private int[] Timeframes()
+    {
+        var list = (config.SignalTimeframes ?? new()).Where(t => t is >= 1 and <= 60).Distinct().OrderBy(t => t).ToArray();
+        return list.Length > 0 ? list : new[] { 1 };
+    }
 
     /// <summary>국내 종목·옵트인(바닥/고점 중 1개 이상)일 때만 호출한다(호출 측에서 게이팅). KIS 키가 없으면 조용히 건너뛴다.</summary>
     public async Task EvaluateAsync(WatchItem item, CancellationToken ct = default)
@@ -72,15 +83,14 @@ public sealed class MinuteSignalEngine(AppConfig config, PriceSourceRegistry reg
         // 정규장(+마감 직후 여유)만. BB(20)이 서려면 어차피 09:20대 이후에나 판정 가능하다.
         if (now.TimeOfDay < new TimeSpan(9, 5, 0) || now.TimeOfDay > new TimeSpan(15, 40, 0)) return;
 
-        if (!_states.TryGetValue(item.Symbol, out var st)) _states[item.Symbol] = st = new State();
-        if ((now - st.LastFetch).TotalSeconds < 25) return;   // 폴링보다 잦은 재조회 방지
-        st.LastFetch = now;
+        if (!_symbols.TryGetValue(item.Symbol, out var sd)) _symbols[item.Symbol] = sd = new SymbolData();
+        if ((now - sd.LastFetch).TotalSeconds < 25) return;   // 폴링보다 잦은 재조회 방지
+        sd.LastFetch = now;
 
-        // 일봉 추세 게이트: 완성 일봉(오늘 제외) 기반 래더 추세점수를 하루 1회 계산.
-        // 실측 근거: 일봉 하락 대세 종목(인버스)의 GC 승률 33% — 역추세 반등을 강등 표기.
-        if (config.BottomTrendGate && st.DayTrend is null && (now - st.LastTrendTry).TotalMinutes >= 10)
+        // 일봉 컨텍스트(추세점수·전일 종가)를 하루 1회 로드 — 실패 시 10분 후 재시도, 없어도 판정은 계속.
+        if (config.BottomTrendGate && sd.DayTrend is null && (now - sd.LastTrendTry).TotalMinutes >= 10)
         {
-            st.LastTrendTry = now;
+            sd.LastTrendTry = now;
             try
             {
                 var daily = await registry.KrDailyAsync(item.Symbol, 40, ct);
@@ -91,53 +101,88 @@ public sealed class MinuteSignalEngine(AppConfig config, PriceSourceRegistry reg
                     var r = LadderCalculator.Calculate(
                         new StockSeries(item.Symbol, "", "", SourceKind.Naver, win),
                         new LadderParams(0, 0, UseTrend: true));
-                    st.DayTrend = r.TrendScore;
+                    sd.DayTrend = r.TrendScore;
+                    sd.PrevClose = completed[^1].Close;
                 }
             }
-            catch { /* 일봉 조회 실패 → 10분 후 재시도(게이트 없이 판정 계속) */ }
+            catch { /* 일봉 조회 실패 → 10분 후 재시도 */ }
         }
 
         // 분봉 수집: 캐시가 얕으면 워밍업(최대 ~100봉), 이후엔 최신 1페이지(30봉)만 증분 병합.
         List<Candle> page;
-        try { page = await registry.KisRecentMinutesAsync(item.Symbol, st.Bars.Count < 45 ? 100 : 30, ct); }
+        try { page = await registry.KisRecentMinutesAsync(item.Symbol, sd.Bars.Count < 45 ? 100 : 30, ct); }
         catch (OperationCanceledException) { throw; }
         catch { return; }   // 유량 초과 등 일시 실패 → 다음 폴링에서 재시도
         foreach (var b in page)
-            if (b.Date.Date == DateTime.Today) st.Bars[b.Date] = b;
+            if (b.Date.Date == DateTime.Today) sd.Bars[b.Date] = b;
 
         // 완성봉만(현재 형성 중인 분봉 제외).
         var nowMinute = new DateTime(now.Year, now.Month, now.Day, now.Hour, now.Minute, 0);
-        var bars = st.Bars.Values.Where(b => b.Date < nowMinute).ToList();
-        int last = bars.Count - 1;
-        if (last < 25) return;   // BB20 + RSI14 최소 표본
+        var bars = sd.Bars.Values.Where(b => b.Date < nowMinute).ToList();
+        if (bars.Count < 26) return;   // BB20 + RSI14 최소 표본(1분봉 기준)
 
-        // 새로 완성된 봉들만 순서대로 판정(폴링 간격 동안 여러 봉이 쌓였어도 놓치지 않음).
-        int start = 0;
-        while (start <= last && bars[start].Date <= st.LastEvalBar) start++;
-        ScanBars(item, st, bars, start, Fire, item.BottomAlert, item.TopAlert);
-        st.LastEvalBar = bars[last].Date;
+        foreach (int tf in Timeframes())
+        {
+            var tfBars = RollBars(bars, tf);
+            if (tfBars.Count < 26) continue;   // 해당 타임프레임 표본 부족(장 초반 상위 TF)
+            if (!sd.Tf.TryGetValue(tf, out var st)) sd.Tf[tf] = st = new State();
+
+            int start = 0;
+            while (start < tfBars.Count && tfBars[start].Date <= st.LastEvalBar) start++;
+            ScanBars(item, st, tfBars, start, Fire, item.BottomAlert, item.TopAlert, tf, sd.DayTrend, sd.PrevClose);
+            st.LastEvalBar = tfBars[^1].Date;
+        }
     }
 
     /// <summary>
-    /// 과거 1분봉 목록을 라이브와 <b>동일한 조건</b>(쿨다운·확인 창·필터 포함)으로 스캔해
+    /// 과거 1분봉 목록을 라이브와 <b>동일한 조건</b>(타임프레임·쿨다운·확인 창·필터 포함)으로 스캔해
     /// 알림이 발생했을 시점 목록을 반환한다(알림 전송·상태 오염 없음). 분봉 CSV 백테스트용.
-    /// dayTrend를 주면 라이브와 동일하게 일봉 추세 게이트도 적용한다(null=게이트 없음).
+    /// dayTrend/prevClose를 주면 컨텍스트(일봉추세·갭)도 라이브와 동일하게 표기된다.
     /// </summary>
-    public List<MinuteSignal> Backtest(IReadOnlyList<Candle> minuteBars, string code, string name, double? dayTrend = null)
+    public List<MinuteSignal> Backtest(IReadOnlyList<Candle> minuteBars, string code, string name,
+        double? dayTrend = null, decimal prevClose = 0m)
     {
         var bars = minuteBars.OrderBy(b => b.Date).ToList();
         var result = new List<MinuteSignal>();
         if (bars.Count < 26) return result;
 
         var item = new WatchItem { Symbol = code, Name = name };
-        var st = new State { DayTrend = dayTrend };   // 라이브 상태와 분리된 임시 상태
-        ScanBars(item, st, bars, 0, result.Add, bottom: true, top: true);
+        foreach (int tf in Timeframes())
+        {
+            var tfBars = RollBars(bars, tf);
+            if (tfBars.Count < 26) continue;
+            var st = new State();   // 라이브 상태와 분리된 임시 상태
+            ScanBars(item, st, tfBars, 0, result.Add, bottom: true, top: true, tf, dayTrend, prevClose);
+        }
+        return result.OrderBy(s => s.Time).ThenBy(s => s.Timeframe).ToList();
+    }
+
+    /// <summary>
+    /// 1분봉 → N분 롤링(convolution) 봉 합성: 각 1분 완성 시각 t에 대해 [t−N+1, t] 구간을 집계.
+    /// 봉 시각은 구간 마지막(t) — 매분 갱신되므로 상위 타임프레임도 1분 해상도로 판정된다.
+    /// </summary>
+    private static List<Candle> RollBars(List<Candle> bars, int n)
+    {
+        if (n <= 1) return bars;
+        var result = new List<Candle>(Math.Max(0, bars.Count - n + 1));
+        for (int i = n - 1; i < bars.Count; i++)
+        {
+            decimal high = decimal.MinValue, low = decimal.MaxValue;
+            long vol = 0;
+            for (int k = i - n + 1; k <= i; k++)
+            {
+                if (bars[k].High > high) high = bars[k].High;
+                if (bars[k].Low < low) low = bars[k].Low;
+                vol += bars[k].Volume;
+            }
+            result.Add(new Candle(bars[i].Date, bars[i - n + 1].Open, high, low, bars[i].Close, vol));
+        }
         return result;
     }
 
     /// <summary>지표 일괄 계산 후 fromIdx부터 완성봉을 순서대로 판정 — 라이브(Fire)·백테스트(수집) 공용 코어.</summary>
     private void ScanBars(WatchItem item, State st, List<Candle> bars, int fromIdx,
-        Action<MinuteSignal> emit, bool bottom, bool top)
+        Action<MinuteSignal> emit, bool bottom, bool top, int tf, double? dayTrend, decimal prevClose)
     {
         var closes = bars.Select(b => (double)b.Close).ToList();
         var (upper, _, lower) = IndicatorMath.Bollinger(closes);
@@ -148,16 +193,17 @@ public sealed class MinuteSignalEngine(AppConfig config, PriceSourceRegistry reg
 
         for (int i = Math.Max(fromIdx, 21); i < bars.Count; i++)
         {
-            EvaluateCross(item, st, bars, i, ma5, ma20, emit);
-            if (bottom) EvaluateFollow(item, st, bars, i, emit);
-            if (bottom) EvaluateBottom(item, st, bars, i, upper, lower, rsi, volMa, emit);
-            if (top) EvaluateTop(item, st, bars, i, upper, lower, rsi, volMa, emit);
+            EvaluateCross(item, st, bars, i, ma5, ma20, emit, tf, dayTrend, prevClose);
+            if (bottom && tf == 1) EvaluateFollow(item, st, bars, i, emit);   // 직후 양봉은 1분봉 전용
+            if (bottom) EvaluateBottom(item, st, bars, i, upper, lower, rsi, volMa, emit, tf, dayTrend);
+            if (top) EvaluateTop(item, st, bars, i, upper, lower, rsi, volMa, emit, tf);
         }
     }
 
     /// <summary>
     /// 1차 반등 직후 첫 완성봉의 양봉 지속(조기 확인) 판정 — 골든크로스보다 1~5분 빠른 힌트.
-    /// 실측: 진짜 반등 3/4에서 직후 양봉, 가짜 2/3에서 직후 음봉/보합.
+    /// 실측: 진짜 반등 3/4에서 직후 양봉, 가짜 2/3에서 직후 음봉/보합. 롤링 봉은 구간이 겹쳐
+    /// 판정이 무뎌지므로 1분봉에서만 사용한다.
     /// </summary>
     private void EvaluateFollow(WatchItem item, State st, List<Candle> bars, int i, Action<MinuteSignal> emit)
     {
@@ -177,17 +223,17 @@ public sealed class MinuteSignalEngine(AppConfig config, PriceSourceRegistry reg
 
     // ───────────────────────── 2차: 골든/데드크로스 확인 ─────────────────────────
 
-    /// <summary>MA5/MA20 관계를 봉마다 추적해 1차 시그널 후 확인 창 내 크로스를 알림한다.</summary>
+    /// <summary>MA5/MA20 관계를 봉마다 추적해 1차 시그널 후 확인 창(×tf) 내 크로스를 알림한다.</summary>
     private void EvaluateCross(WatchItem item, State st, List<Candle> bars, int i, double[] ma5, double[] ma20,
-        Action<MinuteSignal> emit)
+        Action<MinuteSignal> emit, int tf, double? dayTrend, decimal prevClose)
     {
         if (double.IsNaN(ma5[i]) || double.IsNaN(ma20[i])) return;
         var bar = bars[i];
         bool below = ma5[i] <= ma20[i];
 
-        // 확인 창 만료 처리
-        int goldenWin = Math.Max(1, config.BottomConfirmWindowMinutes);
-        int deadWin = Math.Max(1, config.TopConfirmWindowMinutes);
+        // 확인 창 만료 처리 — 타임프레임 비례(15분봉이면 MA 크로스도 그만큼 느리다).
+        int goldenWin = Math.Max(1, config.BottomConfirmWindowMinutes) * tf;
+        int deadWin = Math.Max(1, config.TopConfirmWindowMinutes) * tf;
         if (st.AwaitGolden && (bar.Date - st.BottomFiredAt).TotalMinutes > goldenWin) st.AwaitGolden = false;
         if (st.AwaitDead && (bar.Date - st.TopFiredAt).TotalMinutes > deadWin) st.AwaitDead = false;
 
@@ -196,52 +242,54 @@ public sealed class MinuteSignalEngine(AppConfig config, PriceSourceRegistry reg
             if (st.AwaitGolden && st.PrevBelow && !below)
             {
                 st.AwaitGolden = false;
-                // GC 모멘텀 필터: 1차 이후 상승률이 임계(기본 0.8%) 미달이면 "약한 확인"으로 강등.
-                // 실측: 가짜 GC(07-02 12:35)는 +0.51%, 진짜는 +0.90~6.73% — 횡보성 크로스 구분.
+                // GC 모멘텀 등급: 1차 이후 상승률 — 실측상 건당 기대수익이 모멘텀 구간별 단조 증가
+                // (0.8~1.5% +0.11 → 1.5~2.5% +0.26 → 2.5%+ +0.41%/건). 일봉 추세는 표기만(강등 아님).
                 double rise = st.BottomFiredPrice > 0 ? (double)(bar.Close / st.BottomFiredPrice - 1) * 100 : 0;
                 bool weakMomentum = rise < config.BottomGcMinRisePct;
                 string reason = weakMomentum ? $" (모멘텀 {config.BottomGcMinRisePct:0.0#}% 미달 — 횡보성 크로스 주의)" : "";
-                // 강력 확인(🔥): 모멘텀 상위 구간 — 실측상 건당 기대수익이 임계 이상에서 단조 증가
-                // (0.8~1.5% +0.11 → 1.5~2.5% +0.26 → 2.5%+ +0.41%/건). "확실한 하나"의 계량 프록시.
-                // 등급은 모멘텀만으로 결정한다 — 일봉 추세 강등은 전수 소급 검증에서 폐기:
-                // 최고 시그널(07-03 10:05 +6.73%)이 폭락 직후(추세 -1.00)에 나왔고, 추세 +1.00에서
-                // 통과한 GC들의 실전 수익 합계가 ≈0이라 방향성이 없음 → 추세는 컨텍스트 표기만.
                 var kind = weakMomentum ? MinuteSignalKind.WeakGoldenCross
                     : rise >= config.BottomGcStrongPct ? MinuteSignalKind.StrongGoldenCross
                     : MinuteSignalKind.GoldenCross;
-                // 사람 판단 보조 컨텍스트: 당일 시가 대비 등락·당일 저점 대비 반등폭·일봉 추세점수
-                // (차트 없이 "폭락 후 V바닥 초입"인지 "고점 추격"인지 감 잡기).
-                double dayChg = bars[0].Open > 0 ? (double)(bar.Close / bars[0].Open - 1) * 100 : 0;
-                decimal dayLow = bars.Take(i + 1).Min(b => b.Low);
-                double fromLow = dayLow > 0 ? (double)(bar.Close / dayLow - 1) * 100 : 0;
-                string trendCtx = config.BottomTrendGate && st.DayTrend is { } dt2 ? $" · 일봉추세 {dt2:+0.00;-0.00}" : "";
                 emit(new MinuteSignal(item.Symbol, item.Name, kind, bar.Close,
                     $"MA5 {ma5[i]:N0} > MA20 {ma20[i]:N0} 돌파 · 1차({st.BottomFiredAt:HH:mm}) 후 {(bar.Date - st.BottomFiredAt).TotalMinutes:0}분 · " +
-                    $"{rise:+0.00;-0.00}%{reason} · 당일 {dayChg:+0.0;-0.0}% · 저점比 +{fromLow:0.0}%{trendCtx}", bar.Date));
+                    $"{rise:+0.00;-0.00}%{reason}{Context(bars, i, dayTrend, prevClose)}", bar.Date, tf));
             }
             if (st.AwaitDead && !st.PrevBelow && below)
             {
                 st.AwaitDead = false;
                 emit(new MinuteSignal(item.Symbol, item.Name, MinuteSignalKind.DeadCross, bar.Close,
-                    $"MA5 {ma5[i]:N0} < MA20 {ma20[i]:N0} 돌파 · 경고({st.TopFiredAt:HH:mm}) 후 {(bar.Date - st.TopFiredAt).TotalMinutes:0}분", bar.Date));
+                    $"MA5 {ma5[i]:N0} < MA20 {ma20[i]:N0} 돌파 · 경고({st.TopFiredAt:HH:mm}) 후 {(bar.Date - st.TopFiredAt).TotalMinutes:0}분", bar.Date, tf));
             }
         }
         st.PrevBelow = below;
         st.HasPrevRel = true;
     }
 
+    /// <summary>사람 판단 보조 컨텍스트: 갭·당일 등락·저점比·일봉추세 — "폭락 후 V바닥 초입"인지 식별용.</summary>
+    private string Context(List<Candle> bars, int i, double? dayTrend, decimal prevClose)
+    {
+        var bar = bars[i];
+        double dayChg = bars[0].Open > 0 ? (double)(bar.Close / bars[0].Open - 1) * 100 : 0;
+        decimal dayLow = bars.Take(i + 1).Min(b => b.Low);
+        double fromLow = dayLow > 0 ? (double)(bar.Close / dayLow - 1) * 100 : 0;
+        string gap = prevClose > 0 && bars[0].Open > 0
+            ? $" · 갭 {(double)(bars[0].Open / prevClose - 1) * 100:+0.0;-0.0}%" : "";
+        string trend = config.BottomTrendGate && dayTrend is { } dt ? $" · 일봉추세 {dt:+0.00;-0.00}" : "";
+        return $"{gap} · 당일 {dayChg:+0.0;-0.0}% · 저점比 +{fromLow:0.0}%{trend}";
+    }
+
     // ───────────────────────── 1차: 바닥 반등 ─────────────────────────
 
     /// <summary>완성봉 1개(인덱스 i)에 대한 바닥 반등 판정. 밴드워킹·%b 필터로 지속 하락·약반등을 걸러낸다.</summary>
     private void EvaluateBottom(WatchItem item, State st, List<Candle> bars, int i,
-        double[] upper, double[] lower, double[] rsi, double[] volMa, Action<MinuteSignal> emit)
+        double[] upper, double[] lower, double[] rsi, double[] volMa, Action<MinuteSignal> emit, int tf, double? dayTrend)
     {
         var bar = bars[i];
         if (double.IsNaN(lower[i]) || double.IsNaN(upper[i]) ||
             double.IsNaN(rsi[i]) || double.IsNaN(rsi[i - 1]) || double.IsNaN(volMa[i])) return;
 
-        // 쿨다운: 최근 1차 알림 후 일정 시간 재알림 금지.
-        if ((bar.Date - st.BottomFiredAt).TotalMinutes < Math.Max(1, config.BottomCooldownMinutes)) return;
+        // 쿨다운(×tf): 최근 1차 알림 후 일정 시간 재알림 금지.
+        if ((bar.Date - st.BottomFiredAt).TotalMinutes < Math.Max(1, config.BottomCooldownMinutes) * tf) return;
 
         // 밴드워킹 필터: 최근 WalkWindow봉 중 하단 터치가 임계 초과면 완만한 지속 하락으로 보고 스킵.
         int walkTouches = 0;
@@ -285,12 +333,12 @@ public sealed class MinuteSignalEngine(AppConfig config, PriceSourceRegistry reg
         st.BottomFiredAt = bar.Date;
         st.BottomFiredPrice = bar.Close;
         st.AwaitGolden = config.BottomConfirmCross;
-        st.AwaitFollow = config.BottomFollowCandle;
+        st.AwaitFollow = tf == 1 && config.BottomFollowCandle;
         st.AwaitDead = false;   // 방향 전환 — 반대편 확인 대기 해제
         // 일봉 추세는 정보 표기만(강등 아님) — 폭락 직후(극단 음수)가 오히려 V바닥 기회일 수 있다(실측 07-03 10:05).
-        string trendTag = config.BottomTrendGate && st.DayTrend is { } dt1 ? $" · 일봉추세 {dt1:+0.00;-0.00}" : "";
+        string trendTag = config.BottomTrendGate && dayTrend is { } dt1 ? $" · 일봉추세 {dt1:+0.00;-0.00}" : "";
         emit(new MinuteSignal(item.Symbol, item.Name, MinuteSignalKind.Rebound, bar.Close,
-            $"하단터치 {bars[touchIdx].Date:HH:mm} → 복귀 %b {pb:0.00} · RSI {rsi[i]:0.#}↑(저점 {minRsi:0.#}) · 거래량 {volRatio:0.0}×{trendTag}", bar.Date));
+            $"하단터치 {bars[touchIdx].Date:HH:mm} → 복귀 %b {pb:0.00} · RSI {rsi[i]:0.#}↑(저점 {minRsi:0.#}) · 거래량 {volRatio:0.0}×{trendTag}", bar.Date, tf));
     }
 
     // ───────────────────────── 1차: 고점 경고 ─────────────────────────
@@ -300,14 +348,14 @@ public sealed class MinuteSignalEngine(AppConfig config, PriceSourceRegistry reg
     /// 상단 밴드워킹(최소 봉 수) + RSI 과매수 → 밴드 안 복귀 하락봉 + RSI 하향 전환 + 소진 증거(윗꼬리/거래량).
     /// </summary>
     private void EvaluateTop(WatchItem item, State st, List<Candle> bars, int i,
-        double[] upper, double[] lower, double[] rsi, double[] volMa, Action<MinuteSignal> emit)
+        double[] upper, double[] lower, double[] rsi, double[] volMa, Action<MinuteSignal> emit, int tf)
     {
         var bar = bars[i];
         if (double.IsNaN(lower[i]) || double.IsNaN(upper[i]) ||
             double.IsNaN(rsi[i]) || double.IsNaN(rsi[i - 1]) || double.IsNaN(volMa[i])) return;
 
-        // 쿨다운(고점 방향 별도).
-        if ((bar.Date - st.TopFiredAt).TotalMinutes < Math.Max(1, config.TopCooldownMinutes)) return;
+        // 쿨다운(×tf · 고점 방향 별도).
+        if ((bar.Date - st.TopFiredAt).TotalMinutes < Math.Max(1, config.TopCooldownMinutes) * tf) return;
 
         // 셋업: 최근 lookback봉 내 상단 터치(고가 ≥ 상단) — 가장 이른 터치와 터치 봉 수.
         int lookback = Math.Max(2, config.TopTouchLookback);
@@ -364,7 +412,7 @@ public sealed class MinuteSignalEngine(AppConfig config, PriceSourceRegistry reg
         st.AwaitDead = config.TopConfirmCross;
         st.AwaitGolden = false;   // 방향 전환 — 반대편 확인 대기 해제
         emit(new MinuteSignal(item.Symbol, item.Name, MinuteSignalKind.TopWarn, bar.Close,
-            $"상단워킹 {touchCount}봉 → 이탈 %b {pb:0.00} · RSI {rsi[i]:0.#}↓(고점 {maxRsi:0.#}) · {evidence}", bar.Date));
+            $"상단워킹 {touchCount}봉 → 이탈 %b {pb:0.00} · RSI {rsi[i]:0.#}↓(고점 {maxRsi:0.#}) · {evidence}", bar.Date, tf));
     }
 
     // ───────────────────────── 발생/전송 ─────────────────────────
@@ -386,7 +434,7 @@ public sealed class MinuteSignalEngine(AppConfig config, PriceSourceRegistry reg
     {
         var today = DateOnly.FromDateTime(DateTime.Today);
         if (today == _day) return;
-        _states.Clear();
+        _symbols.Clear();
         _day = today;
     }
 }

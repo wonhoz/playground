@@ -136,6 +136,11 @@
                                ToolTip="이 이상이면 '강력 확인 🔥' 최상위 등급. 실측: 건당 기대수익이 모멘텀 구간별 단조 증가(0.8~1.5% +0.11 → 2.5%+ +0.41%/건) → 권장 2.0."/>
                     <TextBox x:Name="BottomGcStrongBox" Width="56"/>
                 </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0,0,0,8">
+                    <TextBlock Text="타임프레임(분)" Style="{StaticResource FieldLbl}" VerticalAlignment="Center" Margin="0,0,8,0"
+                               ToolTip="시그널을 판정할 봉 단위 목록(쉼표 구분·1~60). 1=원본 1분봉, 그 외는 1분봉을 롤링(convolution) 집계한 N분 봉으로 거시 추세를 독립 판정. 알림에 [N분] 접두로 구분. 쿨다운·확인 창은 N에 비례."/>
+                    <TextBox x:Name="SignalTfBox" Width="160"/>
+                </StackPanel>
                 <CheckBox x:Name="BottomCrossCheck" Content="골든크로스(MA5↗MA20) 확인 알림 (1차 시그널 후 20분 내)"/>
                 <CheckBox x:Name="BottomFollowCheck" Margin="0,6,0,0"
                           Content="직후 양봉 지속 확인 알림 (골든크로스보다 빠른 조기 확인)"

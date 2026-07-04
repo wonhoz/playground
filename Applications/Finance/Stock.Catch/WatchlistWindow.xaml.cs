@@ -73,7 +73,7 @@ public partial class WatchlistWindow : Window
     private void Add_Click(object sender, RoutedEventArgs e)
     {
         var item = new WatchItem();
-        var dlg = new WatchEditWindow(item, _registry, isNew: true) { Owner = this };
+        var dlg = new WatchEditWindow(item, _registry, _config, isNew: true) { Owner = this };
         if (dlg.ShowDialog() != true) return;
         if (_config.Watchlist.Any(w => w.Symbol.Equals(item.Symbol, StringComparison.OrdinalIgnoreCase) && w.Market == item.Market))
         {
@@ -88,7 +88,7 @@ public partial class WatchlistWindow : Window
     private void Edit_Click(object sender, RoutedEventArgs e)
     {
         if (WatchGrid.SelectedItem is not WatchRow row) return;
-        var dlg = new WatchEditWindow(row.Source, _registry, isNew: false) { Owner = this };
+        var dlg = new WatchEditWindow(row.Source, _registry, _config, isNew: false) { Owner = this };
         if (dlg.ShowDialog() != true) return;
         _current.Remove(row.Source.Symbol); // 심볼/소스 변경 가능 → 캐시 무효화
         _config.Save();

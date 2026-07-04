@@ -30,10 +30,12 @@ public sealed class SlackNotifier(AppConfig config) : IDisposable
         return string.IsNullOrWhiteSpace(config.SlackChannel) ? null : config.SlackChannel;
     }
 
-    private string BuildPayload(string text, string? code = null)
-        => ChannelFor(code) is { } channel
-            ? JsonSerializer.Serialize(new { channel, username = "Stock.Catch", text })
-            : JsonSerializer.Serialize(new { username = "Stock.Catch", text });
+    private static string Payload(string text, string? channel)
+        => string.IsNullOrWhiteSpace(channel)
+            ? JsonSerializer.Serialize(new { username = "Stock.Catch", text })
+            : JsonSerializer.Serialize(new { channel, username = "Stock.Catch", text });
+
+    private string BuildPayload(string text, string? code = null) => Payload(text, ChannelFor(code));
 
     public async Task SendAsync(PortfolioAlert a, CancellationToken ct = default)
     {
@@ -175,6 +177,18 @@ public sealed class SlackNotifier(AppConfig config) : IDisposable
     {
         if (!IsConfigured) throw new InvalidOperationException("Slack Webhook URL이 설정되지 않았습니다.");
         await PostAsync(BuildPayload(":white_check_mark: *Stock.Catch* 연결 테스트 — 알림이 정상 수신되었습니다."), ct);
+    }
+
+    /// <summary>
+    /// 관심 종목 수정 화면의 종목별 채널 "테스트" 버튼용 — 채널을 명시적으로 지정해 전송.
+    /// 채널이 비어 있으면 기본 채널 규칙(전역 SlackChannel → webhook 기본)을 따른다.
+    /// </summary>
+    public async Task SendChannelTestAsync(string display, string? channel, CancellationToken ct = default)
+    {
+        if (!IsConfigured) throw new InvalidOperationException("Slack Webhook URL이 설정되지 않았습니다.");
+        if (string.IsNullOrWhiteSpace(channel)) channel = config.SlackChannel;
+        string where = string.IsNullOrWhiteSpace(channel) ? "webhook 기본 채널" : $"*{channel}*";
+        await PostAsync(Payload($":white_check_mark: *{display}* 채널 테스트 — 이 종목의 알림이 {where}(으)로 전송됩니다.", channel), ct);
     }
 
     private async Task PostAsync(string payload, CancellationToken ct)

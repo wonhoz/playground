@@ -70,8 +70,13 @@
                  ToolTip="이 종목 전용 추세 조건. 기간:상승[:하락] 쉼표 구분(예: 3:1:2 → 3분당 상승1%/하락2%, 5:2 → 5분당 ±2%). 소수점 가능. 비우면 전역 조건 사용."/>
 
         <TextBlock Grid.Row="7" Grid.Column="0" Text="Slack 채널" Style="{StaticResource FieldLbl}"/>
-        <TextBox Grid.Row="7" Grid.Column="1" x:Name="ChannelBox" Margin="0,0,0,10"
-                 ToolTip="이 종목의 알림을 보낼 Slack 채널(예: #stock-sk). 비우면 기본 채널(설정의 Slack 채널, 기본 #stock)로 전송."/>
+        <Grid Grid.Row="7" Grid.Column="1" Margin="0,0,0,10">
+            <Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+            <TextBox x:Name="ChannelBox"
+                     ToolTip="이 종목의 알림을 보낼 Slack 채널(예: #stock-sk). 비우면 기본 채널(설정의 Slack 채널, 기본 #stock)로 전송."/>
+            <Button Grid.Column="1" x:Name="ChannelTestBtn" Content="테스트" Width="70" Margin="8,0,0,0" Click="ChannelTest_Click"
+                    ToolTip="입력한 채널로 테스트 알림 전송(비어 있으면 기본 채널). 채널이 존재하지 않으면 실패합니다."/>
+        </Grid>
 
         <TextBlock Grid.Row="8" Grid.Column="0" Text="알림" Style="{StaticResource FieldLbl}"/>
         <StackPanel Grid.Row="8" Grid.Column="1" Margin="0,0,0,10">

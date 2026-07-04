@@ -11,18 +11,20 @@ public partial class WatchEditWindow : Window
 {
     private readonly WatchItem _item;
     private readonly PriceSourceRegistry _registry;
+    private readonly AppConfig _config;
 
     private sealed record SourceOption(string Label, WatchSource Source)
     {
         public override string ToString() => Label;
     }
 
-    public WatchEditWindow(WatchItem item, PriceSourceRegistry registry, bool isNew)
+    public WatchEditWindow(WatchItem item, PriceSourceRegistry registry, AppConfig config, bool isNew)
     {
         InitializeComponent();
         NativeTheme.ApplyDarkTitleBar(this);
         _item = item;
         _registry = registry;
+        _config = config;
 
         HeaderText.Text = isNew ? "관심 종목 추가" : "관심 종목 수정";
         IndexCheck.IsChecked = item.IsIndex;
@@ -171,10 +173,7 @@ public partial class WatchEditWindow : Window
             _item.Rules = rules;
         }
 
-        // 종목 전용 Slack 채널 — 비우면 기본 채널. #/@ 접두사가 없으면 # 채널로 정규화.
-        string channel = ChannelBox.Text.Trim();
-        if (channel.Length > 0 && channel[0] is not ('#' or '@')) channel = "#" + channel;
-        _item.SlackChannel = channel;
+        _item.SlackChannel = NormalizedChannel();
 
         _item.AlertUp = AlertUpCheck.IsChecked == true;
         _item.AlertDown = AlertDownCheck.IsChecked == true;
@@ -195,6 +194,46 @@ public partial class WatchEditWindow : Window
         _ => ""
     };
 
-    private void Error(string msg) => ErrorText.Text = "⚠ " + msg;
+    /// <summary>종목 전용 Slack 채널 입력 정규화 — 비우면 빈값(기본 채널), #/@ 접두사가 없으면 # 채널로.</summary>
+    private string NormalizedChannel()
+    {
+        string channel = ChannelBox.Text.Trim();
+        if (channel.Length > 0 && channel[0] is not ('#' or '@')) channel = "#" + channel;
+        return channel;
+    }
+
+    /// <summary>입력한 채널로 테스트 알림 전송(비어 있으면 기본 채널 규칙).</summary>
+    private async void ChannelTest_Click(object sender, RoutedEventArgs e)
+    {
+        string channel = NormalizedChannel();
+        ChannelBox.Text = channel;   // 정규화 결과를 바로 보여줌(# 자동 접두)
+        string name = NameBox.Text.Trim() is "조회 중…" or "" ? SymbolBox.Text.Trim() : NameBox.Text.Trim();
+        if (string.IsNullOrEmpty(name)) name = "관심 종목";
+
+        ChannelTestBtn.IsEnabled = false;
+        try
+        {
+            using var slack = new SlackNotifier(_config);
+            await slack.SendChannelTestAsync(name, channel);
+            Info($"✅ 테스트 전송 완료 → {(channel.Length > 0 ? channel : "기본 채널")}");
+        }
+        catch (Exception ex)
+        {
+            Error($"테스트 전송 실패: {ex.Message} (채널이 존재하는지 확인)");
+        }
+        finally { ChannelTestBtn.IsEnabled = true; }
+    }
+
+    private void Error(string msg)
+    {
+        ErrorText.Foreground = (System.Windows.Media.Brush)FindResource("BearBrush");
+        ErrorText.Text = "⚠ " + msg;
+    }
+
+    private void Info(string msg)
+    {
+        ErrorText.Foreground = (System.Windows.Media.Brush)FindResource("FgMuted");
+        ErrorText.Text = msg;
+    }
     private void Cancel_Click(object sender, RoutedEventArgs e) => DialogResult = false;
 }

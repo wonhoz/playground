@@ -200,28 +200,24 @@ public sealed class MinuteSignalEngine(AppConfig config, PriceSourceRegistry reg
                 // 실측: 가짜 GC(07-02 12:35)는 +0.51%, 진짜는 +0.90~6.73% — 횡보성 크로스 구분.
                 double rise = st.BottomFiredPrice > 0 ? (double)(bar.Close / st.BottomFiredPrice - 1) * 100 : 0;
                 bool weakMomentum = rise < config.BottomGcMinRisePct;
-                // 일봉 추세 게이트: 일봉 대세가 하락(추세점수<0)이면 역추세 반등으로 강등.
-                // 실측: 하락 대세 종목(인버스)의 GC 승률 33% vs 상승 대세(레버리지) 61%.
-                bool counterTrend = config.BottomTrendGate && st.DayTrend is < 0;
-                string reason = (weakMomentum, counterTrend) switch
-                {
-                    (true, true) => $" (모멘텀 {config.BottomGcMinRisePct:0.0#}% 미달 + 일봉 역추세 {st.DayTrend:0.00} — 주의)",
-                    (true, false) => $" (모멘텀 {config.BottomGcMinRisePct:0.0#}% 미달 — 횡보성 크로스 주의)",
-                    (false, true) => $" (일봉 역추세 {st.DayTrend:0.00} — 하락 대세 속 반등 주의)",
-                    _ => "",
-                };
+                string reason = weakMomentum ? $" (모멘텀 {config.BottomGcMinRisePct:0.0#}% 미달 — 횡보성 크로스 주의)" : "";
                 // 강력 확인(🔥): 모멘텀 상위 구간 — 실측상 건당 기대수익이 임계 이상에서 단조 증가
                 // (0.8~1.5% +0.11 → 1.5~2.5% +0.26 → 2.5%+ +0.41%/건). "확실한 하나"의 계량 프록시.
-                var kind = (weakMomentum || counterTrend) ? MinuteSignalKind.WeakGoldenCross
+                // 등급은 모멘텀만으로 결정한다 — 일봉 추세 강등은 전수 소급 검증에서 폐기:
+                // 최고 시그널(07-03 10:05 +6.73%)이 폭락 직후(추세 -1.00)에 나왔고, 추세 +1.00에서
+                // 통과한 GC들의 실전 수익 합계가 ≈0이라 방향성이 없음 → 추세는 컨텍스트 표기만.
+                var kind = weakMomentum ? MinuteSignalKind.WeakGoldenCross
                     : rise >= config.BottomGcStrongPct ? MinuteSignalKind.StrongGoldenCross
                     : MinuteSignalKind.GoldenCross;
-                // 사람 판단 보조 컨텍스트: 당일 시가 대비 등락·당일 저점 대비 반등폭(차트 없이 장 흐름 감 잡기).
+                // 사람 판단 보조 컨텍스트: 당일 시가 대비 등락·당일 저점 대비 반등폭·일봉 추세점수
+                // (차트 없이 "폭락 후 V바닥 초입"인지 "고점 추격"인지 감 잡기).
                 double dayChg = bars[0].Open > 0 ? (double)(bar.Close / bars[0].Open - 1) * 100 : 0;
                 decimal dayLow = bars.Take(i + 1).Min(b => b.Low);
                 double fromLow = dayLow > 0 ? (double)(bar.Close / dayLow - 1) * 100 : 0;
+                string trendCtx = config.BottomTrendGate && st.DayTrend is { } dt2 ? $" · 일봉추세 {dt2:+0.00;-0.00}" : "";
                 emit(new MinuteSignal(item.Symbol, item.Name, kind, bar.Close,
                     $"MA5 {ma5[i]:N0} > MA20 {ma20[i]:N0} 돌파 · 1차({st.BottomFiredAt:HH:mm}) 후 {(bar.Date - st.BottomFiredAt).TotalMinutes:0}분 · " +
-                    $"{rise:+0.00;-0.00}%{reason} · 당일 {dayChg:+0.0;-0.0}% · 저점比 +{fromLow:0.0}%", bar.Date));
+                    $"{rise:+0.00;-0.00}%{reason} · 당일 {dayChg:+0.0;-0.0}% · 저점比 +{fromLow:0.0}%{trendCtx}", bar.Date));
             }
             if (st.AwaitDead && !st.PrevBelow && below)
             {
@@ -291,7 +287,8 @@ public sealed class MinuteSignalEngine(AppConfig config, PriceSourceRegistry reg
         st.AwaitGolden = config.BottomConfirmCross;
         st.AwaitFollow = config.BottomFollowCandle;
         st.AwaitDead = false;   // 방향 전환 — 반대편 확인 대기 해제
-        string trendTag = config.BottomTrendGate && st.DayTrend is < 0 ? $" · 일봉 역추세 {st.DayTrend:0.00} ⚠" : "";
+        // 일봉 추세는 정보 표기만(강등 아님) — 폭락 직후(극단 음수)가 오히려 V바닥 기회일 수 있다(실측 07-03 10:05).
+        string trendTag = config.BottomTrendGate && st.DayTrend is { } dt1 ? $" · 일봉추세 {dt1:+0.00;-0.00}" : "";
         emit(new MinuteSignal(item.Symbol, item.Name, MinuteSignalKind.Rebound, bar.Close,
             $"하단터치 {bars[touchIdx].Date:HH:mm} → 복귀 %b {pb:0.00} · RSI {rsi[i]:0.#}↑(저점 {minRsi:0.#}) · 거래량 {volRatio:0.0}×{trendTag}", bar.Date));
     }

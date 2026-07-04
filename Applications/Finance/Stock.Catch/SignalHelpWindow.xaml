@@ -1,0 +1,81 @@
+<Window x:Class="Stock.Catch.SignalHelpWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="시그널 도움말" Height="720" Width="640"
+        Background="{StaticResource WindowBg}"
+        WindowStartupLocation="CenterOwner">
+    <Window.Resources>
+        <Style x:Key="H1" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Foreground" Value="{StaticResource AccentBrush}"/>
+            <Setter Property="Margin" Value="0,16,0,6"/>
+        </Style>
+        <Style x:Key="Body" TargetType="TextBlock">
+            <Setter Property="TextWrapping" Value="Wrap"/>
+            <Setter Property="Foreground" Value="{StaticResource FgBrush}"/>
+            <Setter Property="FontSize" Value="12.5"/>
+            <Setter Property="LineHeight" Value="20"/>
+            <Setter Property="Margin" Value="0,0,0,4"/>
+        </Style>
+        <Style x:Key="Muted" TargetType="TextBlock" BasedOn="{StaticResource Body}">
+            <Setter Property="Foreground" Value="{StaticResource FgMuted}"/>
+            <Setter Property="FontSize" Value="11.5"/>
+        </Style>
+    </Window.Resources>
+
+    <Grid Margin="20" Background="{StaticResource WindowBg}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0" Text="📖 시그널 도움말" FontSize="19" FontWeight="Bold"
+                   Foreground="{StaticResource FgBrush}" Margin="0,0,0,4"/>
+
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+            <StackPanel Margin="0,0,14,0">
+
+                <TextBlock Style="{StaticResource H1}" Text="시그널 종류와 순서 (신뢰도 사다리)"/>
+                <TextBlock Style="{StaticResource Body}"
+                           Text="☀ 개장 브리핑 — 매 거래일 첫 폴링(09:05경) 1회. 갭·일봉추세로 오늘 분위기 요약.&#10;📈 바닥 반등 시그널 (1차) — 급락 → 볼린저 하단 터치 → 밴드 복귀 + RSI 상승 전환 + 거래량 급증. 관찰 시작 신호.&#10;↗ 반등 지속 (직후 양봉) — 1차 직후 첫 봉이 양봉이면 +1분 만에 오는 조기 확인 힌트(1분봉 전용).&#10;🔥 강력 확인 / ✅ 반등 확인 / ⚠ 약한 확인 (2차 골든크로스) — MA5가 MA20을 상향 돌파. 등급은 1차 이후 상승률(모멘텀)로 결정: 🔥 ≥2.0% · ✅ ≥0.8% · ⚠ 미달(횡보성 크로스, 관망).&#10;📉 고점 경고 — 상단 밴드워킹 + RSI 과매수 후 이탈(익절 검토). 🔻 데드크로스 — 하락 확인."/>
+                <TextBlock Style="{StaticResource Muted}"
+                           Text="실측(3종목×14일 · GC 110건): 🔥 등급일수록 건당 기대수익 단조 증가(0.8~1.5% +0.11 → 2.5%+ +0.41%/건). 진짜 반등은 골든크로스가 5~9분 내 따라오고, 직후 양봉도 3/4 동반."/>
+
+                <TextBlock Style="{StaticResource H1}" Text="[N분] 타임프레임"/>
+                <TextBlock Style="{StaticResource Body}"
+                           Text="접두 없음=1분봉(초단기), [3분]/[5분]/[10분]/[15분]=1분봉을 롤링(convolution) 집계한 거시 봉. 매 1분 갱신되며 멀리서 본 볼린저·RSI로 같은 로직을 독립 판정합니다. 상위 타임프레임일수록 시그널이 드물고 질이 높습니다(실측: 5분봉 🔥 평균 +1.49%/건)."/>
+                <TextBlock Style="{StaticResource Muted}"
+                           Text="여러 타임프레임이 같은 시각에 동시 발화하면(예: 1·5·10분 동시 🔥) 최상급 — 07-03 10:05 +9.7% 케이스의 시그니처."/>
+
+                <TextBlock Style="{StaticResource H1}" Text="컨텍스트 줄 용어 (3번째 줄)"/>
+                <TextBlock Style="{StaticResource Body}"
+                           Text="갭 — 전일 정규장 종가 → 오늘 시초가 등락(밤사이 변동).&#10;당일 — 오늘 시초가 대비 시그널 시점 등락(장중 흐름 · 전일 대비 아님).&#10;저점比 — 오늘 장중 최저가 대비 반등률. 낮을수록 바닥 초입(한 자릿수 = 갓 반등), 20%+ = 이미 많이 오른 뒤.&#10;일봉추세 — 직전 완성 일봉 11일의 래더 추세점수(−1~+1). RSI 레벨·기울기·이격도·최근수익률 합성. −1.00 = 직전 폭락."/>
+                <TextBlock Style="{StaticResource Muted}"
+                           Text="⭐ 최고 수익 프로필: 당일 큰 음수(폭락) + 저점比 한 자릿수(V바닥 초입) + 일봉추세 음수(전일 급락). 반대로 당일 크게 양수 + 저점比 20%+ 는 고점 추격 위험. 일봉추세는 강등이 아닌 참고 정보입니다 — 대박 반등은 오히려 추세 −1.00(폭락 직후)에서 나왔습니다."/>
+
+                <TextBlock Style="{StaticResource H1}" Text="운용 가이드 (실측 기반)"/>
+                <TextBlock Style="{StaticResource Body}"
+                           Text="1) ☀ 브리핑에서 '전일 급락 대세 — V바닥 관찰 구간'이면 그날 집중.&#10;2) 📈 1차는 관찰만 → ↗ 직후 양봉은 힌트 → 🔥/✅ 골든크로스에서 컨텍스트 보고 진입 판단(⚠는 관망).&#10;3) 멀티 타임프레임 동시 🔥 + 본주·레버리지 동시 발화 = 최상급 후보.&#10;4) 진입 후: 종가가 진입가 아래로 마감하면 손절, 급락 시 −0.5% 하드 스탑, 종가가 MA5 아래 첫 마감(모멘텀 소진)에서 익절."/>
+                <TextBlock Style="{StaticResource Muted}"
+                           Text="이 규칙의 실측(42일): 수익은 폭락 후 V반등 날에 집중(07-03 +17.2%), 평범한 날은 본전권(−0.5% 손절 캡). 며칠에 하나 확실한 것만 잡는 구조입니다."/>
+
+                <TextBlock Style="{StaticResource H1}" Text="설정 권장값 (실측 튜닝)"/>
+                <TextBlock Style="{StaticResource Body}"
+                           Text="RSI 과매도 상한 35 · 거래량 배수 1.5 · 밴드워킹 상한 7 · %b 회복 하한 0.15 · GC 모멘텀 0.8% · 강력🔥 2.0% · 쿨다운 15분 · 확인 창 20분 · 타임프레임 1,3,5,10,15"/>
+                <TextBlock Style="{StaticResource Muted}"
+                           Text="쿨다운·확인 창은 타임프레임에 비례해 자동 스케일됩니다(예: 5분봉 쿨다운 = 15×5분). 일봉추세·갭은 종목별 자동 계산이라 별도 설정이 없습니다."/>
+
+                <TextBlock Style="{StaticResource H1}" Text="알림이 안 올 때 체크리스트"/>
+                <TextBlock Style="{StaticResource Body}"
+                           Text="① 관심 종목 모니터링 ON(트레이 상주) ② 종목별 '바닥 반등/고점 경고' 체크(국내·비지수만) ③ KIS 키 설정 ④ 평일 09:05~15:40(분봉 시그널) · 시그널은 봉 완성 후 다음 폴링에 도착(최대 ~1분 지연)"/>
+
+            </StackPanel>
+        </ScrollViewer>
+
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,12,0,0">
+            <Button Content="닫기" Width="90" Style="{StaticResource AccentButton}" Click="Close_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>

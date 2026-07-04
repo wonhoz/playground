@@ -586,8 +586,14 @@ public partial class MainWindow : Window
         { Owner = this }.Show();
     }
 
+    private void Help_Click(object sender, RoutedEventArgs e)
+        => new SignalHelpWindow { Owner = this }.Show();
+
     // ────────────────────────────── 분봉 CSV ──────────────────────────────
-    /// <summary>특정 영업일의 1분봉을 KIS 일별분봉으로 조회해 CSV로 저장한다.</summary>
+    /// <summary>
+    /// 기간 내 영업일마다 1분봉을 KIS 일별분봉으로 조회해 선택한 폴더에 일자별 CSV로 저장한다
+    /// (주말·휴장일 자동 건너뜀 · 파일명 "이름(코드)_yyyyMMdd_1분봉.csv").
+    /// </summary>
     private async void MinuteCsv_Click(object sender, RoutedEventArgs e)
     {
         if (!TryGetKrCode(out var code)) return;
@@ -599,38 +605,55 @@ public partial class MainWindow : Window
 
         var pick = new MinuteCsvWindow { Owner = this };
         if (pick.ShowDialog() != true) return;
-        var date = pick.SelectedDate;
 
-        string name = NameText.Text is "조회 중…" or "(이름 못 찾음)" or "(검색 결과 없음)" ? "" : NameText.Text.Trim();
-        var dlg = new SaveFileDialog
+        var folder = new OpenFolderDialog
         {
-            Filter = "CSV (쉼표 구분)|*.csv|모든 파일|*.*",
-            FileName = $"{(string.IsNullOrEmpty(name) ? code : $"{name}({code})")}_{date:yyyyMMdd}_1분봉.csv",
+            Title = "분봉 CSV 저장 폴더 선택",
             InitialDirectory = Directory.Exists(_config.LastExportDir) ? _config.LastExportDir : null
         };
-        if (dlg.ShowDialog(this) != true) return;
+        if (folder.ShowDialog(this) != true) return;
+        string outDir = folder.FolderName;
+        _config.LastExportDir = outDir;
+        _config.Save();
+
+        string name = NameText.Text is "조회 중…" or "(이름 못 찾음)" or "(검색 결과 없음)" ? "" : NameText.Text.Trim();
+        string stem = string.IsNullOrEmpty(name) ? code : $"{name}({code})";
 
         MinuteCsvBtn.IsEnabled = false;
-        SummaryText.Text = $"🕐 {date:yyyy-MM-dd} 1분봉 조회 중… ({code})";
+        int ok = 0, skip = 0;
+        string lastFile = "";
         try
         {
-            var bars = await _registry.KisDayMinutesAsync(code, date);
+            for (var date = pick.FromDate; date <= pick.ToDate; date = date.AddDays(1))
+            {
+                if (date.DayOfWeek is DayOfWeek.Saturday or DayOfWeek.Sunday) continue;
+                SummaryText.Text = $"🕐 {date:yyyy-MM-dd} 1분봉 조회 중… ({code} · 완료 {ok}건)";
+                try
+                {
+                    var bars = await _registry.KisDayMinutesAsync(code, date);
 
-            // 기존 내보내기 컬럼 순서(날짜-시가-종가-저가-고가-거래량)에 시각(time)만 추가.
-            var sb = new System.Text.StringBuilder();
-            sb.Append("date,time,open,close,low,high,volume\n");
-            foreach (var b in bars)
-                sb.Append($"{b.Date:yyyy-MM-dd},{b.Date:HH:mm},{Num(b.Open)},{Num(b.Close)},{Num(b.Low)},{Num(b.High)},{b.Volume}\n");
-            await File.WriteAllTextAsync(dlg.FileName, sb.ToString(),
-                new System.Text.UTF8Encoding(encoderShouldEmitUTF8Identifier: true));   // 엑셀 한글 호환 BOM
+                    // 기존 내보내기 컬럼 순서(날짜-시가-종가-저가-고가-거래량)에 시각(time)만 추가.
+                    var sb = new System.Text.StringBuilder();
+                    sb.Append("date,time,open,close,low,high,volume\n");
+                    foreach (var b in bars)
+                        sb.Append($"{b.Date:yyyy-MM-dd},{b.Date:HH:mm},{Num(b.Open)},{Num(b.Close)},{Num(b.Low)},{Num(b.High)},{b.Volume}\n");
 
-            _config.LastExportDir = Path.GetDirectoryName(dlg.FileName) ?? "";
-            _config.Save();
-            SummaryText.Text = $"🕐 분봉 CSV 저장 완료: {date:yyyy-MM-dd} {bars.Count}봉 → {dlg.FileName}";
-        }
-        catch (Exception ex)
-        {
-            ShowError("분봉 조회/저장 실패: " + ex.Message);
+                    lastFile = Path.Combine(outDir, $"{stem}_{date:yyyyMMdd}_1분봉.csv");
+                    await File.WriteAllTextAsync(lastFile, sb.ToString(),
+                        new System.Text.UTF8Encoding(encoderShouldEmitUTF8Identifier: true));   // 엑셀 한글 호환 BOM
+                    ok++;
+                }
+                catch
+                {
+                    skip++;   // 휴장일/보관 기간 초과 등 — 해당 일자만 건너뛰고 계속
+                }
+                await Task.Delay(300);   // KIS 유량 완화
+            }
+
+            SummaryText.Text = pick.FromDate == pick.ToDate && ok == 1
+                ? $"🕐 분봉 CSV 저장 완료: {pick.FromDate:yyyy-MM-dd} → {lastFile}"
+                : $"🕐 분봉 CSV {ok}일치 저장 완료{(skip > 0 ? $" · 건너뜀 {skip}일(휴장/데이터 없음)" : "")} → {outDir}";
+            if (ok == 0) ShowError("저장된 파일이 없습니다(휴장일이거나 KIS 보관 기간을 벗어난 기간일 수 있습니다).");
         }
         finally
         {

@@ -1,19 +1,28 @@
-﻿using System.Windows;
+using System.Windows;
 using System.Windows.Controls;
 using Stock.Catch.Services;
 
 namespace Stock.Catch;
 
-/// <summary>분봉 CSV 다운로드용 날짜 선택 다이얼로그. 확인 시 <see cref="SelectedDate"/>에 영업일이 담긴다.</summary>
+/// <summary>
+/// 분봉 CSV 다운로드용 기간 선택 다이얼로그. 확인 시 <see cref="FromDate"/>~<see cref="ToDate"/>에
+/// 영업일 범위가 담긴다(하루만 받으려면 동일 날짜).
+/// </summary>
 public partial class MinuteCsvWindow : Window
 {
-    public DateTime SelectedDate { get; private set; } = DateTime.Today;
+    public DateTime FromDate { get; private set; } = DateTime.Today;
+    public DateTime ToDate { get; private set; } = DateTime.Today;
+
+    /// <summary>과도한 KIS 호출 방지용 최대 기간(달력일).</summary>
+    private const int MaxRangeDays = 45;
 
     public MinuteCsvWindow()
     {
         InitializeComponent();
         NativeTheme.ApplyDarkTitleBar(this);
-        DateBox.Text = LastBusinessDay(DateTime.Today).ToString("yyyy-MM-dd");
+        string d = LastBusinessDay(DateTime.Today).ToString("yyyy-MM-dd");
+        FromBox.Text = d;
+        ToBox.Text = d;
     }
 
     /// <summary>주말이면 직전 금요일로 보정.</summary>
@@ -23,32 +32,37 @@ public partial class MinuteCsvWindow : Window
         return d;
     }
 
-    private void Shift_Click(object sender, RoutedEventArgs e)
+    private void Today_Click(object sender, RoutedEventArgs e)
     {
-        if (!DateTime.TryParse(DateBox.Text.Trim(), out var d)) d = DateTime.Today;
-        int dir = int.Parse((string)((Button)sender).Tag!);
-        d = d.AddDays(dir);
-        while (d.DayOfWeek is DayOfWeek.Saturday or DayOfWeek.Sunday) d = d.AddDays(dir);   // 주말 건너뛰기
-        DateBox.Text = d.ToString("yyyy-MM-dd");
+        string d = LastBusinessDay(DateTime.Today).ToString("yyyy-MM-dd");
+        FromBox.Text = d;
+        ToBox.Text = d;
         ErrorText.Text = "";
     }
 
-    private void Today_Click(object sender, RoutedEventArgs e)
+    /// <summary>프리셋: 종료=최근 영업일, 시작=종료−N일.</summary>
+    private void Preset_Click(object sender, RoutedEventArgs e)
     {
-        DateBox.Text = LastBusinessDay(DateTime.Today).ToString("yyyy-MM-dd");
+        int days = int.Parse((string)((Button)sender).Tag!);
+        var to = LastBusinessDay(DateTime.Today);
+        FromBox.Text = to.AddDays(-days + 1).ToString("yyyy-MM-dd");
+        ToBox.Text = to.ToString("yyyy-MM-dd");
         ErrorText.Text = "";
     }
 
     private void Save_Click(object sender, RoutedEventArgs e)
     {
-        if (!DateTime.TryParse(DateBox.Text.Trim(), out var d))
+        if (!DateTime.TryParse(FromBox.Text.Trim(), out var from) || !DateTime.TryParse(ToBox.Text.Trim(), out var to))
         { ErrorText.Text = "⚠ 날짜 형식은 yyyy-MM-dd 입니다."; return; }
-        if (d.Date > DateTime.Today)
+        if (from.Date > to.Date)
+        { ErrorText.Text = "⚠ 시작일이 종료일보다 늦습니다."; return; }
+        if (to.Date > DateTime.Today)
         { ErrorText.Text = "⚠ 미래 날짜는 조회할 수 없습니다."; return; }
-        if (d.DayOfWeek is DayOfWeek.Saturday or DayOfWeek.Sunday)
-        { ErrorText.Text = "⚠ 주말은 휴장일입니다."; return; }
+        if ((to.Date - from.Date).TotalDays >= MaxRangeDays)
+        { ErrorText.Text = $"⚠ 기간은 최대 {MaxRangeDays}일까지입니다."; return; }
 
-        SelectedDate = d.Date;
+        FromDate = from.Date;
+        ToDate = to.Date;
         DialogResult = true;
     }
 

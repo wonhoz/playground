@@ -46,7 +46,8 @@
         <DataGrid Grid.Row="2" x:Name="Grid" AutoGenerateColumns="False" IsReadOnly="True"
                   HeadersVisibility="Column" GridLinesVisibility="Horizontal"
                   ColumnHeaderStyle="{StaticResource DarkColHeader}" CanUserAddRows="False"
-                  SelectionMode="Extended">
+                  SelectionMode="Extended" MouseDoubleClick="Grid_MouseDoubleClick"
+                  ToolTip="행 더블 클릭 → 실제 모니터링과 동일한 2줄 포맷으로 Slack 전송(알림 형식 학습용)">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="★" Binding="{Binding Icon}" Width="42" SortMemberPath="Rank">
                     <DataGridTextColumn.ElementStyle>
@@ -70,7 +71,7 @@
 
         <!-- 하단 -->
         <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,12,0,0">
-            <TextBlock Text="※ 컬럼 헤더 클릭으로도 정렬됩니다. 근거·컨텍스트 용어는 [📖 시그널 도움말] 참고."
+            <TextBlock Text="※ 행 더블 클릭 = 실제 알림 포맷으로 Slack 전송. 컬럼 헤더 클릭으로도 정렬됩니다. 용어는 [📖 시그널 도움말] 참고."
                        VerticalAlignment="Center" Margin="0,0,16,0" FontSize="11"
                        Foreground="{StaticResource FgMuted}"/>
             <Button Content="닫기" Width="90" Style="{StaticResource AccentButton}" Click="Close_Click"/>

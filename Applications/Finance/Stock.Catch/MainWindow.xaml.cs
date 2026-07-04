@@ -794,7 +794,7 @@ public partial class MainWindow : Window
 
             // 저장 완료 후 결과 분석 다이얼로그(필터·정렬) 표시.
             if (collected.Count > 0 && totalSignals > 0)
-                new SignalResultWindow(collected) { Owner = this }.Show();
+                new SignalResultWindow(collected, _slack) { Owner = this }.Show();
         }
         finally
         {

@@ -14,13 +14,15 @@ public partial class SignalResultWindow : Window
     public sealed record FileSignals(string Stem, IReadOnlyList<MinuteSignal> Signals);
 
     private readonly List<Row> _all;
+    private readonly SlackNotifier? _slack;
     private bool _sortByImportance;
     private bool _initialized;
 
-    public SignalResultWindow(IReadOnlyList<FileSignals> files)
+    public SignalResultWindow(IReadOnlyList<FileSignals> files, SlackNotifier? slack = null)
     {
         InitializeComponent();
         NativeTheme.ApplyDarkTitleBar(this);
+        _slack = slack;
 
         _all = files
             .SelectMany(f => f.Signals.Select(s => new Row(ShortStem(f.Stem), s)))
@@ -100,11 +102,36 @@ public partial class SignalResultWindow : Window
             (_sortByImportance ? "  (중요도순)" : "  (날짜순)");
     }
 
+    /// <summary>
+    /// 행 더블 클릭 → 해당 시그널을 실제 모니터링과 동일한 2줄 포맷(헤드 + ⭐판정)으로
+    /// Slack에 전송(종목별 채널 규칙 동일 적용 — 기본 #stock). 알림 형식 학습/테스트용.
+    /// </summary>
+    private async void Grid_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+    {
+        if (Grid.SelectedItem is not Row row) return;
+        if (_slack is null || !_slack.IsConfigured)
+        {
+            StatText.Text = "⚠ Slack Webhook이 설정되지 않아 전송할 수 없습니다.";
+            return;
+        }
+        try
+        {
+            StatText.Text = $"📤 Slack 전송 중… {row.Icon} {row.Label} · {row.Stock} ({row.Time:MM-dd HH:mm})";
+            await _slack.SendMinuteSignalAsync(row.Signal);
+            StatText.Text = $"📤 Slack 전송 완료 — {row.Icon} {row.Label} · {row.Stock} ({row.Time:MM-dd HH:mm})";
+        }
+        catch (Exception ex)
+        {
+            StatText.Text = "⚠ Slack 전송 실패: " + ex.Message;
+        }
+    }
+
     private void Close_Click(object sender, RoutedEventArgs e) => Close();
 
     // ───────────────────────── 행 뷰 모델 ─────────────────────────
     public sealed class Row(string stock, MinuteSignal s)
     {
+        public MinuteSignal Signal => s;
         public MinuteSignalKind Kind => s.Kind;
         public DateTime Time => s.Time;
         public string Stock { get; } = stock;

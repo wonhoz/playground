@@ -87,6 +87,9 @@ call :pub "Copy.Path"             "Applications\Files\Manager\Copy.Path"        
 call :pub "Folder.Purge"          "Applications\Files\Manager\Folder.Purge"                 "Folder.Purge.exe"          "Applications\Files\Manager"
 :: call :pub "Shortcut.Forge"        "Applications\Files\Manager\Shortcut.Forge"               "Shortcut.Forge.exe"        "Applications\Files\Manager\Shortcut.Forge"
 
+:: ── Applications / Finance ─────────────────────────────────────────
+call :pub "Stock.Catch"           "Applications\Finance\Stock.Catch"                        "StockCatch.exe"            "Applications\Finance\Stock.Catch"
+
 :: ── Applications / Network / Monitor ───────────────────────────────
 :: call :pub "DNS.Flip"              "Applications\Network\Monitor\DNS.Flip"                   "Dns.Flip.exe"              "Applications\Network\Monitor"
 :: call :pub "Net.Scan"              "Applications\Network\Monitor\Net.Scan"                   "Net.Scan.exe"              "Applications\Network\Monitor\Net.Scan"

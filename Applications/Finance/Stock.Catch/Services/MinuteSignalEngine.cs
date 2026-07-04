@@ -121,6 +121,7 @@ public sealed class MinuteSignalEngine(AppConfig config, PriceSourceRegistry reg
         var nowMinute = new DateTime(now.Year, now.Month, now.Day, now.Hour, now.Minute, 0);
         var bars = sd.Bars.Values.Where(b => b.Date < nowMinute).ToList();
         if (bars.Count < 26) return;   // BB20 + RSI14 최소 표본(1분봉 기준)
+        var vwap = SessionVwap(bars);  // 컨텍스트용 세션 VWAP(원본 1분봉 기준)
 
         // ☀ 개장 브리핑(하루 1회 · 라이브 전용): 갭 + 일봉 추세로 오늘 분위기를 미리 요약.
         if (!sd.BriefSent && sd.DayTrend is { } dtb && bars.Count >= 1)
@@ -142,9 +143,28 @@ public sealed class MinuteSignalEngine(AppConfig config, PriceSourceRegistry reg
 
             int start = 0;
             while (start < tfBars.Count && tfBars[start].Date <= st.LastEvalBar) start++;
-            ScanBars(item, st, tfBars, start, Fire, item.BottomAlert, item.TopAlert, tf, sd.DayTrend, sd.PrevClose);
+            ScanBars(item, st, tfBars, start, Fire, item.BottomAlert, item.TopAlert, tf, sd.DayTrend, sd.PrevClose, vwap);
             st.LastEvalBar = tfBars[^1].Date;
         }
+    }
+
+    /// <summary>
+    /// 당일 세션 VWAP(거래량 가중 평균가) — 원본 1분봉 누적으로 계산해 봉 종료 시각으로 조회한다
+    /// (롤링 봉은 구간이 겹쳐 거래량이 중복되므로 반드시 1분봉 기준). 컨텍스트 표기 전용.
+    /// 실측(14일×3종목): 확인GC(✅🔥)가 VWAP 위면 승률 71%·낙폭 −0.97%, 아래면 46%·−2.19% —
+    /// 단 최고 시그널(07-03 10:05 🔥)은 VWAP 아래에서 발생 → 강등 아닌 표기로만 사용.
+    /// </summary>
+    private static Dictionary<DateTime, double> SessionVwap(List<Candle> minuteBars)
+    {
+        var map = new Dictionary<DateTime, double>(minuteBars.Count);
+        double pv = 0, vv = 0;
+        foreach (var b in minuteBars)
+        {
+            pv += (double)(b.High + b.Low + b.Close) / 3.0 * b.Volume;
+            vv += b.Volume;
+            map[b.Date] = vv > 0 ? pv / vv : double.NaN;
+        }
+        return map;
     }
 
     /// <summary>
@@ -160,12 +180,13 @@ public sealed class MinuteSignalEngine(AppConfig config, PriceSourceRegistry reg
         if (bars.Count < 26) return result;
 
         var item = new WatchItem { Symbol = code, Name = name };
+        var vwap = SessionVwap(bars);
         foreach (int tf in Timeframes())
         {
             var tfBars = RollBars(bars, tf);
             if (tfBars.Count < 26) continue;
             var st = new State();   // 라이브 상태와 분리된 임시 상태
-            ScanBars(item, st, tfBars, 0, result.Add, bottom: true, top: true, tf, dayTrend, prevClose);
+            ScanBars(item, st, tfBars, 0, result.Add, bottom: true, top: true, tf, dayTrend, prevClose, vwap);
         }
         return result.OrderBy(s => s.Time).ThenBy(s => s.Timeframe).ToList();
     }
@@ -195,7 +216,8 @@ public sealed class MinuteSignalEngine(AppConfig config, PriceSourceRegistry reg
 
     /// <summary>지표 일괄 계산 후 fromIdx부터 완성봉을 순서대로 판정 — 라이브(Fire)·백테스트(수집) 공용 코어.</summary>
     private void ScanBars(WatchItem item, State st, List<Candle> bars, int fromIdx,
-        Action<MinuteSignal> emit, bool bottom, bool top, int tf, double? dayTrend, decimal prevClose)
+        Action<MinuteSignal> emit, bool bottom, bool top, int tf, double? dayTrend, decimal prevClose,
+        IReadOnlyDictionary<DateTime, double>? vwap = null)
     {
         var closes = bars.Select(b => (double)b.Close).ToList();
         var (upper, _, lower) = IndicatorMath.Bollinger(closes);
@@ -206,9 +228,9 @@ public sealed class MinuteSignalEngine(AppConfig config, PriceSourceRegistry reg
 
         for (int i = Math.Max(fromIdx, 21); i < bars.Count; i++)
         {
-            EvaluateCross(item, st, bars, i, ma5, ma20, emit, tf, dayTrend, prevClose);
+            EvaluateCross(item, st, bars, i, ma5, ma20, emit, tf, dayTrend, prevClose, vwap);
             if (bottom && tf == 1) EvaluateFollow(item, st, bars, i, emit);   // 직후 양봉은 1분봉 전용
-            if (bottom) EvaluateBottom(item, st, bars, i, upper, lower, rsi, volMa, emit, tf, dayTrend, prevClose);
+            if (bottom) EvaluateBottom(item, st, bars, i, upper, lower, rsi, volMa, emit, tf, dayTrend, prevClose, vwap);
             if (top) EvaluateTop(item, st, bars, i, upper, lower, rsi, volMa, emit, tf);
         }
     }
@@ -238,7 +260,8 @@ public sealed class MinuteSignalEngine(AppConfig config, PriceSourceRegistry reg
 
     /// <summary>MA5/MA20 관계를 봉마다 추적해 1차 시그널 후 확인 창(×tf) 내 크로스를 알림한다.</summary>
     private void EvaluateCross(WatchItem item, State st, List<Candle> bars, int i, double[] ma5, double[] ma20,
-        Action<MinuteSignal> emit, int tf, double? dayTrend, decimal prevClose)
+        Action<MinuteSignal> emit, int tf, double? dayTrend, decimal prevClose,
+        IReadOnlyDictionary<DateTime, double>? vwap = null)
     {
         if (double.IsNaN(ma5[i]) || double.IsNaN(ma20[i])) return;
         var bar = bars[i];
@@ -265,7 +288,7 @@ public sealed class MinuteSignalEngine(AppConfig config, PriceSourceRegistry reg
                     : MinuteSignalKind.GoldenCross;
                 emit(new MinuteSignal(item.Symbol, item.Name, kind, bar.Close,
                     $"MA5 {ma5[i]:N0} > MA20 {ma20[i]:N0} 돌파 · 1차({st.BottomFiredAt:HH:mm}) 후 {(bar.Date - st.BottomFiredAt).TotalMinutes:0}분 · " +
-                    $"{rise:+0.00;-0.00}%{reason}", bar.Date, tf, Context(bars, i, dayTrend, prevClose)));
+                    $"{rise:+0.00;-0.00}%{reason}", bar.Date, tf, Context(bars, i, dayTrend, prevClose, vwap)));
             }
             if (st.AwaitDead && !st.PrevBelow && below)
             {
@@ -278,8 +301,9 @@ public sealed class MinuteSignalEngine(AppConfig config, PriceSourceRegistry reg
         st.HasPrevRel = true;
     }
 
-    /// <summary>사람 판단 보조 컨텍스트: 갭·당일 등락·저점比·일봉추세 — "폭락 후 V바닥 초입"인지 식별용.</summary>
-    private string Context(List<Candle> bars, int i, double? dayTrend, decimal prevClose)
+    /// <summary>사람 판단 보조 컨텍스트: 갭·당일 등락·저점比·VWAP 위치·일봉추세 — "폭락 후 V바닥 초입"인지 식별용.</summary>
+    private string Context(List<Candle> bars, int i, double? dayTrend, decimal prevClose,
+        IReadOnlyDictionary<DateTime, double>? vwap = null)
     {
         var bar = bars[i];
         double dayChg = bars[0].Open > 0 ? (double)(bar.Close / bars[0].Open - 1) * 100 : 0;
@@ -287,15 +311,20 @@ public sealed class MinuteSignalEngine(AppConfig config, PriceSourceRegistry reg
         double fromLow = dayLow > 0 ? (double)(bar.Close / dayLow - 1) * 100 : 0;
         string gap = prevClose > 0 && bars[0].Open > 0
             ? $"갭 {(double)(bars[0].Open / prevClose - 1) * 100:+0.0;-0.0}% · " : "";
+        // VWAP 위치: 확인GC가 VWAP 위면 실측 승률 71%·낙폭 −0.97% (아래 46%·−2.19%) — 표기만, 강등 아님.
+        string vw = "";
+        if (vwap != null && vwap.TryGetValue(bar.Date, out var v) && !double.IsNaN(v) && v > 0)
+            vw = $" · VWAP {((double)bar.Close >= v ? "위" : "아래")} {((double)bar.Close / v - 1) * 100:+0.0;-0.0}%";
         string trend = config.BottomTrendGate && dayTrend is { } dt ? $" · 일봉추세 {dt:+0.00;-0.00}" : "";
-        return $"{gap}당일 {dayChg:+0.0;-0.0}% · 저점比 +{fromLow:0.0}%{trend}";
+        return $"{gap}당일 {dayChg:+0.0;-0.0}% · 저점比 +{fromLow:0.0}%{vw}{trend}";
     }
 
     // ───────────────────────── 1차: 바닥 반등 ─────────────────────────
 
     /// <summary>완성봉 1개(인덱스 i)에 대한 바닥 반등 판정. 밴드워킹·%b 필터로 지속 하락·약반등을 걸러낸다.</summary>
     private void EvaluateBottom(WatchItem item, State st, List<Candle> bars, int i,
-        double[] upper, double[] lower, double[] rsi, double[] volMa, Action<MinuteSignal> emit, int tf, double? dayTrend, decimal prevClose)
+        double[] upper, double[] lower, double[] rsi, double[] volMa, Action<MinuteSignal> emit, int tf, double? dayTrend, decimal prevClose,
+        IReadOnlyDictionary<DateTime, double>? vwap = null)
     {
         var bar = bars[i];
         if (double.IsNaN(lower[i]) || double.IsNaN(upper[i]) ||
@@ -344,6 +373,18 @@ public sealed class MinuteSignalEngine(AppConfig config, PriceSourceRegistry reg
         double volRatio = maxVol / volMa[i];
         if (volRatio < config.BottomVolumeRatio) return;
 
+        // RSI 불리시 다이버전스(참고 표기): 트리거 저점(최근 6봉)이 이전 스윙 저점(7~30봉 전)보다 낮은데
+        // RSI는 더 높음 — 실측(1분 TF): 이후 확인GC 승률 67%(n=7)·평균 +3.11%로 유망하나 표본 부족 → 표기만.
+        bool divergence = false;
+        {
+            int loIdx = i; decimal lo = decimal.MaxValue;
+            for (int k = Math.Max(0, i - 5); k <= i; k++) if (bars[k].Low < lo) { lo = bars[k].Low; loIdx = k; }
+            int prevIdx = -1; decimal prevLo = decimal.MaxValue;
+            for (int k = Math.Max(0, i - 30); k <= i - 7; k++) if (bars[k].Low < prevLo) { prevLo = bars[k].Low; prevIdx = k; }
+            if (prevIdx >= 0 && !double.IsNaN(rsi[loIdx]) && !double.IsNaN(rsi[prevIdx]))
+                divergence = lo < prevLo && rsi[loIdx] > rsi[prevIdx] + 1;
+        }
+
         st.BottomFiredAt = bar.Date;
         st.BottomFiredPrice = bar.Close;
         st.AwaitGolden = config.BottomConfirmCross;
@@ -351,8 +392,9 @@ public sealed class MinuteSignalEngine(AppConfig config, PriceSourceRegistry reg
         st.AwaitDead = false;   // 방향 전환 — 반대편 확인 대기 해제
         // 일봉 추세·갭 등은 컨텍스트 줄로(강등 아님) — 폭락 직후가 오히려 V바닥 기회일 수 있다(실측 07-03 10:05).
         emit(new MinuteSignal(item.Symbol, item.Name, MinuteSignalKind.Rebound, bar.Close,
-            $"하단터치 {bars[touchIdx].Date:HH:mm} → 복귀 %b {pb:0.00} · RSI {rsi[i]:0.#}↑(저점 {minRsi:0.#}) · 거래량 {volRatio:0.0}×",
-            bar.Date, tf, Context(bars, i, dayTrend, prevClose)));
+            $"하단터치 {bars[touchIdx].Date:HH:mm} → 복귀 %b {pb:0.00} · RSI {rsi[i]:0.#}↑(저점 {minRsi:0.#}) · 거래량 {volRatio:0.0}×" +
+            (divergence ? " · 다이버전스" : ""),
+            bar.Date, tf, Context(bars, i, dayTrend, prevClose, vwap)));
     }
 
     // ───────────────────────── 1차: 고점 경고 ─────────────────────────

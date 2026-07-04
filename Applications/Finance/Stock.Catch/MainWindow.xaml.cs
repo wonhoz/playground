@@ -688,7 +688,11 @@ public partial class MainWindow : Window
                     if (bars.Count < 26)
                         throw new InvalidDataException($"분봉 부족({bars.Count}봉, 최소 26봉)");
 
-                    var signals = _minuteSignal.Backtest(bars, stem, "");
+                    // 라이브와 동일한 일봉 추세 게이트 재현: 파일명 "이름(코드)_yyyyMMdd_..."에서
+                    // 코드·날짜를 추출해 그 시점 직전 완성 일봉으로 추세점수를 계산(실패 시 게이트 없이 진행).
+                    double? dayTrend = _config.BottomTrendGate ? await TryDayTrendAsync(stem) : null;
+
+                    var signals = _minuteSignal.Backtest(bars, stem, "", dayTrend);
 
                     // 결과 CSV: 선택한 저장 폴더에 "_시그널" 접미사. detail은 쉼표 포함 → 따옴표 이스케이프.
                     string outPath = Path.Combine(outDir, stem + "_시그널.csv");
@@ -720,6 +724,28 @@ public partial class MainWindow : Window
         {
             SignalCsvBtn.IsEnabled = true;
         }
+    }
+
+    /// <summary>백테스트용 과거 시점 일봉 추세점수 — 파일명에서 (코드)_yyyyMMdd 추출 후 직전 완성 일봉으로 계산. 실패 시 null.</summary>
+    private async Task<double?> TryDayTrendAsync(string stem)
+    {
+        try
+        {
+            var m = System.Text.RegularExpressions.Regex.Match(stem, @"\(([0-9A-Za-z]{5,6})\)_(\d{8})_");
+            if (!m.Success) return null;
+            string code = m.Groups[1].Value.ToUpperInvariant();
+            if (!DateTime.TryParseExact(m.Groups[2].Value, "yyyyMMdd", null, System.Globalization.DateTimeStyles.None, out var day))
+                return null;
+
+            var daily = await _registry.KrDailyRangeAsync(code, day.AddDays(-70), day.AddDays(-1));
+            var completed = daily.Where(c => c.Date.Date < day.Date).ToList();
+            if (completed.Count < LadderCalculator.RequiredDays) return null;
+            var win = completed.TakeLast(LadderCalculator.RequiredDays).ToList();
+            var r = LadderCalculator.Calculate(new StockSeries(code, "", "", SourceKind.Naver, win),
+                new LadderParams(0, 0, UseTrend: true));
+            return r.TrendScore;
+        }
+        catch { return null; }
     }
 
     private static string SignalLabel(Models.MinuteSignalKind kind) => kind switch

@@ -53,6 +53,9 @@ public sealed class MinuteSignalEngine(AppConfig config, PriceSourceRegistry reg
         // MA5/MA20 관계 추적(골든·데드 공용)
         public bool PrevBelow;                                     // 직전 완성봉 MA5≤MA20 여부
         public bool HasPrevRel;
+        // 일봉 추세 게이트(하루 1회 계산 · 실패 시 10분 후 재시도)
+        public double? DayTrend;                                   // 래더 추세점수(−1~+1 · null=미로드)
+        public DateTime LastTrendTry = DateTime.MinValue;
     }
 
     private readonly Dictionary<string, State> _states = new();
@@ -72,6 +75,27 @@ public sealed class MinuteSignalEngine(AppConfig config, PriceSourceRegistry reg
         if (!_states.TryGetValue(item.Symbol, out var st)) _states[item.Symbol] = st = new State();
         if ((now - st.LastFetch).TotalSeconds < 25) return;   // 폴링보다 잦은 재조회 방지
         st.LastFetch = now;
+
+        // 일봉 추세 게이트: 완성 일봉(오늘 제외) 기반 래더 추세점수를 하루 1회 계산.
+        // 실측 근거: 일봉 하락 대세 종목(인버스)의 GC 승률 33% — 역추세 반등을 강등 표기.
+        if (config.BottomTrendGate && st.DayTrend is null && (now - st.LastTrendTry).TotalMinutes >= 10)
+        {
+            st.LastTrendTry = now;
+            try
+            {
+                var daily = await registry.KrDailyAsync(item.Symbol, 40, ct);
+                var completed = daily.Where(c => c.Date.Date != DateTime.Today).ToList();
+                if (completed.Count >= LadderCalculator.RequiredDays)
+                {
+                    var win = completed.TakeLast(LadderCalculator.RequiredDays).ToList();
+                    var r = LadderCalculator.Calculate(
+                        new StockSeries(item.Symbol, "", "", SourceKind.Naver, win),
+                        new LadderParams(0, 0, UseTrend: true));
+                    st.DayTrend = r.TrendScore;
+                }
+            }
+            catch { /* 일봉 조회 실패 → 10분 후 재시도(게이트 없이 판정 계속) */ }
+        }
 
         // 분봉 수집: 캐시가 얕으면 워밍업(최대 ~100봉), 이후엔 최신 1페이지(30봉)만 증분 병합.
         List<Candle> page;
@@ -97,15 +121,16 @@ public sealed class MinuteSignalEngine(AppConfig config, PriceSourceRegistry reg
     /// <summary>
     /// 과거 1분봉 목록을 라이브와 <b>동일한 조건</b>(쿨다운·확인 창·필터 포함)으로 스캔해
     /// 알림이 발생했을 시점 목록을 반환한다(알림 전송·상태 오염 없음). 분봉 CSV 백테스트용.
+    /// dayTrend를 주면 라이브와 동일하게 일봉 추세 게이트도 적용한다(null=게이트 없음).
     /// </summary>
-    public List<MinuteSignal> Backtest(IReadOnlyList<Candle> minuteBars, string code, string name)
+    public List<MinuteSignal> Backtest(IReadOnlyList<Candle> minuteBars, string code, string name, double? dayTrend = null)
     {
         var bars = minuteBars.OrderBy(b => b.Date).ToList();
         var result = new List<MinuteSignal>();
         if (bars.Count < 26) return result;
 
         var item = new WatchItem { Symbol = code, Name = name };
-        var st = new State();   // 라이브 상태와 분리된 임시 상태
+        var st = new State { DayTrend = dayTrend };   // 라이브 상태와 분리된 임시 상태
         ScanBars(item, st, bars, 0, result.Add, bottom: true, top: true);
         return result;
     }
@@ -174,11 +199,21 @@ public sealed class MinuteSignalEngine(AppConfig config, PriceSourceRegistry reg
                 // GC 모멘텀 필터: 1차 이후 상승률이 임계(기본 0.8%) 미달이면 "약한 확인"으로 강등.
                 // 실측: 가짜 GC(07-02 12:35)는 +0.51%, 진짜는 +0.90~6.73% — 횡보성 크로스 구분.
                 double rise = st.BottomFiredPrice > 0 ? (double)(bar.Close / st.BottomFiredPrice - 1) * 100 : 0;
-                bool strong = rise >= config.BottomGcMinRisePct;
+                bool weakMomentum = rise < config.BottomGcMinRisePct;
+                // 일봉 추세 게이트: 일봉 대세가 하락(추세점수<0)이면 역추세 반등으로 강등.
+                // 실측: 하락 대세 종목(인버스)의 GC 승률 33% vs 상승 대세(레버리지) 61%.
+                bool counterTrend = config.BottomTrendGate && st.DayTrend is < 0;
+                string reason = (weakMomentum, counterTrend) switch
+                {
+                    (true, true) => $" (모멘텀 {config.BottomGcMinRisePct:0.0#}% 미달 + 일봉 역추세 {st.DayTrend:0.00} — 주의)",
+                    (true, false) => $" (모멘텀 {config.BottomGcMinRisePct:0.0#}% 미달 — 횡보성 크로스 주의)",
+                    (false, true) => $" (일봉 역추세 {st.DayTrend:0.00} — 하락 대세 속 반등 주의)",
+                    _ => "",
+                };
                 emit(new MinuteSignal(item.Symbol, item.Name,
-                    strong ? MinuteSignalKind.GoldenCross : MinuteSignalKind.WeakGoldenCross, bar.Close,
+                    weakMomentum || counterTrend ? MinuteSignalKind.WeakGoldenCross : MinuteSignalKind.GoldenCross, bar.Close,
                     $"MA5 {ma5[i]:N0} > MA20 {ma20[i]:N0} 돌파 · 1차({st.BottomFiredAt:HH:mm}) 후 {(bar.Date - st.BottomFiredAt).TotalMinutes:0}분 · " +
-                    $"{rise:+0.00;-0.00}%{(strong ? "" : $" (모멘텀 {config.BottomGcMinRisePct:0.0#}% 미달 — 횡보성 크로스 주의)")}", bar.Date));
+                    $"{rise:+0.00;-0.00}%{reason}", bar.Date));
             }
             if (st.AwaitDead && !st.PrevBelow && below)
             {
@@ -248,8 +283,9 @@ public sealed class MinuteSignalEngine(AppConfig config, PriceSourceRegistry reg
         st.AwaitGolden = config.BottomConfirmCross;
         st.AwaitFollow = config.BottomFollowCandle;
         st.AwaitDead = false;   // 방향 전환 — 반대편 확인 대기 해제
+        string trendTag = config.BottomTrendGate && st.DayTrend is < 0 ? $" · 일봉 역추세 {st.DayTrend:0.00} ⚠" : "";
         emit(new MinuteSignal(item.Symbol, item.Name, MinuteSignalKind.Rebound, bar.Close,
-            $"하단터치 {bars[touchIdx].Date:HH:mm} → 복귀 %b {pb:0.00} · RSI {rsi[i]:0.#}↑(저점 {minRsi:0.#}) · 거래량 {volRatio:0.0}×", bar.Date));
+            $"하단터치 {bars[touchIdx].Date:HH:mm} → 복귀 %b {pb:0.00} · RSI {rsi[i]:0.#}↑(저점 {minRsi:0.#}) · 거래량 {volRatio:0.0}×{trendTag}", bar.Date));
     }
 
     // ───────────────────────── 1차: 고점 경고 ─────────────────────────

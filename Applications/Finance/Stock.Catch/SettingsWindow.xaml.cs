@@ -48,6 +48,7 @@ public partial class SettingsWindow : Window
         BottomGcRiseBox.Text = config.BottomGcMinRisePct.ToString("0.0#");
         BottomCrossCheck.IsChecked = config.BottomConfirmCross;
         BottomFollowCheck.IsChecked = config.BottomFollowCandle;
+        BottomTrendGateCheck.IsChecked = config.BottomTrendGate;
         TopRsiBox.Text = config.TopRsiMin.ToString("0.#");
         TopVolBox.Text = config.TopVolumeRatio.ToString("0.##");
         TopCooldownBox.Text = config.TopCooldownMinutes.ToString();
@@ -160,6 +161,7 @@ public partial class SettingsWindow : Window
         if (double.TryParse(BottomGcRiseBox.Text.Trim(), out var bgr)) _config.BottomGcMinRisePct = Math.Clamp(bgr, 0, 10);
         _config.BottomConfirmCross = BottomCrossCheck.IsChecked == true;
         _config.BottomFollowCandle = BottomFollowCheck.IsChecked == true;
+        _config.BottomTrendGate = BottomTrendGateCheck.IsChecked == true;
         if (double.TryParse(TopRsiBox.Text.Trim(), out var trsi)) _config.TopRsiMin = Math.Clamp(trsi, 5, 95);
         if (double.TryParse(TopVolBox.Text.Trim(), out var tvol)) _config.TopVolumeRatio = Math.Max(0, tvol);
         if (int.TryParse(TopCooldownBox.Text.Trim(), out var tcd)) _config.TopCooldownMinutes = Math.Max(1, tcd);

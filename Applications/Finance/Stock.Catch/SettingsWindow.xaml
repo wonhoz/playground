@@ -137,6 +137,9 @@
                 <CheckBox x:Name="BottomFollowCheck" Margin="0,6,0,0"
                           Content="직후 양봉 지속 확인 알림 (골든크로스보다 빠른 조기 확인)"
                           ToolTip="1차 시그널 직후 첫 완성봉이 양봉이면 '반등 지속' 알림. 실측: 진짜 반등 3/4 직후 양봉 vs 가짜 2/3 직후 음봉 — 강/약 반등 구분 힌트."/>
+                <CheckBox x:Name="BottomTrendGateCheck" Margin="0,6,0,0"
+                          Content="일봉 추세 게이트 (하락 대세 종목의 골든크로스를 '약한 확인'으로 강등)"
+                          ToolTip="완성 일봉 기반 추세점수가 음수(하락 대세)면 역추세 반등으로 판단. 실측: 하락 대세 종목 GC 승률 33% vs 상승 대세 61%."/>
 
                 <!-- 고점 경고 시그널 -->
                 <TextBlock Text="고점 경고 시그널 (관심 종목 · 국내 1분봉)" Style="{StaticResource Section}"/>

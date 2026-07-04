@@ -125,6 +125,13 @@ public sealed class PriceSourceRegistry : IDisposable
         return new Quote(item.Symbol, price, rate, DateTime.Now);
     }
 
+    /// <summary>국내 일봉(지정 구간) — 백테스트의 과거 시점 일봉 추세 재현용. 네이버(무인증) 사용.</summary>
+    public async Task<IReadOnlyList<Candle>> KrDailyRangeAsync(string code, DateTime from, DateTime to, CancellationToken ct = default)
+    {
+        var series = await _sources[SourceKind.Naver].FetchAsync(code, from, to, ct);
+        return series.Candles;
+    }
+
     /// <summary>국내 일봉(최근 days일) — 래더/갭다운/반등 계산용. 네이버(무인증) 사용.</summary>
     public async Task<IReadOnlyList<Candle>> KrDailyAsync(string code, int days = 40, CancellationToken ct = default)
     {

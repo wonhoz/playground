@@ -154,6 +154,12 @@ public sealed class AppConfig
     /// </summary>
     public double BottomGcMinRisePct { get; set; } = 0.8;
     /// <summary>
+    /// 일봉 추세 게이트: 완성 일봉 기반 래더 추세점수가 음수(하락 대세)면 골든크로스를
+    /// '약한 확인'으로 강등하고 반등 시그널에 역추세 표기. 실측: 하락 대세 종목 GC 승률 33%
+    /// vs 상승 대세 61% → 기본 켜짐.
+    /// </summary>
+    public bool BottomTrendGate { get; set; } = true;
+    /// <summary>
     /// 밴드워킹 필터: 최근 10봉 중 하단 터치 봉이 이 수를 초과하면 지속 하락으로 보고 스킵.
     /// 실측: 깊은 급락 V바닥은 터치 5~7봉이라 4는 진짜 반등까지 차단 → 7 권장(8봉+만 스킵).
     /// </summary>

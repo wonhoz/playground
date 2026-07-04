@@ -210,10 +210,18 @@ public sealed class MinuteSignalEngine(AppConfig config, PriceSourceRegistry reg
                     (false, true) => $" (일봉 역추세 {st.DayTrend:0.00} — 하락 대세 속 반등 주의)",
                     _ => "",
                 };
-                emit(new MinuteSignal(item.Symbol, item.Name,
-                    weakMomentum || counterTrend ? MinuteSignalKind.WeakGoldenCross : MinuteSignalKind.GoldenCross, bar.Close,
+                // 강력 확인(🔥): 모멘텀 상위 구간 — 실측상 건당 기대수익이 임계 이상에서 단조 증가
+                // (0.8~1.5% +0.11 → 1.5~2.5% +0.26 → 2.5%+ +0.41%/건). "확실한 하나"의 계량 프록시.
+                var kind = (weakMomentum || counterTrend) ? MinuteSignalKind.WeakGoldenCross
+                    : rise >= config.BottomGcStrongPct ? MinuteSignalKind.StrongGoldenCross
+                    : MinuteSignalKind.GoldenCross;
+                // 사람 판단 보조 컨텍스트: 당일 시가 대비 등락·당일 저점 대비 반등폭(차트 없이 장 흐름 감 잡기).
+                double dayChg = bars[0].Open > 0 ? (double)(bar.Close / bars[0].Open - 1) * 100 : 0;
+                decimal dayLow = bars.Take(i + 1).Min(b => b.Low);
+                double fromLow = dayLow > 0 ? (double)(bar.Close / dayLow - 1) * 100 : 0;
+                emit(new MinuteSignal(item.Symbol, item.Name, kind, bar.Close,
                     $"MA5 {ma5[i]:N0} > MA20 {ma20[i]:N0} 돌파 · 1차({st.BottomFiredAt:HH:mm}) 후 {(bar.Date - st.BottomFiredAt).TotalMinutes:0}분 · " +
-                    $"{rise:+0.00;-0.00}%{reason}", bar.Date));
+                    $"{rise:+0.00;-0.00}%{reason} · 당일 {dayChg:+0.0;-0.0}% · 저점比 +{fromLow:0.0}%", bar.Date));
             }
             if (st.AwaitDead && !st.PrevBelow && below)
             {

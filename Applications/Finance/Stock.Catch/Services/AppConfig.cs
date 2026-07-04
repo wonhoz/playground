@@ -154,6 +154,11 @@ public sealed class AppConfig
     /// </summary>
     public double BottomGcMinRisePct { get; set; } = 0.8;
     /// <summary>
+    /// '강력 확인(🔥)' 모멘텀 임계(%): 1차→GC 상승률이 이 이상이면 최상위 등급으로 표시.
+    /// 실측: 건당 기대수익이 모멘텀 구간별 단조 증가(0.8~1.5% +0.11 → 2.5%+ +0.41%/건) → 기본 2.0.
+    /// </summary>
+    public double BottomGcStrongPct { get; set; } = 2.0;
+    /// <summary>
     /// 일봉 추세 게이트: 완성 일봉 기반 래더 추세점수가 음수(하락 대세)면 골든크로스를
     /// '약한 확인'으로 강등하고 반등 시그널에 역추세 표기. 실측: 하락 대세 종목 GC 승률 33%
     /// vs 상승 대세 61% → 기본 켜짐.

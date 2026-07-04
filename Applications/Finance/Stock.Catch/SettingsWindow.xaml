@@ -132,6 +132,9 @@
                     <TextBlock Text="GC 모멘텀(%)" Style="{StaticResource FieldLbl}" VerticalAlignment="Center" Margin="16,0,8,0"
                                ToolTip="골든크로스 시점에 1차 시그널 대비 이 비율 이상 올라 있어야 '반등 확인(강)'. 미달이면 '약한 확인(횡보성 크로스)'으로 구분 알림. 실측: 가짜 +0.51% vs 진짜 +0.90~6.73% → 권장 0.8."/>
                     <TextBox x:Name="BottomGcRiseBox" Width="56"/>
+                    <TextBlock Text="강력🔥(%)" Style="{StaticResource FieldLbl}" VerticalAlignment="Center" Margin="16,0,8,0"
+                               ToolTip="이 이상이면 '강력 확인 🔥' 최상위 등급. 실측: 건당 기대수익이 모멘텀 구간별 단조 증가(0.8~1.5% +0.11 → 2.5%+ +0.41%/건) → 권장 2.0."/>
+                    <TextBox x:Name="BottomGcStrongBox" Width="56"/>
                 </StackPanel>
                 <CheckBox x:Name="BottomCrossCheck" Content="골든크로스(MA5↗MA20) 확인 알림 (1차 시그널 후 20분 내)"/>
                 <CheckBox x:Name="BottomFollowCheck" Margin="0,6,0,0"

@@ -46,6 +46,7 @@ public partial class SettingsWindow : Window
         BottomWalkBox.Text = config.BottomWalkMaxTouches.ToString();
         BottomPbBox.Text = config.BottomMinPercentB.ToString("0.##");
         BottomGcRiseBox.Text = config.BottomGcMinRisePct.ToString("0.0#");
+        BottomGcStrongBox.Text = config.BottomGcStrongPct.ToString("0.0#");
         BottomCrossCheck.IsChecked = config.BottomConfirmCross;
         BottomFollowCheck.IsChecked = config.BottomFollowCandle;
         BottomTrendGateCheck.IsChecked = config.BottomTrendGate;
@@ -159,6 +160,7 @@ public partial class SettingsWindow : Window
         if (int.TryParse(BottomWalkBox.Text.Trim(), out var bwk)) _config.BottomWalkMaxTouches = Math.Clamp(bwk, 1, 10);
         if (double.TryParse(BottomPbBox.Text.Trim(), out var bpb)) _config.BottomMinPercentB = Math.Clamp(bpb, 0, 0.9);
         if (double.TryParse(BottomGcRiseBox.Text.Trim(), out var bgr)) _config.BottomGcMinRisePct = Math.Clamp(bgr, 0, 10);
+        if (double.TryParse(BottomGcStrongBox.Text.Trim(), out var bgs)) _config.BottomGcStrongPct = Math.Clamp(bgs, 0, 20);
         _config.BottomConfirmCross = BottomCrossCheck.IsChecked == true;
         _config.BottomFollowCandle = BottomFollowCheck.IsChecked == true;
         _config.BottomTrendGate = BottomTrendGateCheck.IsChecked == true;

@@ -122,7 +122,6 @@ $allApps = @(
     [pscustomobject]@{N=105; Name="Brush.Scale";           Cat="Applications/Photo.Picture"}
     [pscustomobject]@{N=106; Name="Quant.Lab";             Cat="Applications/Finance"}
     [pscustomobject]@{N=107; Name="Stock.Rush";            Cat="Games/Simulation"}
-    [pscustomobject]@{N=108; Name="Stock.Watch";           Cat="Applications/Finance"}
     [pscustomobject]@{N=109; Name="Stock.Catch";           Cat="Applications/Finance"}
 )
 

@@ -61,7 +61,8 @@ public sealed record MinuteSignal(
             if (Kind == MinuteSignalKind.DeadCross) return "🔻 하락 확인 — 반등 무효 · 정리/관망";
             if (Kind == MinuteSignalKind.MorningBrief) return Detail;
 
-            string stars = new string('★', Stars) + new string('☆', 5 - Stars);
+            // 최상(5성)은 🌟로 차별화 — 모바일 알림에서 즉시 구분되도록.
+            string stars = Stars == 5 ? "🌟🌟🌟🌟🌟" : new string('⭐', Stars);
             string label = Stars switch
             {
                 5 => Kind == MinuteSignalKind.StrongGoldenCross

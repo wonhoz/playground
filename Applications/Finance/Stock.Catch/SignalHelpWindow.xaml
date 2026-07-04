@@ -22,6 +22,15 @@
             <Setter Property="Foreground" Value="{StaticResource FgMuted}"/>
             <Setter Property="FontSize" Value="11.5"/>
         </Style>
+        <Style x:Key="Cell" TargetType="TextBlock" BasedOn="{StaticResource Body}">
+            <Setter Property="Margin" Value="10,5,10,5"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+        <Style x:Key="CellHead" TargetType="TextBlock" BasedOn="{StaticResource Cell}">
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Foreground" Value="{StaticResource FgMuted}"/>
+        </Style>
     </Window.Resources>
 
     <Grid Margin="20" Background="{StaticResource WindowBg}">
@@ -42,6 +51,52 @@
                            Text="☀ 개장 브리핑 — 매 거래일 첫 폴링(09:05경) 1회. 갭·일봉추세로 오늘 분위기 요약.&#10;📈 바닥 반등 시그널 (1차) — 급락 → 볼린저 하단 터치 → 밴드 복귀 + RSI 상승 전환 + 거래량 급증. 관찰 시작 신호.&#10;↗ 반등 지속 (직후 양봉) — 1차 직후 첫 봉이 양봉이면 +1분 만에 오는 조기 확인 힌트(1분봉 전용).&#10;🔥 강력 확인 / ✅ 반등 확인 / ⚠ 약한 확인 (2차 골든크로스) — MA5가 MA20을 상향 돌파. 등급은 1차 이후 상승률(모멘텀)로 결정: 🔥 ≥2.0% · ✅ ≥0.8% · ⚠ 미달(횡보성 크로스, 관망).&#10;📉 고점 경고 — 상단 밴드워킹 + RSI 과매수 후 이탈(익절 검토). 🔻 데드크로스 — 하락 확인."/>
                 <TextBlock Style="{StaticResource Muted}"
                            Text="실측(3종목×14일 · GC 110건): 🔥 등급일수록 건당 기대수익 단조 증가(0.8~1.5% +0.11 → 2.5%+ +0.41%/건). 진짜 반등은 골든크로스가 5~9분 내 따라오고, 직후 양봉도 3/4 동반."/>
+
+                <TextBlock Style="{StaticResource H1}" Text="⭐ 종합 판정 5단계 (알림 2번째 줄)"/>
+                <Border BorderBrush="#3A3A3A" BorderThickness="1" CornerRadius="6" Margin="0,2,0,6">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/><RowDefinition/><RowDefinition/>
+                            <RowDefinition/><RowDefinition/><RowDefinition/><RowDefinition/>
+                        </Grid.RowDefinitions>
+
+                        <Border Grid.Row="0" Grid.ColumnSpan="3" Background="#FF232323" CornerRadius="6,6,0,0"/>
+                        <TextBlock Grid.Row="0" Grid.Column="0" Style="{StaticResource CellHead}" Text="판정"/>
+                        <TextBlock Grid.Row="0" Grid.Column="1" Style="{StaticResource CellHead}" Text="조건"/>
+                        <TextBlock Grid.Row="0" Grid.Column="2" Style="{StaticResource CellHead}" Text="실측 근거 (14일×3종목)"/>
+
+                        <TextBlock Grid.Row="1" Grid.Column="0" Style="{StaticResource Cell}" Text="🌟🌟🌟🌟🌟 최상 — 즉시 주목"/>
+                        <TextBlock Grid.Row="1" Grid.Column="1" Style="{StaticResource Cell}" Text="🔥 강력 GC"/>
+                        <TextBlock Grid.Row="1" Grid.Column="2" Style="{StaticResource Cell}" Text="승률 63% · 건당 +4.6%"/>
+
+                        <TextBlock Grid.Row="2" Grid.Column="0" Style="{StaticResource Cell}" Text="🌟🌟🌟🌟🌟 최상 — 즉시 주목"/>
+                        <TextBlock Grid.Row="2" Grid.Column="1" Style="{StaticResource Cell}" Text="✅ GC + VWAP 위"/>
+                        <TextBlock Grid.Row="2" Grid.Column="2" Style="{StaticResource Cell}" Text="승률 71% · 낙폭 −0.97%"/>
+
+                        <TextBlock Grid.Row="3" Grid.Column="0" Style="{StaticResource Cell}" Text="⭐⭐⭐⭐ 좋음 — 진입 검토"/>
+                        <TextBlock Grid.Row="3" Grid.Column="1" Style="{StaticResource Cell}" Text="✅ GC (VWAP 아래)"/>
+                        <TextBlock Grid.Row="3" Grid.Column="2" Style="{StaticResource Cell}" Text="승률 ~50%"/>
+
+                        <TextBlock Grid.Row="4" Grid.Column="0" Style="{StaticResource Cell}" Text="⭐⭐⭐ 주목"/>
+                        <TextBlock Grid.Row="4" Grid.Column="1" Style="{StaticResource Cell}" Text="↗ 직후양봉 / 📈 반등+다이버전스"/>
+                        <TextBlock Grid.Row="4" Grid.Column="2" Style="{StaticResource Cell}" Text="44% / 이후 GC 승률 67%"/>
+
+                        <TextBlock Grid.Row="5" Grid.Column="0" Style="{StaticResource Cell}" Text="⭐⭐ 관찰 — 확인 대기"/>
+                        <TextBlock Grid.Row="5" Grid.Column="1" Style="{StaticResource Cell}" Text="📈 반등 1차"/>
+                        <TextBlock Grid.Row="5" Grid.Column="2" Style="{StaticResource Cell}" Text="승률 50% (진입은 GC에서)"/>
+
+                        <TextBlock Grid.Row="6" Grid.Column="0" Style="{StaticResource Cell}" Text="⭐ 참고 — 무시 가능"/>
+                        <TextBlock Grid.Row="6" Grid.Column="1" Style="{StaticResource Cell}" Text="⚠ 약한 GC (횡보성)"/>
+                        <TextBlock Grid.Row="6" Grid.Column="2" Style="{StaticResource Cell}" Text="승률 49% · 수익폭 열위"/>
+                    </Grid>
+                </Border>
+                <TextBlock Style="{StaticResource Muted}"
+                           Text="승률 = 시그널 이후 30분 내 ±1% 선도달 기준. 고점 경고는 '⚠️ 경계 — 익절 검토', 데드크로스는 '🔻 하락 확인 — 정리/관망'으로 표시됩니다. 지표 상세(RSI·%b·거래량·컨텍스트)는 트레이 메뉴 [시그널 로그 폴더]의 일자별 CSV와 분봉 시그널 분석 창에서 확인하세요."/>
 
                 <TextBlock Style="{StaticResource H1}" Text="[N분] 타임프레임"/>
                 <TextBlock Style="{StaticResource Body}"

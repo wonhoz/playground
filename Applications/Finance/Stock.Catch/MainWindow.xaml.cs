@@ -703,6 +703,7 @@ public partial class MainWindow : Window
         {
             int okFiles = 0, failFiles = 0, totalSignals = 0;
             var parts = new List<string>();
+            var collected = new List<SignalResultWindow.FileSignals>();   // 분석 다이얼로그용
             string lastOut = "";
 
             foreach (var file in open.FileNames)
@@ -733,6 +734,7 @@ public partial class MainWindow : Window
                     totalSignals += signals.Count;
                     lastOut = outPath;
                     parts.Add($"{stem} {signals.Count}건");
+                    collected.Add(new SignalResultWindow.FileSignals(stem, signals));
                 }
                 catch (Exception ex)
                 {
@@ -745,6 +747,10 @@ public partial class MainWindow : Window
             SummaryText.Text = open.FileNames.Length == 1 && okFiles == 1
                 ? $"🧪 시그널 {totalSignals}건 → {lastOut}"
                 : $"🧪 {okFiles}/{open.FileNames.Length}개 파일 처리 · 시그널 총 {totalSignals}건{(failFiles > 0 ? $" · 실패 {failFiles}" : "")} — {detail}";
+
+            // 저장 완료 후 결과 분석 다이얼로그(필터·정렬) 표시.
+            if (collected.Count > 0 && totalSignals > 0)
+                new SignalResultWindow(collected) { Owner = this }.Show();
         }
         finally
         {

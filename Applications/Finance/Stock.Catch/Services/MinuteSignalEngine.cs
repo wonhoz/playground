@@ -322,12 +322,13 @@ public sealed class MinuteSignalEngine(AppConfig config, PriceSourceRegistry reg
 
         // 셋업: 터치 구간 최저 RSI가 과매도 상한 이하 + 트리거: RSI 상승 전환.
         double minRsi = double.MaxValue;
-        long maxVol = 0;
         for (int k = touchIdx; k <= i; k++)
-        {
             if (!double.IsNaN(rsi[k])) minRsi = Math.Min(minRsi, rsi[k]);
-            maxVol = Math.Max(maxVol, bars[k].Volume);
-        }
+        // 거래량 급증 탐색: 기본은 터치 구간, BottomVolWindowBars>0이면 최근 N봉
+        // — 투매 피크가 RSI 전환보다 몇 분 일러 터치 구간 밖으로 밀리는 케이스 포착(07-02 11:12 실측).
+        long maxVol = 0;
+        int volFrom = config.BottomVolWindowBars > 0 ? Math.Max(0, i - config.BottomVolWindowBars + 1) : touchIdx;
+        for (int k = volFrom; k <= i; k++) maxVol = Math.Max(maxVol, bars[k].Volume);
         if (minRsi > config.BottomRsiMax) return;
         if (rsi[i] <= rsi[i - 1]) return;
 

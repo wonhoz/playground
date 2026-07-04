@@ -177,6 +177,13 @@ public sealed class AppConfig
     public int BottomWalkMaxTouches { get; set; } = 7;
     /// <summary>트리거 봉 종가의 최소 %b(밴드 하단 0~상단 1). 이 이상 회복 마감해야 시그널(약반등 필터).</summary>
     public double BottomMinPercentB { get; set; } = 0.15;
+    /// <summary>
+    /// 거래량 급증 탐색 창(완성봉 수). 0=터치 구간만(구 방식), N=최근 N봉.
+    /// 실측(0197X0 07-02 11:12): 투매 거래량 피크가 RSI 상승 전환보다 5~8분 일러 터치 구간(≤5봉)
+    /// 밖으로 밀리는 케이스 발견. 14일×3종목 A/B 전수: 반등 승률 48→50% · 확인GC 55→56%(n 67→78) ·
+    /// 직후양봉 39→44% · 07-03 레버리지 핵심 시그널 무변화 → 10 채택.
+    /// </summary>
+    public int BottomVolWindowBars { get; set; } = 10;
 
     // ── 고점 경고 시그널(관심 종목 · 국내 1분봉 · 바닥의 거울상) ──
     /// <summary>셋업으로 인정할 RSI(14) 과매수 하한. 상단 터치 구간 최고 RSI가 이 값 이상일 때만 시그널.</summary>

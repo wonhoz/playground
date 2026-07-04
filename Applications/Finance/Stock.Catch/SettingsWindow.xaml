@@ -140,6 +140,9 @@
                     <TextBlock Text="타임프레임(분)" Style="{StaticResource FieldLbl}" VerticalAlignment="Center" Margin="0,0,8,0"
                                ToolTip="시그널을 판정할 봉 단위 목록(쉼표 구분·1~60). 1=원본 1분봉, 그 외는 1분봉을 롤링(convolution) 집계한 N분 봉으로 거시 추세를 독립 판정. 알림에 [N분] 접두로 구분. 쿨다운·확인 창은 N에 비례."/>
                     <TextBox x:Name="SignalTfBox" Width="160"/>
+                    <TextBlock Text="거래량 창(봉)" Style="{StaticResource FieldLbl}" VerticalAlignment="Center" Margin="16,0,8,0"
+                               ToolTip="거래량 급증(배수)을 찾는 최근 완성봉 수. 0=하단 터치 구간만(구 방식). 투매 거래량 피크가 RSI 상승 전환보다 몇 분 이른 V바닥을 놓치지 않도록 10 권장(14일 A/B 실측: 반등 승률 48→50% · 확인GC 55→56% · 07-02 인버스 진짜 바닥 포착)."/>
+                    <TextBox x:Name="BottomVolWinBox" Width="56"/>
                 </StackPanel>
                 <CheckBox x:Name="BottomCrossCheck" Content="골든크로스(MA5↗MA20) 확인 알림 (1차 시그널 후 20분 내)"/>
                 <CheckBox x:Name="BottomFollowCheck" Margin="0,6,0,0"

@@ -143,6 +143,7 @@ public partial class MainWindow : Window
     {
         string head = s.Kind switch
         {
+            Models.MinuteSignalKind.MorningBrief => "☀ 개장 브리핑",
             Models.MinuteSignalKind.Rebound => "📈 바닥 반등 시그널",
             Models.MinuteSignalKind.FollowThrough => "↗ 반등 지속 (직후 양봉)",
             Models.MinuteSignalKind.GoldenCross => "✅ 반등 확인 (골든크로스)",
@@ -151,7 +152,8 @@ public partial class MainWindow : Window
             Models.MinuteSignalKind.TopWarn => "📉 고점 경고 시그널",
             _ => "🔻 하락 확인 (데드크로스)",
         };
-        _tray.ShowBalloon($"{s.TfLabel}{head} · {s.Display}", s.Detail, warning: s.IsBearish);
+        _tray.ShowBalloon($"{s.TfLabel}{head} · {s.Display}",
+            string.IsNullOrEmpty(s.Context) ? s.Detail : $"{s.Detail}\n{s.Context}", warning: s.IsBearish);
     });
 
     private void OnFetchFailed(string display, string context, string reason, int fails) => Dispatcher.Invoke(() =>
@@ -698,7 +700,7 @@ public partial class MainWindow : Window
                     // 결과 CSV: 선택한 저장 폴더에 "_시그널" 접미사. detail은 쉼표 포함 → 따옴표 이스케이프.
                     string outPath = Path.Combine(outDir, stem + "_시그널.csv");
                     var sb = new System.Text.StringBuilder();
-                    sb.Append("date,time,tf,signal,price,detail\n");
+                    sb.Append("date,time,tf,signal,price,detail,context\n");
                     foreach (var s in signals)
                         sb.Append($"{s.Time:yyyy-MM-dd},{s.Time:HH:mm},{s.Timeframe}분,{SignalLabel(s.Kind)},{s.Price.ToString("0.####", System.Globalization.CultureInfo.InvariantCulture)},\"{s.Detail.Replace("\"", "\"\"")}\"\n");
                     await File.WriteAllTextAsync(outPath, sb.ToString(),
@@ -754,6 +756,7 @@ public partial class MainWindow : Window
 
     private static string SignalLabel(Models.MinuteSignalKind kind) => kind switch
     {
+        Models.MinuteSignalKind.MorningBrief => "개장 브리핑",
         Models.MinuteSignalKind.Rebound => "바닥 반등",
         Models.MinuteSignalKind.FollowThrough => "반등 지속(직후 양봉)",
         Models.MinuteSignalKind.GoldenCross => "골든크로스(반등 확인)",

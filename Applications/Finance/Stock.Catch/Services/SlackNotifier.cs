@@ -130,6 +130,7 @@ public sealed class SlackNotifier(AppConfig config) : IDisposable
         if (!IsConfigured) return;
         (string emoji, string head) = s.Kind switch
         {
+            MinuteSignalKind.MorningBrief => (":sunny:", "개장 브리핑"),
             MinuteSignalKind.Rebound => (":rotating_light::chart_with_upwards_trend:", "바닥 반등 시그널"),
             MinuteSignalKind.FollowThrough => (":rotating_light::arrow_upper_right:", "반등 지속 (직후 양봉)"),
             MinuteSignalKind.GoldenCross => (":rotating_light::white_check_mark:", "반등 확인 (골든크로스)"),

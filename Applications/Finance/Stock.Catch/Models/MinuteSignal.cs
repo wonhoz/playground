@@ -10,7 +10,7 @@
 /// GC 5건 중 가짜 1건(07-02 12:35)은 1차→GC 상승률 +0.51%로 진짜(+0.90~6.73%)와 분리 —
 /// 모멘텀 임계(기본 0.8%)가 강/약 확인을 가른다(트리거 봉 장대양봉은 오히려 가짜에서 큼).
 /// </summary>
-public enum MinuteSignalKind { Rebound, FollowThrough, GoldenCross, StrongGoldenCross, WeakGoldenCross, TopWarn, DeadCross }
+public enum MinuteSignalKind { MorningBrief, Rebound, FollowThrough, GoldenCross, StrongGoldenCross, WeakGoldenCross, TopWarn, DeadCross }
 
 /// <summary>
 /// 1분봉 시그널 알림 1건(관심 종목 · 국내).
@@ -24,7 +24,8 @@ public sealed record MinuteSignal(
     decimal Price,
     string Detail,
     DateTime Time,
-    int Timeframe = 1)
+    int Timeframe = 1,
+    string Context = "")   // 판단 보조 컨텍스트(갭·당일·저점比·일봉추세) — Slack 3번째 줄
 {
     public string Display => string.IsNullOrEmpty(Name) ? Code : $"{Name} ({Code})";
 

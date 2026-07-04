@@ -59,6 +59,7 @@ public sealed class MinuteSignalEngine(AppConfig config, PriceSourceRegistry reg
         public double? DayTrend;                                   // 일봉 추세점수(−1~+1 · 컨텍스트)
         public decimal PrevClose;                                  // 전일 정규 종가(갭 컨텍스트 · 0=미로드)
         public DateTime LastTrendTry = DateTime.MinValue;
+        public bool BriefSent;                                     // 개장 브리핑(하루 1회) 전송 여부
         public Dictionary<int, State> Tf = new();                  // 타임프레임 → 판정 상태
     }
 
@@ -120,6 +121,18 @@ public sealed class MinuteSignalEngine(AppConfig config, PriceSourceRegistry reg
         var nowMinute = new DateTime(now.Year, now.Month, now.Day, now.Hour, now.Minute, 0);
         var bars = sd.Bars.Values.Where(b => b.Date < nowMinute).ToList();
         if (bars.Count < 26) return;   // BB20 + RSI14 최소 표본(1분봉 기준)
+
+        // ☀ 개장 브리핑(하루 1회 · 라이브 전용): 갭 + 일봉 추세로 오늘 분위기를 미리 요약.
+        if (!sd.BriefSent && sd.DayTrend is { } dtb && bars.Count >= 1)
+        {
+            sd.BriefSent = true;
+            double gapPct = sd.PrevClose > 0 ? (double)(bars[0].Open / sd.PrevClose - 1) * 100 : 0;
+            string mood = dtb <= -0.5 ? "전일 급락 대세 — V바닥 반등 기회 관찰 구간"
+                : dtb >= 0.5 ? "상승 대세 지속 — 눌림목 반등 우위"
+                : "중립 — 시그널 컨텍스트 보고 판단";
+            Fire(new MinuteSignal(item.Symbol, item.Name, MinuteSignalKind.MorningBrief, bars[0].Open,
+                $"갭 {gapPct:+0.0;-0.0}% · 일봉추세 {dtb:+0.00;-0.00} · {mood}", bars[0].Date));
+        }
 
         foreach (int tf in Timeframes())
         {
@@ -195,7 +208,7 @@ public sealed class MinuteSignalEngine(AppConfig config, PriceSourceRegistry reg
         {
             EvaluateCross(item, st, bars, i, ma5, ma20, emit, tf, dayTrend, prevClose);
             if (bottom && tf == 1) EvaluateFollow(item, st, bars, i, emit);   // 직후 양봉은 1분봉 전용
-            if (bottom) EvaluateBottom(item, st, bars, i, upper, lower, rsi, volMa, emit, tf, dayTrend);
+            if (bottom) EvaluateBottom(item, st, bars, i, upper, lower, rsi, volMa, emit, tf, dayTrend, prevClose);
             if (top) EvaluateTop(item, st, bars, i, upper, lower, rsi, volMa, emit, tf);
         }
     }
@@ -252,7 +265,7 @@ public sealed class MinuteSignalEngine(AppConfig config, PriceSourceRegistry reg
                     : MinuteSignalKind.GoldenCross;
                 emit(new MinuteSignal(item.Symbol, item.Name, kind, bar.Close,
                     $"MA5 {ma5[i]:N0} > MA20 {ma20[i]:N0} 돌파 · 1차({st.BottomFiredAt:HH:mm}) 후 {(bar.Date - st.BottomFiredAt).TotalMinutes:0}분 · " +
-                    $"{rise:+0.00;-0.00}%{reason}{Context(bars, i, dayTrend, prevClose)}", bar.Date, tf));
+                    $"{rise:+0.00;-0.00}%{reason}", bar.Date, tf, Context(bars, i, dayTrend, prevClose)));
             }
             if (st.AwaitDead && !st.PrevBelow && below)
             {
@@ -273,16 +286,16 @@ public sealed class MinuteSignalEngine(AppConfig config, PriceSourceRegistry reg
         decimal dayLow = bars.Take(i + 1).Min(b => b.Low);
         double fromLow = dayLow > 0 ? (double)(bar.Close / dayLow - 1) * 100 : 0;
         string gap = prevClose > 0 && bars[0].Open > 0
-            ? $" · 갭 {(double)(bars[0].Open / prevClose - 1) * 100:+0.0;-0.0}%" : "";
+            ? $"갭 {(double)(bars[0].Open / prevClose - 1) * 100:+0.0;-0.0}% · " : "";
         string trend = config.BottomTrendGate && dayTrend is { } dt ? $" · 일봉추세 {dt:+0.00;-0.00}" : "";
-        return $"{gap} · 당일 {dayChg:+0.0;-0.0}% · 저점比 +{fromLow:0.0}%{trend}";
+        return $"{gap}당일 {dayChg:+0.0;-0.0}% · 저점比 +{fromLow:0.0}%{trend}";
     }
 
     // ───────────────────────── 1차: 바닥 반등 ─────────────────────────
 
     /// <summary>완성봉 1개(인덱스 i)에 대한 바닥 반등 판정. 밴드워킹·%b 필터로 지속 하락·약반등을 걸러낸다.</summary>
     private void EvaluateBottom(WatchItem item, State st, List<Candle> bars, int i,
-        double[] upper, double[] lower, double[] rsi, double[] volMa, Action<MinuteSignal> emit, int tf, double? dayTrend)
+        double[] upper, double[] lower, double[] rsi, double[] volMa, Action<MinuteSignal> emit, int tf, double? dayTrend, decimal prevClose)
     {
         var bar = bars[i];
         if (double.IsNaN(lower[i]) || double.IsNaN(upper[i]) ||
@@ -335,10 +348,10 @@ public sealed class MinuteSignalEngine(AppConfig config, PriceSourceRegistry reg
         st.AwaitGolden = config.BottomConfirmCross;
         st.AwaitFollow = tf == 1 && config.BottomFollowCandle;
         st.AwaitDead = false;   // 방향 전환 — 반대편 확인 대기 해제
-        // 일봉 추세는 정보 표기만(강등 아님) — 폭락 직후(극단 음수)가 오히려 V바닥 기회일 수 있다(실측 07-03 10:05).
-        string trendTag = config.BottomTrendGate && dayTrend is { } dt1 ? $" · 일봉추세 {dt1:+0.00;-0.00}" : "";
+        // 일봉 추세·갭 등은 컨텍스트 줄로(강등 아님) — 폭락 직후가 오히려 V바닥 기회일 수 있다(실측 07-03 10:05).
         emit(new MinuteSignal(item.Symbol, item.Name, MinuteSignalKind.Rebound, bar.Close,
-            $"하단터치 {bars[touchIdx].Date:HH:mm} → 복귀 %b {pb:0.00} · RSI {rsi[i]:0.#}↑(저점 {minRsi:0.#}) · 거래량 {volRatio:0.0}×{trendTag}", bar.Date, tf));
+            $"하단터치 {bars[touchIdx].Date:HH:mm} → 복귀 %b {pb:0.00} · RSI {rsi[i]:0.#}↑(저점 {minRsi:0.#}) · 거래량 {volRatio:0.0}×",
+            bar.Date, tf, Context(bars, i, dayTrend, prevClose)));
     }
 
     // ───────────────────────── 1차: 고점 경고 ─────────────────────────

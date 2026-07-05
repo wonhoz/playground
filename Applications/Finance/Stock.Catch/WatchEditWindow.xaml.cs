@@ -39,6 +39,9 @@ public partial class WatchEditWindow : Window
         TopCheck.IsChecked = item.TopAlert;
         ChannelBox.Text = item.SlackChannel;
         PairBox.Text = item.PairSymbol;
+        OvRsiBox.Text = item.BottomRsiMax?.ToString("0.#") ?? "";
+        OvVolBox.Text = item.BottomVolumeRatio?.ToString("0.##") ?? "";
+        OvPbBox.Text = item.BottomMinPercentB?.ToString("0.##") ?? "";
         SelectSource(item.Source);
         SelectExchange(item.Exchange);
         ApplyIndexMode();
@@ -184,6 +187,14 @@ public partial class WatchEditWindow : Window
         { Error("반대 짝 코드는 자기 자신과 달라야 합니다(레버리지↔인버스)."); return; }
         _item.PairSymbol = pair;
 
+        // 종목별 시그널 override — 빈칸은 null(전역), 값이 있으면 범위 검증.
+        if (!TryOverride(OvRsiBox.Text, 5, 95, out var ovRsi, "RSI")) return;
+        if (!TryOverride(OvVolBox.Text, 0, 20, out var ovVol, "거래량 배수")) return;
+        if (!TryOverride(OvPbBox.Text, 0, 0.9, out var ovPb, "%b")) return;
+        _item.BottomRsiMax = ovRsi;
+        _item.BottomVolumeRatio = ovVol;
+        _item.BottomMinPercentB = ovPb;
+
         _item.AlertUp = AlertUpCheck.IsChecked == true;
         _item.AlertDown = AlertDownCheck.IsChecked == true;
         // 래더·갭다운/반등·고점 시그널은 국내·비지수만
@@ -202,6 +213,18 @@ public partial class WatchEditWindow : Window
         "2001" => "코스피200",
         _ => ""
     };
+
+    /// <summary>override 입력 파싱 — 빈칸이면 null(전역), 값이 있으면 [min,max] 검증. 실패 시 Error 표시 후 false.</summary>
+    private bool TryOverride(string text, double min, double max, out double? value, string label)
+    {
+        value = null;
+        string t = text.Trim();
+        if (t.Length == 0) return true;
+        if (!double.TryParse(t, System.Globalization.NumberStyles.Any, System.Globalization.CultureInfo.InvariantCulture, out var v) || v < min || v > max)
+        { Error($"종목 시그널 {label}는 {min}~{max} 범위 숫자이거나 비워두세요(전역)."); return false; }
+        value = v;
+        return true;
+    }
 
     /// <summary>종목 전용 Slack 채널 입력 정규화 — 비우면 빈값(기본 채널), #/@ 접두사가 없으면 # 채널로.</summary>
     private string NormalizedChannel()

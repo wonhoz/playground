@@ -801,8 +801,9 @@ public partial class MainWindow : Window
                         var (trendA, prevA) = _config.BottomTrendGate ? await TryDayTrendAsync(stemA) : (null, 0m);
                         var (trendB, prevB) = _config.BottomTrendGate ? await TryDayTrendAsync(stemB) : (null, 0m);
 
-                        var sigA = _minuteSignal.Backtest(barsA, codeA, nameA, trendA, prevA);
-                        var sigB = _minuteSignal.Backtest(barsB, codeB, nameB, trendB, prevB);
+                        // 종목별 시그널 override를 라이브와 동일하게 적용(관심 종목에 있으면 그 설정).
+                        var sigA = _minuteSignal.Backtest(barsA, ResolveWatchItem(codeA, nameA), trendA, prevA);
+                        var sigB = _minuteSignal.Backtest(barsB, ResolveWatchItem(codeB, nameB), trendB, prevB);
                         var cross = MinuteSignalEngine.DetectCrossTurns(sigA, barsA, codeA, nameA, sigB, barsB, codeB, nameB);
                         crossCount += cross.Count;
 
@@ -836,7 +837,8 @@ public partial class MainWindow : Window
                         if (bars.Count < 26)
                             throw new InvalidDataException($"분봉 부족({bars.Count}봉, 최소 26봉)");
                         var (dayTrend, prevClose) = _config.BottomTrendGate ? await TryDayTrendAsync(stem) : (null, 0m);
-                        var signals = _minuteSignal.Backtest(bars, stem, "", dayTrend, prevClose);
+                        var (code, name) = CodeNameOf(stem);
+                        var signals = _minuteSignal.Backtest(bars, ResolveWatchItem(code, name), dayTrend, prevClose);
 
                         await WriteSignalCsvAsync(Path.Combine(outDir, stem + "_시그널.csv"), signals);
                         okFiles++;
@@ -865,6 +867,11 @@ public partial class MainWindow : Window
             SignalCsvBtn.IsEnabled = true;
         }
     }
+
+    /// <summary>코드로 관심 종목을 찾아 반환(종목별 시그널 override 포함). 없으면 전역 설정용 기본 WatchItem.</summary>
+    private Models.WatchItem ResolveWatchItem(string code, string name)
+        => _config.Watchlist.FirstOrDefault(w => string.Equals(w.Symbol, code, StringComparison.OrdinalIgnoreCase))
+           ?? new Models.WatchItem { Symbol = code, Name = name };
 
     /// <summary>파일 stem "이름(코드)_yyyyMMdd_..."에서 코드·이름 추출. 이름은 관심 종목에 있으면 그 이름(짧음) 우선.</summary>
     private (string Code, string Name) CodeNameOf(string stem)

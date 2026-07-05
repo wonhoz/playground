@@ -187,12 +187,19 @@ public sealed class MinuteSignalEngine(AppConfig config, PriceSourceRegistry reg
     /// </summary>
     public List<MinuteSignal> Backtest(IReadOnlyList<Candle> minuteBars, string code, string name,
         double? dayTrend = null, decimal prevClose = 0m)
+        => Backtest(minuteBars, new WatchItem { Symbol = code, Name = name }, dayTrend, prevClose);
+
+    /// <summary>
+    /// 종목별 시그널 override(<see cref="WatchItem"/>)를 그대로 반영하는 백테스트 — 라이브와 완전히 동일한
+    /// 유효 설정으로 판정한다. 분봉 시그널 분석에서 관심 종목 설정까지 재현할 때 사용.
+    /// </summary>
+    public List<MinuteSignal> Backtest(IReadOnlyList<Candle> minuteBars, WatchItem item,
+        double? dayTrend = null, decimal prevClose = 0m)
     {
         var bars = minuteBars.OrderBy(b => b.Date).ToList();
         var result = new List<MinuteSignal>();
         if (bars.Count < 26) return result;
 
-        var item = new WatchItem { Symbol = code, Name = name };
         var vwap = SessionVwap(bars);
         foreach (int tf in Timeframes())
         {
@@ -294,10 +301,12 @@ public sealed class MinuteSignalEngine(AppConfig config, PriceSourceRegistry reg
                 // GC 모멘텀 등급: 1차 이후 상승률 — 실측상 건당 기대수익이 모멘텀 구간별 단조 증가
                 // (0.8~1.5% +0.11 → 1.5~2.5% +0.26 → 2.5%+ +0.41%/건). 일봉 추세는 표기만(강등 아님).
                 double rise = st.BottomFiredPrice > 0 ? (double)(bar.Close / st.BottomFiredPrice - 1) * 100 : 0;
-                bool weakMomentum = rise < config.BottomGcMinRisePct;
-                string reason = weakMomentum ? $" (모멘텀 {config.BottomGcMinRisePct:0.0#}% 미달 — 횡보성 크로스 주의)" : "";
+                double eGcMin = item.BottomGcMinRisePct ?? config.BottomGcMinRisePct;
+                double eGcStrong = item.BottomGcStrongPct ?? config.BottomGcStrongPct;
+                bool weakMomentum = rise < eGcMin;
+                string reason = weakMomentum ? $" (모멘텀 {eGcMin:0.0#}% 미달 — 횡보성 크로스 주의)" : "";
                 var kind = weakMomentum ? MinuteSignalKind.WeakGoldenCross
-                    : rise >= config.BottomGcStrongPct ? MinuteSignalKind.StrongGoldenCross
+                    : rise >= eGcStrong ? MinuteSignalKind.StrongGoldenCross
                     : MinuteSignalKind.GoldenCross;
                 emit(new MinuteSignal(item.Symbol, item.Name, kind, bar.Close,
                     $"MA5 {ma5[i]:N0} > MA20 {ma20[i]:N0} 돌파 · 1차({st.BottomFiredAt:HH:mm}) 후 {(bar.Date - st.BottomFiredAt).TotalMinutes:0}분 · " +
@@ -349,6 +358,12 @@ public sealed class MinuteSignalEngine(AppConfig config, PriceSourceRegistry reg
         if (double.IsNaN(lower[i]) || double.IsNaN(upper[i]) ||
             double.IsNaN(rsi[i]) || double.IsNaN(rsi[i - 1]) || double.IsNaN(volMa[i])) return;
 
+        // 종목별 유효 파라미터(override ?? 전역) — 종목 성격에 맞춘 개별 최적화.
+        double eRsiMax = item.BottomRsiMax ?? config.BottomRsiMax;
+        double eVolRatio = item.BottomVolumeRatio ?? config.BottomVolumeRatio;
+        int eWalkMax = item.BottomWalkMaxTouches ?? config.BottomWalkMaxTouches;
+        double eMinPb = item.BottomMinPercentB ?? config.BottomMinPercentB;
+
         // 쿨다운(×tf): 최근 1차 알림 후 일정 시간 재알림 금지.
         if ((bar.Date - st.BottomFiredAt).TotalMinutes < Math.Max(1, config.BottomCooldownMinutes) * tf) return;
 
@@ -356,7 +371,7 @@ public sealed class MinuteSignalEngine(AppConfig config, PriceSourceRegistry reg
         int walkTouches = 0;
         for (int k = Math.Max(0, i - WalkWindow + 1); k <= i; k++)
             if (!double.IsNaN(lower[k]) && (double)bars[k].Low <= lower[k]) walkTouches++;
-        if (walkTouches > Math.Max(1, config.BottomWalkMaxTouches)) return;
+        if (walkTouches > Math.Max(1, eWalkMax)) return;
 
         // 셋업: 최근 lookback봉 내 볼린저 하단 터치(저가 ≤ 하단).
         int lookback = Math.Max(2, config.BottomTouchLookback);
@@ -377,20 +392,20 @@ public sealed class MinuteSignalEngine(AppConfig config, PriceSourceRegistry reg
         long maxVol = 0;
         int volFrom = config.BottomVolWindowBars > 0 ? Math.Max(0, i - config.BottomVolWindowBars + 1) : touchIdx;
         for (int k = volFrom; k <= i; k++) maxVol = Math.Max(maxVol, bars[k].Volume);
-        if (minRsi > config.BottomRsiMax) return;
+        if (minRsi > eRsiMax) return;
         if (rsi[i] <= rsi[i - 1]) return;
 
         // 트리거: 밴드 안 복귀 + %b 하한(밴드폭 대비 회복 비율) + 상승봉.
         double width = upper[i] - lower[i];
         if (width <= 0) return;
         double pb = ((double)bar.Close - lower[i]) / width;
-        if (pb < config.BottomMinPercentB) return;
+        if (pb < eMinPb) return;
         if (bar.Close <= bar.Open && bar.Close <= bars[i - 1].Close) return;
 
         // 트리거: 터치 구간 거래량 급증(20봉 평균 대비 배수).
         if (volMa[i] <= 0) return;
         double volRatio = maxVol / volMa[i];
-        if (volRatio < config.BottomVolumeRatio) return;
+        if (volRatio < eVolRatio) return;
 
         // RSI 불리시 다이버전스(참고 표기): 트리거 저점(최근 6봉)이 이전 스윙 저점(7~30봉 전)보다 낮은데
         // RSI는 더 높음 — 실측(1분 TF): 이후 확인GC 승률 67%(n=7)·평균 +3.11%로 유망하나 표본 부족 → 표기만.
@@ -463,7 +478,7 @@ public sealed class MinuteSignalEngine(AppConfig config, PriceSourceRegistry reg
             decimal wick = b.High - Math.Max(b.Close, b.Open);
             if (wick > 0 && wick >= body * 1.5m) hasWick = true;
         }
-        if (maxRsi < config.TopRsiMin) return;
+        if (maxRsi < (item.TopRsiMin ?? config.TopRsiMin)) return;
         if (rsi[i] >= rsi[i - 1]) return;
 
         // 트리거: 밴드 안 복귀 마감(%b 상한) + 하락봉.
@@ -475,7 +490,7 @@ public sealed class MinuteSignalEngine(AppConfig config, PriceSourceRegistry reg
 
         // 트리거: 소진 증거 — 긴 윗꼬리 또는 클라이맥스 거래량 중 1개 이상.
         double volRatio = volMa[i] > 0 ? maxVol / volMa[i] : 0;
-        bool climax = volRatio >= config.TopVolumeRatio;
+        bool climax = volRatio >= (item.TopVolumeRatio ?? config.TopVolumeRatio);
         if (!hasWick && !climax) return;
 
         string evidence = (hasWick, climax) switch

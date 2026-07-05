@@ -237,6 +237,7 @@ public partial class WatchlistWindow : Window
         public string SourceLabel => Source.SourceLabel;
         public string RulesLabel => Source.RulesLabel;
         public string ChannelLabel => string.IsNullOrEmpty(Source.SlackChannel) ? "기본" : Source.SlackChannel;
+        public string SignalLabel => Source.HasSignalOverride ? "정밀(개별)" : "전역";
         public string PriceText => quote is null ? "—"
             : Source.IsIndex ? $"{quote.Price:N2}"
             : Source.Market == MarketKind.US ? $"${quote.Price:N2}" : $"{quote.Price:N0}";

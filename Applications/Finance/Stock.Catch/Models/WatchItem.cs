@@ -51,6 +51,32 @@ public sealed class WatchItem
     /// </summary>
     public string PairSymbol { get; set; } = string.Empty;
 
+    // ── 종목별 시그널 파라미터 override (null=전역 설정 사용) ──
+    // 종목마다 변동성·성격이 달라 전역 하나로는 최적이 아니므로, 필요한 종목만 개별 지정한다.
+    // 예: 인버스·저변동 종목은 fake 반등이 많아 RSI/거래량/%b를 강화(정밀), 레버리지·본주는 전역(표준).
+    /// <summary>바닥 셋업 RSI 과매도 상한(전역 BottomRsiMax override). 낮출수록 더 깊은 과매도만 인정.</summary>
+    public double? BottomRsiMax { get; set; }
+    /// <summary>바닥 거래량 급증 배수 override. 높일수록 관심 집중된 반등만 인정.</summary>
+    public double? BottomVolumeRatio { get; set; }
+    /// <summary>바닥 밴드워킹 허용 터치 상한 override.</summary>
+    public int? BottomWalkMaxTouches { get; set; }
+    /// <summary>바닥 트리거 봉 최소 %b override. 높일수록 확실한 밴드 복귀만(약반등·fake 억제).</summary>
+    public double? BottomMinPercentB { get; set; }
+    /// <summary>골든크로스 '강' 인정 모멘텀(%) override.</summary>
+    public double? BottomGcMinRisePct { get; set; }
+    /// <summary>골든크로스 '강력🔥' 모멘텀(%) override.</summary>
+    public double? BottomGcStrongPct { get; set; }
+    /// <summary>고점 셋업 RSI 과매수 하한 override.</summary>
+    public double? TopRsiMin { get; set; }
+    /// <summary>고점 소진 거래량 배수 override.</summary>
+    public double? TopVolumeRatio { get; set; }
+
+    /// <summary>바닥/고점 파라미터 중 하나라도 종목 전용값이 있으면 true(그리드 "개별" 표시용).</summary>
+    public bool HasSignalOverride =>
+        BottomRsiMax.HasValue || BottomVolumeRatio.HasValue || BottomWalkMaxTouches.HasValue ||
+        BottomMinPercentB.HasValue || BottomGcMinRisePct.HasValue || BottomGcStrongPct.HasValue ||
+        TopRsiMin.HasValue || TopVolumeRatio.HasValue;
+
     /// <summary>그리드 표시용: 전용 조건이 있으면 요약, 없으면 "전역".</summary>
     public string RulesLabel => Rules.Count > 0 ? TrendRule.Summary(Rules) : "전역";
 

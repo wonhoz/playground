@@ -32,6 +32,11 @@ public sealed class MinuteSignalEngine(AppConfig config, PriceSourceRegistry reg
     /// <summary>밴드워킹 필터 검사 구간(완성봉 수). 바닥·고점 공용.</summary>
     private const int WalkWindow = 10;
 
+    /// <summary>🔁 전환 확인: 고점 경고 후 반대 짝 반등 확인을 인정하는 최대 지연(분). 실측 근거.</summary>
+    private const int CrossWindowMinutes = 15;
+    /// <summary>🔁 전환 확인 재발화 쿨다운(분).</summary>
+    private const int CrossCooldownMinutes = 30;
+
     public event Action<MinuteSignal>? Raised;
 
     /// <summary>타임프레임별 판정 상태(쿨다운·확인 대기·크로스 추적).</summary>
@@ -551,7 +556,7 @@ public sealed class MinuteSignalEngine(AppConfig config, PriceSourceRegistry reg
         }
     }
 
-    /// <summary>반등 확인(✅🔥)이 뜬 종목의 반대 짝에서 15분 내 선행 고점 경고가 있었으면 전환 확인 발화.</summary>
+    /// <summary>반등 확인(✅🔥)이 뜬 종목의 반대 짝에서 15분 내 선행 고점 경고가 있었으면 전환 확인 발화(라이브).</summary>
     private void TryCrossTurn(MinuteSignal gc)
     {
         // 확인이 뜬 종목(gc.Code)을 짝으로 지정한 경고 종목을 찾는다(경고→확인 순서만 유효 — 역순은 실측 실패).
@@ -560,14 +565,68 @@ public sealed class MinuteSignalEngine(AppConfig config, PriceSourceRegistry reg
         if (warnItem is null || !_symbols.TryGetValue(warnItem.Symbol, out var wd)) return;
 
         double sinceWarn = (gc.Time - wd.LastTopWarnAt).TotalMinutes;
-        if (sinceWarn is < 0 or > 15) return;
-        if ((gc.Time - wd.LastCrossAt).TotalMinutes < 30) return;   // 쿨다운
+        if (sinceWarn is < 0 or > CrossWindowMinutes) return;
+        if ((gc.Time - wd.LastCrossAt).TotalMinutes < CrossCooldownMinutes) return;   // 쿨다운
         wd.LastCrossAt = gc.Time;
 
         decimal warnPrice = wd.Bars.Count > 0 ? wd.Bars.Values.Last().Close : 0;   // 경고(매도 대상) 종목 현재가
-        Fire(new MinuteSignal(warnItem.Symbol, warnItem.Name, MinuteSignalKind.CrossTurn, warnPrice,
-            $"고점 경고({wd.LastTopWarnAt:HH:mm}) 후 {sinceWarn:0}분 — 반대 종목 {gc.Display} 반등 확인 · 방향 전환 교차 검증",
-            gc.Time, gc.Timeframe));
+        Fire(BuildCrossTurn(warnItem.Symbol, warnItem.Name, warnPrice, wd.LastTopWarnAt, gc, sinceWarn));
+    }
+
+    /// <summary>🔁 전환 확인 MinuteSignal 생성 — 라이브·백테스트 공용(포맷 일치).</summary>
+    private static MinuteSignal BuildCrossTurn(string warnCode, string warnName, decimal warnPrice,
+        DateTime warnTime, MinuteSignal confirm, double sinceWarn)
+        => new(warnCode, warnName, MinuteSignalKind.CrossTurn, warnPrice,
+            $"고점 경고({warnTime:HH:mm}) 후 {sinceWarn:0}분 — 반대 종목 {confirm.Display} 반등 확인 · 방향 전환 교차 검증",
+            confirm.Time, confirm.Timeframe);
+
+    /// <summary>
+    /// 두 짝 종목(A·B) 시그널 목록에서 🔁 전환 확인(교차)을 검출한다 — 라이브 TryCrossTurn과 동일 규칙
+    /// (경고→확인 순서 · 15분 창 · 30분 쿨다운 · 경고 종목 명의)을 시각순 재생으로 재현. 양방향 모두 판정.
+    /// 반환은 발화 종목 Code로 구분되며, 호출 측이 종목별로 귀속시킨다.
+    /// </summary>
+    public static List<MinuteSignal> DetectCrossTurns(
+        IReadOnlyList<MinuteSignal> sigsA, IReadOnlyList<Candle> barsA, string codeA, string nameA,
+        IReadOnlyList<MinuteSignal> sigsB, IReadOnlyList<Candle> barsB, string codeB, string nameB)
+    {
+        var result = new List<MinuteSignal>();
+        result.AddRange(CrossOneWay(sigsA, barsA, codeA, nameA, sigsB));   // A 경고 + B 확인 → A 명의
+        result.AddRange(CrossOneWay(sigsB, barsB, codeB, nameB, sigsA));   // B 경고 + A 확인 → B 명의
+        return result;
+    }
+
+    private static IEnumerable<MinuteSignal> CrossOneWay(
+        IReadOnlyList<MinuteSignal> warnSigs, IReadOnlyList<Candle> warnBars, string warnCode, string warnName,
+        IReadOnlyList<MinuteSignal> confirmSigs)
+    {
+        var warns = warnSigs.Where(s => s.Kind == MinuteSignalKind.TopWarn)
+            .Select(s => s.Time).Distinct().OrderBy(t => t).ToList();
+        if (warns.Count == 0) yield break;
+        var confirms = confirmSigs
+            .Where(s => s.Kind is MinuteSignalKind.GoldenCross or MinuteSignalKind.StrongGoldenCross)
+            .OrderBy(s => s.Time).ThenBy(s => s.Timeframe).ToList();   // 라이브처럼 1분봉이 먼저 소비
+
+        var sorted = warnBars.OrderBy(b => b.Date).ToList();
+        var lastCross = DateTime.MinValue;
+        foreach (var c in confirms)
+        {
+            DateTime? lastWarn = null;
+            foreach (var w in warns) { if (w <= c.Time) lastWarn = w; else break; }   // 확인 직전 최근 경고
+            if (lastWarn is not { } wt) continue;
+            double since = (c.Time - wt).TotalMinutes;
+            if (since > CrossWindowMinutes) continue;
+            if ((c.Time - lastCross).TotalMinutes < CrossCooldownMinutes) continue;
+            lastCross = c.Time;
+            yield return BuildCrossTurn(warnCode, warnName, PriceAt(sorted, c.Time), wt, c, since);
+        }
+    }
+
+    /// <summary>시각 t 시점(포함)의 마지막 완성봉 종가. bars는 시각 오름차순.</summary>
+    private static decimal PriceAt(List<Candle> bars, DateTime t)
+    {
+        decimal p = 0;
+        foreach (var b in bars) { if (b.Date <= t) p = b.Close; else break; }
+        return p;
     }
 
     private async Task SafeSlackAsync(MinuteSignal s)

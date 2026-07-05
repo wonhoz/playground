@@ -715,12 +715,13 @@ public partial class MainWindow : Window
     /// <summary>
     /// 저장한 1분봉 CSV(다중 선택 가능)를 열어 바닥 반등·고점 경고 시그널(골든/데드크로스 확인 포함)이
     /// 발생했을 시점을 라이브 엔진과 동일 조건으로 추출해 파일별로 "원본명_시그널.csv"로 저장한다.
+    /// 반대 짝(레버리지↔인버스) CSV를 함께 지정하면 라이브와 동일하게 🔁 전환 확인(교차)까지 포함한다.
     /// </summary>
     private async void SignalCsv_Click(object sender, RoutedEventArgs e)
     {
         var open = new OpenFileDialog
         {
-            Title = "분봉 CSV 선택 — 여러 파일 선택 가능 (date,time,open,close,low,high,volume)",
+            Title = "① 분봉 CSV 선택 — 여러 파일 선택 가능 (date,time,open,close,low,high,volume)",
             Filter = "CSV (쉼표 구분)|*.csv|모든 파일|*.*",
             Multiselect = true,
             InitialDirectory = Directory.Exists(_config.LastSignalDir) ? _config.LastSignalDir
@@ -728,17 +729,46 @@ public partial class MainWindow : Window
         };
         if (open.ShowDialog(this) != true || open.FileNames.Length == 0) return;
 
-        // 결과(_시그널.csv) 저장 폴더 선택 — 기본은 마지막 저장 폴더, 없으면 원본 폴더.
+        // ② 반대 짝(레버리지↔인버스) CSV로 교차 알림까지 분석할지 확인.
+        string[]? pairFiles = null;
+        var wantPair = MessageBox.Show(
+            "반대 짝(레버리지↔인버스) 분봉도 함께 분석해 🔁 전환 확인(교차) 알림을 포함할까요?\n\n" +
+            "예: 방금 고른 파일들과 같은 날짜의 반대 종목 CSV를 이어서 선택합니다(날짜 쌍이 맞아야 함).\n" +
+            "아니오: 종목별 개별 분석(기존 방식).",
+            "🔁 전환 확인 (교차) 포함", MessageBoxButton.YesNoCancel, MessageBoxImage.Question);
+        if (wantPair == MessageBoxResult.Cancel) return;
+
+        if (wantPair == MessageBoxResult.Yes)
+        {
+            // ③ 반대 짝 CSV 리스트 선택 + 날짜 쌍 검증.
+            var openPair = new OpenFileDialog
+            {
+                Title = "③ 반대 짝 분봉 CSV 선택 (같은 날짜 · 같은 개수)",
+                Filter = "CSV (쉼표 구분)|*.csv|모든 파일|*.*",
+                Multiselect = true,
+                InitialDirectory = Path.GetDirectoryName(open.FileNames[0])
+            };
+            if (openPair.ShowDialog(this) != true || openPair.FileNames.Length == 0) return;
+
+            string? err = ValidatePairDates(open.FileNames, openPair.FileNames);
+            if (err != null)
+            {
+                MessageBox.Show(err, "짝 데이터 날짜 검증 실패", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+            pairFiles = openPair.FileNames;
+        }
+
+        // ④ 결과(_시그널.csv) 저장 폴더 선택.
         string srcDir = Path.GetDirectoryName(open.FileNames[0]) ?? "";
         var folder = new OpenFolderDialog
         {
-            Title = "시그널 결과(_시그널.csv) 저장 폴더 선택",
+            Title = "④ 시그널 결과(_시그널.csv) 저장 폴더 선택",
             InitialDirectory = Directory.Exists(_config.LastSignalOutDir) ? _config.LastSignalOutDir : srcDir
         };
         if (folder.ShowDialog(this) != true) return;
         string outDir = folder.FolderName;
 
-        // 마지막 선택/저장 폴더 기억 — 다음에 같은 위치에서 열리도록.
         _config.LastSignalDir = srcDir;
         _config.LastSignalOutDir = outDir;
         _config.Save();
@@ -746,54 +776,87 @@ public partial class MainWindow : Window
         SignalCsvBtn.IsEnabled = false;
         try
         {
-            int okFiles = 0, failFiles = 0, totalSignals = 0;
+            int okFiles = 0, failFiles = 0, totalSignals = 0, crossCount = 0;
             var parts = new List<string>();
-            var collected = new List<SignalResultWindow.FileSignals>();   // 분석 다이얼로그용
-            string lastOut = "";
+            var collected = new List<SignalResultWindow.FileSignals>();
 
-            foreach (var file in open.FileNames)
+            // ⑤ 처리: 짝이 있으면 날짜별 페어로 교차 포함, 없으면 종목별 개별.
+            if (pairFiles != null)
             {
-                string stem = Path.GetFileNameWithoutExtension(file);
-                try
+                var mainByDate = MapByDate(open.FileNames);
+                var pairByDate = MapByDate(pairFiles);
+                foreach (var (date, mainFile) in mainByDate.OrderBy(kv => kv.Key))
                 {
-                    var bars = ParseMinuteCsv(file);
-                    if (bars.Count < 26)
-                        throw new InvalidDataException($"분봉 부족({bars.Count}봉, 최소 26봉)");
+                    string stemA = Path.GetFileNameWithoutExtension(mainFile);
+                    string stemB = Path.GetFileNameWithoutExtension(pairByDate[date]);
+                    try
+                    {
+                        var barsA = ParseMinuteCsv(mainFile);
+                        var barsB = ParseMinuteCsv(pairByDate[date]);
+                        if (barsA.Count < 26 || barsB.Count < 26)
+                            throw new InvalidDataException($"분봉 부족(A {barsA.Count}·B {barsB.Count}봉)");
 
-                    // 라이브와 동일한 일봉 컨텍스트(추세·갭) 재현: 파일명 "이름(코드)_yyyyMMdd_..."에서
-                    // 코드·날짜를 추출해 그 시점 직전 완성 일봉으로 계산(실패 시 컨텍스트 없이 진행).
-                    var (dayTrend, prevClose) = _config.BottomTrendGate ? await TryDayTrendAsync(stem) : (null, 0m);
+                        var (codeA, nameA) = CodeNameOf(stemA);
+                        var (codeB, nameB) = CodeNameOf(stemB);
+                        var (trendA, prevA) = _config.BottomTrendGate ? await TryDayTrendAsync(stemA) : (null, 0m);
+                        var (trendB, prevB) = _config.BottomTrendGate ? await TryDayTrendAsync(stemB) : (null, 0m);
 
-                    var signals = _minuteSignal.Backtest(bars, stem, "", dayTrend, prevClose);
+                        var sigA = _minuteSignal.Backtest(barsA, codeA, nameA, trendA, prevA);
+                        var sigB = _minuteSignal.Backtest(barsB, codeB, nameB, trendB, prevB);
+                        var cross = MinuteSignalEngine.DetectCrossTurns(sigA, barsA, codeA, nameA, sigB, barsB, codeB, nameB);
+                        crossCount += cross.Count;
 
-                    // 결과 CSV: 선택한 저장 폴더에 "_시그널" 접미사. detail은 쉼표 포함 → 따옴표 이스케이프.
-                    string outPath = Path.Combine(outDir, stem + "_시그널.csv");
-                    var sb = new System.Text.StringBuilder();
-                    sb.Append("date,time,tf,signal,price,detail,context\n");
-                    foreach (var s in signals)
-                        sb.Append($"{s.Time:yyyy-MM-dd},{s.Time:HH:mm},{s.Timeframe}분,{SignalLabel(s.Kind)},{s.Price.ToString("0.####", System.Globalization.CultureInfo.InvariantCulture)},\"{s.Detail.Replace("\"", "\"\"")}\"\n");
-                    await File.WriteAllTextAsync(outPath, sb.ToString(),
-                        new System.Text.UTF8Encoding(encoderShouldEmitUTF8Identifier: true));
+                        // 교차는 발화 종목(Code) 파일에 귀속.
+                        var listA = sigA.Concat(cross.Where(c => c.Code == codeA)).OrderBy(s => s.Time).ThenBy(s => s.Timeframe).ToList();
+                        var listB = sigB.Concat(cross.Where(c => c.Code == codeB)).OrderBy(s => s.Time).ThenBy(s => s.Timeframe).ToList();
 
-                    okFiles++;
-                    totalSignals += signals.Count;
-                    lastOut = outPath;
-                    parts.Add($"{stem} {signals.Count}건");
-                    collected.Add(new SignalResultWindow.FileSignals(stem, signals));
+                        await WriteSignalCsvAsync(Path.Combine(outDir, stemA + "_시그널.csv"), listA);
+                        await WriteSignalCsvAsync(Path.Combine(outDir, stemB + "_시그널.csv"), listB);
+                        collected.Add(new SignalResultWindow.FileSignals(stemA, listA));
+                        collected.Add(new SignalResultWindow.FileSignals(stemB, listB));
+                        okFiles += 2;
+                        totalSignals += listA.Count + listB.Count;
+                        parts.Add($"{date:MM-dd} 짝 {listA.Count + listB.Count}건" + (cross.Count > 0 ? $"(🔁{cross.Count})" : ""));
+                    }
+                    catch (Exception ex)
+                    {
+                        failFiles += 2;
+                        parts.Add($"{date:MM-dd} 실패({ex.Message})");
+                    }
                 }
-                catch (Exception ex)
+            }
+            else
+            {
+                foreach (var file in open.FileNames)
                 {
-                    failFiles++;
-                    parts.Add($"{stem} 실패({ex.Message})");
+                    string stem = Path.GetFileNameWithoutExtension(file);
+                    try
+                    {
+                        var bars = ParseMinuteCsv(file);
+                        if (bars.Count < 26)
+                            throw new InvalidDataException($"분봉 부족({bars.Count}봉, 최소 26봉)");
+                        var (dayTrend, prevClose) = _config.BottomTrendGate ? await TryDayTrendAsync(stem) : (null, 0m);
+                        var signals = _minuteSignal.Backtest(bars, stem, "", dayTrend, prevClose);
+
+                        await WriteSignalCsvAsync(Path.Combine(outDir, stem + "_시그널.csv"), signals);
+                        okFiles++;
+                        totalSignals += signals.Count;
+                        parts.Add($"{stem} {signals.Count}건");
+                        collected.Add(new SignalResultWindow.FileSignals(stem, signals));
+                    }
+                    catch (Exception ex)
+                    {
+                        failFiles++;
+                        parts.Add($"{stem} 실패({ex.Message})");
+                    }
                 }
             }
 
             string detail = string.Join(" · ", parts.Take(4)) + (parts.Count > 4 ? $" · 외 {parts.Count - 4}개" : "");
-            SummaryText.Text = open.FileNames.Length == 1 && okFiles == 1
-                ? $"🧪 시그널 {totalSignals}건 → {lastOut}"
-                : $"🧪 {okFiles}/{open.FileNames.Length}개 파일 처리 · 시그널 총 {totalSignals}건{(failFiles > 0 ? $" · 실패 {failFiles}" : "")} — {detail}";
+            SummaryText.Text = $"🧪 {okFiles}개 파일 · 시그널 총 {totalSignals}건" +
+                (crossCount > 0 ? $" · 🔁 전환 확인 {crossCount}건" : "") +
+                (failFiles > 0 ? $" · 실패 {failFiles}" : "") + $" — {detail}";
 
-            // 저장 완료 후 결과 분석 다이얼로그(필터·정렬) 표시.
             if (collected.Count > 0 && totalSignals > 0)
                 new SignalResultWindow(collected, _slack) { Owner = this }.Show();
         }
@@ -801,6 +864,64 @@ public partial class MainWindow : Window
         {
             SignalCsvBtn.IsEnabled = true;
         }
+    }
+
+    /// <summary>파일 stem "이름(코드)_yyyyMMdd_..."에서 코드·이름 추출. 이름은 관심 종목에 있으면 그 이름(짧음) 우선.</summary>
+    private (string Code, string Name) CodeNameOf(string stem)
+    {
+        var m = System.Text.RegularExpressions.Regex.Match(stem, @"^(.*)\(([0-9A-Za-z]{5,6})\)_\d{8}_");
+        if (!m.Success) return (stem, "");
+        string code = m.Groups[2].Value.ToUpperInvariant();
+        string nameRaw = m.Groups[1].Value.Trim();
+        string name = _config.Watchlist.FirstOrDefault(w =>
+            string.Equals(w.Symbol, code, StringComparison.OrdinalIgnoreCase))?.Name ?? nameRaw;
+        return (code, name);
+    }
+
+    /// <summary>파일명에서 yyyyMMdd 날짜 추출(실패 시 null).</summary>
+    private static DateTime? DateOf(string path)
+    {
+        var m = System.Text.RegularExpressions.Regex.Match(Path.GetFileNameWithoutExtension(path), @"_(\d{8})_");
+        return m.Success && DateTime.TryParseExact(m.Groups[1].Value, "yyyyMMdd", null,
+            System.Globalization.DateTimeStyles.None, out var d) ? d : null;
+    }
+
+    /// <summary>파일 목록을 날짜→파일로 매핑(같은 날짜 중복 시 예외 던져 검증에서 걸림).</summary>
+    private static Dictionary<DateTime, string> MapByDate(IEnumerable<string> files)
+        => files.ToDictionary(f => DateOf(f) ?? throw new InvalidDataException($"날짜 없음: {Path.GetFileName(f)}"), f => f);
+
+    /// <summary>주·짝 CSV 리스트의 날짜 쌍 검증 — 개수·날짜 집합이 정확히 일치해야 null(통과).</summary>
+    private static string? ValidatePairDates(string[] mainFiles, string[] pairFiles)
+    {
+        if (mainFiles.Length != pairFiles.Length)
+            return $"개수가 다릅니다 — 주 {mainFiles.Length}개 vs 짝 {pairFiles.Length}개.";
+        var mainSet = new HashSet<DateTime>();
+        foreach (var f in mainFiles) { var d = DateOf(f); if (d is null) return $"주 파일 날짜 인식 실패: {Path.GetFileName(f)}"; if (!mainSet.Add(d.Value)) return $"주 파일에 같은 날짜 중복: {d:yyyy-MM-dd}"; }
+        var pairSet = new HashSet<DateTime>();
+        foreach (var f in pairFiles) { var d = DateOf(f); if (d is null) return $"짝 파일 날짜 인식 실패: {Path.GetFileName(f)}"; if (!pairSet.Add(d.Value)) return $"짝 파일에 같은 날짜 중복: {d:yyyy-MM-dd}"; }
+        if (!mainSet.SetEquals(pairSet))
+        {
+            var onlyMain = mainSet.Except(pairSet).OrderBy(d => d).Select(d => d.ToString("MM-dd"));
+            var onlyPair = pairSet.Except(mainSet).OrderBy(d => d).Select(d => d.ToString("MM-dd"));
+            return "날짜가 서로 맞지 않습니다.\n" +
+                (onlyMain.Any() ? $"주에만 있음: {string.Join(", ", onlyMain)}\n" : "") +
+                (onlyPair.Any() ? $"짝에만 있음: {string.Join(", ", onlyPair)}" : "");
+        }
+        return null;
+    }
+
+    /// <summary>시그널 목록을 "_시그널.csv"(date,time,tf,signal,price,detail,context)로 저장. UTF-8 BOM.</summary>
+    private static async Task WriteSignalCsvAsync(string outPath, IEnumerable<Models.MinuteSignal> signals)
+    {
+        var sb = new System.Text.StringBuilder();
+        sb.Append("date,time,tf,signal,price,detail,context\n");
+        static string Esc(string v) => v.Replace("\"", "\"\"");
+        foreach (var s in signals.OrderBy(x => x.Time).ThenBy(x => x.Timeframe))
+            sb.Append($"{s.Time:yyyy-MM-dd},{s.Time:HH:mm},{s.Timeframe}분,{SignalLabel(s.Kind)}," +
+                $"{s.Price.ToString("0.####", System.Globalization.CultureInfo.InvariantCulture)}," +
+                $"\"{Esc(s.Detail)}\",\"{Esc(s.Context)}\"\n");
+        await File.WriteAllTextAsync(outPath, sb.ToString(),
+            new System.Text.UTF8Encoding(encoderShouldEmitUTF8Identifier: true));
     }
 
     /// <summary>
@@ -837,6 +958,7 @@ public partial class MainWindow : Window
         Models.MinuteSignalKind.StrongGoldenCross => "골든크로스(강력)",
         Models.MinuteSignalKind.WeakGoldenCross => "골든크로스(약·모멘텀 부족)",
         Models.MinuteSignalKind.TopWarn => "고점 경고",
+        Models.MinuteSignalKind.CrossTurn => "전환 확인(교차)",
         _ => "데드크로스(하락 확인)",
     };
 

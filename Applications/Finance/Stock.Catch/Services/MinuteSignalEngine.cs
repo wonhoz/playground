@@ -302,9 +302,10 @@ public sealed class MinuteSignalEngine(AppConfig config, PriceSourceRegistry reg
         if (st.GcHoldPrice <= 0 || bar.Close < st.GcHoldPrice) return;   // 추세 미지속 → 진입 부적합, 조용히 취소
 
         double hold = (double)(bar.Close / st.GcHoldPrice - 1) * 100;
+        bool chase = IsChaseWarn(vwap, bar);
         emit(new MinuteSignal(item.Symbol, item.Name, MinuteSignalKind.HoldConfirm, bar.Close,
             $"{(st.GcHoldStrong ? "🔥" : "✅")} 확인({st.GcHoldAt:HH:mm}) 후 {(bar.Date - st.GcHoldAt).TotalMinutes:0}분 종가 유지 · {hold:+0.00;-0.00}% — 추세 지속 확인",
-            bar.Date, tf, Context(bars, i, dayTrend, prevClose, vwap), st.GcHoldVwap, st.GcHoldDiv));
+            bar.Date, tf, Context(bars, i, dayTrend, prevClose, vwap), st.GcHoldVwap, st.GcHoldDiv, chase));
     }
 
     // ───────────────────────── 2차: 골든/데드크로스 확인 ─────────────────────────
@@ -340,10 +341,11 @@ public sealed class MinuteSignalEngine(AppConfig config, PriceSourceRegistry reg
                     : rise >= eGcStrong ? MinuteSignalKind.StrongGoldenCross
                     : MinuteSignalKind.GoldenCross;
                 bool aboveVwap = AboveVwapAt(vwap, bar) == true;
+                bool chase = IsChaseWarn(vwap, bar);
                 emit(new MinuteSignal(item.Symbol, item.Name, kind, bar.Close,
                     $"MA5 {ma5[i]:N0} > MA20 {ma20[i]:N0} 돌파 · 1차({st.BottomFiredAt:HH:mm}) 후 {(bar.Date - st.BottomFiredAt).TotalMinutes:0}분 · " +
                     $"{rise:+0.00;-0.00}%{reason}", bar.Date, tf, Context(bars, i, dayTrend, prevClose, vwap),
-                    AboveVwapAt(vwap, bar), st.BottomFiredDiv));
+                    AboveVwapAt(vwap, bar), st.BottomFiredDiv, chase));
                 // 🚀 진입 적기(3차) 대기 시작 — 약한 GC(횡보성)는 제외.
                 if (!weakMomentum && config.BottomHoldConfirmBars > 0)
                 {
@@ -368,6 +370,17 @@ public sealed class MinuteSignalEngine(AppConfig config, PriceSourceRegistry reg
     private static bool? AboveVwapAt(IReadOnlyDictionary<DateTime, double>? vwap, Candle bar)
         => vwap != null && vwap.TryGetValue(bar.Date, out var v) && !double.IsNaN(v) && v > 0
             ? (double)bar.Close >= v : null;
+
+    /// <summary>
+    /// ⚠ 흔들림 주의: 종가가 세션 VWAP보다 설정 임계 이상 아래(하락 추세 진행 중)면 true.
+    /// 실측: VWAP 깊은 약세 진입은 진입 후 낙폭이 커 버티기 어렵다(GC/🚀 확인 위험 표기용 · 강등 아님).
+    /// </summary>
+    private bool IsChaseWarn(IReadOnlyDictionary<DateTime, double>? vwap, Candle bar)
+    {
+        if (config.BottomChaseVwapBelowPct <= 0 || vwap is null) return false;
+        if (!vwap.TryGetValue(bar.Date, out var v) || double.IsNaN(v) || v <= 0) return false;
+        return ((double)bar.Close / v - 1) * 100 <= -config.BottomChaseVwapBelowPct;
+    }
 
     /// <summary>사람 판단 보조 컨텍스트: 갭·당일 등락·저점比·VWAP 위치·일봉추세 — "폭락 후 V바닥 초입"인지 식별용.</summary>
     private string Context(List<Candle> bars, int i, double? dayTrend, decimal prevClose,

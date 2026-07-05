@@ -42,7 +42,8 @@ public sealed record MinuteSignal(
     int Timeframe = 1,
     string Context = "",       // 판단 보조 컨텍스트(갭·당일·저점比·VWAP·일봉추세) — 분석 창·CSV용
     bool? AboveVwap = null,    // 시그널 봉 종가의 세션 VWAP 상/하 (널=미계산)
-    bool Divergence = false)   // RSI 불리시 다이버전스(반등 1차에서 판정 · GC는 1차 값 상속)
+    bool Divergence = false,   // RSI 불리시 다이버전스(반등 1차에서 판정 · GC는 1차 값 상속)
+    bool ChaseWarn = false)    // ⚠ 흔들림 주의: 종가가 VWAP 깊은 약세(하락 추세 진행 중 · 진입 후 낙폭 큼)
 {
     public string Display => string.IsNullOrEmpty(Name) ? Code : $"{Name} ({Code})";
 
@@ -92,7 +93,8 @@ public sealed record MinuteSignal(
                 2 => "관찰 — 1차 후보 · 확인 대기",
                 _ => "참고 — 횡보성 · 무시 가능",
             };
-            var tags = new List<string>(2);
+            var tags = new List<string>(3);
+            if (ChaseWarn) tags.Add("⚠ 흔들림 주의(VWAP 깊은 약세·낙폭 큼)");   // 위험 표시를 맨 앞에
             if (AboveVwap == true) tags.Add("VWAP 위");
             if (Divergence) tags.Add("다이버전스");
             return $"{stars} {label}{(tags.Count > 0 ? " · " + string.Join(" · ", tags) : "")}";

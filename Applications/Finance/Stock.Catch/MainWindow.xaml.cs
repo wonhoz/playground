@@ -156,8 +156,9 @@ public partial class MainWindow : Window
             _ => "🔻 하락 확인 (데드크로스)",
         };
         // 풍선도 Slack과 동일하게 종합 판정 우선(즉답형) — 지표 상세는 시그널 로그·분석 창에서.
-        _tray.ShowBalloon($"{s.TfLabel}{head} · {s.Display}",
-            s.Kind == Models.MinuteSignalKind.MorningBrief ? s.Detail : s.VerdictLine, warning: s.IsBearish);
+        string body = s.Kind == Models.MinuteSignalKind.MorningBrief ? s.Detail : s.VerdictLine;
+        if (s.StopLossPrice > 0) body += $"\n🛑 손절선: {s.StopLossPrice:N0}원 (−{s.StopLossPct:0.#}%)";
+        _tray.ShowBalloon($"{s.TfLabel}{head} · {s.Display}", body, warning: s.IsBearish);
         AppendSignalLog(s);
     });
 

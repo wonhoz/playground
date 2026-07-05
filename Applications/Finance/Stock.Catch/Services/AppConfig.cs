@@ -209,6 +209,13 @@ public sealed class AppConfig
     /// (검증: 저점比 과도는 위험 신호가 아니었음 — 오히려 높을수록 도달률↑ → 이전 저점比 기준 폐기.)
     /// </summary>
     public double BottomChaseVwapBelowPct { get; set; } = 3;
+    /// <summary>
+    /// 🚀 진입 적기 알림에 표기할 권장 손절선(%). 일반 진입 기준. 실측(승리의 도달 전 최저 낙폭):
+    /// 손절 −2%면 결국 오를 것의 92~94% 보존. 기본 2.
+    /// </summary>
+    public double BottomStopLossPct { get; set; } = 2;
+    /// <summary>⚠ 흔들림 주의 진입의 권장 손절선(%). 흔들림 주의는 더 깊이 빠진 뒤 반등(90%지점 −3%) → 기본 3.</summary>
+    public double BottomStopLossChasePct { get; set; } = 3;
 
     // ── 고점 경고 시그널(관심 종목 · 국내 1분봉 · 바닥의 거울상) ──
     /// <summary>셋업으로 인정할 RSI(14) 과매수 하한. 상단 터치 구간 최고 RSI가 이 값 이상일 때만 시그널.</summary>

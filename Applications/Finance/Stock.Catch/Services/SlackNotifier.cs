@@ -212,6 +212,9 @@ public sealed class SlackNotifier(AppConfig config) : IDisposable
         var sb = new StringBuilder();
         sb.AppendLine($"{emoji} *{s.TfLabel}{head}* · *{s.Display}* · *{s.Price:N0}원* ({s.Time:HH:mm})");
         sb.AppendLine($"*{s.VerdictLine}*");
+        // 🚀 진입 적기엔 권장 손절선 병기(일반 −2%·흔들림 주의 −3%).
+        if (s.StopLossPrice > 0)
+            sb.AppendLine($":octagonal_sign: 손절선: {s.StopLossPrice:N0}원 (−{s.StopLossPct:0.#}%){(s.ChaseWarn ? " · 흔들림 주의라 여유 있게" : "")}");
         await PostAsync(BuildPayload(sb.ToString(), s.Code), ct);
     }
 

@@ -303,9 +303,10 @@ public sealed class MinuteSignalEngine(AppConfig config, PriceSourceRegistry reg
 
         double hold = (double)(bar.Close / st.GcHoldPrice - 1) * 100;
         bool chase = IsChaseWarn(vwap, bar);
+        double stopPct = chase ? config.BottomStopLossChasePct : config.BottomStopLossPct;   // 흔들림 주의는 더 깊게
         emit(new MinuteSignal(item.Symbol, item.Name, MinuteSignalKind.HoldConfirm, bar.Close,
             $"{(st.GcHoldStrong ? "🔥" : "✅")} 확인({st.GcHoldAt:HH:mm}) 후 {(bar.Date - st.GcHoldAt).TotalMinutes:0}분 종가 유지 · {hold:+0.00;-0.00}% — 추세 지속 확인",
-            bar.Date, tf, Context(bars, i, dayTrend, prevClose, vwap), st.GcHoldVwap, st.GcHoldDiv, chase));
+            bar.Date, tf, Context(bars, i, dayTrend, prevClose, vwap), st.GcHoldVwap, st.GcHoldDiv, chase, stopPct));
     }
 
     // ───────────────────────── 2차: 골든/데드크로스 확인 ─────────────────────────

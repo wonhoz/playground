@@ -43,7 +43,8 @@ public sealed record MinuteSignal(
     string Context = "",       // 판단 보조 컨텍스트(갭·당일·저점比·VWAP·일봉추세) — 분석 창·CSV용
     bool? AboveVwap = null,    // 시그널 봉 종가의 세션 VWAP 상/하 (널=미계산)
     bool Divergence = false,   // RSI 불리시 다이버전스(반등 1차에서 판정 · GC는 1차 값 상속)
-    bool ChaseWarn = false)    // ⚠ 흔들림 주의: 종가가 VWAP 깊은 약세(하락 추세 진행 중 · 진입 후 낙폭 큼)
+    bool ChaseWarn = false,    // ⚠ 흔들림 주의: 종가가 VWAP 깊은 약세(하락 추세 진행 중 · 진입 후 낙폭 큼)
+    double StopLossPct = 0)    // 🛑 권장 손절선(%) — 🚀 진입 적기 전용(일반 −2%·흔들림 주의 −3% · 0=미표기)
 {
     public string Display => string.IsNullOrEmpty(Name) ? Code : $"{Name} ({Code})";
 
@@ -52,6 +53,9 @@ public sealed record MinuteSignal(
 
     /// <summary>알림 구분용 타임프레임 접두 — 1분봉은 생략, 롤링 봉은 "[N분] ".</summary>
     public string TfLabel => Timeframe > 1 ? $"[{Timeframe}분] " : "";
+
+    /// <summary>권장 손절가(원). StopLossPct가 있을 때만(진입 적기). 원 단위 반올림.</summary>
+    public decimal StopLossPrice => StopLossPct > 0 ? Math.Round(Price * (1 - (decimal)StopLossPct / 100)) : 0;
 
     /// <summary>
     /// 종합 판정 5단계(★). 실측(14일×3종목 · 이후 30분 ±1% 선도달) 근거:

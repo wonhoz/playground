@@ -32,10 +32,10 @@ public partial class SignalResultWindow : Window
         GradeCombo.ItemsSource = new[]
         {
             "전체",
-            "🔥 강력 확인만",
-            "🔥+✅ 확인 (진입 후보)",
+            "🚀🔥 진입 적기·강력",
+            "🚀🔥✅ 확인 (진입 후보)",
             "📈 바닥 반등 (1차)",
-            "📉 고점 계열 (경고·데드)",
+            "📉🔁 고점·전환 (경고·데드·전환)",
             "⚠ 약한 확인",
         };
         GradeCombo.SelectedIndex = 0;
@@ -76,10 +76,10 @@ public partial class SignalResultWindow : Window
 
         rows = GradeCombo.SelectedIndex switch
         {
-            1 => rows.Where(r => r.Kind == MinuteSignalKind.StrongGoldenCross),
-            2 => rows.Where(r => r.Kind is MinuteSignalKind.StrongGoldenCross or MinuteSignalKind.GoldenCross),
+            1 => rows.Where(r => r.Kind is MinuteSignalKind.HoldConfirm or MinuteSignalKind.StrongGoldenCross),
+            2 => rows.Where(r => r.Kind is MinuteSignalKind.HoldConfirm or MinuteSignalKind.StrongGoldenCross or MinuteSignalKind.GoldenCross),
             3 => rows.Where(r => r.Kind is MinuteSignalKind.Rebound or MinuteSignalKind.FollowThrough),
-            4 => rows.Where(r => r.Kind is MinuteSignalKind.TopWarn or MinuteSignalKind.DeadCross),
+            4 => rows.Where(r => r.Kind is MinuteSignalKind.TopWarn or MinuteSignalKind.DeadCross or MinuteSignalKind.CrossTurn),
             5 => rows.Where(r => r.Kind == MinuteSignalKind.WeakGoldenCross),
             _ => rows,
         };
@@ -95,10 +95,10 @@ public partial class SignalResultWindow : Window
         Grid.ItemsSource = list;
 
         int Count(params MinuteSignalKind[] kinds) => list.Count(r => kinds.Contains(r.Kind));
-        StatText.Text = $"표시 {list.Count}건 — 🔥 {Count(MinuteSignalKind.StrongGoldenCross)} · " +
+        StatText.Text = $"표시 {list.Count}건 — 🚀 {Count(MinuteSignalKind.HoldConfirm)} · 🔥 {Count(MinuteSignalKind.StrongGoldenCross)} · " +
             $"✅ {Count(MinuteSignalKind.GoldenCross)} · ⚠ {Count(MinuteSignalKind.WeakGoldenCross)} · " +
             $"📈 {Count(MinuteSignalKind.Rebound)} · ↗ {Count(MinuteSignalKind.FollowThrough)} · " +
-            $"📉 {Count(MinuteSignalKind.TopWarn)} · 🔻 {Count(MinuteSignalKind.DeadCross)}" +
+            $"🔁 {Count(MinuteSignalKind.CrossTurn)} · 📉 {Count(MinuteSignalKind.TopWarn)} · 🔻 {Count(MinuteSignalKind.DeadCross)}" +
             (_sortByImportance ? "  (중요도순)" : "  (날짜순)");
     }
 
@@ -144,19 +144,21 @@ public partial class SignalResultWindow : Window
         /// <summary>중요도 순위(작을수록 중요) — 🔥 → ✅ → 📈 → ↗ → 📉 → 🔻 → ⚠ → ☀.</summary>
         public int Rank => s.Kind switch
         {
-            MinuteSignalKind.StrongGoldenCross => 0,
-            MinuteSignalKind.GoldenCross => 1,
-            MinuteSignalKind.Rebound => 2,
-            MinuteSignalKind.FollowThrough => 3,
-            MinuteSignalKind.CrossTurn => 4,
-            MinuteSignalKind.TopWarn => 5,
-            MinuteSignalKind.DeadCross => 6,
-            MinuteSignalKind.WeakGoldenCross => 7,
-            _ => 8,
+            MinuteSignalKind.HoldConfirm => 0,
+            MinuteSignalKind.StrongGoldenCross => 1,
+            MinuteSignalKind.GoldenCross => 2,
+            MinuteSignalKind.Rebound => 3,
+            MinuteSignalKind.FollowThrough => 4,
+            MinuteSignalKind.CrossTurn => 5,
+            MinuteSignalKind.TopWarn => 6,
+            MinuteSignalKind.DeadCross => 7,
+            MinuteSignalKind.WeakGoldenCross => 8,
+            _ => 9,
         };
 
         public string Icon => s.Kind switch
         {
+            MinuteSignalKind.HoldConfirm => "🚀",
             MinuteSignalKind.StrongGoldenCross => "🔥",
             MinuteSignalKind.GoldenCross => "✅",
             MinuteSignalKind.Rebound => "📈",
@@ -170,6 +172,7 @@ public partial class SignalResultWindow : Window
 
         public string Label => s.Kind switch
         {
+            MinuteSignalKind.HoldConfirm => "진입 적기",
             MinuteSignalKind.StrongGoldenCross => "강력 확인",
             MinuteSignalKind.GoldenCross => "반등 확인",
             MinuteSignalKind.Rebound => "바닥 반등",

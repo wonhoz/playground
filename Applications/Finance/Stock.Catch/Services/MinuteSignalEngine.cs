@@ -49,6 +49,13 @@ public sealed class MinuteSignalEngine(AppConfig config, PriceSourceRegistry reg
         public bool AwaitGolden;                                   // 2차(골든크로스) 확인 대기
         public bool AwaitFollow;                                   // 직후 봉 양봉 지속(조기 확인) 대기 — 1분봉 전용
         public bool BottomFiredDiv;                                // 1차 시그널의 다이버전스 여부(GC가 상속)
+        // 🚀 진입 적기(3차) 대기: GC 후 N봉 지속 확인
+        public bool AwaitHold;
+        public DateTime GcHoldAt = DateTime.MinValue;
+        public decimal GcHoldPrice;
+        public bool GcHoldStrong;                                  // GC가 🔥였는지(문구용)
+        public bool GcHoldVwap;                                    // GC 시점 VWAP 위였는지(등급 상속)
+        public bool GcHoldDiv;
         // 고점(경고) 상태
         public DateTime TopFiredAt = DateTime.MinValue;
         public bool AwaitDead;                                     // 2차(데드크로스) 확인 대기
@@ -252,6 +259,7 @@ public sealed class MinuteSignalEngine(AppConfig config, PriceSourceRegistry reg
         for (int i = Math.Max(fromIdx, 21); i < bars.Count; i++)
         {
             EvaluateCross(item, st, bars, i, ma5, ma20, emit, tf, dayTrend, prevClose, vwap);
+            if (bottom) EvaluateHold(item, st, bars, i, emit, tf, dayTrend, prevClose, vwap);   // 🚀 진입 적기(GC 후 지속 확인)
             if (bottom && tf == 1) EvaluateFollow(item, st, bars, i, emit);   // 직후 양봉은 1분봉 전용
             if (bottom) EvaluateBottom(item, st, bars, i, upper, lower, rsi, volMa, emit, tf, dayTrend, prevClose, vwap, loShort);
             if (top) EvaluateTop(item, st, bars, i, upper, lower, rsi, volMa, emit, tf);
@@ -277,6 +285,26 @@ public sealed class MinuteSignalEngine(AppConfig config, PriceSourceRegistry reg
         double ratio = avgBody > 0 ? (double)(Math.Abs(bar.Close - bar.Open) / avgBody) : 0;
         emit(new MinuteSignal(item.Symbol, item.Name, MinuteSignalKind.FollowThrough, bar.Close,
             $"1차({st.BottomFiredAt:HH:mm}) 직후 양봉 지속 · 몸통 {ratio:0.0}×", bar.Date));
+    }
+
+    /// <summary>
+    /// 🚀 진입 적기(3차): GC(✅🔥) 후 config.BottomHoldConfirmBars봉(×tf)이 지난 첫 완성봉에서
+    /// 종가가 GC 가격 이상이면 발화(추세 지속 확인). 미달이면 조용히 취소 — "무작정 GC 진입" 오탐 차단.
+    /// 실측: GC 즉시 승률 57%/오탐 16% → +2봉 지속확인 82%/2%.
+    /// </summary>
+    private void EvaluateHold(WatchItem item, State st, List<Candle> bars, int i, Action<MinuteSignal> emit,
+        int tf, double? dayTrend, decimal prevClose, IReadOnlyDictionary<DateTime, double>? vwap)
+    {
+        if (!st.AwaitHold) return;
+        var bar = bars[i];
+        if ((bar.Date - st.GcHoldAt).TotalMinutes < Math.Max(1, config.BottomHoldConfirmBars) * tf) return;   // 아직 관찰 중
+        st.AwaitHold = false;   // 관찰 창 종료 — 1회 판정
+        if (st.GcHoldPrice <= 0 || bar.Close < st.GcHoldPrice) return;   // 추세 미지속 → 진입 부적합, 조용히 취소
+
+        double hold = (double)(bar.Close / st.GcHoldPrice - 1) * 100;
+        emit(new MinuteSignal(item.Symbol, item.Name, MinuteSignalKind.HoldConfirm, bar.Close,
+            $"{(st.GcHoldStrong ? "🔥" : "✅")} 확인({st.GcHoldAt:HH:mm}) 후 {(bar.Date - st.GcHoldAt).TotalMinutes:0}분 종가 유지 · {hold:+0.00;-0.00}% — 추세 지속 확인",
+            bar.Date, tf, Context(bars, i, dayTrend, prevClose, vwap), st.GcHoldVwap, st.GcHoldDiv));
     }
 
     // ───────────────────────── 2차: 골든/데드크로스 확인 ─────────────────────────
@@ -311,14 +339,23 @@ public sealed class MinuteSignalEngine(AppConfig config, PriceSourceRegistry reg
                 var kind = weakMomentum ? MinuteSignalKind.WeakGoldenCross
                     : rise >= eGcStrong ? MinuteSignalKind.StrongGoldenCross
                     : MinuteSignalKind.GoldenCross;
+                bool aboveVwap = AboveVwapAt(vwap, bar) == true;
                 emit(new MinuteSignal(item.Symbol, item.Name, kind, bar.Close,
                     $"MA5 {ma5[i]:N0} > MA20 {ma20[i]:N0} 돌파 · 1차({st.BottomFiredAt:HH:mm}) 후 {(bar.Date - st.BottomFiredAt).TotalMinutes:0}분 · " +
                     $"{rise:+0.00;-0.00}%{reason}", bar.Date, tf, Context(bars, i, dayTrend, prevClose, vwap),
                     AboveVwapAt(vwap, bar), st.BottomFiredDiv));
+                // 🚀 진입 적기(3차) 대기 시작 — 약한 GC(횡보성)는 제외.
+                if (!weakMomentum && config.BottomHoldConfirmBars > 0)
+                {
+                    st.AwaitHold = true; st.GcHoldAt = bar.Date; st.GcHoldPrice = bar.Close;
+                    st.GcHoldStrong = kind == MinuteSignalKind.StrongGoldenCross;
+                    st.GcHoldVwap = aboveVwap; st.GcHoldDiv = st.BottomFiredDiv;
+                }
             }
             if (st.AwaitDead && !st.PrevBelow && below)
             {
                 st.AwaitDead = false;
+                st.AwaitHold = false;   // 하락 전환 — 진입 대기 취소
                 emit(new MinuteSignal(item.Symbol, item.Name, MinuteSignalKind.DeadCross, bar.Close,
                     $"MA5 {ma5[i]:N0} < MA20 {ma20[i]:N0} 돌파 · 경고({st.TopFiredAt:HH:mm}) 후 {(bar.Date - st.TopFiredAt).TotalMinutes:0}분", bar.Date, tf));
             }
@@ -507,6 +544,7 @@ public sealed class MinuteSignalEngine(AppConfig config, PriceSourceRegistry reg
         st.TopFiredAt = bar.Date;
         st.AwaitDead = config.TopConfirmCross;
         st.AwaitGolden = false;   // 방향 전환 — 반대편 확인 대기 해제
+        st.AwaitHold = false;     // 과열 전환 — 진입 대기 취소
         emit(new MinuteSignal(item.Symbol, item.Name, MinuteSignalKind.TopWarn, bar.Close,
             $"상단워킹 {touchCount}봉 → 이탈 %b {pb:0.00} · RSI {rsi[i]:0.#}↓(고점 {maxRsi:0.#}) · {evidence}", bar.Date, tf));
     }

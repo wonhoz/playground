@@ -14,6 +14,12 @@ public enum MinuteSignalKind
 {
     MorningBrief, Rebound, FollowThrough, GoldenCross, StrongGoldenCross, WeakGoldenCross, TopWarn, DeadCross,
     /// <summary>
+    /// 🚀 진입 적기(추세 지속 확인): 골든크로스(✅🔥) 후 N분(기본 2)이 지나도 종가가 GC 가격 이상을
+    /// 유지하면 발화 — "무작정 GC에 진입"의 오탐을 거른다. 실측(14일 GC 114건): 즉시 진입 승률 57%·
+    /// 오탐율 16% → +2분 지속확인 82%·2%, +3분 90%·0%. 🔥는 즉시 오탐율 38%라 특히 유효.
+    /// </summary>
+    HoldConfirm,
+    /// <summary>
     /// 🔁 전환 확인(교차): X의 고점 경고 후 15분 내 반대 짝 종목(레버리지↔인버스)의 반등 확인(✅🔥)이
     /// 따라온 케이스 — 실측(14일·27건): 30분 내 1% 이상 하락 93% · 평균 낙폭 −4.1%(경고 단독 43~67%·−1.3~−2.6%).
     /// 경고가 확인보다 늦은 역순은 실측 실패라 제외. 라이브 전용(백테스트는 종목 단위라 미발생).
@@ -53,6 +59,7 @@ public sealed record MinuteSignal(
     /// </summary>
     public int Stars => Kind switch
     {
+        MinuteSignalKind.HoldConfirm => 5,   // 추세 지속 확인 — 실측 승률 90%(즉시 57%)
         MinuteSignalKind.StrongGoldenCross => 5,
         MinuteSignalKind.GoldenCross => AboveVwap == true ? 5 : 4,
         MinuteSignalKind.FollowThrough => 3,
@@ -66,6 +73,7 @@ public sealed record MinuteSignal(
     {
         get
         {
+            if (Kind == MinuteSignalKind.HoldConfirm) return "🚀 진입 적기 — 추세 지속 확인 (실측 승률 90% · 즉시진입 57%)";
             if (Kind == MinuteSignalKind.CrossTurn) return "🔁 전환 확인 — 매도 타이밍 (실측 93% 하락 · 30분 평균 −4.1%)";
             if (Kind == MinuteSignalKind.TopWarn) return "⚠️ 경계 — 과열 이탈 · 보유 중이면 익절 검토";
             if (Kind == MinuteSignalKind.DeadCross) return "🔻 하락 확인 — 반등 무효 · 정리/관망";
@@ -75,10 +83,11 @@ public sealed record MinuteSignal(
             string stars = Stars == 5 ? "🌟🌟🌟🌟🌟" : new string('⭐', Stars);
             string label = Stars switch
             {
+                // GC(✅🔥)는 '즉시 진입'이 아니라 2분 추세 확인 후 진입 권장 — 즉시 오탐율 16~38% 실측.
                 5 => Kind == MinuteSignalKind.StrongGoldenCross
-                    ? "최상 — 즉시 주목 (실측 ~63% · 건당 +4.6%)"
-                    : "최상 — 즉시 주목 (실측 ~71% · 낙폭 얕음)",
-                4 => "좋음 — 진입 검토",
+                    ? "강력 확인 — 2분 추세 확인 후 진입 (즉시 오탐 38%)"
+                    : "확인+VWAP위 — 2분 추세 확인 후 진입",
+                4 => "확인 — 2분 추세 확인 후 진입",
                 3 => Kind == MinuteSignalKind.FollowThrough ? "주목 — 반등 흐름 지속" : "주목 — 확인(GC) 대기",
                 2 => "관찰 — 1차 후보 · 확인 대기",
                 _ => "참고 — 횡보성 · 무시 가능",

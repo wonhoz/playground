@@ -140,6 +140,12 @@ public sealed class AppConfig
     /// <summary>1차 시그널 후 MA5/MA20 골든크로스 확인(2차) 알림 사용.</summary>
     public bool BottomConfirmCross { get; set; } = true;
     /// <summary>
+    /// 골든크로스(✅🔥) 후 이 봉 수(×tf)가 지나도 종가가 GC 가격 이상이면 "🚀 진입 적기" 확인 알림.
+    /// 0=끔. 실측(14일 GC 114건): GC 즉시 진입 승률 57%·오탐 16% → +2봉 지속확인 82%·2%(🔥는 38%→13%).
+    /// GC에 무작정 진입하는 오탐을 거르는 3차 확인. 기본 2.
+    /// </summary>
+    public int BottomHoldConfirmBars { get; set; } = 2;
+    /// <summary>
     /// 1차 시그널 직후 첫 완성봉이 양봉이면 "반등 지속" 조기 확인 알림(골든크로스보다 1~5분 빠름).
     /// 실측: 진짜 반등 3/4 직후 양봉, 가짜 2/3 직후 음봉 — 강/약 구분 힌트.
     /// </summary>

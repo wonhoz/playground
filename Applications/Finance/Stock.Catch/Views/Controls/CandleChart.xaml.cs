@@ -41,8 +41,13 @@ public partial class CandleChart : UserControl
     private ChartOptions _opt = new(true, true, true, true);
     private List<ChartSignal> _signals = new();
 
+    // 가로 스크롤 상태
+    private int _scrollStart;          // 현재 표시 시작 캔들 인덱스(0=맨 왼쪽)
+    private bool _syncingScroll;       // Redraw↔스크롤바 갱신 재귀 방지
+
     // 마우스 오버 히트테스트용(Redraw에서 갱신)
     private int _mStart;
+    private int _mEnd;
     private double _mSlot;
     private double _mLeftPad;
 
@@ -58,6 +63,7 @@ public partial class CandleChart : UserControl
     {
         _set = set;
         _opt = opt;
+        _scrollStart = 0;   // 새 데이터는 맨 왼쪽(가장 이른 봉)부터 표시
         EmptyHint.Visibility = Visibility.Collapsed;
         Redraw();
     }
@@ -82,7 +88,7 @@ public partial class CandleChart : UserControl
         PlotCanvas.Children.Clear();
         if (_set == null || _set.Candles.Count == 0) return;
 
-        double w = ActualWidth, h = ActualHeight;
+        double w = PlotCanvas.ActualWidth, h = PlotCanvas.ActualHeight;
         if (w < 40 || h < 40) return;
 
         const double rightPad = 56;   // 가격 축 라벨 공간
@@ -102,18 +108,38 @@ public partial class CandleChart : UserControl
         if (_opt.Volume) { volTop = cursor; volH = usableH * 0.18; cursor += volH + gap; }
         if (_opt.Rsi) { rsiTop = cursor; rsiH = usableH - rsiTop; }
 
-        // 표시할 캔들 수. 캔들 너비(slot)는 일봉 기준 크기로 상한을 둬, 데이터가 적어도
-        // 캔들이 과도하게 넓어지지 않게 한다(부족분은 우측 여백).
-        const double maxSlot = 14.0;
-        double slot = 9.0;
-        int visible = Math.Min(_set.Candles.Count, Math.Max(20, (int)(plotW / slot)));
-        int start = _set.Candles.Count - visible;
-        slot = Math.Min(plotW / visible, maxSlot);
+        // 캔들 너비(slot): 전체가 화면에 들어가면 채워 그리고(스크롤 없음),
+        // 너무 많으면 최소 폭으로 고정해 가로 스크롤로 이동한다. 초기 시작은 맨 왼쪽(_scrollStart=0).
+        const double maxSlot = 14.0, minSlot = 6.0;
+        int count = _set.Candles.Count;
+        double fitSlot = plotW / count;
+        double slot;
+        int visible;
+        bool scrollable;
+        if (fitSlot >= minSlot) { slot = Math.Min(fitSlot, maxSlot); visible = count; scrollable = false; }
+        else { slot = minSlot; visible = Math.Max(20, (int)(plotW / slot)); scrollable = true; }
+        int maxStart = Math.Max(0, count - visible);
+        int start = Math.Clamp(_scrollStart, 0, maxStart);
+        _scrollStart = start;
+        int end = Math.Min(count, start + visible);   // 그릴 범위 [start, end)
         double bodyW = Math.Max(2, slot * 0.62);
+
+        // 가로 스크롤바 동기화(재귀 방지).
+        _syncingScroll = true;
+        if (scrollable)
+        {
+            HScroll.Visibility = Visibility.Visible;
+            HScroll.Maximum = maxStart;
+            HScroll.ViewportSize = visible;
+            HScroll.LargeChange = Math.Max(1, visible - 1);
+            HScroll.Value = start;
+        }
+        else HScroll.Visibility = Visibility.Collapsed;
+        _syncingScroll = false;
 
         // 가격 범위(캔들 고저 + 볼린저 상하단 포함)
         double pMin = double.MaxValue, pMax = double.MinValue;
-        for (int i = start; i < _set.Candles.Count; i++)
+        for (int i = start; i < end; i++)
         {
             pMin = Math.Min(pMin, (double)_set.Candles[i].Low);
             pMax = Math.Max(pMax, (double)_set.Candles[i].High);
@@ -132,22 +158,22 @@ public partial class CandleChart : UserControl
         // ── 볼린저 밴드 ──
         if (_opt.Bollinger)
         {
-            AddPolyline(start, _set.BollUpper, X, YPrice, BollBand, 1, 0.7);
-            AddPolyline(start, _set.BollLower, X, YPrice, BollBand, 1, 0.7);
-            AddPolyline(start, _set.BollMiddle, X, YPrice, BollMid, 1.2, 0.9);
+            AddPolyline(start, end, _set.BollUpper, X, YPrice, BollBand, 1, 0.7);
+            AddPolyline(start, end, _set.BollLower, X, YPrice, BollBand, 1, 0.7);
+            AddPolyline(start, end, _set.BollMiddle, X, YPrice, BollMid, 1.2, 0.9);
         }
 
         // ── 이동평균선 ──
         if (_opt.Ma)
         {
-            AddPolyline(start, _set.Sma5, X, YPrice, Sma5B, 1.1, 0.95);
-            AddPolyline(start, _set.Sma20, X, YPrice, Sma20B, 1.1, 0.95);
-            AddPolyline(start, _set.Sma60, X, YPrice, Sma60B, 1.1, 0.95);
+            AddPolyline(start, end, _set.Sma5, X, YPrice, Sma5B, 1.1, 0.95);
+            AddPolyline(start, end, _set.Sma20, X, YPrice, Sma20B, 1.1, 0.95);
+            AddPolyline(start, end, _set.Sma60, X, YPrice, Sma60B, 1.1, 0.95);
             DrawMaLegend(leftPad + 2, 2);
         }
 
         // ── 캔들 ──
-        for (int i = start; i < _set.Candles.Count; i++)
+        for (int i = start; i < end; i++)
         {
             var c = _set.Candles[i];
             var brush = c.IsBullish ? Up : Down;
@@ -168,8 +194,8 @@ public partial class CandleChart : UserControl
         if (_opt.Volume)
         {
             double vMax = 1;
-            for (int i = start; i < _set.Candles.Count; i++) vMax = Math.Max(vMax, _set.Candles[i].Volume);
-            for (int i = start; i < _set.Candles.Count; i++)
+            for (int i = start; i < end; i++) vMax = Math.Max(vMax, _set.Candles[i].Volume);
+            for (int i = start; i < end; i++)
             {
                 var c = _set.Candles[i];
                 double bh = (c.Volume / vMax) * volH;
@@ -178,7 +204,7 @@ public partial class CandleChart : UserControl
                 Canvas.SetTop(bar, volTop + volH - bh);
                 PlotCanvas.Children.Add(bar);
             }
-            AddPolyline(start, _set.VolumeMa20, X, v => volTop + volH - (v / vMax) * volH, BollMid, 1, 0.8);
+            AddPolyline(start, end, _set.VolumeMa20, X, v => volTop + volH - (v / vMax) * volH, BollMid, 1, 0.8);
             AddLabel("거래량", leftPad + 2, volTop, Axis, 10);
         }
 
@@ -192,7 +218,7 @@ public partial class CandleChart : UserControl
                 PlotCanvas.Children.Add(new Line { X1 = leftPad, X2 = leftPad + plotW, Y1 = y, Y2 = y, Stroke = Grid, StrokeThickness = 1, StrokeDashArray = new DoubleCollection { 3, 3 } });
                 AddLabel(lvl.ToString("0"), leftPad + plotW + 4, y - 8, Axis, 9);
             }
-            AddPolyline(start, _set.Rsi14, X, YRsi, RsiLine, 1.3, 1);
+            AddPolyline(start, end, _set.Rsi14, X, YRsi, RsiLine, 1.3, 1);
             AddLabel("RSI(14)", leftPad + 2, rsiTop, Axis, 10);
         }
 
@@ -200,7 +226,7 @@ public partial class CandleChart : UserControl
         if (_signals.Count > 0)
         {
             var idxByTime = new Dictionary<DateTime, int>();
-            for (int i = start; i < _set.Candles.Count; i++) idxByTime[_set.Candles[i].Date] = i;
+            for (int i = start; i < end; i++) idxByTime[_set.Candles[i].Date] = i;
             var offset = new Dictionary<(int, bool), int>();   // 같은 봉·같은 방향 겹침 시 세로 누적
             foreach (var sig in _signals)
             {
@@ -219,12 +245,20 @@ public partial class CandleChart : UserControl
         }
 
         // ── x축 시간 라벨 ──
-        DrawTimeAxis(start, X, usableH, plotW, leftPad);
+        DrawTimeAxis(start, end, X, usableH, plotW, leftPad);
 
         // 마우스 오버 히트테스트용 저장
-        _mStart = start; _mSlot = slot; _mLeftPad = leftPad;
+        _mStart = start; _mEnd = end; _mSlot = slot; _mLeftPad = leftPad;
         OverlayCanvas.Children.Clear();
         InfoBox.Visibility = Visibility.Collapsed;
+    }
+
+    // ────────────────────────────── 가로 스크롤 ──────────────────────────────
+    private void HScroll_Scroll(object sender, System.Windows.Controls.Primitives.ScrollEventArgs e)
+    {
+        if (_syncingScroll) return;
+        _scrollStart = (int)Math.Round(HScroll.Value);
+        Redraw();
     }
 
     // ────────────────────────────── 마우스 오버 ──────────────────────────────
@@ -232,9 +266,8 @@ public partial class CandleChart : UserControl
     {
         if (_set == null || _set.Candles.Count == 0 || _mSlot <= 0) return;
         var pos = e.GetPosition(PlotCanvas);
-        int count = _set.Candles.Count;
         int idx = _mStart + (int)Math.Floor((pos.X - _mLeftPad) / _mSlot);
-        idx = Math.Clamp(idx, _mStart, count - 1);
+        idx = Math.Clamp(idx, _mStart, _mEnd - 1);
 
         OverlayCanvas.Children.Clear();
         double cx = _mLeftPad + (idx - _mStart + 0.5) * _mSlot;
@@ -270,10 +303,10 @@ public partial class CandleChart : UserControl
         return s;
     }
 
-    private void DrawTimeAxis(int start, Func<int, double> x, double usableH, double plotW, double leftPad)
+    private void DrawTimeAxis(int start, int end, Func<int, double> x, double usableH, double plotW, double leftPad)
     {
         if (_set == null) return;
-        int n = _set.Candles.Count;
+        int n = end;   // 표시 범위 끝(스크롤 반영)
         int ticks = Math.Min(6, n - start);
         if (ticks < 2) return;
         double y = usableH + 2;
@@ -317,11 +350,11 @@ public partial class CandleChart : UserControl
         }
     }
 
-    private void AddPolyline(int start, double[] series, Func<int, double> x, Func<double, double> y,
+    private void AddPolyline(int start, int end, double[] series, Func<int, double> x, Func<double, double> y,
         Brush brush, double thickness, double opacity)
     {
         var pl = new Polyline { Stroke = brush, StrokeThickness = thickness, Opacity = opacity };
-        for (int i = start; i < series.Length; i++)
+        for (int i = start; i < Math.Min(end, series.Length); i++)
         {
             if (double.IsNaN(series[i])) continue;
             pl.Points.Add(new Point(x(i), y(series[i])));

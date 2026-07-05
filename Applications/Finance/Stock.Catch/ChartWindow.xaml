@@ -40,6 +40,17 @@
                     <CheckBox x:Name="RsiCheck" Content="RSI" IsChecked="True" Margin="0,0,16,0" Checked="Indicator_Changed" Unchecked="Indicator_Changed"/>
                     <CheckBox x:Name="VolCheck" Content="거래량" IsChecked="True" Checked="Indicator_Changed" Unchecked="Indicator_Changed"/>
                 </StackPanel>
+
+                <!-- 3줄: 분봉 CSV 불러오기 + 시그널 오버레이 -->
+                <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                    <Button x:Name="LoadCsvBtn" Content="📂 분봉 CSV 불러오기" Style="{StaticResource ChipButton}" Click="LoadCsv_Click"/>
+                    <CheckBox x:Name="SignalCheck" Content="🎯 시그널 표시" VerticalAlignment="Center" Margin="18,0,8,0"
+                              Checked="Signal_Changed" Unchecked="Signal_Changed"
+                              ToolTip="불러온 분봉 데이터로 시그널을 계산해 차트에 아이콘으로 표시(1분봉 기준)."/>
+                    <ComboBox x:Name="SignalFilterCombo" Width="180" SelectionChanged="Signal_Changed"/>
+                    <TextBlock x:Name="CsvInfoText" VerticalAlignment="Center" Margin="16,0,0,0"
+                               Foreground="{StaticResource AccentBrush}" FontSize="12"/>
+                </StackPanel>
             </StackPanel>
         </Border>
 

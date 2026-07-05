@@ -9,6 +9,9 @@ namespace Stock.Catch.Views.Controls;
 /// <summary>차트에 표시할 지표 토글 + x축 날짜 포맷.</summary>
 public sealed record ChartOptions(bool Bollinger, bool Ma, bool Rsi, bool Volume, string DateFormat = "MM-dd");
 
+/// <summary>차트에 오버레이할 분봉 시그널 마커(시각·가격·아이콘·하락계열 여부).</summary>
+public sealed record ChartSignal(DateTime Time, decimal Price, string Icon, bool Bearish);
+
 /// <summary>
 /// 캔들 + 볼린저밴드 + 이동평균선(가격 패널) + 거래량(중단) + RSI(하단)를 Canvas에 직접 렌더링.
 /// 외부 라이브러리 없이 WPF Shape으로 그려 다크 테마를 완전히 제어한다. 한국식: 상승=빨강, 하락=파랑.
@@ -36,6 +39,7 @@ public partial class CandleChart : UserControl
 
     private IndicatorSet? _set;
     private ChartOptions _opt = new(true, true, true, true);
+    private List<ChartSignal> _signals = new();
 
     // 마우스 오버 히트테스트용(Redraw에서 갱신)
     private int _mStart;
@@ -61,8 +65,16 @@ public partial class CandleChart : UserControl
     public void Clear()
     {
         _set = null;
+        _signals = new();
         PlotCanvas.Children.Clear();
         EmptyHint.Visibility = Visibility.Visible;
+    }
+
+    /// <summary>차트에 표시할 시그널 마커 설정(빈 목록이면 마커 제거). 캔들 위/아래에 아이콘으로 오버레이.</summary>
+    public void SetSignals(IEnumerable<ChartSignal> signals)
+    {
+        _signals = signals.ToList();
+        Redraw();
     }
 
     private void Redraw()
@@ -182,6 +194,28 @@ public partial class CandleChart : UserControl
             }
             AddPolyline(start, _set.Rsi14, X, YRsi, RsiLine, 1.3, 1);
             AddLabel("RSI(14)", leftPad + 2, rsiTop, Axis, 10);
+        }
+
+        // ── 분봉 시그널 마커(캔들 아래=바닥 계열, 위=고점/전환 계열) ──
+        if (_signals.Count > 0)
+        {
+            var idxByTime = new Dictionary<DateTime, int>();
+            for (int i = start; i < _set.Candles.Count; i++) idxByTime[_set.Candles[i].Date] = i;
+            var offset = new Dictionary<(int, bool), int>();   // 같은 봉·같은 방향 겹침 시 세로 누적
+            foreach (var sig in _signals)
+            {
+                if (!idxByTime.TryGetValue(sig.Time, out int idx)) continue;   // 표시 범위 밖·불일치 스킵
+                int lvl = offset.GetValueOrDefault((idx, sig.Bearish));
+                offset[(idx, sig.Bearish)] = lvl + 1;
+                double px = X(idx);
+                double baseY = sig.Bearish ? YPrice((double)_set.Candles[idx].High) - 16 : YPrice((double)_set.Candles[idx].Low) + 4;
+                double py = baseY + (sig.Bearish ? -1 : 1) * lvl * 15;
+                var tb = new TextBlock { Text = sig.Icon, FontSize = 12 };
+                tb.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
+                Canvas.SetLeft(tb, px - tb.DesiredSize.Width / 2);
+                Canvas.SetTop(tb, py);
+                PlotCanvas.Children.Add(tb);
+            }
         }
 
         // ── x축 시간 라벨 ──

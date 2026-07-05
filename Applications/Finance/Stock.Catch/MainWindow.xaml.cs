@@ -976,38 +976,8 @@ public partial class MainWindow : Window
         _ => "데드크로스(하락 확인)",
     };
 
-    /// <summary>분봉 CSV(헤더 date,time,open,close,low,high,volume · 순서 무관) → Candle 목록. 형식 오류 시 예외.</summary>
-    private static List<Candle> ParseMinuteCsv(string path)
-    {
-        var lines = File.ReadAllLines(path);
-        if (lines.Length < 2)
-            throw new InvalidDataException("CSV에 데이터 행이 없습니다.");
-
-        var header = lines[0].TrimStart('﻿').Split(',').Select(h => h.Trim().ToLowerInvariant()).ToList();
-        int Idx(string key) => header.IndexOf(key) is var i && i >= 0
-            ? i
-            : throw new InvalidDataException($"분봉 CSV 형식이 아닙니다 — '{key}' 컬럼이 없습니다(필수 헤더: date,time,open,close,low,high,volume).");
-        int di = Idx("date"), ti = Idx("time"), oi = Idx("open"), ci = Idx("close"), li = Idx("low"), hi = Idx("high"), vi = Idx("volume");
-
-        var inv = System.Globalization.CultureInfo.InvariantCulture;
-        var bars = new List<Candle>();
-        foreach (var line in lines.Skip(1))
-        {
-            if (string.IsNullOrWhiteSpace(line)) continue;
-            var f = line.Split(',');
-            if (f.Length <= Math.Max(vi, Math.Max(hi, Math.Max(li, Math.Max(ci, Math.Max(oi, ti)))))) continue;
-            if (!DateTime.TryParse($"{f[di].Trim()} {f[ti].Trim()}", inv, System.Globalization.DateTimeStyles.None, out var dt)) continue;
-            if (!decimal.TryParse(f[oi], System.Globalization.NumberStyles.Number, inv, out var o) ||
-                !decimal.TryParse(f[ci], System.Globalization.NumberStyles.Number, inv, out var c) ||
-                !decimal.TryParse(f[li], System.Globalization.NumberStyles.Number, inv, out var lo) ||
-                !decimal.TryParse(f[hi], System.Globalization.NumberStyles.Number, inv, out var h)) continue;
-            long.TryParse(f[vi], System.Globalization.NumberStyles.Number, inv, out var v);
-            bars.Add(new Candle(dt, o, h, lo, c, v));
-        }
-        if (bars.Count == 0)
-            throw new InvalidDataException("파싱된 분봉이 없습니다. [🕐 분봉 CSV]로 저장한 파일인지 확인하세요.");
-        return bars;
-    }
+    /// <summary>분봉 CSV → Candle 목록(공용 유틸 위임).</summary>
+    private static List<Candle> ParseMinuteCsv(string path) => MinuteCsvIo.Parse(path);
 
     // ────────────────────────────── 매수/익절 래더 계산 ──────────────────────────────
     private void Ladder_Click(object sender, RoutedEventArgs e)

@@ -132,10 +132,15 @@ public partial class ChartWindow : Window
         {
             Title = "분봉 CSV 선택 (date,time,open,close,low,high,volume)",
             Filter = "CSV (쉼표 구분)|*.csv|모든 파일|*.*",
-            InitialDirectory = Directory.Exists(_config.LastSignalDir) ? _config.LastSignalDir
+            InitialDirectory = Directory.Exists(_config.LastChartCsvDir) ? _config.LastChartCsvDir
+                : Directory.Exists(_config.LastSignalDir) ? _config.LastSignalDir
                 : Directory.Exists(_config.LastExportDir) ? _config.LastExportDir : null
         };
         if (open.ShowDialog(this) != true) return;
+
+        // 마지막 불러온 폴더 기억 — 다음에 같은 위치에서 열리도록.
+        _config.LastChartCsvDir = Path.GetDirectoryName(open.FileName) ?? "";
+        _config.Save();
 
         try
         {

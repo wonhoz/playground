@@ -53,6 +53,8 @@ public sealed class AppConfig
     public string LastSignalDir { get; set; } = string.Empty;
     /// <summary>분봉 시그널 결과(_시그널.csv)를 마지막으로 저장한 폴더.</summary>
     public string LastSignalOutDir { get; set; } = string.Empty;
+    /// <summary>차트에서 분봉 CSV를 마지막으로 불러온 폴더.</summary>
+    public string LastChartCsvDir { get; set; } = string.Empty;
 
     // ── 차트 설정(재오픈 시 복원) ──
     public BarInterval ChartInterval { get; set; } = BarInterval.Day;

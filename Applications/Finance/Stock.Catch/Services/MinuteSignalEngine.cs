@@ -245,12 +245,15 @@ public sealed class MinuteSignalEngine(AppConfig config, PriceSourceRegistry reg
         var ma5 = IndicatorMath.Sma(closes, 5);
         var ma20 = IndicatorMath.Sma(closes, 20);
         var volMa = IndicatorMath.Sma(bars.Select(b => (double)b.Volume).ToList(), 20);
+        // 짧은 볼린저 병행(개장 급락으로 넓어진 20-밴드가 놓치는 두 번째 저점 포착) — 셋업 하단으로만 사용.
+        double[]? loShort = config.BottomShortBandPeriod > 1
+            ? IndicatorMath.Bollinger(closes, config.BottomShortBandPeriod, 2).Lower : null;
 
         for (int i = Math.Max(fromIdx, 21); i < bars.Count; i++)
         {
             EvaluateCross(item, st, bars, i, ma5, ma20, emit, tf, dayTrend, prevClose, vwap);
             if (bottom && tf == 1) EvaluateFollow(item, st, bars, i, emit);   // 직후 양봉은 1분봉 전용
-            if (bottom) EvaluateBottom(item, st, bars, i, upper, lower, rsi, volMa, emit, tf, dayTrend, prevClose, vwap);
+            if (bottom) EvaluateBottom(item, st, bars, i, upper, lower, rsi, volMa, emit, tf, dayTrend, prevClose, vwap, loShort);
             if (top) EvaluateTop(item, st, bars, i, upper, lower, rsi, volMa, emit, tf);
         }
     }
@@ -352,7 +355,7 @@ public sealed class MinuteSignalEngine(AppConfig config, PriceSourceRegistry reg
     /// <summary>완성봉 1개(인덱스 i)에 대한 바닥 반등 판정. 밴드워킹·%b 필터로 지속 하락·약반등을 걸러낸다.</summary>
     private void EvaluateBottom(WatchItem item, State st, List<Candle> bars, int i,
         double[] upper, double[] lower, double[] rsi, double[] volMa, Action<MinuteSignal> emit, int tf, double? dayTrend, decimal prevClose,
-        IReadOnlyDictionary<DateTime, double>? vwap = null)
+        IReadOnlyDictionary<DateTime, double>? vwap = null, double[]? loShort = null)
     {
         var bar = bars[i];
         if (double.IsNaN(lower[i]) || double.IsNaN(upper[i]) ||
@@ -373,13 +376,14 @@ public sealed class MinuteSignalEngine(AppConfig config, PriceSourceRegistry reg
             if (!double.IsNaN(lower[k]) && (double)bars[k].Low <= lower[k]) walkTouches++;
         if (walkTouches > Math.Max(1, eWalkMax)) return;
 
-        // 셋업: 최근 lookback봉 내 볼린저 하단 터치(저가 ≤ 하단).
+        // 셋업: 최근 lookback봉 내 볼린저 하단 터치(저가 ≤ 20-하단 OR 짧은-하단 — 이중 바닥 포착).
         int lookback = Math.Max(2, config.BottomTouchLookback);
         int touchIdx = -1;
         for (int k = Math.Max(1, i - lookback); k <= i; k++)
         {
-            if (double.IsNaN(lower[k])) continue;
-            if ((double)bars[k].Low <= lower[k]) { touchIdx = k; break; }   // 가장 이른 터치 봉
+            bool t20 = !double.IsNaN(lower[k]) && (double)bars[k].Low <= lower[k];
+            bool tSh = loShort != null && !double.IsNaN(loShort[k]) && (double)bars[k].Low <= loShort[k];
+            if (t20 || tSh) { touchIdx = k; break; }   // 가장 이른 터치 봉
         }
         if (touchIdx < 0) return;
 

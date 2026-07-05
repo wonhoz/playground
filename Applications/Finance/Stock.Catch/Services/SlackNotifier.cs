@@ -94,7 +94,8 @@ public sealed class SlackNotifier(AppConfig config) : IDisposable
     /// delta=구간 중 흐름. 프리는 last(전일比)와 흐름, 애프터는 흐름(정규 대비 추가)과 종합(전일比)을 보여준다.
     /// </summary>
     public async Task SendSessionSummaryAsync(bool isPre,
-        IReadOnlyList<(WatchItem Item, decimal Base, decimal Last, decimal Price)> lines, CancellationToken ct = default)
+        IReadOnlyList<(WatchItem Item, decimal Base, decimal Last, decimal Price, string ShapeIcon, string ShapeName)> lines,
+        CancellationToken ct = default)
     {
         if (!IsConfigured || lines.Count == 0) return;
 
@@ -128,9 +129,11 @@ public sealed class SlackNotifier(AppConfig config) : IDisposable
             var (e, w) = Mood(l.Last - l.Base);
             decimal delta = l.Last - l.Base;
             string price = l.Item.IsIndex ? $"{l.Price:N2}p" : $"{l.Price:N0}원";
+            // 흐름 형태(선형/로그/제곱/V/역V/Z)를 끝에 병기 — 이전까지 장 흐름 파악용.
+            string shape = $" · {l.ShapeIcon} {l.ShapeName}";
             sb.AppendLine(isPre
-                ? $"{e} {l.Item.Name} · 전일比 {l.Last:+0.0;-0.0;0.0}% ({price}) · 프리 {delta:+0.0;-0.0;0.0}%p {w}"
-                : $"{e} {l.Item.Name} · 정규 대비 {delta:+0.0;-0.0;0.0}%p {w} (전일比 {l.Last:+0.0;-0.0;0.0}% · {price})");
+                ? $"{e} {l.Item.Name} · 전일比 {l.Last:+0.0;-0.0;0.0}% ({price}) · 프리 {delta:+0.0;-0.0;0.0}%p {w}{shape}"
+                : $"{e} {l.Item.Name} · 정규 대비 {delta:+0.0;-0.0;0.0}%p {w} (전일比 {l.Last:+0.0;-0.0;0.0}% · {price}){shape}");
         }
         await PostAsync(BuildPayload(sb.ToString()), ct);
     }

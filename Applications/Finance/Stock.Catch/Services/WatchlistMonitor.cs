@@ -34,7 +34,7 @@ public sealed class WatchlistMonitor(AppConfig config, PriceSourceRegistry regis
     private DateTime _lastDigestAt = DateTime.MinValue;
 
     // ── 프리/애프터 세션 분위기 트래커(KR 종목 · 하루 1회 요약) ──
-    private sealed class SessTrack { public decimal BaseRate; public decimal LastRate; public decimal LastPrice; public bool Has; }
+    private sealed class SessTrack { public decimal BaseRate; public decimal LastRate; public decimal LastPrice; public bool Has; public List<double> Series = new(); }
     private readonly Dictionary<string, SessTrack> _preTrack = new();
     private readonly Dictionary<string, SessTrack> _afterTrack = new();
     private DateOnly _sessionDay = DateOnly.FromDateTime(DateTime.Today);
@@ -305,6 +305,7 @@ public sealed class WatchlistMonitor(AppConfig config, PriceSourceRegistry regis
         if (!s.Has) { s.BaseRate = rate; s.Has = true; }
         s.LastRate = rate;
         s.LastPrice = price;
+        s.Series.Add((double)rate);   // 궤적 형태 분류용 시계열
     }
 
     /// <summary>구간 종료 시각 도달 시 세션 요약을 하루 1회 전송(프리 08:50↑, 애프터 20:00↑).</summary>
@@ -326,11 +327,14 @@ public sealed class WatchlistMonitor(AppConfig config, PriceSourceRegistry regis
 
     private void DispatchSession(bool isPre, Dictionary<string, SessTrack> map)
     {
-        // 심볼 → WatchItem 매핑(현재 관심 목록 기준). 목록에서 빠진 종목은 스킵.
-        var lines = new List<(WatchItem Item, decimal Base, decimal Last, decimal Price)>();
+        // 심볼 → WatchItem 매핑(현재 관심 목록 기준). 목록에서 빠진 종목은 스킵. 궤적 형태도 분류.
+        var lines = new List<(WatchItem Item, decimal Base, decimal Last, decimal Price, string ShapeIcon, string ShapeName)>();
         foreach (var item in config.Watchlist)
             if (map.TryGetValue(item.Symbol, out var s) && s.Has)
-                lines.Add((item, s.BaseRate, s.LastRate, s.LastPrice));
+            {
+                var (ic, nm) = SessionShape.Classify(s.Series);
+                lines.Add((item, s.BaseRate, s.LastRate, s.LastPrice, ic, nm));
+            }
         if (lines.Count == 0) return;
 
         _ = SafeAsync(() => slack.SendSessionSummaryAsync(isPre, lines));

@@ -89,6 +89,52 @@ public sealed class SlackNotifier(AppConfig config) : IDisposable
         await PostAsync(BuildPayload(sb.ToString()), ct);
     }
 
+    /// <summary>
+    /// 프리마켓·애프터마켓 세션 분위기 요약(하루 1회) — 위트 있게. base=구간 시작 등락율, last=구간 끝 등락율,
+    /// delta=구간 중 흐름. 프리는 last(전일比)와 흐름, 애프터는 흐름(정규 대비 추가)과 종합(전일比)을 보여준다.
+    /// </summary>
+    public async Task SendSessionSummaryAsync(bool isPre,
+        IReadOnlyList<(WatchItem Item, decimal Base, decimal Last, decimal Price)> lines, CancellationToken ct = default)
+    {
+        if (!IsConfigured || lines.Count == 0) return;
+
+        // 흐름(delta) → 이모지·코멘트
+        static (string Emoji, string Word) Mood(decimal d) => d switch
+        {
+            >= 1.5m => (":rocket:", "확 달아오름"),
+            >= 0.5m => (":slightly_smiling_face:", "슬금슬금 상승"),
+            > -0.5m => (":neutral_face:", "잠잠"),
+            > -1.5m => (":worried:", "스멀스멀 하락"),
+            _ => (":cold_face:", "찬물 끼얹음"),
+        };
+
+        decimal avg = lines.Average(l => l.Last - l.Base);
+        string emoji = isPre ? ":coffee:" : ":crescent_moon:";
+        string title = isPre ? "프리장 브리핑 — 개장 전 분위기" : "애프터장 마감 — 장 후 분위기";
+        string overall = avg switch
+        {
+            >= 1.0m => isPre ? "다들 아침부터 신났네 ☀" : "장 끝나고도 열기 이어감 🔥",
+            >= 0.2m => isPre ? "살짝 몸 푸는 분위기 🙂" : "여운이 남아 오르는 중 🙂",
+            > -0.2m => "대체로 잠잠, 눈치 보는 중 😐",
+            > -1.0m => isPre ? "아침부터 살짝 무겁네 🌫" : "장 끝나니 스르르 식는 중 🌫",
+            _ => isPre ? "아침부터 찬바람 부네 🥶" : "마감 후 급격히 식음 🥶",
+        };
+
+        var sb = new StringBuilder();
+        sb.AppendLine($"{emoji} *{title}* ({(isPre ? "08:50" : "20:00")})");
+        sb.AppendLine(overall);
+        foreach (var l in lines.OrderByDescending(l => l.Last - l.Base))
+        {
+            var (e, w) = Mood(l.Last - l.Base);
+            decimal delta = l.Last - l.Base;
+            string price = l.Item.IsIndex ? $"{l.Price:N2}p" : $"{l.Price:N0}원";
+            sb.AppendLine(isPre
+                ? $"{e} {l.Item.Name} · 전일比 {l.Last:+0.0;-0.0;0.0}% ({price}) · 프리 {delta:+0.0;-0.0;0.0}%p {w}"
+                : $"{e} {l.Item.Name} · 정규 대비 {delta:+0.0;-0.0;0.0}%p {w} (전일比 {l.Last:+0.0;-0.0;0.0}% · {price})");
+        }
+        await PostAsync(BuildPayload(sb.ToString()), ct);
+    }
+
     /// <summary>관심 종목 다이제스트(주기 요약) 알림.</summary>
     public async Task SendDigestAsync(IReadOnlyList<WatchQuote> quotes, CancellationToken ct = default)
     {

@@ -33,10 +33,21 @@ public sealed class WatchlistMonitor(AppConfig config, PriceSourceRegistry regis
     private readonly HashSet<string> _failAlerted = new();          // 실패 알림을 이미 보낸 종목
     private DateTime _lastDigestAt = DateTime.MinValue;
 
+    // ── 프리/애프터 세션 분위기 트래커(KR 종목 · 하루 1회 요약) ──
+    private sealed class SessTrack { public decimal BaseRate; public decimal LastRate; public decimal LastPrice; public bool Has; }
+    private readonly Dictionary<string, SessTrack> _preTrack = new();
+    private readonly Dictionary<string, SessTrack> _afterTrack = new();
+    private DateOnly _sessionDay = DateOnly.FromDateTime(DateTime.Today);
+    private bool _preSent, _afterSent;
+    private static readonly TimeSpan PreStart = new(8, 0, 0), PreEnd = new(8, 50, 0);
+    private static readonly TimeSpan AfterStart = new(15, 40, 0), AfterEnd = new(20, 0, 0);
+
     public event Action<WatchAlert>? WatchAlertRaised;
     /// <summary>모니터링 시작 시 종목별 시작 알림을 한 번에 모아 전달(요약 1건).</summary>
     public event Action<IReadOnlyList<WatchAlert>>? StartupSummary;
     public event Action<IReadOnlyList<WatchQuote>>? DigestReady;
+    /// <summary>프리/애프터 세션 요약 준비(트레이 풍선용 · isPre, 제목, 한 줄 본문).</summary>
+    public event Action<bool, string, string>? SessionSummaryReady;
     /// <summary>시세 조회 연속 실패 알림(item, 사유, 연속 실패 횟수).</summary>
     public event Action<WatchItem, string, int>? FetchFailed;
     /// <summary>실패 후 정상 복구 알림.</summary>
@@ -125,6 +136,7 @@ public sealed class WatchlistMonitor(AppConfig config, PriceSourceRegistry regis
                 HandleSuccess(item);
                 item.Name = string.IsNullOrWhiteSpace(item.Name) ? item.Symbol : item.Name;
                 snapshot.Add(new WatchQuote(item, q!.Price, q.ChangeRate));
+                TrackSession(item, q.Price, q.ChangeRate);   // 프리/애프터 분위기 누적(KR)
                 var rules = item.Rules.Count > 0 ? item.Rules : globalRules; // 종목별 조건 우선
                 Evaluate(item, q.Price, q.ChangeRate, rules, startups);
 
@@ -150,6 +162,7 @@ public sealed class WatchlistMonitor(AppConfig config, PriceSourceRegistry regis
 
         if (startups.Count > 0) RaiseStartupSummary(startups);
         MaybeSendDigest(snapshot);
+        MaybeSendSessionSummary();
         StatusChanged?.Invoke(closed == items.Count
             ? $"장 시간 외 대기 중 ({DateTime.Now:HH:mm}) · 관심 {items.Count}종목"
             : $"갱신 {DateTime.Now:HH:mm:ss} · 관심 {snapshot.Count}/{items.Count}종목{(closed > 0 ? $" (장외 {closed}종목 대기)" : "")}");
@@ -276,6 +289,64 @@ public sealed class WatchlistMonitor(AppConfig config, PriceSourceRegistry regis
             FetchRecovered?.Invoke(item);
             _ = SafeAsync(() => slack.SendFetchRecoveryAsync(item.ToString(), "관심 종목", item.Symbol));
         }
+    }
+
+    /// <summary>KR 종목의 프리(08:00~08:50)·애프터(15:40~20:00) 구간 등락율 흐름을 누적한다(요약용).</summary>
+    private void TrackSession(WatchItem item, decimal price, decimal rate)
+    {
+        if (item.Market != MarketKind.KR) return;
+        ResetSessionIfNewDay();
+        var t = DateTime.Now.TimeOfDay;
+        Dictionary<string, SessTrack>? map =
+            config.WatchPreMarketSummary && t >= PreStart && t < PreEnd ? _preTrack :
+            config.WatchAfterMarketSummary && t >= AfterStart && t < AfterEnd ? _afterTrack : null;
+        if (map is null) return;
+        if (!map.TryGetValue(item.Symbol, out var s)) map[item.Symbol] = s = new SessTrack();
+        if (!s.Has) { s.BaseRate = rate; s.Has = true; }
+        s.LastRate = rate;
+        s.LastPrice = price;
+    }
+
+    /// <summary>구간 종료 시각 도달 시 세션 요약을 하루 1회 전송(프리 08:50↑, 애프터 20:00↑).</summary>
+    private void MaybeSendSessionSummary()
+    {
+        ResetSessionIfNewDay();
+        var t = DateTime.Now.TimeOfDay;
+        if (config.WatchPreMarketSummary && !_preSent && t >= PreEnd && t < AfterStart && _preTrack.Count > 0)
+        {
+            _preSent = true;
+            DispatchSession(isPre: true, _preTrack);
+        }
+        if (config.WatchAfterMarketSummary && !_afterSent && t >= AfterEnd && _afterTrack.Count > 0)
+        {
+            _afterSent = true;
+            DispatchSession(isPre: false, _afterTrack);
+        }
+    }
+
+    private void DispatchSession(bool isPre, Dictionary<string, SessTrack> map)
+    {
+        // 심볼 → WatchItem 매핑(현재 관심 목록 기준). 목록에서 빠진 종목은 스킵.
+        var lines = new List<(WatchItem Item, decimal Base, decimal Last, decimal Price)>();
+        foreach (var item in config.Watchlist)
+            if (map.TryGetValue(item.Symbol, out var s) && s.Has)
+                lines.Add((item, s.BaseRate, s.LastRate, s.LastPrice));
+        if (lines.Count == 0) return;
+
+        _ = SafeAsync(() => slack.SendSessionSummaryAsync(isPre, lines));
+        string title = isPre ? "☕ 프리장 브리핑" : "🌙 애프터장 마감";
+        decimal avg = lines.Average(l => l.Last - l.Base);
+        string body = $"{lines.Count}종목 · 평균 흐름 {avg:+0.0;-0.0;0.0}%p";
+        SessionSummaryReady?.Invoke(isPre, title, body);
+    }
+
+    private void ResetSessionIfNewDay()
+    {
+        var today = DateOnly.FromDateTime(DateTime.Today);
+        if (today == _sessionDay) return;
+        _sessionDay = today;
+        _preTrack.Clear(); _afterTrack.Clear();
+        _preSent = _afterSent = false;
     }
 
     private void MaybeSendDigest(List<WatchQuote> snapshot)

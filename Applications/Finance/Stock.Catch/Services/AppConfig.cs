@@ -90,6 +90,10 @@ public sealed class AppConfig
     public int WatchPollIntervalSeconds { get; set; } = 60;
     /// <summary>관심 종목 다이제스트 알림 주기(분). 0이면 비활성.</summary>
     public int WatchDigestIntervalMinutes { get; set; } = 0;
+    /// <summary>프리마켓(08:00~08:50) 분위기 요약을 동시호가 직전(08:50) 1회 Slack 전송. 기본 켜짐.</summary>
+    public bool WatchPreMarketSummary { get; set; } = true;
+    /// <summary>애프터마켓(15:40~20:00) 분위기 요약을 장 종료(20:00) 후 1회 Slack 전송. 기본 켜짐.</summary>
+    public bool WatchAfterMarketSummary { get; set; } = true;
     /// <summary>
     /// 관심 종목 전역 추세 조건 목록(여러 개 가능: 예 3분당 1%, 5분당 2%). 종목에 자체 조건이 없으면 이 목록을 사용.
     /// 기본 1개(3분당 2%).

@@ -81,6 +81,7 @@ public partial class MainWindow : Window
         _watch.WatchAlertRaised += OnWatchAlertRaised;
         _watch.StartupSummary += OnWatchStartupSummary;
         _watch.DigestReady += OnWatchDigest;
+        _watch.SessionSummaryReady += OnSessionSummary;
         _schedule = new MarketScheduleNotifier(_config, _slack);
         _schedule.Raised += OnScheduleAlert;
         _watch.FetchFailed += (item, reason, fails) => OnFetchFailed(item.ToString(), "관심 종목", reason, fails);
@@ -189,6 +190,9 @@ public partial class MainWindow : Window
 
     private void OnFetchRecovered(string display, string context) => Dispatcher.Invoke(() =>
         _tray.ShowBalloon($"✓ {display} 시세 조회 복구", $"{context} · 정상 수신 중"));
+
+    private void OnSessionSummary(bool isPre, string title, string body) => Dispatcher.Invoke(() =>
+        _tray.ShowBalloon(title, body));
 
     private void OnWatchDigest(IReadOnlyList<WatchQuote> quotes) => Dispatcher.Invoke(() =>
     {

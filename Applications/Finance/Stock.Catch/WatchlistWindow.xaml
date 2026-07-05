@@ -54,7 +54,11 @@
                     <TextBlock Text="다이제스트(분·0=끔)" Style="{StaticResource FieldLbl}"/>
                     <TextBox x:Name="DigestBox" Width="60" Margin="0,0,18,6"/>
                     <CheckBox x:Name="YahooExtendedCheck" Content="미국 프리/애프터는 Yahoo로" VerticalAlignment="Center"
-                              Margin="0,0,0,6" ToolTip="체크: 미국 확장시간(프리·애프터)엔 소스와 무관하게 Yahoo 사용. 해제: 항상 각 종목 소스."/>
+                              Margin="0,0,18,6" ToolTip="체크: 미국 확장시간(프리·애프터)엔 소스와 무관하게 Yahoo 사용. 해제: 항상 각 종목 소스."/>
+                    <CheckBox x:Name="PreMarketCheck" Content="프리장 요약(08:50)" VerticalAlignment="Center"
+                              Margin="0,0,14,6" ToolTip="국내 프리마켓(08:00~08:50) 분위기를 동시호가 직전 1회 위트 있게 요약해 Slack 전송."/>
+                    <CheckBox x:Name="AfterMarketCheck" Content="애프터장 요약(20:00)" VerticalAlignment="Center"
+                              Margin="0,0,0,6" ToolTip="국내 애프터마켓(15:40~20:00) 분위기를 장 종료 후 1회 요약해 Slack 전송. 20시까지 모니터링 상주 필요."/>
                 </WrapPanel>
                 <TextBlock x:Name="StatusText" Foreground="{StaticResource FgMuted}" FontSize="11" Margin="0,4,0,0"/>
             </StackPanel>

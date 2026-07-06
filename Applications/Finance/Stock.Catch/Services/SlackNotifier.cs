@@ -217,7 +217,7 @@ public sealed class SlackNotifier(AppConfig config) : IDisposable
         sb.AppendLine($"*{s.VerdictLine}*");
         // 🚀 진입 적기엔 권장 손절선 병기(일반 −2%·흔들림 주의 −3%).
         if (s.StopLossPrice > 0)
-            sb.AppendLine($":octagonal_sign: 손절선: {s.StopLossPrice:N0}원 (−{s.StopLossPct:0.#}%){(s.ChaseWarn ? " · 흔들림 주의라 여유 있게" : "")}");
+            sb.AppendLine($":octagonal_sign: 손절선: {s.StopLossPrice:N0}원 (−{s.StopLossPct:0.#}%){(s.ChaseWarn ? " · 흔들림 주의라 여유 있게" : s.CounterTrend ? " · 역추세라 여유 있게" : "")}");
         await PostAsync(BuildPayload(sb.ToString(), s.Code), ct);
     }
 

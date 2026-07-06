@@ -218,6 +218,13 @@ public sealed class AppConfig
     public double BottomStopLossPct { get; set; } = 2;
     /// <summary>⚠ 흔들림 주의 진입의 권장 손절선(%). 흔들림 주의는 더 깊이 빠진 뒤 반등(90%지점 −3%) → 기본 3.</summary>
     public double BottomStopLossChasePct { get; set; } = 3;
+    /// <summary>
+    /// 알림 중복 억제 창(분). 같은 종목에서 <b>직전에 보낸 알림과 판정 내용(2번째 줄)이 완전히 동일</b>하고
+    /// 이 시간 이내면 스킵한다 — 1·3·5분 등 여러 타임프레임이 같은 반등/GC를 동시 발화해 같은 문구가
+    /// 연달아 오는 것을 막는다(내용이 달라지면 즉시 전송). 라이브 알림 전용(백테스트·분석 창은 전건 표시).
+    /// 0=끔(모두 전송). 기본 10.
+    /// </summary>
+    public int SignalDedupWindowMinutes { get; set; } = 10;
 
     // ── 고점 경고 시그널(관심 종목 · 국내 1분봉 · 바닥의 거울상) ──
     /// <summary>셋업으로 인정할 RSI(14) 과매수 하한. 상단 터치 구간 최고 RSI가 이 값 이상일 때만 시그널.</summary>

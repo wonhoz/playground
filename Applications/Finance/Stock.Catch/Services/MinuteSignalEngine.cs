@@ -241,6 +241,51 @@ public sealed class MinuteSignalEngine(AppConfig config, PriceSourceRegistry reg
         return result;
     }
 
+    /// <summary>
+    /// 이동평균 리본(5/20/60/120) 스프레드% = (max−min)/종가 × 100. 4개 MA가 모두 서기 전(≈120봉·11시 이후)은 NaN.
+    /// 작을수록 리본 밀집(저변동·눌림 다지기) — 실측상 그 자리 진입은 이후 낙폭이 작아 버티기 쉽다.
+    /// </summary>
+    private static double[] BuildRibbon(List<double> closes)
+    {
+        var m5 = IndicatorMath.Sma(closes, 5);
+        var m20 = IndicatorMath.Sma(closes, 20);
+        var m60 = IndicatorMath.Sma(closes, 60);
+        var m120 = IndicatorMath.Sma(closes, 120);
+        var r = new double[closes.Count];
+        for (int i = 0; i < closes.Count; i++)
+        {
+            if (double.IsNaN(m5[i]) || double.IsNaN(m20[i]) || double.IsNaN(m60[i]) || double.IsNaN(m120[i]) || closes[i] <= 0)
+            { r[i] = double.NaN; continue; }
+            double mx = Math.Max(Math.Max(m5[i], m20[i]), Math.Max(m60[i], m120[i]));
+            double mn = Math.Min(Math.Min(m5[i], m20[i]), Math.Min(m60[i], m120[i]));
+            r[i] = (mx - mn) / closes[i] * 100;
+        }
+        return r;
+    }
+
+    /// <summary>ribbon 배열에서 인덱스 i의 리본 스프레드%를 안전하게 얻는다(없으면 NaN).</summary>
+    private static double RibbonAt(double[]? ribbon, int i)
+        => ribbon != null && i >= 0 && i < ribbon.Length ? ribbon[i] : double.NaN;
+
+    /// <summary>
+    /// 역추세 플래그 배열: MA20·MA60의 5봉 기울기가 <b>둘 다 음(하락 중)</b>이면 true. MA60 미형성(≈10시 전)이면 false.
+    /// 하락하는 중기 이평으로의 역추세 반등(예: 07-06 KODEX 10:19 MA20 −0.15·MA60 −0.22 → −1.9%)은 🚀 실패가 잦다.
+    /// </summary>
+    private static bool[] BuildCounterTrend(List<double> closes, double[] ma20)
+    {
+        var ma60 = IndicatorMath.Sma(closes, 60);
+        var r = new bool[closes.Count];
+        const int k = 5;   // 기울기 측정 구간(봉)
+        for (int i = 0; i < closes.Count; i++)
+        {
+            if (i < k) continue;
+            double s20 = !double.IsNaN(ma20[i]) && !double.IsNaN(ma20[i - k]) && ma20[i - k] != 0 ? ma20[i] - ma20[i - k] : double.NaN;
+            double s60 = !double.IsNaN(ma60[i]) && !double.IsNaN(ma60[i - k]) && ma60[i - k] != 0 ? ma60[i] - ma60[i - k] : double.NaN;
+            r[i] = !double.IsNaN(s20) && !double.IsNaN(s60) && s20 < 0 && s60 < 0;
+        }
+        return r;
+    }
+
     /// <summary>지표 일괄 계산 후 fromIdx부터 완성봉을 순서대로 판정 — 라이브(Fire)·백테스트(수집) 공용 코어.</summary>
     private void ScanBars(WatchItem item, State st, List<Candle> bars, int fromIdx,
         Action<MinuteSignal> emit, bool bottom, bool top, int tf, double? dayTrend, decimal prevClose,
@@ -255,13 +300,19 @@ public sealed class MinuteSignalEngine(AppConfig config, PriceSourceRegistry reg
         // 짧은 볼린저 병행(개장 급락으로 넓어진 20-밴드가 놓치는 두 번째 저점 포착) — 셋업 하단으로만 사용.
         double[]? loShort = config.BottomShortBandPeriod > 1
             ? IndicatorMath.Bollinger(closes, config.BottomShortBandPeriod, 2).Lower : null;
+        // 이동평균 리본(5/20/60/120) 밀집도 — 밀집=진입 후 낙폭 작아 버티기 쉬움(실측 −0.77% vs 분산 −2.40%).
+        // 컨텍스트·태그 표기 전용(강등 아님). 1분봉에서만(상위 TF는 120봉=120×tf분이라 의미가 흐려짐).
+        double[]? ribbon = tf == 1 ? BuildRibbon(closes) : null;
+        // ⚠ 역추세: MA20·MA60이 동시 하락(5봉 기울기<0) 중인 자리 — 🚀 진입 적기가 여기서 뜨면 실패 잦음
+        // (실측 66건: 둘 다 하락 시 순상승 48%·낙폭≤−2% 27.6% vs 정렬 75%·0%). MA60 형성(≈10시) 후만.
+        bool[]? counterTrend = tf == 1 ? BuildCounterTrend(closes, ma20) : null;
 
         for (int i = Math.Max(fromIdx, 21); i < bars.Count; i++)
         {
-            EvaluateCross(item, st, bars, i, ma5, ma20, emit, tf, dayTrend, prevClose, vwap);
-            if (bottom) EvaluateHold(item, st, bars, i, emit, tf, dayTrend, prevClose, vwap);   // 🚀 진입 적기(GC 후 지속 확인)
-            if (bottom && tf == 1) EvaluateFollow(item, st, bars, i, emit);   // 직후 양봉은 1분봉 전용
-            if (bottom) EvaluateBottom(item, st, bars, i, upper, lower, rsi, volMa, emit, tf, dayTrend, prevClose, vwap, loShort);
+            EvaluateCross(item, st, bars, i, ma5, ma20, emit, tf, dayTrend, prevClose, vwap, ribbon);
+            if (bottom) EvaluateHold(item, st, bars, i, emit, tf, dayTrend, prevClose, vwap, ribbon, counterTrend);   // 🚀 진입 적기(GC 후 지속 확인)
+            if (bottom && tf == 1) EvaluateFollow(item, st, bars, i, emit, ribbon);   // 직후 양봉은 1분봉 전용
+            if (bottom) EvaluateBottom(item, st, bars, i, upper, lower, rsi, volMa, emit, tf, dayTrend, prevClose, vwap, loShort, ribbon);
             if (top) EvaluateTop(item, st, bars, i, upper, lower, rsi, volMa, emit, tf);
         }
     }
@@ -271,7 +322,7 @@ public sealed class MinuteSignalEngine(AppConfig config, PriceSourceRegistry reg
     /// 실측: 진짜 반등 3/4에서 직후 양봉, 가짜 2/3에서 직후 음봉/보합. 롤링 봉은 구간이 겹쳐
     /// 판정이 무뎌지므로 1분봉에서만 사용한다.
     /// </summary>
-    private void EvaluateFollow(WatchItem item, State st, List<Candle> bars, int i, Action<MinuteSignal> emit)
+    private void EvaluateFollow(WatchItem item, State st, List<Candle> bars, int i, Action<MinuteSignal> emit, double[]? ribbon = null)
     {
         if (!st.AwaitFollow || bars[i].Date <= st.BottomFiredAt) return;
         st.AwaitFollow = false;   // 직후 1봉만 판정(양봉 아니면 조용히 종료)
@@ -284,7 +335,8 @@ public sealed class MinuteSignalEngine(AppConfig config, PriceSourceRegistry reg
         avgBody /= 20;
         double ratio = avgBody > 0 ? (double)(Math.Abs(bar.Close - bar.Open) / avgBody) : 0;
         emit(new MinuteSignal(item.Symbol, item.Name, MinuteSignalKind.FollowThrough, bar.Close,
-            $"1차({st.BottomFiredAt:HH:mm}) 직후 양봉 지속 · 몸통 {ratio:0.0}×", bar.Date));
+            $"1차({st.BottomFiredAt:HH:mm}) 직후 양봉 지속 · 몸통 {ratio:0.0}×", bar.Date,
+            RibbonSpreadPct: RibbonAt(ribbon, i)));
     }
 
     /// <summary>
@@ -293,7 +345,8 @@ public sealed class MinuteSignalEngine(AppConfig config, PriceSourceRegistry reg
     /// 실측: GC 즉시 승률 57%/오탐 16% → +2봉 지속확인 82%/2%.
     /// </summary>
     private void EvaluateHold(WatchItem item, State st, List<Candle> bars, int i, Action<MinuteSignal> emit,
-        int tf, double? dayTrend, decimal prevClose, IReadOnlyDictionary<DateTime, double>? vwap)
+        int tf, double? dayTrend, decimal prevClose, IReadOnlyDictionary<DateTime, double>? vwap, double[]? ribbon = null,
+        bool[]? counterTrend = null)
     {
         if (!st.AwaitHold) return;
         var bar = bars[i];
@@ -303,10 +356,11 @@ public sealed class MinuteSignalEngine(AppConfig config, PriceSourceRegistry reg
 
         double hold = (double)(bar.Close / st.GcHoldPrice - 1) * 100;
         bool chase = IsChaseWarn(vwap, bar);
-        double stopPct = chase ? config.BottomStopLossChasePct : config.BottomStopLossPct;   // 흔들림 주의는 더 깊게
+        bool ct = counterTrend != null && i < counterTrend.Length && counterTrend[i];   // MA20·60 동시 하락(역추세)
+        double stopPct = chase || ct ? config.BottomStopLossChasePct : config.BottomStopLossPct;   // 흔들림 주의·역추세는 더 깊게
         emit(new MinuteSignal(item.Symbol, item.Name, MinuteSignalKind.HoldConfirm, bar.Close,
             $"{(st.GcHoldStrong ? "🔥" : "✅")} 확인({st.GcHoldAt:HH:mm}) 후 {(bar.Date - st.GcHoldAt).TotalMinutes:0}분 종가 유지 · {hold:+0.00;-0.00}% — 추세 지속 확인",
-            bar.Date, tf, Context(bars, i, dayTrend, prevClose, vwap), st.GcHoldVwap, st.GcHoldDiv, chase, stopPct));
+            bar.Date, tf, Context(bars, i, dayTrend, prevClose, vwap, RibbonAt(ribbon, i)), st.GcHoldVwap, st.GcHoldDiv, chase, stopPct, RibbonAt(ribbon, i), ct));
     }
 
     // ───────────────────────── 2차: 골든/데드크로스 확인 ─────────────────────────
@@ -314,7 +368,7 @@ public sealed class MinuteSignalEngine(AppConfig config, PriceSourceRegistry reg
     /// <summary>MA5/MA20 관계를 봉마다 추적해 1차 시그널 후 확인 창(×tf) 내 크로스를 알림한다.</summary>
     private void EvaluateCross(WatchItem item, State st, List<Candle> bars, int i, double[] ma5, double[] ma20,
         Action<MinuteSignal> emit, int tf, double? dayTrend, decimal prevClose,
-        IReadOnlyDictionary<DateTime, double>? vwap = null)
+        IReadOnlyDictionary<DateTime, double>? vwap = null, double[]? ribbon = null)
     {
         if (double.IsNaN(ma5[i]) || double.IsNaN(ma20[i])) return;
         var bar = bars[i];
@@ -345,8 +399,8 @@ public sealed class MinuteSignalEngine(AppConfig config, PriceSourceRegistry reg
                 bool chase = IsChaseWarn(vwap, bar);
                 emit(new MinuteSignal(item.Symbol, item.Name, kind, bar.Close,
                     $"MA5 {ma5[i]:N0} > MA20 {ma20[i]:N0} 돌파 · 1차({st.BottomFiredAt:HH:mm}) 후 {(bar.Date - st.BottomFiredAt).TotalMinutes:0}분 · " +
-                    $"{rise:+0.00;-0.00}%{reason}", bar.Date, tf, Context(bars, i, dayTrend, prevClose, vwap),
-                    AboveVwapAt(vwap, bar), st.BottomFiredDiv, chase));
+                    $"{rise:+0.00;-0.00}%{reason}", bar.Date, tf, Context(bars, i, dayTrend, prevClose, vwap, RibbonAt(ribbon, i)),
+                    AboveVwapAt(vwap, bar), st.BottomFiredDiv, chase, RibbonSpreadPct: RibbonAt(ribbon, i)));
                 // 🚀 진입 적기(3차) 대기 시작 — 약한 GC(횡보성)는 제외.
                 if (!weakMomentum && config.BottomHoldConfirmBars > 0)
                 {
@@ -385,7 +439,7 @@ public sealed class MinuteSignalEngine(AppConfig config, PriceSourceRegistry reg
 
     /// <summary>사람 판단 보조 컨텍스트: 갭·당일 등락·저점比·VWAP 위치·일봉추세 — "폭락 후 V바닥 초입"인지 식별용.</summary>
     private string Context(List<Candle> bars, int i, double? dayTrend, decimal prevClose,
-        IReadOnlyDictionary<DateTime, double>? vwap = null)
+        IReadOnlyDictionary<DateTime, double>? vwap = null, double ribbon = double.NaN)
     {
         var bar = bars[i];
         double dayChg = bars[0].Open > 0 ? (double)(bar.Close / bars[0].Open - 1) * 100 : 0;
@@ -397,8 +451,11 @@ public sealed class MinuteSignalEngine(AppConfig config, PriceSourceRegistry reg
         string vw = "";
         if (vwap != null && vwap.TryGetValue(bar.Date, out var v) && !double.IsNaN(v) && v > 0)
             vw = $" · VWAP {((double)bar.Close >= v ? "위" : "아래")} {((double)bar.Close / v - 1) * 100:+0.0;-0.0}%";
+        // 리본(5/20/60/120) 밀집도 — 밀집=진입 후 낙폭 작음(버티기 쉬움)·분산=낙폭 큼. MA120 미형성(≈11시 전)이면 생략.
+        string rib = !double.IsNaN(ribbon)
+            ? $" · 리본 {ribbon:0.0}%({(ribbon <= MinuteSignal.RibbonTightPct ? "밀집" : ribbon >= MinuteSignal.RibbonWidePct ? "분산" : "보통")})" : "";
         string trend = config.BottomTrendGate && dayTrend is { } dt ? $" · 일봉추세 {dt:+0.00;-0.00}" : "";
-        return $"{gap}당일 {dayChg:+0.0;-0.0}% · 저점比 +{fromLow:0.0}%{vw}{trend}";
+        return $"{gap}당일 {dayChg:+0.0;-0.0}% · 저점比 +{fromLow:0.0}%{vw}{rib}{trend}";
     }
 
     // ───────────────────────── 1차: 바닥 반등 ─────────────────────────
@@ -406,7 +463,7 @@ public sealed class MinuteSignalEngine(AppConfig config, PriceSourceRegistry reg
     /// <summary>완성봉 1개(인덱스 i)에 대한 바닥 반등 판정. 밴드워킹·%b 필터로 지속 하락·약반등을 걸러낸다.</summary>
     private void EvaluateBottom(WatchItem item, State st, List<Candle> bars, int i,
         double[] upper, double[] lower, double[] rsi, double[] volMa, Action<MinuteSignal> emit, int tf, double? dayTrend, decimal prevClose,
-        IReadOnlyDictionary<DateTime, double>? vwap = null, double[]? loShort = null)
+        IReadOnlyDictionary<DateTime, double>? vwap = null, double[]? loShort = null, double[]? ribbon = null)
     {
         var bar = bars[i];
         if (double.IsNaN(lower[i]) || double.IsNaN(upper[i]) ||
@@ -484,8 +541,8 @@ public sealed class MinuteSignalEngine(AppConfig config, PriceSourceRegistry reg
         emit(new MinuteSignal(item.Symbol, item.Name, MinuteSignalKind.Rebound, bar.Close,
             $"하단터치 {bars[touchIdx].Date:HH:mm} → 복귀 %b {pb:0.00} · RSI {rsi[i]:0.#}↑(저점 {minRsi:0.#}) · 거래량 {volRatio:0.0}×" +
             (divergence ? " · 다이버전스" : ""),
-            bar.Date, tf, Context(bars, i, dayTrend, prevClose, vwap),
-            AboveVwapAt(vwap, bar), divergence));
+            bar.Date, tf, Context(bars, i, dayTrend, prevClose, vwap, RibbonAt(ribbon, i)),
+            AboveVwapAt(vwap, bar), divergence, RibbonSpreadPct: RibbonAt(ribbon, i)));
     }
 
     // ───────────────────────── 1차: 고점 경고 ─────────────────────────
@@ -583,12 +640,30 @@ public sealed class MinuteSignalEngine(AppConfig config, PriceSourceRegistry reg
         }
     }
 
-    /// <summary>라이브 경로의 emit — 라이브 상태 갱신(부스트·교차) 후 트레이 이벤트 + Slack 전송.</summary>
+    /// <summary>종목별 직전 전송 알림(판정 문구·시각) — 중복(같은 내용 [3분][5분]) 억제용.</summary>
+    private readonly Dictionary<string, (string Verdict, DateTime At)> _lastAlert = new();
+
+    /// <summary>
+    /// 라이브 경로의 emit — 라이브 상태 갱신(부스트·교차)은 항상 하고, 알림(트레이+Slack)은 중복이 아닐 때만 보낸다.
+    /// 여러 타임프레임(1·3·5분)이 같은 반등/GC를 동시 발화해 같은 판정 문구가 연달아 오는 것을 막는다
+    /// — 내용(VerdictLine)이 바뀌면 즉시 전송. 상태 갱신은 스킵과 무관(교차·부스트 로직 보존).
+    /// </summary>
     private void Fire(MinuteSignal s)
     {
         UpdateLiveState(s);
+        if (IsDuplicateAlert(s)) return;
+        _lastAlert[s.Code] = (s.VerdictLine, s.Time);
         Raised?.Invoke(s);
         _ = SafeSlackAsync(s);
+    }
+
+    /// <summary>직전에 보낸 알림과 판정 문구가 완전히 동일하고 dedup 창(분) 이내면 중복으로 본다(브리핑 제외).</summary>
+    private bool IsDuplicateAlert(MinuteSignal s)
+    {
+        if (s.Kind == MinuteSignalKind.MorningBrief || config.SignalDedupWindowMinutes <= 0) return false;
+        if (!_lastAlert.TryGetValue(s.Code, out var last)) return false;
+        double gap = (s.Time - last.At).TotalMinutes;
+        return last.Verdict == s.VerdictLine && gap >= 0 && gap <= config.SignalDedupWindowMinutes;
     }
 
     /// <summary>
@@ -711,6 +786,7 @@ public sealed class MinuteSignalEngine(AppConfig config, PriceSourceRegistry reg
         var today = DateOnly.FromDateTime(DateTime.Today);
         if (today == _day) return;
         _symbols.Clear();
+        _lastAlert.Clear();
         _day = today;
     }
 }

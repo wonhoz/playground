@@ -44,8 +44,15 @@ public sealed record MinuteSignal(
     bool? AboveVwap = null,    // 시그널 봉 종가의 세션 VWAP 상/하 (널=미계산)
     bool Divergence = false,   // RSI 불리시 다이버전스(반등 1차에서 판정 · GC는 1차 값 상속)
     bool ChaseWarn = false,    // ⚠ 흔들림 주의: 종가가 VWAP 깊은 약세(하락 추세 진행 중 · 진입 후 낙폭 큼)
-    double StopLossPct = 0)    // 🛑 권장 손절선(%) — 🚀 진입 적기 전용(일반 −2%·흔들림 주의 −3% · 0=미표기)
+    double StopLossPct = 0,    // 🛑 권장 손절선(%) — 🚀 진입 적기 전용(일반 −2%·흔들림 주의 −3% · 0=미표기)
+    double RibbonSpreadPct = double.NaN,  // MA5/20/60/120 리본 스프레드(%) — 밀집=낙폭 작음(NaN=MA120 미형성)
+    bool CounterTrend = false) // ⚠ 역추세: MA20·MA60이 동시 하락 중 진입(🚀 전용) — 하락 MA로의 역추세 반등은 실패 잦음
 {
+    /// <summary>리본 밀집 판정 상한(%): 이하면 "리본 밀집(낙폭 작음)". 실측: 밀집 시그널 평균 낙폭 −0.77%.</summary>
+    public const double RibbonTightPct = 1.5;
+    /// <summary>리본 분산 판정 하한(%): 이상이면 "⚠ 리본 분산(낙폭 주의)". 실측: 분산 시그널 평균 낙폭 −2.40%.</summary>
+    public const double RibbonWidePct = 3.0;
+
     public string Display => string.IsNullOrEmpty(Name) ? Code : $"{Name} ({Code})";
 
     /// <summary>하락 계열(고점 경고·데드크로스·전환 확인) 여부 — 트레이 warning 표시 등에 사용.</summary>
@@ -58,18 +65,19 @@ public sealed record MinuteSignal(
     public decimal StopLossPrice => StopLossPct > 0 ? Math.Round(Price * (1 - (decimal)StopLossPct / 100)) : 0;
 
     /// <summary>
-    /// 종합 판정 5단계(★). 실측(14일×3종목 · 이후 30분 ±1% 선도달) 근거:
-    /// 🔥 63%·건당 +4.6% / ✅+VWAP위 71%·낙폭 −0.97% / ✅ 50% / ↗ 44% / 📈 50% / ⚠ 49%(수익폭 열위).
-    /// 0=등급 없음(브리핑·하락 계열).
+    /// 종합 판정 단계(별 개수). 진입 적기(🌟×5)만 최상위이고 GC 이하는 한 단계씩 내려 "확인은 관심, 진입은 🚀에서"를 강조.
+    /// 참고(0·별 없음) → 관찰(1) → 주목(2) → 좋음(3) → 최상·즉시 주목(4) → 진입 적기(5·🌟).
+    /// 실측(14일×3종목 · 이후 30분 ±1% 선도달) 근거: 🚀 90% / 🔥 63%·건당 +4.6% / ✅+VWAP위 71%·낙폭 −0.97% /
+    /// ✅ 50% / ↗ 44% / 📈 50% / ⚠ 49%(수익폭 열위). 0=참고 또는 등급 없음(브리핑·하락 계열).
     /// </summary>
     public int Stars => Kind switch
     {
-        MinuteSignalKind.HoldConfirm => 5,   // 추세 지속 확인 — 실측 승률 90%(즉시 57%)
-        MinuteSignalKind.StrongGoldenCross => 5,
-        MinuteSignalKind.GoldenCross => AboveVwap == true ? 5 : 4,
-        MinuteSignalKind.FollowThrough => 3,
-        MinuteSignalKind.Rebound => Divergence ? 3 : 2,
-        MinuteSignalKind.WeakGoldenCross => 1,
+        MinuteSignalKind.HoldConfirm => 5,          // 🌟 진입 적기 — 실측 승률 90%(즉시 57%)
+        MinuteSignalKind.StrongGoldenCross => 4,    // 최상·즉시 주목(🔥 강력 GC)
+        MinuteSignalKind.GoldenCross => AboveVwap == true ? 4 : 3,   // VWAP위=최상 / 아래=좋음
+        MinuteSignalKind.FollowThrough => 2,        // 주목
+        MinuteSignalKind.Rebound => Divergence ? 2 : 1,   // 다이버전스=주목 / 기본=관찰
+        MinuteSignalKind.WeakGoldenCross => 0,      // 참고(별 없음 · 횡보성)
         _ => 0
     };
 
@@ -78,30 +86,40 @@ public sealed record MinuteSignal(
     {
         get
         {
-            if (Kind == MinuteSignalKind.HoldConfirm) return "🚀 진입 적기 — 추세 지속 확인 (실측 승률 90% · 즉시진입 57%)";
+            if (Kind == MinuteSignalKind.HoldConfirm)
+                return CounterTrend
+                    ? "🌟🌟🌟🌟🌟 진입 적기 — 추세 지속 확인 · ⚠ 역추세(MA20·60 하락 중 · 낙폭 주의 — 정렬 진입 75% vs 역추세 48%)"
+                    : "🌟🌟🌟🌟🌟 진입 적기 — 추세 지속 확인 (실측 승률 90% · 즉시진입 57%)";
             if (Kind == MinuteSignalKind.CrossTurn) return "🔁 전환 확인 — 매도 타이밍 (실측 93% 하락 · 30분 평균 −4.1%)";
             if (Kind == MinuteSignalKind.TopWarn) return "⚠️ 경계 — 과열 이탈 · 보유 중이면 익절 검토";
             if (Kind == MinuteSignalKind.DeadCross) return "🔻 하락 확인 — 반등 무효 · 정리/관망";
             if (Kind == MinuteSignalKind.MorningBrief) return Detail;
 
-            // 최상(5성)은 🌟로 차별화 — 모바일 알림에서 즉시 구분되도록.
+            // 별 표기: 참고(0)=별 없음 · 관찰~최상(1~4)=⭐ · 진입 적기(5)=🌟(모바일에서 즉시 구분).
             string stars = Stars == 5 ? "🌟🌟🌟🌟🌟" : new string('⭐', Stars);
             string label = Stars switch
             {
-                // GC(✅🔥)는 '즉시 진입'이 아니라 2분 추세 확인 후 진입 권장 — 즉시 오탐율 16~38% 실측.
-                5 => Kind == MinuteSignalKind.StrongGoldenCross
-                    ? "강력 확인 — 2분 추세 확인 후 진입 (즉시 오탐 38%)"
-                    : "확인+VWAP위 — 2분 추세 확인 후 진입",
-                4 => "확인 — 2분 추세 확인 후 진입",
-                3 => Kind == MinuteSignalKind.FollowThrough ? "주목 — 반등 흐름 지속" : "주목 — 확인(GC) 대기",
-                2 => "관찰 — 1차 후보 · 확인 대기",
+                // GC(✅🔥)는 '즉시 진입'이 아니라 2분 추세 확인(🚀 진입 적기) 후 진입 권장 — 즉시 오탐율 16~38% 실측.
+                4 => Kind == MinuteSignalKind.StrongGoldenCross
+                    ? "최상 · 즉시 주목 — 강력 확인 (2분 추세 확인 후 진입 · 즉시 오탐 38%)"
+                    : "최상 · 즉시 주목 — 확인+VWAP위 (2분 추세 확인 후 진입)",
+                3 => "좋음 — 확인 (2분 추세 확인 후 진입)",
+                2 => Kind == MinuteSignalKind.FollowThrough ? "주목 — 반등 흐름 지속" : "주목 — 1차 후보(다이버전스) · 확인 대기",
+                1 => "관찰 — 1차 후보 · 확인 대기",
                 _ => "참고 — 횡보성 · 무시 가능",
             };
-            var tags = new List<string>(3);
+            var tags = new List<string>(4);
             if (ChaseWarn) tags.Add("⚠ 흔들림 주의(VWAP 깊은 약세·낙폭 큼)");   // 위험 표시를 맨 앞에
+            // 리본(5/20/60/120) 밀집도 — 밀집=진입 후 낙폭 작아 버티기 쉬움 / 분산=낙폭 큼(실측 −0.77% vs −2.40%).
+            if (!double.IsNaN(RibbonSpreadPct))
+            {
+                if (RibbonSpreadPct <= RibbonTightPct) tags.Add($"리본 밀집 {RibbonSpreadPct:0.0}%(낙폭 작음)");
+                else if (RibbonSpreadPct >= RibbonWidePct) tags.Add($"⚠ 리본 분산 {RibbonSpreadPct:0.0}%(낙폭 주의)");
+            }
             if (AboveVwap == true) tags.Add("VWAP 위");
             if (Divergence) tags.Add("다이버전스");
-            return $"{stars} {label}{(tags.Count > 0 ? " · " + string.Join(" · ", tags) : "")}";
+            string prefix = stars.Length > 0 ? stars + " " : "";
+            return $"{prefix}{label}{(tags.Count > 0 ? " · " + string.Join(" · ", tags) : "")}";
         }
     }
 }

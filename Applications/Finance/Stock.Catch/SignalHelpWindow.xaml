@@ -52,7 +52,7 @@
                 <TextBlock Style="{StaticResource Muted}"
                            Text="실측(3종목×14일 · GC 110건): 🔥 등급일수록 건당 기대수익 단조 증가(0.8~1.5% +0.11 → 2.5%+ +0.41%/건). 진짜 반등은 골든크로스가 5~9분 내 따라오고, 직후 양봉도 3/4 동반."/>
 
-                <TextBlock Style="{StaticResource H1}" Text="⭐ 종합 판정 5단계 (알림 2번째 줄)"/>
+                <TextBlock Style="{StaticResource H1}" Text="⭐ 종합 판정 단계 (알림 2번째 줄)"/>
                 <Border BorderBrush="#3A3A3A" BorderThickness="1" CornerRadius="6" Margin="0,2,0,6">
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -70,28 +70,28 @@
                         <TextBlock Grid.Row="0" Grid.Column="1" Style="{StaticResource CellHead}" Text="조건"/>
                         <TextBlock Grid.Row="0" Grid.Column="2" Style="{StaticResource CellHead}" Text="실측 근거 (14일×3종목)"/>
 
-                        <TextBlock Grid.Row="1" Grid.Column="0" Style="{StaticResource Cell}" Text="🌟🌟🌟🌟🌟 최상 — 즉시 주목"/>
-                        <TextBlock Grid.Row="1" Grid.Column="1" Style="{StaticResource Cell}" Text="🔥 강력 GC"/>
-                        <TextBlock Grid.Row="1" Grid.Column="2" Style="{StaticResource Cell}" Text="승률 63% · 건당 +4.6%"/>
+                        <TextBlock Grid.Row="1" Grid.Column="0" Style="{StaticResource Cell}" Text="🌟🌟🌟🌟🌟 진입 적기"/>
+                        <TextBlock Grid.Row="1" Grid.Column="1" Style="{StaticResource Cell}" Text="🚀 GC 후 2분 추세 지속 확인"/>
+                        <TextBlock Grid.Row="1" Grid.Column="2" Style="{StaticResource Cell}" Text="승률 90% (즉시진입 57%)"/>
 
-                        <TextBlock Grid.Row="2" Grid.Column="0" Style="{StaticResource Cell}" Text="🌟🌟🌟🌟🌟 최상 — 즉시 주목"/>
-                        <TextBlock Grid.Row="2" Grid.Column="1" Style="{StaticResource Cell}" Text="✅ GC + VWAP 위"/>
-                        <TextBlock Grid.Row="2" Grid.Column="2" Style="{StaticResource Cell}" Text="승률 71% · 낙폭 −0.97%"/>
+                        <TextBlock Grid.Row="2" Grid.Column="0" Style="{StaticResource Cell}" Text="⭐⭐⭐⭐ 최상 · 즉시 주목"/>
+                        <TextBlock Grid.Row="2" Grid.Column="1" Style="{StaticResource Cell}" Text="🔥 강력 GC / ✅ GC + VWAP 위"/>
+                        <TextBlock Grid.Row="2" Grid.Column="2" Style="{StaticResource Cell}" Text="63%·+4.6% / 71%·낙폭 −0.97%"/>
 
-                        <TextBlock Grid.Row="3" Grid.Column="0" Style="{StaticResource Cell}" Text="⭐⭐⭐⭐ 좋음 — 진입 검토"/>
-                        <TextBlock Grid.Row="3" Grid.Column="1" Style="{StaticResource Cell}" Text="✅ GC (VWAP 아래)"/>
+                        <TextBlock Grid.Row="3" Grid.Column="0" Style="{StaticResource Cell}" Text="⭐⭐⭐ 좋음"/>
+                        <TextBlock Grid.Row="3" Grid.Column="1" Style="{StaticResource Cell}" Text="✅ GC (VWAP 아래) — 2분 확인 후 진입"/>
                         <TextBlock Grid.Row="3" Grid.Column="2" Style="{StaticResource Cell}" Text="승률 ~50%"/>
 
-                        <TextBlock Grid.Row="4" Grid.Column="0" Style="{StaticResource Cell}" Text="⭐⭐⭐ 주목"/>
+                        <TextBlock Grid.Row="4" Grid.Column="0" Style="{StaticResource Cell}" Text="⭐⭐ 주목"/>
                         <TextBlock Grid.Row="4" Grid.Column="1" Style="{StaticResource Cell}" Text="↗ 직후양봉 / 📈 반등+다이버전스"/>
                         <TextBlock Grid.Row="4" Grid.Column="2" Style="{StaticResource Cell}" Text="44% / 이후 GC 승률 67%"/>
 
-                        <TextBlock Grid.Row="5" Grid.Column="0" Style="{StaticResource Cell}" Text="⭐⭐ 관찰 — 확인 대기"/>
-                        <TextBlock Grid.Row="5" Grid.Column="1" Style="{StaticResource Cell}" Text="📈 반등 1차"/>
-                        <TextBlock Grid.Row="5" Grid.Column="2" Style="{StaticResource Cell}" Text="승률 50% (진입은 GC에서)"/>
+                        <TextBlock Grid.Row="5" Grid.Column="0" Style="{StaticResource Cell}" Text="⭐ 관찰"/>
+                        <TextBlock Grid.Row="5" Grid.Column="1" Style="{StaticResource Cell}" Text="📈 반등 1차 — 확인 대기"/>
+                        <TextBlock Grid.Row="5" Grid.Column="2" Style="{StaticResource Cell}" Text="승률 50% (진입은 🚀에서)"/>
 
-                        <TextBlock Grid.Row="6" Grid.Column="0" Style="{StaticResource Cell}" Text="⭐ 참고 — 무시 가능"/>
-                        <TextBlock Grid.Row="6" Grid.Column="1" Style="{StaticResource Cell}" Text="⚠ 약한 GC (횡보성)"/>
+                        <TextBlock Grid.Row="6" Grid.Column="0" Style="{StaticResource Cell}" Text="(별 없음) 참고"/>
+                        <TextBlock Grid.Row="6" Grid.Column="1" Style="{StaticResource Cell}" Text="⚠ 약한 GC (횡보성) — 무시 가능"/>
                         <TextBlock Grid.Row="6" Grid.Column="2" Style="{StaticResource Cell}" Text="승률 49% · 수익폭 열위"/>
                     </Grid>
                 </Border>
@@ -103,12 +103,22 @@
                            Text="🔥/✅ 골든크로스는 '확인'이지 '진입 신호'가 아닙니다. 실측(14일 GC 114건): GC 즉시 진입은 승률 57%·오탐율 16%인데, GC 후 2분이 지나도 종가가 GC 가격 이상이면(🚀 진입 적기) 승률 82%·오탐 2%, 3분이면 90%·0%로 급등합니다. 특히 🔥는 급반등 꼭대기에서 뜨면 즉시 오탐율이 38%로 가장 위험(2분 확인 시 13%). 그래서 🔥/✅가 떠도 1~3분 추세를 더 보고, 🚀 진입 적기 알림이 오면 그때 들어가는 것이 안전합니다."/>
                 <TextBlock Style="{StaticResource Muted}"
                            Text="🚀는 GC 후 2봉(기본) 뒤 종가가 GC 가격 이상일 때만 발화하고, 그 사이 하락하면 조용히 취소됩니다(진입 부적합 = 오탐 회피). 07-03 KODEX레버: 09:39 🔥(꼭대기)는 🚀 없이 걸러지고, 진짜 저점 후 10:04 🔥 → 10:06 🚀만 통과(+8% 상승)."/>
+                <TextBlock Style="{StaticResource Body}"
+                           Text="⚠ 역추세 경고 — 🚀 진입 적기라도 MA20·MA60이 둘 다 아직 하락 중이면 '하락하는 이평으로의 역추세 반등'이라 실패가 잦습니다. 실측(66건): MA20·60 정렬(둘 다 상승) 진입은 순상승 75%·큰 낙폭 0%인데, 둘 다 하락 중이면 48%·낙폭 −1.42%·−2% 이상 하락 27.6%. 07-06 KODEX레버 10:19 🚀(MA20 −0.15·MA60 −0.22)가 바로 이 함정으로 −1.9%↓ — 반면 같은 종목·같은 날 SK하이닉스 레버리지 13:16 🚀는 MA20이 +0.10으로 살아나 정상(+4.6%). 역추세 🚀엔 판정줄에 '⚠ 역추세'와 함께 손절선이 −3%로 넓게 표기됩니다 — 굳이 무리하지 말고 MA20이 고개를 들 때까지 기다리는 편이 낫습니다."/>
 
                 <TextBlock Style="{StaticResource H1}" Text="종목별 위험도 (GC 즉시진입 오탐율 · 14일 실측)"/>
                 <TextBlock Style="{StaticResource Body}"
                            Text="오탐율 = 골든크로스 후 3분 내 −1% 하락 도달 비율. 높을수록 🚀 진입 적기를 꼭 기다려야 합니다.&#10;⚠ 조심(오탐 잦음): SK하이닉스 레버리지 30% · 삼성전기 25% · SK스퀘어 25%.&#10;△ 보통: KODEX 레버리지 13% · SK하이닉스 인버스 11% · 삼성전자 레버리지 8%.&#10;○ 안전(즉시성 높음): SK하이닉스 본주 0% · 삼성전자 인버스 0% · 삼성전자 0%."/>
                 <TextBlock Style="{StaticResource Muted}"
                            Text="'조심' 종목은 🔥가 떠도 반드시 🚀 진입 적기까지 기다리거나 1~3분 캔들을 눈으로 확인하세요. 레버리지·고변동일수록 첫 반등이 되돌려지는 경우가 잦습니다."/>
+
+                <TextBlock Style="{StaticResource H1}" Text="📿 이동평균 리본 밀집도 — '버티기 쉬운 자리' 판별"/>
+                <TextBlock Style="{StaticResource Body}"
+                           Text="5·20·60·120 이동평균선이 서로 가까이 모여 있을수록(리본 밀집) 그 자리에서 진입하면 이후 낙폭(버텨야 할 폭)이 작습니다. 반대로 리본이 넓게 벌어진 자리(개장 급락 캐스케이드 등)의 반등/GC는 진입 후 크게 흔들립니다. 실측(전 종목·14일 반등/GC 549건): 밀집 하위1/3(스프레드 중앙 0.8%) 평균 낙폭 −0.77% vs 분산 상위1/3(중앙 4.0%) −2.40% — 3배 차이. 07-06 SK하이닉스 레버리지도 오전 급락 GC(11:03·리본 5.1%)는 −5.9%로 데인 반면, 오후 최적점(13:10~14:40·리본 0.8~2.7%)은 낙폭 −0.1~−1.0%·상승 +3.6~+6.0%."/>
+                <TextBlock Style="{StaticResource Body}"
+                           Text="컨텍스트 줄에 '리본 X.X%(밀집/보통/분산)'로, 알림 2번째 줄엔 밀집(≤1.5%)이면 '리본 밀집(낙폭 작음)', 분산(≥3.0%)이면 '⚠ 리본 분산(낙폭 주의)'로 표기됩니다. 밀집 = 손절 −2%에 걸릴 확률이 낮아 버티기 편한 자리, 분산 = 진입 자제하거나 손절 여유를 더 두세요."/>
+                <TextBlock Style="{StaticResource Muted}"
+                           Text="주의: 밀집이 '큰 상승'을 뜻하진 않습니다(밀집=저변동이라 상승폭도 대체로 작음, 상관 r=+0.33은 오히려 분산일수록 변동이 큼). 리본은 '방향'이 아니라 '진입 후 흔들림(리스크)'을 읽는 지표입니다. 또한 MA120이 서려면 약 120분이 필요해 대략 11시 이전 시그널엔 표기되지 않습니다(그 시간대는 변동이 커 특히 🚀 진입 적기까지 대기 권장)."/>
 
                 <TextBlock Style="{StaticResource H1}" Text="[N분] 타임프레임"/>
                 <TextBlock Style="{StaticResource Body}"
@@ -118,13 +128,13 @@
 
                 <TextBlock Style="{StaticResource H1}" Text="컨텍스트 줄 용어 (3번째 줄)"/>
                 <TextBlock Style="{StaticResource Body}"
-                           Text="갭 — 전일 정규장 종가 → 오늘 시초가 등락(밤사이 변동).&#10;당일 — 오늘 시초가 대비 시그널 시점 등락(장중 흐름 · 전일 대비 아님).&#10;저점比 — 오늘 장중 최저가 대비 반등률. 낮을수록 바닥 초입(한 자릿수 = 갓 반등), 20%+ = 이미 많이 오른 뒤.&#10;VWAP 위/아래 — 당일 거래량 가중 평균가(기관 평균 단가 근사) 대비 위치와 이격. 확인GC(✅🔥)가 VWAP 위면 실측 승률 71%·평균 낙폭 −0.97%(아래면 46%·−2.19%).&#10;다이버전스 — 가격은 신저가인데 RSI는 저점을 높임(하락 힘 소진 힌트). 반등 근거 줄에 표시.&#10;일봉추세 — 직전 완성 일봉 11일의 래더 추세점수(−1~+1). RSI 레벨·기울기·이격도·최근수익률 합성. −1.00 = 직전 폭락."/>
+                           Text="갭 — 전일 정규장 종가 → 오늘 시초가 등락(밤사이 변동).&#10;당일 — 오늘 시초가 대비 시그널 시점 등락(장중 흐름 · 전일 대비 아님).&#10;저점比 — 오늘 장중 최저가 대비 반등률. 낮을수록 바닥 초입(한 자릿수 = 갓 반등), 20%+ = 이미 많이 오른 뒤.&#10;VWAP 위/아래 — 당일 거래량 가중 평균가(기관 평균 단가 근사) 대비 위치와 이격. 확인GC(✅🔥)가 VWAP 위면 실측 승률 71%·평균 낙폭 −0.97%(아래면 46%·−2.19%).&#10;리본 — 5/20/60/120 이동평균 스프레드%(밀집/보통/분산). 밀집일수록 진입 후 낙폭이 작아 버티기 쉽습니다(위 '📿 이동평균 리본 밀집도' 참고). MA120 형성 전(≈11시 이전)엔 생략.&#10;다이버전스 — 가격은 신저가인데 RSI는 저점을 높임(하락 힘 소진 힌트). 반등 근거 줄에 표시.&#10;일봉추세 — 직전 완성 일봉 11일의 래더 추세점수(−1~+1). RSI 레벨·기울기·이격도·최근수익률 합성. −1.00 = 직전 폭락."/>
                 <TextBlock Style="{StaticResource Muted}"
                            Text="⭐ 최고 수익 프로필: 당일 큰 음수(폭락) + 저점比 한 자릿수(V바닥 초입) + 일봉추세 음수(전일 급락). 반대로 당일 크게 양수 + 저점比 20%+ 는 고점 추격 위험. VWAP·일봉추세는 강등이 아닌 참고 정보입니다 — 대박 반등(07-03 10:05 🔥 +6.73%)은 오히려 추세 −1.00·VWAP 아래에서 나왔습니다. VWAP 위 확인GC는 낙폭이 얕아 손절 걸릴 확률이 낮다는 뜻으로 읽으세요."/>
 
                 <TextBlock Style="{StaticResource H1}" Text="운용 가이드 (실측 기반)"/>
                 <TextBlock Style="{StaticResource Body}"
-                           Text="1) ☀ 브리핑에서 '전일 급락 대세 — V바닥 관찰 구간'이면 그날 집중.&#10;2) 📈 1차는 관찰만 → ↗ 직후 양봉은 힌트 → 🔥/✅ 골든크로스는 '확인'(아직 진입 X) → 🚀 진입 적기(2~3분 지속 확인)에서 진입(⚠는 관망).&#10;3) 멀티 타임프레임 동시 🔥 + 본주·레버리지 동시 발화 = 최상급 후보. 단 '조심' 종목은 🚀까지 대기.&#10;4) 진입 후 20~25분은 지켜볼 것 — 실측: 🚀 진입 시 +1% 익절 기회 78%·+0.5% 89%, 평균 고점 도달이 ~23분. 진입 직후 −1~2% 흔들려도 성급히 던지면 이후 큰 상승을 놓칩니다(못 버티는 게 패의 주범).&#10;5) 안 오르는 경우의 신호: ⚠ 흔들림 주의(VWAP 깊은 약세, 하락 추세 진행 중)면 진입 후 낙폭이 커 버티기 어려움 — 실측 평균 저점 −2.2%(VWAP 위는 −0.6%). 폭락일(본주 급등)엔 인버스 진입 역행 주의. 참고로 폭락 후(당일 −5%↓) 반등은 도달률 최고(81%), 저점比 높은 것 자체는 위험 아님.&#10;6) 손절선(실측): 일반 진입 −2%, ⚠ 흔들림 주의 진입 −3%까지 각오. 승리의 대부분이 도달 전 −1~2%(흔들림 주의는 −3%)만 흔들린 뒤 반등 — −2%(흔들림 −3%)에서 손절하면 결국 오를 것의 90%+ 보존, 그 밑으로 빠지면 방향 오류 확률↑. 🚀 알림에 손절가가 함께 표기됩니다.&#10;7) 청산은 본인 판단 — '적더라도 익절은 옳다'. MA5 이탈 마감이 모멘텀 소진 참고선.&#10;8) 🔁 전환 확인은 보유 종목 매도 타이밍(반대 짝 반등 확인)."/>
+                           Text="1) ☀ 브리핑에서 '전일 급락 대세 — V바닥 관찰 구간'이면 그날 집중.&#10;2) 📈 1차는 관찰만 → ↗ 직후 양봉은 힌트 → 🔥/✅ 골든크로스는 '확인'(아직 진입 X) → 🚀 진입 적기(2~3분 지속 확인)에서 진입(⚠는 관망).&#10;3) 멀티 타임프레임 동시 🔥 + 본주·레버리지 동시 발화 = 최상급 후보. 단 '조심' 종목은 🚀까지 대기.&#10;4) 진입 후 20~25분은 지켜볼 것 — 실측: 🚀 진입 시 +1% 익절 기회 78%·+0.5% 89%, 평균 고점 도달이 ~23분. 진입 직후 −1~2% 흔들려도 성급히 던지면 이후 큰 상승을 놓칩니다(못 버티는 게 패의 주범).&#10;5) 안 오르는 경우의 신호: ⚠ 흔들림 주의(VWAP 깊은 약세, 하락 추세 진행 중) 또는 ⚠ 리본 분산(5/20/60/120이 넓게 벌어짐, ≥3%)이면 진입 후 낙폭이 커 버티기 어려움 — 실측 평균 저점 −2.2%(VWAP 위는 −0.6%), 리본 분산 −2.4%(밀집 −0.77%). 리본 밀집(≤1.5%) 자리가 손절 안 걸리고 버티기 가장 편합니다. 폭락일(본주 급등)엔 인버스 진입 역행 주의. 참고로 폭락 후(당일 −5%↓) 반등은 도달률 최고(81%), 저점比 높은 것 자체는 위험 아님.&#10;6) 손절선(실측): 일반 진입 −2%, ⚠ 흔들림 주의·⚠ 역추세(MA20·60 동시 하락) 진입 −3%까지 각오. 승리의 대부분이 도달 전 −1~2%(흔들림 주의는 −3%)만 흔들린 뒤 반등 — −2%(흔들림 −3%)에서 손절하면 결국 오를 것의 90%+ 보존, 그 밑으로 빠지면 방향 오류 확률↑. 🚀 알림에 손절가가 함께 표기됩니다.&#10;7) 청산은 본인 판단 — '적더라도 익절은 옳다'. MA5 이탈 마감이 모멘텀 소진 참고선.&#10;8) 🔁 전환 확인은 보유 종목 매도 타이밍(반대 짝 반등 확인)."/>
                 <TextBlock Style="{StaticResource Muted}"
                            Text="이 규칙의 실측(42일): 수익은 폭락 후 V반등 날에 집중(07-03 +17.2%), 평범한 날은 본전권(−0.5% 손절 캡). 며칠에 하나 확실한 것만 잡는 구조입니다."/>
 

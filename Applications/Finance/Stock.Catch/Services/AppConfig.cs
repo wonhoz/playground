@@ -225,6 +225,15 @@ public sealed class AppConfig
     /// 0=끔(모두 전송). 기본 10.
     /// </summary>
     public int SignalDedupWindowMinutes { get; set; } = 10;
+    /// <summary>
+    /// 📦 진입 권장(박스 상단 돌파) 알림 사용. GC/🚀 직후 가변 박스를 추적하다 종가가 박스 상단을 돌파하면 발화
+    /// — "흔들림을 통과하고 진입"을 확인(실측: GC 즉시 진입보다 순상승↑·낙폭 위험 절반). 기본 켬.
+    /// </summary>
+    public bool BoxBreakoutAlert { get; set; } = true;
+    /// <summary>박스 시드 봉수: GC 직후 이만큼(기본 3)은 박스만 형성(고저 확장), 돌파 판정 안 함.</summary>
+    public int BoxSeedBars { get; set; } = 3;
+    /// <summary>박스 최대 추적 봉수(×tf): 이 안에 상단 돌파 없으면 폐기(김샘). 기본 20(≈20분).</summary>
+    public int BoxMaxBars { get; set; } = 20;
 
     // ── 고점 경고 시그널(관심 종목 · 국내 1분봉 · 바닥의 거울상) ──
     /// <summary>셋업으로 인정할 RSI(14) 과매수 하한. 상단 터치 구간 최고 RSI가 이 값 이상일 때만 시그널.</summary>

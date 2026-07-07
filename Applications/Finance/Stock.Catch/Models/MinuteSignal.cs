@@ -24,7 +24,13 @@ public enum MinuteSignalKind
     /// 따라온 케이스 — 실측(14일·27건): 30분 내 1% 이상 하락 93% · 평균 낙폭 −4.1%(경고 단독 43~67%·−1.3~−2.6%).
     /// 경고가 확인보다 늦은 역순은 실측 실패라 제외. 라이브 전용(백테스트는 종목 단위라 미발생).
     /// </summary>
-    CrossTurn
+    CrossTurn,
+    /// <summary>
+    /// 📦 진입 권장(박스 상단 돌파): GC/🚀 직후 형성된 가변 박스(시드 3봉 후 계속 확장)의 상단을 종가가
+    /// 돌파한 순간 — "흔들림을 통과하고 진입"을 확인. 실측(15일 GC 134건): GC 즉시 진입 순상승 41%·낙폭≤−2% 28%
+    /// → 박스 상단 돌파 진입 49%·16%로 승률↑·낙폭 위험 절반. 하단 이탈은 침묵(흔들기 바닥인 경우가 다수).
+    /// </summary>
+    BoxBreakout
 }
 
 /// <summary>
@@ -73,6 +79,7 @@ public sealed record MinuteSignal(
     public int Stars => Kind switch
     {
         MinuteSignalKind.HoldConfirm => 5,          // 🌟 진입 적기 — 실측 승률 90%(즉시 57%)
+        MinuteSignalKind.BoxBreakout => 5,          // 📦 진입 권장 — 박스 상단 돌파(실측 순상승 49%·낙폭 위험 절반)
         MinuteSignalKind.StrongGoldenCross => 4,    // 최상·즉시 주목(🔥 강력 GC)
         MinuteSignalKind.GoldenCross => AboveVwap == true ? 4 : 3,   // VWAP위=최상 / 아래=좋음
         MinuteSignalKind.FollowThrough => 2,        // 주목
@@ -90,6 +97,9 @@ public sealed record MinuteSignal(
                 return CounterTrend
                     ? "🌟🌟🌟🌟🌟 진입 적기 — 추세 지속 확인 · ⚠ 역추세(MA20·60 하락 중 · 낙폭 주의 — 정렬 진입 75% vs 역추세 48%)"
                     : "🌟🌟🌟🌟🌟 진입 적기 — 추세 지속 확인 (실측 승률 90% · 즉시진입 57%)";
+            if (Kind == MinuteSignalKind.BoxBreakout)
+                return "📦 진입 권장 — 박스 상단 돌파 (흔들림 통과 · 실측 순상승 49% vs GC 41% · 낙폭 위험 절반)"
+                    + (ChaseWarn ? " · ⚠ 흔들림 주의" : "");
             if (Kind == MinuteSignalKind.CrossTurn) return "🔁 전환 확인 — 매도 타이밍 (실측 93% 하락 · 30분 평균 −4.1%)";
             if (Kind == MinuteSignalKind.TopWarn) return "⚠️ 경계 — 과열 이탈 · 보유 중이면 익절 검토";
             if (Kind == MinuteSignalKind.DeadCross) return "🔻 하락 확인 — 반등 무효 · 정리/관망";

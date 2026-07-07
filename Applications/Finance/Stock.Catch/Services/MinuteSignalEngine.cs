@@ -62,6 +62,11 @@ public sealed class MinuteSignalEngine(AppConfig config, PriceSourceRegistry reg
         // MA5/MA20 관계 추적(골든·데드 공용)
         public bool PrevBelow;                                     // 직전 완성봉 MA5≤MA20 여부
         public bool HasPrevRel;
+        // 📦 박스 상단 돌파(진입 권장) 추적: GC/🚀 직후 가변 박스
+        public bool BoxActive;
+        public DateTime BoxStart = DateTime.MinValue;              // 박스 시작(GC) 봉 시각
+        public decimal BoxHi, BoxLo;                               // 박스 상/하단(확장)
+        public int BoxBars;                                        // 시작 후 경과 완성봉 수
     }
 
     /// <summary>종목 단위 공용 데이터(분봉 캐시·일봉 컨텍스트) + 타임프레임별 상태.</summary>
@@ -311,6 +316,7 @@ public sealed class MinuteSignalEngine(AppConfig config, PriceSourceRegistry reg
         {
             EvaluateCross(item, st, bars, i, ma5, ma20, emit, tf, dayTrend, prevClose, vwap, ribbon);
             if (bottom) EvaluateHold(item, st, bars, i, emit, tf, dayTrend, prevClose, vwap, ribbon, counterTrend);   // 🚀 진입 적기(GC 후 지속 확인)
+            if (bottom && tf == 1 && config.BoxBreakoutAlert) EvaluateBox(item, st, bars, i, emit, tf, dayTrend, prevClose, vwap, ribbon, counterTrend);   // 📦 진입 권장(박스 상단 돌파)
             if (bottom && tf == 1) EvaluateFollow(item, st, bars, i, emit, ribbon);   // 직후 양봉은 1분봉 전용
             if (bottom) EvaluateBottom(item, st, bars, i, upper, lower, rsi, volMa, emit, tf, dayTrend, prevClose, vwap, loShort, ribbon);
             if (top) EvaluateTop(item, st, bars, i, upper, lower, rsi, volMa, emit, tf);
@@ -363,6 +369,49 @@ public sealed class MinuteSignalEngine(AppConfig config, PriceSourceRegistry reg
             bar.Date, tf, Context(bars, i, dayTrend, prevClose, vwap, RibbonAt(ribbon, i)), st.GcHoldVwap, st.GcHoldDiv, chase, stopPct, RibbonAt(ribbon, i), ct));
     }
 
+    /// <summary>
+    /// 📦 진입 권장(박스 상단 돌파): GC 직후 가변 박스(시드 BoxSeedBars봉 후 계속 확장)를 추적하다,
+    /// 종가가 박스 상단(그동안의 최고가)을 돌파하면 발화 — "흔들림 통과 진입". 하단 이탈은 침묵(박스만 넓힘).
+    /// BoxMaxBars(×tf) 안에 돌파 없으면 폐기. 손절선은 박스 하단(자연스러운 무효선). 실측: GC 즉시 대비 순상승↑·낙폭 위험 절반.
+    /// </summary>
+    private void EvaluateBox(WatchItem item, State st, List<Candle> bars, int i, Action<MinuteSignal> emit,
+        int tf, double? dayTrend, decimal prevClose, IReadOnlyDictionary<DateTime, double>? vwap,
+        double[]? ribbon, bool[]? counterTrend)
+    {
+        if (!st.BoxActive) return;
+        var bar = bars[i];
+        if (bar.Date <= st.BoxStart) return;   // 시드(GC) 봉 자체는 건너뜀
+        st.BoxBars++;
+
+        // 타임아웃: 정해진 봉 수 내 돌파 없으면 폐기.
+        if (st.BoxBars > Math.Max(1, config.BoxMaxBars)) { st.BoxActive = false; return; }
+
+        // 시드 구간: 박스만 형성(확장), 돌파 판정 보류.
+        if (st.BoxBars <= Math.Max(1, config.BoxSeedBars))
+        {
+            if (bar.High > st.BoxHi) st.BoxHi = bar.High;
+            if (bar.Low < st.BoxLo) st.BoxLo = bar.Low;
+            return;
+        }
+
+        // 상단 돌파(종가 > 박스 최고가) = 진입 권장. 하단 이탈은 침묵(박스만 확장 · 흔들기 바닥일 때 다수).
+        if (bar.Close > st.BoxHi)
+        {
+            st.BoxActive = false;
+            double stopPct = st.BoxLo > 0 && st.BoxLo < bar.Close
+                ? (double)((bar.Close - st.BoxLo) / bar.Close) * 100    // 손절선 = 박스 하단(무효선)
+                : config.BottomStopLossPct;
+            bool ct = counterTrend != null && i < counterTrend.Length && counterTrend[i];
+            emit(new MinuteSignal(item.Symbol, item.Name, MinuteSignalKind.BoxBreakout, bar.Close,
+                $"박스({st.BoxStart:HH:mm}~{(bar.Date - st.BoxStart).TotalMinutes:0}분) 상단 {st.BoxHi:N0} 돌파 · 흔들림 통과 진입 권장",
+                bar.Date, tf, Context(bars, i, dayTrend, prevClose, vwap, RibbonAt(ribbon, i)),
+                AboveVwapAt(vwap, bar), false, IsChaseWarn(vwap, bar), stopPct, RibbonAt(ribbon, i), ct));
+            return;
+        }
+        if (bar.High > st.BoxHi) st.BoxHi = bar.High;
+        if (bar.Low < st.BoxLo) st.BoxLo = bar.Low;
+    }
+
     // ───────────────────────── 2차: 골든/데드크로스 확인 ─────────────────────────
 
     /// <summary>MA5/MA20 관계를 봉마다 추적해 1차 시그널 후 확인 창(×tf) 내 크로스를 알림한다.</summary>
@@ -408,11 +457,17 @@ public sealed class MinuteSignalEngine(AppConfig config, PriceSourceRegistry reg
                     st.GcHoldStrong = kind == MinuteSignalKind.StrongGoldenCross;
                     st.GcHoldVwap = aboveVwap; st.GcHoldDiv = st.BottomFiredDiv;
                 }
+                // 📦 박스 상단 돌파(진입 권장) 추적 시작 — GC 봉을 시드로(약한 GC 제외 · 1분봉 전용).
+                if (!weakMomentum && tf == 1 && config.BoxBreakoutAlert)
+                {
+                    st.BoxActive = true; st.BoxStart = bar.Date; st.BoxHi = bar.High; st.BoxLo = bar.Low; st.BoxBars = 0;
+                }
             }
             if (st.AwaitDead && !st.PrevBelow && below)
             {
                 st.AwaitDead = false;
                 st.AwaitHold = false;   // 하락 전환 — 진입 대기 취소
+                st.BoxActive = false;   // 하락 전환 — 박스 추적 취소
                 emit(new MinuteSignal(item.Symbol, item.Name, MinuteSignalKind.DeadCross, bar.Close,
                     $"MA5 {ma5[i]:N0} < MA20 {ma20[i]:N0} 돌파 · 경고({st.TopFiredAt:HH:mm}) 후 {(bar.Date - st.TopFiredAt).TotalMinutes:0}분", bar.Date, tf));
             }
@@ -616,6 +671,7 @@ public sealed class MinuteSignalEngine(AppConfig config, PriceSourceRegistry reg
         st.AwaitDead = config.TopConfirmCross;
         st.AwaitGolden = false;   // 방향 전환 — 반대편 확인 대기 해제
         st.AwaitHold = false;     // 과열 전환 — 진입 대기 취소
+        st.BoxActive = false;     // 과열 전환 — 박스 추적 취소
         emit(new MinuteSignal(item.Symbol, item.Name, MinuteSignalKind.TopWarn, bar.Close,
             $"상단워킹 {touchCount}봉 → 이탈 %b {pb:0.00} · RSI {rsi[i]:0.#}↓(고점 {maxRsi:0.#}) · {evidence}", bar.Date, tf));
     }

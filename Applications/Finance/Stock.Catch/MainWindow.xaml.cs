@@ -177,8 +177,11 @@ public partial class MainWindow : Window
             string path = System.IO.Path.Combine(dir, $"{s.Time:yyyyMMdd}_시그널로그.csv");
             bool fresh = !System.IO.File.Exists(path);
             static string Q(string v) => $"\"{v.Replace("\"", "\"\"")}\"";
+            // 판정 = 종류 라벨 + 2번째 줄(알림은 종류를 타이틀에 두지만, 로그는 한 칸에 자립적으로 담는다).
+            string verdict = s.Kind == Models.MinuteSignalKind.MorningBrief
+                ? s.VerdictLine : $"{SignalLabel(s.Kind)} · {s.VerdictLine}";
             var line = string.Join(",",
-                s.Time.ToString("HH:mm:ss"), Q(s.Display), $"{s.Timeframe}분", Q(s.VerdictLine),
+                s.Time.ToString("HH:mm:ss"), Q(s.Display), $"{s.Timeframe}분", Q(verdict),
                 s.Price.ToString("0.####"), Q(s.Detail), Q(s.Context));
             System.IO.File.AppendAllText(path,
                 (fresh ? "time,종목,tf,판정,price,근거 상세,컨텍스트\r\n" : "") + line + "\r\n",

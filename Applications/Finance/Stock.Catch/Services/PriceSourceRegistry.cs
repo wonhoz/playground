@@ -125,6 +125,26 @@ public sealed class PriceSourceRegistry : IDisposable
         return new Quote(item.Symbol, price, rate, DateTime.Now);
     }
 
+    /// <summary>
+    /// 프록시(선물·지수·개별주) 현재가·등락율을 소스별로 직접 조회 — 야간 프록시 선행 알림용.
+    /// Yahoo는 NQ=F·^KS11 같은 특수 티커도 처리한다(IsIndex 분기 없이 소스 그대로). 실패 시 null.
+    /// </summary>
+    public async Task<Quote?> ProxyQuoteAsync(string symbol, WatchSource source, CancellationToken ct = default)
+    {
+        try
+        {
+            return source switch
+            {
+                WatchSource.Yahoo => await _yahoo.FetchQuoteAsync(symbol, ct),
+                WatchSource.Kis => await _kis.FetchQuoteAsync(symbol, ct),
+                WatchSource.Finnhub => await _finnhub.FetchQuoteAsync(symbol, ct),
+                WatchSource.Alpaca => await _alpaca.FetchQuoteAsync(symbol, ct),
+                _ => null,
+            };
+        }
+        catch { return null; }
+    }
+
     /// <summary>국내 일봉(지정 구간) — 백테스트의 과거 시점 일봉 추세 재현용. 네이버(무인증) 사용.</summary>
     public async Task<IReadOnlyList<Candle>> KrDailyRangeAsync(string code, DateTime from, DateTime to, CancellationToken ct = default)
     {

@@ -82,6 +82,7 @@ public partial class MainWindow : Window
         _watch.StartupSummary += OnWatchStartupSummary;
         _watch.DigestReady += OnWatchDigest;
         _watch.SessionSummaryReady += OnSessionSummary;
+        _watch.ProxyLeadRaised += OnProxyLead;
         _schedule = new MarketScheduleNotifier(_config, _slack);
         _schedule.Raised += OnScheduleAlert;
         _watch.FetchFailed += (item, reason, fails) => OnFetchFailed(item.ToString(), "관심 종목", reason, fails);
@@ -127,6 +128,9 @@ public partial class MainWindow : Window
 
     private void OnScheduleAlert(string title, string detail) => Dispatcher.Invoke(() =>
         _tray.ShowBalloon("🔔 " + title, detail));
+
+    private void OnProxyLead(string title, string body, bool up) => Dispatcher.Invoke(() =>
+        _tray.ShowBalloon(title, body, warning: !up));
 
     private void OnLadderAlert(Models.LadderAlert a) => Dispatcher.Invoke(() =>
     {

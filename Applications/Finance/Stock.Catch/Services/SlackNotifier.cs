@@ -74,6 +74,23 @@ public sealed class SlackNotifier(AppConfig config) : IDisposable
         await PostAsync(BuildPayload(sb.ToString(), a.Item.Symbol), ct);
     }
 
+    /// <summary>
+    /// 야간 프록시 선행 알림 — 대상 ETF 휴장 시간에 프록시(NQ선물·KOSPI 등) 움직임으로 다음 세션 상방/하방 예고.
+    /// 한국식 색상(상승 빨강·하락 파랑). 채널은 lead 전용 → ETF 종목 채널 → 전역 순.
+    /// </summary>
+    public async Task SendProxyLeadAsync(ProxyLead lead, decimal proxyPrice, double proxyRate, double implied, bool up, CancellationToken ct = default)
+    {
+        if (!IsConfigured) return;
+        string emoji = up ? ":red_circle:" : ":large_blue_circle:";
+        string dir = up ? "상방" : "하방";
+        var sb = new StringBuilder();
+        sb.AppendLine($"{emoji} :crescent_moon: *{lead.EtfSymbol} {dir} 예고* (다음 US 세션 · 야간 프록시 선행)");
+        sb.AppendLine($"{lead.ProxyLabel} *{proxyRate:+0.0;-0.0}%* → 기대 {lead.EtfName} *{implied:+0.0;-0.0}%*");
+        string payload = string.IsNullOrWhiteSpace(lead.SlackChannel)
+            ? BuildPayload(sb.ToString(), lead.EtfSymbol) : Payload(sb.ToString(), lead.SlackChannel);
+        await PostAsync(payload, ct);
+    }
+
     /// <summary>모니터링 시작 시 종목별 현재 수준을 한 메시지로 요약.</summary>
     public async Task SendWatchStartupSummaryAsync(IReadOnlyList<WatchAlert> alerts, CancellationToken ct = default)
     {

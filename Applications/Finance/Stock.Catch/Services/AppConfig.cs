@@ -106,6 +106,14 @@ public sealed class AppConfig
     /// 정규장에는 각 종목에 설정된 소스를 사용. 기본 켜짐.
     /// </summary>
     public bool WatchUseYahooExtended { get; set; } = true;
+    /// <summary>
+    /// 야간 프록시 선행 알림. 미국 ETF(SOXL·SOXS·KORU 등)가 <b>휴장</b>(ET 20:00~04:00 · 한국 낮)일 때,
+    /// 그 시간대에도 거래되는 상관 자산(NQ선물·KOSPI 등)의 움직임으로 다음 세션 상방/하방을 미리 알린다.
+    /// 데이터가 없는 야간 공백을 상관 지표로 메운다. 기본 켜짐(설정은 <see cref="ProxyLeads"/>).
+    /// </summary>
+    public bool WatchProxyLeadEnabled { get; set; } = true;
+    /// <summary>야간 프록시 선행 알림 매핑(ETF↔프록시·베타·임계). 비어 있으면 Load에서 기본값(SOXL/SOXS↔NQ선물, KORU↔KOSPI) 시드.</summary>
+    public List<ProxyLead> ProxyLeads { get; set; } = new();
 
     // ── 보유 종목 모니터링 / Slack 알림 ──
     public string SlackWebhookUrl { get; set; } = string.Empty;
@@ -308,12 +316,12 @@ public sealed class AppConfig
             {
                 var json = File.ReadAllText(ConfigPath);
                 var cfg = JsonSerializer.Deserialize<AppConfig>(json, JsonOpts);
-                if (cfg != null) return cfg;
+                if (cfg != null) { if (cfg.ProxyLeads.Count == 0) cfg.ProxyLeads = ProxyLead.Defaults(); return cfg; }
             }
         }
         catch { /* 손상된 설정은 기본값으로 폴백 */ }
 
-        return new AppConfig();
+        return new AppConfig { ProxyLeads = ProxyLead.Defaults() };
     }
 
     /// <summary>

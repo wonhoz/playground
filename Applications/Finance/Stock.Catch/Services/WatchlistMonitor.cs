@@ -32,6 +32,9 @@ public sealed class WatchlistMonitor(AppConfig config, PriceSourceRegistry regis
     private readonly Dictionary<string, int> _failCount = new();   // 종목별 연속 실패 횟수
     private readonly HashSet<string> _failAlerted = new();          // 실패 알림을 이미 보낸 종목
     private DateTime _lastDigestAt = DateTime.MinValue;
+    // 야간 프록시 선행 알림: ETF별 마지막 임계 버킷(엣지 트리거)·일 리셋.
+    private readonly Dictionary<string, int> _proxyBucket = new();
+    private DateOnly _proxyDay = DateOnly.FromDateTime(DateTime.Today);
 
     // ── 프리/애프터 세션 분위기 트래커(KR 종목 · 하루 1회 요약) ──
     private sealed class SessTrack { public decimal BaseRate; public decimal LastRate; public decimal LastPrice; public bool Has; public List<double> Series = new(); }
@@ -48,6 +51,8 @@ public sealed class WatchlistMonitor(AppConfig config, PriceSourceRegistry regis
     public event Action<IReadOnlyList<WatchQuote>>? DigestReady;
     /// <summary>프리/애프터 세션 요약 준비(트레이 풍선용 · isPre, 제목, 한 줄 본문).</summary>
     public event Action<bool, string, string>? SessionSummaryReady;
+    /// <summary>야간 프록시 선행 알림(트레이 풍선용 · 제목, 본문, 상방 여부).</summary>
+    public event Action<string, string, bool>? ProxyLeadRaised;
     /// <summary>시세 조회 연속 실패 알림(item, 사유, 연속 실패 횟수).</summary>
     public event Action<WatchItem, string, int>? FetchFailed;
     /// <summary>실패 후 정상 복구 알림.</summary>
@@ -79,7 +84,7 @@ public sealed class WatchlistMonitor(AppConfig config, PriceSourceRegistry regis
         StatusChanged?.Invoke("관심 종목 모니터링 시작");
         while (!ct.IsCancellationRequested)
         {
-            try { await PollAsync(ct); }
+            try { await PollAsync(ct); await PollProxyLeadsAsync(ct); }
             catch (OperationCanceledException) { break; }
             catch (Exception ex) { StatusChanged?.Invoke("오류: " + ex.Message); }
 
@@ -176,6 +181,50 @@ public sealed class WatchlistMonitor(AppConfig config, PriceSourceRegistry regis
         => item.Market == MarketKind.KR
             ? PortfolioMonitor.IsMarketOpen(DateTime.Now, config)
             : UsMarket.CurrentSession() != UsSession.Closed;
+
+    /// <summary>
+    /// 야간 프록시 선행 알림: 대상 ETF가 <b>휴장</b>(미국 세션 종료)일 때만, 그 시간대에도 거래되는
+    /// 프록시(NQ선물·KOSPI 등)의 전일比 움직임을 베타로 환산해 기대 ETF 변화가 임계(StepPct) 배수를
+    /// 새로 넘을 때 상방/하방을 알린다(엣지 트리거 · 되돌림은 조용히 갱신 · 일 경계 리셋).
+    /// 미국 정규/확장 세션이면 ETF 자체가 정상 모니터링되므로 프록시는 건너뛴다.
+    /// </summary>
+    private async Task PollProxyLeadsAsync(CancellationToken ct)
+    {
+        if (!config.WatchProxyLeadEnabled) return;
+        var leads = config.ProxyLeads;
+        if (leads is null || leads.Count == 0) return;
+        if (UsMarket.CurrentSession() != UsSession.Closed) return;   // ETF 거래 중 → 일반 모니터가 담당
+
+        var today = DateOnly.FromDateTime(DateTime.Today);
+        if (today != _proxyDay) { _proxyBucket.Clear(); _proxyDay = today; }
+
+        foreach (var lead in leads)
+        {
+            if (string.IsNullOrWhiteSpace(lead.EtfSymbol) || string.IsNullOrWhiteSpace(lead.ProxySymbol) || lead.StepPct <= 0) continue;
+            ct.ThrowIfCancellationRequested();
+            var q = await registry.ProxyQuoteAsync(lead.ProxySymbol, lead.ProxySource, ct);
+            if (q is null || q.Price <= 0) continue;   // 프록시도 휴장/실패면 조용히 스킵
+
+            double implied = (double)q.ChangeRate * lead.Beta;   // 프록시 전일比 → 기대 ETF 변화%
+            int bucket = (int)(implied / lead.StepPct);          // 임계 배수(부호 포함)
+            int last = _proxyBucket.GetValueOrDefault(lead.EtfSymbol, 0);
+            if (bucket != last)
+            {
+                // 0에서 더 멀어지는 새 임계에 도달했을 때만 알림(escalation).
+                if (bucket != 0 && Math.Abs(bucket) > Math.Abs(last))
+                {
+                    bool up = implied > 0;
+                    string dir = up ? "상방" : "하방";
+                    string title = $"🌙 {lead.EtfSymbol} {dir} 예고";
+                    string body = $"{lead.ProxyLabel} {(double)q.ChangeRate:+0.0;-0.0}% → {lead.EtfName} 다음 세션 {dir} (기대 {implied:+0.0;-0.0}%)";
+                    ProxyLeadRaised?.Invoke(title, body, up);
+                    _ = SafeAsync(() => slack.SendProxyLeadAsync(lead, q.Price, (double)q.ChangeRate, implied, up, ct));
+                }
+                _proxyBucket[lead.EtfSymbol] = bucket;
+            }
+            try { await Task.Delay(250, ct); } catch (OperationCanceledException) { break; }
+        }
+    }
 
     /// <summary>
     /// 다중 조건 추세 감지: 조건마다 기준값을 따로 두고, 기준 대비 현재 등락율이 그 조건의 step만큼 변하면

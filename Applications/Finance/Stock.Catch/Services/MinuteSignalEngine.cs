@@ -37,6 +37,23 @@ public sealed class MinuteSignalEngine(AppConfig config, PriceSourceRegistry reg
     /// <summary>🔁 전환 확인 재발화 쿨다운(분).</summary>
     private const int CrossCooldownMinutes = 30;
 
+    // ── 적응형 폴링(부스트) — 하드코딩 대신 기준 폴링 주기의 백분율로 단축한다 ──
+    /// <summary>폴링·재조회의 최소 간격(초). 이보다 촘촘하게는 조회하지 않는다(KIS 유량 보호).</summary>
+    private const int MinPollSeconds = 10;
+    /// <summary>L1 관찰 부스트: 기준 폴링 주기의 비율(기준 30초 → ≈20초).</summary>
+    private const double BoostObserveRatio = 2.0 / 3.0;
+    /// <summary>L2 주목 부스트: 기준 폴링 주기의 비율(기준 30초 → 15초).</summary>
+    private const double BoostFocusRatio = 0.5;
+
+    /// <summary>기준 폴링 주기(초) — 설정값(최소 <see cref="MinPollSeconds"/>).</summary>
+    private int BasePollSeconds => Math.Max(MinPollSeconds, config.WatchPollIntervalSeconds);
+
+    /// <summary>부스트 레벨별 제안 폴링 주기(초) — 기준의 백분율로 단축(최소 <see cref="MinPollSeconds"/>). 0=기준.</summary>
+    private int PollSecondsForLevel(int level)
+        => level >= 2 ? Math.Max(MinPollSeconds, (int)Math.Round(BasePollSeconds * BoostFocusRatio))
+         : level >= 1 ? Math.Max(MinPollSeconds, (int)Math.Round(BasePollSeconds * BoostObserveRatio))
+         : BasePollSeconds;
+
     public event Action<MinuteSignal>? Raised;
 
     /// <summary>타임프레임별 판정 상태(쿨다운·확인 대기·크로스 추적).</summary>
@@ -83,7 +100,7 @@ public sealed class MinuteSignalEngine(AppConfig config, PriceSourceRegistry reg
         // ── 라이브 전용 상태 ──
         public DateTime LastTopWarnAt = DateTime.MinValue;         // 최근 고점 경고 시각(교차 알림용)
         public DateTime LastCrossAt = DateTime.MinValue;           // 최근 전환 확인 발화(쿨다운 30분)
-        public int BoostLevel;                                     // 적응형 폴링: 0=기본 · 1=관찰(20초) · 2=주목(15초)
+        public int BoostLevel;                                     // 적응형 폴링: 0=기본 · 1=관찰(기준×2/3) · 2=주목(기준×1/2 · 최소 10초)
         public DateTime BoostUntil = DateTime.MinValue;            // 부스트 만료(확인 창 종료 시각)
     }
 
@@ -109,8 +126,10 @@ public sealed class MinuteSignalEngine(AppConfig config, PriceSourceRegistry reg
         if (now.TimeOfDay < new TimeSpan(9, 5, 0) || now.TimeOfDay > new TimeSpan(15, 40, 0)) return;
 
         if (!_symbols.TryGetValue(item.Symbol, out var sd)) _symbols[item.Symbol] = sd = new SymbolData();
-        // 재조회 스로틀: 기본 25초, 적응형 부스트 중(1차 후 확인 창)엔 12초까지 촘촘하게.
-        int fetchGap = sd.BoostLevel > 0 && sd.BoostUntil > now ? 12 : 25;
+        // 재조회 스로틀: 유효 폴링 주기(기준·부스트)보다 약간 짧게(타이머 지터로 한 틱 건너뛰지 않도록).
+        // 다른 종목 부스트로 타이머가 빨리 돌아도 이 종목은 이 간격보다 자주 조회하지 않는다.
+        int level = sd.BoostLevel > 0 && sd.BoostUntil > now ? sd.BoostLevel : 0;
+        int fetchGap = Math.Max(MinPollSeconds - 2, (int)Math.Round(PollSecondsForLevel(level) * 0.8));
         if ((now - sd.LastFetch).TotalSeconds < fetchGap) return;
         sd.LastFetch = now;
 
@@ -689,9 +708,10 @@ public sealed class MinuteSignalEngine(AppConfig config, PriceSourceRegistry reg
     // ───────────────────────── 발생/전송 ─────────────────────────
 
     /// <summary>
-    /// 적응형 폴링 제안(초). 1차 반등 후 확인 창 동안만 관찰 20초 / 주목(★3) 15초로 단축을 제안하고,
-    /// GC 확인(어느 등급이든)·창 만료 시 기본으로 복귀한다. null=부스트 없음(기본 주기 사용).
-    /// 분봉은 1분에 1개 완성되므로 상시 단축은 낭비 — 확인 창에서만 GC 포착 지연을 줄인다.
+    /// 적응형 폴링 제안(초). 1차 반등 후 확인 창 동안만 관찰(L1 ≈기준×2/3) / 주목(L2 ★3 · 기준×1/2)으로 단축을
+    /// 제안하고, GC 확인(어느 등급이든)·창 만료 시 기본으로 복귀한다. 하드코딩 대신 기준 폴링 주기의 백분율로 산출
+    /// (기준 30초 → 20/15초 · 최소 <see cref="MinPollSeconds"/>초). null=부스트 없음(기준 주기 사용).
+    /// 분봉은 1분에 1개 완성되므로 상시 단축은 낭비 — 확인 창에서만 완성봉 포착 지연을 줄인다.
     /// </summary>
     public int? SuggestedPollSeconds
     {
@@ -701,7 +721,7 @@ public sealed class MinuteSignalEngine(AppConfig config, PriceSourceRegistry reg
             int? best = null;
             foreach (var sd in _symbols.Values)
                 if (sd.BoostLevel > 0 && sd.BoostUntil > now)
-                    best = Math.Min(best ?? int.MaxValue, sd.BoostLevel >= 2 ? 15 : 20);
+                    best = Math.Min(best ?? int.MaxValue, PollSecondsForLevel(sd.BoostLevel));
             return best;
         }
     }

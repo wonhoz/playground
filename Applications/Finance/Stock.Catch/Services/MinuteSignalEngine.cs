@@ -91,6 +91,8 @@ public sealed class MinuteSignalEngine(AppConfig config, PriceSourceRegistry reg
     private sealed class SymbolData
     {
         public SortedDictionary<DateTime, Candle> Bars = new();   // 당일 1분봉 캐시
+        public List<Candle> PrevDayBars = new();                  // 전날 1분봉(지표 워밍업용 · 하루 1회 로드)
+        public bool PrevDayLoaded;                                 // 전날 분봉 로드 성공 여부(하루 1회)
         public DateTime LastFetch = DateTime.MinValue;            // 조회 스로틀
         public double? DayTrend;                                   // 일봉 추세점수(−1~+1 · 컨텍스트)
         public decimal PrevClose;                                  // 전일 정규 종가(갭 컨텍스트 · 0=미로드)
@@ -133,25 +135,38 @@ public sealed class MinuteSignalEngine(AppConfig config, PriceSourceRegistry reg
         if ((now - sd.LastFetch).TotalSeconds < fetchGap) return;
         sd.LastFetch = now;
 
-        // 일봉 컨텍스트(추세점수·전일 종가)를 하루 1회 로드 — 실패 시 10분 후 재시도, 없어도 판정은 계속.
-        if (config.BottomTrendGate && sd.DayTrend is null && (now - sd.LastTrendTry).TotalMinutes >= 10)
+        // 일봉 컨텍스트(추세점수·전일 종가)·전날 분봉(워밍업)을 하루 1회 로드 — 실패 시 10분 후 재시도, 없어도 판정은 계속.
+        bool needTrend = config.BottomTrendGate && sd.DayTrend is null;
+        bool needWarm = config.SignalWarmupPrevDay && !sd.PrevDayLoaded;
+        if ((needTrend || needWarm) && (now - sd.LastTrendTry).TotalMinutes >= 10)
         {
             sd.LastTrendTry = now;
             try
             {
                 var daily = await registry.KrDailyAsync(item.Symbol, 40, ct);
                 var completed = daily.Where(c => c.Date.Date != DateTime.Today).ToList();
-                if (completed.Count >= LadderCalculator.RequiredDays)
+                if (completed.Count > 0)
                 {
-                    var win = completed.TakeLast(LadderCalculator.RequiredDays).ToList();
-                    var r = LadderCalculator.Calculate(
-                        new StockSeries(item.Symbol, "", "", SourceKind.Naver, win),
-                        new LadderParams(0, 0, UseTrend: true));
-                    sd.DayTrend = r.TrendScore;
-                    sd.PrevClose = completed[^1].Close;
+                    sd.PrevClose = completed[^1].Close;   // 갭 컨텍스트(워밍업만 켜도 필요)
+                    if (needTrend && completed.Count >= LadderCalculator.RequiredDays)
+                    {
+                        var win = completed.TakeLast(LadderCalculator.RequiredDays).ToList();
+                        var r = LadderCalculator.Calculate(
+                            new StockSeries(item.Symbol, "", "", SourceKind.Naver, win),
+                            new LadderParams(0, 0, UseTrend: true));
+                        sd.DayTrend = r.TrendScore;
+                    }
+                    if (needWarm)
+                    {
+                        // 전 거래일(일봉 마지막 완성일)의 1분봉을 지표 워밍업용으로 로드 — BB/MA/RSI/리본/역추세를 09:00부터 세운다.
+                        var prevDate = completed[^1].Date.Date;
+                        var pm = await registry.KisDayMinutesAsync(item.Symbol, prevDate, ct);
+                        var prev = pm.Where(b => b.Date.Date == prevDate).OrderBy(b => b.Date).ToList();
+                        if (prev.Count > 0) { sd.PrevDayBars = prev; sd.PrevDayLoaded = true; }
+                    }
                 }
             }
-            catch { /* 일봉 조회 실패 → 10분 후 재시도 */ }
+            catch { /* 일봉/전날 분봉 조회 실패 → 10분 후 재시도 */ }
         }
 
         // 분봉 수집: 캐시가 얕으면 워밍업(최대 ~100봉), 이후엔 최신 1페이지(30봉)만 증분 병합.
@@ -182,13 +197,17 @@ public sealed class MinuteSignalEngine(AppConfig config, PriceSourceRegistry reg
 
         foreach (int tf in Timeframes())
         {
-            var tfBars = RollBars(bars, tf);
-            if (tfBars.Count < 26) continue;   // 해당 타임프레임 표본 부족(장 초반 상위 TF)
+            var todayTf = RollBars(bars, tf);
+            // 워밍업: 전날 분봉을 같은 tf로 롤링해 앞에 붙인다(지표만 데움 · 판정·발화는 todayStart부터).
+            var warmTf = sd.PrevDayBars.Count > 0 ? RollBars(sd.PrevDayBars, tf) : new List<Candle>();
+            var tfBars = warmTf.Count > 0 ? warmTf.Concat(todayTf).ToList() : todayTf;
+            int todayStart = warmTf.Count;
+            if (tfBars.Count < 26) continue;   // 워밍업 포함해도 표본 부족(장 초반 상위 TF)
             if (!sd.Tf.TryGetValue(tf, out var st)) sd.Tf[tf] = st = new State();
 
             int start = 0;
             while (start < tfBars.Count && tfBars[start].Date <= st.LastEvalBar) start++;
-            ScanBars(item, st, tfBars, start, Fire, item.BottomAlert, item.TopAlert, tf, sd.DayTrend, sd.PrevClose, vwap);
+            ScanBars(item, st, tfBars, todayStart, start, Fire, item.BottomAlert, item.TopAlert, tf, sd.DayTrend, sd.PrevClose, vwap);
             st.LastEvalBar = tfBars[^1].Date;
         }
     }
@@ -218,27 +237,33 @@ public sealed class MinuteSignalEngine(AppConfig config, PriceSourceRegistry reg
     /// dayTrend/prevClose를 주면 컨텍스트(일봉추세·갭)도 라이브와 동일하게 표기된다.
     /// </summary>
     public List<MinuteSignal> Backtest(IReadOnlyList<Candle> minuteBars, string code, string name,
-        double? dayTrend = null, decimal prevClose = 0m)
-        => Backtest(minuteBars, new WatchItem { Symbol = code, Name = name }, dayTrend, prevClose);
+        double? dayTrend = null, decimal prevClose = 0m, IReadOnlyList<Candle>? warmupBars = null)
+        => Backtest(minuteBars, new WatchItem { Symbol = code, Name = name }, dayTrend, prevClose, warmupBars);
 
     /// <summary>
     /// 종목별 시그널 override(<see cref="WatchItem"/>)를 그대로 반영하는 백테스트 — 라이브와 완전히 동일한
     /// 유효 설정으로 판정한다. 분봉 시그널 분석에서 관심 종목 설정까지 재현할 때 사용.
+    /// <paramref name="warmupBars"/>(전날 1분봉)를 주면 라이브 워밍업과 동일하게 지표를 데워 09:00부터 판정한다
+    /// (VWAP·컨텍스트·발화는 당일 세션에만 앵커 — 전날 봉은 지표 워밍업 전용).
     /// </summary>
     public List<MinuteSignal> Backtest(IReadOnlyList<Candle> minuteBars, WatchItem item,
-        double? dayTrend = null, decimal prevClose = 0m)
+        double? dayTrend = null, decimal prevClose = 0m, IReadOnlyList<Candle>? warmupBars = null)
     {
-        var bars = minuteBars.OrderBy(b => b.Date).ToList();
+        var bars = minuteBars.OrderBy(b => b.Date).ToList();          // 당일
+        var warm = warmupBars?.OrderBy(b => b.Date).ToList() ?? new List<Candle>();
         var result = new List<MinuteSignal>();
-        if (bars.Count < 26) return result;
+        if (bars.Count < 26 && warm.Count == 0) return result;
 
-        var vwap = SessionVwap(bars);
+        var vwap = SessionVwap(bars);   // 세션 VWAP은 당일만(워밍업 제외)
         foreach (int tf in Timeframes())
         {
-            var tfBars = RollBars(bars, tf);
+            var todayTf = RollBars(bars, tf);
+            var warmTf = warm.Count > 0 ? RollBars(warm, tf) : new List<Candle>();
+            var tfBars = warmTf.Count > 0 ? warmTf.Concat(todayTf).ToList() : todayTf;
             if (tfBars.Count < 26) continue;
+            int todayStart = warmTf.Count;
             var st = new State();   // 라이브 상태와 분리된 임시 상태
-            ScanBars(item, st, tfBars, 0, result.Add, bottom: true, top: true, tf, dayTrend, prevClose, vwap);
+            ScanBars(item, st, tfBars, todayStart, 0, result.Add, bottom: true, top: true, tf, dayTrend, prevClose, vwap);
         }
         return result.OrderBy(s => s.Time).ThenBy(s => s.Timeframe).ToList();
     }
@@ -311,8 +336,12 @@ public sealed class MinuteSignalEngine(AppConfig config, PriceSourceRegistry reg
         return r;
     }
 
-    /// <summary>지표 일괄 계산 후 fromIdx부터 완성봉을 순서대로 판정 — 라이브(Fire)·백테스트(수집) 공용 코어.</summary>
-    private void ScanBars(WatchItem item, State st, List<Candle> bars, int fromIdx,
+    /// <summary>
+    /// 지표 일괄 계산 후 fromIdx부터 완성봉을 순서대로 판정 — 라이브(Fire)·백테스트(수집) 공용 코어.
+    /// <paramref name="todayStart"/>=워밍업 봉 수(0=워밍업 없음): 지표는 전체(워밍업+당일)로 계산해 데우되,
+    /// 판정·발화는 todayStart 이후(당일 세션)에만 한다 — 전날 봉으로 09:00부터 지표가 서게 하기 위함.
+    /// </summary>
+    private void ScanBars(WatchItem item, State st, List<Candle> bars, int todayStart, int fromIdx,
         Action<MinuteSignal> emit, bool bottom, bool top, int tf, double? dayTrend, decimal prevClose,
         IReadOnlyDictionary<DateTime, double>? vwap = null)
     {
@@ -332,7 +361,8 @@ public sealed class MinuteSignalEngine(AppConfig config, PriceSourceRegistry reg
         // (실측 66건: 둘 다 하락 시 순상승 48%·낙폭≤−2% 27.6% vs 정렬 75%·0%). MA60 형성(≈10시) 후만.
         bool[]? counterTrend = tf == 1 ? BuildCounterTrend(closes, ma20) : null;
 
-        for (int i = Math.Max(fromIdx, 21); i < bars.Count; i++)
+        // 발화 시작: fromIdx·todayStart(당일 세션) 중 큰 값, 그리고 BB 최소 표본(21) 이상.
+        for (int i = Math.Max(Math.Max(fromIdx, todayStart), 21); i < bars.Count; i++)
         {
             EvaluateCross(item, st, bars, i, ma5, ma20, emit, tf, dayTrend, prevClose, vwap, ribbon);
             if (bottom) EvaluateHold(item, st, bars, i, emit, tf, dayTrend, prevClose, vwap, ribbon, counterTrend);   // 🚀 진입 적기(GC 후 지속 확인)
@@ -517,11 +547,15 @@ public sealed class MinuteSignalEngine(AppConfig config, PriceSourceRegistry reg
         IReadOnlyDictionary<DateTime, double>? vwap = null, double ribbon = double.NaN)
     {
         var bar = bars[i];
-        double dayChg = bars[0].Open > 0 ? (double)(bar.Close / bars[0].Open - 1) * 100 : 0;
-        decimal dayLow = bars.Take(i + 1).Min(b => b.Low);
+        // 워밍업으로 전날 봉이 앞에 붙어 있어도 당일 세션 시가·저가에 앵커한다(같은 날짜의 첫 봉을 찾는다).
+        int ts = i;
+        while (ts > 0 && bars[ts - 1].Date.Date == bar.Date.Date) ts--;
+        double dayChg = bars[ts].Open > 0 ? (double)(bar.Close / bars[ts].Open - 1) * 100 : 0;
+        decimal dayLow = decimal.MaxValue;
+        for (int k = ts; k <= i; k++) if (bars[k].Low < dayLow) dayLow = bars[k].Low;
         double fromLow = dayLow > 0 ? (double)(bar.Close / dayLow - 1) * 100 : 0;
-        string gap = prevClose > 0 && bars[0].Open > 0
-            ? $"갭 {(double)(bars[0].Open / prevClose - 1) * 100:+0.0;-0.0}% · " : "";
+        string gap = prevClose > 0 && bars[ts].Open > 0
+            ? $"갭 {(double)(bars[ts].Open / prevClose - 1) * 100:+0.0;-0.0}% · " : "";
         // VWAP 위치: 확인GC가 VWAP 위면 실측 승률 71%·낙폭 −0.97% (아래 46%·−2.19%) — 표기만, 강등 아님.
         string vw = "";
         if (vwap != null && vwap.TryGetValue(bar.Date, out var v) && !double.IsNaN(v) && v > 0)

@@ -49,6 +49,7 @@ public sealed class MinuteSignalEngine(AppConfig config, PriceSourceRegistry reg
         public bool AwaitGolden;                                   // 2차(골든크로스) 확인 대기
         public bool AwaitFollow;                                   // 직후 봉 양봉 지속(조기 확인) 대기 — 1분봉 전용
         public bool BottomFiredDiv;                                // 1차 시그널의 다이버전스 여부(GC가 상속)
+        public bool BottomFiredLowConv;                            // 1차가 애매(고낙폭 · 합류 게이트 대상)였는지 — 직후양봉 상속
         // 🚀 진입 적기(3차) 대기: GC 후 N봉 지속 확인
         public bool AwaitHold;
         public DateTime GcHoldAt = DateTime.MinValue;
@@ -318,7 +319,7 @@ public sealed class MinuteSignalEngine(AppConfig config, PriceSourceRegistry reg
             if (bottom) EvaluateHold(item, st, bars, i, emit, tf, dayTrend, prevClose, vwap, ribbon, counterTrend);   // 🚀 진입 적기(GC 후 지속 확인)
             if (bottom && tf == 1 && config.BoxBreakoutAlert) EvaluateBox(item, st, bars, i, emit, tf, dayTrend, prevClose, vwap, ribbon, counterTrend);   // 📦 진입 권장(박스 상단 돌파)
             if (bottom && tf == 1) EvaluateFollow(item, st, bars, i, emit, ribbon);   // 직후 양봉은 1분봉 전용
-            if (bottom) EvaluateBottom(item, st, bars, i, upper, lower, rsi, volMa, emit, tf, dayTrend, prevClose, vwap, loShort, ribbon);
+            if (bottom) EvaluateBottom(item, st, bars, i, upper, lower, rsi, volMa, emit, tf, dayTrend, prevClose, vwap, loShort, ribbon, counterTrend);
             if (top) EvaluateTop(item, st, bars, i, upper, lower, rsi, volMa, emit, tf);
         }
     }
@@ -342,7 +343,7 @@ public sealed class MinuteSignalEngine(AppConfig config, PriceSourceRegistry reg
         double ratio = avgBody > 0 ? (double)(Math.Abs(bar.Close - bar.Open) / avgBody) : 0;
         emit(new MinuteSignal(item.Symbol, item.Name, MinuteSignalKind.FollowThrough, bar.Close,
             $"1차({st.BottomFiredAt:HH:mm}) 직후 양봉 지속 · 몸통 {ratio:0.0}×", bar.Date,
-            RibbonSpreadPct: RibbonAt(ribbon, i)));
+            RibbonSpreadPct: RibbonAt(ribbon, i), LowConviction: st.BottomFiredLowConv));
     }
 
     /// <summary>
@@ -518,7 +519,7 @@ public sealed class MinuteSignalEngine(AppConfig config, PriceSourceRegistry reg
     /// <summary>완성봉 1개(인덱스 i)에 대한 바닥 반등 판정. 밴드워킹·%b 필터로 지속 하락·약반등을 걸러낸다.</summary>
     private void EvaluateBottom(WatchItem item, State st, List<Candle> bars, int i,
         double[] upper, double[] lower, double[] rsi, double[] volMa, Action<MinuteSignal> emit, int tf, double? dayTrend, decimal prevClose,
-        IReadOnlyDictionary<DateTime, double>? vwap = null, double[]? loShort = null, double[]? ribbon = null)
+        IReadOnlyDictionary<DateTime, double>? vwap = null, double[]? loShort = null, double[]? ribbon = null, bool[]? counterTrend = null)
     {
         var bar = bars[i];
         if (double.IsNaN(lower[i]) || double.IsNaN(upper[i]) ||
@@ -586,9 +587,18 @@ public sealed class MinuteSignalEngine(AppConfig config, PriceSourceRegistry reg
                 divergence = lo < prevLo && rsi[loIdx] > rsi[prevIdx] + 1;
         }
 
+        // 합류 게이트용 애매(고낙폭) 판정: 리본 분산(≥3%) OR (역추세[MA20·60 동시 하락] & VWAP 아래).
+        // 실측(15일 704건): 이 자리 낙폭≤−2% 34~50%(통과분 21%). 알림만 억제(상태·확정신호는 유지 — Fire에서 게이팅).
+        double ribNow = RibbonAt(ribbon, i);
+        bool ct = counterTrend != null && i < counterTrend.Length && counterTrend[i];
+        bool ribWide = !double.IsNaN(ribNow) && ribNow >= MinuteSignal.RibbonWidePct;
+        bool belowVwap = AboveVwapAt(vwap, bar) == false;
+        bool lowConv = ribWide || (ct && belowVwap);
+
         st.BottomFiredAt = bar.Date;
         st.BottomFiredPrice = bar.Close;
         st.BottomFiredDiv = divergence;
+        st.BottomFiredLowConv = lowConv;
         st.AwaitGolden = config.BottomConfirmCross;
         st.AwaitFollow = tf == 1 && config.BottomFollowCandle;
         st.AwaitDead = false;   // 방향 전환 — 반대편 확인 대기 해제
@@ -597,7 +607,7 @@ public sealed class MinuteSignalEngine(AppConfig config, PriceSourceRegistry reg
             $"하단터치 {bars[touchIdx].Date:HH:mm} → 복귀 %b {pb:0.00} · RSI {rsi[i]:0.#}↑(저점 {minRsi:0.#}) · 거래량 {volRatio:0.0}×" +
             (divergence ? " · 다이버전스" : ""),
             bar.Date, tf, Context(bars, i, dayTrend, prevClose, vwap, RibbonAt(ribbon, i)),
-            AboveVwapAt(vwap, bar), divergence, RibbonSpreadPct: RibbonAt(ribbon, i)));
+            AboveVwapAt(vwap, bar), divergence, RibbonSpreadPct: RibbonAt(ribbon, i), LowConviction: lowConv));
     }
 
     // ───────────────────────── 1차: 고점 경고 ─────────────────────────
@@ -706,12 +716,22 @@ public sealed class MinuteSignalEngine(AppConfig config, PriceSourceRegistry reg
     /// </summary>
     private void Fire(MinuteSignal s)
     {
-        UpdateLiveState(s);
+        UpdateLiveState(s);   // 부스트·교차 등 상태는 억제 여부와 무관하게 항상 갱신
+        if (IsLowConvictionSuppressed(s)) return;   // 애매(고낙폭) 반등 1차·직후양봉 알림 억제(합류 게이트)
         if (IsDuplicateAlert(s)) return;
         _lastAlert[s.Code] = (s.VerdictLine, s.Time);
         Raised?.Invoke(s);
         _ = SafeSlackAsync(s);
     }
+
+    /// <summary>
+    /// 합류 게이트: 애매(고낙폭) 반등 1차(<see cref="MinuteSignalKind.Rebound"/>)·직후양봉(<see cref="MinuteSignalKind.FollowThrough"/>)
+    /// 알림을 억제한다 — 리본 분산 또는 역추세+VWAP아래 자리. 상태(<see cref="UpdateLiveState"/>·확인 대기)는 이미 갱신됐으므로
+    /// 뒤이어 확정되는 GC·🚀·📦 알림은 그대로 발화한다("애매한 건 줄이고, 확실할 때만"). 기본 켬.
+    /// </summary>
+    private bool IsLowConvictionSuppressed(MinuteSignal s)
+        => config.ReboundHighConvictionGate && s.LowConviction
+           && s.Kind is MinuteSignalKind.Rebound or MinuteSignalKind.FollowThrough;
 
     /// <summary>직전에 보낸 알림과 판정 문구가 완전히 동일하고 dedup 창(분) 이내면 중복으로 본다(브리핑 제외).</summary>
     private bool IsDuplicateAlert(MinuteSignal s)

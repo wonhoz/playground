@@ -52,7 +52,8 @@ public sealed record MinuteSignal(
     bool ChaseWarn = false,    // ⚠ 흔들림 주의: 종가가 VWAP 깊은 약세(하락 추세 진행 중 · 진입 후 낙폭 큼)
     double StopLossPct = 0,    // 🛑 권장 손절선(%) — 🚀 진입 적기 전용(일반 −2%·흔들림 주의 −3% · 0=미표기)
     double RibbonSpreadPct = double.NaN,  // MA5/20/60/120 리본 스프레드(%) — 밀집=낙폭 작음(NaN=MA120 미형성)
-    bool CounterTrend = false) // ⚠ 역추세: MA20·MA60이 동시 하락 중 진입(🚀 전용) — 하락 MA로의 역추세 반등은 실패 잦음
+    bool CounterTrend = false, // ⚠ 역추세: MA20·MA60이 동시 하락 중 진입(🚀 전용) — 하락 MA로의 역추세 반등은 실패 잦음
+    bool LowConviction = false) // 애매(고낙폭) 반등: 리본 분산 OR (역추세 & VWAP아래) — 합류 게이트가 알림 억제(상태는 유지)
 {
     /// <summary>리본 밀집 판정 상한(%): 이하면 "리본 밀집(낙폭 작음)". 실측: 밀집 시그널 평균 낙폭 −0.77%.</summary>
     public const double RibbonTightPct = 1.5;

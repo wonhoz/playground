@@ -234,6 +234,15 @@ public sealed class AppConfig
     public int BoxSeedBars { get; set; } = 3;
     /// <summary>박스 최대 추적 봉수(×tf): 이 안에 상단 돌파 없으면 폐기(김샘). 기본 20(≈20분).</summary>
     public int BoxMaxBars { get; set; } = 20;
+    /// <summary>
+    /// 고신뢰 반등만 알림(합류 게이트). 켜면 <b>애매한 바닥 반등 1차 알림(반등·직후양봉)</b>을 억제한다 —
+    /// ① 리본 분산(MA5/20/60/120 스프레드 ≥ <see cref="MinuteSignal.RibbonWidePct"/>%) 또는
+    /// ② 역추세(MA20·MA60 동시 하락) + VWAP 아래(추격) 자리.
+    /// 실측(15일 반등 704건): 이 애매 케이스는 낙폭≤−2%가 34~50%(vs 통과분 21%)로 "버티기 어려운" 자리.
+    /// 억제해도 <b>내부 상태는 유지</b>되어 뒤이어 확정되는 골든크로스·🚀 진입 적기·📦 진입 권장 알림은 그대로 온다
+    /// (알림 ~1/3로 감소, 남는 반등의 순상승 유지·낙폭 30%→21%). 기본 켬. 끄면 모든 반등 알림 + 태그(⚠) 표기.
+    /// </summary>
+    public bool ReboundHighConvictionGate { get; set; } = true;
 
     // ── 고점 경고 시그널(관심 종목 · 국내 1분봉 · 바닥의 거울상) ──
     /// <summary>셋업으로 인정할 RSI(14) 과매수 하한. 상단 터치 구간 최고 RSI가 이 값 이상일 때만 시그널.</summary>

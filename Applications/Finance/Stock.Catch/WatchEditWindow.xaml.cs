@@ -94,6 +94,7 @@ public partial class WatchEditWindow : Window
                 new SourceOption("Yahoo (지연)", WatchSource.Yahoo),
                 new SourceOption("Finnhub (실시간·무료키)", WatchSource.Finnhub),
                 new SourceOption("Alpaca (실시간 IEX·무료키)", WatchSource.Alpaca),
+                new SourceOption("Databento (프로·유료키)", WatchSource.Databento),
                 new SourceOption("KIS (준실시간)", WatchSource.Kis),
             }
             : new[] { new SourceOption("네이버 (지연)", WatchSource.Naver), new SourceOption("KIS (실시간)", WatchSource.Kis) };

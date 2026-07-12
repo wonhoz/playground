@@ -28,6 +28,8 @@ public partial class SettingsWindow : Window
         FinnhubKeyBox.Text = config.FinnhubApiKey;
         AlpacaKeyIdBox.Text = config.AlpacaApiKeyId;
         AlpacaSecretBox.Password = config.AlpacaApiSecret;
+        DatabentoKeyBox.Password = config.DatabentoApiKey;
+        DatabentoDatasetBox.Text = config.DatabentoDataset;
 
         SlackUrlBox.Text = config.SlackWebhookUrl;
         SlackChannelBox.Text = config.SlackChannel;
@@ -144,6 +146,8 @@ public partial class SettingsWindow : Window
         _config.FinnhubApiKey = FinnhubKeyBox.Text.Trim();
         _config.AlpacaApiKeyId = AlpacaKeyIdBox.Text.Trim();
         _config.AlpacaApiSecret = AlpacaSecretBox.Password.Trim();
+        _config.DatabentoApiKey = DatabentoKeyBox.Password.Trim();
+        _config.DatabentoDataset = string.IsNullOrWhiteSpace(DatabentoDatasetBox.Text) ? "DBEQ.BASIC" : DatabentoDatasetBox.Text.Trim();
 
         _config.SlackWebhookUrl = SlackUrlBox.Text.Trim();
         _config.SlackChannel = SlackChannelBox.Text.Trim();

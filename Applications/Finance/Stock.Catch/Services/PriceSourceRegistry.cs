@@ -17,6 +17,7 @@ public sealed class PriceSourceRegistry : IDisposable
     private readonly YahooPriceSource _yahoo;
     private readonly FinnhubPriceSource _finnhub;
     private readonly AlpacaPriceSource _alpaca;
+    private readonly DatabentoPriceSource _databento;
 
     /// <summary>차트용 봉 데이터(분/일/주/월) 조회 서비스.</summary>
     public ChartDataService Chart { get; }
@@ -34,6 +35,7 @@ public sealed class PriceSourceRegistry : IDisposable
         _yahoo = new YahooPriceSource(_http);
         _finnhub = new FinnhubPriceSource(config, _http);
         _alpaca = new AlpacaPriceSource(config, _http);
+        _databento = new DatabentoPriceSource(config, _http);
         _sources = new()
         {
             [SourceKind.Naver] = new NaverPriceSource(_http),
@@ -106,6 +108,7 @@ public sealed class PriceSourceRegistry : IDisposable
                 WatchSource.Kis => await _kis.FetchOverseasQuoteAsync(item.Exchange, item.Symbol, ct),
                 WatchSource.Finnhub => await _finnhub.FetchQuoteAsync(item.Symbol, ct),
                 WatchSource.Alpaca => await _alpaca.FetchQuoteAsync(item.Symbol, ct),
+                WatchSource.Databento => await _databento.FetchQuoteAsync(item.Symbol, ct),
                 _ => await _yahoo.FetchQuoteAsync(item.Symbol, ct), // Yahoo 기본
             };
         }
@@ -139,6 +142,7 @@ public sealed class PriceSourceRegistry : IDisposable
                 WatchSource.Kis => await _kis.FetchQuoteAsync(symbol, ct),
                 WatchSource.Finnhub => await _finnhub.FetchQuoteAsync(symbol, ct),
                 WatchSource.Alpaca => await _alpaca.FetchQuoteAsync(symbol, ct),
+                WatchSource.Databento => await _databento.FetchQuoteAsync(symbol, ct),
                 _ => null,
             };
         }

@@ -31,9 +31,14 @@ public sealed class AppConfig
     public string AlpacaApiKeyId { get; set; } = string.Empty;
     /// <summary>Alpaca API Secret Key.</summary>
     public string AlpacaApiSecret { get; set; } = string.Empty;
+    /// <summary>Databento API Key(databento.com · 프로 실시간/히스토리). 미국 종목 시세 소스.</summary>
+    public string DatabentoApiKey { get; set; } = string.Empty;
+    /// <summary>Databento 데이터셋(예: DBEQ.BASIC=US 주식 통합, XNAS.ITCH=나스닥). 기본 DBEQ.BASIC.</summary>
+    public string DatabentoDataset { get; set; } = "DBEQ.BASIC";
 
     [JsonIgnore] public bool HasFinnhubKey => !string.IsNullOrWhiteSpace(FinnhubApiKey);
     [JsonIgnore] public bool HasAlpacaKeys => !string.IsNullOrWhiteSpace(AlpacaApiKeyId) && !string.IsNullOrWhiteSpace(AlpacaApiSecret);
+    [JsonIgnore] public bool HasDatabentoKey => !string.IsNullOrWhiteSpace(DatabentoApiKey);
 
     // ── 즐겨찾기 종목 ──
     public List<FavoriteStock> Favorites { get; set; } = new();
@@ -114,6 +119,19 @@ public sealed class AppConfig
     public bool WatchProxyLeadEnabled { get; set; } = true;
     /// <summary>야간 프록시 선행 알림 매핑(ETF↔프록시·베타·임계). 비어 있으면 Load에서 기본값(SOXL/SOXS↔NQ선물, KORU↔KOSPI) 시드.</summary>
     public List<ProxyLead> ProxyLeads { get; set; } = new();
+
+    // ── 추세 지속/전환 알림(관심 종목) ──
+    /// <summary>
+    /// 추세 펄스 알림. 종목이 <b>연속으로 몇 분째 상승/하락 중</b>인지(마일스톤 도달)와 <b>추세 전환</b>(상승↔하락)을 알린다.
+    /// 되돌림 임계(<see cref="WatchTrendReversalPct"/>)로 노이즈를 걸러 지그재그 피벗으로 런을 추적한다. 기본 켜짐.
+    /// </summary>
+    public bool WatchTrendPulseEnabled { get; set; } = true;
+    /// <summary>추세 전환 인정 되돌림 임계(%). 극점에서 이만큼 되돌리면 방향 전환으로 본다(작을수록 민감). 기본 0.4.</summary>
+    public double WatchTrendReversalPct { get; set; } = 0.4;
+    /// <summary>지속 알림 마일스톤(분): 런이 이 시간을 새로 넘으면 "N분째 상승/하락 중" 알림. 기본 3/5/10/30/60.</summary>
+    public List<int> WatchTrendMilestonesMinutes { get; set; } = new() { 3, 5, 10, 30, 60 };
+    /// <summary>다중 호라이즌 요약(분): 알림에 각 구간 방향(↑/↓/·)을 함께 표기. 기본 3/5/10/30/60.</summary>
+    public List<int> WatchTrendHorizonsMinutes { get; set; } = new() { 3, 5, 10, 30, 60 };
 
     // ── 보유 종목 모니터링 / Slack 알림 ──
     public string SlackWebhookUrl { get; set; } = string.Empty;

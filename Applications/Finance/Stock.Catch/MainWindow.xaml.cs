@@ -83,6 +83,7 @@ public partial class MainWindow : Window
         _watch.DigestReady += OnWatchDigest;
         _watch.SessionSummaryReady += OnSessionSummary;
         _watch.ProxyLeadRaised += OnProxyLead;
+        _watch.TrendPulseRaised += OnTrendPulse;
         _schedule = new MarketScheduleNotifier(_config, _slack);
         _schedule.Raised += OnScheduleAlert;
         _watch.FetchFailed += (item, reason, fails) => OnFetchFailed(item.ToString(), "관심 종목", reason, fails);
@@ -131,6 +132,18 @@ public partial class MainWindow : Window
 
     private void OnProxyLead(string title, string body, bool up) => Dispatcher.Invoke(() =>
         _tray.ShowBalloon(title, body, warning: !up));
+
+    private void OnTrendPulse(Models.WatchItem item, Services.TrendPulse p) => Dispatcher.Invoke(() =>
+    {
+        string display = string.IsNullOrEmpty(item.Name) ? item.Symbol : $"{item.Name} ({item.Symbol})";
+        string title = p.IsFlip
+            ? $"🔄 {display} {(p.Up ? "하락→상승" : "상승→하락")} 전환"
+            : $"⏱ {display} {p.Milestone}분째 {(p.Up ? "상승" : "하락")}";
+        string body = p.IsFlip
+            ? $"직전 {(p.Up ? "하락" : "상승")} {p.PrevRunMinutes:0}분 {p.PrevRunPct:+0.0;-0.0}%  ·  {p.Horizons}"
+            : $"{p.RunPct:+0.0;-0.0}%  ·  {p.Horizons}";
+        _tray.ShowBalloon(title, body, warning: !p.Up);
+    });
 
     private void OnLadderAlert(Models.LadderAlert a) => Dispatcher.Invoke(() =>
     {

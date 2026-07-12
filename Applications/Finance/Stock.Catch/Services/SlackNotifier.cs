@@ -91,6 +91,31 @@ public sealed class SlackNotifier(AppConfig config) : IDisposable
         await PostAsync(payload, ct);
     }
 
+    /// <summary>
+    /// 추세 지속/전환 펄스 — "N분째 상승/하락 중" 또는 "상승↔하락 전환". 한국식 색상(상승 빨강·하락 파랑).
+    /// 다중 호라이즌 요약(3분↑ 5분↑ …)을 함께 표기. 채널은 종목 전용 → 전역.
+    /// </summary>
+    public async Task SendTrendPulseAsync(WatchItem item, TrendPulse p, CancellationToken ct = default)
+    {
+        if (!IsConfigured) return;
+        string emoji = p.Up ? ":red_circle:" : ":large_blue_circle:";
+        string display = string.IsNullOrEmpty(item.Name) ? item.Symbol : $"{item.Name} ({item.Symbol})";
+        var sb = new StringBuilder();
+        if (p.IsFlip)
+        {
+            string turn = p.Up ? "하락→상승 전환" : "상승→하락 전환";
+            string prevDir = p.Up ? "하락" : "상승";
+            sb.AppendLine($"{emoji} :arrows_counterclockwise: *{display}* {turn} · 직전 {prevDir} {p.PrevRunMinutes:0}분 {p.PrevRunPct:+0.0;-0.0}%");
+        }
+        else
+        {
+            string dir = p.Up ? "상승" : "하락";
+            sb.AppendLine($"{emoji} :stopwatch: *{display}* {p.Milestone}분째 {dir} 중 · {p.RunPct:+0.0;-0.0}%");
+        }
+        if (!string.IsNullOrWhiteSpace(p.Horizons)) sb.AppendLine(p.Horizons);
+        await PostAsync(BuildPayload(sb.ToString(), item.Symbol), ct);
+    }
+
     /// <summary>모니터링 시작 시 종목별 현재 수준을 한 메시지로 요약.</summary>
     public async Task SendWatchStartupSummaryAsync(IReadOnlyList<WatchAlert> alerts, CancellationToken ct = default)
     {

@@ -35,6 +35,8 @@ public sealed class WatchlistMonitor(AppConfig config, PriceSourceRegistry regis
     // 야간 프록시 선행 알림: ETF별 마지막 임계 버킷(엣지 트리거)·일 리셋.
     private readonly Dictionary<string, int> _proxyBucket = new();
     private DateOnly _proxyDay = DateOnly.FromDateTime(DateTime.Today);
+    // 추세 지속/전환: 종목별 지그재그 추적기(장 마감 시 정리 → 재개장 새로).
+    private readonly Dictionary<string, TrendTracker> _trendTrackers = new();
 
     // ── 프리/애프터 세션 분위기 트래커(KR 종목 · 하루 1회 요약) ──
     private sealed class SessTrack { public decimal BaseRate; public decimal LastRate; public decimal LastPrice; public bool Has; public List<double> Series = new(); }
@@ -53,6 +55,8 @@ public sealed class WatchlistMonitor(AppConfig config, PriceSourceRegistry regis
     public event Action<bool, string, string>? SessionSummaryReady;
     /// <summary>야간 프록시 선행 알림(트레이 풍선용 · 제목, 본문, 상방 여부).</summary>
     public event Action<string, string, bool>? ProxyLeadRaised;
+    /// <summary>추세 지속/전환 펄스(종목, 펄스).</summary>
+    public event Action<WatchItem, TrendPulse>? TrendPulseRaised;
     /// <summary>시세 조회 연속 실패 알림(item, 사유, 연속 실패 횟수).</summary>
     public event Action<WatchItem, string, int>? FetchFailed;
     /// <summary>실패 후 정상 복구 알림.</summary>
@@ -121,6 +125,7 @@ public sealed class WatchlistMonitor(AppConfig config, PriceSourceRegistry regis
             {
                 closed++;
                 _trend.Remove(item.Symbol);
+                _trendTrackers.Remove(item.Symbol);   // 재개장 시 추세 추적 새로 시작
                 _failCount.Remove(item.Symbol);
                 continue;
             }
@@ -144,6 +149,7 @@ public sealed class WatchlistMonitor(AppConfig config, PriceSourceRegistry regis
                 TrackSession(item, q.Price, q.ChangeRate);   // 프리/애프터 분위기 누적(KR)
                 var rules = item.Rules.Count > 0 ? item.Rules : globalRules; // 종목별 조건 우선
                 Evaluate(item, q.Price, q.ChangeRate, rules, startups);
+                TrackTrend(item, q.Price);   // 연속 상승/하락 지속·전환 펄스
 
                 // 매수 래더·갭다운 알림(국내·비지수·옵트인)
                 if (item.LadderAlert && !item.IsIndex && item.Market == MarketKind.KR)
@@ -223,6 +229,28 @@ public sealed class WatchlistMonitor(AppConfig config, PriceSourceRegistry regis
                 _proxyBucket[lead.EtfSymbol] = bucket;
             }
             try { await Task.Delay(250, ct); } catch (OperationCanceledException) { break; }
+        }
+    }
+
+    /// <summary>
+    /// 연속 상승/하락 지속 시간·추세 전환 추적. 종목별 <see cref="TrendTracker"/>에 현재가를 급여해
+    /// 마일스톤(N분째 상승/하락) 도달·전환(상승↔하락) 펄스를 방향 필터(AlertUp/AlertDown)에 맞춰 발화한다.
+    /// 지수 종목은 제외. 되돌림 임계·마일스톤·호라이즌은 설정값.
+    /// </summary>
+    private void TrackTrend(WatchItem item, decimal price)
+    {
+        if (!config.WatchTrendPulseEnabled || item.IsIndex) return;
+        if (!_trendTrackers.TryGetValue(item.Symbol, out var tk))
+            _trendTrackers[item.Symbol] = tk = new TrendTracker(config.WatchTrendReversalPct);
+        var pulses = tk.Update(DateTime.Now, price,
+            config.WatchTrendMilestonesMinutes ?? new(), config.WatchTrendHorizonsMinutes ?? new());
+        foreach (var p in pulses)
+        {
+            if (p.Up && !item.AlertUp) continue;      // 방향 필터
+            if (!p.Up && !item.AlertDown) continue;
+            item.Name = string.IsNullOrWhiteSpace(item.Name) ? item.Symbol : item.Name;
+            TrendPulseRaised?.Invoke(item, p);
+            _ = SafeAsync(() => slack.SendTrendPulseAsync(item, p));
         }
     }
 

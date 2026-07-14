@@ -481,4 +481,92 @@ public sealed class KisPriceSource(AppConfig config, Action saveConfig, HttpClie
 
     private static long ParseLong(JsonElement el, string prop)
         => el.TryGetProperty(prop, out var v) && long.TryParse(v.GetString(), out var l) ? l : 0L;
+
+    // ───────────────────────── 실시간 수급·호가(즐겨찾기 상세 창) ─────────────────────────
+
+    /// <summary>KIS GET 공용 — 토큰·헤더·rt_cd 체크. 반환 JsonDocument는 호출 측이 dispose.</summary>
+    private async Task<JsonDocument> KisGetDocAsync(string path, string trId, string query, CancellationToken ct)
+    {
+        string token = await EnsureTokenAsync(ct);
+        using var req = new HttpRequestMessage(HttpMethod.Get, $"{BaseUrl}{path}?{query}");
+        req.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
+        req.Headers.Add("appkey", config.AppKey);
+        req.Headers.Add("appsecret", config.AppSecret);
+        req.Headers.Add("tr_id", trId);
+        req.Headers.Add("custtype", "P");
+        using var resp = await http.SendAsync(req, ct);
+        string text = await resp.Content.ReadAsStringAsync(ct);
+        var doc = JsonDocument.Parse(text);
+        if (doc.RootElement.TryGetProperty("rt_cd", out var rt) && rt.GetString() != "0")
+        {
+            string msg = doc.RootElement.TryGetProperty("msg1", out var m) ? m.GetString() ?? text : text;
+            doc.Dispose();
+            throw new PriceSourceException($"KIS 응답 오류: {msg.Trim()}");
+        }
+        return doc;
+    }
+
+    /// <summary>
+    /// 실시간 호가창(10단) — inquire-asking-price-exp-ccn(FHKST01010200). 장중에만 잔량이 채워진다.
+    /// </summary>
+    public async Task<MarketDepth> FetchMarketDepthAsync(string code, CancellationToken ct = default)
+    {
+        if (!config.HasKisCredentials)
+            throw new PriceSourceException("KIS APP KEY / APP SECRET이 설정되지 않았습니다.");
+        using var doc = await KisGetDocAsync(
+            "/uapi/domestic-stock/v1/quotations/inquire-asking-price-exp-ccn", "FHKST01010200",
+            $"FID_COND_MRKT_DIV_CODE=J&FID_INPUT_ISCD={code}", ct);
+        var o1 = doc.RootElement.GetProperty("output1");
+        var asks = new List<AskBid>(10);
+        var bids = new List<AskBid>(10);
+        for (int i = 1; i <= 10; i++)
+        {
+            asks.Add(new AskBid(ParseDecimal(o1, $"askp{i}"), ParseLong(o1, $"askp_rsqn{i}")));
+            bids.Add(new AskBid(ParseDecimal(o1, $"bidp{i}"), ParseLong(o1, $"bidp_rsqn{i}")));
+        }
+        decimal price = doc.RootElement.TryGetProperty("output2", out var o2) ? ParseDecimal(o2, "stck_prpr") : 0m;
+        return new MarketDepth(asks, bids, ParseLong(o1, "total_askp_rsqn"), ParseLong(o1, "total_bidp_rsqn"), price);
+    }
+
+    /// <summary>
+    /// 실시간 수급 스냅샷 — inquire-price(외인·프로그램 순매수·소진율·현재가) + inquire-investor(기관·개인 순매수)
+    /// + inquire-ccnl(체결강도). 3콜 조합. 장 마감 시 일부 값은 0/전일 기준.
+    /// </summary>
+    public async Task<SupplyDemand> FetchSupplyDemandAsync(string code, CancellationToken ct = default)
+    {
+        if (!config.HasKisCredentials)
+            throw new PriceSourceException("KIS APP KEY / APP SECRET이 설정되지 않았습니다.");
+
+        decimal price = 0m, rate = 0m; long frgn = 0, pgtr = 0; double ehrt = 0;
+        using (var d1 = await KisGetDocAsync("/uapi/domestic-stock/v1/quotations/inquire-price", "FHKST01010100",
+            $"FID_COND_MRKT_DIV_CODE=J&FID_INPUT_ISCD={code}", ct))
+        {
+            var o = d1.RootElement.GetProperty("output");
+            price = ParseDecimal(o, "stck_prpr"); rate = ParseDecimal(o, "prdy_ctrt");
+            frgn = ParseLong(o, "frgn_ntby_qty"); pgtr = ParseLong(o, "pgtr_ntby_qty");
+            ehrt = (double)ParseDecimal(o, "hts_frgn_ehrt");
+        }
+
+        long orgn = 0, prsn = 0;
+        try
+        {
+            using var d2 = await KisGetDocAsync("/uapi/domestic-stock/v1/quotations/inquire-investor", "FHKST01010900",
+                $"FID_COND_MRKT_DIV_CODE=J&FID_INPUT_ISCD={code}", ct);
+            if (d2.RootElement.TryGetProperty("output", out var arr) && arr.ValueKind == JsonValueKind.Array && arr.GetArrayLength() > 0)
+            { orgn = ParseLong(arr[0], "orgn_ntby_qty"); prsn = ParseLong(arr[0], "prsn_ntby_qty"); }
+        }
+        catch { /* 투자자 집계 실패는 무시(기관/개인만 0) */ }
+
+        double exec = 0;
+        try
+        {
+            using var d3 = await KisGetDocAsync("/uapi/domestic-stock/v1/quotations/inquire-ccnl", "FHKST01010300",
+                $"FID_COND_MRKT_DIV_CODE=J&FID_INPUT_ISCD={code}", ct);
+            if (d3.RootElement.TryGetProperty("output", out var arr) && arr.ValueKind == JsonValueKind.Array && arr.GetArrayLength() > 0)
+                exec = (double)ParseDecimal(arr[0], "tday_rltv");
+        }
+        catch { /* 체결강도 실패는 무시 */ }
+
+        return new SupplyDemand(price, rate, frgn, orgn, prsn, pgtr, ehrt, exec);
+    }
 }

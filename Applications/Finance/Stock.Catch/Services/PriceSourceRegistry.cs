@@ -63,6 +63,14 @@ public sealed class PriceSourceRegistry : IDisposable
     public Task<List<Candle>> KisDayMinutesAsync(string code, DateTime date, CancellationToken ct = default)
         => _kis.FetchDayMinutesAsync(code, date, ct);
 
+    /// <summary>KIS 실시간 호가창(10단) — 즐겨찾기 실시간 수급·호가 창용.</summary>
+    public Task<MarketDepth> KrMarketDepthAsync(string code, CancellationToken ct = default)
+        => _kis.FetchMarketDepthAsync(code, ct);
+
+    /// <summary>KIS 실시간 수급(외인/기관/개인/프로그램 순매수·소진율·체결강도) — 즐겨찾기 실시간 수급·호가 창용.</summary>
+    public Task<SupplyDemand> KrSupplyDemandAsync(string code, CancellationToken ct = default)
+        => _kis.FetchSupplyDemandAsync(code, ct);
+
     /// <summary>
     /// 모니터링용 현재가 — KIS 키가 있으면 KIS 실시간(inquire-price), 없으면 네이버 최근 종가로 폴백.
     /// 둘 다 실패하면 null.

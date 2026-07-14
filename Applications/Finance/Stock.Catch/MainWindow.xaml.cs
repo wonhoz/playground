@@ -1023,6 +1023,9 @@ public partial class MainWindow : Window
     }
 
     // ────────────────────────────── 관심 종목(워치리스트) ──────────────────────────────
+    private void Flow_Click(object sender, RoutedEventArgs e)
+        => new InvestorFlowWindow(_registry, _config) { Owner = this }.Show();
+
     private void Watchlist_Click(object sender, RoutedEventArgs e)
     {
         var win = new WatchlistWindow(_config, _registry, _watch) { Owner = this };

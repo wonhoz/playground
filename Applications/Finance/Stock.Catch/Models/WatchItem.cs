@@ -41,6 +41,12 @@ public sealed class WatchItem
     /// <summary>고점 경고 시그널 알림 사용(국내 종목만 · KIS 1분봉 필요). 볼린저 상단 밴드워킹 이탈 + RSI 과매수 전환. 기본 꺼짐.</summary>
     public bool TopAlert { get; set; } = false;
 
+    /// <summary>
+    /// 🔊 거래량 급증 알림 사용(국내 종목만 · KIS 1분봉 필요). 완성 1분봉 거래량이 직전 20봉 평균의
+    /// RVOL 배수(전역 <c>VolumeSurgeRvol</c> 또는 종목 override) 이상이면 방향 무관 관심 알림. 기본 꺼짐.
+    /// </summary>
+    public bool VolumeSurgeAlert { get; set; } = false;
+
     /// <summary>이 종목 전용 Slack 채널(예: "#stock-sk"). 비우면 전역 기본 채널(설정의 SlackChannel)을 사용한다.</summary>
     public string SlackChannel { get; set; } = string.Empty;
 
@@ -70,12 +76,14 @@ public sealed class WatchItem
     public double? TopRsiMin { get; set; }
     /// <summary>고점 소진 거래량 배수 override.</summary>
     public double? TopVolumeRatio { get; set; }
+    /// <summary>🔊 거래량 급증 RVOL 배수(직전 20봉 평균比) override. 높일수록 더 확실한 급증만 알림.</summary>
+    public double? VolumeSurgeRvol { get; set; }
 
     /// <summary>바닥/고점 파라미터 중 하나라도 종목 전용값이 있으면 true(그리드 "개별" 표시용).</summary>
     public bool HasSignalOverride =>
         BottomRsiMax.HasValue || BottomVolumeRatio.HasValue || BottomWalkMaxTouches.HasValue ||
         BottomMinPercentB.HasValue || BottomGcMinRisePct.HasValue || BottomGcStrongPct.HasValue ||
-        TopRsiMin.HasValue || TopVolumeRatio.HasValue;
+        TopRsiMin.HasValue || TopVolumeRatio.HasValue || VolumeSurgeRvol.HasValue;
 
     /// <summary>그리드 표시용: 전용 조건이 있으면 요약, 없으면 "전역".</summary>
     public string RulesLabel => Rules.Count > 0 ? TrendRule.Summary(Rules) : "전역";

@@ -176,6 +176,33 @@ public sealed class PriceSourceRegistry : IDisposable
     public Task<List<Candle>> UsDailyAsync(string symbol, string range = "6mo", CancellationToken ct = default)
         => _yahoo.FetchDailyCandlesAsync(symbol, range, ct);
 
+    // ───────────────────────── 급등락 전광판(시장 전체 순위) ─────────────────────────
+
+    /// <summary>
+    /// 국내 전광판 순위 — KIS 실시간 순위 API(급등/급락=등락률 순위 · 거래량 급증=거래증가율 순위). KIS 키 필요.
+    /// </summary>
+    public Task<List<MoverRow>> KrMoversAsync(MoverKind kind, CancellationToken ct = default)
+        => kind == MoverKind.VolumeSurge ? _kis.FetchVolumeRankAsync(ct)
+         : _kis.FetchFluctuationRankAsync(gainers: kind == MoverKind.Gainers, ct);
+
+    /// <summary>
+    /// 미국 전광판 순위 — Alpaca 키가 있으면 실시간 스크리너(movers/most-actives · Yahoo는 정규장 지연),
+    /// 없으면 Yahoo 사전정의 스크리너 폴백(지연 가능).
+    /// </summary>
+    public Task<List<MoverRow>> UsMoversAsync(MoverKind kind, CancellationToken ct = default)
+    {
+        if (_config.HasAlpacaKeys)
+            return kind == MoverKind.VolumeSurge ? _alpaca.FetchMostActivesAsync(30, ct)
+                 : _alpaca.FetchMoversAsync(gainers: kind == MoverKind.Gainers, 30, ct);
+        string scrId = kind switch
+        {
+            MoverKind.Gainers => "day_gainers",
+            MoverKind.Losers => "day_losers",
+            _ => "most_actives",
+        };
+        return _yahoo.FetchPredefinedMoversAsync(scrId, 30, ct);
+    }
+
     public IPriceSource Get(SourceKind kind) => _sources[kind];
 
     public IReadOnlyList<IPriceSource> All => _sources.Values.ToList();

@@ -569,4 +569,59 @@ public sealed class KisPriceSource(AppConfig config, Action saveConfig, HttpClie
 
         return new SupplyDemand(price, rate, frgn, orgn, prsn, pgtr, ehrt, exec);
     }
+
+    // ───────────────────────── 급등락 전광판(시장 전체 순위) ─────────────────────────
+
+    /// <summary>
+    /// 국내 등락률 순위 — ranking/fluctuation(FHPST01700000). 상승률/하락률 상위 최대 30종목.
+    /// 시장 전체(0000) 기준 · 실시간. 전광판(급등/급락) 전용.
+    /// </summary>
+    public async Task<List<MoverRow>> FetchFluctuationRankAsync(bool gainers, CancellationToken ct = default)
+    {
+        if (!config.HasKisCredentials)
+            throw new PriceSourceException("KIS APP KEY / APP SECRET이 설정되지 않았습니다.");
+        string query =
+            "fid_cond_mrkt_div_code=J&fid_cond_scr_div_code=20170&fid_input_iscd=0000" +
+            $"&fid_rank_sort_cls_code={(gainers ? 0 : 1)}&fid_input_cnt_1=0&fid_prc_cls_code=1" +
+            "&fid_input_price_1=&fid_input_price_2=&fid_vol_cnt=&fid_trgt_cls_code=0" +
+            "&fid_trgt_exls_cls_code=0&fid_div_cls_code=0&fid_rsfl_rate1=&fid_rsfl_rate2=";
+        using var doc = await KisGetDocAsync("/uapi/domestic-stock/v1/ranking/fluctuation", "FHPST01700000", query, ct);
+        return ParseMovers(doc, "stck_shrn_iscd", extra: null);
+    }
+
+    /// <summary>
+    /// 국내 거래량 순위 — volume-rank(FHPST01710000 · 거래증가율 기준). "평소보다 갑자기 거래가 몰리는"
+    /// 종목 상위 최대 30개(전일比 거래증가율 vol_inrt 병기). 시장 전체(0000) · 실시간. 전광판(거래량 급증) 전용.
+    /// </summary>
+    public async Task<List<MoverRow>> FetchVolumeRankAsync(CancellationToken ct = default)
+    {
+        if (!config.HasKisCredentials)
+            throw new PriceSourceException("KIS APP KEY / APP SECRET이 설정되지 않았습니다.");
+        string query =
+            "FID_COND_MRKT_DIV_CODE=J&FID_COND_SCR_DIV_CODE=20171&FID_INPUT_ISCD=0000" +
+            "&FID_DIV_CLS_CODE=0&FID_BLNG_CLS_CODE=1&FID_TRGT_CLS_CODE=111111111" +
+            "&FID_TRGT_EXLS_CLS_CODE=0000000000&FID_INPUT_PRICE_1=&FID_INPUT_PRICE_2=" +
+            "&FID_VOL_CNT=&FID_INPUT_DATE_1=";
+        using var doc = await KisGetDocAsync("/uapi/domestic-stock/v1/quotations/volume-rank", "FHPST01710000", query, ct);
+        return ParseMovers(doc, "mksc_shrn_iscd", extra: "vol_inrt");
+    }
+
+    /// <summary>순위 응답 공통 파싱 — output 배열에서 코드·이름·현재가·등락률·거래량(+선택 부가 필드)을 추출.</summary>
+    private static List<MoverRow> ParseMovers(JsonDocument doc, string codeProp, string? extra)
+    {
+        var rows = new List<MoverRow>();
+        if (!doc.RootElement.TryGetProperty("output", out var arr) || arr.ValueKind != JsonValueKind.Array)
+            return rows;
+        foreach (var o in arr.EnumerateArray())
+        {
+            string code = o.TryGetProperty(codeProp, out var c) ? c.GetString() ?? "" : "";
+            if (code.Length == 0) continue;
+            string name = o.TryGetProperty("hts_kor_isnm", out var n) ? n.GetString() ?? "" : "";
+            string ex = extra != null && o.TryGetProperty(extra, out var e) && decimal.TryParse(e.GetString(), out var ev)
+                ? $"증가율 {ev:+0;-0;0}%" : "";
+            rows.Add(new MoverRow(rows.Count + 1, code, name,
+                ParseDecimal(o, "stck_prpr"), (double)ParseDecimal(o, "prdy_ctrt"), ParseLong(o, "acml_vol"), ex));
+        }
+        return rows;
+    }
 }

@@ -30,7 +30,14 @@ public enum MinuteSignalKind
     /// 돌파한 순간 — "흔들림을 통과하고 진입"을 확인. 실측(15일 GC 134건): GC 즉시 진입 순상승 41%·낙폭≤−2% 28%
     /// → 박스 상단 돌파 진입 49%·16%로 승률↑·낙폭 위험 절반. 하단 이탈은 침묵(흔들기 바닥인 경우가 다수).
     /// </summary>
-    BoxBreakout
+    BoxBreakout,
+    /// <summary>
+    /// 🔊 거래량 급증: 완성 1분봉 거래량이 직전 20봉 평균의 RVOL 배수(기본 5×) 이상 —
+    /// 방향 판단 없이 "지금 이 종목에 수급이 몰린다"는 관심 신호. 직전 봉 단순 비교는 직전 봉이
+    /// 우연히 작을 때 오탐이 커서 20봉 평균 기준(RVOL)을 쓴다(전봉比는 참고 표기).
+    /// 알림에 분봉 등락·당일 등락률을 병기해 급등/급락 어느 쪽 수급인지 바로 읽게 한다. 1분봉 전용.
+    /// </summary>
+    VolumeSurge
 }
 
 /// <summary>
@@ -98,6 +105,7 @@ public sealed record MinuteSignal(
         get
         {
             if (Kind == MinuteSignalKind.MorningBrief) return Detail;
+            if (Kind == MinuteSignalKind.VolumeSurge) return Detail;   // 판정 수치(RVOL·전봉比·등락)가 곧 본문
             // 🚀 진입 적기 / 📦 진입 권장 — 둘 다 🌟×5(타이틀이 종류를 구분). 근거 한 줄만.
             if (Kind == MinuteSignalKind.HoldConfirm)
                 return CounterTrend

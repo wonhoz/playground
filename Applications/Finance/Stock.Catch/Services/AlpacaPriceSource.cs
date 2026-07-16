@@ -66,4 +66,85 @@ public sealed class AlpacaPriceSource(AppConfig config, HttpClient http)
         => root.TryGetProperty(obj, out var o) && o.ValueKind == JsonValueKind.Object
            && o.TryGetProperty(prop, out var v) && v.ValueKind == JsonValueKind.Number
             ? v.GetDecimal() : 0m;
+
+    // ───────────────────────── 급등락 전광판(미국 · 실시간 스크리너) ─────────────────────────
+
+    /// <summary>
+    /// 미국 급등/급락 상위 — Alpaca Screener movers(v1beta1 · 실시간). 정규장 지연이 있는 Yahoo와 달리
+    /// 실시간 기준 등락률 순위를 준다. gainers/losers 배열에서 해당 방향만 추린다.
+    /// </summary>
+    public async Task<List<MoverRow>> FetchMoversAsync(bool gainers, int top = 30, CancellationToken ct = default)
+    {
+        using var doc = await GetDocAsync($"https://data.alpaca.markets/v1beta1/screener/stocks/movers?top={top}", ct);
+        var rows = new List<MoverRow>();
+        if (!doc.RootElement.TryGetProperty(gainers ? "gainers" : "losers", out var arr) || arr.ValueKind != JsonValueKind.Array)
+            return rows;
+        foreach (var o in arr.EnumerateArray())
+        {
+            string sym = o.TryGetProperty("symbol", out var s) ? s.GetString() ?? "" : "";
+            if (sym.Length == 0) continue;
+            decimal price = o.TryGetProperty("price", out var p) && p.ValueKind == JsonValueKind.Number ? p.GetDecimal() : 0m;
+            double chg = o.TryGetProperty("percent_change", out var c) && c.ValueKind == JsonValueKind.Number ? c.GetDouble() : 0;
+            rows.Add(new MoverRow(rows.Count + 1, sym, "", price, chg, 0));
+        }
+        return rows;
+    }
+
+    /// <summary>
+    /// 미국 최다 거래 상위 — Alpaca Screener most-actives(by=volume · 실시간) + 스냅샷 멀티 조회 1회로
+    /// 현재가·등락률을 보강한다(스크리너 응답엔 거래량·건수만 있음).
+    /// </summary>
+    public async Task<List<MoverRow>> FetchMostActivesAsync(int top = 30, CancellationToken ct = default)
+    {
+        using var doc = await GetDocAsync($"https://data.alpaca.markets/v1beta1/screener/stocks/most-actives?by=volume&top={top}", ct);
+        var actives = new List<(string Sym, long Vol)>();
+        if (doc.RootElement.TryGetProperty("most_actives", out var arr) && arr.ValueKind == JsonValueKind.Array)
+            foreach (var o in arr.EnumerateArray())
+            {
+                string sym = o.TryGetProperty("symbol", out var s) ? s.GetString() ?? "" : "";
+                long vol = o.TryGetProperty("volume", out var v) && v.ValueKind == JsonValueKind.Number ? v.GetInt64() : 0;
+                if (sym.Length > 0) actives.Add((sym, vol));
+            }
+        if (actives.Count == 0) return new List<MoverRow>();
+
+        // 스냅샷 멀티 조회(1콜): 현재가(latestTrade.p)·전일 종가(prevDailyBar.c) → 등락률.
+        var quotes = new Dictionary<string, (decimal Price, double Chg)>(StringComparer.OrdinalIgnoreCase);
+        try
+        {
+            string symbols = string.Join(",", actives.Select(a => Uri.EscapeDataString(a.Sym)));
+            using var snap = await GetDocAsync($"https://data.alpaca.markets/v2/stocks/snapshots?symbols={symbols}&feed=iex", ct);
+            foreach (var prop in snap.RootElement.EnumerateObject())
+            {
+                if (prop.Value.ValueKind != JsonValueKind.Object) continue;
+                decimal price = SubDec(prop.Value, "latestTrade", "p");
+                if (price <= 0) price = SubDec(prop.Value, "dailyBar", "c");
+                decimal prev = SubDec(prop.Value, "prevDailyBar", "c");
+                quotes[prop.Name] = (price, prev > 0 && price > 0 ? (double)Math.Round((price / prev - 1) * 100, 2) : 0);
+            }
+        }
+        catch { /* 스냅샷 보강 실패 시 거래량만 표시 */ }
+
+        return actives.Select((a, i) =>
+        {
+            var q = quotes.GetValueOrDefault(a.Sym);
+            return new MoverRow(i + 1, a.Sym, "", q.Price, q.Chg, a.Vol);
+        }).ToList();
+    }
+
+    /// <summary>Alpaca GET 공용 — 키 헤더·상태 코드 검사. 반환 JsonDocument는 호출 측이 dispose.</summary>
+    private async Task<JsonDocument> GetDocAsync(string url, CancellationToken ct)
+    {
+        if (!config.HasAlpacaKeys)
+            throw new PriceSourceException("Alpaca API Key ID/Secret이 설정되지 않았습니다. 설정에서 입력하세요.");
+        using var req = new HttpRequestMessage(HttpMethod.Get, url);
+        req.Headers.Add("APCA-API-KEY-ID", config.AlpacaApiKeyId);
+        req.Headers.Add("APCA-API-SECRET-KEY", config.AlpacaApiSecret);
+        using var resp = await http.SendAsync(req, ct);
+        if (resp.StatusCode == HttpStatusCode.TooManyRequests)
+            throw new PriceSourceException("Alpaca 호출 한도를 초과했습니다. 잠시 후 다시 시도하세요.");
+        if (resp.StatusCode is HttpStatusCode.Unauthorized or HttpStatusCode.Forbidden)
+            throw new PriceSourceException("Alpaca API Key ID/Secret이 올바르지 않습니다.");
+        string text = await resp.Content.ReadAsStringAsync(ct);
+        return JsonDocument.Parse(text);
+    }
 }

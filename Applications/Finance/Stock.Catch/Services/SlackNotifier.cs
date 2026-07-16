@@ -253,11 +253,15 @@ public sealed class SlackNotifier(AppConfig config) : IDisposable
             MinuteSignalKind.WeakGoldenCross => (":warning:", "약한 확인 (횡보성 크로스)"),
             MinuteSignalKind.TopWarn => (":rotating_light::chart_with_downwards_trend:", "고점 경고 시그널"),
             MinuteSignalKind.CrossTurn => (":rotating_light::arrows_counterclockwise:", "전환 확인 (교차)"),
+            MinuteSignalKind.VolumeSurge => (":rotating_light::loud_sound:", "거래량 급증"),
             _ => (":rotating_light::small_red_triangle_down:", "하락 확인 (데드크로스)"),
         };
         var sb = new StringBuilder();
         sb.AppendLine($"{emoji} *{s.TfLabel}{head}* · *{s.Display}* · *{s.Price:N0}원* ({s.Time:HH:mm})");
         sb.AppendLine($"*{s.VerdictLine}*");
+        // 🔊 거래량 급증엔 당일 등락·VWAP 컨텍스트 병기 — 어느 방향 수급인지 바로 읽게.
+        if (s.Kind == MinuteSignalKind.VolumeSurge && !string.IsNullOrEmpty(s.Context))
+            sb.AppendLine(s.Context);
         // 🚀 진입 적기엔 권장 손절선 병기(일반 −2%·흔들림 주의 −3%).
         if (s.StopLossPrice > 0)
             sb.AppendLine($":octagonal_sign: 손절선: {s.StopLossPrice:N0}원 (−{s.StopLossPct:0.#}%){(s.ChaseWarn ? " · 흔들림 주의라 여유 있게" : s.CounterTrend ? " · 역추세라 여유 있게" : "")}");

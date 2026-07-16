@@ -80,6 +80,60 @@ public sealed class YahooPriceSource(HttpClient http) : IPriceSource
     private static decimal MetaDec(JsonElement meta, string prop)
         => meta.TryGetProperty(prop, out var v) && v.ValueKind == JsonValueKind.Number ? v.GetDecimal() : 0m;
 
+    // ───────────────────────── 급등락 전광판(미국 · 폴백 스크리너) ─────────────────────────
+
+    /// <summary>
+    /// 미국 사전정의 스크리너 — day_gainers / day_losers / most_actives. Alpaca 키가 없을 때의
+    /// 폴백(15분 지연 가능). 값이 raw 숫자 또는 {raw,fmt} 객체 두 형태로 오므로 둘 다 처리한다.
+    /// </summary>
+    public async Task<List<MoverRow>> FetchPredefinedMoversAsync(string scrId, int count = 30, CancellationToken ct = default)
+    {
+        string url = $"https://query1.finance.yahoo.com/v1/finance/screener/predefined/saved?scrIds={scrId}&count={count}";
+        string text;
+        try
+        {
+            using var resp = await http.GetAsync(url, ct);
+            text = await resp.Content.ReadAsStringAsync(ct);
+            if (!resp.IsSuccessStatusCode)
+                throw new PriceSourceException($"Yahoo 스크리너 응답 오류(HTTP {(int)resp.StatusCode}) — Alpaca 키를 설정하면 실시간 스크리너를 사용합니다.");
+        }
+        catch (PriceSourceException) { throw; }
+        catch (Exception ex) when (ex is not OperationCanceledException)
+        {
+            throw new PriceSourceException($"Yahoo 스크리너 요청 실패: {ex.Message}");
+        }
+
+        using var doc = JsonDocument.Parse(text);
+        var rows = new List<MoverRow>();
+        if (!doc.RootElement.TryGetProperty("finance", out var fin) ||
+            !fin.TryGetProperty("result", out var resArr) || resArr.ValueKind != JsonValueKind.Array ||
+            resArr.GetArrayLength() == 0 ||
+            !resArr[0].TryGetProperty("quotes", out var quotes) || quotes.ValueKind != JsonValueKind.Array)
+            return rows;
+
+        foreach (var q in quotes.EnumerateArray())
+        {
+            string sym = q.TryGetProperty("symbol", out var s) ? s.GetString() ?? "" : "";
+            if (sym.Length == 0) continue;
+            string name = q.TryGetProperty("shortName", out var n) && n.ValueKind == JsonValueKind.String ? n.GetString()! : "";
+            rows.Add(new MoverRow(rows.Count + 1, sym, name,
+                (decimal)RawNum(q, "regularMarketPrice"),
+                RawNum(q, "regularMarketChangePercent"),
+                (long)RawNum(q, "regularMarketVolume")));
+        }
+        return rows;
+    }
+
+    /// <summary>스크리너 필드 값 — raw 숫자 또는 {raw,fmt} 객체 모두 지원.</summary>
+    private static double RawNum(JsonElement el, string prop)
+    {
+        if (!el.TryGetProperty(prop, out var v)) return 0;
+        if (v.ValueKind == JsonValueKind.Number) return v.GetDouble();
+        if (v.ValueKind == JsonValueKind.Object && v.TryGetProperty("raw", out var r) && r.ValueKind == JsonValueKind.Number)
+            return r.GetDouble();
+        return 0;
+    }
+
     private async Task<StockSeries?> TryFetchAsync(string code, string suffix, string market,
         DateTime from, DateTime to, CancellationToken ct)
     {

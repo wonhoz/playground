@@ -171,6 +171,7 @@ public partial class MainWindow : Window
             Models.MinuteSignalKind.WeakGoldenCross => "⚠ 약한 확인 (횡보성 크로스)",
             Models.MinuteSignalKind.TopWarn => "📉 고점 경고 시그널",
             Models.MinuteSignalKind.CrossTurn => "🔁 전환 확인 (교차)",
+            Models.MinuteSignalKind.VolumeSurge => "🔊 거래량 급증",
             _ => "🔻 하락 확인 (데드크로스)",
         };
         // 풍선도 Slack과 동일하게 종합 판정 우선(즉답형) — 지표 상세는 시그널 로그·분석 창에서.
@@ -995,6 +996,7 @@ public partial class MainWindow : Window
         Models.MinuteSignalKind.WeakGoldenCross => "골든크로스(약·모멘텀 부족)",
         Models.MinuteSignalKind.TopWarn => "고점 경고",
         Models.MinuteSignalKind.CrossTurn => "전환 확인(교차)",
+        Models.MinuteSignalKind.VolumeSurge => "거래량 급증",
         _ => "데드크로스(하락 확인)",
     };
 
@@ -1025,6 +1027,9 @@ public partial class MainWindow : Window
     // ────────────────────────────── 관심 종목(워치리스트) ──────────────────────────────
     private void Flow_Click(object sender, RoutedEventArgs e)
         => new InvestorFlowWindow(_registry, _config) { Owner = this }.Show();
+
+    private void Leaderboard_Click(object sender, RoutedEventArgs e)
+        => new LeaderboardWindow(_registry, _config) { Owner = this }.Show();
 
     private void Watchlist_Click(object sender, RoutedEventArgs e)
     {

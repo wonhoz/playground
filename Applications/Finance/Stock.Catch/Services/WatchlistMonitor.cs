@@ -159,8 +159,8 @@ public sealed class WatchlistMonitor(AppConfig config, PriceSourceRegistry regis
                     catch { /* 래더 알림 실패는 무시 */ }
                 }
 
-                // 1분봉 시그널: 바닥 반등·고점 경고(국내·비지수·옵트인·KIS 1분봉 · 분봉 캐시 공유)
-                if ((item.BottomAlert || item.TopAlert) && !item.IsIndex && item.Market == MarketKind.KR)
+                // 1분봉 시그널: 바닥 반등·고점 경고·거래량 급증(국내·비지수·옵트인·KIS 1분봉 · 분봉 캐시 공유)
+                if ((item.BottomAlert || item.TopAlert || item.VolumeSurgeAlert) && !item.IsIndex && item.Market == MarketKind.KR)
                 {
                     try { await minuteSignal.EvaluateAsync(item, ct); }
                     catch (OperationCanceledException) { break; }

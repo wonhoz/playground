@@ -58,6 +58,8 @@ public partial class SettingsWindow : Window
         TopVolBox.Text = config.TopVolumeRatio.ToString("0.##");
         TopCooldownBox.Text = config.TopCooldownMinutes.ToString();
         TopCrossCheck.IsChecked = config.TopConfirmCross;
+        VolSurgeRvolBox.Text = config.VolumeSurgeRvol.ToString("0.##");
+        VolSurgeCooldownBox.Text = config.VolumeSurgeCooldownMinutes.ToString();
         CalibResult.Text = config.ReversalCalibration?.Summary ?? "미학습 — 지표 휴리스틱 확률 사용 중";
     }
 
@@ -178,6 +180,8 @@ public partial class SettingsWindow : Window
         if (double.TryParse(TopVolBox.Text.Trim(), out var tvol)) _config.TopVolumeRatio = Math.Max(0, tvol);
         if (int.TryParse(TopCooldownBox.Text.Trim(), out var tcd)) _config.TopCooldownMinutes = Math.Max(1, tcd);
         _config.TopConfirmCross = TopCrossCheck.IsChecked == true;
+        if (double.TryParse(VolSurgeRvolBox.Text.Trim(), out var vsr)) _config.VolumeSurgeRvol = Math.Clamp(vsr, 1, 50);
+        if (int.TryParse(VolSurgeCooldownBox.Text.Trim(), out var vscd)) _config.VolumeSurgeCooldownMinutes = Math.Max(1, vscd);
 
         // 자격 변경 시 캐시 토큰 무효화
         _config.CachedToken = string.Empty;

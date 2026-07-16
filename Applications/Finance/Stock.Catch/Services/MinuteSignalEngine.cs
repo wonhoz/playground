@@ -85,6 +85,8 @@ public sealed class MinuteSignalEngine(AppConfig config, PriceSourceRegistry reg
         public DateTime BoxStart = DateTime.MinValue;              // 박스 시작(GC) 봉 시각
         public decimal BoxHi, BoxLo;                               // 박스 상/하단(확장)
         public int BoxBars;                                        // 시작 후 경과 완성봉 수
+        // 🔊 거래량 급증(1분봉 전용) 상태
+        public DateTime VolSurgeAt = DateTime.MinValue;            // 최근 급증 알림 봉 시각(쿨다운 기준)
     }
 
     /// <summary>종목 단위 공용 데이터(분봉 캐시·일봉 컨텍스트) + 타임프레임별 상태.</summary>
@@ -207,7 +209,7 @@ public sealed class MinuteSignalEngine(AppConfig config, PriceSourceRegistry reg
 
             int start = 0;
             while (start < tfBars.Count && tfBars[start].Date <= st.LastEvalBar) start++;
-            ScanBars(item, st, tfBars, todayStart, start, Fire, item.BottomAlert, item.TopAlert, tf, sd.DayTrend, sd.PrevClose, vwap);
+            ScanBars(item, st, tfBars, todayStart, start, Fire, item.BottomAlert, item.TopAlert, item.VolumeSurgeAlert, tf, sd.DayTrend, sd.PrevClose, vwap);
             st.LastEvalBar = tfBars[^1].Date;
         }
     }
@@ -263,7 +265,7 @@ public sealed class MinuteSignalEngine(AppConfig config, PriceSourceRegistry reg
             if (tfBars.Count < 26) continue;
             int todayStart = warmTf.Count;
             var st = new State();   // 라이브 상태와 분리된 임시 상태
-            ScanBars(item, st, tfBars, todayStart, 0, result.Add, bottom: true, top: true, tf, dayTrend, prevClose, vwap);
+            ScanBars(item, st, tfBars, todayStart, 0, result.Add, bottom: true, top: true, volSurge: true, tf, dayTrend, prevClose, vwap);
         }
         return result.OrderBy(s => s.Time).ThenBy(s => s.Timeframe).ToList();
     }
@@ -342,7 +344,7 @@ public sealed class MinuteSignalEngine(AppConfig config, PriceSourceRegistry reg
     /// 판정·발화는 todayStart 이후(당일 세션)에만 한다 — 전날 봉으로 09:00부터 지표가 서게 하기 위함.
     /// </summary>
     private void ScanBars(WatchItem item, State st, List<Candle> bars, int todayStart, int fromIdx,
-        Action<MinuteSignal> emit, bool bottom, bool top, int tf, double? dayTrend, decimal prevClose,
+        Action<MinuteSignal> emit, bool bottom, bool top, bool volSurge, int tf, double? dayTrend, decimal prevClose,
         IReadOnlyDictionary<DateTime, double>? vwap = null)
     {
         var closes = bars.Select(b => (double)b.Close).ToList();
@@ -370,6 +372,7 @@ public sealed class MinuteSignalEngine(AppConfig config, PriceSourceRegistry reg
             if (bottom && tf == 1) EvaluateFollow(item, st, bars, i, emit, ribbon);   // 직후 양봉은 1분봉 전용
             if (bottom) EvaluateBottom(item, st, bars, i, upper, lower, rsi, volMa, emit, tf, dayTrend, prevClose, vwap, loShort, ribbon, counterTrend);
             if (top) EvaluateTop(item, st, bars, i, upper, lower, rsi, volMa, emit, tf);
+            if (volSurge && tf == 1) EvaluateVolumeSurge(item, st, bars, i, volMa, emit, dayTrend, prevClose, vwap);   // 🔊 거래량 급증(1분봉 전용)
         }
     }
 
@@ -737,6 +740,38 @@ public sealed class MinuteSignalEngine(AppConfig config, PriceSourceRegistry reg
         st.BoxActive = false;     // 과열 전환 — 박스 추적 취소
         emit(new MinuteSignal(item.Symbol, item.Name, MinuteSignalKind.TopWarn, bar.Close,
             $"상단워킹 {touchCount}봉 → 이탈 %b {pb:0.00} · RSI {rsi[i]:0.#}↓(고점 {maxRsi:0.#}) · {evidence}", bar.Date, tf));
+    }
+
+    // ───────────────────────── 🔊 거래량 급증 ─────────────────────────
+
+    /// <summary>
+    /// 완성 1분봉의 거래량 급증 판정(방향 무관 관심 신호 · 1분봉 전용). 완성봉 거래량이
+    /// <b>직전 20봉 평균</b>(volMa[i-1] — 현재 봉 제외 · 자기 부풀림 방지)의 RVOL 배수(종목 override ?? 전역,
+    /// 기본 5×) 이상이면 발화. 직전 봉 단순 비교는 직전 봉이 우연히 작을 때(한산 구간) 오탐이 커서
+    /// 20봉 평균 기준을 쓰고, 전봉比는 참고로만 표기한다. 분봉 등락·봉 방향을 병기해
+    /// 급등/급락 어느 쪽 수급인지 바로 읽게 하고, 당일 등락·VWAP 등은 Context 줄로 제공한다.
+    /// </summary>
+    private void EvaluateVolumeSurge(WatchItem item, State st, List<Candle> bars, int i, double[] volMa,
+        Action<MinuteSignal> emit, double? dayTrend, decimal prevClose, IReadOnlyDictionary<DateTime, double>? vwap)
+    {
+        var bar = bars[i];
+        // 쿨다운: 뉴스 직후 등 연속 봉 급증의 도배 방지.
+        if ((bar.Date - st.VolSurgeAt).TotalMinutes < Math.Max(1, config.VolumeSurgeCooldownMinutes)) return;
+        if (i < 1 || double.IsNaN(volMa[i - 1]) || volMa[i - 1] <= 0) return;   // 직전 20봉 평균 미형성
+
+        double eRvol = item.VolumeSurgeRvol ?? config.VolumeSurgeRvol;
+        if (eRvol <= 0) return;   // 0 이하 = 끔
+        double rvol = bar.Volume / volMa[i - 1];
+        if (rvol < eRvol) return;
+
+        st.VolSurgeAt = bar.Date;
+        long prevVol = bars[i - 1].Volume;
+        double prevRatio = prevVol > 0 ? (double)bar.Volume / prevVol : 0;
+        double barChg = bars[i - 1].Close > 0 ? (double)(bar.Close / bars[i - 1].Close - 1) * 100 : 0;
+        string dir = bar.Close > bar.Open ? "양봉" : bar.Close < bar.Open ? "음봉" : "보합";
+        emit(new MinuteSignal(item.Symbol, item.Name, MinuteSignalKind.VolumeSurge, bar.Close,
+            $"RVOL {rvol:0.0}× (20봉 평균比){(prevRatio > 0 ? $" · 전봉比 {prevRatio:0.0}×" : "")} · {dir} {barChg:+0.00;-0.00}% · 거래량 {bar.Volume:N0}",
+            bar.Date, 1, Context(bars, i, dayTrend, prevClose, vwap), AboveVwapAt(vwap, bar)));
     }
 
     // ───────────────────────── 발생/전송 ─────────────────────────

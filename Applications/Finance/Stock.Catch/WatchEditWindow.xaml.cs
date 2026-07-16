@@ -37,11 +37,13 @@ public partial class WatchEditWindow : Window
         LadderCheck.IsChecked = item.LadderAlert;
         BottomCheck.IsChecked = item.BottomAlert;
         TopCheck.IsChecked = item.TopAlert;
+        VolSurgeCheck.IsChecked = item.VolumeSurgeAlert;
         ChannelBox.Text = item.SlackChannel;
         PairBox.Text = item.PairSymbol;
         OvRsiBox.Text = item.BottomRsiMax?.ToString("0.#") ?? "";
         OvVolBox.Text = item.BottomVolumeRatio?.ToString("0.##") ?? "";
         OvPbBox.Text = item.BottomMinPercentB?.ToString("0.##") ?? "";
+        OvRvolBox.Text = item.VolumeSurgeRvol?.ToString("0.##") ?? "";
         SelectSource(item.Source);
         SelectExchange(item.Exchange);
         ApplyIndexMode();
@@ -69,6 +71,7 @@ public partial class WatchEditWindow : Window
             LadderCheck.IsEnabled = false;   // 지수는 래더 알림 미지원
             BottomCheck.IsEnabled = false;   // 지수는 반등 시그널 미지원
             TopCheck.IsEnabled = false;      // 지수는 고점 경고 미지원
+            VolSurgeCheck.IsEnabled = false; // 지수는 거래량 급증 미지원(분봉 거래량 개념 없음)
         }
         else UpdateLabels();
     }
@@ -124,6 +127,7 @@ public partial class WatchEditWindow : Window
         LadderCheck.IsEnabled = !us;   // 매수 래더·갭다운은 국내 종목만
         BottomCheck.IsEnabled = !us;   // 바닥 반등 시그널도 국내 종목만(KIS 분봉)
         TopCheck.IsEnabled = !us;      // 고점 경고 시그널도 국내 종목만(KIS 분봉)
+        VolSurgeCheck.IsEnabled = !us; // 거래량 급증도 국내 종목만(KIS 분봉)
     }
 
     private async void Lookup_Click(object sender, RoutedEventArgs e)
@@ -192,9 +196,11 @@ public partial class WatchEditWindow : Window
         if (!TryOverride(OvRsiBox.Text, 5, 95, out var ovRsi, "RSI")) return;
         if (!TryOverride(OvVolBox.Text, 0, 20, out var ovVol, "거래량 배수")) return;
         if (!TryOverride(OvPbBox.Text, 0, 0.9, out var ovPb, "%b")) return;
+        if (!TryOverride(OvRvolBox.Text, 1, 50, out var ovRvol, "RVOL 배수")) return;
         _item.BottomRsiMax = ovRsi;
         _item.BottomVolumeRatio = ovVol;
         _item.BottomMinPercentB = ovPb;
+        _item.VolumeSurgeRvol = ovRvol;
 
         _item.AlertUp = AlertUpCheck.IsChecked == true;
         _item.AlertDown = AlertDownCheck.IsChecked == true;
@@ -203,6 +209,7 @@ public partial class WatchEditWindow : Window
         _item.LadderAlert = LadderCheck.IsChecked == true && krStock;
         _item.BottomAlert = BottomCheck.IsChecked == true && krStock;
         _item.TopAlert = TopCheck.IsChecked == true && krStock;
+        _item.VolumeSurgeAlert = VolSurgeCheck.IsChecked == true && krStock;
 
         DialogResult = true;
     }

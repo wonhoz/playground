@@ -1,7 +1,7 @@
 ﻿<Window x:Class="Stock.Catch.WatchEditWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="관심 종목" Height="730" Width="430"
+        Title="관심 종목" Height="800" Width="430"
         Background="{StaticResource WindowBg}" ResizeMode="NoResize"
         WindowStartupLocation="CenterOwner">
     <Window.Resources>
@@ -98,19 +98,25 @@
                       ToolTip="국내 종목만 · KIS 키 필요. 급락 후 볼린저(20,2σ) 하단 터치 → 밴드 복귀 + RSI 과매도 상승 전환 + 거래량 급증이면 알림(밴드워킹·약반등 필터 적용). 이후 MA5/MA20 골든크로스 확인 알림."/>
             <CheckBox x:Name="TopCheck" Content="고점 경고 시그널 (볼린저 상단 이탈 · 1분봉)" Margin="0,8,0,0"
                       ToolTip="국내 종목만 · KIS 키 필요. 상단 밴드워킹(2봉+) + RSI 과매수(70+) 후 밴드 안 복귀 하락봉 + 소진 증거(긴 윗꼬리/거래량 클라이맥스)면 익절 경고. 이후 MA5/MA20 데드크로스 확인 알림."/>
+            <CheckBox x:Name="VolSurgeCheck" Content="거래량 급증 알림 (RVOL · 1분봉)" Margin="0,8,0,0"
+                      ToolTip="국내 종목만 · KIS 키 필요. 완성 1분봉 거래량이 직전 20봉 평균의 RVOL 배수(기본 5×) 이상이면 방향 무관 관심 알림 — 분봉 등락·당일 등락률 병기. 배수는 아래 종목 시그널의 RVOL≥에 입력(비우면 전역)."/>
         </StackPanel>
 
         <TextBlock Grid.Row="10" Grid.Column="0" Text="종목 시그널" Style="{StaticResource FieldLbl}"/>
-        <StackPanel Grid.Row="10" Grid.Column="1" Orientation="Horizontal" Margin="0,0,0,10"
-                    ToolTip="바닥 반등 판정 임계 — 비우면 전역 설정 사용. 인버스·저변동 종목은 fake 반등이 많아 RSI↓·거래량↑·%b↑ 강화 권장(실측: R32/V1.8/%b0.25 → 인버스 GC 승률 29%→50%·75%). 레버리지·본주는 비워두세요(전역).">
-            <TextBlock Text="RSI≤" Style="{StaticResource FieldLbl}" VerticalAlignment="Center" Margin="0,0,4,0"/>
-            <TextBox x:Name="OvRsiBox" Width="44"/>
-            <TextBlock Text="거래량≥" Style="{StaticResource FieldLbl}" VerticalAlignment="Center" Margin="12,0,4,0"/>
-            <TextBox x:Name="OvVolBox" Width="44"/>
-            <TextBlock Text="%b≥" Style="{StaticResource FieldLbl}" VerticalAlignment="Center" Margin="12,0,4,0"/>
-            <TextBox x:Name="OvPbBox" Width="44"/>
+        <WrapPanel Grid.Row="10" Grid.Column="1" Margin="0,0,0,10"
+                    ToolTip="시그널 임계 — 비우면 전역 설정 사용. 인버스·저변동 종목은 fake 반등이 많아 RSI↓·거래량↑·%b↑ 강화 권장(실측: R32/V1.8/%b0.25 → 인버스 GC 승률 29%→50%·75%). 레버리지·본주는 비워두세요(전역). RVOL은 거래량 급증 알림 배수.">
+            <TextBlock Text="RSI≤" Style="{StaticResource FieldLbl}" VerticalAlignment="Center" Margin="0,0,4,4"/>
+            <TextBox x:Name="OvRsiBox" Width="44" Margin="0,0,0,4"/>
+            <TextBlock Text="거래량≥" Style="{StaticResource FieldLbl}" VerticalAlignment="Center" Margin="12,0,4,4"/>
+            <TextBox x:Name="OvVolBox" Width="44" Margin="0,0,0,4"/>
+            <TextBlock Text="%b≥" Style="{StaticResource FieldLbl}" VerticalAlignment="Center" Margin="12,0,4,4"/>
+            <TextBox x:Name="OvPbBox" Width="44" Margin="0,0,0,4"/>
+            <TextBlock Text="RVOL≥" Style="{StaticResource FieldLbl}" VerticalAlignment="Center" Margin="0,0,4,0"
+                       ToolTip="거래량 급증 알림의 RVOL 배수(직전 20봉 평균比) override"/>
+            <TextBox x:Name="OvRvolBox" Width="44"
+                     ToolTip="거래량 급증 알림 RVOL 배수(직전 20봉 평균比). 비우면 전역(기본 5). 높일수록 더 확실한 급증만."/>
             <TextBlock Text="(비우면 전역)" Style="{StaticResource FieldLbl}" VerticalAlignment="Center" Margin="10,0,0,0" FontSize="11"/>
-        </StackPanel>
+        </WrapPanel>
 
         <TextBlock Grid.Row="11" Grid.ColumnSpan="2" x:Name="HintText" Style="{x:Null}" TextWrapping="Wrap"
                    FontSize="11" Foreground="{StaticResource FgMuted}" VerticalAlignment="Top" Margin="0,4,0,0"

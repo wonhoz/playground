@@ -170,6 +170,19 @@
                 </StackPanel>
                 <CheckBox x:Name="TopCrossCheck" Content="데드크로스(MA5↘MA20) 확인 알림 (고점 경고 후 20분 내)"/>
 
+                <!-- 🔊 거래량 급증 알림 -->
+                <TextBlock Text="거래량 급증 알림 (관심 종목 · 국내 1분봉)" Style="{StaticResource Section}"/>
+                <TextBlock Style="{StaticResource Hint}"
+                           Text="완성 1분봉 거래량이 직전 20봉 평균의 RVOL 배수 이상이면 방향 무관 '수급 관심' 알림 — 분봉 등락·당일 등락률을 병기합니다. 직전 봉 단순 비교는 한산 구간 오탐이 커서 20봉 평균(RVOL)을 기준으로 합니다. 독립 알림이므로 배수는 보수적으로(기본 5×). 종목별 사용 여부·배수 override는 관심 종목 편집에서(KIS 키 필요)."/>
+                <StackPanel Orientation="Horizontal" Margin="0,0,0,8">
+                    <TextBlock Text="RVOL 배수" Style="{StaticResource FieldLbl}" VerticalAlignment="Center" Margin="0,0,8,0"
+                               ToolTip="직전 20봉 평균 거래량 대비 배수. 높일수록 더 확실한 급증만 알림. 권장 4~6."/>
+                    <TextBox x:Name="VolSurgeRvolBox" Width="56"/>
+                    <TextBlock Text="쿨다운(분)" Style="{StaticResource FieldLbl}" VerticalAlignment="Center" Margin="16,0,8,0"
+                               ToolTip="같은 종목 재알림 금지 시간 — 뉴스 직후 연속 봉 급증의 도배 방지."/>
+                    <TextBox x:Name="VolSurgeCooldownBox" Width="56"/>
+                </StackPanel>
+
                 <!-- 반등 캘리브레이션(백테스트) -->
                 <TextBlock Text="반등 확률 캘리브레이션 (백테스트)" Style="{StaticResource Section}"/>
                 <TextBlock Style="{StaticResource Hint}"

@@ -277,6 +277,21 @@ public sealed class AppConfig
     /// </summary>
     public bool SignalWarmupPrevDay { get; set; } = true;
 
+    // ── 🔊 거래량 급증 알림(관심 종목 · 국내 1분봉 · 종목별 옵트인) ──
+    /// <summary>
+    /// 거래량 급증 RVOL 배수: 완성 1분봉 거래량이 <b>직전 20봉 평균</b>(현재 봉 제외)의 이 배수 이상이면 알림.
+    /// 직전 봉 단순 비교(1.5~2×)는 직전 봉이 우연히 작을 때(한산 구간) 오탐이 커서 20봉 평균 기준을 쓴다
+    /// — 바닥 시그널의 거래량 배수(BottomVolumeRatio·시그널 문맥 내 1.5×)와 달리 이 알림은 <b>독립 관심 신호</b>라
+    /// 훨씬 보수적인 5×를 기본으로 한다(운용 철학: 애매한 건 버리고 확실할 때만). 종목별 override 가능.
+    /// </summary>
+    public double VolumeSurgeRvol { get; set; } = 5.0;
+    /// <summary>같은 종목 거래량 급증 재알림 쿨다운(분). 연속 봉 급증(뉴스 직후 등)의 도배 방지. 기본 10.</summary>
+    public int VolumeSurgeCooldownMinutes { get; set; } = 10;
+
+    // ── 🏆 급등락 전광판 ──
+    /// <summary>전광판 자동 갱신 주기(초). 최소 10초. 기본 30.</summary>
+    public int LeaderboardRefreshSeconds { get; set; } = 30;
+
     // ── 고점 경고 시그널(관심 종목 · 국내 1분봉 · 바닥의 거울상) ──
     /// <summary>셋업으로 인정할 RSI(14) 과매수 하한. 상단 터치 구간 최고 RSI가 이 값 이상일 때만 시그널.</summary>
     public double TopRsiMin { get; set; } = 70;

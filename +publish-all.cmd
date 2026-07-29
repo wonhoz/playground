@@ -96,6 +96,9 @@ call :pub "DNS.Flip"              "Applications\Network\Monitor\DNS.Flip"       
 call :pub "Net.Scan"              "Applications\Network\Monitor\Net.Scan"                   "Net.Scan.exe"              "Applications\Network\Monitor\Net.Scan"
 call :pub "Port.Watch"            "Applications\Network\Monitor\Port.Watch"                 "Port.Watch.exe"            "Applications\Network\Monitor"
 
+:: ── Applications / Network / Security ──────────────────────────────
+call :pub "Siege.Lab"             "Applications\Network\Security\Siege.Lab"                 "Siege.Lab.exe"             "Applications\Network\Security\Siege.Lab"
+
 :: ── Applications / Network / Server ────────────────────────────────
 call :pub "Api.Probe"             "Applications\Network\Server\Api.Probe"                   "Api.Probe.exe"             "Applications\Network\Server\Api.Probe"
 call :pub "Mock.Server"           "Applications\Network\Server\Mock.Server"                 "Mock.Server.exe"           "Applications\Network\Server"

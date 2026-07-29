@@ -123,6 +123,7 @@ $allApps = @(
     [pscustomobject]@{N=106; Name="Win.Scope";            Cat="Applications/System/Manager"}
     [pscustomobject]@{N=107; Name="Word.Cloud";           Cat="Applications/Text"}
     [pscustomobject]@{N=108; Name="Zip.Peek";             Cat="Applications/Files/Inspector"}
+    [pscustomobject]@{N=109; Name="Siege.Lab";            Cat="Applications/Network/Security"}
 )
 
 $checkedArr = New-Object bool[] $allApps.Count

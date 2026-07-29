@@ -1,0 +1,437 @@
+<Window x:Class="SiegeLab.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Siege.Lab — 보안 · 스트레스 테스트" Height="760" Width="1180"
+        WindowStartupLocation="CenterScreen"
+        Background="{StaticResource Bg0Brush}"
+        FontFamily="Segoe UI" FontSize="13">
+
+  <Window.Resources>
+    <!-- 스탯 카드 스타일 -->
+    <Style x:Key="Card" TargetType="Border">
+      <Setter Property="Background" Value="{StaticResource Bg2Brush}"/>
+      <Setter Property="BorderBrush" Value="{StaticResource BorderBrush2}"/>
+      <Setter Property="BorderThickness" Value="1"/>
+      <Setter Property="CornerRadius" Value="8"/>
+      <Setter Property="Padding" Value="14,10"/>
+      <Setter Property="Margin" Value="4"/>
+    </Style>
+    <Style x:Key="StatLabel" TargetType="TextBlock">
+      <Setter Property="Foreground" Value="{StaticResource FgDimBrush}"/>
+      <Setter Property="FontSize" Value="11"/>
+    </Style>
+    <Style x:Key="StatValue" TargetType="TextBlock">
+      <Setter Property="Foreground" Value="{StaticResource FgBrush}"/>
+      <Setter Property="FontSize" Value="22"/>
+      <Setter Property="FontWeight" Value="SemiBold"/>
+      <Setter Property="FontFamily" Value="Consolas"/>
+    </Style>
+    <Style x:Key="H2" TargetType="TextBlock">
+      <Setter Property="Foreground" Value="{StaticResource FgBrush}"/>
+      <Setter Property="FontSize" Value="14"/>
+      <Setter Property="FontWeight" Value="SemiBold"/>
+      <Setter Property="Margin" Value="0,4,0,8"/>
+    </Style>
+    <Style x:Key="FieldLabel" TargetType="TextBlock">
+      <Setter Property="Foreground" Value="{StaticResource FgDimBrush}"/>
+      <Setter Property="FontSize" Value="12"/>
+      <Setter Property="Margin" Value="0,8,0,3"/>
+    </Style>
+  </Window.Resources>
+
+  <Grid Margin="14">
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto"/>
+      <RowDefinition Height="Auto"/>
+      <RowDefinition Height="*"/>
+      <RowDefinition Height="Auto"/>
+    </Grid.RowDefinitions>
+
+    <!-- ── 헤더 ─────────────────────────────────────────────── -->
+    <Grid Grid.Row="0" Margin="0,0,0,10">
+      <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+        <TextBlock Text="🛡" FontSize="24" VerticalAlignment="Center"/>
+        <TextBlock Text="Siege.Lab" FontSize="20" FontWeight="Bold"
+                   Foreground="{StaticResource AccentBrush}" Margin="8,0,0,0" VerticalAlignment="Center"/>
+        <TextBlock Text="보안 · 스트레스 테스트" FontSize="12"
+                   Foreground="{StaticResource FgDimBrush}" Margin="10,0,0,0" VerticalAlignment="Bottom"/>
+      </StackPanel>
+      <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
+        <TextBlock Text="활성 대상:" Foreground="{StaticResource FgDimBrush}"
+                   VerticalAlignment="Center" Margin="0,0,8,0"/>
+        <ComboBox x:Name="cboTarget" Width="320" SelectionChanged="OnTargetChanged"/>
+        <Border x:Name="badgeAuth" Style="{StaticResource Card}" Margin="10,0,0,0" Padding="10,5">
+          <TextBlock x:Name="txtAuthBadge" Text="미인가" Foreground="{StaticResource CriticalBrush}"
+                     FontWeight="SemiBold" VerticalAlignment="Center"/>
+        </Border>
+      </StackPanel>
+    </Grid>
+
+    <!-- ── 안전 배너 ────────────────────────────────────────── -->
+    <Border Grid.Row="1" Background="#1A2A2E" BorderBrush="{StaticResource AccentBrush}"
+            BorderThickness="1" CornerRadius="6" Padding="12,8" Margin="0,0,0,10">
+      <TextBlock TextWrapping="Wrap" Foreground="{StaticResource FgBrush}" FontSize="12">
+        ⚠ 이 도구는 <Run FontWeight="Bold">소유하거나 서면 허가를 받은 대상</Run>에 대해서만 사용하세요.
+        허가 없는 스캔·부하 테스트는 법적 책임이 따를 수 있습니다. 모든 능동 테스트는 안전 게이트(허용 목록)를 통과해야 실행됩니다.
+      </TextBlock>
+    </Border>
+
+    <!-- ── 탭 ───────────────────────────────────────────────── -->
+    <TabControl Grid.Row="2">
+
+      <!-- 1) 대상 -->
+      <TabItem Header="🎯 대상">
+        <Grid Margin="8">
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="380"/>
+            <ColumnDefinition Width="*"/>
+          </Grid.ColumnDefinitions>
+          <StackPanel Grid.Column="0" Margin="0,0,16,0">
+            <TextBlock Text="대상 프로파일 등록" Style="{StaticResource H2}"/>
+            <TextBlock Text="이름" Style="{StaticResource FieldLabel}"/>
+            <TextBox x:Name="txtProfName"/>
+            <TextBlock Text="기본 URL (예: https://i-pacs.net)" Style="{StaticResource FieldLabel}"/>
+            <TextBox x:Name="txtProfUrl"/>
+            <TextBlock Text="인증 헤더 (선택, 예: Authorization: Bearer …)" Style="{StaticResource FieldLabel}"/>
+            <TextBox x:Name="txtProfAuth"/>
+            <CheckBox x:Name="chkPledge" Margin="0,14,0,0"
+                      Content="이 대상을 소유하거나 테스트 허가를 받았습니다"/>
+            <Button Content="대상 등록 / 갱신" Style="{StaticResource AccentButton}"
+                    Margin="0,14,0,0" Click="OnSaveTarget"/>
+          </StackPanel>
+          <StackPanel Grid.Column="1">
+            <TextBlock Text="등록된 대상 (허용 목록)" Style="{StaticResource H2}"/>
+            <DataGrid x:Name="gridTargets" Height="360" SelectionChanged="OnTargetGridSelect">
+              <DataGrid.Columns>
+                <DataGridTextColumn Header="이름" Binding="{Binding Name}" Width="140"/>
+                <DataGridTextColumn Header="URL" Binding="{Binding BaseUrl}" Width="*"/>
+                <DataGridTextColumn Header="허가" Binding="{Binding Authorized}" Width="60"/>
+              </DataGrid.Columns>
+            </DataGrid>
+            <Button Content="선택 대상 삭제" Margin="0,10,0,0" HorizontalAlignment="Left"
+                    Click="OnDeleteTarget"/>
+          </StackPanel>
+        </Grid>
+      </TabItem>
+
+      <!-- 2) 부하 -->
+      <TabItem Header="🔥 부하/스트레스">
+        <Grid Margin="8">
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="320"/>
+            <ColumnDefinition Width="*"/>
+          </Grid.ColumnDefinitions>
+          <ScrollViewer Grid.Column="0" VerticalScrollBarVisibility="Auto" Margin="0,0,16,0">
+            <StackPanel>
+              <TextBlock Text="부하 설정" Style="{StaticResource H2}"/>
+              <TextBlock Text="URL (경로 포함)" Style="{StaticResource FieldLabel}"/>
+              <TextBox x:Name="txtLoadUrl"/>
+              <TextBlock Text="HTTP 메서드" Style="{StaticResource FieldLabel}"/>
+              <ComboBox x:Name="cboLoadMethod" SelectedIndex="0">
+                <ComboBoxItem>GET</ComboBoxItem><ComboBoxItem>POST</ComboBoxItem>
+                <ComboBoxItem>PUT</ComboBoxItem><ComboBoxItem>HEAD</ComboBoxItem>
+              </ComboBox>
+              <Grid>
+                <Grid.ColumnDefinitions><ColumnDefinition/><ColumnDefinition/></Grid.ColumnDefinitions>
+                <StackPanel Grid.Column="0" Margin="0,0,4,0">
+                  <TextBlock Text="동시 사용자" Style="{StaticResource FieldLabel}"/>
+                  <TextBox x:Name="txtConc" Text="20"/>
+                </StackPanel>
+                <StackPanel Grid.Column="1" Margin="4,0,0,0">
+                  <TextBlock Text="지속(초)" Style="{StaticResource FieldLabel}"/>
+                  <TextBox x:Name="txtDur" Text="30"/>
+                </StackPanel>
+              </Grid>
+              <Grid>
+                <Grid.ColumnDefinitions><ColumnDefinition/><ColumnDefinition/></Grid.ColumnDefinitions>
+                <StackPanel Grid.Column="0" Margin="0,0,4,0">
+                  <TextBlock Text="램프업(초)" Style="{StaticResource FieldLabel}"/>
+                  <TextBox x:Name="txtRamp" Text="5"/>
+                </StackPanel>
+                <StackPanel Grid.Column="1" Margin="4,0,0,0">
+                  <TextBlock Text="최대 RPS (0=무제한)" Style="{StaticResource FieldLabel}"/>
+                  <TextBox x:Name="txtRps" Text="0"/>
+                </StackPanel>
+              </Grid>
+              <TextBlock Text="요청 타임아웃(ms)" Style="{StaticResource FieldLabel}"/>
+              <TextBox x:Name="txtTimeout" Text="10000"/>
+              <TextBlock Text="추가 헤더 (한 줄에 하나: Name: Value)" Style="{StaticResource FieldLabel}"/>
+              <TextBox x:Name="txtLoadHeaders" AcceptsReturn="True" Height="46" TextWrapping="Wrap"/>
+              <TextBlock Text="본문 (POST/PUT)" Style="{StaticResource FieldLabel}"/>
+              <TextBox x:Name="txtLoadBody" AcceptsReturn="True" Height="60" TextWrapping="Wrap"/>
+              <StackPanel Orientation="Horizontal" Margin="0,14,0,0">
+                <Button x:Name="btnLoadStart" Content="▶ 시작" Style="{StaticResource AccentButton}"
+                        Width="110" Click="OnLoadStart"/>
+                <Button x:Name="btnLoadStop" Content="■ 중지" Style="{StaticResource DangerButton}"
+                        Width="110" Margin="8,0,0,0" Click="OnLoadStop" IsEnabled="False"/>
+              </StackPanel>
+            </StackPanel>
+          </ScrollViewer>
+
+          <StackPanel Grid.Column="1">
+            <ProgressBar x:Name="pbLoad" Margin="4,0,4,8"/>
+            <UniformGrid Columns="4">
+              <Border Style="{StaticResource Card}"><StackPanel>
+                <TextBlock Text="경과(초)" Style="{StaticResource StatLabel}"/>
+                <TextBlock x:Name="lvElapsed" Text="0" Style="{StaticResource StatValue}"/></StackPanel></Border>
+              <Border Style="{StaticResource Card}"><StackPanel>
+                <TextBlock Text="총 요청" Style="{StaticResource StatLabel}"/>
+                <TextBlock x:Name="lvTotal" Text="0" Style="{StaticResource StatValue}"/></StackPanel></Border>
+              <Border Style="{StaticResource Card}"><StackPanel>
+                <TextBlock Text="현재 RPS" Style="{StaticResource StatLabel}"/>
+                <TextBlock x:Name="lvRps" Text="0" Style="{StaticResource StatValue}"
+                           Foreground="{StaticResource AccentBrush}"/></StackPanel></Border>
+              <Border Style="{StaticResource Card}"><StackPanel>
+                <TextBlock Text="활성 워커" Style="{StaticResource StatLabel}"/>
+                <TextBlock x:Name="lvWorkers" Text="0" Style="{StaticResource StatValue}"/></StackPanel></Border>
+              <Border Style="{StaticResource Card}"><StackPanel>
+                <TextBlock Text="성공" Style="{StaticResource StatLabel}"/>
+                <TextBlock x:Name="lvSuccess" Text="0" Style="{StaticResource StatValue}"
+                           Foreground="{StaticResource OkBrush}"/></StackPanel></Border>
+              <Border Style="{StaticResource Card}"><StackPanel>
+                <TextBlock Text="실패" Style="{StaticResource StatLabel}"/>
+                <TextBlock x:Name="lvFailed" Text="0" Style="{StaticResource StatValue}"
+                           Foreground="{StaticResource CriticalBrush}"/></StackPanel></Border>
+              <Border Style="{StaticResource Card}"><StackPanel>
+                <TextBlock Text="평균 RPS" Style="{StaticResource StatLabel}"/>
+                <TextBlock x:Name="lvAvgRps" Text="0" Style="{StaticResource StatValue}"/></StackPanel></Border>
+              <Border Style="{StaticResource Card}"><StackPanel>
+                <TextBlock Text="처리량 MB/s" Style="{StaticResource StatLabel}"/>
+                <TextBlock x:Name="lvMbps" Text="0" Style="{StaticResource StatValue}"/></StackPanel></Border>
+              <Border Style="{StaticResource Card}"><StackPanel>
+                <TextBlock Text="지연 p50 (ms)" Style="{StaticResource StatLabel}"/>
+                <TextBlock x:Name="lvP50" Text="0" Style="{StaticResource StatValue}"/></StackPanel></Border>
+              <Border Style="{StaticResource Card}"><StackPanel>
+                <TextBlock Text="지연 p95 (ms)" Style="{StaticResource StatLabel}"/>
+                <TextBlock x:Name="lvP95" Text="0" Style="{StaticResource StatValue}"
+                           Foreground="{StaticResource MediumBrush}"/></StackPanel></Border>
+              <Border Style="{StaticResource Card}"><StackPanel>
+                <TextBlock Text="지연 p99 (ms)" Style="{StaticResource StatLabel}"/>
+                <TextBlock x:Name="lvP99" Text="0" Style="{StaticResource StatValue}"
+                           Foreground="{StaticResource HighBrush}"/></StackPanel></Border>
+              <Border Style="{StaticResource Card}"><StackPanel>
+                <TextBlock Text="지연 max (ms)" Style="{StaticResource StatLabel}"/>
+                <TextBlock x:Name="lvMax" Text="0" Style="{StaticResource StatValue}"/></StackPanel></Border>
+            </UniformGrid>
+            <Grid Margin="4,10,4,0">
+              <Grid.ColumnDefinitions><ColumnDefinition/><ColumnDefinition/></Grid.ColumnDefinitions>
+              <StackPanel Grid.Column="0">
+                <TextBlock Text="상태코드 분포" Style="{StaticResource H2}"/>
+                <TextBox x:Name="txtStatusDist" IsReadOnly="True" Height="120"
+                         AcceptsReturn="True" VerticalScrollBarVisibility="Auto"/>
+              </StackPanel>
+              <StackPanel Grid.Column="1" Margin="8,0,0,0">
+                <TextBlock Text="오류 분포" Style="{StaticResource H2}"/>
+                <TextBox x:Name="txtErrDist" IsReadOnly="True" Height="120"
+                         AcceptsReturn="True" VerticalScrollBarVisibility="Auto"/>
+              </StackPanel>
+            </Grid>
+          </StackPanel>
+        </Grid>
+      </TabItem>
+
+      <!-- 3) 보안 점검 -->
+      <TabItem Header="🔒 보안 점검">
+        <Grid Margin="8">
+          <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="*"/></Grid.RowDefinitions>
+          <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,10">
+            <Button x:Name="btnAuditStart" Content="▶ 비침습 점검 시작"
+                    Style="{StaticResource AccentButton}" Click="OnAuditStart"/>
+            <Border Style="{StaticResource Card}" Margin="14,0,0,0" Padding="16,6">
+              <StackPanel Orientation="Horizontal">
+                <TextBlock Text="보안 점수" Style="{StaticResource StatLabel}" VerticalAlignment="Center"/>
+                <TextBlock x:Name="txtScore" Text="—" FontSize="26" FontWeight="Bold"
+                           Foreground="{StaticResource AccentBrush}" Margin="10,0,0,0"/>
+              </StackPanel>
+            </Border>
+            <Button Content="Markdown 리포트 저장" Margin="14,0,0,0" Click="OnExportReport"/>
+          </StackPanel>
+          <DataGrid x:Name="gridAudit" Grid.Row="1">
+            <DataGrid.Columns>
+              <DataGridTemplateColumn Header="심각도" Width="80">
+                <DataGridTemplateColumn.CellTemplate><DataTemplate>
+                  <TextBlock Text="{Binding SeverityLabel}" Foreground="{Binding SeverityBrush}"
+                             FontWeight="SemiBold"/>
+                </DataTemplate></DataGridTemplateColumn.CellTemplate>
+              </DataGridTemplateColumn>
+              <DataGridTextColumn Header="카테고리" Binding="{Binding CategoryLabel}" Width="100"/>
+              <DataGridTextColumn Header="항목" Binding="{Binding Title}" Width="260"/>
+              <DataGridTextColumn Header="상세" Binding="{Binding Detail}" Width="*"/>
+              <DataGridTextColumn Header="권고" Binding="{Binding Recommendation}" Width="240"/>
+            </DataGrid.Columns>
+          </DataGrid>
+        </Grid>
+      </TabItem>
+
+      <!-- 4) 가용성 -->
+      <TabItem Header="💓 가용성">
+        <Grid Margin="8">
+          <Grid.ColumnDefinitions><ColumnDefinition Width="300"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+          <StackPanel Grid.Column="0" Margin="0,0,16,0">
+            <TextBlock Text="헬스 모니터 설정" Style="{StaticResource H2}"/>
+            <TextBlock Text="URL" Style="{StaticResource FieldLabel}"/>
+            <TextBox x:Name="txtHealthUrl"/>
+            <TextBlock Text="점검 간격(초)" Style="{StaticResource FieldLabel}"/>
+            <TextBox x:Name="txtHealthInterval" Text="5"/>
+            <TextBlock Text="타임아웃(ms)" Style="{StaticResource FieldLabel}"/>
+            <TextBox x:Name="txtHealthTimeout" Text="8000"/>
+            <StackPanel Orientation="Horizontal" Margin="0,14,0,0">
+              <Button x:Name="btnHealthStart" Content="▶ 시작" Style="{StaticResource AccentButton}"
+                      Width="100" Click="OnHealthStart"/>
+              <Button x:Name="btnHealthStop" Content="■ 중지" Style="{StaticResource DangerButton}"
+                      Width="100" Margin="8,0,0,0" Click="OnHealthStop" IsEnabled="False"/>
+            </StackPanel>
+          </StackPanel>
+          <StackPanel Grid.Column="1">
+            <UniformGrid Columns="3">
+              <Border Style="{StaticResource Card}"><StackPanel>
+                <TextBlock Text="현재 상태" Style="{StaticResource StatLabel}"/>
+                <TextBlock x:Name="hvStatus" Text="—" Style="{StaticResource StatValue}"/></StackPanel></Border>
+              <Border Style="{StaticResource Card}"><StackPanel>
+                <TextBlock Text="가동률 %" Style="{StaticResource StatLabel}"/>
+                <TextBlock x:Name="hvUptime" Text="0" Style="{StaticResource StatValue}"
+                           Foreground="{StaticResource OkBrush}"/></StackPanel></Border>
+              <Border Style="{StaticResource Card}"><StackPanel>
+                <TextBlock Text="연속 실패" Style="{StaticResource StatLabel}"/>
+                <TextBlock x:Name="hvFails" Text="0" Style="{StaticResource StatValue}"
+                           Foreground="{StaticResource CriticalBrush}"/></StackPanel></Border>
+              <Border Style="{StaticResource Card}"><StackPanel>
+                <TextBlock Text="점검 횟수" Style="{StaticResource StatLabel}"/>
+                <TextBlock x:Name="hvChecks" Text="0" Style="{StaticResource StatValue}"/></StackPanel></Border>
+              <Border Style="{StaticResource Card}"><StackPanel>
+                <TextBlock Text="최근 지연(ms)" Style="{StaticResource StatLabel}"/>
+                <TextBlock x:Name="hvLast" Text="0" Style="{StaticResource StatValue}"/></StackPanel></Border>
+              <Border Style="{StaticResource Card}"><StackPanel>
+                <TextBlock Text="평균 지연(ms)" Style="{StaticResource StatLabel}"/>
+                <TextBlock x:Name="hvAvg" Text="0" Style="{StaticResource StatValue}"/></StackPanel></Border>
+            </UniformGrid>
+            <TextBlock Text="최근 점검 이력" Style="{StaticResource H2}" Margin="4,10,0,4"/>
+            <TextBox x:Name="txtHealthLog" IsReadOnly="True" Height="300" FontFamily="Consolas"
+                     AcceptsReturn="True" VerticalScrollBarVisibility="Auto"/>
+          </StackPanel>
+        </Grid>
+      </TabItem>
+
+      <!-- 5) 취약점/노출 -->
+      <TabItem Header="🕵 취약점 · 노출">
+        <Grid Margin="8">
+          <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="*"/></Grid.RowDefinitions>
+          <StackPanel Grid.Row="0" Margin="0,0,0,10">
+            <TextBlock Text="점검 항목 선택" Style="{StaticResource H2}"/>
+            <WrapPanel>
+              <CheckBox x:Name="chkFiles" Content="민감 파일 노출" IsChecked="True" Margin="0,0,18,6"/>
+              <CheckBox x:Name="chkConsoles" Content="관리·디버그 콘솔" IsChecked="True" Margin="0,0,18,6"/>
+              <CheckBox x:Name="chkBackdoor" Content="웹셸/백도어 흔적" IsChecked="True" Margin="0,0,18,6"/>
+              <CheckBox x:Name="chkDirList" Content="디렉터리 리스팅" IsChecked="True" Margin="0,0,18,6"/>
+              <CheckBox x:Name="chkErrors" Content="상세 오류 노출" IsChecked="True" Margin="0,0,18,6"/>
+              <CheckBox x:Name="chkTrace" Content="TRACE(XST)" IsChecked="True" Margin="0,0,18,6"/>
+            </WrapPanel>
+            <CheckBox x:Name="chkDefaultCreds" Margin="0,4,0,0"
+                      Content="⚠ 기본 자격증명 확인 (공격적 — Basic 인증 엔드포인트 대상)"
+                      Foreground="{StaticResource MediumBrush}"/>
+            <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+              <TextBlock Text="요청 간 지연(ms)" Style="{StaticResource FieldLabel}" VerticalAlignment="Center"/>
+              <TextBox x:Name="txtScanDelay" Text="150" Width="80" Margin="8,0,0,0"/>
+              <Button x:Name="btnScanStart" Content="▶ 스캔 시작" Style="{StaticResource AccentButton}"
+                      Margin="18,0,0,0" Click="OnScanStart"/>
+              <Button x:Name="btnScanStop" Content="■ 중지" Style="{StaticResource DangerButton}"
+                      Margin="8,0,0,0" Click="OnScanStop" IsEnabled="False"/>
+            </StackPanel>
+          </StackPanel>
+          <DataGrid x:Name="gridScan" Grid.Row="1">
+            <DataGrid.Columns>
+              <DataGridTemplateColumn Header="심각도" Width="80">
+                <DataGridTemplateColumn.CellTemplate><DataTemplate>
+                  <TextBlock Text="{Binding SeverityLabel}" Foreground="{Binding SeverityBrush}"
+                             FontWeight="SemiBold"/>
+                </DataTemplate></DataGridTemplateColumn.CellTemplate>
+              </DataGridTemplateColumn>
+              <DataGridTextColumn Header="카테고리" Binding="{Binding CategoryLabel}" Width="100"/>
+              <DataGridTextColumn Header="항목" Binding="{Binding Title}" Width="320"/>
+              <DataGridTextColumn Header="상세" Binding="{Binding Detail}" Width="*"/>
+              <DataGridTextColumn Header="권고" Binding="{Binding Recommendation}" Width="240"/>
+            </DataGrid.Columns>
+          </DataGrid>
+        </Grid>
+      </TabItem>
+
+      <!-- 6) 로그인 방어 -->
+      <TabItem Header="🔑 로그인 방어">
+        <Grid Margin="8">
+          <Grid.ColumnDefinitions><ColumnDefinition Width="340"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+          <ScrollViewer Grid.Column="0" VerticalScrollBarVisibility="Auto" Margin="0,0,16,0">
+            <StackPanel>
+              <TextBlock Text="무차별 대입 저항성 테스트" Style="{StaticResource H2}"/>
+              <TextBlock TextWrapping="Wrap" Foreground="{StaticResource FgDimBrush}" FontSize="11">
+                의도적으로 틀린 비밀번호를 반복 전송해 레이트리밋·계정 잠금 등 방어가 작동하는지 확인합니다.
+                기본 사용자명은 존재하지 않는 계정으로 두어 실계정 잠금을 피하세요.
+              </TextBlock>
+              <TextBlock Text="로그인 URL" Style="{StaticResource FieldLabel}"/>
+              <TextBox x:Name="txtLoginUrl"/>
+              <TextBlock Text="메서드" Style="{StaticResource FieldLabel}"/>
+              <ComboBox x:Name="cboLoginMethod" SelectedIndex="0">
+                <ComboBoxItem>POST</ComboBoxItem><ComboBoxItem>GET</ComboBoxItem>
+              </ComboBox>
+              <TextBlock Text="Content-Type" Style="{StaticResource FieldLabel}"/>
+              <ComboBox x:Name="cboLoginCt" SelectedIndex="0">
+                <ComboBoxItem>application/x-www-form-urlencoded</ComboBoxItem>
+                <ComboBoxItem>application/json</ComboBoxItem>
+              </ComboBox>
+              <TextBlock Text="본문 템플릿 ({user}/{pass} 치환)" Style="{StaticResource FieldLabel}"/>
+              <TextBox x:Name="txtLoginBody" AcceptsReturn="True" Height="50" TextWrapping="Wrap"
+                       Text="username={user}&amp;password={pass}"/>
+              <TextBlock Text="테스트 사용자명" Style="{StaticResource FieldLabel}"/>
+              <TextBox x:Name="txtLoginUser" Text="siege-test-nouser"/>
+              <Grid>
+                <Grid.ColumnDefinitions><ColumnDefinition/><ColumnDefinition/></Grid.ColumnDefinitions>
+                <StackPanel Grid.Column="0" Margin="0,0,4,0">
+                  <TextBlock Text="시도 횟수" Style="{StaticResource FieldLabel}"/>
+                  <TextBox x:Name="txtLoginAttempts" Text="50"/>
+                </StackPanel>
+                <StackPanel Grid.Column="1" Margin="4,0,0,0">
+                  <TextBlock Text="간격(ms)" Style="{StaticResource FieldLabel}"/>
+                  <TextBox x:Name="txtLoginDelay" Text="200"/>
+                </StackPanel>
+              </Grid>
+              <TextBlock Text="성공 상태코드(쉼표, 관찰되면 경고)" Style="{StaticResource FieldLabel}"/>
+              <TextBox x:Name="txtLoginSuccess" Text="200,302"/>
+              <StackPanel Orientation="Horizontal" Margin="0,14,0,0">
+                <Button x:Name="btnLoginStart" Content="▶ 시작" Style="{StaticResource AccentButton}"
+                        Width="100" Click="OnLoginStart"/>
+                <Button x:Name="btnLoginStop" Content="■ 중지" Style="{StaticResource DangerButton}"
+                        Width="100" Margin="8,0,0,0" Click="OnLoginStop" IsEnabled="False"/>
+              </StackPanel>
+            </StackPanel>
+          </ScrollViewer>
+          <StackPanel Grid.Column="1">
+            <Border x:Name="loginVerdictCard" Style="{StaticResource Card}" Padding="16,12">
+              <TextBlock x:Name="txtLoginVerdict" Text="테스트 대기 중" TextWrapping="Wrap"
+                         FontSize="14" FontWeight="SemiBold" Foreground="{StaticResource FgBrush}"/>
+            </Border>
+            <UniformGrid Columns="3" Margin="0,8,0,0">
+              <Border Style="{StaticResource Card}"><StackPanel>
+                <TextBlock Text="진행" Style="{StaticResource StatLabel}"/>
+                <TextBlock x:Name="lgProgress" Text="0/0" Style="{StaticResource StatValue}"/></StackPanel></Border>
+              <Border Style="{StaticResource Card}"><StackPanel>
+                <TextBlock Text="최근 상태코드" Style="{StaticResource StatLabel}"/>
+                <TextBlock x:Name="lgStatus" Text="—" Style="{StaticResource StatValue}"/></StackPanel></Border>
+              <Border Style="{StaticResource Card}"><StackPanel>
+                <TextBlock Text="평균 지연(ms)" Style="{StaticResource StatLabel}"/>
+                <TextBlock x:Name="lgLat" Text="0" Style="{StaticResource StatValue}"/></StackPanel></Border>
+            </UniformGrid>
+            <TextBlock Text="상태코드 분포" Style="{StaticResource H2}" Margin="4,10,0,4"/>
+            <TextBox x:Name="txtLoginDist" IsReadOnly="True" Height="260" FontFamily="Consolas"
+                     AcceptsReturn="True" VerticalScrollBarVisibility="Auto"/>
+          </StackPanel>
+        </Grid>
+      </TabItem>
+    </TabControl>
+
+    <!-- ── 상태바 ───────────────────────────────────────────── -->
+    <Border Grid.Row="3" Background="{StaticResource Bg1Brush}" CornerRadius="6"
+            Padding="12,6" Margin="0,10,0,0">
+      <TextBlock x:Name="txtLog" Text="준비됨" Foreground="{StaticResource FgDimBrush}"
+                 FontFamily="Consolas" FontSize="12" TextTrimming="CharacterEllipsis"/>
+    </Border>
+  </Grid>
+</Window>

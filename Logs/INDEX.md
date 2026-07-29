@@ -4,6 +4,7 @@
 
 | 파일 | 날짜 | 태그 | 설명 |
 |------|------|------|------|
+| [20260730_070851_feature_SiegeLab_보안스트레스테스트_신규.md](20260730_070851_feature_SiegeLab_보안스트레스테스트_신규.md) | 2026-07-30 | feature | Siege.Lab 신규 v1.0.0 — 인가된 대상 웹사이트 종합 테스트(부하/RPS·지연 백분위 + 비침습 보안 헤더/TLS/쿠키 점검 + 가용성 모니터 + 노출·백도어/웹셸 스캔 + 로그인 무차별 대입 저항성). 안전 게이트(허용 목록·상한) 내장 |
 | [20260628_105759_feature_StockFetch_한국주식시세_4소스_내보내기.md](20260628_105759_feature_StockFetch_한국주식시세_4소스_내보내기.md) | 2026-06-28 | feature | Stock.Fetch 신규 v1.0.0 — 종목코드+기간으로 일별 OHLCV 조회, 4소스 선택형(네이버·다음·Yahoo·KIS), CSV/TSV/JSON/XML/Markdown 내보내기. KRX 직접 호출 차단(LOGOUT) → 다음 금융으로 대체 |
 | [20260626_201304_feature_StockWatch_실시간WebSocket_다크테마_콤보수정.md](20260626_201304_feature_StockWatch_실시간WebSocket_다크테마_콤보수정.md) | 2026-06-26 | feature | Stock.Watch v1.1.0 — WebSocket 실시간 체결가(H0STCNT0) 추가, 설정창 다크 테마 수정(파생 Window implicit 스타일 미적용), 조건 콤보 라벨 표시 수정 |
 | [20260624_073541_feature_StockWatch_종목조건감시_Slack알림.md](20260624_073541_feature_StockWatch_종목조건감시_Slack알림.md) | 2026-06-24 | feature | Stock.Watch 신규 — 종목 매수/매도 조건(RSI·볼린저·거래량) 감시 후 Slack 알림, 캔들·볼린저·RSI 차트, KIS Open API |

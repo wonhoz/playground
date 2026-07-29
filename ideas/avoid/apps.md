@@ -53,6 +53,7 @@
 | `Net.Scan` | Network | LAN ARP 스캐너, 기기 탐지·제조사(OUI) 조회·포트 스캔·핑 모니터 | ✅ |
 | `Port.Watch` | Network | 포트 점유 프로세스 모니터 + 원클릭 종료 | ✅ |
 | `Serve.Cast` | Network | ASP.NET Core Kestrel 기반 로컬 파일 서버 + QR | ✅ |
+| `Siege.Lab` | Network/Security | 인가된 대상 웹사이트 보안·스트레스 종합 테스트 (부하/RPS·지연 백분위 + 비침습 보안 헤더/TLS/쿠키 점검 + 가용성 모니터 + 노출·백도어/웹셸 스캔 + 로그인 무차별 대입 저항성) ★사용자 직접 요청 | ✅ 구현 완료 (2026-07-30) |
 | `WiFi.Cast` | Network | Wi-Fi 채널 분석기 + 신호 강도 트레이 모니터 | 🗃️ |
 | `Brush.Scale` | Photo.Picture | waifu2x/RealESRGAN ONNX 오프라인 AI 업스케일러 (2x/4x/8x, 배치, Before/After 슬라이더) ★35차 | ✅ |
 | `Color.Grade` | Photo.Picture | 이미지 LUT 색보정 도구 | ✅ |
@@ -117,5 +118,5 @@
 | `Case.Forge` | Text | camelCase·snake_case 등 10가지 케이스 전역 팝업 변환기 ★34차 | ✅ 구현 완료 (2026-04-01) |
 | `Copy.Path` | Files/Manager | 파일 경로를 다양한 포맷으로 팝업 복사 (전체·슬래시·UNC 등 9종) ★34차 | ✅ 구현 완료 (2026-04-01) |
 | `Stock.Watch` | Finance | 종목 매수/매도 조건(RSI·볼린저·거래량 등) 감시 후 충족 시 Slack 알림, 캔들·볼린저·RSI 차트, KIS Open API ★사용자 직접 요청 | 📦 아카이브 (2026-07-04 · Stock.Catch로 기능 통합, Archive/Applications/Finance) |
-| `Stock.Fetch` | Finance | 종목코드+기간으로 일별 OHLCV 시세를 4소스 선택형(네이버·다음·Yahoo·KIS)으로 조회해 CSV/TSV/JSON/XML/Markdown 내보내기 ★사용자 직접 요청 | ✅ 구현 완료 (2026-06-28) → Stock.Catch로 리네이밍 (2026-07-04) |
+| `Stock.Fetch` | Finance | 종목코드+기간으로 일별 OHLCV 시세를 4소스 선택형(네이버·다음·Yahoo·KIS)으로 조회해 CSV/TSV/JSON/XML/Markdown 내보내기 ★사용자 직접 요청 | ✅ 구현 완료 (2026-06-28) → Stock.Catch로 리네이밍 (2026-07-04) |
 | `Stock.Catch` | Finance | Stock.Fetch 리네이밍(Fetch+Watch 통합) — 시세 조회·내보내기 + 관심 종목 모니터링·추세/래더/바닥 반등·고점 경고 시그널 Slack 알림 ★사용자 직접 요청 | ✅ 구현 완료 (2026-07-04) |

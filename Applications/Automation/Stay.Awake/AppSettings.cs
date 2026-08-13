@@ -19,6 +19,16 @@ namespace StayAwake
         /// <summary>전역 단축키 활성화 여부 (Ctrl+Alt+S 시작/정지, Ctrl+Alt+R 즉시 실행)</summary>
         public bool GlobalHotkeyEnabled { get; set; } = true;
 
+        // 업무시간 스케줄 (지정 요일·시간대에만 시뮬레이션 동작)
+        public bool ScheduleEnabled { get; set; } = false;
+        public int ScheduleStartHour { get; set; } = 9;
+        public int ScheduleStartMinute { get; set; } = 0;
+        public int ScheduleEndHour { get; set; } = 17;
+        public int ScheduleEndMinute { get; set; } = 0;
+
+        /// <summary>적용 요일 비트마스크 (bit N = DayOfWeek N, 기본: 월~금)</summary>
+        public int ScheduleDaysMask { get; set; } = WorkSchedule.MaskWeekdays;
+
         // Slack 자동 상태 변경 (UI 자동화 방식 - 토큰 불필요)
         public bool SlackAutoStatusEnabled { get; set; } = false;
         public int WorkStartHour { get; set; } = 8;

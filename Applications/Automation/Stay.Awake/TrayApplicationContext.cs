@@ -16,6 +16,7 @@ namespace StayAwake
         // private readonly System.Windows.Forms.Timer _pauseTimer;
         private readonly ActivitySimulator _simulator;
         private readonly SlackUiAutomation _slackAutomation;
+        private readonly WorkSchedule _schedule;
 
         private Font? _menuFont;
         private Font? _startStopFont;
@@ -35,7 +36,13 @@ namespace StayAwake
         private ToolStripMenuItem _autoStartItem = null!;
         private ToolStripMenuItem _progressIconItem = null!;
         private ToolStripMenuItem _globalHotkeyItem = null!;
+        private ToolStripMenuItem _scheduleMenuItem = null!;
+        private ToolStripMenuItem _scheduleEnabledItem = null!;
+        private ToolStripMenuItem _scheduleStatusItem = null!;
         private GlobalHotkey? _hotkey;
+
+        /// <summary>직전 스케줄 판정 결과 — 구간 경계에서만 자동 시작/정지시켜 수동 조작을 존중</summary>
+        private bool? _lastScheduleInWindow;
         // private ToolStripMenuItem _pauseItem = null!;
         // private ToolStripMenuItem _pauseCancelItem = null!;
 
@@ -101,6 +108,17 @@ namespace StayAwake
                 LastAwaySet = _settings.LastSlackAwaySetDate
             };
 
+            // 업무시간 스케줄 초기화
+            _schedule = new WorkSchedule
+            {
+                IsEnabled = _settings.ScheduleEnabled,
+                StartHour = _settings.ScheduleStartHour,
+                StartMinute = _settings.ScheduleStartMinute,
+                EndHour = _settings.ScheduleEndHour,
+                EndMinute = _settings.ScheduleEndMinute,
+                DaysMask = _settings.ScheduleDaysMask
+            };
+
             // 활동 타이머 설정
             _activityTimer = new System.Windows.Forms.Timer
             {
@@ -162,8 +180,29 @@ namespace StayAwake
             // 전역 단축키 등록 (활성화된 경우)
             RegisterHotkeysIfEnabled();
 
-            // 앱 실행 시 자동 시작
-            ToggleRunning();
+            // 앱 실행 시 자동 시작 — 스케줄이 켜져 있으면 업무시간 구간 안일 때만 시작
+            if (_schedule.IsEnabled)
+            {
+                var inWindow = _schedule.IsWithin(DateTime.Now);
+                _lastScheduleInWindow = inWindow;
+                if (inWindow)
+                {
+                    ToggleRunning();
+                }
+                else
+                {
+                    _isFirstStart = false;
+                    UpdateStoppedTooltip();
+                    _statusItem.Text = $"상태: 업무시간 외 대기 ({_schedule.Summary()})";
+                    var next = _schedule.NextStartSummary(DateTime.Now);
+                    ShowStartupBalloon($"StayAwake 실행됨 — 업무시간 스케줄 대기 중 ({_schedule.Summary()})"
+                        + (next != null ? $"\n다음 시작: {next}" : ""));
+                }
+            }
+            else
+            {
+                ToggleRunning();
+            }
         }
 
         private ContextMenuStrip CreateContextMenu()
@@ -268,6 +307,22 @@ namespace StayAwake
             };
             menu.Items.Add(_globalHotkeyItem);
 
+            // 업무시간 스케줄 (지정 요일·시간대에만 자동 동작)
+            _scheduleMenuItem = new ToolStripMenuItem(BuildScheduleMenuText());
+
+            _scheduleEnabledItem = new ToolStripMenuItem("스케줄 사용", null, (s, e) => ToggleSchedule())
+            {
+                Checked = _schedule.IsEnabled
+            };
+            _scheduleMenuItem.DropDownItems.Add(_scheduleEnabledItem);
+            _scheduleMenuItem.DropDownItems.Add(new ToolStripMenuItem("요일·시간 설정...", null, (s, e) => OpenScheduleSettings()));
+            _scheduleMenuItem.DropDownItems.Add(new ToolStripSeparator());
+
+            _scheduleStatusItem = new ToolStripMenuItem(BuildScheduleStatusText()) { Enabled = false };
+            _scheduleMenuItem.DropDownItems.Add(_scheduleStatusItem);
+
+            menu.Items.Add(_scheduleMenuItem);
+
             menu.Items.Add(new ToolStripSeparator());
 
             // 지금 실행
@@ -337,7 +392,8 @@ namespace StayAwake
             return menu;
         }
 
-        private void ToggleRunning()
+        /// <param name="balloonOverride">시작/정지 풍선 알림 문구 대체 (스케줄 자동 전환 시 사유 표시)</param>
+        private void ToggleRunning(string? balloonOverride = null)
         {
             // 수동 토글 시 일시 중지 상태 해제 (비활성화)
             // if (_isPaused)
@@ -371,23 +427,14 @@ namespace StayAwake
                 if (_isFirstStart)
                 {
                     _isFirstStart = false;
-                    // 트레이 Visible 직후 OS toast 시스템이 아직 초기화되지 않을 수 있어
-                    // 짧은 지연 후 풍선 알림 표시 (메시지 펌프 다음 사이클 + α)
-                    var msg = $"StayAwake 실행됨 — {_intervalMinutes}분 간격으로 활동 시뮬레이션을 시작합니다.";
-                    var initTimer = new System.Windows.Forms.Timer { Interval = 300 };
-                    initTimer.Tick += (s, e) =>
-                    {
-                        initTimer.Stop();
-                        initTimer.Dispose();
-                        try { _trayIcon.ShowBalloonTip(2000, "StayAwake", msg, ToolTipIcon.Info); }
-                        catch (Exception ex) { Logger.LogException("FirstBalloon", ex); }
-                    };
-                    initTimer.Start();
+                    ShowStartupBalloon(balloonOverride
+                        ?? $"StayAwake 실행됨 — {_intervalMinutes}분 간격으로 활동 시뮬레이션을 시작합니다.");
                 }
                 else
                 {
                     _trayIcon.ShowBalloonTip(1500, "StayAwake",
-                        $"활동 시뮬레이션 시작됨 ({_intervalMinutes}분 간격, {_simulator.MoveDistance}px)", ToolTipIcon.Info);
+                        balloonOverride ?? $"활동 시뮬레이션 시작됨 ({_intervalMinutes}분 간격, {_simulator.MoveDistance}px)",
+                        ToolTipIcon.Info);
                 }
             }
             else
@@ -402,15 +449,54 @@ namespace StayAwake
                 _currentProgressIcon = null;
                 _lastProgressBucket = -1;
                 _trayIcon.Icon = CreateIcon(false);
-                var stoppedTime = _todayActiveTime;
-                var stoppedText = $"StayAwake - 정지됨 (오늘 {(int)stoppedTime.TotalHours:D2}:{stoppedTime:mm\\:ss})";
-                _trayIcon.Text = stoppedText.Length > 127 ? stoppedText[..127] : stoppedText;
-                _statusItem.Text = "상태: 정지됨";
+                UpdateStoppedTooltip();
+                _statusItem.Text = _schedule.IsEnabled && _lastScheduleInWindow == false
+                    ? $"상태: 업무시간 외 대기 ({_schedule.Summary()})"
+                    : "상태: 정지됨";
                 SaveDailyStats(); // 정지 시 활성 시간 포함 저장
 
                 _trayIcon.ShowBalloonTip(1500, "StayAwake",
-                    "활동 시뮬레이션 정지됨", ToolTipIcon.Info);
+                    balloonOverride ?? "활동 시뮬레이션 정지됨", ToolTipIcon.Info);
             }
+        }
+
+        /// <summary>
+        /// 앱 기동 직후 풍선 알림 — 트레이 Visible 직후에는 OS toast 시스템이 아직
+        /// 초기화되지 않을 수 있어 짧은 지연(메시지 펌프 다음 사이클 + α) 후 표시
+        /// </summary>
+        private void ShowStartupBalloon(string message)
+        {
+            var initTimer = new System.Windows.Forms.Timer { Interval = 300 };
+            initTimer.Tick += (s, e) =>
+            {
+                initTimer.Stop();
+                initTimer.Dispose();
+                try { _trayIcon.ShowBalloonTip(2000, "StayAwake", message, ToolTipIcon.Info); }
+                catch (Exception ex) { Logger.LogException("FirstBalloon", ex); }
+            };
+            initTimer.Start();
+        }
+
+        /// <summary>정지 상태 툴팁 — 스케줄 대기 중이면 다음 시작 시각을 함께 표시</summary>
+        private void UpdateStoppedTooltip()
+        {
+            var stoppedTime = _todayActiveTime;
+            var todayText = $"오늘 {(int)stoppedTime.TotalHours:D2}:{stoppedTime:mm\\:ss}";
+
+            string text;
+            if (_schedule.IsEnabled && _lastScheduleInWindow == false)
+            {
+                var next = _schedule.NextStartSummary(DateTime.Now);
+                text = next != null
+                    ? $"StayAwake - 업무시간 외 대기 (다음 시작: {next} | {todayText})"
+                    : $"StayAwake - 업무시간 외 대기 ({todayText})";
+            }
+            else
+            {
+                text = $"StayAwake - 정지됨 ({todayText})";
+            }
+
+            _trayIcon.Text = text.Length > 127 ? text[..127] : text;
         }
 
         private void SetInterval(int minutes)
@@ -523,7 +609,7 @@ namespace StayAwake
             {
                 _hotkey?.Dispose();
                 _hotkey = new GlobalHotkey();
-                var ok1 = _hotkey.Register(GlobalHotkey.MOD_CONTROL | GlobalHotkey.MOD_ALT, Keys.S, ToggleRunning);
+                var ok1 = _hotkey.Register(GlobalHotkey.MOD_CONTROL | GlobalHotkey.MOD_ALT, Keys.S, () => ToggleRunning());
                 var ok2 = _hotkey.Register(GlobalHotkey.MOD_CONTROL | GlobalHotkey.MOD_ALT, Keys.R, () => SimulateNow());
                 if (!ok1 || !ok2)
                     Logger.LogWarn("Hotkey", $"전역 단축키 일부 등록 실패 (다른 앱이 점유 가능): Ctrl+Alt+S={ok1}, Ctrl+Alt+R={ok2}");
@@ -578,6 +664,12 @@ namespace StayAwake
             _settings.PreventDisplaySleep = _simulator.PreventDisplaySleep;
             _settings.SkipIfUserActive = _simulator.SkipIfUserActive;
             _settings.SlackAutoStatusEnabled = _slackAutomation.IsEnabled;
+            _settings.ScheduleEnabled = _schedule.IsEnabled;
+            _settings.ScheduleStartHour = _schedule.StartHour;
+            _settings.ScheduleStartMinute = _schedule.StartMinute;
+            _settings.ScheduleEndHour = _schedule.EndHour;
+            _settings.ScheduleEndMinute = _schedule.EndMinute;
+            _settings.ScheduleDaysMask = _schedule.DaysMask;
             _settings.Save();
         }
 
@@ -923,6 +1015,22 @@ namespace StayAwake
                        (관리자 권한 없이 HKCU에 저장)
 • 전역 단축키          체크 시 Ctrl+Alt+S / Ctrl+Alt+R 단축키 활성화
 
+[메뉴 — 업무시간 스케줄]
+• 스케줄 사용          체크 시 지정한 요일·시간대에만 시뮬레이션 자동 동작
+                       (예: 평일 09:00~17:00 → 그 시간에만 절전 방지)
+                       업무 시작 시각에 자동 시작, 종료 시각에 자동 정지
+• 요일·시간 설정       적용 요일(요일 버튼 토글 · 평일/매일/주말 프리셋)과
+                       시작·종료 시각 설정 (기본 평일 09:00~17:00)
+                       종료가 시작보다 이르면 자정을 넘는 야간 구간으로 동작
+                       (요일은 구간이 시작된 날 기준으로 판정)
+• 동작 방식            구간에 들어가고 나갈 때만 자동으로 상태를 전환 —
+                       구간 안에서 수동으로 정지하면 그대로 유지되고,
+                       다음 구간 경계에서 다시 자동 전환됨
+• 앱 실행 시           스케줄이 켜져 있으면 업무시간일 때만 자동 시작,
+                       업무시간 외에는 '대기' 상태로 시작
+• 상태 확인            서브메뉴 하단에 현재 구간 여부와 다음 전환 시각 표시
+                       호버 툴팁에도 '업무시간 외 대기 (다음 시작: 월 09:00)'
+
 [메뉴 — Slack 자동 상태 변경]
 • 자동 변경 활성화     출퇴근 시각에 Active/Away 자동 전환
                        시각을 놓쳐도(PC 꺼짐·앱 지연 등) 당일 범위 내
@@ -944,6 +1052,7 @@ namespace StayAwake
 [호버 툴팁 읽는 법]
   실행 중: '다음: X분 XX초 후 | 오늘 HH:MM:SS / N회 | 세션 HH:MM:SS'
   정지 시: 'StayAwake - 정지됨 (오늘 HH:MM:SS)'
+  스케줄 대기: 'StayAwake - 업무시간 외 대기 (다음 시작: 월 09:00 | 오늘 HH:MM:SS)'
 
 [참고]
 • 앱 실행 시 자동으로 시뮬레이션이 시작됩니다
@@ -951,7 +1060,7 @@ namespace StayAwake
 • 날짜가 바뀌면 전날 통계는 히스토리에 자동 저장됩니다
 • 예외 로그는 %AppData%\StayAwake\error.log에 기록됩니다";
 
-            DarkInfoDialog.Show("도움말", message, 740, 960);
+            DarkInfoDialog.Show("도움말", message, 760, 1000);
         }
 
         private void ShowAbout()
@@ -963,6 +1072,10 @@ namespace StayAwake
             var activityTypeLabel = _simulator.ActivityType == ActivityType.MouseAndKeyboard
                 ? "마우스 + 키보드"
                 : "마우스 이동";
+
+            var scheduleLine = _schedule.IsEnabled
+                ? $"켜짐 ({_schedule.Summary()}) — {BuildScheduleStatusText()}"
+                : "꺼짐 (항상 동작)";
 
             var version = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
             var versionStr = version != null ? $"v{version.Major}.{version.Minor}.{version.Build}" : "v?";
@@ -983,6 +1096,7 @@ Slack 자리 비움 상태 방지 도구
 
 [현재 설정]
 • 간격: {_intervalMinutes}분
+• 업무시간 스케줄: {scheduleLine}
 • 이동 거리: {_simulator.MoveDistance}px
 • 활동 유형: {activityTypeLabel}
 • 디스플레이 절전 방지: {(_simulator.PreventDisplaySleep ? "켜짐" : "꺼짐")}
@@ -994,10 +1108,121 @@ Slack 자리 비움 상태 방지 도구
             DarkInfoDialog.Show($"StayAwake {versionStr}", message, 750, 800);
         }
 
+        private string BuildScheduleMenuText() =>
+            _schedule.IsEnabled ? $"업무시간 스케줄: {_schedule.Summary()}" : "업무시간 스케줄: 꺼짐";
+
+        private string BuildScheduleStatusText()
+        {
+            if (!_schedule.IsEnabled) return $"현재 설정: {_schedule.Summary()} (사용 안 함)";
+
+            if (_schedule.IsWithin(DateTime.Now))
+            {
+                var end = _schedule.CurrentEnd(DateTime.Now);
+                return end != null ? $"업무시간 중 — {end:HH:mm}에 자동 정지" : "업무시간 중 (종일)";
+            }
+
+            var next = _schedule.NextStartSummary(DateTime.Now);
+            return next != null ? $"업무시간 외 — 다음 시작: {next}" : "업무시간 외 — 적용 요일 없음";
+        }
+
+        private void UpdateScheduleMenuText()
+        {
+            _scheduleMenuItem.Text = BuildScheduleMenuText();
+            _scheduleStatusItem.Text = BuildScheduleStatusText();
+        }
+
+        private void ToggleSchedule()
+        {
+            _schedule.IsEnabled = !_schedule.IsEnabled;
+            _scheduleEnabledItem.Checked = _schedule.IsEnabled;
+            SaveSettings();
+
+            if (_schedule.IsEnabled)
+            {
+                // 켜는 즉시 현재 시각 기준으로 상태를 맞춤 (경계까지 기다리지 않음)
+                _lastScheduleInWindow = null;
+                ApplySchedule();
+                var next = _schedule.NextStartSummary(DateTime.Now);
+                var detail = _schedule.IsWithin(DateTime.Now)
+                    ? "지금은 업무시간입니다."
+                    : next != null ? $"다음 시작: {next}" : "적용 요일이 없습니다.";
+                _trayIcon.ShowBalloonTip(2500, "StayAwake",
+                    $"업무시간 스케줄 활성화 — {_schedule.Summary()}\n{detail}", ToolTipIcon.Info);
+            }
+            else
+            {
+                _lastScheduleInWindow = null;
+                _trayIcon.ShowBalloonTip(1500, "StayAwake", "업무시간 스케줄 비활성화", ToolTipIcon.Info);
+            }
+
+            UpdateScheduleMenuText();
+            if (!_isRunning) UpdateStoppedTooltip();
+        }
+
+        private void OpenScheduleSettings()
+        {
+            using var form = new WorkScheduleForm(_schedule);
+            if (form.ShowDialog() != DialogResult.OK) return;
+
+            _schedule.StartHour = form.StartHour;
+            _schedule.StartMinute = form.StartMinute;
+            _schedule.EndHour = form.EndHour;
+            _schedule.EndMinute = form.EndMinute;
+            _schedule.DaysMask = form.DaysMask;
+            SaveSettings();
+
+            // 설정 변경 즉시 현재 시각 기준으로 재평가
+            if (_schedule.IsEnabled)
+            {
+                _lastScheduleInWindow = null;
+                ApplySchedule();
+            }
+
+            UpdateScheduleMenuText();
+            if (!_isRunning) UpdateStoppedTooltip();
+        }
+
+        /// <summary>
+        /// 업무시간 구간 진입/이탈 시에만 자동 시작·정지
+        /// 구간 안에서의 수동 시작·정지는 다음 경계까지 그대로 유지된다.
+        /// </summary>
+        private void ApplySchedule()
+        {
+            if (!_schedule.IsEnabled) return;
+
+            var inWindow = _schedule.IsWithin(DateTime.Now);
+            if (_lastScheduleInWindow == inWindow) return;
+
+            _lastScheduleInWindow = inWindow;
+
+            if (inWindow && !_isRunning)
+            {
+                var end = _schedule.CurrentEnd(DateTime.Now);
+                ToggleRunning($"업무시간 시작 — 활동 시뮬레이션을 시작합니다."
+                    + (end != null ? $" ({end:HH:mm}까지)" : ""));
+            }
+            else if (!inWindow && _isRunning)
+            {
+                var next = _schedule.NextStartSummary(DateTime.Now);
+                ToggleRunning("업무시간 종료 — 활동 시뮬레이션을 정지합니다."
+                    + (next != null ? $"\n다음 시작: {next}" : ""));
+            }
+            else if (!_isRunning)
+            {
+                // 이미 정지 상태 — 툴팁·상태만 새 구간 기준으로 갱신
+                UpdateStoppedTooltip();
+            }
+
+            UpdateScheduleMenuText();
+        }
+
         private async void OnScheduleTimerTick(object? sender, EventArgs e)
         {
             try
             {
+                // 업무시간 스케줄 평가 (1분 주기)
+                ApplySchedule();
+
                 var result = await _slackAutomation.CheckAndSetPresenceAsync();
                 if (result == null) return;
 
@@ -1089,6 +1314,16 @@ Slack 자리 비움 상태 방지 도구
                 if (nextActivity < TimeSpan.Zero) nextActivity = TimeSpan.Zero;
                 _statusItem.Text = $"상태: 실행 중 ({_activityCount}회 · 다음 {(int)nextActivity.TotalMinutes}분 {nextActivity.Seconds:D2}초 후)";
             }
+            else if (_schedule.IsEnabled && !_schedule.IsWithin(DateTime.Now))
+            {
+                var next = _schedule.NextStartSummary(DateTime.Now);
+                _statusItem.Text = next != null
+                    ? $"상태: 업무시간 외 대기 (다음 시작 {next})"
+                    : $"상태: 업무시간 외 대기 ({_schedule.Summary()})";
+            }
+
+            // 스케줄 요약·다음 전환 시각은 시간에 따라 변하므로 메뉴 열 때마다 갱신
+            UpdateScheduleMenuText();
         }
 
         private async Task SetSlackDndAsync(int minutes)

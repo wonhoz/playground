@@ -155,6 +155,7 @@ call :pub "Dict.Cast"             "Applications\Tools.Utility\Dict.Cast"        
 call :pub "Char.Pad"              "Applications\Tools.Utility\Char.Pad"                     "Char.Pad.exe"              "Applications\Tools.Utility\Char.Pad"
 call :pub "Icon.Maker"            "Applications\Tools.Utility\Icon.Maker"                   "Icon.Maker.exe"            "Applications\Tools.Utility\Icon.Maker"
 call :pub "JSON.Fmt"              "Applications\Tools.Utility\JSON.Fmt"                     "JSON.Fmt.exe"              "Applications\Tools.Utility\JSON.Fmt"
+call :pub "Link.Scan"             "Applications\Tools.Utility\Link.Scan"                    "Link.Scan.exe"             "Applications\Tools.Utility\Link.Scan"
 call :pub "Mouse.Flick"           "Applications\Tools.Utility\Mouse.Flick"                  "Mouse.Flick.exe"           "Applications\Tools.Utility"
 call :pub "QR.Forge"              "Applications\Tools.Utility\QR.Forge"                     "QR.Forge.exe"              "Applications\Tools.Utility"
 

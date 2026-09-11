@@ -8,6 +8,10 @@ public partial class KeyCaptureDialog : Window
 {
     private readonly KeyboardHook _hook = new();
 
+    // 훅에서 키를 삼키면 시스템 키 상태(GetAsyncKeyState)가 갱신되지 않는다.
+    // 그래서 수식 키 눌림은 훅이 본 이벤트로 직접 추적한다.
+    private bool _ctrlHeld, _altHeld, _shiftHeld, _winHeld;
+
     private KeyCaptureDialog(string header, string hint)
     {
         InitializeComponent();
@@ -16,8 +20,13 @@ public partial class KeyCaptureDialog : Window
 
         _hook.KeyEvent += OnKey;
 
-        Loaded      += (_, _) => _hook.Install();
-        Activated   += (_, _) => _hook.Install();
+        Loaded += (_, _) =>
+        {
+            SyncHeldFromSystem();       // 창을 열기 전부터 누르고 있던 수식 키 반영
+            _hook.Install();
+            UpdateDisplay();
+        };
+        Activated   += (_, _) => { SyncHeldFromSystem(); _hook.Install(); };
         Deactivated += (_, _) => _hook.Uninstall();   // 다른 창을 쓰는 동안 키를 가로채지 않도록
         Closed      += (_, _) => _hook.Dispose();
     }
@@ -39,21 +48,43 @@ public partial class KeyCaptureDialog : Window
         return ok && combo.Vk != 0;
     }
 
+    // ── 수식 키 판별 (저수준 훅은 좌/우가 구분된 코드를 준다) ──────────
+    private static bool IsCtrl(int vk)  => vk is 0x11 or 0xA2 or 0xA3;
+    private static bool IsAlt(int vk)   => vk is 0x12 or 0xA4 or 0xA5;
+    private static bool IsShift(int vk) => vk is 0x10 or 0xA0 or 0xA1;
+    private static bool IsWin(int vk)   => vk is 0x5B or 0x5C;
+
+    private static bool SystemHeld(int vk) => (NativeMethods.GetAsyncKeyState(vk) & 0x8000) != 0;
+
+    private void SyncHeldFromSystem()
+    {
+        _ctrlHeld  = SystemHeld(0x11);
+        _altHeld   = SystemHeld(0x12);
+        _shiftHeld = SystemHeld(0x10);
+        _winHeld   = SystemHeld(0x5B) || SystemHeld(0x5C);
+    }
+
     private bool OnKey(HookedKey key)
     {
-        if (!key.IsDown) return true;          // 눌림만 반영하고 모든 키 입력은 여기서 소비
-
-        if (KeyNames.IsModifier(key.Vk))
+        // 수식 키는 눌림·뗌을 모두 추적해야 조합을 정확히 알 수 있다
+        if (IsCtrl(key.Vk) || IsAlt(key.Vk) || IsShift(key.Vk) || IsWin(key.Vk))
         {
+            if (IsCtrl(key.Vk))  _ctrlHeld  = key.IsDown;
+            if (IsAlt(key.Vk))   _altHeld   = key.IsDown;
+            if (IsShift(key.Vk)) _shiftHeld = key.IsDown;
+            if (IsWin(key.Vk))   _winHeld   = key.IsDown;
+
             Dispatcher.BeginInvoke(UpdateDisplay);
             return true;
         }
 
+        if (!key.IsDown) return true;          // 일반 키는 눌림만 반영하고 입력은 여기서 소비
+
         Vk    = key.Vk;
-        Ctrl  = Down(0x11);
-        Alt   = Down(0x12);
-        Shift = Down(0x10);
-        Win   = Down(0x5B) || Down(0x5C);
+        Ctrl  = _ctrlHeld;
+        Alt   = _altHeld;
+        Shift = _shiftHeld;
+        Win   = _winHeld;
 
         Dispatcher.BeginInvoke(() =>
         {
@@ -61,8 +92,6 @@ public partial class KeyCaptureDialog : Window
             BtnOk.IsEnabled = true;
         });
         return true;
-
-        static bool Down(int vk) => (NativeMethods.GetAsyncKeyState(vk) & 0x8000) != 0;
     }
 
     private void UpdateDisplay()
@@ -70,10 +99,10 @@ public partial class KeyCaptureDialog : Window
         if (Vk == 0)
         {
             var held = new List<string>(4);
-            if ((NativeMethods.GetAsyncKeyState(0x11) & 0x8000) != 0) held.Add("Ctrl");
-            if ((NativeMethods.GetAsyncKeyState(0x12) & 0x8000) != 0) held.Add("Alt");
-            if ((NativeMethods.GetAsyncKeyState(0x10) & 0x8000) != 0) held.Add("Shift");
-            if ((NativeMethods.GetAsyncKeyState(0x5B) & 0x8000) != 0) held.Add("Win");
+            if (_ctrlHeld)  held.Add("Ctrl");
+            if (_altHeld)   held.Add("Alt");
+            if (_shiftHeld) held.Add("Shift");
+            if (_winHeld)   held.Add("Win");
 
             TxtKey.Text = held.Count == 0 ? "키를 누르세요..." : string.Join(" + ", held) + " + ...";
             return;
@@ -85,6 +114,7 @@ public partial class KeyCaptureDialog : Window
     {
         Vk = 0;
         Ctrl = Alt = Shift = Win = false;
+        SyncHeldFromSystem();
         BtnOk.IsEnabled = false;
         UpdateDisplay();
     }

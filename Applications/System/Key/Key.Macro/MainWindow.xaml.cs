@@ -8,8 +8,11 @@ namespace KeyMacro;
 public partial class MainWindow : Window
 {
     private readonly ObservableCollection<MacroRule> _rules;
+    private readonly AppSettings _settings;
     private readonly MacroEngine _engine = new();
     private readonly DispatcherTimer _saveTimer = new() { Interval = TimeSpan.FromMilliseconds(800) };
+    private readonly DispatcherTimer _scheduleTimer = new() { Interval = TimeSpan.FromMilliseconds(200) };
+    private readonly Dictionary<string, DateTime> _lastScheduledRun = new();
 
     private MacroRule? _rule;       // 편집 중인 매크로
     private MacroAction? _action;   // 편집 중인 동작
@@ -23,24 +26,32 @@ public partial class MainWindow : Window
         _rules = MacroStore.Load();
         foreach (var rule in _rules) Watch(rule);
 
+        _settings = SettingsStore.Load();
+
         LstRules.ItemsSource = _rules;
         _engine.Rules = _rules;
+        _engine.Settings = _settings;
         _engine.Log += message => Dispatcher.BeginInvoke(() => TxtLog.Text = message);
         _engine.StateChanged += () => Dispatcher.BeginInvoke(UpdateStatus);
 
         _saveTimer.Tick += (_, _) => { _saveTimer.Stop(); SaveNow(); };
+        _scheduleTimer.Tick += (_, _) => ScheduleTick();
 
         Loaded += (_, _) =>
         {
             UpdateRuleCount();
             UpdateStatus();
+            UpdateHint();
             if (_rules.Count > 0) LstRules.SelectedIndex = 0;
+            _scheduleTimer.Start();
         };
 
         Closing += (_, _) =>
         {
+            _scheduleTimer.Stop();
             _saveTimer.Stop();
             SaveNow();
+            SettingsStore.Save(_settings);
             _engine.Dispose();
         };
     }
@@ -90,6 +101,142 @@ public partial class MainWindow : Window
 
     private void UpdateRuleCount() => TxtRuleCount.Text = $"매크로 {_rules.Count}개";
 
+    /// <summary>상태바 오른쪽 안내를 현재 중단 키에 맞춰 갱신</summary>
+    private void UpdateHint()
+        => TxtHint.Text = $"실행 중 {_settings.AbortDisplay} = 즉시 중단   ·   설정은 자동 저장됩니다";
+
+    // ══════════ 전체 설정 · 시간 동기화 ══════════
+    private void BtnOptions_Click(object sender, RoutedEventArgs e)
+    {
+        _engine.Paused = true;
+        try
+        {
+            if (!OptionsDialog.Show(this, _settings)) return;
+        }
+        finally { _engine.Paused = false; }
+
+        SettingsStore.Save(_settings);
+        UpdateHint();
+        TxtLog.Text = $"중단 키: {_settings.AbortDisplay}";
+    }
+
+    private void BtnTimeSync_Click(object sender, RoutedEventArgs e)
+    {
+        _engine.Paused = true;
+        try { TimeSyncDialog.Show(this, _settings); }
+        finally { _engine.Paused = false; }
+
+        SettingsStore.Save(_settings);
+    }
+
+    // ══════════ 예약 실행 ══════════
+    private void ChkSchedule_Click(object sender, RoutedEventArgs e)
+    {
+        if (_binding || _rule is null) return;
+
+        _rule.ScheduleEnabled = ChkSchedule.IsChecked == true;
+        if (_rule.ScheduleEnabled && _rule.ScheduleAt is null)
+        {
+            DarkDialog.Info(this, "시각을 HH:mm:ss 형식으로 입력하세요. (예: 10:10:09)");
+            _rule.ScheduleEnabled = false;
+            ChkSchedule.IsChecked = false;
+        }
+
+        UpdateNextRun();
+        ScheduleSave();
+    }
+
+    private void ScheduleTime_TextChanged(object sender, TextChangedEventArgs e)
+    {
+        if (_binding || _rule is null) return;
+
+        _rule.ScheduleTime = TxtScheduleTime.Text.Trim();
+        UpdateNextRun();
+        ScheduleSave();
+    }
+
+    private void CmbScheduleMode_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        if (_binding || _rule is null || CmbScheduleMode.SelectedIndex < 0) return;
+
+        _rule.ScheduleDaily = CmbScheduleMode.SelectedIndex == 0;
+        ScheduleSave();
+    }
+
+    private void BtnScheduleNow_Click(object sender, RoutedEventArgs e)
+    {
+        if (_rule is null) return;
+
+        var soon = DateTime.Now.AddMinutes(1);
+        _binding = true;
+        TxtScheduleTime.Text = soon.ToString("HH:mm:ss");
+        _binding = false;
+
+        _rule.ScheduleTime = TxtScheduleTime.Text;
+        UpdateNextRun();
+        ScheduleSave();
+    }
+
+    /// <summary>예약 시각이 되면 키 입력 없이 실행한다 (0.2초마다 확인)</summary>
+    private void ScheduleTick()
+    {
+        var now = DateTime.Now;
+
+        foreach (var rule in _rules.ToList())
+        {
+            if (!rule.Enabled || !rule.HasSchedule) continue;
+
+            var target = now.Date + rule.ScheduleAt!.Value;
+            double passed = (now - target).TotalSeconds;
+            if (passed < 0 || passed > 2) continue;                       // 지정 시각 직후에만
+            if (_lastScheduledRun.TryGetValue(rule.Id, out var last)
+                && (now - last).TotalSeconds < 5) continue;               // 같은 시각 중복 실행 방지
+
+            _lastScheduledRun[rule.Id] = now;
+            _engine.RunNow(rule);
+            TxtLog.Text = $"⏰ 예약 실행: {rule.Name} ({rule.ScheduleTime})";
+
+            if (!rule.ScheduleDaily)
+            {
+                rule.ScheduleEnabled = false;                             // 한 번만 모드는 실행 후 해제
+                if (ReferenceEquals(rule, _rule))
+                {
+                    _binding = true;
+                    ChkSchedule.IsChecked = false;
+                    _binding = false;
+                }
+                ScheduleSave();
+            }
+        }
+
+        UpdateNextRun();
+    }
+
+    /// <summary>편집 중인 매크로의 다음 실행까지 남은 시간 표시</summary>
+    private void UpdateNextRun()
+    {
+        if (_rule is null) return;
+
+        if (!_rule.HasSchedule)
+        {
+            TxtNextRun.Text = _rule.ScheduleEnabled && _rule.ScheduleAt is null
+                ? "시각 형식이 올바르지 않습니다 (HH:mm:ss)"
+                : "";
+            return;
+        }
+
+        var now = DateTime.Now;
+        var next = now.Date + _rule.ScheduleAt!.Value;
+        if (next <= now) next = next.AddDays(1);
+
+        var left = next - now;
+        TxtNextRun.Text = left.TotalHours >= 1
+            ? $"다음 실행까지 {(int)left.TotalHours}시간 {left.Minutes}분"
+            : left.TotalMinutes >= 1
+                ? $"다음 실행까지 {left.Minutes}분 {left.Seconds}초"
+                : $"다음 실행까지 {left.Seconds}초";
+    }
+
     // ══════════ 매크로 목록 ══════════
     private void BtnAddRule_Click(object sender, RoutedEventArgs e)
     {
@@ -123,8 +270,13 @@ public partial class MainWindow : Window
         ChkSuppress.IsChecked = _rule.SuppressTrigger;
         TxtRepeat.Text    = _rule.RepeatCount.ToString();
         TxtGap.Text       = _rule.GapMs.ToString();
+        ChkSchedule.IsChecked = _rule.ScheduleEnabled;
+        TxtScheduleTime.Text  = _rule.ScheduleTime;
+        CmbScheduleMode.SelectedIndex = _rule.ScheduleDaily ? 0 : 1;
         LstActions.ItemsSource = _rule.Actions;
         _binding = false;
+
+        UpdateNextRun();
 
         LstActions.SelectedIndex = _rule.Actions.Count > 0 ? 0 : -1;
         UpdateActionPlaceholder();
@@ -148,7 +300,10 @@ public partial class MainWindow : Window
             Ctrl = _rule.Ctrl, Alt = _rule.Alt, Shift = _rule.Shift, Win = _rule.Win,
             SuppressTrigger = _rule.SuppressTrigger,
             RepeatCount = _rule.RepeatCount,
-            GapMs = _rule.GapMs
+            GapMs = _rule.GapMs,
+            ScheduleTime = _rule.ScheduleTime,
+            ScheduleDaily = _rule.ScheduleDaily,
+            ScheduleEnabled = false      // 복제본이 곧바로 예약 실행되지 않도록
         };
         foreach (var action in _rule.Actions) copy.Actions.Add(action.Clone());
 
@@ -293,7 +448,7 @@ public partial class MainWindow : Window
     private void BtnAddDelay_Click(object sender, RoutedEventArgs e)
     {
         if (_rule is null) return;
-        Add(new MacroAction { Kind = ActionKind.Delay, DelayMs = 500 });
+        Add(new MacroAction { Kind = ActionKind.Delay, DelayMs = 100 });
     }
 
     /// <summary>새 동작을 현재 선택 위치 다음에 넣고 바로 선택한다</summary>
@@ -513,7 +668,7 @@ public partial class MainWindow : Window
         };
         countdown.Start();
 
-        TxtLog.Text = "3초 안에 매크로를 실행할 창을 클릭해 활성화하세요 (중단은 Esc)";
+        TxtLog.Text = $"3초 안에 매크로를 실행할 창을 클릭해 활성화하세요 (중단은 {_settings.AbortDisplay})";
     }
 
     // ══════════ 입력 받기 공통 ══════════

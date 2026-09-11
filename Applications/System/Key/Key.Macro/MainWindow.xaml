@@ -45,6 +45,7 @@
             <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
         </Style>
         <Style x:Key="CardItem" TargetType="ListBoxItem">
+            <Setter Property="Foreground" Value="{StaticResource TextPrimary}"/>
             <Setter Property="Padding" Value="0"/>
             <Setter Property="Margin" Value="0,0,0,6"/>
             <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
@@ -114,6 +115,10 @@
                                        VerticalAlignment="Center"/>
                         </StackPanel>
                     </Border>
+                    <Button Content="🕒  시간 동기화" Margin="0,0,6,0" Click="BtnTimeSync_Click"
+                            ToolTip="기준 사이트 시각에 PC 시계를 맞춥니다 (예약 실행 정확도)"/>
+                    <Button Content="⚙  설정" Margin="0,0,10,0" Click="BtnOptions_Click"
+                            ToolTip="중단 키 등 전체 설정"/>
                     <Button x:Name="BtnToggle" Content="감시 시작" Style="{StaticResource AccentButton}"
                             MinWidth="118" Click="BtnToggle_Click"
                             ToolTip="켜면 등록된 트리거 키를 전역에서 감지합니다"/>
@@ -168,11 +173,12 @@
                                                                FontSize="12" FontWeight="Bold"
                                                                Foreground="{StaticResource AccentBrush}"/>
                                                 </Border>
-                                                <TextBlock Text="{Binding Name}" Margin="8,0,0,0" FontSize="13"
+                                                <TextBlock Text="{Binding Name}" Margin="8,0,0,0" FontSize="13.5"
+                                                           FontWeight="SemiBold" Foreground="{StaticResource TextPrimary}"
                                                            VerticalAlignment="Center" TextTrimming="CharacterEllipsis"/>
                                             </StackPanel>
-                                            <TextBlock Text="{Binding Summary}" FontSize="11" Margin="0,5,0,0"
-                                                       Foreground="{StaticResource TextSecondary}"/>
+                                            <TextBlock Text="{Binding Summary}" FontSize="11.5" Margin="0,5,0,0"
+                                                       Foreground="#9A9AB0"/>
                                         </StackPanel>
                                     </Grid>
                                 </DataTemplate>
@@ -235,6 +241,8 @@
                                 <CheckBox x:Name="ChkSuppress" Margin="0,14,0,0" Click="ChkSuppress_Click"
                                           Content="트리거 키의 원래 입력을 다른 프로그램에 전달하지 않음"
                                           ToolTip="예를 들어 숫자 1을 트리거로 쓰면, 눌러도 1이 입력되지 않습니다"/>
+                                <TextBlock Foreground="{StaticResource TextSecondary}" FontSize="11.5" Margin="0,8,0,0"
+                                           Text="아래 ⑤ 예약 실행만 쓸 매크로라면 트리거 키를 비워 둬도 됩니다."/>
                             </StackPanel>
                         </Border>
 
@@ -251,11 +259,12 @@
                                                    FontSize="12.5" HorizontalAlignment="Center"
                                                    VerticalAlignment="Center" TextAlignment="Center"
                                                    Text="아직 동작이 없습니다&#x0a;아래 버튼으로 마우스 클릭 지점이나 키 입력을 추가하세요"/>
-                                        <ScrollViewer MaxHeight="260" VerticalScrollBarVisibility="Auto">
-                                            <ListBox x:Name="LstActions" Style="{StaticResource CardList}"
-                                                     ItemContainerStyle="{StaticResource CardItem}"
-                                                     AlternationCount="999"
-                                                     SelectionChanged="LstActions_SelectionChanged">
+                                        <ListBox x:Name="LstActions" Style="{StaticResource CardList}"
+                                                 ItemContainerStyle="{StaticResource CardItem}"
+                                                 AlternationCount="999" MaxHeight="264"
+                                                 ScrollViewer.VerticalScrollBarVisibility="Auto"
+                                                 ScrollViewer.CanContentScroll="False"
+                                                 SelectionChanged="LstActions_SelectionChanged">
                                                 <ListBox.ItemTemplate>
                                                     <DataTemplate>
                                                         <Grid Margin="10,8">
@@ -279,7 +288,8 @@
                                                                        FontSize="15" Margin="10,0,10,0"
                                                                        VerticalAlignment="Center"/>
                                                             <TextBlock Grid.Column="2" Text="{Binding Display}"
-                                                                       FontSize="13" VerticalAlignment="Center"
+                                                                       FontSize="13.5" VerticalAlignment="Center"
+                                                                       Foreground="{StaticResource TextPrimary}"
                                                                        TextTrimming="CharacterEllipsis"/>
                                                             <StackPanel Grid.Column="3" Orientation="Horizontal">
                                                                 <Button Content="▲" Style="{StaticResource MiniButton}"
@@ -294,9 +304,8 @@
                                                             </StackPanel>
                                                         </Grid>
                                                     </DataTemplate>
-                                                </ListBox.ItemTemplate>
-                                            </ListBox>
-                                        </ScrollViewer>
+                                            </ListBox.ItemTemplate>
+                                        </ListBox>
                                     </Grid>
                                 </Border>
 
@@ -404,7 +413,9 @@
                         <!-- ④ 실행 설정 -->
                         <Border Background="{StaticResource SurfaceBrush}" CornerRadius="10" Margin="0,10,0,4"
                                 BorderBrush="{StaticResource LineBrush}" BorderThickness="1" Padding="16,14">
-                            <StackPanel Orientation="Horizontal">
+                            <StackPanel>
+                                <TextBlock Style="{StaticResource SectionTitle}" Text="④ 반복 횟수와 속도"/>
+                                <StackPanel Orientation="Horizontal">
                                 <TextBlock Text="전체 반복" Style="{StaticResource FieldLabel}"/>
                                 <TextBox x:Name="TxtRepeat" Width="62" TextChanged="Repeat_TextChanged"/>
                                 <TextBlock Text="회" Style="{StaticResource FieldLabel}" Margin="8,0,22,0"/>
@@ -415,7 +426,34 @@
 
                                 <Button x:Name="BtnTest" Content="▶  3초 뒤 테스트 실행" Margin="26,0,0,0"
                                         Style="{StaticResource AccentButton}" Click="BtnTest_Click"
-                                        ToolTip="3초 안에 대상 창을 클릭해 활성화하세요. 실행 중 Esc 를 누르면 중단됩니다"/>
+                                        ToolTip="3초 안에 대상 창을 클릭해 활성화하세요. 실행 중에는 중단 키로 멈출 수 있습니다"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </Border>
+
+                        <!-- ⑤ 예약 실행 -->
+                        <Border Background="{StaticResource SurfaceBrush}" CornerRadius="10" Margin="0,10,0,4"
+                                BorderBrush="{StaticResource LineBrush}" BorderThickness="1" Padding="16,14">
+                            <StackPanel>
+                                <TextBlock Style="{StaticResource SectionTitle}"
+                                           Text="⑤ 예약 실행 — 키를 누르지 않아도 지정한 시각에 실행합니다"/>
+                                <StackPanel Orientation="Horizontal">
+                                    <CheckBox x:Name="ChkSchedule" Content="예약 사용" VerticalAlignment="Center"
+                                              Click="ChkSchedule_Click"/>
+                                    <TextBlock Text="시각" Style="{StaticResource FieldLabel}" Margin="20,0,8,0"/>
+                                    <TextBox x:Name="TxtScheduleTime" Width="104" FontFamily="Consolas"
+                                             TextChanged="ScheduleTime_TextChanged"
+                                             ToolTip="HH:mm:ss 형식 (예: 10:10:09)"/>
+                                    <Button Content="지금 시각" Padding="10,4" FontSize="12" Margin="6,0,0,0"
+                                            Click="BtnScheduleNow_Click" ToolTip="현재 시각 + 1분을 넣습니다"/>
+                                    <ComboBox x:Name="CmbScheduleMode" Width="112" Margin="14,0,0,0"
+                                              SelectionChanged="CmbScheduleMode_SelectionChanged">
+                                        <ComboBoxItem Content="매일 반복"/>
+                                        <ComboBoxItem Content="한 번만"/>
+                                    </ComboBox>
+                                    <TextBlock x:Name="TxtNextRun" Style="{StaticResource FieldLabel}"
+                                               Margin="18,0,0,0" Foreground="{StaticResource AccentBrush}"/>
+                                </StackPanel>
                             </StackPanel>
                         </Border>
                     </StackPanel>
@@ -429,8 +467,9 @@
             <Grid>
                 <TextBlock x:Name="TxtLog" FontSize="12" Foreground="{StaticResource TextSecondary}"
                            Text="준비됨"/>
-                <TextBlock FontSize="11.5" HorizontalAlignment="Right" Foreground="{StaticResource TextSecondary}"
-                           Text="실행 중 Esc = 즉시 중단   ·   설정은 자동 저장됩니다"/>
+                <TextBlock x:Name="TxtHint" FontSize="11.5" HorizontalAlignment="Right"
+                           Foreground="{StaticResource TextSecondary}"
+                           Text="설정은 자동 저장됩니다"/>
             </Grid>
         </Border>
     </Grid>

@@ -1,0 +1,80 @@
+<Window x:Class="KeyMacro.Views.TimeSyncDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="시간 동기화" Width="520" SizeToContent="Height"
+        WindowStartupLocation="CenterOwner" ResizeMode="NoResize"
+        Background="#1B1B22" Foreground="#E0E0E0" ShowInTaskbar="False"
+        FontFamily="Segoe UI, Malgun Gothic">
+    <StackPanel Margin="22,18,22,18">
+
+        <TextBlock Text="기준 사이트의 시각에 PC 시계를 맞춥니다" FontSize="15" FontWeight="SemiBold"/>
+        <TextBlock Foreground="#9A9AB0" FontSize="12" Margin="0,6,0,0" TextWrapping="Wrap"
+                   Text="사이트 응답의 Date 헤더를 읽어 왕복 지연을 보정합니다. 예약 실행을 초 단위로 맞출 때 유용합니다."/>
+
+        <TextBlock Text="기준 사이트 주소" Foreground="#888888" FontSize="12" Margin="0,16,0,6"/>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <TextBox x:Name="TxtUrl" Grid.Column="0" VerticalContentAlignment="Center"/>
+            <Button x:Name="BtnProbe" Grid.Column="1" Content="시간 확인" Margin="8,0,0,0"
+                    Style="{StaticResource AccentButton}" Click="BtnProbe_Click"/>
+        </Grid>
+
+        <WrapPanel Margin="0,10,0,0">
+            <Button Content="google.com" Tag="https://www.google.com" Padding="10,4" FontSize="12"
+                    Margin="0,0,6,0" Click="BtnPreset_Click"/>
+            <Button Content="naver.com" Tag="https://www.naver.com" Padding="10,4" FontSize="12"
+                    Margin="0,0,6,0" Click="BtnPreset_Click"/>
+            <Button Content="time.kriss.re.kr" Tag="https://time.kriss.re.kr" Padding="10,4" FontSize="12"
+                    Margin="0,0,12,0" Click="BtnPreset_Click"
+                    ToolTip="한국표준과학연구원 표준시"/>
+            <CheckBox x:Name="ChkPrecise" Content="정밀 보정 (초가 바뀌는 순간까지 추적)"
+                      VerticalAlignment="Center"/>
+        </WrapPanel>
+
+        <Border Background="#1A1A22" CornerRadius="8" Padding="16,14" Margin="0,16,0,0"
+                BorderBrush="#37374A" BorderThickness="1">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Row="0" Grid.Column="0" Text="기준 시각" Foreground="#888888" FontSize="12"
+                           Margin="0,0,14,7" VerticalAlignment="Center"/>
+                <TextBlock x:Name="TxtServer" Grid.Row="0" Grid.Column="1" Text="—" FontFamily="Consolas"
+                           FontSize="15" Margin="0,0,0,7"/>
+
+                <TextBlock Grid.Row="1" Grid.Column="0" Text="PC 시각" Foreground="#888888" FontSize="12"
+                           Margin="0,0,14,7" VerticalAlignment="Center"/>
+                <TextBlock x:Name="TxtLocal" Grid.Row="1" Grid.Column="1" Text="—" FontFamily="Consolas"
+                           FontSize="15" Margin="0,0,0,7"/>
+
+                <TextBlock Grid.Row="2" Grid.Column="0" Text="차이" Foreground="#888888" FontSize="12"
+                           Margin="0,0,14,0" VerticalAlignment="Center"/>
+                <TextBlock x:Name="TxtDiff" Grid.Row="2" Grid.Column="1" Text="—" FontFamily="Consolas"
+                           FontSize="19" FontWeight="Bold" Foreground="#4DD0E1"/>
+
+                <TextBlock x:Name="TxtDetail" Grid.Row="3" Grid.Column="1" Text="" Foreground="#888888"
+                           FontSize="11.5" Margin="0,6,0,0" TextWrapping="Wrap"/>
+            </Grid>
+        </Border>
+
+        <TextBlock x:Name="TxtNote" Foreground="#9A9AB0" FontSize="11.5" Margin="2,10,0,0" TextWrapping="Wrap"
+                   Text="PC 시간을 바꾸려면 관리자 권한이 필요합니다. 아래 버튼을 누를 때만 권한 상승을 요청합니다."/>
+
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,16,0,0">
+            <Button Content="닫기" Click="BtnClose_Click" Margin="0,0,8,0"/>
+            <Button x:Name="BtnApply" Content="🛡  PC 시간 맞추기" Style="{StaticResource AccentButton}"
+                    IsEnabled="False" Click="BtnApply_Click"/>
+        </StackPanel>
+    </StackPanel>
+</Window>

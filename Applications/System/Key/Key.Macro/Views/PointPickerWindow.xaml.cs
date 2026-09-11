@@ -86,7 +86,7 @@ public partial class PointPickerWindow : Window
 
     private bool OnKey(HookedKey key)
     {
-        if (!key.IsDown || key.Vk != MacroEngine.AbortVk) return false;
+        if (!key.IsDown || key.Vk != MacroEngine.EscVk) return false;
 
         Dispatcher.BeginInvoke(() =>
         {

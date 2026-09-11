@@ -7,8 +7,8 @@ namespace KeyMacro.Services;
 /// <summary>키 입력을 감시하다가 일치하는 규칙의 동작 시퀀스를 실행한다</summary>
 public sealed class MacroEngine : IDisposable
 {
-    /// <summary>실행 중인 매크로를 중단시키는 키 (Esc)</summary>
-    public const int AbortVk = 0x1B;
+    /// <summary>Esc 가상 키 코드</summary>
+    public const int EscVk = 0x1B;
 
     private readonly KeyboardHook _hook = new();
     private readonly BlockingCollection<MacroRule> _queue = new();
@@ -23,6 +23,9 @@ public sealed class MacroEngine : IDisposable
 
     /// <summary>규칙 목록 (UI 컬렉션을 그대로 참조)</summary>
     public IList<MacroRule> Rules { get; set; } = new List<MacroRule>();
+
+    /// <summary>전역 설정 (중단 핫키 등)</summary>
+    public AppSettings Settings { get; set; } = new();
 
     /// <summary>감시 중 여부</summary>
     public bool IsActive => _hook.IsInstalled;
@@ -79,11 +82,14 @@ public sealed class MacroEngine : IDisposable
             return false;
         }
 
-        // 실행 중 Esc → 즉시 중단
-        if (key.Vk == AbortVk && _busy)
+        // 중단 핫키 → 실행 중이면 즉시 멈춘다
+        if (IsAbortKey(key.Vk))
         {
-            _abort = true;
-            Log?.Invoke("Esc — 실행 중단 요청");
+            if (_busy || _queue.Count > 0)
+            {
+                AbortAll();
+                Log?.Invoke($"{KeyNames.Of(key.Vk)} — 실행 중단");
+            }
             return false;
         }
 
@@ -100,6 +106,27 @@ public sealed class MacroEngine : IDisposable
         _queue.Add(rule);
         return rule.SuppressTrigger;
     }
+
+    /// <summary>실행 중인 매크로를 모두 멈추고 대기 중인 것도 취소</summary>
+    public void AbortAll()
+    {
+        _abort = true;
+        while (_queue.TryTake(out _)) { }
+    }
+
+    /// <summary>눌린 키가 중단 핫키인지 (수식 키는 눌려 있기만 하면 인정)</summary>
+    private bool IsAbortKey(int vk)
+    {
+        if (Settings.AbortOnEsc && vk == EscVk) return true;
+        if (Settings.AbortVk == 0 || vk != Settings.AbortVk) return false;
+
+        return (!Settings.AbortCtrl  || Held(0x11))
+            && (!Settings.AbortAlt   || Held(0x12))
+            && (!Settings.AbortShift || Held(0x10))
+            && (!Settings.AbortWin   || Held(0x5B) || Held(0x5C));
+    }
+
+    private static bool Held(int vk) => (GetAsyncKeyState(vk) & 0x8000) != 0;
 
     /// <summary>눌린 키 + 현재 수식 키 상태와 정확히 일치하는 규칙을 찾는다</summary>
     private MacroRule? Match(int vk)
@@ -146,7 +173,7 @@ public sealed class MacroEngine : IDisposable
         {
             for (int i = 0; i < actions.Count && !_abort; i++)
             {
-                if (EscPressed()) { _abort = true; break; }
+                if (AbortHeld()) { _abort = true; break; }
                 Execute(actions[i]);
                 if (i < actions.Count - 1) Wait(rule.GapMs);
             }
@@ -219,12 +246,21 @@ public sealed class MacroEngine : IDisposable
         for (int elapsed = 0; elapsed < ms && !_abort; elapsed += slice)
         {
             Thread.Sleep(Math.Min(slice, ms - elapsed));
-            if (EscPressed()) _abort = true;
+            if (AbortHeld()) _abort = true;
         }
     }
 
-    /// <summary>Esc 물리 키 눌림 — 감시가 꺼진 상태의 테스트 실행도 중단할 수 있도록 직접 확인</summary>
-    private static bool EscPressed() => (GetAsyncKeyState(AbortVk) & 0x8000) != 0;
+    /// <summary>중단 핫키가 물리적으로 눌려 있는지 — 감시가 꺼진 테스트 실행도 멈출 수 있도록 직접 확인</summary>
+    private bool AbortHeld()
+    {
+        if (Settings.AbortOnEsc && Held(EscVk)) return true;
+        if (Settings.AbortVk == 0 || !Held(Settings.AbortVk)) return false;
+
+        return (!Settings.AbortCtrl  || Held(0x11))
+            && (!Settings.AbortAlt   || Held(0x12))
+            && (!Settings.AbortShift || Held(0x10))
+            && (!Settings.AbortWin   || Held(0x5B) || Held(0x5C));
+    }
 
     private void Raise(string message)
     {

@@ -10,6 +10,9 @@ public sealed class MacroRule : ObservableObject
     private bool _suppressTrigger = true;
     private int _repeatCount = 1;
     private int _gapMs = 50;
+    private bool _scheduleEnabled;
+    private string _scheduleTime = "09:00:00";
+    private bool _scheduleDaily = true;
 
     public string Id { get; set; } = Guid.NewGuid().ToString("N");
 
@@ -32,6 +35,34 @@ public sealed class MacroRule : ObservableObject
     /// <summary>동작과 동작 사이 기본 간격(ms)</summary>
     public int GapMs { get => _gapMs; set => Set(ref _gapMs, Math.Max(0, value)); }
 
+    // ── 예약 실행 ──
+    /// <summary>지정한 시각이 되면 키 입력 없이도 알아서 실행</summary>
+    public bool ScheduleEnabled
+    {
+        get => _scheduleEnabled;
+        set { Set(ref _scheduleEnabled, value); RaiseDisplay(); }
+    }
+
+    /// <summary>실행할 시각 (HH:mm:ss)</summary>
+    public string ScheduleTime
+    {
+        get => _scheduleTime;
+        set { Set(ref _scheduleTime, value ?? ""); RaiseDisplay(); }
+    }
+
+    /// <summary>true = 매일 반복, false = 한 번만 실행하고 예약 해제</summary>
+    public bool ScheduleDaily
+    {
+        get => _scheduleDaily;
+        set { Set(ref _scheduleDaily, value); RaiseDisplay(); }
+    }
+
+    /// <summary>예약 시각을 TimeSpan 으로 (형식이 잘못됐으면 null)</summary>
+    [JsonIgnore]
+    public TimeSpan? ScheduleAt =>
+        TimeSpan.TryParseExact(ScheduleTime, new[] { @"hh\:mm\:ss", @"h\:mm\:ss", @"hh\:mm" },
+            System.Globalization.CultureInfo.InvariantCulture, out var t) ? t : null;
+
     public ObservableCollection<MacroAction> Actions { get; set; } = new();
 
     [JsonIgnore]
@@ -39,8 +70,21 @@ public sealed class MacroRule : ObservableObject
         TriggerVk == 0 ? "키 미지정" : KeyNames.Combo(TriggerVk, Ctrl, Alt, Shift, Win);
 
     [JsonIgnore]
-    public string Summary =>
-        Actions.Count == 0 ? "동작 없음" : $"동작 {Actions.Count}개" + (RepeatCount > 1 ? $" · {RepeatCount}회 반복" : "");
+    public string Summary
+    {
+        get
+        {
+            var text = Actions.Count == 0 ? "동작 없음" : $"동작 {Actions.Count}개";
+            if (RepeatCount > 1) text += $" · {RepeatCount}회 반복";
+            if (ScheduleEnabled && ScheduleAt is not null)
+                text += $" · ⏰ {ScheduleTime}{(ScheduleDaily ? " 매일" : " 1회")}";
+            return text;
+        }
+    }
+
+    /// <summary>예약이 켜져 있고 시각도 올바른지</summary>
+    [JsonIgnore]
+    public bool HasSchedule => ScheduleEnabled && ScheduleAt is not null && Actions.Count > 0;
 
     public void RaiseDisplay()
     {

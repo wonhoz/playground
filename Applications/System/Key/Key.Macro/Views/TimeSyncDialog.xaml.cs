@@ -80,6 +80,7 @@ public partial class TimeSyncDialog : Window
 
         if (!ok) return;
 
+        TxtNote.Text = "Windows 설정에서 '자동으로 시간 설정'이 켜져 있으면 잠시 후 표준 시각으로 다시 맞춰질 수 있습니다.";
         TxtLocal.Text = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff");
         TxtDiff.Text = "0 ms  (맞춤 완료)";
         TxtDiff.Foreground = (SolidColorBrush)FindResource("SuccessBrush");

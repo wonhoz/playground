@@ -67,6 +67,7 @@
 | `Boot.Map` | System | Windows 부팅 ETW 타임라인 시각화 | ✅ |
 | `Env.Guard` | System | Windows 환경변수 GUI 관리자 + 스냅샷/롤백 | ✅ |
 | `Hotkey.Map` | System | 전역 단축키 충돌 감지 + AHK 내보내기 ★24차 | ✅ |
+| `Key.Macro` | System | 키 트리거 매크로 - 지정 키 누르면 마우스 클릭·키 입력 시퀀스 자동 실행 (채택 2026-09-11) | ✅ |
 | `Key.Map` | System | 앱별 단축키 키보드 다이어그램 시각화 + PDF 치트시트 | ✅ |
 | `Key.Test` | System | 하드웨어 키보드 키 입력 테스트 도구 | ✅ |
 | `Layout.Forge` | System | 키보드 키 재배치 프로파일 에디터 | 🗃️ |

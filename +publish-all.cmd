@@ -1,4 +1,4 @@
-@echo off
+﻿@echo off
 chcp 65001 >nul
 setlocal enabledelayedexpansion
 
@@ -116,6 +116,7 @@ call :pub "Web.Shot"              "Applications\Photo.Picture\Web.Shot"         
 
 :: ── Applications / System / Key ────────────────────────────────────
 call :pub "Hotkey.Map"            "Applications\System\Key\Hotkey.Map"                      "Hotkey.Map.exe"            "Applications\System\Key\Hotkey.Map"
+call :pub "Key.Macro"             "Applications\System\Key\Key.Macro"                      "Key.Macro.exe"             "Applications\System\Key\Key.Macro"
 call :pub "Key.Map"               "Applications\System\Key\Key.Map"                         "Key.Map.exe"               "Applications\System\Key\Key.Map"
 call :pub "Key.Test"              "Applications\System\Key\Key.Test"                        "KeyTest.exe"               "Applications\System\Key"
 

@@ -1,0 +1,34 @@
+<Window x:Class="KeyMacro.Views.PointPickerWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="지점 지정" SizeToContent="WidthAndHeight"
+        WindowStyle="None" AllowsTransparency="True" Background="Transparent"
+        Topmost="True" ShowInTaskbar="False" ResizeMode="NoResize"
+        WindowStartupLocation="Manual">
+    <Border Background="#F0232330" BorderBrush="#4DD0E1" BorderThickness="2"
+            CornerRadius="10" Padding="22,16" Width="320">
+        <StackPanel>
+            <TextBlock Text="클릭할 지점을 화면에서 눌러 주세요"
+                       Foreground="#E0E0E0" FontSize="14" FontWeight="SemiBold"
+                       HorizontalAlignment="Center"/>
+
+            <Border Background="#1A1A22" CornerRadius="8" Padding="0,12" Margin="0,14,0,10">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <TextBlock Text="X" Foreground="#888888" FontSize="13" VerticalAlignment="Center"/>
+                    <TextBlock x:Name="TxtX" Text="0" Foreground="#4DD0E1" FontSize="26"
+                               FontFamily="Consolas" FontWeight="Bold" Margin="8,0,22,0"
+                               VerticalAlignment="Center"/>
+                    <TextBlock Text="Y" Foreground="#888888" FontSize="13" VerticalAlignment="Center"/>
+                    <TextBlock x:Name="TxtY" Text="0" Foreground="#4DD0E1" FontSize="26"
+                               FontFamily="Consolas" FontWeight="Bold" Margin="8,0,0,0"
+                               VerticalAlignment="Center"/>
+                </StackPanel>
+            </Border>
+
+            <TextBlock Foreground="#888888" FontSize="12" HorizontalAlignment="Center"
+                       Text="마우스 클릭 = 지점 확정    ·    Esc = 취소"/>
+            <TextBlock Foreground="#666677" FontSize="11" HorizontalAlignment="Center" Margin="0,6,0,0"
+                       Text="여기서 누른 클릭은 다른 프로그램에 전달되지 않습니다"/>
+        </StackPanel>
+    </Border>
+</Window>

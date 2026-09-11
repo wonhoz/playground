@@ -1,0 +1,27 @@
+<Window x:Class="KeyMacro.Views.KeyCaptureDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="키 입력 받기" Width="430" SizeToContent="Height"
+        WindowStartupLocation="CenterOwner" ResizeMode="NoResize"
+        Background="#1B1B22" Foreground="#E0E0E0" ShowInTaskbar="False">
+    <StackPanel Margin="24,20,24,20">
+        <TextBlock x:Name="TxtHeader" Text="사용할 키를 지금 눌러 주세요"
+                   FontSize="15" FontWeight="SemiBold" HorizontalAlignment="Center"/>
+        <TextBlock x:Name="TxtHint" Foreground="#888888" FontSize="12" Margin="0,6,0,0"
+                   HorizontalAlignment="Center" TextAlignment="Center"
+                   Text="Ctrl · Alt · Shift · Win 을 함께 눌러 조합으로 만들 수 있습니다"/>
+
+        <Border Background="#1A1A22" BorderBrush="#4DD0E1" BorderThickness="2"
+                CornerRadius="10" Padding="0,22" Margin="0,16,0,0">
+            <TextBlock x:Name="TxtKey" Text="키를 누르세요..." FontSize="24" FontWeight="Bold"
+                       FontFamily="Consolas" Foreground="#4DD0E1" HorizontalAlignment="Center"/>
+        </Border>
+
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,18,0,0">
+            <Button x:Name="BtnClear" Content="다시 누르기" Click="BtnClear_Click" Margin="0,0,8,0"/>
+            <Button x:Name="BtnCancel" Content="취소" Click="BtnCancel_Click" Margin="0,0,8,0"/>
+            <Button x:Name="BtnOk" Content="확인" Style="{StaticResource AccentButton}"
+                    Click="BtnOk_Click" IsEnabled="False"/>
+        </StackPanel>
+    </StackPanel>
+</Window>

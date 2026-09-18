@@ -166,7 +166,6 @@ public partial class BatchView : UserControl
         PbBatch.Maximum       = _chapters.Count;
         PbBatch.Value         = 0;
 
-        var ext = toMp3 ? "mp3" : "wav";
         UpdateOutputNames(toMp3);
 
         var mw = Window.GetWindow(this) as MainWindow;

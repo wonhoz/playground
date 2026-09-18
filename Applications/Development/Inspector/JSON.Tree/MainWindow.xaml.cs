@@ -19,7 +19,7 @@ public partial class MainWindow : Window
 {
     [DllImport("dwmapi.dll")] static extern int DwmSetWindowAttribute(IntPtr hwnd, int attr, ref int val, int sz);
 
-    string? _rawA, _rawB;
+    string? _rawA;
     JsonNode? _rootA, _rootB;
 
     public MainWindow() => InitializeComponent();
@@ -82,7 +82,7 @@ public partial class MainWindow : Window
             }
             else
             {
-                _rawB = text; _rootB = root;
+                _rootB = root;
                 LabelB.Text = label;
                 StatsB.Text = $"  ({CountNodes(root)} 노드)";
                 BtnClearB.IsEnabled = true;
@@ -106,7 +106,7 @@ public partial class MainWindow : Window
 
     void BtnClearB_Click(object sender, RoutedEventArgs e)
     {
-        _rawB = null; _rootB = null;
+        _rootB = null;
         TreeB.Items.Clear();
         EnableDiffLayout(false);
         BtnClearB.IsEnabled = false;

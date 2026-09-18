@@ -126,7 +126,7 @@ public class ArchiveService
 
     private static List<ComicPage> GetSharpCompressPages(string archivePath)
     {
-        using var archive = ArchiveFactory.Open(archivePath);
+        using var archive = ArchiveFactory.OpenArchive(archivePath);
         return archive.Entries
             .Where(e => !e.IsDirectory &&
                         ImageExts.Contains(Path.GetExtension(e.Key ?? "").ToLowerInvariant()))
@@ -156,7 +156,7 @@ public class ArchiveService
 
     private static Stream OpenSharpEntry(string archivePath, string entryKey)
     {
-        using var archive = ArchiveFactory.Open(archivePath);
+        using var archive = ArchiveFactory.OpenArchive(archivePath);
         var entry = archive.Entries
             .FirstOrDefault(e => e.Key == entryKey)
             ?? throw new FileNotFoundException($"아카이브 항목을 찾을 수 없음: {entryKey}");

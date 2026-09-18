@@ -17,7 +17,6 @@ namespace StayAwake
         // 진행률 아이콘 색상 (ACTIVE 배지 색상과 일치)
         private static readonly Color ProgressColor = Color.FromArgb(67, 217, 123); // #43D97B
         private static readonly Color ProgressTrack = Color.FromArgb(60, 60, 60);
-        private static readonly Color ProgressBg = Color.FromArgb(24, 24, 24);
 
         /// <summary>
         /// 실행 중 트레이 아이콘 (녹색 활성 점)

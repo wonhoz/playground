@@ -62,9 +62,6 @@ namespace StayAwake
         // F15 키 (실제 키보드에 없어서 무해함)
         private const byte VK_F15 = 0x7E;
 
-        // Scroll Lock (눈에 보이지만 대부분 사용 안 함)
-        private const byte VK_SCROLL = 0x91;
-
         // SetThreadExecutionState 플래그
         private const uint ES_CONTINUOUS = 0x80000000;
         private const uint ES_SYSTEM_REQUIRED = 0x00000001;

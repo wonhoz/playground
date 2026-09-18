@@ -267,7 +267,6 @@ public partial class MainWindow : Window
     {
         if (!IsLoaded) return;
         double w = ViewerGrid.ActualWidth;
-        double h = ViewerGrid.ActualHeight;
 
         // 화면 좌표 기준 슬라이더 X
         double screenX = _sliderX * w;

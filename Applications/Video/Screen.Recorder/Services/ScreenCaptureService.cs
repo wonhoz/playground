@@ -41,8 +41,6 @@ public sealed class ScreenCaptureService : IDisposable
     private const int  CURSOR_SHOWING = 0x00000001;
     private const uint DI_NORMAL      = 0x0003;
 
-    private const int SRCCOPY = 0x00CC0020;
-
     private readonly Int32Rect _region;
     private readonly int _fps;
     private readonly string _outputPath;

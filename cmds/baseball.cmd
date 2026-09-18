@@ -7,13 +7,13 @@ setlocal enabledelayedexpansion
 :: ======================================================================
 ::  NUMBER BASEBALL - 숫자 야구 콘솔 게임 
 ::
-::  부엉이 베어스가 숨긴 비밀 숫자를 맞혀 끝내기 홈런을 쳐라
-::   · 정규 시즌   3자리 · 9이닝
-::   · 포스트 시즌 4자리 · 10이닝
+::  부엉이 베어스가 숨긴 비밀 숫자를 맞혀 끝내기 홈런을 쳐라  
+::   · 정규 시즌   3자리 · 9이닝  
+::   · 포스트 시즌 4자리 · 10이닝  
 ::   · 자리와 숫자 모두 맞으면 S, 숫자만 맞으면 B, 하나도 없으면 OUT 
 ::
 ::  콘솔 테마: .claude/docs/cmd-console-style.md (ANSI 256 색, Windows 10+)
-::  주의: 멀티바이트 문자가 있는 줄은 공백을 붙여 짝수 바이트로 끝낸다
+::  주의: 멀티바이트 문자가 있는 줄은 공백을 붙여 짝수 바이트로 끝낸다  
 ::  주의: 지연 확장 상태이므로 느낌표는 !EX! 로만 출력한다 
 ::  주의: 캐럿이 들어간 이모티콘은 느낌표가 없는 set 줄에서만 정의한다 
 :: ======================================================================
@@ -85,7 +85,7 @@ set "PV_2=118"
 set "PV_3=127"
 set "PV_4=131"
 
-:: 중계 멘트
+:: 중계 멘트  
 set "CAST_OUT_1=헛스윙 삼진~ 방망이가 허공을 가릅니다"
 set "CAST_OUT_2=공 하나 건드리지 못했어요. 그래도 지울 숫자가 생겼습니다" 
 set "CAST_OUT_3=완벽하게 속았습니다. 부엉이 투수 오늘 공이 좋네요" 
@@ -105,7 +105,7 @@ set "CAST_HR_1=넘어갑니다~ 담장을 넘어갑니다!EX! 끝내기 홈런!E
 set "CAST_HR_2=이 타구는~ 이 타구는~ 넘어갔습니다!EX! 경기 끝!EX!" 
 set "CAST_HR_3=밤하늘을 가르는 대형 아치!EX! 숫자 구장이 뒤집어집니다!EX!"
 
-:: 기록 파일
+:: 기록 파일  
 set "REC_DIR=%LOCALAPPDATA%\Playground\NumberBaseball"
 set "REC_FILE=%REC_DIR%\record.ini"
 if not exist "%REC_DIR%" mkdir "%REC_DIR%" >nul 2>&1
@@ -140,7 +140,7 @@ echo.
 echo   %CC%■%C0% %CW%경기 선택%C0%
 echo     %CD%└%C0% %CY%[1]%C0% 정규 시즌     %CD%숫자 3개 · 9이닝%C0% 
 echo     %CD%└%C0% %CY%[2]%C0% 포스트 시즌   %CD%숫자 4개 · 10이닝%C0% 
-echo     %CD%└%C0% %CY%[3]%C0% 경기 규칙
+echo     %CD%└%C0% %CY%[3]%C0% 경기 규칙  
 echo     %CD%└%C0% %CY%[Q]%C0% 퇴장 
 echo.
 choice /C 123Q /N /M "   선택 > " 
@@ -166,7 +166,7 @@ call :RULES
 goto :TITLE
 
 :: ======================================================================
-:: 경기 진행
+:: 경기 진행  
 :: ======================================================================
 :PLAY
 title Number Baseball - !MODE_NAME!
@@ -237,7 +237,7 @@ set "LP_CROWD=!KAO_SHRUG!  아까비~"
 set "LP_HINT="
 set /a "LP_DIST=B*12 + !random! %% 10 + 8"
 set /a "LP_BARN=LP_DIST/10"
-echo     !CL_B!틱~!C0! ↗️
+echo     !CL_B!틱~!C0! ↗️  
 goto :R_DONE
 
 :R_HIT
@@ -254,7 +254,7 @@ if !S! geq 2 set "LP_CROWD=!KAO_WOW!  모두 일어나세요~"
 set "LP_HINT="
 set /a "LP_DIST=25 + S*90/LEN + B*5 + !random! %% 10"
 set /a "LP_BARN=LP_DIST/10"
-echo     !CY!딱~!C0! 💥
+echo     !CY!딱~!C0! 💥  
 goto :R_DONE
 
 :R_DONE
@@ -277,7 +277,7 @@ goto :AT_BAT
 set "H_G_!INN!=!GUESS!"
 set "H_R_!INN!=HR"
 set "H_C_!INN!=!CM!"
-echo     !CM!따아악~!C0! 💥💥💥
+echo     !CM!따아악~!C0! 💥💥💥  
 call :SLEEP 900
 cls
 echo.
@@ -302,7 +302,7 @@ echo.
 echo   %CD%   관중석%C0%  !KAO_WOW!  !KAO_CHEER!  !KAO_WOW!  !KAO_CHEER! 
 echo.
 
-:: 기록 갱신
+:: 기록 갱신  
 set "NEWREC="
 set /a REC_WIN+=1
 if not defined REC_BEST%LEN% set "REC_BEST%LEN%=99"
@@ -560,7 +560,7 @@ call :SLEEP 250
 goto :eof
 
 :: ======================================================================
-:: 서브루틴: 경기 규칙
+:: 서브루틴: 경기 규칙  
 :: ======================================================================
 :RULES
 cls
@@ -570,17 +570,17 @@ echo   %RULE%
 echo.
 echo   %CC%■%C0% %CW%기본 규칙%C0%
 echo     %CD%└%C0% 부엉이 베어스가 1~9 중 서로 다른 숫자로 비밀 숫자를 숨깁니다 
-echo     %CD%└%C0% 매 이닝 한 번 숫자를 던지면 부엉 심판이 판정합니다
-echo     %CD%└%C0% 이닝이 끝나기 전에 모든 자리를 맞히면 끝내기 홈런 승리
+echo     %CD%└%C0% 매 이닝 한 번 숫자를 던지면 부엉 심판이 판정합니다  
+echo     %CD%└%C0% 이닝이 끝나기 전에 모든 자리를 맞히면 끝내기 홈런 승리  
 echo.
 echo   %CC%■%C0% %CW%판정%C0% 
 echo     %CD%└%C0% %CL_S%S 스트라이크%C0%  숫자와 자리가 모두 맞음 
-echo     %CD%└%C0% %CL_B%B 볼%C0%          숫자는 있지만 자리가 다름
+echo     %CD%└%C0% %CL_B%B 볼%C0%          숫자는 있지만 자리가 다름  
 echo     %CD%└%C0% %CR%OUT%C0%           숫자가 하나도 없음 %CD%(오히려 힌트)%C0%
 echo.
 echo   %CC%■%C0% %CW%타구 연출%C0%
 echo     %CD%└%C0% 💨 %CR%삼진 아웃%C0%  0S 0B
-echo     %CD%└%C0% ↗️ %CL_B%파울%C0%       0S · 볼만 있음
+echo     %CD%└%C0% ↗️ %CL_B%파울%C0%       0S · 볼만 있음  
 echo     %CD%└%C0% 💥 %CY%안타%C0%       1S  %CD%→%C0%  %CY%2루타%C0% 2S  %CD%→%C0%  %CY%3루타%C0% 3S 
 echo     %CD%└%C0% 🎆 %CM%홈런%C0%       모든 자리 적중 
 echo.

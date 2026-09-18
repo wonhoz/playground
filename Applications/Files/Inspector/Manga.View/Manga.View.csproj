@@ -14,8 +14,10 @@
     <EnableCompressionInSingleFile>true</EnableCompressionInSingleFile>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="SharpCompress" Version="0.38.0" />
+    <PackageReference Include="SharpCompress" Version="0.48.1" />
     <PackageReference Include="Microsoft.Data.Sqlite" Version="9.0.3" />
+    <!-- GHSA-2m69-gcr7-jv3q: Microsoft.Data.Sqlite transitive SQLitePCLRaw <= 2.1.11 -> pin patched version -->
+    <PackageReference Include="SQLitePCLRaw.bundle_e_sqlite3" Version="2.1.13" />
     <Resource Include="Resources\app.ico" />
   </ItemGroup>
 </Project>

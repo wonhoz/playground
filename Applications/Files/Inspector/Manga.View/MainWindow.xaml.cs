@@ -7,6 +7,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using Microsoft.Data.Sqlite;
 using SharpCompress.Archives;
+using SharpCompress.Archives.GZip;
 using SharpCompress.Common;
 
 namespace MangaView;
@@ -76,6 +77,17 @@ public partial class MainWindow : Window
             OpenFile(dlg.FileName);
     }
 
+    // SharpCompress 0.48+ 는 .tar.gz 를 Tar 로 자동 인식하지만 두 번째 헤더부터 읽기에 실패하므로,
+    // gzip 파일은 기존과 동일하게 GZipArchive 로 연다.
+    static IArchive OpenArchiveFile(string path) =>
+        IsGZipFile(path) ? GZipArchive.OpenArchive(path) : ArchiveFactory.OpenArchive(path);
+
+    static bool IsGZipFile(string path)
+    {
+        using var fs = File.OpenRead(path);
+        return fs.ReadByte() == 0x1F && fs.ReadByte() == 0x8B;
+    }
+
     void OpenFile(string path)
     {
         try
@@ -84,7 +96,7 @@ public partial class MainWindow : Window
             _pages.Clear();
             _cache.Clear();
 
-            using var archive = ArchiveFactory.Open(path);
+            using var archive = OpenArchiveFile(path);
             _pages = archive.Entries
                 .Where(e => !e.IsDirectory && ImageExts.Contains(Path.GetExtension(e.Key ?? "").ToLower()))
                 .Select(e => e.Key!)
@@ -211,7 +223,7 @@ public partial class MainWindow : Window
         if (_currentFile == null || idx < 0 || idx >= _pages.Count) return null;
         try
         {
-            using var archive = ArchiveFactory.Open(_currentFile);
+            using var archive = OpenArchiveFile(_currentFile);
             var entry = archive.Entries.First(e => e.Key == _pages[idx]);
             using var stream = entry.OpenEntryStream();
             using var ms = new MemoryStream();

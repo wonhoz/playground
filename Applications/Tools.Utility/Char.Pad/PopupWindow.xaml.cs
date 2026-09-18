@@ -1266,7 +1266,7 @@ public partial class PopupWindow : System.Windows.Window
         {
             var hwnd = new WindowInteropHelper(this).Handle;
             ReleaseMouseCapture();
-            SendMessage(hwnd, WM_SYSCOMMAND, new IntPtr(0xF008), IntPtr.Zero);
+            SendMessage(hwnd, WM_SYSCOMMAND, new IntPtr(SC_SIZE_BOTTOM_RIGHT), IntPtr.Zero);
         }
     }
 

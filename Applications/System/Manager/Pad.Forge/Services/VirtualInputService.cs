@@ -63,10 +63,6 @@ public class VirtualInputService
 
     #endregion
 
-    // 현재 눌린 상태 추적 (키 업 전송용)
-    private readonly HashSet<GamepadInput> _pressedInputs = [];
-    private readonly object _lock = new();
-
     /// <summary>매핑 동작 실행 (버튼 눌림 이벤트)</summary>
     public void ExecuteDown(MappingAction action)
     {

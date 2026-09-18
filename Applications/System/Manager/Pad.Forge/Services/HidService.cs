@@ -140,7 +140,6 @@ public class HidService : IDisposable
         // 버튼 (5~8번 바이트)
         var b5 = buf[5];  // 방향키 하위 4비트, 모양 버튼 상위 4비트
         var b6 = buf[6];
-        var b7 = buf[7];
 
         XButtons btns = XButtons.None;
 

@@ -10,7 +10,6 @@ namespace PadForge.Views;
 /// <summary>D-pad 방향키 시각화 UserControl (코드-비하인드 전용)</summary>
 public class DpadVisual : FrameworkElement
 {
-    private static readonly SolidColorBrush BgBrush  = new(WpfColor.FromArgb(255, 30, 30, 46));
     private static readonly SolidColorBrush ActBrush = new(WpfColor.FromArgb(255, 108, 99, 255));
     private static readonly SolidColorBrush InvBrush = new(WpfColor.FromArgb(255, 51, 51, 68));
 

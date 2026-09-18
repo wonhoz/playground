@@ -37,7 +37,6 @@ sealed class PopupForm : Form
     const int H         = 410;
     const int Pad       = 16;
     const int GraphH    = 40;
-    const int RowH      = 72;  // 각 지표 행 높이
 
     StatsSnapshot _snap = new();
     StatsCollector? _collector;

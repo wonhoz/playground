@@ -147,7 +147,6 @@ public partial class MainWindow : Window
 file sealed class DarkMenuRenderer : ToolStripRenderer
 {
     private static readonly System.Drawing.Color _bg     = System.Drawing.Color.FromArgb(26, 26, 40);
-    private static readonly System.Drawing.Color _hover  = System.Drawing.Color.FromArgb(50, 128, 255, 100);
     private static readonly System.Drawing.Color _border = System.Drawing.Color.FromArgb(46, 46, 80);
     private static readonly System.Drawing.Color _fg     = System.Drawing.Color.FromArgb(224, 224, 240);
     private static readonly System.Drawing.Color _sep    = System.Drawing.Color.FromArgb(46, 46, 80);

@@ -122,7 +122,9 @@ public class ArchiveService
         }
 
         // 부모-자식 연결 (경로 구조 기반)
-        foreach (var (key, node) in nodeMap)
+        // EnsureDirectory가 순회 중 nodeMap에 가상 폴더를 추가하므로 스냅샷으로 순회
+        // (가상 폴더는 EnsureDirectory 안에서 이미 부모/roots에 연결됨)
+        foreach (var (key, node) in nodeMap.ToList())
         {
             var parentPath = Path.GetDirectoryName(key)?.Replace('\\', '/') ?? "";
             if (string.IsNullOrEmpty(parentPath))

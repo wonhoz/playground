@@ -3428,7 +3428,6 @@ public partial class MainWindow : Window
         Editor.CaretIndex = start + sel.Length + 3;
     }
 
-    private static readonly Regex _headingLineRegex = new(@"^(#{1,6})\s+(.+)", RegexOptions.Multiline | RegexOptions.Compiled);
     private static readonly Regex _orderedListLineRegex   = new(@"^(\s*)(\d+)([.)]) ", RegexOptions.Compiled);
     private static readonly Regex _unorderedListLineRegex = new(@"^(\s*)([-*+]) ", RegexOptions.Compiled);
     private static readonly Regex _blockquoteLineRegex    = new(@"^(\s*)(>) ", RegexOptions.Compiled);

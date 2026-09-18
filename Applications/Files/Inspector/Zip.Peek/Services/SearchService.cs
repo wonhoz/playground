@@ -29,7 +29,7 @@ public class SearchService
             var results = new List<SearchResult>();
             if (string.IsNullOrWhiteSpace(query)) return results;
 
-            using var archive = ArchiveFactory.Open(archivePath);
+            using var archive = ArchiveService.OpenArchiveFile(archivePath);
             var entries = archive.Entries.Where(e => !e.IsDirectory).ToList();
             int idx = 0;
 

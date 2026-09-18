@@ -1,4 +1,5 @@
 using SharpCompress.Archives;
+using SharpCompress.Archives.GZip;
 using SharpCompress.Common;
 using SharpCompress.Readers;
 
@@ -71,10 +72,23 @@ public class ArchiveStats
 
 public class ArchiveService
 {
+    /// <summary>
+    /// 아카이브 열기. SharpCompress 0.48+ 는 .tar.gz 를 Tar 로 자동 인식하지만 두 번째 헤더부터
+    /// 읽기에 실패하므로, gzip 파일은 기존과 동일하게 GZipArchive 로 열어 내부 파일 1개로 표시.
+    /// </summary>
+    internal static IArchive OpenArchiveFile(string path) =>
+        IsGZipFile(path) ? GZipArchive.OpenArchive(path) : ArchiveFactory.OpenArchive(path);
+
+    private static bool IsGZipFile(string path)
+    {
+        using var fs = File.OpenRead(path);
+        return fs.ReadByte() == 0x1F && fs.ReadByte() == 0x8B;
+    }
+
     /// <summary>아카이브를 열어 루트 노드 목록과 통계를 반환.</summary>
     public (List<ArchiveNode> roots, ArchiveStats stats) Open(string path)
     {
-        using var archive = ArchiveFactory.Open(path);
+        using var archive = OpenArchiveFile(path);
         var stats = new ArchiveStats { Format = archive.Type.ToString() };
 
         // 경로 → 노드 맵
@@ -165,7 +179,7 @@ public class ArchiveService
 
         await Task.Run(() =>
         {
-            using var archive = ArchiveFactory.Open(archivePath);
+            using var archive = OpenArchiveFile(archivePath);
             var entries = archive.Entries
                 .Where(e => !e.IsDirectory && targetPaths.Contains(e.Key?.Replace('\\', '/') ?? ""))
                 .ToList();
@@ -186,7 +200,7 @@ public class ArchiveService
     {
         await Task.Run(() =>
         {
-            using var archive = ArchiveFactory.Open(archivePath);
+            using var archive = OpenArchiveFile(archivePath);
             var entries = archive.Entries.Where(e => !e.IsDirectory).ToList();
             int done = 0;
             foreach (var entry in entries)
@@ -213,7 +227,7 @@ public class ArchiveService
     /// <summary>특정 엔트리의 스트림을 반환 (미리보기용).</summary>
     public byte[] ReadEntry(string archivePath, string entryKey)
     {
-        using var archive = ArchiveFactory.Open(archivePath);
+        using var archive = OpenArchiveFile(archivePath);
         var entry = archive.Entries.FirstOrDefault(e =>
             string.Equals(e.Key?.Replace('\\', '/'), entryKey, StringComparison.OrdinalIgnoreCase));
         if (entry is null) return [];

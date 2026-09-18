@@ -16,8 +16,6 @@ public class PhysicsEngine
     // 홀 흡입 반경 배수
     public const double HoleSuckRadius = 1.8;
 
-    private readonly Random _rng = new();
-
     /// <summary>물리 스텝 — dt는 초 단위</summary>
     public void Step(Ball ball, HoleData hole, double dt)
     {

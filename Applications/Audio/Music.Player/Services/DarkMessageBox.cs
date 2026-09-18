@@ -19,7 +19,6 @@ internal static class DarkMessageBox
     private static readonly SolidColorBrush AccentBrush = new(Color.FromRgb(0x9C, 0x27, 0xB0));
     private static readonly SolidColorBrush AccentDimBrush = new(Color.FromRgb(0x3A, 0x1A, 0x42));
     private static readonly SolidColorBrush BtnBgBrush = new(Color.FromRgb(0x38, 0x38, 0x38));
-    private static readonly SolidColorBrush SecondaryBrush = new(Color.FromRgb(0x9E, 0x9E, 0x9E));
 
     public static MessageBoxResult Show(
         string message, string title,

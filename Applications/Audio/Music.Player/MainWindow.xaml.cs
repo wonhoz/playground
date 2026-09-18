@@ -574,16 +574,6 @@ namespace Music.Player
                 PlayTrack(0);
         }
 
-        private void AddTrack(string filePath)
-        {
-            var fullPath = System.IO.Path.GetFullPath(filePath);
-            if (_playlist.Any(t => string.Equals(t.FilePath, fullPath, StringComparison.OrdinalIgnoreCase))) return;
-
-            var track = TrackInfo.FromFile(fullPath);
-            HistoryService.Instance.LoadFavoriteStatus(track);
-            _playlist.Add(track);
-        }
-
         private void FavoriteButton_Click(object sender, RoutedEventArgs e)
         {
             if (sender is ToggleButton button && button.DataContext is TrackInfo track)

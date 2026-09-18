@@ -16,6 +16,8 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Data.Sqlite" Version="10.0.5" />
+    <!-- GHSA-2m69-gcr7-jv3q: Microsoft.Data.Sqlite transitive SQLitePCLRaw <= 2.1.11 -> pin patched version -->
+    <PackageReference Include="SQLitePCLRaw.bundle_e_sqlite3" Version="2.1.13" />
   </ItemGroup>
 
   <ItemGroup>

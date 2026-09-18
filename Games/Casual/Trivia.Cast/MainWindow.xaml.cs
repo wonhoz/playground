@@ -631,7 +631,7 @@ public partial class MainWindow : Window
             string[] medals = ["🥇", "🥈", "🥉"];
             for (int i = 0; i < scores.Count; i++)
             {
-                var (mode, s, total, streak, date) = scores[i];
+                var (mode, s, _, streak, date) = scores[i];
                 var border = new Border
                 {
                     Background = (SolidColorBrush)FindResource("SurfaceBrush"),

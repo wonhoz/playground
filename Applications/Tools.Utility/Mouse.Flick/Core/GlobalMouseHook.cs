@@ -76,7 +76,6 @@ internal sealed class GlobalMouseHook : IDisposable
     private bool     _tracking;
     private bool     _gestureStarted;
     private Point    _startPoint;
-    private Point    _downPoint;       // RBUTTONDOWN 원래 위치 (재생용)
     private readonly List<Point> _points = [];
 
     public int Threshold { get; set; } = 30;
@@ -129,7 +128,6 @@ internal sealed class GlobalMouseHook : IDisposable
                 _tracking       = true;
                 _gestureStarted = false;
                 _startPoint     = pt;
-                _downPoint      = pt;
                 _points.Clear();
                 _points.Add(pt);
                 return new IntPtr(1);   // 항상 차단 — 앱에 전달하지 않음

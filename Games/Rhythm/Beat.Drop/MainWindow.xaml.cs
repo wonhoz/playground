@@ -513,7 +513,6 @@ public partial class MainWindow : Window
         NormalBtn.BorderThickness = new Thickness(_difficulty == Difficulty.Normal ? 3 : 1);
         HardBtn.BorderThickness   = new Thickness(_difficulty == Difficulty.Hard   ? 3 : 1);
 
-        var accent = new SolidColorBrush(Color.FromRgb(0x00, 0xFF, 0xCC));
         var dim    = new SolidColorBrush(Color.FromRgb(0x55, 0x55, 0x55));
         EasyBtn.BorderBrush   = _difficulty == Difficulty.Easy   ? new SolidColorBrush(Color.FromRgb(0x2E, 0xCC, 0x71)) : dim;
         NormalBtn.BorderBrush = _difficulty == Difficulty.Normal ? new SolidColorBrush(Color.FromRgb(0xFF, 0xD7, 0x00)) : dim;

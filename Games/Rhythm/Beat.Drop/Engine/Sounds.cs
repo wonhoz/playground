@@ -27,7 +27,6 @@ public static class Sounds
 
         var kick = Noise(0.05, 0.2, 2.0);
         var hihat = Noise(0.02, 0.1, 3.0);
-        var silence = Tone(REST, 0.13, 0);
         var drums = Mix(
             Seq([(REST, 0.0)], vol: 0),
             kick,

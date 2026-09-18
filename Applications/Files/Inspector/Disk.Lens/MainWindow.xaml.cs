@@ -56,9 +56,6 @@ public partial class MainWindow : Window
     private DispatcherTimer? _watcherDebounce;
     private string _currentView = "Tree";
 
-    // 트리맵용
-    private DiskItem? _mapRoot;
-
     public MainWindow()
     {
         InitializeComponent();
@@ -424,7 +421,6 @@ public partial class MainWindow : Window
     // ═════════════════════════════════════════════════════════════════
     private void DrawTreeMap(DiskItem root)
     {
-        _mapRoot = root;
         TbMapHint.Visibility = Visibility.Collapsed;
         TreeMapCanvas.Children.Clear();
         TreeMapCanvas.Children.Add(TbMapHint);

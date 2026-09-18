@@ -524,7 +524,6 @@ public partial class MainWindow : Window
         // 플레이어 몸통
         if (_playerBody != null)
         {
-            double bodyH = _isSliding ? 0.4 : 1.2;
             double bodyY = _playerY + (_isSliding ? 0.2 : 0.6);
 
             var bodyGroup = new Transform3DGroup();

@@ -121,7 +121,6 @@ public class RegistryService
         {
             ct.ThrowIfCancellationRequested();
 
-            var count = key.GetValue(valName);
             if (!File.Exists(valName))
             {
                 issues.Add(new RegistryIssue

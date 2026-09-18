@@ -12,9 +12,6 @@ public partial class MainWindow : Window
     private const int    MaxSlots   = 5;
     private const int    MaxLives   = 3;
 
-    // 구조물 비용
-    private static readonly int[] StructureCost = [0, 2, 3, 2, 4]; // index=StructureType+1
-
     // ── 엔진 ──────────────────────────────────────────────────────────────
     private readonly GameLoop _loop = new();
 

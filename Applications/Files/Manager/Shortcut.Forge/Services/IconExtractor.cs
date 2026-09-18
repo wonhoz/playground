@@ -37,7 +37,7 @@ public static class IconExtractor
         // 직접 아이콘 추출 시도 (ExtractIconEx)
         var largeIcons  = large ? new IntPtr[1] : null;
         var smallIcons  = large ? null : new IntPtr[1];
-        uint count = ExtractIconEx(filePath, iconIndex, largeIcons, smallIcons, 1);
+        ExtractIconEx(filePath, iconIndex, largeIcons, smallIcons, 1);
         var hIcon = large
             ? (largeIcons != null && largeIcons[0] != IntPtr.Zero ? largeIcons[0] : IntPtr.Zero)
             : (smallIcons != null && smallIcons[0] != IntPtr.Zero ? smallIcons[0] : IntPtr.Zero);

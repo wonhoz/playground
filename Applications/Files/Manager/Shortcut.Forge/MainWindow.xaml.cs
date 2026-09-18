@@ -9,7 +9,6 @@ public partial class MainWindow : Window
     private readonly ObservableCollection<ShortcutEntry> _all      = [];
     private readonly ObservableCollection<ShortcutEntry> _filtered = [];
     private ShortcutEntry? _editing;
-    private string _currentScanDir = "";
 
     // ── 다크 타이틀바 P/Invoke ──────────────────────────────────────────
     [DllImport("dwmapi.dll")]
@@ -56,7 +55,6 @@ public partial class MainWindow : Window
     private async void ScanFolder(string folder, bool recurse)
     {
         SetStatus($"스캔 중: {folder}");
-        _currentScanDir = folder;
         TxtScanDir.Text = folder;
 
         _all.Clear();

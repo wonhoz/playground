@@ -264,9 +264,6 @@ public partial class MainWindow : Window
     // ── 선택된 항목 ───────────────────────────────────
     private ExtEntry? Selected => Grid.SelectedItem as ExtEntry;
 
-    private List<ExtEntry> SelectedItems =>
-        Grid.SelectedItems.Cast<ExtEntry>().ToList();
-
     // ── 이벤트 핸들러 ─────────────────────────────────
     private void TxtSearch_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
         => ApplyFilter();

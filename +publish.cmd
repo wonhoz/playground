@@ -150,9 +150,8 @@ for %%n in (!SEL!) do (
     if "%%n"=="110" call :pub "Siege.Lab"              "Applications\Network\Security\Siege.Lab"                 "Siege.Lab.exe"             "Applications\Network\Security\Siege.Lab"
     if "%%n"=="111" call :pub "Link.Scan"              "Applications\Tools.Utility\Link.Scan"                    "Link.Scan.exe"             "Applications\Tools.Utility\Link.Scan"
 )
-goto :DONE
-:: ── 완료 ──────────────────────────────────────────────────────────
-:DONE
+
+:: -- Done ---------------------------------------------------------------
 echo !DG!Cleaning .pdb files...!RS!
 del /s /q "%BIN%\*.pdb" 2>nul
 echo !DG!--------------------------------------------------!RS!

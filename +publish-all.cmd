@@ -27,20 +27,6 @@ echo !DG!Output: %BIN%!RS!
 echo !DG!--------------------------------------------------!RS!
 echo.
 
-:: 배포 전 버전 확인
-:: for /f "delims=" %%v in ('powershell -NoProfile -Command "([xml](Get-Content \"%ROOT%Directory.Build.props\")).Project.PropertyGroup.AppVersion" 2^>nul') do set "APP_VER=%%v"
-:: if not defined APP_VER set "APP_VER=(알 수 없음)"
-:: echo !BD!현재 버전: !GR!!APP_VER!!RS!
-:: echo !DG!Directory.Build.props 기준 — 배포 전 버전을 확인하세요.!RS!
-:: echo.
-:: choice /C YN /N /M "계속 배포하시겠습니까? [Y/N] "
-:: if errorlevel 2 (
-::     echo.
-::     echo !RE!배포가 취소되었습니다.!RS!
-::     exit /b 0
-:: )
-:: echo.
-
 :: ── Applications / AI ──────────────────────────────────────────────
 call :pub "Prompt.Forge"          "Applications\AI\Prompt.Forge"                            "Prompt.Forge.exe"          "Applications\AI\Prompt.Forge"
 

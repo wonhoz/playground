@@ -66,11 +66,6 @@ internal static class SvgPreprocessor
         @"viewBox\s*=\s*""[^\s""]+\s+[^\s""]+\s+([0-9.]+)\s+([0-9.]+)""",
         RegexOptions.Compiled | RegexOptions.IgnoreCase);
 
-    // 속성값 추출용
-    static readonly Regex AttrRegex = new(
-        @"(\w[\w-]*)=""([^""]*)""",
-        RegexOptions.Compiled);
-
     public static string Process(string svgText)
     {
         var (vbW, vbH) = ParseViewBox(svgText);
@@ -165,13 +160,5 @@ internal static class SvgPreprocessor
             && float.TryParse(m.Groups[2].Value, NumberStyles.Float, CultureInfo.InvariantCulture, out float h))
             return (w, h);
         return (0, 0);
-    }
-
-    static Dictionary<string, string> ParseAttrs(string attrText)
-    {
-        var dict = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
-        foreach (Match m in AttrRegex.Matches(attrText))
-            dict[m.Groups[1].Value] = m.Groups[2].Value;
-        return dict;
     }
 }

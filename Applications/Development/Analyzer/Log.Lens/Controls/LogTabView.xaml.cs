@@ -27,7 +27,6 @@ public partial class LogTabView : UserControl, IDisposable
     private readonly List<LogLine>                 _all     = new(capacity: 4096);
     private readonly ObservableCollection<LogLine> _visible = new();
     private LogWatcherService? _watcher;
-    private string _filePath = "";
     private int    _maxLines = 50_000;
     private int    _lineCounter;
 
@@ -56,7 +55,6 @@ public partial class LogTabView : UserControl, IDisposable
     // ── 초기화 ──────────────────────────────────────────────────────
     public void Initialize(string filePath, int maxLines, Encoding? encoding = null)
     {
-        _filePath = filePath;
         _maxLines = maxLines;
         TxtFilePath.Text  = filePath;
         TxtLineCount.Text = "로딩 중...";

@@ -225,7 +225,7 @@ public partial class MainWindow : Window
 
     private void BuildCoinVisuals()
     {
-        foreach (var coin in _level.Coins)
+        foreach (var _ in _level.Coins)
         {
             var ell = new Ellipse
             {

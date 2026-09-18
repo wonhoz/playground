@@ -28,7 +28,6 @@ public partial class MainWindow : Window
     static readonly Brush BrushDefault = new SolidColorBrush(Color.FromRgb(0xD4, 0xD4, 0xD4));
     static readonly Brush BrushBugHighlight = new SolidColorBrush(Color.FromArgb(80, 0xEF, 0x53, 0x50));
     static readonly Brush BrushCorrectHighlight = new SolidColorBrush(Color.FromArgb(80, 0x00, 0xAA, 0x44));
-    static readonly Brush BrushHover = new SolidColorBrush(Color.FromArgb(30, 0xFF, 0xFF, 0xFF));
 
     public MainWindow() => InitializeComponent();
 

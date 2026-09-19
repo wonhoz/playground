@@ -13,7 +13,10 @@ setlocal enabledelayedexpansion
 ::                     → 파일명 패턴 (20231225_123456 · 2023-12-25 12.34.56 · 20231225) → 수정일  
 ::   · 대상 폴더에 내용이 같은 파일이 있으면 건너뜀 (크기 → SHA-256)
 ::   · 미리보기 후 실행, CSV 로그 선택  
-::   · 원본 앱과 다른 점: EXIF 자동 회전 없음 (JPEG 재압축으로 화질 손실)
+::   · EXIF 방향 회전: 원본 화질 100% 유지 (선택)
+::       JPEG  = 무손실 변환 (압축 블록 재배치, 재압축 없음). 크기가 MCU 배수가 아니면 원본 그대로 둠 
+::       PNG · BMP · TIFF = 무손실 형식이라 화소 회전 후 같은 형식으로 저장 
+::   · 원본 앱과 다른 점: 원본 앱의 회전은 JPEG 를 품질 100 으로 재압축 (화질 손실) - 여기서는 무손실 
 ::                       HEIC · RAW 는 EXIF 를 못 읽어 파일명 → 수정일 순으로 판단 
 ::   · 사용법: photo.cmd [원본 폴더]   (폴더를 이 파일 위에 끌어다 놓아도 된다) 
 ::
@@ -42,6 +45,8 @@ set "PH_L_ERR=오류"
 set "PH_L_IMG=사진" 
 set "PH_L_VID=동영상"
 set "PH_L_ETC=기타" 
+set "PH_L_ROT=무손실 회전" 
+set "PH_L_KEEP=회전 불가 크기 - 원본 유지"  
 
 :: ----------------------------------------------------------------------
 :: 콘솔 테마 (G1~G6 배너: 벚꽃 분홍 → 라일락)
@@ -79,6 +84,7 @@ set "RB_WOW=(°ㅅ°)"
 set "LAST_DST="
 set "LAST_STRUCT=1"
 set "LAST_PATTERN=yyyy/MM/dd"
+set "LAST_ROTATE=1"
 if exist "%PH_SET_FILE%" for /f "usebackq tokens=1,* delims==" %%a in ("%PH_SET_FILE%") do set "LAST_%%a=%%b"
 
 :: ======================================================================
@@ -158,6 +164,12 @@ echo   %CC%■%C0% %CW%CSV 로그%C0%  %CD%대상 폴더에 organizer_log_날짜
 echo     %CD%└%C0% %CY%[1]%C0% 저장   %CY%[2]%C0% 안 함 
 choice /C 12 /N /M "   선택 > " 
 set /a "PH_LOG=2 - %errorlevel%"
+echo.
+echo   %CC%■%C0% %CW%사진 방향 바로잡기%C0%  %CD%폰으로 세로로 찍은 사진이 눕혀 보일 때%C0% 
+echo     %CD%└%C0% %CY%[1]%C0% 무손실 회전   %CD%원본 화질 100%% 그대로 · EXIF 방향대로 (권장)%C0% 
+echo     %CD%└%C0% %CY%[2]%C0% 안 함         %CD%파일을 그대로 복사%C0% 
+choice /C 12 /N /M "   선택 > " 
+set /a "PH_ROTATE=2 - %errorlevel%"
 call :SAVE_SETTINGS
 
 :: ======================================================================
@@ -168,7 +180,7 @@ call :STEP 4 "미리보기"
 set "PH_MODE=plan"
 call :RUN_ENGINE
 if not exist "%PH_SUM%" goto :ENGINE_FAIL
-for %%v in (FILES IMG VID ETC SRC_EXIF SRC_VIDEO SRC_NAME SRC_MTIME SIZE_MB FOLDERS SAMPLES PATTERN_BAD) do set "S_%%v=0"
+for %%v in (FILES IMG VID ETC SRC_EXIF SRC_VIDEO SRC_NAME SRC_MTIME SIZE_MB FOLDERS SAMPLES PATTERN_BAD ROT_N) do set "S_%%v=0"
 for /f "usebackq tokens=1,* delims==" %%a in ("%PH_SUM%") do set "S_%%a=%%b"
 if not "!S_PATTERN_BAD!"=="0" (
     echo   !CR!✗!C0! 폴더 패턴이 올바르지 않아요  !CD!!PH_PATTERN!!C0!
@@ -182,6 +194,9 @@ echo.
 echo   %CC%╭─%C0% 📷 %CW%정리 계획%C0% %CC%%CARD%%C0% 
 set "MSG=  !CC!│!C0!  !CD!파일!C0!        !CW!!S_FILES!!C0!개  !CD!(사진 !S_IMG! · 동영상 !S_VID! · 기타 !S_ETC!)  !S_SIZE_MB! MB!C0!" & echo !MSG! 
 set "MSG=  !CC!│!C0!  !CD!방식!C0!        !_mode!  !CD!→!C0! !PH_DST!" & echo !MSG! 
+set "_rot=!CD!안 함  (방향 정보가 있는 사진 !S_ROT_N!장)!C0!" 
+if "!PH_ROTATE!"=="1" set "_rot=!CW!!S_ROT_N!!C0!장  !CD!EXIF 방향대로 무손실 회전 · 불가능한 크기는 원본 유지!C0!" 
+set "MSG=  !CC!│!C0!  !CD!회전!C0!        !_rot!" & echo !MSG!
 echo   %CC%│%C0%
 echo   %CC%│%C0%  %CW%촬영일을 찾은 곳%C0% 
 call :SRC_ROW "EXIF 촬영일  " !S_SRC_EXIF! 
@@ -219,12 +234,14 @@ echo   %CC%■%C0% %CB%RUN%C0%  %CW%정리 중%C0%  %CD%Ctrl+C 로 중단할 수
 set "PH_MODE=apply"
 call :RUN_ENGINE
 if not exist "%PH_SUM%" goto :ENGINE_FAIL
-for %%v in (OK DUP ERR LOG) do set "R_%%v="
+for %%v in (OK DUP ERR LOG ROT KEEP) do set "R_%%v="
 for /f "usebackq tokens=1,* delims==" %%a in ("%PH_SUM%") do set "R_%%a=%%b"
 echo.
 echo   %CC%╭─%C0% 📷 %CW%정리 결과%C0% %CC%%CARD%%C0% 
 set "MSG=  !CC!│!C0!  !CG!✓!C0! 정리함        !CW!!R_OK!!C0!개" & echo !MSG!
 set "MSG=  !CC!│!C0!  !CY!–!C0! 중복 건너뜀   !R_DUP!개  !CD!(대상에 같은 내용이 이미 있음)!C0!" & echo !MSG! 
+if "!PH_ROTATE!"=="1" set "MSG=  !CC!│!C0!  !CB!↻!C0! 무손실 회전   !R_ROT!장  !CD!원본 화질 그대로!C0!" & echo !MSG!
+if not "!R_KEEP!"=="0" set "MSG=  !CC!│!C0!  !CY!▲!C0! 회전 보류     !R_KEEP!장  !CD!크기가 무손실 회전 단위(MCU)에 안 맞아 원본 그대로 저장!C0!" & echo !MSG!
 set "_ec=!CG!"
 if not "!R_ERR!"=="0" set "_ec=!CR!"
 set "MSG=  !CC!│!C0!  !_ec!✗!C0! 오류          !R_ERR!개" & echo !MSG! 
@@ -318,6 +335,7 @@ if not exist "%PH_SET_DIR%" mkdir "%PH_SET_DIR%" >nul 2>&1
     echo DST=!PH_DST!
     echo STRUCT=!PH_STRUCT!
     echo PATTERN=!PH_PATTERN!
+    echo ROTATE=!PH_ROTATE!
 )
 set "LAST_DST=!PH_DST!"
 set "LAST_STRUCT=!PH_STRUCT!"
@@ -391,11 +409,13 @@ function Get-MvhdDate([string]$path) {
     } finally { $fs.Dispose() }
 }
 
+# also records EXIF Orientation (0x0112) of the last image in $script:LastOrient
 function Get-ExifDate([string]$path) {
-    $fs = $null; $img = $null
+    $fs = $null; $img = $null; $script:LastOrient = 1
     try {
         $fs = [IO.File]::OpenRead($path)
         $img = [Drawing.Image]::FromStream($fs, $false, $false)
+        if ($img.PropertyIdList -contains 274) { $script:LastOrient = [int][BitConverter]::ToUInt16($img.GetPropertyItem(274).Value, 0) }
         foreach ($id in 36867, 36868, 306) {
             if ($img.PropertyIdList -contains $id) {
                 $s = [Text.Encoding]::ASCII.GetString($img.GetPropertyItem($id).Value).Trim([char]0, ' ')
@@ -441,6 +461,73 @@ function Get-DestDir([datetime]$d) {
 
 function Write-Kv([string[]]$lines) { [IO.File]::WriteAllLines($env:PH_SUM, $lines, $utf8) }
 
+# ---------------------------------------------------------------- lossless rotation
+# JPEG : GDI+ lossless transform (DCT blocks are rearranged, never re-encoded).
+#        Only when width/height are multiples of the MCU size - otherwise GDI+ silently
+#        re-encodes (verified: 100x75 round trip differs, 640x480 / 96x64 identical).
+#        Not aligned -> keep the original untouched (Orientation tag left as is).
+# PNG / BMP / TIFF : lossless formats, pixels rotated and saved in the same format.
+$rotExt = '.jpg', '.jpeg', '.png', '.bmp', '.tif', '.tiff'
+$jpegCodec = [Drawing.Imaging.ImageCodecInfo]::GetImageEncoders() | Where-Object { $_.MimeType -eq 'image/jpeg' }
+$EV = [Drawing.Imaging.EncoderValue]
+$jpegSteps = @{
+    2 = @($EV::TransformFlipHorizontal); 3 = @($EV::TransformRotate180); 4 = @($EV::TransformFlipVertical)
+    5 = @($EV::TransformRotate90, $EV::TransformFlipHorizontal); 6 = @($EV::TransformRotate90)
+    7 = @($EV::TransformRotate270, $EV::TransformFlipHorizontal); 8 = @($EV::TransformRotate270)
+}
+$pixelFlip = @{ 2 = 'RotateNoneFlipX'; 3 = 'Rotate180FlipNone'; 4 = 'RotateNoneFlipY'; 5 = 'Rotate90FlipX'; 6 = 'Rotate90FlipNone'; 7 = 'Rotate270FlipX'; 8 = 'Rotate270FlipNone' }
+
+# MCU size from the SOF segment: 8 x max sampling factor (4:2:0 -> 16x16, 4:4:4 -> 8x8)
+function Get-JpegMcu([byte[]]$b) {
+    $i = 2
+    while ($i + 9 -lt $b.Length) {
+        if ($b[$i] -ne 0xFF) { return $null }
+        $m = $b[$i + 1]; $len = $b[$i + 2] * 256 + $b[$i + 3]
+        if ($m -ge 0xC0 -and $m -le 0xCF -and $m -ne 0xC4 -and $m -ne 0xC8 -and $m -ne 0xCC) {
+            $h = $b[$i + 5] * 256 + $b[$i + 6]; $w = $b[$i + 7] * 256 + $b[$i + 8]; $nc = $b[$i + 9]
+            $mh = 1; $mv = 1
+            for ($k = 0; $k -lt $nc; $k++) { $s = $b[$i + 11 + $k * 3]; $mh = [Math]::Max($mh, $s -shr 4); $mv = [Math]::Max($mv, $s -band 15) }
+            return @{ W = $w; H = $h; McuW = 8 * $mh; McuH = 8 * $mv }
+        }
+        $i += 2 + $len
+    }
+    return $null
+}
+
+function Get-RotatedBytes([string]$path, [int]$orient) {
+    $x = [IO.Path]::GetExtension($path).ToLowerInvariant()
+    if ($orient -lt 2 -or $orient -gt 8 -or ($rotExt -notcontains $x)) { return @{ Status = 'NONE' } }
+    $bytes = [IO.File]::ReadAllBytes($path)
+    $ms = New-Object IO.MemoryStream (, $bytes); $img = $null
+    try {
+        if ($x -eq '.jpg' -or $x -eq '.jpeg') {
+            $mcu = Get-JpegMcu $bytes
+            if (-not $mcu -or ($mcu.W % $mcu.McuW) -ne 0 -or ($mcu.H % $mcu.McuH) -ne 0) { return @{ Status = 'KEEP' } }
+            $img = [Drawing.Image]::FromStream($ms, $false, $false)
+            $pi = $img.GetPropertyItem(274); $pi.Value = [byte[]](1, 0); $img.SetPropertyItem($pi)
+            foreach ($step in $jpegSteps[$orient]) {
+                $ep = New-Object Drawing.Imaging.EncoderParameters 1
+                $ep.Param[0] = New-Object Drawing.Imaging.EncoderParameter ([Drawing.Imaging.Encoder]::Transformation), ([long]$step)
+                $out = New-Object IO.MemoryStream
+                $img.Save($out, $jpegCodec, $ep)
+                $img.Dispose(); $ms.Dispose()
+                $ms = $out; $ms.Position = 0
+                $img = [Drawing.Image]::FromStream($ms, $false, $false)
+            }
+            return @{ Status = 'ROTATED'; Bytes = $ms.ToArray() }
+        }
+        $img = [Drawing.Image]::FromStream($ms, $true, $true)
+        $fmt = $img.RawFormat
+        $img.RotateFlip([Drawing.RotateFlipType]$pixelFlip[$orient])
+        if ($img.PropertyIdList -contains 274) { $pi = $img.GetPropertyItem(274); $pi.Value = [byte[]](1, 0); $img.SetPropertyItem($pi) }
+        $out = New-Object IO.MemoryStream
+        $img.Save($out, $fmt)
+        return @{ Status = 'ROTATED'; Bytes = $out.ToArray() }
+    } catch {
+        return @{ Status = 'KEEP' }
+    } finally { if ($img) { $img.Dispose() }; $ms.Dispose() }
+}
+
 # ---------------------------------------------------------------- plan
 if ($env:PH_MODE -eq 'plan') {
     if ($env:PH_STRUCT -eq '3') {
@@ -458,7 +545,7 @@ if ($env:PH_MODE -eq 'plan') {
     })
     $n = $all.Count
     $rows = New-Object 'System.Collections.Generic.List[string]'
-    $cnt = @{ IMG = 0; VID = 0; ETC = 0; EXIF = 0; VIDEO = 0; NAME = 0; MTIME = 0 }
+    $cnt = @{ IMG = 0; VID = 0; ETC = 0; EXIF = 0; VIDEO = 0; NAME = 0; MTIME = 0; ROT = 0 }
     $folders = @{}; $bytes = [long]0; $samples = New-Object 'System.Collections.Generic.List[string]'
     $i = 0
     foreach ($f in $all) {
@@ -469,9 +556,11 @@ if ($env:PH_MODE -eq 'plan') {
         $bytes += $fi.Length
         $kind = if ($imgExt -contains $x) { 'IMG' } elseif ($vidExt -contains $x) { 'VID' } else { 'ETC' }
         $cnt[$kind]++
-        $d = $null; $src = 'MTIME'
+        $d = $null; $src = 'MTIME'; $orient = 1
+        if ($rotExt -contains $x) { $d = Get-ExifDate $f; $orient = $script:LastOrient; if ($orient -gt 1 -and $orient -le 8) { $cnt.ROT++ } }
+        if ($kind -ne 'IMG') { $d = $null }
         if ($kind -ne 'ETC') {
-            if ($kind -eq 'IMG') { $d = Get-ExifDate $f; if ($d) { $src = 'EXIF' } }
+            if ($kind -eq 'IMG') { if (-not ($rotExt -contains $x)) { $d = Get-ExifDate $f }; if ($d) { $src = 'EXIF' } }
             if (-not $d -and $kind -eq 'VID' -and ($qtExt -contains $x)) { try { $d = Get-MvhdDate $f } catch { $d = $null }; if ($d) { $src = 'VIDEO' } }
             if (-not $d) { $d = Get-NameDate ([IO.Path]::GetFileNameWithoutExtension($f)); if ($d) { $src = 'NAME' } }
         }
@@ -481,14 +570,14 @@ if ($env:PH_MODE -eq 'plan') {
         $newName = $d.ToString('yyyy-MM-dd HH.mm.ss') + [IO.Path]::GetExtension($f)
         $rel = $dir.Substring($env:PH_DST.TrimEnd('\').Length).TrimStart('\')
         if ($folders.ContainsKey($rel)) { $folders[$rel]++ } else { $folders[$rel] = 1 }
-        $rows.Add(($f, $dir, $newName, $d.ToString('yyyy-MM-dd HH:mm:ss'), $src, $kind) -join "`t")
+        $rows.Add(($f, $dir, $newName, $d.ToString('yyyy-MM-dd HH:mm:ss'), $src, $kind, $orient) -join "`t")
     }
     [Console]::Write("`r$e[2K")
     [IO.File]::WriteAllLines($env:PH_PLAN, $rows, $utf8)
 
     $kv = New-Object 'System.Collections.Generic.List[string]'
     $kv.Add("FILES=$n"); $kv.Add("IMG=$($cnt.IMG)"); $kv.Add("VID=$($cnt.VID)"); $kv.Add("ETC=$($cnt.ETC)")
-    $kv.Add("SRC_EXIF=$($cnt.EXIF)"); $kv.Add("SRC_VIDEO=$($cnt.VIDEO)"); $kv.Add("SRC_NAME=$($cnt.NAME)"); $kv.Add("SRC_MTIME=$($cnt.MTIME)")
+    $kv.Add("SRC_EXIF=$($cnt.EXIF)"); $kv.Add("SRC_VIDEO=$($cnt.VIDEO)"); $kv.Add("SRC_NAME=$($cnt.NAME)"); $kv.Add("SRC_MTIME=$($cnt.MTIME)"); $kv.Add("ROT_N=$($cnt.ROT)")
     $kv.Add('SIZE_MB=' + ($bytes / 1MB).ToString('0.0', [Globalization.CultureInfo]::InvariantCulture))
     $top = @($folders.GetEnumerator() | Sort-Object Value -Descending | Select-Object -First 10)
     $kv.Add("FOLDERS=$($top.Count)")
@@ -508,8 +597,10 @@ if ($env:PH_MODE -eq 'plan') {
 
 # ---------------------------------------------------------------- apply
 $rows = [IO.File]::ReadAllLines($env:PH_PLAN, $utf8)
-$n = $rows.Count; $ok = 0; $dup = 0; $err = 0; $i = 0
+$n = $rows.Count; $ok = 0; $dup = 0; $err = 0; $i = 0; $rotated = 0; $kept = 0
 $move = $env:PH_MOVE -eq '1'
+$rotate = $env:PH_ROTATE -eq '1'
+function HashBytes([byte[]]$b) { $h = [Security.Cryptography.SHA256]::Create(); try { [BitConverter]::ToString($h.ComputeHash($b)) } finally { $h.Dispose() } }
 $log = New-Object 'System.Collections.Generic.List[string]'
 $kindName = @{ IMG = $env:PH_L_IMG; VID = $env:PH_L_VID; ETC = $env:PH_L_ETC }
 function Csv([string]$s) { '"' + $s.Replace('"', '""') + '"' }
@@ -522,11 +613,19 @@ foreach ($r in $rows) {
     $result = $env:PH_L_OK; $target = ''; $note = ''
     try {
         [void][IO.Directory]::CreateDirectory($dir)
-        $len = (New-Object IO.FileInfo $srcPath).Length
+        $srcInfo = New-Object IO.FileInfo $srcPath
+        # rotated output (if any) is what lands in the target - compare duplicates against it
+        $outBytes = $null
+        if ($rotate -and $c.Count -gt 6) {
+            $rr = Get-RotatedBytes $srcPath ([int]$c[6])
+            if ($rr.Status -eq 'ROTATED') { $outBytes = $rr.Bytes; $note = $env:PH_L_ROT }
+            elseif ($rr.Status -eq 'KEEP') { $note = $env:PH_L_KEEP }
+        }
+        $len = if ($outBytes) { $outBytes.Length } else { $srcInfo.Length }
         $same = $null
         foreach ($other in [IO.Directory]::EnumerateFiles($dir)) {
             if ((New-Object IO.FileInfo $other).Length -eq $len) {
-                if ($null -eq $same) { $srcHash = Hash $srcPath; $same = $false }
+                if ($null -eq $same) { $srcHash = if ($outBytes) { HashBytes $outBytes } else { Hash $srcPath }; $same = $false }
                 if ((Hash $other) -eq $srcHash) { $same = $true; $target = $other; break }
             }
         }
@@ -536,7 +635,16 @@ foreach ($r in $rows) {
             $target = Join-Path $dir $name
             $base = [IO.Path]::GetFileNameWithoutExtension($name); $ext = [IO.Path]::GetExtension($name); $k = 1
             while (Test-Path -LiteralPath $target) { $target = Join-Path $dir ("{0}_{1}{2}" -f $base, $k, $ext); $k++ }
-            if ($move) { [IO.File]::Move($srcPath, $target) } else { [IO.File]::Copy($srcPath, $target, $false) }
+            if ($outBytes) {
+                [IO.File]::WriteAllBytes($target, $outBytes)
+                $ti = New-Object IO.FileInfo $target
+                $ti.CreationTime = $srcInfo.CreationTime; $ti.LastWriteTime = $srcInfo.LastWriteTime
+                if ($move) { [IO.File]::Delete($srcPath) }
+                $rotated++
+            } else {
+                if ($move) { [IO.File]::Move($srcPath, $target) } else { [IO.File]::Copy($srcPath, $target, $false) }
+                if ($note -eq $env:PH_L_KEEP) { $kept++ }
+            }
             $ok++
         }
     } catch { $err++; $result = $env:PH_L_ERR; $note = $_.Exception.Message }
@@ -549,4 +657,4 @@ if ($env:PH_LOG -eq '1') {
     $all = New-Object 'System.Collections.Generic.List[string]'; $all.Add($env:PH_L_CSV); $all.AddRange($log)
     [IO.File]::WriteAllLines($logPath, $all, (New-Object System.Text.UTF8Encoding $true))
 }
-Write-Kv @("OK=$ok", "DUP=$dup", "ERR=$err", "LOG=$logPath")
+Write-Kv @("OK=$ok", "DUP=$dup", "ERR=$err", "LOG=$logPath", "ROT=$rotated", "KEEP=$kept")

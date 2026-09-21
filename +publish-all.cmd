@@ -1,4 +1,4 @@
-﻿@echo off
+@echo off
 chcp 65001 >nul
 setlocal enabledelayedexpansion
 
@@ -52,6 +52,7 @@ call :pub "Locale.View"           "Applications\Development\Inspector\Locale.Vie
 call :pub "Quick.Calc"            "Applications\Development\Inspector\Quick.Calc"           "Quick.Calc.exe"            "Applications\Development\Inspector"
 call :pub "Signal.Flow"           "Applications\Development\Inspector\Signal.Flow"          "Signal.Flow.exe"           "Applications\Development\Inspector"
 call :pub "Skill.Cast"            "Applications\Development\Inspector\Skill.Cast"           "Skill.Cast.exe"            "Applications\Development\Inspector"
+call :pub "AIP.Forge"             "Applications\Development\Inspector\AIP.Forge"            "AIP.Forge.exe"             "Applications\Development\Inspector\AIP.Forge"
 
 :: ── Applications / Emoji.Icon ──────────────────────────────────────
 call :pub "Glyph.Map"             "Applications\Emoji.Icon\Glyph.Map"                       "Glyph.Map.exe"             "Applications\Emoji.Icon\Glyph.Map"

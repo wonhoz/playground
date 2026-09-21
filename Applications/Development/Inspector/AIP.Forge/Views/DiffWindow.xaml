@@ -1,0 +1,41 @@
+<Window x:Class="AIPForge.Views.DiffWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="변경 사항 (디스크 원본 ↔ 현재 편집본)" Width="1100" Height="700"
+        WindowStartupLocation="CenterOwner"
+        Background="{StaticResource BgBrush}" Foreground="{StaticResource TextPrimary}">
+    <Grid Margin="16">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+            <TextBlock x:Name="TxtSummary" FontSize="13" VerticalAlignment="Center"/>
+            <CheckBox x:Name="ChkAll" Content="변경 없는 줄도 모두 보기" Margin="20,0,0,0"
+                      Checked="ChkAll_Changed" Unchecked="ChkAll_Changed"/>
+        </StackPanel>
+        <Border Grid.Row="1" BorderBrush="{StaticResource LineBrush}" BorderThickness="1" CornerRadius="6">
+            <ListBox x:Name="LstDiff" FontFamily="{StaticResource MonoFont}" FontSize="12.5"
+                     VirtualizingPanel.IsVirtualizing="True" VirtualizingPanel.VirtualizationMode="Recycling"
+                     ScrollViewer.HorizontalScrollBarVisibility="Auto">
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType="ListBoxItem">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="ListBoxItem">
+                                    <ContentPresenter/>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </ListBox.ItemContainerStyle>
+            </ListBox>
+        </Border>
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,12,0,0">
+            <Button x:Name="BtnSave" Content="저장" Style="{StaticResource AccentButton}" MinWidth="90"
+                    Margin="0,0,8,0" Click="BtnSave_Click"/>
+            <Button Content="닫기" IsCancel="True" MinWidth="76"/>
+        </StackPanel>
+    </Grid>
+</Window>

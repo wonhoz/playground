@@ -1,4 +1,4 @@
-﻿# Avoid — 구현 완료 + 채택 결정 앱 (Applications)
+# Avoid — 구현 완료 + 채택 결정 앱 (Applications)
 
 > ★N차 = 해당 차수 브레인스토밍에서 처음 제안됨
 > 상태: ✅ 구현 완료 | 📌 채택 결정 (미구현) | 🗃️ 아카이브
@@ -121,3 +121,4 @@
 | `Stock.Watch` | Finance | 종목 매수/매도 조건(RSI·볼린저·거래량 등) 감시 후 충족 시 Slack 알림, 캔들·볼린저·RSI 차트, KIS Open API ★사용자 직접 요청 | 📦 아카이브 (2026-07-04 · Stock.Catch로 기능 통합, Archive/Applications/Finance) |
 | `Stock.Fetch` | Finance | 종목코드+기간으로 일별 OHLCV 시세를 4소스 선택형(네이버·다음·Yahoo·KIS)으로 조회해 CSV/TSV/JSON/XML/Markdown 내보내기 ★사용자 직접 요청 | ✅ 구현 완료 (2026-06-28) → Stock.Catch로 리네이밍 (2026-07-04) |
 | `Stock.Catch` | Finance | Stock.Fetch 리네이밍(Fetch+Watch 통합) — 시세 조회·내보내기 + 관심 종목 모니터링·추세/래더/바닥 반등·고점 경고 시그널 Slack 알림 ★사용자 직접 요청 | ✅ 구현 완료 (2026-07-04) |
+| `AIP.Forge` | Development/Inspector | Advanced Installer 프로젝트(.aip) 뷰어·편집기·빌더 — 전 테이블 표 편집(바이트 단위 원형 보존), 버전·ProductCode 변경, CLI 빌드·폴더 동기화, 같은 폴더 AIP 일괄 버전/빌드·비교 ★사용자 직접 요청 | ✅ 구현 완료 (2026-09-21) |

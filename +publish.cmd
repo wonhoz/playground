@@ -150,6 +150,7 @@ for %%n in (!SEL!) do (
     if "%%n"=="110" call :pub "Siege.Lab"              "Applications\Network\Security\Siege.Lab"                 "Siege.Lab.exe"             "Applications\Network\Security\Siege.Lab"
     if "%%n"=="111" call :pub "Link.Scan"              "Applications\Tools.Utility\Link.Scan"                    "Link.Scan.exe"             "Applications\Tools.Utility\Link.Scan"
     if "%%n"=="112" call :pub "AIP.Forge"              "Applications\Development\Inspector\AIP.Forge"            "AIP.Forge.exe"             "Applications\Development\Inspector\AIP.Forge"
+    if "%%n"=="113" call :pub "Audio.Cast"             "Applications\Audio\Audio.Cast"                          "Audio.Cast.exe"            "Applications\Audio\Audio.Cast"
 )
 
 :: -- Done ---------------------------------------------------------------

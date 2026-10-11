@@ -14,6 +14,7 @@
 | `Token.Calc` | AI | LLM 멀티모델 토큰 수·비용 실시간 계산기 (GPT/Claude/Gemini 20+종 단가 내장) ★30차 | 🗃️ |
 | `Music.Player` | Audio | WPF 음악 플레이어 (플레이리스트, 셔플) | ✅ |
 | `Tag.Forge` | Audio | MP3/FLAC ID3 태그 일괄 편집기 (MusicBrainz 연동) | ✅ |
+| `Audio.Cast` | Audio | 오디오 포맷 일괄 변환기 (MP3·FLAC·WAV·M4A AAC/ALAC·OGG·OPUS) — 폴더 드롭 일괄 변환, 지정 폴더 저장(하위 구조 유지), 음질 보호(같은 코덱 스트림 복사·비트레이트 업스케일 방지), 24bit 유지·태그/앨범아트 보존 (FFmpeg) ★사용자 직접 요청 | ✅ 구현 완료 (2026-10-11) |
 | `Stay.Awake` | Automation | 트레이 상주, 화면 꺼짐 방지, Slack 상태 연동 | ✅ |
 | `Pane.Cast` | Automation/System | Windows Terminal 멀티패인 세션 레이아웃 저장·복원기 (프리셋 라이브러리·트레이) ★30차 | ✅ |
 | `Dep.Graph` | Dev/Analyzer | .NET 솔루션 NuGet 패키지 의존성 그래프 시각화 | ✅ |

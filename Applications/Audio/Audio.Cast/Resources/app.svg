@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFB74D"/>
+      <stop offset="100%" stop-color="#FFE0B2"/>
+    </linearGradient>
+    <linearGradient id="outGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#26A69A"/>
+      <stop offset="100%" stop-color="#00796B"/>
+    </linearGradient>
+  </defs>
+
+  <!-- 배경 -->
+  <circle cx="512" cy="512" r="512" fill="url(#bg)"/>
+
+  <!-- 원본 카드 (FLAC · 파형) -->
+  <rect x="72" y="284" width="300" height="440" rx="28" fill="#000000" opacity="0.14"/>
+  <rect x="72" y="270" width="300" height="440" rx="28" fill="#FFFFFF"/>
+  <path d="M72,298 a28,28 0 0 1 28,-28 h244 a28,28 0 0 1 28,28 v92 h-300 Z" fill="#7E57C2"/>
+  <text x="222" y="366" text-anchor="middle" fill="#FFFFFF" font-size="86" font-weight="bold" font-family="Arial, sans-serif">FLAC</text>
+  <g fill="#9575CD">
+    <rect x="104" y="520" width="26" height="80"  rx="13"/>
+    <rect x="146" y="470" width="26" height="180" rx="13"/>
+    <rect x="188" y="430" width="26" height="260" rx="13"/>
+    <rect x="230" y="490" width="26" height="140" rx="13"/>
+    <rect x="272" y="450" width="26" height="220" rx="13"/>
+    <rect x="314" y="530" width="26" height="60"  rx="13"/>
+  </g>
+
+  <!-- 변환 화살표 -->
+  <path d="M396,450 L548,450 L548,370 L640,512 L548,654 L548,574 L396,574 Z" fill="#E65100"/>
+  <path d="M396,450 L548,450 L548,404 L586,450 Z" fill="#FF8A50" opacity="0.6"/>
+
+  <!-- 결과 카드 (MP3 · 음표) -->
+  <rect x="662" y="284" width="290" height="440" rx="28" fill="#000000" opacity="0.14"/>
+  <rect x="662" y="270" width="290" height="440" rx="28" fill="url(#outGrad)"/>
+  <path d="M662,298 a28,28 0 0 1 28,-28 h234 a28,28 0 0 1 28,28 v92 h-290 Z" fill="#004D40"/>
+  <text x="807" y="366" text-anchor="middle" fill="#FFFFFF" font-size="86" font-weight="bold" font-family="Arial, sans-serif">MP3</text>
+  <!-- 음표 -->
+  <g fill="#FFFFFF">
+    <rect x="818" y="440" width="24" height="190" rx="6"/>
+    <path d="M830,440 Q890,450 900,520 Q875,488 842,486 Z"/>
+    <ellipse cx="792" cy="630" rx="56" ry="42" transform="rotate(-20 792 630)"/>
+  </g>
+</svg>

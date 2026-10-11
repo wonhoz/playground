@@ -33,6 +33,7 @@ call :pub "Prompt.Forge"          "Applications\AI\Prompt.Forge"                
 :: ── Applications / Audio ───────────────────────────────────────────
 call :pub "Music.Player"          "Applications\Audio\Music.Player"                         "Music.Player.exe"          "Applications\Audio"
 call :pub "Tag.Forge"             "Applications\Audio\Tag.Forge"                            "Tag.Forge.exe"             "Applications\Audio\Tag.Forge"
+call :pub "Audio.Cast"            "Applications\Audio\Audio.Cast"                          "Audio.Cast.exe"            "Applications\Audio\Audio.Cast"
 
 :: ── Applications / Automation ──────────────────────────────────────
 call :pub "Stay.Awake"            "Applications\Automation\Stay.Awake"                      "Stay.Awake.exe"            "Applications\Automation\Stay.Awake"

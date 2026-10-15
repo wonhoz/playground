@@ -1,0 +1,170 @@
+<Window x:Class="HwxPdf.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="HWX → PDF" Width="760" Height="600" MinWidth="560" MinHeight="440"
+        Background="{StaticResource Bg}" Foreground="{StaticResource Ink}"
+        FontFamily="Malgun Gothic" FontSize="13"
+        WindowStartupLocation="CenterScreen" AllowDrop="True"
+        DragEnter="Window_DragEnter" DragOver="Window_DragEnter" DragLeave="Window_DragLeave" Drop="Window_Drop"
+        Closing="Window_Closing">
+
+    <Window.Resources>
+        <Style x:Key="CardBorder" TargetType="Border">
+            <Setter Property="Background" Value="{StaticResource Card}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource Line}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="22"/>
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect BlurRadius="18" ShadowDepth="3" Direction="270" Opacity="0.07" Color="#6B5B3E"/>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
+    <Grid Margin="20,16,20,18">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- ── 제목 리본 + 별 마스코트 ── -->
+        <Grid Grid.Row="0" Margin="0,0,0,12">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Canvas Width="64" Height="62" Margin="0,0,12,0">
+                <Path Fill="{StaticResource Star}" Stroke="{StaticResource Star}" StrokeThickness="5" StrokeLineJoin="Round"
+                      Data="M32,5 L39.6,22.5 L58.6,24.4 L44.4,37 L48.5,55.7 L32,46 L15.5,55.7 L19.6,37 L5.4,24.4 L24.4,22.5 Z"/>
+                <Ellipse Canvas.Left="23.5" Canvas.Top="27" Width="5" Height="5.5" Fill="{StaticResource Ink}"/>
+                <Ellipse Canvas.Left="35.5" Canvas.Top="27" Width="5" Height="5.5" Fill="{StaticResource Ink}"/>
+                <Ellipse Canvas.Left="18" Canvas.Top="33" Width="6" Height="3.5" Fill="{StaticResource Coral}" Opacity="0.55"/>
+                <Ellipse Canvas.Left="40" Canvas.Top="33" Width="6" Height="3.5" Fill="{StaticResource Coral}" Opacity="0.55"/>
+                <Path x:Name="Mouth" Stroke="{StaticResource Ink}" StrokeThickness="2" StrokeStartLineCap="Round" StrokeEndLineCap="Round"
+                      Data="M28,36 Q32,40 36,36"/>
+            </Canvas>
+            <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                <Border Background="{StaticResource Teal}" CornerRadius="12" Padding="16,5" HorizontalAlignment="Left">
+                    <TextBlock Text="HWX → PDF 일괄 변환" Foreground="White" FontSize="18" FontWeight="Bold"/>
+                </Border>
+                <TextBlock x:Name="SummaryText" Margin="4,7,0,0" Foreground="{StaticResource Sub}"
+                           Text="결재 문서(hwx) · 한글(hwp · hwpx) 파일이나 폴더를 끌어다 놓으면 바로 PDF 로 바꿔 드려요."
+                           TextWrapping="Wrap"/>
+            </StackPanel>
+        </Grid>
+
+        <!-- ── 놓는 곳 ── -->
+        <Border x:Name="DropZone" Grid.Row="1" CornerRadius="22" Background="{StaticResource TealSoft}" Padding="18,14" Margin="0,0,0,12">
+            <Grid>
+                <Rectangle x:Name="DropDash" RadiusX="20" RadiusY="20" Margin="-12,-8" Stroke="{StaticResource Teal}"
+                           StrokeThickness="1.5" StrokeDashArray="5 4" Opacity="0.55"/>
+                <StackPanel HorizontalAlignment="Center">
+                    <TextBlock HorizontalAlignment="Center" FontSize="15" FontWeight="SemiBold" Foreground="{StaticResource Teal}"
+                               Text="여기에 파일 · 폴더를 끌어다 놓으세요"/>
+                    <TextBlock HorizontalAlignment="Center" Margin="0,4,0,0" Foreground="{StaticResource Sub}" FontSize="12"
+                               Text="폴더는 안쪽의 .hwx · .hwp · .hwpx 를 모두 찾아요. 한컴오피스 한글이 설치돼 있어야 해요."/>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <!-- ── 목록 카드 ── -->
+        <Border Grid.Row="2" Style="{StaticResource CardBorder}" Padding="6,8">
+            <Grid>
+                <ListBox x:Name="FileList" BorderThickness="0" Background="Transparent"
+                         ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                         HorizontalContentAlignment="Stretch" MouseDoubleClick="FileList_MouseDoubleClick">
+                    <ListBox.ItemContainerStyle>
+                        <Style TargetType="ListBoxItem">
+                            <Setter Property="Padding" Value="0"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="ListBoxItem">
+                                        <Border x:Name="Bd" CornerRadius="14" Padding="10,7" Margin="2,1" Background="Transparent">
+                                            <ContentPresenter/>
+                                        </Border>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter TargetName="Bd" Property="Background" Value="#F5F1EA"/>
+                                            </Trigger>
+                                            <Trigger Property="IsSelected" Value="True">
+                                                <Setter TargetName="Bd" Property="Background" Value="{StaticResource TealSoft}"/>
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </ListBox.ItemContainerStyle>
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="72"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Border x:Name="Chip" CornerRadius="8" Padding="0,3" Margin="0,0,10,0" VerticalAlignment="Center"
+                                        Background="#F1ECE3">
+                                    <TextBlock x:Name="ChipText" Text="{Binding StateText}" HorizontalAlignment="Center"
+                                               FontSize="12" FontWeight="SemiBold" Foreground="{StaticResource Sub}"/>
+                                </Border>
+                                <StackPanel Grid.Column="1">
+                                    <TextBlock Text="{Binding FileName}" FontWeight="SemiBold" TextTrimming="CharacterEllipsis"/>
+                                    <TextBlock x:Name="SubLine" Text="{Binding Folder}" FontSize="11.5" Foreground="{StaticResource Sub}"
+                                               TextTrimming="CharacterEllipsis"/>
+                                </StackPanel>
+                            </Grid>
+                            <DataTemplate.Triggers>
+                                <DataTrigger Binding="{Binding State}" Value="Running">
+                                    <Setter TargetName="Chip" Property="Background" Value="#FFF1C9"/>
+                                    <Setter TargetName="ChipText" Property="Foreground" Value="{StaticResource Warn}"/>
+                                    <Setter TargetName="SubLine" Property="Text" Value="{Binding Message}"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding State}" Value="Done">
+                                    <Setter TargetName="Chip" Property="Background" Value="#DDF0E5"/>
+                                    <Setter TargetName="ChipText" Property="Foreground" Value="{StaticResource Pass}"/>
+                                    <Setter TargetName="SubLine" Property="Text" Value="{Binding Message}"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding State}" Value="Failed">
+                                    <Setter TargetName="Chip" Property="Background" Value="#FBE1DE"/>
+                                    <Setter TargetName="ChipText" Property="Foreground" Value="{StaticResource Fail}"/>
+                                    <Setter TargetName="SubLine" Property="Text" Value="{Binding Message}"/>
+                                    <Setter TargetName="SubLine" Property="Foreground" Value="{StaticResource Fail}"/>
+                                </DataTrigger>
+                            </DataTemplate.Triggers>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+                <TextBlock x:Name="EmptyHint" HorizontalAlignment="Center" VerticalAlignment="Center"
+                           Foreground="{StaticResource Sub}" TextAlignment="Center" LineHeight="20"
+                           Text="아직 파일이 없어요.&#10;끌어다 놓거나 아래 '파일 추가' 를 눌러 주세요."/>
+            </Grid>
+        </Border>
+
+        <!-- ── 하단: 옵션 · 버튼 ── -->
+        <Grid Grid.Row="3" Margin="0,12,0,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <WrapPanel Grid.Row="0" Margin="4,0,0,10" VerticalAlignment="Center">
+                <CheckBox x:Name="SameFolderCheck" Content="원본과 같은 폴더에 저장" IsChecked="True" Margin="0,0,16,0"
+                          Checked="SameFolderCheck_Changed" Unchecked="SameFolderCheck_Changed"/>
+                <TextBlock x:Name="OutputDirText" VerticalAlignment="Center" Foreground="{StaticResource Sub}"
+                           TextTrimming="CharacterEllipsis" MaxWidth="330" Margin="0,0,16,0"/>
+                <CheckBox x:Name="OverwriteCheck" Content="같은 이름 PDF 덮어쓰기"/>
+            </WrapPanel>
+            <DockPanel Grid.Row="1" LastChildFill="False">
+                <Button DockPanel.Dock="Left" Style="{StaticResource PillBtn}" Content="파일 추가" Margin="0,0,8,0" Click="AddFiles_Click"/>
+                <Button DockPanel.Dock="Left" Style="{StaticResource PillBtn}" Content="목록 비우기" Margin="0,0,8,0" Click="Clear_Click"/>
+                <Button x:Name="RetryButton" DockPanel.Dock="Left" Style="{StaticResource PillBtn}" Content="실패 다시" IsEnabled="False" Click="Retry_Click"/>
+                <Button x:Name="CancelButton" DockPanel.Dock="Right" Style="{StaticResource PillBtn}" Content="멈추기"
+                        IsEnabled="False" Click="Cancel_Click"/>
+                <Button DockPanel.Dock="Right" Style="{StaticResource AccentBtn}" Content="저장 폴더 열기" Margin="0,0,8,0"
+                        Click="OpenFolder_Click"/>
+            </DockPanel>
+        </Grid>
+    </Grid>
+</Window>

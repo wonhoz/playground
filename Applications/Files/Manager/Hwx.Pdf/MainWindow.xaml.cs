@@ -14,7 +14,9 @@ namespace HwxPdf;
 
 public partial class MainWindow : Window
 {
-    private static readonly string[] Extensions = [".hwx", ".hwp", ".hwpx"];
+    private static readonly string[] HwpExtensions = [".hwx", ".hwp", ".hwpx"];
+    private static readonly string[] PdfExtensions = [".pdf"];
+    private const string AppTitle = "한글 ⇄ PDF";
     private static readonly string TempDir = Path.Combine(Path.GetTempPath(), "Hwx.Pdf");
 
     private readonly ObservableCollection<ConvertItem> _items = [];
@@ -24,6 +26,8 @@ public partial class MainWindow : Window
     private string? _outputDir;    // null = 원본과 같은 폴더
     private bool _overwrite;
     private bool? _securityModule;
+    private ConvertDirection _mode = ConvertDirection.ToPdf;   // 지금 탭 — 폴더 검색 · 파일 추가 필터 · 안내 문구
+    private bool _saveHwpx;
 
     public MainWindow(string[] args)
     {
@@ -32,6 +36,9 @@ public partial class MainWindow : Window
         _items.CollectionChanged += (_, _) => EmptyHint.Visibility = _items.Count == 0 ? Visibility.Visible : Visibility.Collapsed;
         OverwriteCheck.Checked += (_, _) => _overwrite = true;
         OverwriteCheck.Unchecked += (_, _) => _overwrite = false;
+        HwpxCheck.Checked += (_, _) => _saveHwpx = true;
+        HwpxCheck.Unchecked += (_, _) => _saveHwpx = false;
+        ApplyMode();
 
         var worker = new Thread(WorkerLoop) { IsBackground = true, Name = "HwpWorker" };
         worker.SetApartmentState(ApartmentState.STA);   // 한글 COM 은 STA 에서
@@ -55,13 +62,13 @@ public partial class MainWindow : Window
     {
         if (!HwpPdfConverter.IsHancomInstalled)
         {
-            MessageBox.Show(this, "한컴오피스 한글이 설치되어 있지 않아 변환할 수 없어요.", "HWX → PDF",
+            MessageBox.Show(this, "한컴오피스 한글이 설치되어 있지 않아 변환할 수 없어요.", AppTitle,
                 MessageBoxButton.OK, MessageBoxImage.Warning);
             return;
         }
 
         var added = 0;
-        foreach (var file in Expand(paths))
+        foreach (var file in Expand(paths, _mode))
         {
             // 이미 대기 · 변환 중인 같은 파일은 다시 넣지 않는다
             if (_items.Any(i => i.State is ConvertState.Waiting or ConvertState.Running
@@ -73,33 +80,41 @@ public partial class MainWindow : Window
             added++;
         }
         if (added == 0)
-            SummaryText.Text = "변환할 .hwx · .hwp · .hwpx 파일을 찾지 못했어요.";
+            SummaryText.Text = _mode == ConvertDirection.ToPdf
+                ? "변환할 .hwx · .hwp · .hwpx · .pdf 파일을 찾지 못했어요."
+                : "변환할 .pdf 파일을 찾지 못했어요. (한글 문서 폴더는 '한글 → PDF' 탭에서 놓아 주세요)";
         RefreshSummary();
     }
 
-    private static IEnumerable<string> Expand(IEnumerable<string> paths)
+    /// <summary>
+    /// 폴더는 지금 탭의 종류만 찾고(한글 탭: hwx · hwp · hwpx, PDF 탭: pdf),
+    /// 파일은 탭과 상관없이 네 종류 모두 받는다 — 방향은 확장자로 정해진다.
+    /// </summary>
+    private static IEnumerable<string> Expand(IEnumerable<string> paths, ConvertDirection mode)
     {
+        var folderExts = mode == ConvertDirection.ToPdf ? HwpExtensions : PdfExtensions;
         foreach (var path in paths)
         {
             if (Directory.Exists(path))
             {
                 IEnumerable<string> files;
-                try { files = Directory.EnumerateFiles(path, "*.*", SearchOption.AllDirectories).Where(IsTarget).Order().ToList(); }
+                try { files = Directory.EnumerateFiles(path, "*.*", SearchOption.AllDirectories).Where(f => HasExt(f, folderExts)).Order().ToList(); }
                 catch { continue; }
                 foreach (var f in files) yield return f;
             }
-            else if (File.Exists(path) && IsTarget(path))
+            else if (File.Exists(path) && (HasExt(path, HwpExtensions) || HasExt(path, PdfExtensions)))
                 yield return Path.GetFullPath(path);
         }
     }
 
-    private static bool IsTarget(string path) =>
-        Extensions.Contains(Path.GetExtension(path), StringComparer.OrdinalIgnoreCase);
+    private static bool HasExt(string path, string[] exts) =>
+        exts.Contains(Path.GetExtension(path), StringComparer.OrdinalIgnoreCase);
 
     private void Enqueue(ConvertItem item)
     {
         item.State = ConvertState.Waiting;
         item.Message = "";
+        item.TargetExtension = item.Direction == ConvertDirection.ToPdf ? ".pdf" : _saveHwpx ? ".hwpx" : ".hwp";
         Interlocked.Increment(ref _pending);
         _cancelRequested = false;
         CancelButton.IsEnabled = true;
@@ -122,18 +137,22 @@ public partial class MainWindow : Window
                 Ui(() =>
                 {
                     item.State = ConvertState.Running;
-                    item.Message = _securityModule == true
-                        ? "한글로 PDF 만드는 중…"
-                        : "한글로 PDF 만드는 중… (한글 확인 창이 뜨면 '접근 허용' 을 눌러 주세요)";
+                    item.Message = (item.Direction == ConvertDirection.ToPdf
+                                       ? "한글로 PDF 만드는 중…"
+                                       : "PDF 를 한글 문서로 바꾸는 중… (쪽이 많으면 시간이 걸려요)")
+                                   + (_securityModule == true ? "" : " (한글 확인 창이 뜨면 '접근 허용' 을 눌러 주세요)");
                     SetMood(Mood.Busy);
                 });
                 try
                 {
                     converter ??= new HwpPdfConverter();
-                    var pdf = OutputPathFor(item.Source);
-                    converter.Convert(item.Source, pdf, TempDir);
+                    var output = OutputPathFor(item);
+                    if (item.Direction == ConvertDirection.ToPdf)
+                        converter.ToPdf(item.Source, output, TempDir);
+                    else
+                        converter.PdfToHwp(item.Source, output);
                     _securityModule = converter.SecurityModuleActive;
-                    Ui(() => { item.OutputPath = pdf; item.State = ConvertState.Done; item.Message = _outputDir == null ? $"→ {Path.GetFileName(pdf)}" : $"→ {pdf}"; });
+                    Ui(() => { item.OutputPath = output; item.State = ConvertState.Done; item.Message = _outputDir == null ? $"→ {Path.GetFileName(output)}" : $"→ {output}"; });
                 }
                 catch (Exception ex)
                 {
@@ -156,15 +175,16 @@ public partial class MainWindow : Window
         }
     }
 
-    private string OutputPathFor(string source)
+    private string OutputPathFor(ConvertItem item)
     {
-        var dir = _outputDir ?? Path.GetDirectoryName(source)!;
-        var name = Path.GetFileNameWithoutExtension(source);
-        var pdf = Path.Combine(dir, name + ".pdf");
-        if (_overwrite) return pdf;
-        for (var n = 2; File.Exists(pdf); n++)
-            pdf = Path.Combine(dir, $"{name} ({n}).pdf");
-        return pdf;
+        var dir = _outputDir ?? Path.GetDirectoryName(item.Source)!;
+        var name = Path.GetFileNameWithoutExtension(item.Source);
+        var ext = item.TargetExtension;
+        var output = Path.Combine(dir, name + ext);
+        if (_overwrite) return output;
+        for (var n = 2; File.Exists(output); n++)
+            output = Path.Combine(dir, $"{name} ({n}){ext}");
+        return output;
     }
 
     private void Ui(Action action)
@@ -190,7 +210,7 @@ public partial class MainWindow : Window
         if (_items.Count == 0)
         {
             SetMood(Mood.Idle);
-            SummaryText.Text = "결재 문서(hwx) · 한글(hwp · hwpx) 파일이나 폴더를 끌어다 놓으면 바로 PDF 로 바꿔 드려요.";
+            SummaryText.Text = IdleText();
             return;
         }
 
@@ -217,13 +237,39 @@ public partial class MainWindow : Window
         else
         {
             SetMood(Mood.Happy);
-            text += "  —  모두 끝났어요! 줄을 두 번 누르면 PDF 가 열려요.";
+            text += "  —  모두 끝났어요! 줄을 두 번 누르면 만든 파일이 열려요.";
         }
         if (waiting == 0 && _securityModule == false)
             text += "\n💡 한글 보안 모듈(FilePathCheckerModule*.dll)을 이 exe 옆에 두면 확인 창 없이 변환돼요.";
         SummaryText.Text = text;
         RetryButton.IsEnabled = failed + canceled > 0;
     }
+
+    // ── 탭 ──────────────────────────────────────────────
+
+    private void ModeTab_Checked(object sender, RoutedEventArgs e)
+    {
+        if (!IsLoaded) return;
+        _mode = PdfTab.IsChecked == true ? ConvertDirection.ToHwp : ConvertDirection.ToPdf;
+        ApplyMode();
+        RefreshSummary();
+    }
+
+    private void ApplyMode()
+    {
+        var toPdf = _mode == ConvertDirection.ToPdf;
+        DropTitle.Text = toPdf
+            ? "여기에 결재 · 한글 문서나 폴더를 끌어다 놓으세요"
+            : "여기에 PDF 파일이나 폴더를 끌어다 놓으세요";
+        DropSub.Text = toPdf
+            ? "폴더는 안쪽의 .hwx · .hwp · .hwpx 를 모두 찾아 PDF 로 바꿔요. 한컴오피스 한글이 설치돼 있어야 해요."
+            : "폴더는 안쪽의 .pdf 를 모두 찾아 한글 문서로 바꿔요. 글자는 고칠 수 있게, 그림은 그림으로 들어가요.";
+        HwpxCheck.Visibility = toPdf ? Visibility.Collapsed : Visibility.Visible;
+    }
+
+    private string IdleText() => _mode == ConvertDirection.ToPdf
+        ? "결재 문서(hwx) · 한글(hwp · hwpx) 파일이나 폴더를 끌어다 놓으면 바로 PDF 로 바꿔 드려요."
+        : "PDF 파일이나 폴더를 끌어다 놓으면 바로 한글 문서(hwp)로 바꿔 드려요. 스캔한 PDF 는 그림으로만 들어가요.";
 
     // ── 드래그 앤 드롭 ────────────────────────────────────
 
@@ -257,7 +303,9 @@ public partial class MainWindow : Window
         var dlg = new OpenFileDialog
         {
             Multiselect = true,
-            Filter = "결재 · 한글 문서 (*.hwx;*.hwp;*.hwpx)|*.hwx;*.hwp;*.hwpx|모든 파일 (*.*)|*.*",
+            Filter = _mode == ConvertDirection.ToPdf
+                ? "결재 · 한글 문서 (*.hwx;*.hwp;*.hwpx)|*.hwx;*.hwp;*.hwpx|모든 파일 (*.*)|*.*"
+                : "PDF 문서 (*.pdf)|*.pdf|모든 파일 (*.*)|*.*",
         };
         if (dlg.ShowDialog(this) == true) AddPaths(dlg.FileNames);
     }
@@ -293,7 +341,7 @@ public partial class MainWindow : Window
             OutputDirText.Text = "";
             return;
         }
-        var dlg = new OpenFolderDialog { Title = "PDF 를 저장할 폴더" };
+        var dlg = new OpenFolderDialog { Title = "만든 파일을 저장할 폴더" };
         if (dlg.ShowDialog(this) == true)
         {
             _outputDir = dlg.FolderName;
@@ -323,7 +371,7 @@ public partial class MainWindow : Window
     private void Window_Closing(object? sender, CancelEventArgs e)
     {
         if (Volatile.Read(ref _pending) > 0 &&
-            MessageBox.Show(this, "아직 변환 중이에요. 그래도 닫을까요?", "HWX → PDF",
+            MessageBox.Show(this, "아직 변환 중이에요. 그래도 닫을까요?", AppTitle,
                 MessageBoxButton.YesNo, MessageBoxImage.Question) != MessageBoxResult.Yes)
         {
             e.Cancel = true;

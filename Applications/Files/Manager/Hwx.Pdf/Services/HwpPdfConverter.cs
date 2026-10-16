@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 namespace HwxPdf.Services;
 
 /// <summary>
-/// 설치된 한컴오피스 한글(HWPFrame.HwpObject COM)로 문서를 열어 PDF 로 저장한다.
+/// 설치된 한컴오피스 한글(HWPFrame.HwpObject COM)로 문서를 열어 PDF 로, 또는 PDF 를 한글 문서로 저장한다.
 /// 한글 COM 은 STA 스레드에서만 호출해야 한다 — 한 인스턴스를 만들어 여러 파일에 재사용한다.
 /// </summary>
 public sealed class HwpPdfConverter : IDisposable
@@ -54,8 +54,12 @@ public sealed class HwpPdfConverter : IDisposable
         }
     }
 
+    private const string OpenOptions = "forceopen:true;suspendpassword:true;versionwarning:false";
+    // 한컴 PDF 변환기(HpdfHwpConverter.exe)가 쓰는 옵션 — PDF 를 편집 가능한 한글 문서로 읽는다
+    private const string PdfOpenOptions = "nocompatible:true;pdfconverter:true;" + OpenOptions;
+
     /// <summary>hwp · hwpx · hwx 를 PDF 로 변환한다.</summary>
-    public void Convert(string source, string pdfPath, string tempDir)
+    public void ToPdf(string source, string pdfPath, string tempDir)
     {
         string? extracted = null;
         try
@@ -65,13 +69,7 @@ public sealed class HwpPdfConverter : IDisposable
                 input = extracted = HwxExtractor.ExtractToTemp(source, tempDir);
 
             var format = Path.GetExtension(input).Equals(".hwp", StringComparison.OrdinalIgnoreCase) ? "HWP" : "";
-            ConvertCore(input, format, pdfPath);
-        }
-        catch (COMException)
-        {
-            // 한글이 죽었거나 응답이 끊긴 경우 — 다음 파일은 새 인스턴스로
-            Reset();
-            throw;
+            OpenAndSave(input, format, OpenOptions, pdfPath, "PDF");
         }
         finally
         {
@@ -80,20 +78,40 @@ public sealed class HwpPdfConverter : IDisposable
         }
     }
 
-    private void ConvertCore(string input, string format, string pdfPath)
+    /// <summary>
+    /// PDF 를 한글 문서(.hwp / .hwpx)로 변환한다. 글자는 편집 가능한 텍스트, 그림은 그림으로 들어간다.
+    /// 스캔한(그림뿐인) PDF 는 글자 없이 그림으로만 들어간다.
+    /// </summary>
+    public void PdfToHwp(string pdfPath, string hwpPath)
     {
-        var hwp = Hwp;
-        if (!(bool)hwp.Open(input, format, "forceopen:true;suspendpassword:true;versionwarning:false"))
-            throw new InvalidOperationException("한글에서 문서를 열지 못했습니다.");
+        var saveFormat = Path.GetExtension(hwpPath).Equals(".hwpx", StringComparison.OrdinalIgnoreCase) ? "HWPX" : "HWP";
+        // 형식을 "PDF" 로 주면 열리지 않는다 — 빈 문자열(자동 판별)이어야 PDF 변환기로 열린다
+        OpenAndSave(pdfPath, "", PdfOpenOptions, hwpPath, saveFormat);
+    }
+
+    private void OpenAndSave(string input, string openFormat, string openOptions, string output, string saveFormat)
+    {
         try
         {
-            if (File.Exists(pdfPath)) File.Delete(pdfPath);
-            if (!(bool)hwp.SaveAs(pdfPath, "PDF", "") || !File.Exists(pdfPath))
-                throw new InvalidOperationException("PDF 저장에 실패했습니다.");
+            var hwp = Hwp;
+            if (!(bool)hwp.Open(input, openFormat, openOptions))
+                throw new InvalidOperationException("한글에서 문서를 열지 못했습니다. (암호가 걸렸거나 손상된 파일일 수 있어요)");
+            try
+            {
+                if (File.Exists(output)) File.Delete(output);
+                if (!(bool)hwp.SaveAs(output, saveFormat, "") || !File.Exists(output))
+                    throw new InvalidOperationException($"{saveFormat} 저장에 실패했습니다.");
+            }
+            finally
+            {
+                try { hwp.Clear(1); } catch { }   // 1 = 저장하지 않고 닫기
+            }
         }
-        finally
+        catch (COMException)
         {
-            try { hwp.Clear(1); } catch { }   // 1 = 저장하지 않고 닫기
+            // 한글이 죽었거나 응답이 끊긴 경우 — 다음 파일은 새 인스턴스로
+            Reset();
+            throw;
         }
     }
 

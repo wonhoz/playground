@@ -6,11 +6,31 @@ namespace HwxPdf.Models;
 
 public enum ConvertState { Waiting, Running, Done, Failed, Canceled }
 
+/// <summary>변환 방향 — 원본 확장자로 정한다 (.pdf → 한글, 나머지 → PDF)</summary>
+public enum ConvertDirection { ToPdf, ToHwp }
+
 public sealed class ConvertItem : INotifyPropertyChanged
 {
-    public ConvertItem(string source) => Source = source;
+    public ConvertItem(string source)
+    {
+        Source = source;
+        Direction = Path.GetExtension(source).Equals(".pdf", StringComparison.OrdinalIgnoreCase)
+            ? ConvertDirection.ToHwp
+            : ConvertDirection.ToPdf;
+    }
 
     public string Source { get; }
+    public ConvertDirection Direction { get; }
+
+    /// <summary>만들 파일 확장자 (.pdf · .hwp · .hwpx) — 목록에 넣을 때 옵션으로 정한다</summary>
+    public string TargetExtension
+    {
+        get => _targetExtension;
+        set { _targetExtension = value; OnChanged(); OnChanged(nameof(TargetLabel)); }
+    }
+    private string _targetExtension = ".pdf";
+
+    public string TargetLabel => "→ " + TargetExtension.TrimStart('.').ToUpperInvariant();
     public string FileName => Path.GetFileName(Source);
     public string Folder => Path.GetDirectoryName(Source) ?? "";
 

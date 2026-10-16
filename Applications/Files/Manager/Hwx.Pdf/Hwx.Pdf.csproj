@@ -6,7 +6,7 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UseWPF>true</UseWPF>
-    <Version>1.1.0</Version>
+    <Version>1.2.0</Version>
     <ApplicationIcon Condition="Exists('Resources\app.ico')">Resources\app.ico</ApplicationIcon>
     <AssemblyName>Hwx.Pdf</AssemblyName>
     <RootNamespace>HwxPdf</RootNamespace>
@@ -19,6 +19,8 @@
 
   <ItemGroup>
     <Resource Include="Resources\app.ico" Condition="Exists('Resources\app.ico')" />
+    <!-- 한컴 자동화 보안 모듈 — exe 안에 넣어 두고 실행 시 꺼내 등록 (다른 PC 에서도 확인 창 없이) -->
+    <EmbeddedResource Include="Resources\FilePathCheckerModuleExample.dll" LogicalName="FilePathCheckerModule.dll" />
   </ItemGroup>
 
 </Project>

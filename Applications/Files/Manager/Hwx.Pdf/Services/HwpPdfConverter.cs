@@ -21,20 +21,37 @@ public sealed class HwpPdfConverter : IDisposable
     public bool? SecurityModuleActive { get; private set; }
 
     /// <summary>
-    /// exe 옆에 한컴 보안 모듈 DLL(FilePathCheckerModule*.dll)이 있으면 레지스트리에 경로를 기록한다.
-    /// 이미 기록된 경로의 파일이 살아 있으면 그대로 둔다. 경로는 따옴표 없이 써야 한다.
+    /// exe 에 넣어 둔 한컴 보안 모듈 DLL 을 %LOCALAPPDATA%\Hwx.Pdf 로 꺼내 그 경로를 레지스트리에 기록한다.
+    /// 다른 곳(바탕화면 등)을 가리키던 값도 이 경로로 바꾼다 — 그 파일이 지워져도 확인 창이 뜨지 않게.
+    /// 경로는 따옴표 없이 써야 한다. 실패해도 변환은 막지 않는다 (확인 창이 뜰 뿐).
     /// </summary>
     private static void EnsureSecurityModuleRegistry()
     {
         try
         {
+            var dll = ExtractEmbeddedModule();
+            if (dll == null) return;
             using var key = Microsoft.Win32.Registry.CurrentUser.CreateSubKey(ModulesKey);
-            if (key.GetValue(ModuleName) is string current && File.Exists(current)) return;
-
-            var dll = Directory.EnumerateFiles(AppContext.BaseDirectory, "FilePathCheckerModule*.dll").FirstOrDefault();
-            if (dll != null) key.SetValue(ModuleName, dll);
+            if (!string.Equals(key.GetValue(ModuleName) as string, dll, StringComparison.OrdinalIgnoreCase))
+                key.SetValue(ModuleName, dll);
         }
         catch { }
+    }
+
+    private static string? ExtractEmbeddedModule()
+    {
+        using var res = typeof(HwpPdfConverter).Assembly.GetManifestResourceStream("FilePathCheckerModule.dll");
+        if (res == null) return null;
+
+        var dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Hwx.Pdf");
+        var path = Path.Combine(dir, "FilePathCheckerModuleExample.dll");
+        // 같은 크기면 이미 꺼낸 것 — 한글이 쥐고 있을 수 있으니 다시 쓰지 않는다
+        if (File.Exists(path) && new FileInfo(path).Length == res.Length) return path;
+
+        Directory.CreateDirectory(dir);
+        using (var fs = File.Create(path))
+            res.CopyTo(fs);
+        return path;
     }
 
     private dynamic Hwp

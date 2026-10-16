@@ -240,7 +240,7 @@ public partial class MainWindow : Window
             text += "  —  모두 끝났어요! 줄을 두 번 누르면 만든 파일이 열려요.";
         }
         if (waiting == 0 && _securityModule == false)
-            text += "\n💡 한글 보안 모듈(FilePathCheckerModule*.dll)을 이 exe 옆에 두면 확인 창 없이 변환돼요.";
+            text += "\n💡 한글 보안 모듈을 등록하지 못해 확인 창이 떴어요. 한글을 모두 닫고 다시 실행해 보세요.";
         SummaryText.Text = text;
         RetryButton.IsEnabled = failed + canceled > 0;
     }
